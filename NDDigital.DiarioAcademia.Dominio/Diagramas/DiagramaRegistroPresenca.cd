@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="NDDigital.DiarioAcademia.Dominio.Aluno">
+    <Position X="1.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACgAAAAAAAAAIEAAAAAAAAAAAAQAAAAAAAEAEAgAA=</HashCode>
+      <FileName>Aluno.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Turma" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="Presencas" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="NDDigital.DiarioAcademia.Dominio.Aula">
+    <Position X="8.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAA=</HashCode>
+      <FileName>Aula.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NDDigital.DiarioAcademia.Dominio.Presenca">
+    <Position X="5.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAEAAAAAAAAAAAAAAAAEAAAAAAJAAA=</HashCode>
+      <FileName>Presenca.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Aula" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="NDDigital.DiarioAcademia.Dominio.Turma">
+    <Position X="5.5" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Turma.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
