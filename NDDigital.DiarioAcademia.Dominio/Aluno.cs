@@ -53,10 +53,27 @@ namespace NDDigital.DiarioAcademia.Dominio
         {
             return string.Format("{0}: Presenças: {1}, Faltas: {2}", Nome, ObtemQuantidadePresencas(), ObtemQuantidadeAusencias());
         }
+
+        public Endereco Endereco { get; set; }
     }
 
     public interface IAlunoRepository : IRepository<Aluno>
     {
         IEnumerable<Aluno> GetAllByTurma(int ano);
+
+        
+    }
+
+    public interface IEnderecoRepository 
+    {
+        Endereco GetEnderecoByCep(string cep);
+    }
+
+    public class Endereco
+    {
+        public int Numero { get; set; }
+
+        public string Rua { get; set; }
+
     }
 }

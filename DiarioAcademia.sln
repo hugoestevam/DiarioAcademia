@@ -38,6 +38,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aplicacao", "NDDigital.Diar
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aplicacao.CommandQuery", "NDDigital.DiarioAcademia.CommandQuery\Aplicacao.CommandQuery.csproj", "{FAC6B57F-D8C9-4593-80F0-184F5CAB272C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infraestrutura.WebServices", "NDDigital.DiarioAcademia.Infraestrutura.WebServices\Infraestrutura.WebServices.csproj", "{7C91018A-6066-4AB4-BCEA-7F477BB514C4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -76,6 +78,10 @@ Global
 		{FAC6B57F-D8C9-4593-80F0-184F5CAB272C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FAC6B57F-D8C9-4593-80F0-184F5CAB272C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FAC6B57F-D8C9-4593-80F0-184F5CAB272C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7C91018A-6066-4AB4-BCEA-7F477BB514C4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7C91018A-6066-4AB4-BCEA-7F477BB514C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7C91018A-6066-4AB4-BCEA-7F477BB514C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7C91018A-6066-4AB4-BCEA-7F477BB514C4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -89,5 +95,6 @@ Global
 		{FAC851DE-01EE-4BBE-98DF-B5BA902F9AFB} = {43379275-7C91-4A46-8B0C-F3E23A341ABE}
 		{175B058E-A32A-491A-A1FD-9783EDC7A943} = {2EE4498A-325B-4D91-A17F-84A7BF302C37}
 		{FAC6B57F-D8C9-4593-80F0-184F5CAB272C} = {2EE4498A-325B-4D91-A17F-84A7BF302C37}
+		{7C91018A-6066-4AB4-BCEA-7F477BB514C4} = {EB2A9331-52C7-4E23-AF46-B700C8055769}
 	EndGlobalSection
 EndGlobal

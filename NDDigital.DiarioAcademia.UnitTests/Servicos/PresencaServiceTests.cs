@@ -15,7 +15,7 @@ using Xunit;
 namespace NDDigital.DiarioAcademia.UnitTests.Servicos
 {
     [AplicacaoTrait("")]
-    public class AlunoServiceTests
+    public class PresencaServiceTests
     {
         private readonly Mock<IAlunoRepository> _alunoRepository = null;
         private readonly Mock<IAulaRepository> _aulaRepository = null;
@@ -23,7 +23,7 @@ namespace NDDigital.DiarioAcademia.UnitTests.Servicos
 
         private IPresencaService presencaService = null;
 
-        public AlunoServiceTests()
+        public PresencaServiceTests()
         {
             _alunoRepository = new Mock<IAlunoRepository>();
             _aulaRepository = new Mock<IAulaRepository>();
