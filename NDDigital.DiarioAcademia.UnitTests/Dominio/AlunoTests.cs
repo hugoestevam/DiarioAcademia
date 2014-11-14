@@ -17,9 +17,11 @@ namespace DiarioAcademia.UnitTests.Dominio
     public class AlunoTests
     {
         private Aluno aluno;
+        private Turma turma;
         public AlunoTests()
         {
-            aluno = new Aluno();
+            turma = new Turma(2005);
+            aluno = new Aluno("Rech",turma);
         }
 
         [Fact(DisplayName = "Quantidade de presencas deveria ser 0")]
@@ -39,10 +41,10 @@ namespace DiarioAcademia.UnitTests.Dominio
         {
             aluno.Nome = "Rech";
 
-            Aula aula1 = ObjectMother.CreateAula();
+            Aula aula1 = new Aula(DateTime.Now.AddDays(-1));
             aluno.RegistraPresenca(aula1, "C");
 
-            Aula aula2 = ObjectMother.CreateAula();
+            Aula aula2 = new Aula(DateTime.Now);
             aluno.RegistraPresenca(aula2, "F");
 
             aluno.ToString().Should().Be("Rech: Presenças: 1, Faltas: 1");
@@ -73,7 +75,7 @@ namespace DiarioAcademia.UnitTests.Dominio
             Aula aula = ObjectMother.CreateAula();
 
             aluno.RegistraPresenca(aula, "C");
-
+            
             Assert.Throws<PresencaJaRegistradaException>(() => aluno.RegistraPresenca(aula, "C"));
         }       
     

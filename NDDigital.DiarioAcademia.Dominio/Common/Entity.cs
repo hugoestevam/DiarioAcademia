@@ -20,7 +20,7 @@
         /// <summary>
         /// Get the persisten object identifier
         /// </summary>
-        public virtual  Guid Id 
+        public virtual Guid Id 
         {
             get
             {
@@ -107,18 +107,6 @@
 
         }
 
-        public static bool operator ==(Entity left, Entity right)
-        {
-            if (Object.Equals(left, null))
-                return (Object.Equals(right, null)) ? true : false;
-            else
-                return left.Equals(right);
-        }
-
-        public static bool operator !=(Entity left, Entity right)
-        {
-            return !(left == right);
-        }
 
         #endregion
     }

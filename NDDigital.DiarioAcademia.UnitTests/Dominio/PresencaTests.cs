@@ -20,7 +20,9 @@ namespace NDDigital.DiarioAcademia.UnitTests.Dominio
             Aula aula = ObjectMother.CreateAula();
             aula.Data = new DateTime(2000, 10, 5);
 
-            presenca = new Presenca(aula, new Aluno("Marco Antônio"), "F"); 
+            Turma turma = new Turma(2012);
+
+            presenca = new Presenca(aula, new Aluno("Marco Antônio", turma), "F"); 
         }
 
         [Fact(DisplayName = "Deveria retornar a data, nome do aluno e status da presença")]

@@ -52,9 +52,17 @@
     <Reference Include="FluentAssertions.Core">
       <HintPath>..\packages\FluentAssertions.3.2.1\lib\net45\FluentAssertions.Core.dll</HintPath>
     </Reference>
+    <Reference Include="NDbUnit.Core">
+      <HintPath>..\packages\NDbUnit.Core.1.6.8.0\lib\Net35\NDbUnit.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="NDbUnit.SqlClient">
+      <HintPath>..\packages\NDbUnit.SqlClient.1.6.8.0\lib\Net35\NDbUnit.SqlClient.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Transactions" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
@@ -81,16 +89,55 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="DatabaseTest.cs" />
+    <Compile Include="AulaRepositoryTest.cs" />
+    <Compile Include="DatabaseFixture.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="TestData\DiarioAcademia.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DiarioAcademia.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Traits\RepositorioTrait.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="TestData\DiarioAcademia.xsc">
+      <DependentUpon>DiarioAcademia.xsd</DependentUpon>
+    </None>
+    <None Include="TestData\DiarioAcademia.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DiarioAcademia.Designer.cs</LastGenOutput>
+    </None>
     <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="TestData\DiarioAcademia.xss">
+      <DependentUpon>DiarioAcademia.xsd</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Common\" />
+    <ProjectReference Include="..\NDDigital.DiarioAcademia.Dominio\Dominio.csproj">
+      <Project>{98aeeab1-ab78-451a-ae88-c852c6bc3c31}</Project>
+      <Name>Dominio</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NDDigital.DiarioAcademia.Infraestrutura.Orm\Infraestrutura.Orm.csproj">
+      <Project>{3fd3156c-9f4f-4e10-8b7a-7454c803be89}</Project>
+      <Name>Infraestrutura.Orm</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TestData\DiarioAcademia.TBPresenca.xml" />
+    <Content Include="TestData\DiarioAcademia.TBTurma.xml" />
+    <Content Include="TestData\DiarioAcademia.TBAula.xml" />
+    <Content Include="TestData\DiarioAcademia.TBAluno.xml" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

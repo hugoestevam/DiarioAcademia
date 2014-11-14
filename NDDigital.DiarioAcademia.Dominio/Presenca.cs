@@ -1,22 +1,25 @@
-﻿using System;
+﻿using NDDigital.DiarioAcademia.Dominio.Common;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
 namespace NDDigital.DiarioAcademia.Dominio
 {
-    public class Presenca
+    public class Presenca : Entity
     {
-        public int Id { get; set; }
         public virtual Aula Aula { get; private set; }
 
-        public virtual Aluno Aluno { get; private set; }
-
-        //public int AlunoId { get; set; }
+        public virtual Aluno Aluno { get; private set; }        
 
         public string StatusPresenca { get; private set; }
 
-        public Presenca(Aula aula, Aluno aluno, string statusPresenca)
+        protected Presenca()
+        {
+            GenerateNewIdentity();
+        }
+
+        public Presenca(Aula aula, Aluno aluno, string statusPresenca) : this()
         {
             this.Aula = aula;
             this.Aluno = aluno;

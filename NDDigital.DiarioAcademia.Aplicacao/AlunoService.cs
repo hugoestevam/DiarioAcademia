@@ -35,8 +35,7 @@ namespace NDDigital.DiarioAcademia.Aplicacao
         {
             Endereco endereco = _enderecoRepository.GetEnderecoByCep(cep);         
 
-            Aluno aluno = new Aluno();
-            aluno.Endereco = endereco;
+            Aluno aluno = new Aluno("Rech",null);            
 
             _alunoRepository.Add(aluno);
 

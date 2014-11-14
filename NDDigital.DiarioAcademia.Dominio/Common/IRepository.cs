@@ -14,7 +14,9 @@ namespace NDDigital.DiarioAcademia.Dominio
 
         void Delete(T entity);
 
-        T GetById(long id);
+        void Delete(Guid id);
+
+        T GetById(Guid id);
 
         IEnumerable<T> GetAll();
 

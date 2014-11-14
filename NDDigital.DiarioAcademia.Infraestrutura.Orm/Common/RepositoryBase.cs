@@ -7,11 +7,13 @@ using System.Data.Entity;
 using System.Data;
 using System.Linq.Expressions;
 using NDDigital.DiarioAcademia.Infraestrutura.Orm.Contexts;
+using NDDigital.DiarioAcademia.Dominio.Common;
+using System.Data.Entity.Infrastructure;
 
 
 namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Common 
 {
-    public abstract class RepositoryBase<T> where T : class
+    public abstract class RepositoryBase<T> where T : Entity 
     {
         private DiarioAcademiaContext dataContext;
         private readonly IDbSet<T> dbset;
@@ -41,9 +43,31 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Common
             dbset.Attach(entity);
             dataContext.Entry(entity).State = EntityState.Modified;
         }
+
         public virtual void Delete(T entity)
         {
-            dbset.Remove(entity);
+            DbEntityEntry dbEntityEntry = dataContext.Entry(entity);
+            if (dbEntityEntry.State != EntityState.Deleted)
+            {
+                dbEntityEntry.State = EntityState.Deleted;
+            }
+            else
+            {
+                dbset.Attach(entity);
+                dbset.Remove(entity);
+            }
+       
+            //dbset.Attach(entity);
+            //dataContext.Entry(entity).State = EntityState.Deleted;
+
+            //dbset.Remove(entity);
+        }
+
+        public virtual void Delete(Guid id)
+        {
+            var entity =  GetById(id);
+                  
+            dbset.Remove(entity);            
         }
         public virtual void Delete(Expression<Func<T, bool>> where)
         {
@@ -52,6 +76,11 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Common
                 dbset.Remove(obj);
         }
         public virtual T GetById(long id)
+        {
+            return dbset.Find(id);
+        }
+
+        public virtual T GetById(Guid id)
         {
             return dbset.Find(id);
         }

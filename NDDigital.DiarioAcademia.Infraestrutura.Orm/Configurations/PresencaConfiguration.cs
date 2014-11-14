@@ -15,13 +15,13 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Configurations
         {
             ToTable("TBPresenca");
 
-            HasKey(map => map.Id);
+            HasKey(p => p.Id);
 
-            HasRequired(map => map.Aluno);
+            HasRequired(p => p.Aluno); 
 
-            HasRequired(map => map.Aula);
+            HasRequired(p => p.Aula);
 
-            Property(map => map.StatusPresenca);
+            Property(p => p.StatusPresenca);
 
         }
     }

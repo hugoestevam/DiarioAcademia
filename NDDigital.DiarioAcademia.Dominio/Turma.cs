@@ -1,15 +1,24 @@
-﻿using System;
+﻿using NDDigital.DiarioAcademia.Dominio.Common;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
 namespace NDDigital.DiarioAcademia.Dominio
 {
-    public class Turma
+    public class Turma : Entity
     {
-        public int Ano { get; set; }
+        protected Turma()
+        {
+            GenerateNewIdentity();
+        }
 
-        public int Id { get; set; }
+        public Turma(int ano) : this()
+        {
+            Ano = ano;
+        }
+
+        public int Ano { get; set; }        
     }
 
     public interface ITurmaRepository : IRepository<Turma>

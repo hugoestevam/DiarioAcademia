@@ -14,9 +14,9 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Configurations
         {
             ToTable("TBTurma");
 
-            HasKey(x => x.Id);
+            HasKey(t => t.Id);
 
-            Property(x => x.Ano);
+            Property(t => t.Ano);
         }
     }
 }

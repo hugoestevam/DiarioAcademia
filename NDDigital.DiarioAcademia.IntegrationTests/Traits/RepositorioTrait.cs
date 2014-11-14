@@ -9,8 +9,8 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Testes.Traits
 {
     public class RepositorioTrait : TraitAttribute
     {
-        public RepositorioTrait(string name)
-            : base(name, "Repositórios")
+        public RepositorioTrait(string name = "")
+            : base("Camada de Infraestrutura de Dados", "")
         {
 
         }

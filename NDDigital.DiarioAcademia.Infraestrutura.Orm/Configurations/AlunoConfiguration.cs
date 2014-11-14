@@ -10,14 +10,14 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Configurations
         {
             ToTable("TBAluno");
 
-            HasKey(map => map.Id);
+            HasKey(a => a.Id);
 
-            Property(map => map.Nome);
+            Property(a => a.Nome);
 
-            HasRequired(map => map.Turma);
+            HasRequired(a => a.Turma);
 
-            HasMany(map => map.Presencas);                            
-        }       
+            HasMany(a => a.Presencas);
+        }
     }
 
 }

@@ -8,16 +8,17 @@ namespace NDDigital.DiarioAcademia.Dominio
 {
     public class Aluno : Entity
     {
-        public Aluno() {
+        protected Aluno() {
 
             Presencas = new List<Presenca>();
 
             GenerateNewIdentity();
         }
 
-        public Aluno(string nome) : this()
+        public Aluno(string nome, Turma turma) : this()
         {
             this.Nome = nome;
+            this.Turma = turma;
         }        
 
         public string Nome { get; set; }
@@ -25,7 +26,7 @@ namespace NDDigital.DiarioAcademia.Dominio
         public virtual Turma Turma { get; set; }
 
         public virtual List<Presenca> Presencas { get; set; }
-
+        
         public int ObtemQuantidadePresencas()
         {
             return Presencas.Count(x => x.StatusPresenca == "C");
@@ -52,16 +53,12 @@ namespace NDDigital.DiarioAcademia.Dominio
         public override string ToString()
         {
             return string.Format("{0}: Presenças: {1}, Faltas: {2}", Nome, ObtemQuantidadePresencas(), ObtemQuantidadeAusencias());
-        }
-
-        public Endereco Endereco { get; set; }
+        }        
     }
 
     public interface IAlunoRepository : IRepository<Aluno>
     {
-        IEnumerable<Aluno> GetAllByTurma(int ano);
-
-        
+        IEnumerable<Aluno> GetAllByTurma(int ano);        
     }
 
     public interface IEnderecoRepository 
