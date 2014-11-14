@@ -19,6 +19,8 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Configurations
 
             Property(a => a.Data)
                 .HasColumnType("Date");
+
+            HasMany(a => a.Presencas);
         }
     }
 }

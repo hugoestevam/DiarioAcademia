@@ -37,6 +37,9 @@ namespace NDDigital.DiarioAcademia.IntegrationTests
         protected const string TBPresenca = @"..\..\TestData\DiarioAcademia.TBPresenca.xml";
 
         protected readonly Guid AulaId = Guid.Parse("4064d4ed-f5b4-cb81-d201-08d1ccc21216");
+        protected readonly DateTime DataPrimeiraAula = new DateTime(2014, 11, 13);
+        protected readonly DateTime DataSegundaAula = new DateTime(2014, 11, 14);
+        protected readonly DateTime DataTerceiraAula = new DateTime(2014, 11, 15);
 
         protected readonly Guid AlunoId = Guid.Parse("952c499a-d155-c21d-8788-08d1cc983ea7");
 
@@ -117,7 +120,7 @@ namespace NDDigital.DiarioAcademia.IntegrationTests
             aulaEncontrada.Should().NotBeNull();
         }
 
-        [Fact(DisplayName = "Deveria excluir a aula com base no ID")]
+        [Fact(DisplayName = "Deveria excluir a aula com base no ID"), ]
         public void Test_2()
         {
             //arrange
@@ -138,9 +141,9 @@ namespace NDDigital.DiarioAcademia.IntegrationTests
         public void Test_4()
         {
             //arrange
-            InsertTestData(TBAula);
+            InsertTestData(TBAula, TBPresenca);
 
-            Aula aula = new Aula(DateTime.Now);
+            Aula aula = new Aula(DataPrimeiraAula);
             aula.ChangeCurrentIdentity(AulaId);
 
             //act
@@ -183,6 +186,8 @@ namespace NDDigital.DiarioAcademia.IntegrationTests
             //arrange
 
             InsertTestData(TBAluno, TBAula, TBPresenca, TBTurma);
+
+            var aulaEncontrada = aulaRepository.GetById(AulaId);
 
             //act            
             var alunoEncontrado = alunoRepository.GetById(AlunoId);

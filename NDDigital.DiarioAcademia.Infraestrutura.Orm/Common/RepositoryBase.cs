@@ -15,8 +15,8 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Common
 {
     public abstract class RepositoryBase<T> where T : Entity 
     {
-        private DiarioAcademiaContext dataContext;
-        private readonly IDbSet<T> dbset;
+        protected DiarioAcademiaContext dataContext;
+        protected readonly IDbSet<T> dbset;
         protected RepositoryBase(IDatabaseFactory databaseFactory)
         {
             DatabaseFactory = databaseFactory;
@@ -40,8 +40,16 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Common
         }
         public virtual void Update(T entity)
         {
-            dbset.Attach(entity);
-            dataContext.Entry(entity).State = EntityState.Modified;
+            DbEntityEntry dbEntityEntry = dataContext.Entry(entity);
+
+            if (dbEntityEntry.State == EntityState.Detached)
+            {
+                dbset.Attach(entity);
+            }
+            dbEntityEntry.State = EntityState.Modified;
+
+            //dbset.Attach(entity);
+            //dataContext.Entry(entity).State = EntityState.Modified;
         }
 
         public virtual void Delete(T entity)

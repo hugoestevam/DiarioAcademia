@@ -19,7 +19,9 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Configurations
 
             HasRequired(p => p.Aluno); 
 
-            HasRequired(p => p.Aula);
+            HasRequired(p => p.Aula)
+                .WithMany(a => a.Presencas)
+                .WillCascadeOnDelete(true);
 
             Property(p => p.StatusPresenca);
 

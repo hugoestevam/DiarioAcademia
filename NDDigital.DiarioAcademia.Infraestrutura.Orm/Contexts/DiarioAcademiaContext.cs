@@ -18,6 +18,8 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Contexts
         public DbSet<Aula> Aulas { get; set; }
 
         public DbSet<Turma> Turmas { get; set; }
+
+        public DbSet<Presenca> Presencas { get; set; }
        
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

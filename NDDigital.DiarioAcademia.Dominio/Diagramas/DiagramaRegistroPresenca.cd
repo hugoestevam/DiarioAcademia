@@ -3,7 +3,7 @@
   <Class Name="NDDigital.DiarioAcademia.Dominio.Aluno">
     <Position X="1.75" Y="4.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAACgAAAAAAAAAIEAAAAAAAAAAAAQAAAAAAAEAEAgAA=</HashCode>
+      <HashCode>AAAAgAAAAAAAAAIEAAAAAAAAAAAAQAAAAAAAEAEAgAA=</HashCode>
       <FileName>Aluno.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
@@ -16,24 +16,25 @@
   <Class Name="NDDigital.DiarioAcademia.Dominio.Aula">
     <Position X="8.5" Y="4.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAACAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAgAAAAAAAAAAAABAAAAAAAAAAAAA=</HashCode>
       <FileName>Aula.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="NDDigital.DiarioAcademia.Dominio.Presenca">
     <Position X="5.25" Y="4.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAACAAAAAAAAAAAEAAAAAAAAAAAAAAAAEAAAAAAJAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAEAAAAAAJAAA=</HashCode>
       <FileName>Presenca.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
       <Property Name="Aula" />
+      <Property Name="Aluno" />
     </ShowAsAssociation>
   </Class>
   <Class Name="NDDigital.DiarioAcademia.Dominio.Turma">
     <Position X="5.5" Y="1.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>IAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>IAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Turma.cs</FileName>
     </TypeIdentifier>
   </Class>
