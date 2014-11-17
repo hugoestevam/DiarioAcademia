@@ -17,14 +17,11 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Configurations
 
             HasKey(p => p.Id);
 
-            HasRequired(p => p.Aluno); 
+            HasRequired(p => p.Aluno);
 
-            HasRequired(p => p.Aula)
-                .WithMany(a => a.Presencas)
-                .WillCascadeOnDelete(true);
+            HasRequired(p => p.Aula);                
 
             Property(p => p.StatusPresenca);
-
         }
     }
 }

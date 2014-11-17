@@ -9,6 +9,7 @@ using System.Linq.Expressions;
 using NDDigital.DiarioAcademia.Infraestrutura.Orm.Contexts;
 using NDDigital.DiarioAcademia.Dominio.Common;
 using System.Data.Entity.Infrastructure;
+using System.Diagnostics;
 
 
 namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Common 
@@ -54,7 +55,8 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Common
 
         public virtual void Delete(T entity)
         {
-            DbEntityEntry dbEntityEntry = dataContext.Entry(entity);
+            DbEntityEntry dbEntityEntry = dataContext.Entry(entity);            
+
             if (dbEntityEntry.State != EntityState.Deleted)
             {
                 dbEntityEntry.State = EntityState.Deleted;
@@ -77,6 +79,7 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Common
                   
             dbset.Remove(entity);            
         }
+
         public virtual void Delete(Expression<Func<T, bool>> where)
         {
             IEnumerable<T> objects = dbset.Where<T>(where).AsEnumerable();

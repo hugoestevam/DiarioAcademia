@@ -32,4 +32,9 @@ namespace NDDigital.DiarioAcademia.Dominio
                 Aluno.Nome, StatusPresenca == "F" ? "Faltou" : "Compareceu");
         }
     }
+
+    public interface IPresencaRepository : IRepository<Presenca>
+    {
+       
+    }
 }

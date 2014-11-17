@@ -7,13 +7,12 @@ using NDbUnit.Core;
 using System.Configuration;
 using NDbUnit.Core.SqlClient;
 using System.IO;
+using System.Diagnostics;
 
 namespace NDDigital.DiarioAcademia.IntegrationTests
 {
     public class DatabaseFixture : IDisposable
-    {
-       
-
+    {       
         public DatabaseFactory Factory
         {
             get;
@@ -28,17 +27,18 @@ namespace NDDigital.DiarioAcademia.IntegrationTests
 
         public DatabaseFixture()
         {
+            Debug.Write("ctor: DatabaseFixture->");
+
             Factory = new DatabaseFactory();
 
-            UnitOfWork = new UnitOfWork(Factory);                  
+            UnitOfWork = new UnitOfWork(Factory);
 
-            Database.SetInitializer(new DropCreateDatabaseIfModelChanges<DiarioAcademiaContext>());          
+            Database.SetInitializer(new DropCreateDatabaseIfModelChanges<DiarioAcademiaContext>());
         }
-
-      
 
         public virtual void Dispose()
         {
+            Debug.Write("dispose: DatabaseFixture->");
             Factory.Dispose();
         }
     }  

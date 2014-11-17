@@ -22,29 +22,7 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Repositories
         public Aula GetByData(DateTime data)
         {
             return GetQueryable().FirstOrDefault(x => x.Data.Equals(data));
-        }
-
-        
-
-        public override void Delete(Aula entity)
-        {
-            base.Delete(entity);
-
-            var presencas = dataContext
-                .Presencas
-                .Where(p => p.Aula.Equals(entity))
-                .ToList();
-
-            foreach (var p in presencas)
-            {
-                dataContext.Presencas.Remove(p);
-            }
-
-        }
-
-        
-
-       
+        }                       
 
     }
 }

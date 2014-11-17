@@ -11,7 +11,10 @@ namespace NDDigital.DiarioAcademia.Aplicacao
 {
     public interface IPresencaService
     {
-        void RegistraPresenca(RegistraPresencaCommand cmd);        
+        void RegistraPresenca(RegistraPresencaCommand cmd);
+
+
+        //void RegistraPresenca(int anoTurma, DateTime dataAula, int[]  );        
     }
 
     public class PresencaService : IPresencaService 
