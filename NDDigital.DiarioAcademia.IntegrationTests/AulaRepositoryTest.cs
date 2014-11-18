@@ -3,6 +3,7 @@ using NDDigital.DiarioAcademia.Aplicacao.Testes.Traits;
 using NDDigital.DiarioAcademia.Dominio;
 using NDDigital.DiarioAcademia.Infraestrutura.Orm.Common;
 using NDDigital.DiarioAcademia.Infraestrutura.Orm.Repositories;
+using NDDigital.DiarioAcademia.IntegrationTests.Common;
 using System;
 using Xunit;
 
@@ -24,7 +25,7 @@ namespace NDDigital.DiarioAcademia.IntegrationTests
             uow = databaseFixture.UnitOfWork;
         }
 
-        [Fact(DisplayName = "Deveria persistir aula no banco de dados")]
+        [Fact(DisplayName = "Deveria gravar aula")]
         public void Test_1()
         {            
             //arrange
@@ -60,7 +61,7 @@ namespace NDDigital.DiarioAcademia.IntegrationTests
             presencaRepository.GetById(Presenca_Id).Should().BeNull();
         }
 
-        [Fact(DisplayName = "Deveria atualizar aula no banco de dados")]
+        [Fact(DisplayName = "Deveria atualizar aula")]
         public void Test_3()
         {            
             //arrange
@@ -79,8 +80,32 @@ namespace NDDigital.DiarioAcademia.IntegrationTests
             var aulaEncontrada = aulaRepository.GetById(aula.Id);
 
             aulaEncontrada.ShouldBeEquivalentTo(aula);
-        }                      
+        }
 
-                
+        [Fact(DisplayName = "Deveria buscar todas aulas")]
+        public void Test_4()
+        {
+            //arrange
+            InsertTestData(TBAula);
+
+            //action
+            var aulas = aulaRepository.GetAll();
+
+            //assert
+            aulas.Should().HaveCount(3);
+        }
+
+        [Fact(DisplayName = "Deveria buscar aulas por data")]
+        public void Test_5()
+        {
+            //arrange
+            InsertTestData(TBAula);
+
+            //action
+            var aula = aulaRepository.GetByData(Aula_Data);
+
+            //assert
+            aula.Should().NotBeNull();
+        } 
     }
 }

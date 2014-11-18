@@ -9,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NDDigital.DiarioAcademia.IntegrationTests
+namespace NDDigital.DiarioAcademia.IntegrationTests.Common
 {
     public abstract class UnitTestContext : IDisposable
     {
@@ -19,8 +19,9 @@ namespace NDDigital.DiarioAcademia.IntegrationTests
         protected const string TBAula = @"..\..\TestData\DiarioAcademia.TBAula.xml";
         protected const string TBTurma = @"..\..\TestData\DiarioAcademia.TBTurma.xml";
         protected const string TBPresenca = @"..\..\TestData\DiarioAcademia.TBPresenca.xml";
-
+        
         protected readonly Guid Aula_Id = Guid.Parse("4064d4ed-f5b4-cb81-d201-08d1ccc21216");
+        protected readonly DateTime Aula_Data = new DateTime(2014, 11,13);        
 
         protected readonly Guid Presenca_Id = Guid.Parse("76545b3e-9b2b-cb1c-524d-08d1cd58e012");
 
@@ -67,7 +68,7 @@ namespace NDDigital.DiarioAcademia.IntegrationTests
 
         public void Dispose()
         {
-            Debug.Write("Dispose: NDbUnitTestBase->");
+            Debug.Write("dispose: NDbUnitTestBase->");
 
             _db.PerformDbOperation(DbOperationFlag.DeleteAll);
         }
