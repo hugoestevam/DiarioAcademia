@@ -22,7 +22,7 @@ namespace DiarioAcademia.UnitTests.Dominio
         {
             turma = new Turma(2005);
             aluno = new Aluno("Rech",turma);
-        }
+        }//kl
 
         [Fact(DisplayName = "Quantidade de presencas deveria ser 0")]
         public void Test_1()
