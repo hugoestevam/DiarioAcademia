@@ -13,9 +13,7 @@ namespace NDDigital.DiarioAcademia.Dominio
             GenerateNewIdentity();
         }
 
-        public DateTime Data { get; set; }
-
-        //public virtual List<Presenca> Presencas { get; set; }
+        public DateTime Data { get; set; }        
 
         public Aula(DateTime dateTime) : this()
         {            

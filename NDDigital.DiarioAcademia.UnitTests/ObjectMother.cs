@@ -11,26 +11,12 @@ namespace NDDigital.DiarioAcademia.UnitTests
 {
     public class ObjectMother
     {
-        public static Aula CreateAula()
+        public static Aula CriaUmaAula()
         {
             return new Aula(DateTime.Now);
-        }
+        }        
 
-        public static RegistraPresencaCommand MontaRegistraPresencaCommandValido()
-        {
-            var comando = Builder<RegistraPresencaCommand>.CreateNew()
-                .With(x => x.AnoTurma = 2014)
-                .With(x => x.DataAula = new DateTime(2000, 10, 10))
-                .With(x => x.PresencaAlunos = Builder<PresencaAlunosCommand>
-                            .CreateListOfSize(5)
-                            .Build()
-                            .ToList())
-                .Build();
-
-            return comando;
-        }
-
-        public static RegistraPresencaCommand MontaRegistraPresencaCommand(IEnumerable<Guid> ids)
+        public static RegistraPresencaCommand CriaRegistraPresencaCommand(IEnumerable<Guid> ids)
         {
             var comando = Builder<RegistraPresencaCommand>.CreateNew()
                 .With(x => x.AnoTurma = 2014)
@@ -45,5 +31,11 @@ namespace NDDigital.DiarioAcademia.UnitTests
             return comando;
         }
 
+        internal static IEnumerable<Aluno> CriaListaAlunos(int qtdAlunos)
+        {
+            return Builder<Aluno>
+                .CreateListOfSize(qtdAlunos)
+                .Build();
+        }
     }
 }

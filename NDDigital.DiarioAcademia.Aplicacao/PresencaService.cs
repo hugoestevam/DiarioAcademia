@@ -23,6 +23,9 @@ namespace NDDigital.DiarioAcademia.Aplicacao
         private IAulaRepository _aulaRepository;
         private IUnitOfWork _unitOfWork;
 
+        private const string NENHUM_ALUNO_ENCOTRADO_PARA_TURMA = "Nenhum aluno encontrado para a turma de {0}";
+        private const string NENHUMA_AULA_ENCOTRADA_NESTA_DATA = "Nenhuma aula encontrada para esta data {0}";
+
         public PresencaService(IUnitOfWork unitOfWork, IAlunoRepository alunoRepositorio, IAulaRepository aulaRepository)
         {
             _alunoRepository = alunoRepositorio;
@@ -35,12 +38,12 @@ namespace NDDigital.DiarioAcademia.Aplicacao
             var alunos = _alunoRepository.GetAllByTurma(cmd.AnoTurma);
 
             if (alunos == null || alunos.Any() == false)
-                throw new AlunoNaoEncontrado();
+                throw new AlunoNaoEncontrado(String.Format(NENHUM_ALUNO_ENCOTRADO_PARA_TURMA, cmd.AnoTurma));
 
             var aula = _aulaRepository.GetByData(cmd.DataAula);
 
             if (aula == null)
-                throw new AulaNaoEncontrada();
+                throw new AulaNaoEncontrada(String.Format(NENHUMA_AULA_ENCOTRADA_NESTA_DATA, cmd.DataAula));
 
             foreach (var item in cmd.PresencaAlunos)
             {

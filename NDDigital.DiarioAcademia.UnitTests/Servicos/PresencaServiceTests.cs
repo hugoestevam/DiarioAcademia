@@ -39,7 +39,9 @@ namespace NDDigital.DiarioAcademia.UnitTests.Servicos
             //arrange
             int qtdAlunos = 5;
 
-            var alunos = Builder<Aluno>.CreateListOfSize(qtdAlunos).Build();
+            var alunos = ObjectMother.CriaListaAlunos(qtdAlunos);
+
+            var comando = ObjectMother.CriaRegistraPresencaCommand(alunos.Select(x => x.Id));
 
             _alunoRepository
                 .Setup(x => x.GetAllByTurma(It.IsAny<int>()))
@@ -48,8 +50,6 @@ namespace NDDigital.DiarioAcademia.UnitTests.Servicos
             _aulaRepository
                 .Setup(x => x.GetByData(It.IsAny<DateTime>()))
                 .Returns(new Aula(DateTime.Now));
-
-            RegistraPresencaCommand comando = ObjectMother.MontaRegistraPresencaCommand(alunos.Select(x => x.Id));
 
             //act
             presencaService.RegistraPresenca(comando);
@@ -63,21 +63,29 @@ namespace NDDigital.DiarioAcademia.UnitTests.Servicos
         [Fact(DisplayName = "RegistraPresenca deveria lançar exceção AlunoNaoEncontrado")]
         public void Test_2()
         {
+            //arrange
             _alunoRepository
                 .Setup(x => x.GetAllByTurma(It.IsAny<int>()))
                 .Returns(null as List<Aluno>);
 
             var comando = new RegistraPresencaCommand { AnoTurma = 2000 };
+            
+            // act
+            Exception ex = Record.Exception(new Assert.ThrowsDelegate(() => { presencaService.RegistraPresenca(comando); }));
 
-            Assert.Throws<AlunoNaoEncontrado>(() => presencaService.RegistraPresenca(comando));
+            // assert
+            Assert.IsType(typeof(AlunoNaoEncontrado), ex);            
+                        
+            //Assert.Throws<AlunoNaoEncontrado>(() => presencaService.RegistraPresenca(comando));
         }
 
         [Fact(DisplayName = "RegistraPresenca deveria lançar exceção AulaNaoEncontrado")]
         public void Test_3()
         {
-            int qtdAlunos = 5;
+            //arrange
+            int qtdAlunos = 1;
 
-            var alunos = Builder<Aluno>.CreateListOfSize(qtdAlunos).Build();
+            var alunos = ObjectMother.CriaListaAlunos(qtdAlunos);
 
             _alunoRepository
                 .Setup(x => x.GetAllByTurma(It.IsAny<int>()))
@@ -89,7 +97,13 @@ namespace NDDigital.DiarioAcademia.UnitTests.Servicos
 
             var comando = new RegistraPresencaCommand { AnoTurma = 2000 };
 
-            Assert.Throws<AulaNaoEncontrada>(() => presencaService.RegistraPresenca(comando));
+            //act
+            Exception ex = Record.Exception(new Assert.ThrowsDelegate(() => presencaService.RegistraPresenca(comando)));
+
+            //assert
+            Assert.IsType<AulaNaoEncontrada>(ex);
         }
+
+        
     }
 }

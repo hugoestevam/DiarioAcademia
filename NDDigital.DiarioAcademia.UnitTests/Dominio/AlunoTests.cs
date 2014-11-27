@@ -53,7 +53,7 @@ namespace DiarioAcademia.UnitTests.Dominio
         [Fact(DisplayName = "Deveria registrar uma ausência")]
         public void Test_4()
         {
-            Aula aula = ObjectMother.CreateAula();
+            Aula aula = new Aula(DateTime.Now);
             aluno.RegistraPresenca(aula, "F");
 
             aluno.ObtemQuantidadeAusencias().Should().Be(1);
@@ -62,7 +62,7 @@ namespace DiarioAcademia.UnitTests.Dominio
         [Fact(DisplayName = "Deveria registrar uma presença")]
         public void Test_5()
         {
-            Aula aula = ObjectMother.CreateAula();
+            Aula aula = new Aula(DateTime.Now);
 
             aluno.RegistraPresenca(aula, "C");
 
@@ -72,7 +72,7 @@ namespace DiarioAcademia.UnitTests.Dominio
         [Fact(DisplayName = "Não deveria registrar duas presenças na mesma aula")]
         public void Test_6()
         {
-            Aula aula = ObjectMother.CreateAula();
+            Aula aula = new Aula(DateTime.Now);
 
             aluno.RegistraPresenca(aula, "C");
             
