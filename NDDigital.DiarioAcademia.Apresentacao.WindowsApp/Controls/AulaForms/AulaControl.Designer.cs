@@ -28,10 +28,31 @@
         /// </summary>
         private void InitializeComponent()
         {
-            components = new System.ComponentModel.Container();
+            this.listAulas = new System.Windows.Forms.ListBox();
+            this.SuspendLayout();
+            // 
+            // listAulas
+            // 
+            this.listAulas.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listAulas.FormattingEnabled = true;
+            this.listAulas.Location = new System.Drawing.Point(0, 0);
+            this.listAulas.Name = "listAulas";
+            this.listAulas.Size = new System.Drawing.Size(317, 267);
+            this.listAulas.TabIndex = 0;
+            // 
+            // AulaControl
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.listAulas);
+            this.Name = "AulaControl";
+            this.Size = new System.Drawing.Size(317, 267);
+            this.ResumeLayout(false);
+
         }
 
         #endregion
+
+        private System.Windows.Forms.ListBox listAulas;
     }
 }

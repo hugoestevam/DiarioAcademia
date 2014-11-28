@@ -7,7 +7,7 @@ namespace NDDigital.DiarioAcademia.Apresentacao.WindowsApp.Controls.Shared
             Add = " ";
             Delete = " ";
             Edit = " ";
-            EditItens = " ";
+            RegistraPresenca = " ";
             Report = " ";
         }
 
@@ -17,7 +17,7 @@ namespace NDDigital.DiarioAcademia.Apresentacao.WindowsApp.Controls.Shared
 
         public string Edit { get; set; }
 
-        public string EditItens { get; set; }
+        public string RegistraPresenca { get; set; }
 
         public string Report { get; set; }
     }

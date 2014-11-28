@@ -159,12 +159,12 @@ namespace NDDigital.DiarioAcademia.Apresentacao.WindowsApp
 
                 
                 btnAdd.ToolTipText = _dataManager.GetToolTipMessage().Add;
-                btnUpdateItens.ToolTipText = _dataManager.GetToolTipMessage().EditItens;
+                btnUpdateItens.ToolTipText = _dataManager.GetToolTipMessage().RegistraPresenca;
                 btnUpdate.ToolTipText = _dataManager.GetToolTipMessage().Edit;
                 btnDelete.ToolTipText = _dataManager.GetToolTipMessage().Delete;                
 
                 btnAdd.Enabled = _dataManager.GetStateButtons().Add;
-                btnUpdateItens.Enabled = _dataManager.GetStateButtons().UpdateItens;
+                btnUpdateItens.Enabled = _dataManager.GetStateButtons().RegistraPresenca;
                 btnUpdate.Enabled = _dataManager.GetStateButtons().Update;
                 btnDelete.Enabled = _dataManager.GetStateButtons().Delete;
 

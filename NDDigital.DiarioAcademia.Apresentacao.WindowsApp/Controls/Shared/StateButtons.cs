@@ -4,7 +4,7 @@
     {
         public bool Add { get; set; }
 
-        public bool UpdateItens { get; set; }
+        public bool RegistraPresenca { get; set; }
 
         public bool Delete { get; set; }
 

@@ -16,5 +16,7 @@ namespace NDDigital.DiarioAcademia.Apresentacao.WindowsApp.Controls.AulaForms
         {
             InitializeComponent();
         }
+
+        public Aplicacao.DTOs.AulaDTO Aula { get; set; }
     }
 }
