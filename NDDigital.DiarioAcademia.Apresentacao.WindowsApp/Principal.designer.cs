@@ -31,8 +31,8 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Principal));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.cadastrosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.tarefasMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.compromissosMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.alunosMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.turmasMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolbar = new System.Windows.Forms.ToolStrip();
             this.btnAdd = new System.Windows.Forms.ToolStripButton();
             this.btnUpdateItens = new System.Windows.Forms.ToolStripButton();
@@ -63,23 +63,25 @@
             // cadastrosToolStripMenuItem
             // 
             this.cadastrosToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tarefasMenuItem,
-            this.compromissosMenuItem});
+            this.alunosMenuItem,
+            this.turmasMenuItem});
             this.cadastrosToolStripMenuItem.Name = "cadastrosToolStripMenuItem";
             this.cadastrosToolStripMenuItem.Size = new System.Drawing.Size(71, 20);
             this.cadastrosToolStripMenuItem.Text = "Cadastros";
             // 
-            // tarefasMenuItem
+            // alunosMenuItem
             // 
-            this.tarefasMenuItem.Name = "tarefasMenuItem";
-            this.tarefasMenuItem.Size = new System.Drawing.Size(154, 22);
-            this.tarefasMenuItem.Text = "Tarefas";
+            this.alunosMenuItem.Name = "alunosMenuItem";
+            this.alunosMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.alunosMenuItem.Text = "Alunos";
+            this.alunosMenuItem.Click += new System.EventHandler(this.alunosMenuItem_Click);
             // 
-            // compromissosMenuItem
+            // turmasMenuItem
             // 
-            this.compromissosMenuItem.Name = "compromissosMenuItem";
-            this.compromissosMenuItem.Size = new System.Drawing.Size(154, 22);
-            this.compromissosMenuItem.Text = "Compromissos";
+            this.turmasMenuItem.Name = "turmasMenuItem";
+            this.turmasMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.turmasMenuItem.Text = "Turmas";
+            this.turmasMenuItem.Click += new System.EventHandler(this.turmasMenuItem_Click);
             // 
             // toolbar
             // 
@@ -227,7 +229,7 @@
 
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem cadastrosToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem tarefasMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem alunosMenuItem;
         private System.Windows.Forms.ToolStrip toolbar;
         private System.Windows.Forms.ToolStripButton btnAdd;
         private System.Windows.Forms.ToolStripButton btnUpdate;
@@ -238,7 +240,7 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripLabel labelTipoCadastro;
         private System.Windows.Forms.ToolStripButton btnUpdateItens;
-        private System.Windows.Forms.ToolStripMenuItem compromissosMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem turmasMenuItem;
         private System.Windows.Forms.ToolStripStatusLabel statusImage;
         private System.Windows.Forms.ToolStripComboBox cmbTurmas;
     }

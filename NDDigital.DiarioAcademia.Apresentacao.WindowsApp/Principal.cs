@@ -13,6 +13,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using NDDigital.DiarioAcademia.Apresentacao.WindowsApp.Controls.AlunoForms;
 
 
 
@@ -178,14 +179,15 @@ namespace NDDigital.DiarioAcademia.Apresentacao.WindowsApp
             }
         }
 
-        
+        private void alunosMenuItem_Click(object sender, EventArgs e)
+        {
+            LoadDataManager(new AlunoDataManager());
+        }
 
-        
-       
-
-       
-
-
+        private void turmasMenuItem_Click(object sender, EventArgs e)
+        {
+            LoadDataManager(new AlunoDataManager());
+        }
 
 
     }

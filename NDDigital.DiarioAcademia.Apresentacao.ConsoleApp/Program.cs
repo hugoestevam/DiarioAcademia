@@ -1,4 +1,6 @@
-﻿using System;
+﻿using NDDigital.DiarioAcademia.Dominio;
+using NDDigital.DiarioAcademia.Infraestrutura.Orm.Contexts;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,6 +12,11 @@ namespace NDDigital.DiarioAcademia.Apresentacao.ConsoleApp
     {
         static void Main(string[] args)
         {
+            DiarioAcademiaContext context = new DiarioAcademiaContext();
+
+            context.Aulas.Add(new Aula(DateTime.Now));
+
+            context.SaveChanges();
 
         }
     }
