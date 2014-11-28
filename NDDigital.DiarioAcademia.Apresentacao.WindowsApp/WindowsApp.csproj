@@ -67,6 +67,19 @@
     <Compile Include="Controls\AlunoForms\AlunoDialog.Designer.cs">
       <DependentUpon>AlunoDialog.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\AulaForms\AulaControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\AulaForms\AulaControl.Designer.cs">
+      <DependentUpon>AulaControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\AulaForms\AulaDataManager.cs" />
+    <Compile Include="Controls\AulaForms\AulaDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Controls\AulaForms\AulaDialog.Designer.cs">
+      <DependentUpon>AulaDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Shared\DataManager.cs" />
     <Compile Include="Controls\Shared\StateButtons.cs" />
     <Compile Include="Controls\Shared\ToolTipMessage.cs" />
@@ -163,6 +176,7 @@
       <Name>Infraestrutura.Orm</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
