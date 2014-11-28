@@ -61,16 +61,4 @@ namespace NDDigital.DiarioAcademia.Dominio
         IEnumerable<Aluno> GetAllByTurma(int ano);        
     }
 
-    public interface IEnderecoRepository 
-    {
-        Endereco GetEnderecoByCep(string cep);
-    }
-
-    public class Endereco
-    {
-        public int Numero { get; set; }
-
-        public string Rua { get; set; }
-
-    }
 }

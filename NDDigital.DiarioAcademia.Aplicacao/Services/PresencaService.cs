@@ -1,4 +1,4 @@
-﻿using NDDigital.DiarioAcademia.CommandQuery;
+﻿using NDDigital.DiarioAcademia.Aplicacao.DTOs;
 using NDDigital.DiarioAcademia.Dominio;
 using NDDigital.DiarioAcademia.Infraestrutura.Orm.Common;
 using System;
@@ -7,11 +7,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NDDigital.DiarioAcademia.Aplicacao
+namespace NDDigital.DiarioAcademia.Aplicacao.Services
 {
     public interface IPresencaService
     {
-        void RegistraPresenca(RegistraPresencaCommand cmd);
+        void RegistraPresenca(RegistroPresencaDTO cmd);
 
 
         //void RegistraPresenca(int anoTurma, DateTime dataAula, int[]  );        
@@ -33,7 +33,7 @@ namespace NDDigital.DiarioAcademia.Aplicacao
             _unitOfWork = unitOfWork;
         }
 
-        public void RegistraPresenca(RegistraPresencaCommand cmd)
+        public void RegistraPresenca(RegistroPresencaDTO cmd)
         {
             var alunos = _alunoRepository.GetAllByTurma(cmd.AnoTurma);
 

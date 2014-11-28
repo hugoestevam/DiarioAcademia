@@ -44,14 +44,39 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Form1.cs">
+    <Compile Include="Controls\AlunoForms\AlunoControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\AlunoForms\AlunoControl.Designer.cs">
+      <DependentUpon>AlunoControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\AlunoForms\AlunoDataManager.cs" />
+    <Compile Include="Controls\AlunoForms\AlunoDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Controls\AlunoForms\AlunoDialog.Designer.cs">
+      <DependentUpon>AlunoDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Shared\DataManager.cs" />
+    <Compile Include="Controls\Shared\StateButtons.cs" />
+    <Compile Include="Controls\Shared\ToolTipMessage.cs" />
+    <Compile Include="Principal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Principal.designer.cs">
+      <DependentUpon>Principal.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Controls\AlunoForms\AlunoControl.resx">
+      <DependentUpon>AlunoControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\AlunoForms\AlunoDialog.resx">
+      <DependentUpon>AlunoDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Principal.resx">
+      <DependentUpon>Principal.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -60,6 +85,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -73,6 +99,39 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Symbol Add.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Symbol Delete.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Symbol Error 3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Symbol Pencil.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Symbol Check.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\NDDigital.DiarioAcademia.Aplicacao\Aplicacao.csproj">
+      <Project>{175b058e-a32a-491a-a1fd-9783edc7a943}</Project>
+      <Name>Aplicacao</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NDDigital.DiarioAcademia.CommandQuery\Aplicacao.DTOs.csproj">
+      <Project>{fac6b57f-d8c9-4593-80f0-184f5cab272c}</Project>
+      <Name>Aplicacao.DTOs</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NDDigital.DiarioAcademia.Dominio\Dominio.csproj">
+      <Project>{98aeeab1-ab78-451a-ae88-c852c6bc3c31}</Project>
+      <Name>Dominio</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NDDigital.DiarioAcademia.Infraestrutura.Orm\Infraestrutura.Orm.csproj">
+      <Project>{3fd3156c-9f4f-4e10-8b7a-7454c803be89}</Project>
+      <Name>Infraestrutura.Orm</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

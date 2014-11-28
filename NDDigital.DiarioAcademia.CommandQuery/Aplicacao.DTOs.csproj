@@ -7,8 +7,8 @@
     <ProjectGuid>{FAC6B57F-D8C9-4593-80F0-184F5CAB272C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>NDDigital.DiarioAcademia.CommandQuery</RootNamespace>
-    <AssemblyName>NDDigital.DiarioAcademia.CommandQuery</AssemblyName>
+    <RootNamespace>NDDigital.DiarioAcademia.Aplicacao.DTOs</RootNamespace>
+    <AssemblyName>NDDigital.DiarioAcademia.Aplicacao.DTOs</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -39,8 +39,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AlunoDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RegistraPresencaCommand.cs" />
+    <Compile Include="RegistroPresencaDTO.cs" />
+    <Compile Include="TurmaDTO.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\NDDigital.DiarioAcademia.Dominio\Dominio.csproj">
+      <Project>{98aeeab1-ab78-451a-ae88-c852c6bc3c31}</Project>
+      <Name>Dominio</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

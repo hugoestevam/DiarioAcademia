@@ -22,26 +22,5 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.WebServices.Properties {
                 return defaultInstance;
             }
         }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://ws.correios.com.br/calculador/CalcPrecoPrazo.asmx")]
-        public string NDDigital_DiarioAcademia_Infraestrutura_WebServices_br_com_correios_ws_CalcPrecoPrazoWS {
-            get {
-                return ((string)(this["NDDigital_DiarioAcademia_Infraestrutura_WebServices_br_com_correios_ws_CalcPrecoP" +
-                    "razoWS"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://www.byjg.com.br/site/webservice.php/ws/cep")]
-        public string NDDigital_DiarioAcademia_Infraestrutura_WebServices_br_com_byjg_www_CEPService {
-            get {
-                return ((string)(this["NDDigital_DiarioAcademia_Infraestrutura_WebServices_br_com_byjg_www_CEPService"]));
-            }
-        }
     }
 }

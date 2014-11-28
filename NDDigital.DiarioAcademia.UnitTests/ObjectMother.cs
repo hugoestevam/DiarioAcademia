@@ -1,5 +1,5 @@
 ﻿using FizzWare.NBuilder;
-using NDDigital.DiarioAcademia.CommandQuery;
+using NDDigital.DiarioAcademia.Aplicacao.DTOs;
 using NDDigital.DiarioAcademia.Dominio;
 using System;
 using System.Collections.Generic;
@@ -16,16 +16,16 @@ namespace NDDigital.DiarioAcademia.UnitTests
             return new Aula(DateTime.Now);
         }        
 
-        public static RegistraPresencaCommand CriaRegistraPresencaCommand(IEnumerable<Guid> ids)
+        public static RegistroPresencaDTO CriaRegistraPresencaCommand(IEnumerable<Guid> ids)
         {
-            var comando = Builder<RegistraPresencaCommand>.CreateNew()
+            var comando = Builder<RegistroPresencaDTO>.CreateNew()
                 .With(x => x.AnoTurma = 2014)
                 .With(x => x.DataAula = new DateTime(2000, 10, 10))               
                 .Build();
 
             foreach (var id in ids)
             {
-                comando.PresencaAlunos.Add(new PresencaAlunosCommand { AlunoId = id, Status = "C" });
+                comando.PresencaAlunos.Add(new PresencaAlunoDTO { AlunoId = id, Status = "C" });
             }
 
             return comando;

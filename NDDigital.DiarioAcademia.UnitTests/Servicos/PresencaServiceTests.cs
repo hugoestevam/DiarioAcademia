@@ -1,8 +1,8 @@
 ﻿using FizzWare.NBuilder;
 using Moq;
-using NDDigital.DiarioAcademia.Aplicacao;
+using NDDigital.DiarioAcademia.Aplicacao.Services;
+using NDDigital.DiarioAcademia.Aplicacao.DTOs;
 using NDDigital.DiarioAcademia.Aplicacao.Testes.Traits;
-using NDDigital.DiarioAcademia.CommandQuery;
 using NDDigital.DiarioAcademia.Dominio;
 using NDDigital.DiarioAcademia.Infraestrutura.Orm.Common;
 using System;
@@ -68,7 +68,7 @@ namespace NDDigital.DiarioAcademia.UnitTests.Servicos
                 .Setup(x => x.GetAllByTurma(It.IsAny<int>()))
                 .Returns(null as List<Aluno>);
 
-            var comando = new RegistraPresencaCommand { AnoTurma = 2000 };
+            var comando = new RegistroPresencaDTO { AnoTurma = 2000 };
             
             // act
             Exception ex = Record.Exception(new Assert.ThrowsDelegate(() => { presencaService.RegistraPresenca(comando); }));
@@ -95,7 +95,7 @@ namespace NDDigital.DiarioAcademia.UnitTests.Servicos
                 .Setup(x => x.GetByData(It.IsAny<DateTime>()))
                 .Returns(null as Aula);
 
-            var comando = new RegistraPresencaCommand { AnoTurma = 2000 };
+            var comando = new RegistroPresencaDTO { AnoTurma = 2000 };
 
             //act
             Exception ex = Record.Exception(new Assert.ThrowsDelegate(() => presencaService.RegistraPresenca(comando)));

@@ -1,12 +1,5 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
-<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="NDDigital.DiarioAcademia.Infraestrutura.WebServices.Properties" GeneratedClassName="Settings">
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)">
   <Profiles />
-  <Settings>
-    <Setting Name="NDDigital_DiarioAcademia_Infraestrutura_WebServices_br_com_correios_ws_CalcPrecoPrazoWS" Type="(Web Service URL)" Scope="Application">
-      <Value Profile="(Default)">http://ws.correios.com.br/calculador/CalcPrecoPrazo.asmx</Value>
-    </Setting>
-    <Setting Name="NDDigital_DiarioAcademia_Infraestrutura_WebServices_br_com_byjg_www_CEPService" Type="(Web Service URL)" Scope="Application">
-      <Value Profile="(Default)">http://www.byjg.com.br/site/webservice.php/ws/cep</Value>
-    </Setting>
-  </Settings>
+  <Settings />
 </SettingsFile>

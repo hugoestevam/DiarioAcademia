@@ -44,14 +44,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AlunoService.cs" />
-    <Compile Include="PresencaService.cs" />
+    <Compile Include="Services\AlunoService.cs" />
+    <Compile Include="Services\TurmaService.cs" />
+    <Compile Include="Services\PresencaService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\NDDigital.DiarioAcademia.CommandQuery\Aplicacao.CommandQuery.csproj">
+    <ProjectReference Include="..\NDDigital.DiarioAcademia.CommandQuery\Aplicacao.DTOs.csproj">
       <Project>{fac6b57f-d8c9-4593-80f0-184f5cab272c}</Project>
-      <Name>Aplicacao.CommandQuery</Name>
+      <Name>Aplicacao.DTOs</Name>
     </ProjectReference>
     <ProjectReference Include="..\NDDigital.DiarioAcademia.Dominio\Dominio.csproj">
       <Project>{98aeeab1-ab78-451a-ae88-c852c6bc3c31}</Project>

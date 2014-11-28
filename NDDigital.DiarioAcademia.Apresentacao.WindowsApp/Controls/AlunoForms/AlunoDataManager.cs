@@ -1,0 +1,138 @@
+﻿using NDDigital.DiarioAcademia.Aplicacao.Services;
+using NDDigital.DiarioAcademia.Aplicacao.DTOs;
+using NDDigital.DiarioAcademia.Apresentacao.WindowsApp.Controls.Shared;
+using NDDigital.DiarioAcademia.Infraestrutura.Orm.Common;
+using NDDigital.DiarioAcademia.Infraestrutura.Orm.Repositories;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using Uniplac.Sindicontrata.Infraestrutura.AcessoDadosRepositories;
+
+namespace NDDigital.DiarioAcademia.Apresentacao.WindowsApp.Controls.AlunoForms
+{
+    public class AlunoDataManager : DataManager
+    {
+        private IAlunoService _alunoService;
+        private ITurmaService _turmaService;
+        
+        private AlunoControl _control;
+
+        public AlunoDataManager()
+        {
+            var factory = new DatabaseFactory();
+
+            var unitOfWork = new UnitOfWork(factory);
+
+            var alunoRepository = new AlunoRepository(factory);
+
+            var turmaRepository = new TurmaRepository(factory);
+
+            _turmaService = new TurmaService(turmaRepository, unitOfWork);
+
+            _alunoService = new AlunoService(alunoRepository, turmaRepository, unitOfWork);
+
+            _control = new AlunoControl(_alunoService);
+        }
+
+        public override void AddData()
+        {
+            var turmas = _turmaService.GetAll();
+
+            var dialog = new AlunoDialog(turmas);
+
+            dialog.Aluno = new AlunoDTO();
+
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                _alunoService.Add(dialog.Aluno);
+
+                _control.RefreshGrid();
+            }
+        }
+
+        public override void UpdateData()
+        {
+            AlunoDTO aluno = _control.GetAluno();
+
+            if (aluno == null)
+            {
+                MessageBox.Show("Nenhum aluno selecionado. Selecionar um aluno antes de solicitar a edição");
+                return;
+            }
+
+            var turmas = _turmaService.GetAll();
+
+            var dialog = new AlunoDialog(turmas);
+
+            dialog.Aluno = aluno;
+
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                _alunoService.Update(dialog.Aluno);
+                _control.RefreshGrid();
+            }
+        }
+
+        public override void DeleteData()
+        {
+            AlunoDTO aluno = _control.GetAluno();
+
+            if (aluno == null)
+            {
+                MessageBox.Show("Nenhum aluno selecionado. Selecionar um aluno antes de solicitar a exclusão");
+                return;
+            }
+
+            if (MessageBox.Show("Deseja remover o aluno selecionado?", "", MessageBoxButtons.YesNoCancel) == DialogResult.Yes)
+            {
+                try
+                {
+                    _alunoService.Delete(aluno.Id);
+
+                    _control.RefreshGrid();
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show(e.Message);
+                }
+            }
+        }
+
+        public override UserControl GetControl()
+        {
+            if (_control != null)
+                _control.RefreshGrid();
+
+            return _control;
+        }
+
+        public override string GetDescription()
+        {
+            return "Cadastro de Alunos";
+        }
+
+        public override ToolTipMessage GetToolTipMessage()
+        {
+            return new ToolTipMessage
+            {
+                Add = "Adiciona um novo aluno",
+                Delete = "Exclui o aluno selecionado",
+                Edit = "Atualiza o aluno selecionado"
+            };
+        }
+
+        public override StateButtons GetStateButtons()
+        {
+            return new StateButtons
+            {
+                Add = true,
+                Delete = true,
+                Update = true
+            };
+        }
+
+    }
+}

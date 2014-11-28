@@ -117,20 +117,37 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="Symbol_Add" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Symbol Add.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <metadata name="menuStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
+  <metadata name="toolbar.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>132, 17</value>
+  </metadata>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="btnUpdateItens.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAPxSURBVEhLrZX9T1tVGMf52X9g8R9YlExjNDFGTbZfxGCK
+        tdkGziKjtgGB4lbLWEvLultoASmFtYV2pazItJSyBrCFvUQz2XiLBEbpBptOM6rAcJStt93tC4Wvt6XB
+        KPSCiU/yyT3nOSfPJ+fcc+/J2H+8+MLh93IKs1m59ZmvvZmZSv4/kfnqG+9KCMOC1jQAq+0mTJfcwZde
+        ef2t1PD+gzAPcRRG1zGFsT/JcYE4l5NX1KHUdUfqWvtQT9PSMQSr/RasvSNx4Sli8HAWhyc3OI/JDf1J
+        RF91HU2V2xlKvY20dLlg/noA5k4XLN3D0LYPosnsRlN7ArptGYTWMgR95w1YHSPov+aBY2ACdc2dqGm0
+        oFhYE02V2xm1BjvZ7RyGztiDonI1uAI5jp88u0XhWeQWSmikW/DoNk+KT+g5AqEKvJLzqG/uQqmoMb1A
+        pbeTU7ML+GF4CrbeG7A5ruPbFMl+GrrsV9FpG4Szww6RzMAgoFcw7V3AWiD2nwlpdVh7OROlJVJmwR2v
+        D8/I2L4JPFpGjHMUD9kcTE/cwZd7rWDmrg9kKL4vgnO/IJ6dDa9IjPs/L9C5dVTWtDK8ZH036ZnzIRTe
+        2BNqdg4bbDamGjT4fWl1Oy9RtaUXJI7pLC2gIpuMhO/dx4ZAgJmmZiytrP1jTKo2phcQKUE4hrRE6OJx
+        qRQPNFr4/ljZMc4oOK+zkZ57C4gkCu1C1LeETZkMAUKJGXqLdptTVWdKL1C0fJNeQMUQN11ElCAw6b6G
+        4PPYrvNkdRcZBNrLpOf6CNYtFkTsPQiFoghH6T2niV1xIlpdjTG7A0/Wgtv5f8O4AnljJzk67oW/UYON
+        8nL4nX0IhuOgfppK9uf0bVh87EcoQp+YNDAKpLUd5KTnV/y59AQxHg/r3Hwsz84jXlyMp3wBvJ45BOit
+        YUKqZhBUKtvI8emH8JMRrBrbsXnkCCIsVvI5dcGAx/5gcowJiYrhFJ1SGMiRyQdYefoci74VxA8dwubB
+        g/C//Q5mvFv5vaisZfjQhAo9+ePEPBZXg0mecQsQPXAA44QKj5bXtvNMnFEy/IvKqnXk96N34VsJbNHn
+        xs1LlzH/2+LfuT0QEwyCUlkzecHcB1vfMLppEs8E9oHb6Enw3QgcSUbhcI2i1zWGXvcYrgyOJ3HSlFU0
+        pxcUS5rIws+l4JfJ6RvtHEpOExCKa/HFGTVEkgZUVGlQWa2FRNECmVKPc6pWEHUm1DSYodZ0oF5rpW+0
+        +vSCnPwKfxaLT2V9SMPmU+9zBFR2XhH1QV4xxTpRQuVwSyl2vpD6qKCcyj0ppj7mVVAnPqukuHwJ9Sm/
+        iirgyyhO3ulAqhwdGRl/AUR8CFWcQpEqAAAAAElFTkSuQmCC
+</value>
   </data>
-  <data name="Symbol_Check" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Symbol Check.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Symbol_Delete" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Symbol Delete.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Symbol_Error_3" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Symbol Error 3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Symbol_Pencil" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Symbol Pencil.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
+  <metadata name="statusStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>237, 17</value>
+  </metadata>
 </root>
