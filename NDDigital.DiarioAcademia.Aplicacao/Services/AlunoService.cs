@@ -49,7 +49,7 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
             _alunoRepository.Update(aluno);
 
             _unitOfWork.Commit();
-        }       
+        }
 
         public void Delete(Guid id)
         {

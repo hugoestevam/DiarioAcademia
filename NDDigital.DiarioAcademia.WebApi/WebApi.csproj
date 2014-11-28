@@ -40,6 +40,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Web.DynamicData" />
@@ -79,6 +87,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\TurmaController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -95,8 +104,24 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Controllers\" />
-    <Folder Include="Models\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\NDDigital.DiarioAcademia.Aplicacao\Aplicacao.csproj">
+      <Project>{175b058e-a32a-491a-a1fd-9783edc7a943}</Project>
+      <Name>Aplicacao</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NDDigital.DiarioAcademia.CommandQuery\Aplicacao.DTOs.csproj">
+      <Project>{fac6b57f-d8c9-4593-80f0-184f5cab272c}</Project>
+      <Name>Aplicacao.DTOs</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NDDigital.DiarioAcademia.Dominio\Dominio.csproj">
+      <Project>{98aeeab1-ab78-451a-ae88-c852c6bc3c31}</Project>
+      <Name>Dominio</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NDDigital.DiarioAcademia.Infraestrutura.Orm\Infraestrutura.Orm.csproj">
+      <Project>{3fd3156c-9f4f-4e10-8b7a-7454c803be89}</Project>
+      <Name>Infraestrutura.Orm</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
