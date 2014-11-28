@@ -10,7 +10,7 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Contexts
             : base("DiarioAcademiaContext")
         {
             this.Configuration.LazyLoadingEnabled = true;
-            this.Configuration.ProxyCreationEnabled = true;              
+            this.Configuration.ProxyCreationEnabled = true;            
         }
 
         public DbSet<Aluno> Alunos { get; set; }

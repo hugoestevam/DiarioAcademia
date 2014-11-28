@@ -1,8 +1,10 @@
 ﻿using NDbUnit.Core;
 using NDbUnit.Core.SqlClient;
+using NDDigital.DiarioAcademia.Infraestrutura.Orm.Contexts;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Data.Entity;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -30,11 +32,13 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.Common
         protected INDbUnitTest _db;
 
         public UnitTestContext()
-        {
-            Debug.Write("ctor: NDbUnitTestBase->");
+        {            
+            new DatabaseBootstrapper(new DiarioAcademiaContext()).Configure();
+
             var connectionString = ConfigurationManager.ConnectionStrings["DiarioAcademiaContext"].ConnectionString;
 
             _db = new SqlDbUnitTest(connectionString);
+            
             _db.ReadXmlSchema(XmlSchema);
         }
 
@@ -68,8 +72,6 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.Common
 
         public void Dispose()
         {
-            Debug.Write("dispose: NDbUnitTestBase->");
-
             _db.PerformDbOperation(DbOperationFlag.DeleteAll);
         }
     }

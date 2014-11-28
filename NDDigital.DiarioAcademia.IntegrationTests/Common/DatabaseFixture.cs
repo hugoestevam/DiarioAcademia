@@ -23,8 +23,6 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.Common
             Factory = new DatabaseFactory();
 
             UnitOfWork = new UnitOfWork(Factory);
-
-            Database.SetInitializer(new DatabaseTestInitializer());
         }
 
         public void Dispose()
