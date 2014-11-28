@@ -97,6 +97,9 @@
     <EmbeddedResource Include="Controls\AlunoForms\AlunoDialog.resx">
       <DependentUpon>AlunoDialog.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Controls\TurmaForms\TurmaControl.resx">
+      <DependentUpon>TurmaControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\TurmaForms\TurmaDialog.resx">
       <DependentUpon>TurmaDialog.cs</DependentUpon>
     </EmbeddedResource>

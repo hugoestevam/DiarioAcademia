@@ -7,31 +7,40 @@ using System.Threading.Tasks;
 namespace NDDigital.DiarioAcademia.Aplicacao.DTOs
 {
     public class TurmaDTO
-    {
+    {        
+        public TurmaDTO()
+        {
+        }
+
         public TurmaDTO(Guid id)
         {
-            Id = id;
+            // TODO: Complete member initialization
+            this.Id = id;
         }
 
         public TurmaDTO(Dominio.Turma turma)
         {
-            // TODO: Complete member initialization
             Id = turma.Id;
-            Descricao = "Turma de " + turma.Ano;
             Ano = turma.Ano;
         }
 
         public Guid Id { get; set; }
 
-        public string Descricao { get; set; }
-
         public override bool Equals(object obj)
         {
-            var turma = (TurmaDTO)obj;
+            var turma = obj as TurmaDTO;
+
+            if (turma == null)
+                return false;
 
             return this.Id == turma.Id;
         }
 
         public int Ano { get; set; }
+
+        public override string ToString()
+        {
+            return "Academia do Programador " + Ano;
+        }
     }
 }

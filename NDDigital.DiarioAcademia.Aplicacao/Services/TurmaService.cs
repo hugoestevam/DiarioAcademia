@@ -11,7 +11,7 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
 
     public interface IService<T> where T : class
     {
-        T Add(T dto);
+        void Add(T dto);
 
         void Update(T dto);        
 
@@ -39,29 +39,43 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
             _unitOfWork = unitOfWork;
         }
 
-        public TurmaDTO Add(TurmaDTO turmaDto)
+        public void Add(TurmaDTO turmaDto)
         {
-            throw new NotImplementedException();
+            Turma turma = new Turma(turmaDto.Ano);
+
+            _turmaRepository.Add(turma);
+
+            _unitOfWork.Commit();
+
         }
 
         public void Update(TurmaDTO turmaDto)
         {
-            throw new NotImplementedException();
-        }
+            Turma turma = _turmaRepository.GetById(turmaDto.Id);
 
-        public void Delete(TurmaDTO turmaDto)
-        {
-            throw new NotImplementedException();
-        }
+            turma.Ano = turmaDto.Ano;
+
+            _turmaRepository.Update(turma);
+
+            _unitOfWork.Commit();
+        }      
 
         public void Delete(Guid id)
         {
-            throw new NotImplementedException();
+            _turmaRepository.Delete(id);
+
+            _unitOfWork.Commit();
         }
 
         public TurmaDTO GetById(Guid id)
         {
-            throw new NotImplementedException();
+            var turma = _turmaRepository.GetById(id);
+
+            return new TurmaDTO
+            {
+                Id = turma.Id,
+                Ano= turma.Ano
+            };
         }
 
         public IEnumerable<TurmaDTO> GetAll()

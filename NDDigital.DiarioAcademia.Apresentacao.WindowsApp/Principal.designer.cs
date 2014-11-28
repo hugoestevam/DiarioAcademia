@@ -72,14 +72,14 @@
             // alunosMenuItem
             // 
             this.alunosMenuItem.Name = "alunosMenuItem";
-            this.alunosMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.alunosMenuItem.Size = new System.Drawing.Size(114, 22);
             this.alunosMenuItem.Text = "Alunos";
             this.alunosMenuItem.Click += new System.EventHandler(this.alunosMenuItem_Click);
             // 
             // turmasMenuItem
             // 
             this.turmasMenuItem.Name = "turmasMenuItem";
-            this.turmasMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.turmasMenuItem.Size = new System.Drawing.Size(114, 22);
             this.turmasMenuItem.Text = "Turmas";
             this.turmasMenuItem.Click += new System.EventHandler(this.turmasMenuItem_Click);
             // 
@@ -96,7 +96,7 @@
             this.cmbTurmas});
             this.toolbar.Location = new System.Drawing.Point(0, 24);
             this.toolbar.Name = "toolbar";
-            this.toolbar.Size = new System.Drawing.Size(741, 43);
+            this.toolbar.Size = new System.Drawing.Size(741, 48);
             this.toolbar.TabIndex = 1;
             this.toolbar.Text = "toolStrip1";
             // 
@@ -108,7 +108,7 @@
             this.btnAdd.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Padding = new System.Windows.Forms.Padding(6);
-            this.btnAdd.Size = new System.Drawing.Size(40, 40);
+            this.btnAdd.Size = new System.Drawing.Size(40, 45);
             this.btnAdd.Text = "toolStripButton1";
             this.btnAdd.ToolTipText = " ";
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
@@ -121,7 +121,7 @@
             this.btnUpdateItens.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnUpdateItens.Name = "btnUpdateItens";
             this.btnUpdateItens.Padding = new System.Windows.Forms.Padding(6);
-            this.btnUpdateItens.Size = new System.Drawing.Size(40, 40);
+            this.btnUpdateItens.Size = new System.Drawing.Size(40, 45);
             this.btnUpdateItens.Text = "toolStripButton1";
             this.btnUpdateItens.ToolTipText = " ";
             this.btnUpdateItens.Click += new System.EventHandler(this.btnUpdateItens_Click);
@@ -134,7 +134,7 @@
             this.btnUpdate.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnUpdate.Name = "btnUpdate";
             this.btnUpdate.Padding = new System.Windows.Forms.Padding(6);
-            this.btnUpdate.Size = new System.Drawing.Size(40, 40);
+            this.btnUpdate.Size = new System.Drawing.Size(40, 45);
             this.btnUpdate.Text = "toolStripButton1";
             this.btnUpdate.ToolTipText = " ";
             this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
@@ -147,7 +147,7 @@
             this.btnDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Padding = new System.Windows.Forms.Padding(6);
-            this.btnDelete.Size = new System.Drawing.Size(40, 40);
+            this.btnDelete.Size = new System.Drawing.Size(40, 45);
             this.btnDelete.Text = "toolStripButton1";
             this.btnDelete.ToolTipText = " ";
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
@@ -155,19 +155,20 @@
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 43);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 48);
             // 
             // labelTipoCadastro
             // 
             this.labelTipoCadastro.Name = "labelTipoCadastro";
-            this.labelTipoCadastro.Size = new System.Drawing.Size(176, 40);
+            this.labelTipoCadastro.Size = new System.Drawing.Size(176, 45);
             this.labelTipoCadastro.Text = " Cadastro selecionado: Nenhum";
             // 
             // cmbTurmas
             // 
             this.cmbTurmas.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.cmbTurmas.AutoSize = false;
             this.cmbTurmas.Name = "cmbTurmas";
-            this.cmbTurmas.Size = new System.Drawing.Size(121, 43);
+            this.cmbTurmas.Size = new System.Drawing.Size(250, 48);
             // 
             // statusStrip1
             // 
@@ -195,9 +196,9 @@
             // panelPrincipal
             // 
             this.panelPrincipal.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelPrincipal.Location = new System.Drawing.Point(0, 67);
+            this.panelPrincipal.Location = new System.Drawing.Point(0, 72);
             this.panelPrincipal.Name = "panelPrincipal";
-            this.panelPrincipal.Size = new System.Drawing.Size(741, 467);
+            this.panelPrincipal.Size = new System.Drawing.Size(741, 462);
             this.panelPrincipal.TabIndex = 3;
             // 
             // Principal

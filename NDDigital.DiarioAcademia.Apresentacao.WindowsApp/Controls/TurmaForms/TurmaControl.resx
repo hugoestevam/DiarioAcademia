@@ -117,37 +117,4 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <metadata name="menuStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
-  </metadata>
-  <metadata name="toolbar.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>132, 17</value>
-  </metadata>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="btnUpdateItens.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAPZSURBVEhLrZX9T1tVGMf52X9g8R9YlExjNDFGTbZfxKAg
-        acbACTJqGyodMLCstKOsXhgFBFoGZWBpB7JZSlkD2Ja9RDPZykskZUC3suk0axVYHe3W2+7SlsLX09Jg
-        FHrBxCf55JzznJPnk3PuuTkp+48XXzj8XmZhekZOY+prb6Ymkv9PpL76xrsSSu1Sdo+iV38T3RctgZde
-        ef2txPT+g9KMceRd5mx510icY3xRDie3SCdvvxxq6BxGI6FNN4Zewy1oh2zRklOU9XAahytTm7Jl6pE4
-        FV/1H02U2xnyDj2t7TdD880oNH1maAfGoeyxolVjQWtPDNLXWqHUjqGj7wZ6jTaMXJuHcXQaDao+1DVr
-        IRDWhRPldgZFBAOmcbR3DaKoVIE8vgzHTlRtUViFnEIJQboFl/S5UnxC1vBL6sEt/hKNqn4Iy5qTC2qJ
-        wL7gwg/jduiHbkBvvI5vE8THSeg3XEWf3gqTzoAyiZpdMOtwweeP/GeCynb4Xk6FsFjMLrjjcOMZHdk3
-        /kcriHCO4mEWB7PTd3Bqrx3M3XWDDkb3RcD5C6Lp6XBUiHD/ZxfJrUNUxyKIfeR5pxvBtY09YRac2MjK
-        gr2pBb8vr27nT9ezCGLXdIEImNAmK2v37mODz8dcqwrLHt8/5sSKfQjWIkhKiBSPSqV40KKE+w/Pjnl2
-        QTs5onsuhGKFdiHsXsZmdTX8VC3myBHttqaqoZNF0HY5uYCJINr9NcIUhRnLNQSeR3ZdJ2m4wCJQXqLn
-        r9uwrtUiZBhEMBjGWpicOSFyxYRwTQ0mDUY88QW28/+GdQey5j56YsoBb3MLNkpL4TUNI7AWBfOTPT52
-        dlzA0mMvgiFyY5LAKpBSOnpm/lf8ufwEES4X63n5WFlYRFQgwFMeH455J/zkaNgQK1gEYnkHPTX7EF46
-        hNWuHmweOYJQRka8tZ9X47E3EJ9jg/U/KCEC28wDeJ4+x5Lbg+ihQ9g8eBDet9/BnGMrvxeicyyCk0Tw
-        4/QillYDcZ7lFSB84ACmqHo8WvFt59n4opZNUNNOfz9xF26Pf4thC25evITF35b+zu1BOcUiEFar6POa
-        YeiHxzFAiLUxDKO3MRjjOxuMcSZgNE9gyDyJIcskrlin4pgIwgpVcoFA0koXfi4F76SMvGhnUVxOoUR0
-        DmWnFaiQNKHyTAvENUpI5G2oru3A2fpOUA3dqGvSQNGiQ6Oyl7xojckFmfmV3rR0HpP2ISGD8BEhl8e8
-        n8tn0o8XMR/kCZiM/GIms0DI5JwQMR9zK5njn4mZPJ6E+ZR3hingVTOc7HJ/ohyJlJS/AD1QB4DnuKhx
-        AAAAAElFTkSuQmCC
-</value>
-  </data>
-  <metadata name="statusStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>237, 17</value>
-  </metadata>
 </root>

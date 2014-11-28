@@ -25,7 +25,7 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
             _unitOfWork = unitOfWork;
         }
 
-        public AlunoDTO Add(AlunoDTO alunoDto)
+        public void Add(AlunoDTO alunoDto)
         {
             Turma turma = _turmaRepository.GetById(alunoDto.TurmaId);
 
@@ -34,8 +34,6 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
             _alunoRepository.Add(aluno);
 
             _unitOfWork.Commit();
-
-            return alunoDto;
         }
 
 

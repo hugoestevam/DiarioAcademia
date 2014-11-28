@@ -14,6 +14,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using NDDigital.DiarioAcademia.Apresentacao.WindowsApp.Controls.AlunoForms;
+using NDDigital.DiarioAcademia.Apresentacao.WindowsApp.Controls.TurmaForms;
 
 
 
@@ -41,13 +42,10 @@ namespace NDDigital.DiarioAcademia.Apresentacao.WindowsApp
 
             _turmaService = new TurmaService(turmaRepository, unitOfWork);
 
-            var turmas = _turmaService.GetAll();
-
-            foreach (var turma in turmas)
-            {
-                cmbTurmas.Items.Add(turma);
-            }
+            AtualizaListaTurmas();
         }
+
+       
 
         public static Principal Instance
         {
@@ -186,9 +184,21 @@ namespace NDDigital.DiarioAcademia.Apresentacao.WindowsApp
 
         private void turmasMenuItem_Click(object sender, EventArgs e)
         {
-            LoadDataManager(new AlunoDataManager());
+            LoadDataManager(new TurmaDataManager());
         }
 
+        public void AtualizaListaTurmas()
+        {
+            var turmas = _turmaService.GetAll();
 
+            cmbTurmas.Items.Clear();
+
+            foreach (var turma in turmas)
+            {
+                cmbTurmas.Items.Add(turma);
+            }
+        }
+
+        
     }
 }

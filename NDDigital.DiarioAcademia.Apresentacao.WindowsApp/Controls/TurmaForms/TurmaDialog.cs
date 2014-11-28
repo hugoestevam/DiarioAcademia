@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NDDigital.DiarioAcademia.Aplicacao.DTOs;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,9 +13,44 @@ namespace NDDigital.DiarioAcademia.Apresentacao.WindowsApp.Controls.TurmaForms
 {
     public partial class TurmaDialog : Form
     {
+        private TurmaDTO _turma;
+        private Guid _turmaId;
+
         public TurmaDialog()
         {
             InitializeComponent();
+        }
+
+        public TurmaDTO Turma
+        {
+            get
+            {
+                return _turma;
+            }
+            set
+            {
+                _turma = value;
+
+                _turmaId = _turma.Id;
+
+                cmbTurmas.Text = _turma.Ano.ToString();
+            }
+        }
+
+        private void btnOk_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                _turma.Id = _turmaId;
+
+                _turma.Ano = int.Parse(cmbTurmas.Text);
+            }
+            catch (Exception exc)
+            {
+                Principal.Instance.ShowErrorInFooter(exc.Message);
+
+                DialogResult = DialogResult.None;
+            }
         }
     }
 }

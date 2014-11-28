@@ -25,6 +25,9 @@ namespace NDDigital.DiarioAcademia.Aplicacao.DTOs
 
         public string Nome { get; set; }
 
-
+        public override string ToString()
+        {
+            return Nome;
+        }
     }
 }
