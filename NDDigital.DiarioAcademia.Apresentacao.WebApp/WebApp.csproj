@@ -76,8 +76,75 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="app\controllers\events\eventCreate.ctrl.js" />
+    <Content Include="app\controllers\events\eventDetails.ctrl.js" />
+    <Content Include="app\controllers\events\eventsList.ctrl.js" />
+    <Content Include="app\controllers\layout\footer.ctrl.js" />
+    <Content Include="app\controllers\layout\header.ctrl.js" />
+    <Content Include="app\controllers\layout\home.ctrl.js" />
+    <Content Include="app\controllers\layout\navbar.ctrl.js" />
+    <Content Include="app\controllers\layout\shell.ctrl.js" />
+    <Content Include="app\controllers\layout\sidebar.ctrl.js" />
+    <Content Include="app\controllers\layout\toolbar.ctrl.js" />
+    <Content Include="app\controllers\turma\turmaCreate.ctrl.js" />
+    <Content Include="app\controllers\turma\turmaList.ctrl.js" />
+    <Content Include="app\libs\angular\angular-local-storage.min.js" />
+    <Content Include="app\libs\angular\angular-ui-router.min.js" />
+    <Content Include="app\libs\angular\angular.js" />
+    <Content Include="app\libs\angular\angular.min.js" />
+    <Content Include="app\libs\angular\loading-bar.min.js" />
+    <None Include="app\libs\jquery\jquery-2.1.1.intellisense.js" />
+    <Content Include="app\libs\jquery\jquery-2.1.1.js" />
+    <Content Include="app\libs\jquery\jquery-2.1.1.min.js" />
+    <Content Include="app\libs\toastr\toastr.js" />
+    <Content Include="app\models\turma.model.js" />
+    <Content Include="app\modules\common.module.js" />
+    <Content Include="app\modules\core.module.js" />
+    <Content Include="app\modules\other.module.js" />
+    <Content Include="app\modules\routes.module.js" />
+    <Content Include="app\modules\services.module.js" />
+    <Content Include="app\routes\config.routes.js" />
+    <Content Include="app\routes\events.routes.js" />
+    <Content Include="app\routes\layout.routes.js" />
+    <Content Include="app\routes\turma.routes.js" />
+    <Content Include="app\services\events.services.js" />
+    <Content Include="app\services\logger.services.js" />
+    <Content Include="app\services\turma.services.js" />
+    <Content Include="app\templates\components\inner-view.html" />
+    <Content Include="app\templates\layout\footer.html" />
+    <Content Include="app\templates\layout\header.html" />
+    <Content Include="app\templates\layout\navbar.html" />
+    <Content Include="app\templates\layout\sidebar.html" />
+    <Content Include="app\templates\layout\toolbar.html" />
+    <Content Include="app\views\events\event-create.html" />
+    <Content Include="app\views\events\event-details.html" />
+    <Content Include="app\views\events\events-list.html" />
+    <Content Include="app\views\layout\home.html" />
+    <Content Include="app\views\turma\turma-create.html" />
+    <Content Include="app\views\turma\turma-list.html" />
+    <Content Include="content\base\normalize.css" />
+    <Content Include="content\components\lateral-bar.css" />
+    <Content Include="content\components\side-button.css" />
+    <Content Include="content\fonts\fontawesome-webfont.svg" />
+    <Content Include="content\layout\bootstrap.css" />
+    <Content Include="content\layout\site.css" />
+    <Content Include="content\libs\bootstrap.css" />
+    <Content Include="content\libs\font-awesome.css" />
+    <Content Include="content\libs\loading-bar.css" />
+    <Content Include="content\libs\toastr.css" />
+    <Content Include="content\themes\default\components\lateral-bar.css" />
+    <Content Include="content\themes\default\components\side-button.css" />
+    <Content Include="content\themes\default\layout\bootstrap.css" />
+    <Content Include="content\themes\default\layout\site.css" />
     <Content Include="Global.asax" />
+    <Content Include="index.html" />
     <Content Include="packages.config" />
+    <Content Include="app\libs\angular\angular.min.js.map" />
+    <Content Include="app\libs\jquery\jquery-2.1.1.min.map" />
+    <Content Include="content\fonts\fontawesome-webfont.eot" />
+    <Content Include="content\fonts\fontawesome-webfont.ttf" />
+    <Content Include="content\fonts\fontawesome-webfont.woff" />
+    <Content Include="content\fonts\FontAwesome.otf" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -94,7 +161,11 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="app\directives\" />
+    <Folder Include="app\filters\" />
+    <Folder Include="content\images\" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

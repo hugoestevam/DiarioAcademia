@@ -1,0 +1,32 @@
+﻿
+
+.action-container a {
+    color: #4D4D4D;
+    
+}
+
+.action-container a .fa {
+    background-color: #E6E6E6;
+
+
+    box-shadow: 0 1px 2px #bdc3c7;
+}
+
+.action-container p {
+    font-size: 1em;
+    margin-top: 3px;
+    margin-bottom: 0;
+    z-index: -1;
+    position: relative;
+}
+    
+
+.action-container .action-button:hover a .fa {
+    background-color: #E25D41;
+    color: #FFFFFF;
+}
+
+.action-container .action-button:hover p {
+    color: #E25D41;
+
+}

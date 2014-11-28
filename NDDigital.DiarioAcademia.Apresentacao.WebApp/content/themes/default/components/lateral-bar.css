@@ -1,0 +1,25 @@
+﻿
+.left-menu {
+    background-color: #E6ECF3;
+}
+
+
+
+.left-menu li a {
+    color: #4D4D4D;
+    border-radius: 0;
+    -moz-transition: all 0.1s ease-in-out;
+    -o-transition: all 0.1s ease-in-out;
+    -webkit-transition: all 0.1s ease-in-out;
+    transition: all 0.1s ease-in-out;
+}
+
+
+.left-menu li.active a,
+.left-menu li.active a:hover, 
+.left-menu li:hover a,
+.left-menu li:focus a {
+    background-color: #E25D41;
+    color: #FFFFFF;
+}
+

@@ -1,0 +1,35 @@
+﻿<div>
+
+    <div class="container">
+        <div class="page-header">
+            <h1 class="visible-lg">{{vm.event.information}}</h1>
+            <p class="lead hidden-lg">{{vm.event.information}}</p>
+            <p>
+                Apresentação d evento selecionado.
+            </p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-2">
+            &nbsp;
+        </div>
+        <div class="col-md-8">
+            <div class="col-md-6">
+                <p><strong>Date of the event occurrence:</strong></p>
+                <p>{{vm.event.dateEventOccurrence| date:'dd-MM-yyyy hh:mm'}}</p>
+                <p>({{vm.event.timeElapsedDateOccurrence}})</p>
+                <p><strong>Event Information</strong></p>
+                <p>{{vm.event.information}}</p>
+
+            </div>
+            <div class="col-md-6">
+                <p><strong>Date of the last update:</strong></p>
+                <p>{{vm.event.dateLastUpdate| date:'dd-MM-yyyy'}}</p>
+                <p>({{vm.event.timeElapsedDateLastUpdate| date:'dd-MM-yyyy'}})</p>
+            </div>
+        </div>
+
+    </div>
+</div>
+<div>
