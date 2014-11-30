@@ -108,6 +108,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
     <None Include="TestData\DiarioAcademia.xsc">
       <DependentUpon>DiarioAcademia.xsd</DependentUpon>
     </None>
@@ -115,11 +120,6 @@
       <SubType>Designer</SubType>
       <Generator>MSDataSetGenerator</Generator>
       <LastGenOutput>DiarioAcademia.Designer.cs</LastGenOutput>
-    </None>
-    <None Include="packages.config" />
-    <None Include="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <None Include="TestData\DiarioAcademia.xss">
       <DependentUpon>DiarioAcademia.xsd</DependentUpon>

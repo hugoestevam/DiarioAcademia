@@ -22,7 +22,7 @@ namespace NDDigital.DiarioAcademia.Aplicacao.DTOs
 
     public class PresencaAlunoDTO
     {
-        public Guid AlunoId { get; set; }
+        public int AlunoId { get; set; }
 
         public string Status { get; set; }
 

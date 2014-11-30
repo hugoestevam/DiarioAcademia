@@ -16,9 +16,12 @@ namespace NDDigital.DiarioAcademia.Aplicacao.DTOs
 
         public AulaDTO()
         {
+            Data = DateTime.Now;
         }
         public DateTime Data { get; set; }
 
-        public Guid Id { get; set; }
+        public int Id { get; set; }
+
+        public int TurmaId { get; set; }
     }
 }

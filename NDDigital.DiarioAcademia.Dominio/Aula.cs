@@ -8,16 +8,18 @@ namespace NDDigital.DiarioAcademia.Dominio
 {
     public class Aula : Entity
     {
-        protected Aula()
+        private Aula()
         {
-            GenerateNewIdentity();
         }
 
-        public DateTime Data { get; set; }        
+        public DateTime Data { get; set; }
 
-        public Aula(DateTime dateTime) : this()
+        public virtual Turma Turma { get; set; }
+
+        public Aula(DateTime dateTime, Turma turma) : this()
         {            
-            this.Data = dateTime;            
+            this.Data = dateTime;
+            this.Turma = turma;
         }
 
         public override bool Equals(object obj)

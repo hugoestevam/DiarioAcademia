@@ -14,12 +14,15 @@ namespace NDDigital.DiarioAcademia.IntegrationTests
     {
         private IAulaRepository aulaRepository;
         private IPresencaRepository presencaRepository;
+        private TurmaRepository turmaRepository;   
 
-        private IUnitOfWork uow;        
+        private IUnitOfWork uow;
+             
 
         public void SetFixture(DatabaseFixture databaseFixture)
         {            
             aulaRepository = new AulaRepository(databaseFixture.Factory);
+            turmaRepository = new TurmaRepository(databaseFixture.Factory);
             presencaRepository = new PresencaRepository(databaseFixture.Factory);
 
             uow = databaseFixture.UnitOfWork;
@@ -27,9 +30,13 @@ namespace NDDigital.DiarioAcademia.IntegrationTests
 
         [Fact(DisplayName = "Deveria gravar aula")]
         public void Test_1()
-        {            
+        {
             //arrange
-            var aula = new Aula(DateTime.Now);
+            InsertTestData(TBTurma);
+
+            var turma = turmaRepository.GetById(TURMA_ID);
+            
+            var aula = new Aula(DateTime.Now, turma);
 
             //action
             aulaRepository.Add(aula);
@@ -48,7 +55,7 @@ namespace NDDigital.DiarioAcademia.IntegrationTests
             //arrange
             InsertTestData(TBAula, TBPresenca);
 
-            Aula aula = aulaRepository.GetById(Aula_Id);
+            Aula aula = aulaRepository.GetById(AULA_ID);
 
             //act
             aulaRepository.Delete(aula);
@@ -56,18 +63,18 @@ namespace NDDigital.DiarioAcademia.IntegrationTests
             uow.Commit();
 
             //assert
-            aulaRepository.GetById(Aula_Id).Should().BeNull();
+            aulaRepository.GetById(AULA_ID).Should().BeNull();
 
-            presencaRepository.GetById(Presenca_Id).Should().BeNull();
+            presencaRepository.GetById(PRESENCA_ID).Should().BeNull();
         }
 
         [Fact(DisplayName = "Deveria atualizar aula")]
         public void Test_3()
         {            
             //arrange
-            InsertTestData(TBAula, TBPresenca);
+            InsertTestData(TBAula, TBTurma, TBPresenca);
 
-            Aula aula = aulaRepository.GetById(Aula_Id);
+            Aula aula = aulaRepository.GetById(AULA_ID);
 
             aula.Data = DateTime.Now;            
 
@@ -102,7 +109,7 @@ namespace NDDigital.DiarioAcademia.IntegrationTests
             InsertTestData(TBAula);
 
             //action
-            var aula = aulaRepository.GetByData(Aula_Data);
+            var aula = aulaRepository.GetByData(AULA_DATA);
 
             //assert
             aula.Should().NotBeNull();

@@ -19,9 +19,9 @@ namespace NDDigital.DiarioAcademia.Aplicacao.DTOs
             TurmaId = aluno.Turma.Id;
         }
 
-        public Guid Id { get; set; }
+        public int Id { get; set; }
 
-        public Guid TurmaId { get; set; }
+        public int TurmaId { get; set; }
 
         public string Nome { get; set; }
 

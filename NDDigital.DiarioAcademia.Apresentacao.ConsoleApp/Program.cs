@@ -14,7 +14,7 @@ namespace NDDigital.DiarioAcademia.Apresentacao.ConsoleApp
         {
             DiarioAcademiaContext context = new DiarioAcademiaContext();
 
-            context.Aulas.Add(new Aula(DateTime.Now));
+            context.Turmas.Add(new Turma(2100));
 
             context.SaveChanges();
 

@@ -33,5 +33,16 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.Properties {
                 return ((string)(this["DiarioAcademiaTestsConnectionString"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=(localdb)\\v11.0;Initial Catalog=DiarioAcademia;Integrated Security=Tr" +
+            "ue")]
+        public string DiarioAcademiaConnectionString {
+            get {
+                return ((string)(this["DiarioAcademiaConnectionString"]));
+            }
+        }
     }
 }

@@ -13,14 +13,16 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Configurations
     {
         public AulaConfiguration()
         {
-            ToTable("TBAula");                        
+            ToTable("TBAula");
 
             HasKey(a => a.Id);
 
+            HasRequired(a => a.Turma)
+                .WithMany()
+                .WillCascadeOnDelete(false);
+
             Property(a => a.Data)
                 .HasColumnType("Date");
-
-            //HasMany(a => a.Presencas);
         }
     }
 }

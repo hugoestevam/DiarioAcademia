@@ -11,7 +11,7 @@
         #region Members
 
         int? _requestedHashCode;
-        Guid _Id;
+        int _Id;
       
         #endregion
 
@@ -20,7 +20,7 @@
         /// <summary>
         /// Get the persisten object identifier
         /// </summary>
-        public virtual Guid Id 
+        public virtual int Id 
         {
             get
             {
@@ -42,27 +42,8 @@
         /// <returns>True if entity is transient, else false</returns>
         public bool IsTransient()
         {
-            return this.Id == Guid.Empty;
-        }
-
-        /// <summary>
-        /// Generate identity for this entity
-        /// </summary>
-        public void GenerateNewIdentity()
-        {
-            if ( IsTransient())
-                this.Id = IdentityGenerator.NewSequentialGuid();
-        }
-
-        /// <summary>
-        /// Change current identity for a new non transient identity
-        /// </summary>
-        /// <param name="identity">the new identity</param>
-        public void ChangeCurrentIdentity(Guid identity)
-        {
-            if ( identity != Guid.Empty)
-                this.Id = identity;
-        }
+            return this.Id == 0;
+        }                
 
         #endregion
 

@@ -18,18 +18,22 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
     {
         private IUnitOfWork _unitOfWork;
         private IAulaRepository _aulaRepository;
+        private ITurmaRepository _turmaRepository;
 
-        public AulaService(IAulaRepository repoAula, IUnitOfWork unitOfWork)
+        public AulaService(IAulaRepository repoAula, ITurmaRepository repoTurma, IUnitOfWork unitOfWork)
         {
             _aulaRepository = repoAula;
+            _turmaRepository = repoTurma;
             _unitOfWork = unitOfWork;
         }
 
         public void Add(AulaDTO aulaDto)
         {
-            Aula Aula = new Aula(aulaDto.Data);
+            Turma turma = _turmaRepository.GetById(aulaDto.TurmaId);
 
-            _aulaRepository.Add(Aula);
+            Aula aula = new Aula(aulaDto.Data, turma);
+
+            _aulaRepository.Add(aula);
 
             _unitOfWork.Commit();
         }
@@ -45,14 +49,14 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
             _unitOfWork.Commit();
         }      
 
-        public void Delete(Guid id)
+        public void Delete(int id)
         {
             _aulaRepository.Delete(id);
 
             _unitOfWork.Commit();
         }
 
-        public AulaDTO GetById(Guid id)
+        public AulaDTO GetById(int id)
         {
             var aula = _aulaRepository.GetById(id);
 

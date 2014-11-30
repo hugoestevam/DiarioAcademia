@@ -1,20 +1,18 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <DiarioAcademia xmlns="http://tempuri.org/DiarioAcademia.xsd">
   <TBAluno>
-    <Id>952c499a-d155-c21d-8788-08d1cc983ea7</Id>
+    <Id>1</Id>
     <Nome>Alexandre Rech</Nome>    
-    <Turma_Id>4064d4ed-f5b4-cb81-d201-08d1ccc21216</Turma_Id>
+    <Turma_Id>1</Turma_Id>
   </TBAluno>
   <TBAluno>
-    <Id>4fa6b849-62a6-c128-a93a-08d1cca6785d</Id>
+    <Id>2</Id>
     <Nome>Thiago Sartor</Nome>
-    <Turma_Id>4064d4ed-f5b4-cb81-d201-08d1ccc21216</Turma_Id>
+    <Turma_Id>1</Turma_Id>
   </TBAluno>
   <TBAluno>
-    <Id>4a655310-27e3-c524-1c11-08d1ccaf740b</Id>
+    <Id>3</Id>
     <Nome>Wesley Lemos</Nome>
-    <Turma_Id>4064d4ed-f5b4-cb81-d201-08d1ccc21216</Turma_Id>
+    <Turma_Id>1</Turma_Id>
   </TBAluno>
 </DiarioAcademia>
-
-

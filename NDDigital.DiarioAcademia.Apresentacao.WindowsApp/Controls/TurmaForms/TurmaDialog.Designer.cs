@@ -32,6 +32,8 @@
             this.btnOk = new System.Windows.Forms.Button();
             this.cmbTurmas = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
+            this.txtId = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // btnCancel
@@ -67,7 +69,7 @@
             "2017",
             "2018",
             "2019"});
-            this.cmbTurmas.Location = new System.Drawing.Point(58, 22);
+            this.cmbTurmas.Location = new System.Drawing.Point(54, 37);
             this.cmbTurmas.Name = "cmbTurmas";
             this.cmbTurmas.Size = new System.Drawing.Size(249, 21);
             this.cmbTurmas.TabIndex = 17;
@@ -75,11 +77,29 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(12, 25);
+            this.label3.Location = new System.Drawing.Point(8, 40);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(40, 13);
             this.label3.TabIndex = 18;
             this.label3.Text = "Turma:";
+            // 
+            // txtId
+            // 
+            this.txtId.Enabled = false;
+            this.txtId.Location = new System.Drawing.Point(54, 12);
+            this.txtId.Name = "txtId";
+            this.txtId.ReadOnly = true;
+            this.txtId.Size = new System.Drawing.Size(75, 20);
+            this.txtId.TabIndex = 20;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(11, 15);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(19, 13);
+            this.label2.TabIndex = 19;
+            this.label2.Text = "Id:";
             // 
             // TurmaDialog
             // 
@@ -88,6 +108,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
             this.ClientSize = new System.Drawing.Size(316, 154);
+            this.Controls.Add(this.txtId);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.cmbTurmas);
             this.Controls.Add(this.btnCancel);
@@ -111,5 +133,7 @@
         private System.Windows.Forms.Button btnOk;
         private System.Windows.Forms.ComboBox cmbTurmas;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox txtId;
+        private System.Windows.Forms.Label label2;
     }
 }

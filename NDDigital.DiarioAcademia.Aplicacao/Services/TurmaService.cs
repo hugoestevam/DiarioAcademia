@@ -46,14 +46,14 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
             _unitOfWork.Commit();
         }      
 
-        public void Delete(Guid id)
+        public void Delete(int id)
         {
             _turmaRepository.Delete(id);
 
             _unitOfWork.Commit();
         }
 
-        public TurmaDTO GetById(Guid id)
+        public TurmaDTO GetById(int id)
         {
             var turma = _turmaRepository.GetById(id);
 

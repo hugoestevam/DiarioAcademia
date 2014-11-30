@@ -34,6 +34,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.cmbTurmas = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
+            this.txtId = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // btnCancel
@@ -61,7 +63,7 @@
             // 
             // txtNome
             // 
-            this.txtNome.Location = new System.Drawing.Point(102, 12);
+            this.txtNome.Location = new System.Drawing.Point(102, 36);
             this.txtNome.Name = "txtNome";
             this.txtNome.Size = new System.Drawing.Size(349, 20);
             this.txtNome.TabIndex = 9;
@@ -69,7 +71,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(15, 16);
+            this.label1.Location = new System.Drawing.Point(15, 40);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(38, 13);
             this.label1.TabIndex = 8;
@@ -78,7 +80,7 @@
             // cmbTurmas
             // 
             this.cmbTurmas.FormattingEnabled = true;
-            this.cmbTurmas.Location = new System.Drawing.Point(102, 38);
+            this.cmbTurmas.Location = new System.Drawing.Point(102, 62);
             this.cmbTurmas.Name = "cmbTurmas";
             this.cmbTurmas.Size = new System.Drawing.Size(193, 21);
             this.cmbTurmas.TabIndex = 11;
@@ -86,17 +88,37 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(15, 41);
+            this.label3.Location = new System.Drawing.Point(15, 65);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(40, 13);
             this.label3.TabIndex = 12;
             this.label3.Text = "Turma:";
             // 
-            // AddOrUpdateAlunoDialog
+            // txtId
+            // 
+            this.txtId.Enabled = false;
+            this.txtId.Location = new System.Drawing.Point(102, 12);
+            this.txtId.Name = "txtId";
+            this.txtId.ReadOnly = true;
+            this.txtId.Size = new System.Drawing.Size(75, 20);
+            this.txtId.TabIndex = 14;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(15, 16);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(19, 13);
+            this.label2.TabIndex = 13;
+            this.label2.Text = "Id:";
+            // 
+            // AlunoDialog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(463, 218);
+            this.Controls.Add(this.txtId);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.cmbTurmas);
             this.Controls.Add(this.txtNome);
@@ -106,7 +128,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "AddOrUpdateAlunoDialog";
+            this.Name = "AlunoDialog";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -124,5 +146,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox cmbTurmas;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox txtId;
+        private System.Windows.Forms.Label label2;
     }
 }

@@ -8,17 +8,13 @@ namespace NDDigital.DiarioAcademia.Dominio
 {
     public class Aluno : Entity
     {
-        protected Aluno() {
-
-            Presencas = new List<Presenca>();
-
-            GenerateNewIdentity();
-        }
+        private Aluno() { }
 
         public Aluno(string nome, Turma turma) : this()
         {
             this.Nome = nome;
             this.Turma = turma;
+            Presencas = new List<Presenca>();
         }        
 
         public string Nome { get; set; }

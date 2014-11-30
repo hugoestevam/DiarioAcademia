@@ -15,7 +15,6 @@ namespace NDDigital.DiarioAcademia.Apresentacao.WindowsApp.Controls.AlunoForms
     public partial class AlunoDialog : Form
     {
         private AlunoDTO _aluno;
-        private Guid _alunoId;
 
         public AlunoDialog(IEnumerable<TurmaDTO> turmas)
         {
@@ -39,7 +38,7 @@ namespace NDDigital.DiarioAcademia.Apresentacao.WindowsApp.Controls.AlunoForms
             {
                 _aluno = value;
 
-                _alunoId = _aluno.Id;
+                txtId.Text = _aluno.Id.ToString();
 
                 txtNome.Text = _aluno.Nome;
 
@@ -51,7 +50,7 @@ namespace NDDigital.DiarioAcademia.Apresentacao.WindowsApp.Controls.AlunoForms
         {
             try
             {
-                _aluno.Id = _alunoId;
+                _aluno.Id = int.Parse(txtId.Text);
 
                 _aluno.Nome = txtNome.Text;
 

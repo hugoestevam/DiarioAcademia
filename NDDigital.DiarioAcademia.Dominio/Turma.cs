@@ -8,12 +8,11 @@ namespace NDDigital.DiarioAcademia.Dominio
 {
     public class Turma : Entity
     {
-        protected Turma()
+        private Turma()
         {
-            GenerateNewIdentity();
-        }
 
-        public Turma(int ano) : this()
+        }
+        public Turma(int ano) 
         {
             Ano = ano;
         }

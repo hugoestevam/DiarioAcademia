@@ -12,7 +12,7 @@ namespace NDDigital.DiarioAcademia.Aplicacao.DTOs
         {
         }
 
-        public TurmaDTO(Guid id)
+        public TurmaDTO(int id)
         {
             // TODO: Complete member initialization
             this.Id = id;
@@ -24,7 +24,7 @@ namespace NDDigital.DiarioAcademia.Aplicacao.DTOs
             Ano = turma.Ano;
         }
 
-        public Guid Id { get; set; }
+        public int Id { get; set; }
 
         public override bool Equals(object obj)
         {

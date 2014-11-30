@@ -14,9 +14,8 @@ namespace NDDigital.DiarioAcademia.Dominio
 
         public string StatusPresenca { get; private set; }
 
-        protected Presenca()
+        private Presenca()
         {
-            GenerateNewIdentity();
         }
 
         public Presenca(Aula aula, Aluno aluno, string statusPresenca) : this()

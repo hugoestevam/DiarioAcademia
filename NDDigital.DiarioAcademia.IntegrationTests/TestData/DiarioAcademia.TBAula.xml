@@ -1,16 +1,19 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <DiarioAcademia xmlns="http://tempuri.org/DiarioAcademia.xsd">
   <TBAula>
-    <Id>4064d4ed-f5b4-cb81-d201-08d1ccc21216</Id>
+    <Id>1</Id>
     <Data>2014-11-13T00:00:00</Data>
+    <Turma_Id>1</Turma_Id>
   </TBAula>
   <TBAula>
-    <Id>fb55b123-4a32-c133-4462-08d1ccc243bf</Id>
+    <Id>2</Id>
     <Data>2014-11-14T00:00:00</Data>
+    <Turma_Id>1</Turma_Id>
   </TBAula>
   <TBAula>
-    <Id>112fa6b8-5aee-c017-dd61-08d1ccc260f6</Id>
+    <Id>3</Id>
     <Data>2014-11-15T00:00:00</Data>
+    <Turma_Id>1</Turma_Id>
   </TBAula>
 </DiarioAcademia>
 

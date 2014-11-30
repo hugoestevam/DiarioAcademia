@@ -73,7 +73,7 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Common
             //dbset.Remove(entity);
         }
 
-        public virtual void Delete(Guid id)
+        public virtual void Delete(int id)
         {
             var entity =  GetById(id);
                   
@@ -86,16 +86,10 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Common
             foreach (T obj in objects)
                 dbset.Remove(obj);
         }
-        public virtual T GetById(long id)
+        public virtual T GetById(int id)
         {
             return dbset.Find(id);
         }
-
-        public virtual T GetById(Guid id)
-        {
-            return dbset.Find(id);
-        }
-    
         public virtual IEnumerable<T> GetAll()
         {            
             return dbset.ToList();

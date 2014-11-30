@@ -14,8 +14,7 @@ namespace NDDigital.DiarioAcademia.Apresentacao.WindowsApp.Controls.TurmaForms
     public partial class TurmaDialog : Form
     {
         private TurmaDTO _turma;
-        private Guid _turmaId;
-
+        
         public TurmaDialog()
         {
             InitializeComponent();
@@ -31,7 +30,7 @@ namespace NDDigital.DiarioAcademia.Apresentacao.WindowsApp.Controls.TurmaForms
             {
                 _turma = value;
 
-                _turmaId = _turma.Id;
+                txtId.Text = _turma.Id.ToString();
 
                 cmbTurmas.Text = _turma.Ano.ToString();
             }
@@ -41,7 +40,7 @@ namespace NDDigital.DiarioAcademia.Apresentacao.WindowsApp.Controls.TurmaForms
         {
             try
             {
-                _turma.Id = _turmaId;
+                _turma.Id = int.Parse(txtId.Text);
 
                 _turma.Ano = int.Parse(cmbTurmas.Text);
             }

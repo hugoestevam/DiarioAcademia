@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using NDDigital.DiarioAcademia.Aplicacao.DTOs;
 
 namespace NDDigital.DiarioAcademia.Apresentacao.WindowsApp.Controls.AulaForms
 {
@@ -19,20 +20,28 @@ namespace NDDigital.DiarioAcademia.Apresentacao.WindowsApp.Controls.AulaForms
             InitializeComponent();
         }
 
-        public AulaControl(Aplicacao.Services.IAulaService _aulaService) : this()
+        public AulaControl(Aplicacao.Services.IAulaService aulaService) : this()
         {
-            // TODO: Complete member initialization
-            this._aulaService = _aulaService;
+            this._aulaService = aulaService;
         }
 
         internal void RefreshGrid()
         {
-            throw new NotImplementedException();
+            var aulas = _aulaService.GetAll();
+
+            listAulas.Items.Clear();
+
+            foreach (var aula in aulas)
+            {
+                listAulas.Items.Add(aula);
+            }
         }
 
         internal Aplicacao.DTOs.AulaDTO GetAulaSelecionada()
         {
-            throw new NotImplementedException();
+            AulaDTO aulaSelecionada = listAulas.SelectedItem as AulaDTO;
+
+            return aulaSelecionada;
         }
     }
 }

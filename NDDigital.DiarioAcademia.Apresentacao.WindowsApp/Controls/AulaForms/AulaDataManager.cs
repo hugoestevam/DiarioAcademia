@@ -24,9 +24,11 @@ namespace NDDigital.DiarioAcademia.Apresentacao.WindowsApp.Controls.AulaForms
 
             var unitOfWork = new UnitOfWork(factory);
 
-            var AulaRepository = new AulaRepository(factory);
+            var aulaRepository = new AulaRepository(factory);
 
-            _aulaService = new AulaService(AulaRepository, unitOfWork);
+            var turmaRepository = new TurmaRepository(factory);
+
+            _aulaService = new AulaService(aulaRepository, turmaRepository, unitOfWork);
            
             _control = new AulaControl(_aulaService);
         }

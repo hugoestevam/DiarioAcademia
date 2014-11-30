@@ -9,9 +9,9 @@ namespace NDDigital.DiarioAcademia.Aplicacao
 
         void Update(T dto);
 
-        void Delete(Guid id);
+        void Delete(int id);
 
-        T GetById(Guid id);
+        T GetById(int id);
 
         IEnumerable<T> GetAll();
     }

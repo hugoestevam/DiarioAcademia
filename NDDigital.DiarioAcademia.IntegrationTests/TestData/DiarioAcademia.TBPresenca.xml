@@ -1,16 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <DiarioAcademia xmlns="http://tempuri.org/DiarioAcademia.xsd">
   <TBPresenca>
-    <Id>76545b3e-9b2b-cb1c-524d-08d1cd58e012</Id>
+    <Id>1</Id>
     <StatusPresenca>F</StatusPresenca>
-    <Aula_Id>4064d4ed-f5b4-cb81-d201-08d1ccc21216</Aula_Id>
-    <Aluno_Id>952c499a-d155-c21d-8788-08d1cc983ea7</Aluno_Id>
+    <Aula_Id>1</Aula_Id>
+    <Aluno_Id>1</Aluno_Id>
   </TBPresenca>
   <TBPresenca>
-    <Id>6afc543a-11ba-cadd-7960-08d1cd58e012</Id>
+    <Id>2</Id>
     <StatusPresenca>C</StatusPresenca>
-    <Aula_Id>fb55b123-4a32-c133-4462-08d1ccc243bf</Aula_Id>
-    <Aluno_Id>952c499a-d155-c21d-8788-08d1cc983ea7</Aluno_Id>    
+    <Aula_Id>2</Aula_Id>
+    <Aluno_Id>1</Aluno_Id>    
   </TBPresenca>
 </DiarioAcademia>
 

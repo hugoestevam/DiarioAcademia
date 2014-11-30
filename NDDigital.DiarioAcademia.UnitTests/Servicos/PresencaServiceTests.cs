@@ -49,7 +49,7 @@ namespace NDDigital.DiarioAcademia.UnitTests.Servicos
 
             _aulaRepository
                 .Setup(x => x.GetByData(It.IsAny<DateTime>()))
-                .Returns(new Aula(DateTime.Now));
+                .Returns(new Aula(DateTime.Now, new Turma(2014)));
 
             //act
             presencaService.RegistraPresenca(comando);

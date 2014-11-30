@@ -51,14 +51,14 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
             _unitOfWork.Commit();
         }
 
-        public void Delete(Guid id)
+        public void Delete(int id)
         {
             _alunoRepository.Delete(id);
 
             _unitOfWork.Commit();
         }
 
-        public AlunoDTO GetById(Guid id)
+        public AlunoDTO GetById(int id)
         {
             var aluno = _alunoRepository.GetById(id);
 
