@@ -18,11 +18,17 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Repositories
 
         }
 
-
         public Aula GetByData(DateTime data)
         {
             return GetQueryable().FirstOrDefault(x => x.Data.Equals(data));
-        }                       
+        }
 
+        public IEnumerable<Aula> GetAllByTurma(int ano)
+        {
+            return GetQueryable()
+               .Include(x => x.Turma)
+               .Where(x => x.Turma.Ano == ano)
+               .ToList();
+        }
     }
 }

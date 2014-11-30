@@ -15,6 +15,9 @@ namespace NDDigital.DiarioAcademia.Apresentacao.WindowsApp.Controls.AulaForms
     public class AulaDataManager : DataManager
     {
         private IAulaService _aulaService;
+
+        private ITurmaService _turmaService;
+       
         
         private AulaControl _control;
 
@@ -29,13 +32,17 @@ namespace NDDigital.DiarioAcademia.Apresentacao.WindowsApp.Controls.AulaForms
             var turmaRepository = new TurmaRepository(factory);
 
             _aulaService = new AulaService(aulaRepository, turmaRepository, unitOfWork);
+
+            _turmaService = new TurmaService(turmaRepository, unitOfWork);
            
             _control = new AulaControl(_aulaService);
         }
 
         public override void AddData()
         {
-            var dialog = new AulaDialog();
+            var turmas = _turmaService.GetAll();
+
+            var dialog = new AulaDialog(turmas);
 
             dialog.Aula = new AulaDTO();
 
@@ -57,7 +64,9 @@ namespace NDDigital.DiarioAcademia.Apresentacao.WindowsApp.Controls.AulaForms
                 return;
             }
 
-            var dialog = new AulaDialog();
+            var turmas = _turmaService.GetAll();
+
+            var dialog = new AulaDialog(turmas);
 
             dialog.Aula = aulaSelecionada;
 

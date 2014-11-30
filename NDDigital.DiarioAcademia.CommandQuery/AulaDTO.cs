@@ -23,5 +23,10 @@ namespace NDDigital.DiarioAcademia.Aplicacao.DTOs
         public int Id { get; set; }
 
         public int TurmaId { get; set; }
+
+        public override string ToString()
+        {
+            return Data.ToString("dd/MM/yyyy");
+        }
     }
 }

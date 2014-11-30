@@ -30,7 +30,7 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Common
         }
 
         public void Commit()
-        {           
+        {
             try
             {
                 DbContext.SaveChanges();
@@ -51,6 +51,10 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Common
 
                 context.SaveChanges();
             }
+            catch (Exception exc) { 
+            
+            }
+
         }
 
         public void CommitAndRefreshChanges()

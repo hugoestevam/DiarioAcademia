@@ -9,9 +9,17 @@ using System.Threading.Tasks;
 
 namespace NDDigital.DiarioAcademia.Aplicacao.Services
 {
-    public interface IAulaService : IService<AulaDTO>
+    public interface IAulaService 
     {
+        void Add(AulaDTO aulaDto);
 
+        void Update(AulaDTO aulaDto);
+
+        void Delete(int id);
+
+        AulaDTO GetById(int id);
+
+        IEnumerable<AulaDTO> GetAllByTurma(int anoTurma);
     }
 
     public class AulaService : IAulaService
@@ -67,10 +75,10 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
             };
         }
 
-        public IEnumerable<AulaDTO> GetAll()
+        public IEnumerable<AulaDTO> GetAllByTurma(int ano)
         {
             return _aulaRepository
-                .GetAll()
+                .GetAllByTurma(ano)
                 .Select(aula => new AulaDTO(aula))
                 .ToList();
         }

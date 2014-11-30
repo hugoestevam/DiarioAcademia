@@ -33,6 +33,7 @@
             this.cadastrosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.alunosMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.turmasMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aulasMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolbar = new System.Windows.Forms.ToolStrip();
             this.btnAdd = new System.Windows.Forms.ToolStripButton();
             this.btnUpdateItens = new System.Windows.Forms.ToolStripButton();
@@ -45,7 +46,6 @@
             this.statusImage = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusMessage = new System.Windows.Forms.ToolStripStatusLabel();
             this.panelPrincipal = new System.Windows.Forms.Panel();
-            this.aulasMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.toolbar.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -74,16 +74,23 @@
             // alunosMenuItem
             // 
             this.alunosMenuItem.Name = "alunosMenuItem";
-            this.alunosMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.alunosMenuItem.Size = new System.Drawing.Size(114, 22);
             this.alunosMenuItem.Text = "Alunos";
             this.alunosMenuItem.Click += new System.EventHandler(this.alunosMenuItem_Click);
             // 
             // turmasMenuItem
             // 
             this.turmasMenuItem.Name = "turmasMenuItem";
-            this.turmasMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.turmasMenuItem.Size = new System.Drawing.Size(114, 22);
             this.turmasMenuItem.Text = "Turmas";
             this.turmasMenuItem.Click += new System.EventHandler(this.turmasMenuItem_Click);
+            // 
+            // aulasMenuItem
+            // 
+            this.aulasMenuItem.Name = "aulasMenuItem";
+            this.aulasMenuItem.Size = new System.Drawing.Size(114, 22);
+            this.aulasMenuItem.Text = "Aulas";
+            this.aulasMenuItem.Click += new System.EventHandler(this.aulasMenuItem_Click);
             // 
             // toolbar
             // 
@@ -171,6 +178,7 @@
             this.cmbTurmas.AutoSize = false;
             this.cmbTurmas.Name = "cmbTurmas";
             this.cmbTurmas.Size = new System.Drawing.Size(250, 23);
+            this.cmbTurmas.SelectedIndexChanged += new System.EventHandler(this.cmbTurmas_SelectedIndexChanged);
             // 
             // statusStrip1
             // 
@@ -202,13 +210,6 @@
             this.panelPrincipal.Name = "panelPrincipal";
             this.panelPrincipal.Size = new System.Drawing.Size(741, 467);
             this.panelPrincipal.TabIndex = 3;
-            // 
-            // aulasMenuItem
-            // 
-            this.aulasMenuItem.Name = "aulasMenuItem";
-            this.aulasMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.aulasMenuItem.Text = "Aulas";
-            this.aulasMenuItem.Click += new System.EventHandler(this.aulasMenuItem_Click);
             // 
             // Principal
             // 

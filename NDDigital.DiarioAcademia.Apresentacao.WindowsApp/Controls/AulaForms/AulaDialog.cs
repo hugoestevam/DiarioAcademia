@@ -14,9 +14,17 @@ namespace NDDigital.DiarioAcademia.Apresentacao.WindowsApp.Controls.AulaForms
     public partial class AulaDialog : Form
     {
         private AulaDTO _aula;
-        public AulaDialog()
+
+        public AulaDialog(IEnumerable<TurmaDTO> turmas)
         {
             InitializeComponent();
+
+            cmbTurmas.Items.Clear();
+
+            foreach (var turma in turmas)
+            {
+                cmbTurmas.Items.Add(turma);
+            }
         }
 
         public Aplicacao.DTOs.AulaDTO Aula 
@@ -31,6 +39,8 @@ namespace NDDigital.DiarioAcademia.Apresentacao.WindowsApp.Controls.AulaForms
 
                 txtId.Text = _aula.Id.ToString();
 
+                cmbTurmas.SelectedItem = new TurmaDTO(_aula.TurmaId);
+
                 cmbData.Value = _aula.Data;
             }
         }
@@ -42,6 +52,8 @@ namespace NDDigital.DiarioAcademia.Apresentacao.WindowsApp.Controls.AulaForms
                 _aula.Id = int.Parse(txtId.Text);
 
                 _aula.Data = cmbData.Value;
+
+                _aula.TurmaId = ((TurmaDTO)cmbTurmas.SelectedItem).Id;
             }
             catch (Exception exc)
             {

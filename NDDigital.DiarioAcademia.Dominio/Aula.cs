@@ -34,5 +34,7 @@ namespace NDDigital.DiarioAcademia.Dominio
     public interface IAulaRepository : IRepository<Aula>
     {
         Aula GetByData(DateTime data);
+
+        IEnumerable<Aula> GetAllByTurma(int ano);        
     }
 }

@@ -16,10 +16,10 @@ namespace Uniplac.Sindicontrata.Infraestrutura.AcessoDadosRepositories
 
         public IEnumerable<Aluno> GetAllByTurma(int ano)
         {
-            return
-                GetQueryable()
+            return GetQueryable()
+                .Include(x => x.Turma)
                 .Where(x => x.Turma.Ano == ano)
                 .ToList();
-        }       
+        }
     }
 }

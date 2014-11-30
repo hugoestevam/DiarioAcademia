@@ -17,8 +17,6 @@ using NDDigital.DiarioAcademia.Apresentacao.WindowsApp.Controls.AlunoForms;
 using NDDigital.DiarioAcademia.Apresentacao.WindowsApp.Controls.TurmaForms;
 using NDDigital.DiarioAcademia.Apresentacao.WindowsApp.Controls.AulaForms;
 
-
-
 namespace NDDigital.DiarioAcademia.Apresentacao.WindowsApp
 {
     public partial class Principal : Form
@@ -27,7 +25,9 @@ namespace NDDigital.DiarioAcademia.Apresentacao.WindowsApp
         private DataManager _dataManager;
         private UserControl _control;
        
-        private ITurmaService _turmaService; 
+        private ITurmaService _turmaService;
+
+        private IEnumerable<TurmaDTO> turmas; 
 
         public Principal()
         {
@@ -44,9 +44,17 @@ namespace NDDigital.DiarioAcademia.Apresentacao.WindowsApp
             _turmaService = new TurmaService(turmaRepository, unitOfWork);
 
             AtualizaListaTurmas();
+
+            SelecionaTurmaAnoAtual();
         }
 
-       
+        private void SelecionaTurmaAnoAtual()
+        {
+            TurmaDTO turmaSelecionada = turmas.FirstOrDefault(x => x.Ano == DateTime.Now.Year);
+
+            if (turmaSelecionada != null)
+                cmbTurmas.SelectedItem = turmaSelecionada;
+        }       
 
         public static Principal Instance
         {
@@ -191,9 +199,10 @@ namespace NDDigital.DiarioAcademia.Apresentacao.WindowsApp
         {
             LoadDataManager(new AulaDataManager());
         }
+
         public void AtualizaListaTurmas()
         {
-            var turmas = _turmaService.GetAll();
+            turmas = _turmaService.GetAll();
 
             cmbTurmas.Items.Clear();
 
@@ -201,6 +210,22 @@ namespace NDDigital.DiarioAcademia.Apresentacao.WindowsApp
             {
                 cmbTurmas.Items.Add(turma);
             }
+        }
+
+        private void cmbTurmas_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (_control == null)
+            {
+                return;
+            }
+
+            panelPrincipal.Controls.Clear();
+
+            _control = _dataManager.GetControl();
+
+            _control.Dock = DockStyle.Fill;
+
+            panelPrincipal.Controls.Add(_control);
         }
         
     }
