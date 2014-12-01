@@ -123,7 +123,7 @@ namespace NDDigital.DiarioAcademia.Apresentacao.WindowsApp.Controls.AulaForms
 
             var alunos = _alunoService.GetAllByTurma(turma.Ano);
           
-            var dialog = new PresencaDialog(alunos);
+            var dialog = new PresencaDialog(alunos.ToList());
 
             var presencas = new RegistroPresencaDTO();
             presencas.AnoTurma = turma.Ano;
