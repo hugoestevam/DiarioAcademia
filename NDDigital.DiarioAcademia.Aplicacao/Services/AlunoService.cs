@@ -7,8 +7,18 @@ using System.Linq;
 
 namespace NDDigital.DiarioAcademia.Aplicacao.Services
 {    
-    public interface IAlunoService : IService<AlunoDTO>
+    public interface IAlunoService 
     {
+        void Add(AlunoDTO alunoDto);
+
+        void Update(AlunoDTO alunoDto);
+
+        void Delete(int id);
+
+        AlunoDTO GetById(int id);
+
+        IEnumerable<AlunoDTO> GetAll();
+
         IEnumerable<AlunoDTO> GetAllByTurma(int ano);       
     }
 

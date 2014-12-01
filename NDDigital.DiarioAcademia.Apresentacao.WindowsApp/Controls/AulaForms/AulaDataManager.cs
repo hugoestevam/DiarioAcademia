@@ -119,7 +119,7 @@ namespace NDDigital.DiarioAcademia.Apresentacao.WindowsApp.Controls.AulaForms
                 return;
             }
 
-            ChamadaDTO chamada = _aulaService.GetChamada(aulaSelecionada);
+            ChamadaDTO chamada = _aulaService.GetChamadaByAula(aulaSelecionada);
 
             ChamadaDialog dialog = new ChamadaDialog();
 

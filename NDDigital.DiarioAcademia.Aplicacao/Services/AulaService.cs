@@ -15,7 +15,7 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
 
         void RealizaChamada(ChamadaDTO registroPresencaDto);
 
-        ChamadaDTO GetChamada(AulaDTO aula);
+        ChamadaDTO GetChamadaByAula(AulaDTO aula);
 
         void Update(AulaDTO aulaDto);
 
@@ -121,7 +121,7 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
                 .ToList();
         }
 
-        public ChamadaDTO GetChamada(AulaDTO aulaDTO)
+        public ChamadaDTO GetChamadaByAula(AulaDTO aulaDTO)
         {
             var chamada = new ChamadaDTO();
             chamada.AnoTurma = aulaDTO.AnoTurma;

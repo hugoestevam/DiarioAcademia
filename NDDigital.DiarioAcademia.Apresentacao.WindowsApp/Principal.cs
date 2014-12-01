@@ -68,7 +68,10 @@ namespace NDDigital.DiarioAcademia.Apresentacao.WindowsApp
         {
             get
             {
+
                 var turmaSelecionada = cmbTurmas.SelectedItem as TurmaDTO;
+
+                if (turmaSelecionada == null) return 0;
 
                 return turmaSelecionada.Ano;
             }

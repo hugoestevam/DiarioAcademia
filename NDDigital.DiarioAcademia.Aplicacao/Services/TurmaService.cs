@@ -9,9 +9,17 @@ using System.Text;
 namespace NDDigital.DiarioAcademia.Aplicacao.Services
 {
 
-    public interface ITurmaService : IService<TurmaDTO>
+    public interface ITurmaService
     {
+        void Add(TurmaDTO turmaDto);
 
+        void Delete(int id);
+
+        IEnumerable<TurmaDTO> GetAll();
+
+        TurmaDTO GetById(int id);
+
+        void Update(TurmaDTO turmaDto);
     }
 
     public class TurmaService : ITurmaService

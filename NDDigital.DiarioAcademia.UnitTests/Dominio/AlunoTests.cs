@@ -13,7 +13,7 @@ using NDDigital.DiarioAcademia.UnitTests;
 
 namespace DiarioAcademia.UnitTests.Dominio
 {
-    [DominioTrait("")]    
+    [DominioTrait("")]
     public class AlunoTests
     {
         private Aluno aluno;
@@ -22,7 +22,7 @@ namespace DiarioAcademia.UnitTests.Dominio
         {
             turma = new Turma(2005);
             aluno = new Aluno("Rech",turma);
-        }//kl
+        }
 
         [Fact(DisplayName = "Quantidade de presencas deveria ser 0")]
         public void Test_1()
@@ -69,15 +69,7 @@ namespace DiarioAcademia.UnitTests.Dominio
             aluno.ObtemQuantidadePresencas().Should().Be(1);
         }
 
-        [Fact(DisplayName = "Não deveria registrar duas presenças na mesma aula")]
-        public void Test_6()
-        {
-            Aula aula = new Aula(DateTime.Now,turma);
-
-            aluno.RegistraPresenca(aula, "C");
-            
-            Assert.Throws<PresencaJaRegistradaException>(() => aluno.RegistraPresenca(aula, "C"));
-        }       
+              
     
         
     }
