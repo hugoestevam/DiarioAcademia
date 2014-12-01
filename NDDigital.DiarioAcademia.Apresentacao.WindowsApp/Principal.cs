@@ -122,11 +122,11 @@ namespace NDDigital.DiarioAcademia.Apresentacao.WindowsApp
             }
         }
 
-        private void btnUpdateItens_Click(object sender, EventArgs e)
+        private void btnRegistraPresenca_Click(object sender, EventArgs e)
         {
             try
             {
-                _dataManager.UpdateItens();
+                _dataManager.RegistraPresenca();
             }
             catch (Exception exc)
             {
@@ -168,12 +168,12 @@ namespace NDDigital.DiarioAcademia.Apresentacao.WindowsApp
 
                 
                 btnAdd.ToolTipText = _dataManager.GetToolTipMessage().Add;
-                btnUpdateItens.ToolTipText = _dataManager.GetToolTipMessage().RegistraPresenca;
+                btnRegistraPresenca.ToolTipText = _dataManager.GetToolTipMessage().RegistraPresenca;
                 btnUpdate.ToolTipText = _dataManager.GetToolTipMessage().Edit;
                 btnDelete.ToolTipText = _dataManager.GetToolTipMessage().Delete;                
 
                 btnAdd.Enabled = _dataManager.GetStateButtons().Add;
-                btnUpdateItens.Enabled = _dataManager.GetStateButtons().RegistraPresenca;
+                btnRegistraPresenca.Enabled = _dataManager.GetStateButtons().RegistraPresenca;
                 btnUpdate.Enabled = _dataManager.GetStateButtons().Update;
                 btnDelete.Enabled = _dataManager.GetStateButtons().Delete;
 
@@ -227,6 +227,8 @@ namespace NDDigital.DiarioAcademia.Apresentacao.WindowsApp
 
             panelPrincipal.Controls.Add(_control);
         }
+
+        
         
     }
 }

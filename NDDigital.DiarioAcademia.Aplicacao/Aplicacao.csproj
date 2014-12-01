@@ -48,7 +48,6 @@
     <Compile Include="Services\AlunoService.cs" />
     <Compile Include="Services\AulaService.cs" />
     <Compile Include="Services\TurmaService.cs" />
-    <Compile Include="Services\PresencaService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

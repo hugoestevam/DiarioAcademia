@@ -19,18 +19,20 @@ namespace NDDigital.DiarioAcademia.UnitTests.Servicos
     {
         private readonly Mock<IAlunoRepository> _alunoRepository = null;
         private readonly Mock<IAulaRepository> _aulaRepository = null;
+        private readonly Mock<ITurmaRepository> _turmaRepository = null;
         private readonly Mock<IUnitOfWork> _unitOfWork = null;
 
-        private IPresencaService presencaService = null;
+        private IAulaService aulaService = null;
 
         public PresencaServiceTests()
         {
             _alunoRepository = new Mock<IAlunoRepository>();
             _aulaRepository = new Mock<IAulaRepository>();
+            _turmaRepository = new Mock<ITurmaRepository>();
 
             _unitOfWork = new Mock<IUnitOfWork>();
 
-            presencaService = new PresencaService(_unitOfWork.Object, _alunoRepository.Object, _aulaRepository.Object);
+            aulaService = new AulaService(_aulaRepository.Object, _alunoRepository.Object, _turmaRepository.Object, _unitOfWork.Object  );
         }
 
         [Fact(DisplayName = "RegistraPresenca deveria persistir as presenças dos alunos")]
@@ -52,7 +54,7 @@ namespace NDDigital.DiarioAcademia.UnitTests.Servicos
                 .Returns(new Aula(DateTime.Now, new Turma(2014)));
 
             //act
-            presencaService.RegistraPresenca(comando);
+            aulaService.RegistraPresenca(comando);
 
             //assert
             _alunoRepository.Verify(x => x.Update(It.IsAny<Aluno>()), Times.Exactly(5));
@@ -71,7 +73,7 @@ namespace NDDigital.DiarioAcademia.UnitTests.Servicos
             var comando = new RegistroPresencaDTO { AnoTurma = 2000 };
             
             // act
-            Exception ex = Record.Exception(new Assert.ThrowsDelegate(() => { presencaService.RegistraPresenca(comando); }));
+            Exception ex = Record.Exception(new Assert.ThrowsDelegate(() => { aulaService.RegistraPresenca(comando); }));
 
             // assert
             Assert.IsType(typeof(AlunoNaoEncontrado), ex);            
@@ -98,7 +100,7 @@ namespace NDDigital.DiarioAcademia.UnitTests.Servicos
             var comando = new RegistroPresencaDTO { AnoTurma = 2000 };
 
             //act
-            Exception ex = Record.Exception(new Assert.ThrowsDelegate(() => presencaService.RegistraPresenca(comando)));
+            Exception ex = Record.Exception(new Assert.ThrowsDelegate(() => aulaService.RegistraPresenca(comando)));
 
             //assert
             Assert.IsType<AulaNaoEncontrada>(ex);

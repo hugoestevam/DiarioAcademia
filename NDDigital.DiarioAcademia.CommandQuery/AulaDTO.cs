@@ -12,6 +12,7 @@ namespace NDDigital.DiarioAcademia.Aplicacao.DTOs
         {
             Data = aula.Data;
             Id = aula.Id;
+            TurmaId = aula.Turma.Id;
         }
 
         public AulaDTO()

@@ -56,6 +56,8 @@ namespace NDDigital.DiarioAcademia.Apresentacao.WindowsApp.Controls.Shared
         /// <summary>
         /// 
         /// </summary>
-        public virtual void UpdateItens() {  }
+        public virtual void RegistraPresenca() {  }
+
+
     }
 }

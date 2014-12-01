@@ -36,7 +36,7 @@
             this.aulasMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolbar = new System.Windows.Forms.ToolStrip();
             this.btnAdd = new System.Windows.Forms.ToolStripButton();
-            this.btnUpdateItens = new System.Windows.Forms.ToolStripButton();
+            this.btnRegistraPresenca = new System.Windows.Forms.ToolStripButton();
             this.btnUpdate = new System.Windows.Forms.ToolStripButton();
             this.btnDelete = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
@@ -97,7 +97,7 @@
             this.toolbar.Enabled = false;
             this.toolbar.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.btnAdd,
-            this.btnUpdateItens,
+            this.btnRegistraPresenca,
             this.btnUpdate,
             this.btnDelete,
             this.toolStripSeparator1,
@@ -122,18 +122,18 @@
             this.btnAdd.ToolTipText = " ";
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
-            // btnUpdateItens
+            // btnRegistraPresenca
             // 
-            this.btnUpdateItens.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnUpdateItens.Image = ((System.Drawing.Image)(resources.GetObject("btnUpdateItens.Image")));
-            this.btnUpdateItens.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnUpdateItens.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnUpdateItens.Name = "btnUpdateItens";
-            this.btnUpdateItens.Padding = new System.Windows.Forms.Padding(6);
-            this.btnUpdateItens.Size = new System.Drawing.Size(40, 40);
-            this.btnUpdateItens.Text = "toolStripButton1";
-            this.btnUpdateItens.ToolTipText = " ";
-            this.btnUpdateItens.Click += new System.EventHandler(this.btnUpdateItens_Click);
+            this.btnRegistraPresenca.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnRegistraPresenca.Image = ((System.Drawing.Image)(resources.GetObject("btnRegistraPresenca.Image")));
+            this.btnRegistraPresenca.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnRegistraPresenca.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnRegistraPresenca.Name = "btnRegistraPresenca";
+            this.btnRegistraPresenca.Padding = new System.Windows.Forms.Padding(6);
+            this.btnRegistraPresenca.Size = new System.Drawing.Size(40, 40);
+            this.btnRegistraPresenca.Text = "toolStripButton1";
+            this.btnRegistraPresenca.ToolTipText = " ";
+            this.btnRegistraPresenca.Click += new System.EventHandler(this.btnRegistraPresenca_Click);
             // 
             // btnUpdate
             // 
@@ -250,7 +250,7 @@
         private System.Windows.Forms.Panel panelPrincipal;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripLabel labelTipoCadastro;
-        private System.Windows.Forms.ToolStripButton btnUpdateItens;
+        private System.Windows.Forms.ToolStripButton btnRegistraPresenca;
         private System.Windows.Forms.ToolStripMenuItem turmasMenuItem;
         private System.Windows.Forms.ToolStripStatusLabel statusImage;
         private System.Windows.Forms.ToolStripComboBox cmbTurmas;

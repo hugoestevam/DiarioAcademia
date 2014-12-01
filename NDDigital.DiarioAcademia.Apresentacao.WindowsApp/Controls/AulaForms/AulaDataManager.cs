@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Uniplac.Sindicontrata.Infraestrutura.AcessoDadosRepositories;
 
 namespace NDDigital.DiarioAcademia.Apresentacao.WindowsApp.Controls.AulaForms
 {
@@ -16,9 +17,10 @@ namespace NDDigital.DiarioAcademia.Apresentacao.WindowsApp.Controls.AulaForms
     {
         private IAulaService _aulaService;
 
-        private ITurmaService _turmaService;
-       
-        
+        private ITurmaService _turmaService;                       
+
+        private AlunoService _alunoService;
+
         private AulaControl _control;
 
         public AulaDataManager()
@@ -31,7 +33,11 @@ namespace NDDigital.DiarioAcademia.Apresentacao.WindowsApp.Controls.AulaForms
 
             var turmaRepository = new TurmaRepository(factory);
 
-            _aulaService = new AulaService(aulaRepository, turmaRepository, unitOfWork);
+            var alunoRepository = new AlunoRepository(factory);
+
+            _aulaService = new AulaService(aulaRepository, alunoRepository, turmaRepository, unitOfWork);
+
+            _alunoService = new AlunoService(alunoRepository, turmaRepository, unitOfWork);
 
             _turmaService = new TurmaService(turmaRepository, unitOfWork);
            
@@ -100,6 +106,34 @@ namespace NDDigital.DiarioAcademia.Apresentacao.WindowsApp.Controls.AulaForms
                 {
                     MessageBox.Show(e.Message);
                 }
+            }
+        }
+
+        public override void RegistraPresenca()
+        {
+            AulaDTO aulaSelecionada = _control.GetAulaSelecionada();
+
+            if (aulaSelecionada == null)
+            {
+                MessageBox.Show("Nenhuma Aula selecionada. Selecionar uma Aula antes para Registrar a presença dos alunos");
+                return;
+            }
+
+            var turma = _turmaService.GetById(aulaSelecionada.TurmaId);
+
+            var alunos = _alunoService.GetAllByTurma(turma.Ano);
+          
+            var dialog = new PresencaDialog(alunos);
+
+            var presencas = new RegistroPresencaDTO();
+            presencas.AnoTurma = turma.Ano;
+            presencas.DataAula = aulaSelecionada.Data;
+
+            dialog.RegistroPresenca = presencas;
+
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                _aulaService.RegistraPresenca(presencas);
             }
         }
 
