@@ -986,6 +986,8 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.TestData {
             
             private global::System.Data.DataColumn columnId;
             
+            private global::System.Data.DataColumn columnChamadaRealizada;
+            
             private global::System.Data.DataColumn columnData;
             
             private global::System.Data.DataColumn columnTurma_Id;
@@ -1028,6 +1030,14 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.TestData {
             public global::System.Data.DataColumn IdColumn {
                 get {
                     return this.columnId;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn ChamadaRealizadaColumn {
+                get {
+                    return this.columnChamadaRealizada;
                 }
             }
             
@@ -1084,14 +1094,15 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.TestData {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public TBAulaRow AddTBAulaRow(System.DateTime Data, TBTurmaRow _parentTBTurmaRowByFK_dbo_TBAula_dbo_TBTurma_Turma_Id) {
+            public TBAulaRow AddTBAulaRow(bool ChamadaRealizada, System.DateTime Data, TBTurmaRow _parentTBTurmaRowByFK_dbo_TBAula_dbo_TBTurma_Turma_Id) {
                 TBAulaRow rowTBAulaRow = ((TBAulaRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
+                        ChamadaRealizada,
                         Data,
                         null};
                 if ((_parentTBTurmaRowByFK_dbo_TBAula_dbo_TBTurma_Turma_Id != null)) {
-                    columnValuesArray[2] = _parentTBTurmaRowByFK_dbo_TBAula_dbo_TBTurma_Turma_Id[0];
+                    columnValuesArray[3] = _parentTBTurmaRowByFK_dbo_TBAula_dbo_TBTurma_Turma_Id[0];
                 }
                 rowTBAulaRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowTBAulaRow);
@@ -1123,6 +1134,7 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.TestData {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             internal void InitVars() {
                 this.columnId = base.Columns["Id"];
+                this.columnChamadaRealizada = base.Columns["ChamadaRealizada"];
                 this.columnData = base.Columns["Data"];
                 this.columnTurma_Id = base.Columns["Turma_Id"];
             }
@@ -1132,6 +1144,8 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.TestData {
             private void InitClass() {
                 this.columnId = new global::System.Data.DataColumn("Id", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnId);
+                this.columnChamadaRealizada = new global::System.Data.DataColumn("ChamadaRealizada", typeof(bool), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnChamadaRealizada);
                 this.columnData = new global::System.Data.DataColumn("Data", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnData);
                 this.columnTurma_Id = new global::System.Data.DataColumn("Turma_Id", typeof(int), null, global::System.Data.MappingType.Element);
@@ -1144,6 +1158,7 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.TestData {
                 this.columnId.AllowDBNull = false;
                 this.columnId.ReadOnly = true;
                 this.columnId.Unique = true;
+                this.columnChamadaRealizada.AllowDBNull = false;
                 this.columnData.AllowDBNull = false;
                 this.columnTurma_Id.AllowDBNull = false;
             }
@@ -1753,6 +1768,17 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.TestData {
                 }
                 set {
                     this[this.tableTBAula.IdColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool ChamadaRealizada {
+                get {
+                    return ((bool)(this[this.tableTBAula.ChamadaRealizadaColumn]));
+                }
+                set {
+                    this[this.tableTBAula.ChamadaRealizadaColumn] = value;
                 }
             }
             
@@ -2771,33 +2797,39 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.TestData.DiarioAcademiaTable
             tableMapping.SourceTable = "Table";
             tableMapping.DataSetTable = "TBAula";
             tableMapping.ColumnMappings.Add("Id", "Id");
+            tableMapping.ColumnMappings.Add("ChamadaRealizada", "ChamadaRealizada");
             tableMapping.ColumnMappings.Add("Data", "Data");
             tableMapping.ColumnMappings.Add("Turma_Id", "Turma_Id");
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = "DELETE FROM [dbo].[TBAula] WHERE (([Id] = @Original_Id) AND ([Data] = @Original_D" +
-                "ata) AND ([Turma_Id] = @Original_Turma_Id))";
+            this._adapter.DeleteCommand.CommandText = "DELETE FROM [dbo].[TBAula] WHERE (([Id] = @Original_Id) AND ([ChamadaRealizada] =" +
+                " @Original_ChamadaRealizada) AND ([Data] = @Original_Data) AND ([Turma_Id] = @Or" +
+                "iginal_Turma_Id))";
             this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ChamadaRealizada", global::System.Data.SqlDbType.Bit, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ChamadaRealizada", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Data", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Data", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Turma_Id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Turma_Id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = "INSERT INTO [dbo].[TBAula] ([Data], [Turma_Id]) VALUES (@Data, @Turma_Id);\r\nSELEC" +
-                "T Id, Data, Turma_Id FROM TBAula WHERE (Id = SCOPE_IDENTITY())";
+            this._adapter.InsertCommand.CommandText = "INSERT INTO [dbo].[TBAula] ([ChamadaRealizada], [Data], [Turma_Id]) VALUES (@Cham" +
+                "adaRealizada, @Data, @Turma_Id);\r\nSELECT Id, ChamadaRealizada, Data, Turma_Id FR" +
+                "OM TBAula WHERE (Id = SCOPE_IDENTITY())";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ChamadaRealizada", global::System.Data.SqlDbType.Bit, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ChamadaRealizada", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Data", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Data", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Turma_Id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Turma_Id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = "UPDATE [dbo].[TBAula] SET [Data] = @Data, [Turma_Id] = @Turma_Id WHERE (([Id] = @" +
-                "Original_Id) AND ([Data] = @Original_Data) AND ([Turma_Id] = @Original_Turma_Id)" +
-                ");\r\nSELECT Id, Data, Turma_Id FROM TBAula WHERE (Id = @Id)";
+            this._adapter.UpdateCommand.CommandText = @"UPDATE [dbo].[TBAula] SET [ChamadaRealizada] = @ChamadaRealizada, [Data] = @Data, [Turma_Id] = @Turma_Id WHERE (([Id] = @Original_Id) AND ([ChamadaRealizada] = @Original_ChamadaRealizada) AND ([Data] = @Original_Data) AND ([Turma_Id] = @Original_Turma_Id));
+SELECT Id, ChamadaRealizada, Data, Turma_Id FROM TBAula WHERE (Id = @Id)";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ChamadaRealizada", global::System.Data.SqlDbType.Bit, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ChamadaRealizada", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Data", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Data", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Turma_Id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Turma_Id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ChamadaRealizada", global::System.Data.SqlDbType.Bit, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ChamadaRealizada", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Data", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Data", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Turma_Id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Turma_Id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Id", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "Id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
@@ -2816,7 +2848,7 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.TestData.DiarioAcademiaTable
             this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT Id, Data, Turma_Id FROM dbo.TBAula";
+            this._commandCollection[0].CommandText = "SELECT Id, ChamadaRealizada, Data, Turma_Id FROM dbo.TBAula";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         
@@ -2877,10 +2909,11 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.TestData.DiarioAcademiaTable
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(int Original_Id, System.DateTime Original_Data, int Original_Turma_Id) {
+        public virtual int Delete(int Original_Id, bool Original_ChamadaRealizada, System.DateTime Original_Data, int Original_Turma_Id) {
             this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(Original_Id));
-            this.Adapter.DeleteCommand.Parameters[1].Value = ((System.DateTime)(Original_Data));
-            this.Adapter.DeleteCommand.Parameters[2].Value = ((int)(Original_Turma_Id));
+            this.Adapter.DeleteCommand.Parameters[1].Value = ((bool)(Original_ChamadaRealizada));
+            this.Adapter.DeleteCommand.Parameters[2].Value = ((System.DateTime)(Original_Data));
+            this.Adapter.DeleteCommand.Parameters[3].Value = ((int)(Original_Turma_Id));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
             if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -2901,9 +2934,10 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.TestData.DiarioAcademiaTable
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(System.DateTime Data, int Turma_Id) {
-            this.Adapter.InsertCommand.Parameters[0].Value = ((System.DateTime)(Data));
-            this.Adapter.InsertCommand.Parameters[1].Value = ((int)(Turma_Id));
+        public virtual int Insert(bool ChamadaRealizada, System.DateTime Data, int Turma_Id) {
+            this.Adapter.InsertCommand.Parameters[0].Value = ((bool)(ChamadaRealizada));
+            this.Adapter.InsertCommand.Parameters[1].Value = ((System.DateTime)(Data));
+            this.Adapter.InsertCommand.Parameters[2].Value = ((int)(Turma_Id));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
             if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -2924,13 +2958,15 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.TestData.DiarioAcademiaTable
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(System.DateTime Data, int Turma_Id, int Original_Id, System.DateTime Original_Data, int Original_Turma_Id, int Id) {
-            this.Adapter.UpdateCommand.Parameters[0].Value = ((System.DateTime)(Data));
-            this.Adapter.UpdateCommand.Parameters[1].Value = ((int)(Turma_Id));
-            this.Adapter.UpdateCommand.Parameters[2].Value = ((int)(Original_Id));
-            this.Adapter.UpdateCommand.Parameters[3].Value = ((System.DateTime)(Original_Data));
-            this.Adapter.UpdateCommand.Parameters[4].Value = ((int)(Original_Turma_Id));
-            this.Adapter.UpdateCommand.Parameters[5].Value = ((int)(Id));
+        public virtual int Update(bool ChamadaRealizada, System.DateTime Data, int Turma_Id, int Original_Id, bool Original_ChamadaRealizada, System.DateTime Original_Data, int Original_Turma_Id, int Id) {
+            this.Adapter.UpdateCommand.Parameters[0].Value = ((bool)(ChamadaRealizada));
+            this.Adapter.UpdateCommand.Parameters[1].Value = ((System.DateTime)(Data));
+            this.Adapter.UpdateCommand.Parameters[2].Value = ((int)(Turma_Id));
+            this.Adapter.UpdateCommand.Parameters[3].Value = ((int)(Original_Id));
+            this.Adapter.UpdateCommand.Parameters[4].Value = ((bool)(Original_ChamadaRealizada));
+            this.Adapter.UpdateCommand.Parameters[5].Value = ((System.DateTime)(Original_Data));
+            this.Adapter.UpdateCommand.Parameters[6].Value = ((int)(Original_Turma_Id));
+            this.Adapter.UpdateCommand.Parameters[7].Value = ((int)(Id));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
             if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -2951,8 +2987,8 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.TestData.DiarioAcademiaTable
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(System.DateTime Data, int Turma_Id, int Original_Id, System.DateTime Original_Data, int Original_Turma_Id) {
-            return this.Update(Data, Turma_Id, Original_Id, Original_Data, Original_Turma_Id, Original_Id);
+        public virtual int Update(bool ChamadaRealizada, System.DateTime Data, int Turma_Id, int Original_Id, bool Original_ChamadaRealizada, System.DateTime Original_Data, int Original_Turma_Id) {
+            return this.Update(ChamadaRealizada, Data, Turma_Id, Original_Id, Original_ChamadaRealizada, Original_Data, Original_Turma_Id, Original_Id);
         }
     }
     

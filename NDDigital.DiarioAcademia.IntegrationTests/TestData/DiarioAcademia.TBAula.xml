@@ -2,17 +2,20 @@
 <DiarioAcademia xmlns="http://tempuri.org/DiarioAcademia.xsd">
   <TBAula>
     <Id>1</Id>
-    <Data>2014-11-13T00:00:00</Data>
+    <ChamadaRealizada>true</ChamadaRealizada>
+    <Data>2014-11-13T00:00:00</Data>    
     <Turma_Id>1</Turma_Id>
   </TBAula>
   <TBAula>
     <Id>2</Id>
-    <Data>2014-11-14T00:00:00</Data>
+    <ChamadaRealizada>true</ChamadaRealizada>
+    <Data>2014-11-14T00:00:00</Data>    
     <Turma_Id>1</Turma_Id>
   </TBAula>
   <TBAula>
     <Id>3</Id>
-    <Data>2014-11-15T00:00:00</Data>
+    <ChamadaRealizada>true</ChamadaRealizada>
+    <Data>2014-11-15T00:00:00</Data>    
     <Turma_Id>1</Turma_Id>
   </TBAula>
 </DiarioAcademia>
