@@ -8,26 +8,28 @@ namespace NDDigital.DiarioAcademia.Aplicacao.DTOs
 {
     public class AulaDTO
     {
-        public AulaDTO(Dominio.Aula aula)
-        {
-            Data = aula.Data;
-            Id = aula.Id;
-            TurmaId = aula.Turma.Id;
-        }
-
         public AulaDTO()
         {
             Data = DateTime.Now;
         }
-        public DateTime Data { get; set; }
+
+        public AulaDTO(Dominio.Aula aula)
+        {
+            Data = aula.Data;
+            Id = aula.Id;
+            AnoTurma = aula.Turma.Ano;
+        }
 
         public int Id { get; set; }
 
-        public int TurmaId { get; set; }
+        public DateTime Data { get; set; }
+
+        public int AnoTurma { get; set; }
 
         public override string ToString()
         {
             return Data.ToString("dd/MM/yyyy");
-        }
-    }
+        }        
+
+    }    
 }

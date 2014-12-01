@@ -39,7 +39,7 @@ namespace NDDigital.DiarioAcademia.Apresentacao.WindowsApp.Controls.AulaForms
 
                 txtId.Text = _aula.Id.ToString();
 
-                cmbTurmas.SelectedItem = new TurmaDTO(_aula.TurmaId);
+                cmbTurmas.SelectedItem = new TurmaDTO(_aula.AnoTurma);
 
                 cmbData.Value = _aula.Data;
             }
@@ -53,7 +53,7 @@ namespace NDDigital.DiarioAcademia.Apresentacao.WindowsApp.Controls.AulaForms
 
                 _aula.Data = cmbData.Value;
 
-                _aula.TurmaId = ((TurmaDTO)cmbTurmas.SelectedItem).Id;
+                _aula.AnoTurma = ((TurmaDTO)cmbTurmas.SelectedItem).Id;
             }
             catch (Exception exc)
             {

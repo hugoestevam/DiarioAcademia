@@ -126,7 +126,7 @@ namespace NDDigital.DiarioAcademia.Apresentacao.WindowsApp
         {
             try
             {
-                _dataManager.RegistraPresenca();
+                _dataManager.RealizaChamada();
             }
             catch (Exception exc)
             {

@@ -54,7 +54,7 @@ namespace NDDigital.DiarioAcademia.UnitTests.Servicos
                 .Returns(new Aula(DateTime.Now, new Turma(2014)));
 
             //act
-            aulaService.RegistraPresenca(comando);
+            aulaService.RealizaChamada(comando);
 
             //assert
             _alunoRepository.Verify(x => x.Update(It.IsAny<Aluno>()), Times.Exactly(5));
@@ -70,10 +70,10 @@ namespace NDDigital.DiarioAcademia.UnitTests.Servicos
                 .Setup(x => x.GetAllByTurma(It.IsAny<int>()))
                 .Returns(null as List<Aluno>);
 
-            var comando = new RegistroPresencaDTO { AnoTurma = 2000 };
+            var comando = new ChamadaDTO { AnoTurma = 2000 };
             
             // act
-            Exception ex = Record.Exception(new Assert.ThrowsDelegate(() => { aulaService.RegistraPresenca(comando); }));
+            Exception ex = Record.Exception(new Assert.ThrowsDelegate(() => { aulaService.RealizaChamada(comando); }));
 
             // assert
             Assert.IsType(typeof(AlunoNaoEncontrado), ex);            
@@ -97,10 +97,10 @@ namespace NDDigital.DiarioAcademia.UnitTests.Servicos
                 .Setup(x => x.GetByData(It.IsAny<DateTime>()))
                 .Returns(null as Aula);
 
-            var comando = new RegistroPresencaDTO { AnoTurma = 2000 };
+            var comando = new ChamadaDTO { AnoTurma = 2000 };
 
             //act
-            Exception ex = Record.Exception(new Assert.ThrowsDelegate(() => aulaService.RegistraPresenca(comando)));
+            Exception ex = Record.Exception(new Assert.ThrowsDelegate(() => aulaService.RealizaChamada(comando)));
 
             //assert
             Assert.IsType<AulaNaoEncontrada>(ex);

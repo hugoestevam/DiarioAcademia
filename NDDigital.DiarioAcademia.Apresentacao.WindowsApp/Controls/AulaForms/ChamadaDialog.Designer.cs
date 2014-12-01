@@ -1,6 +1,6 @@
 ﻿namespace NDDigital.DiarioAcademia.Apresentacao.WindowsApp.Controls.AulaForms
 {
-    partial class PresencaDialog
+    partial class ChamadaDialog
     {
         /// <summary>
         /// Required designer variable.
@@ -58,16 +58,17 @@
             // listAlunos
             // 
             this.listAlunos.FormattingEnabled = true;
-            this.listAlunos.Location = new System.Drawing.Point(15, 65);
+            this.listAlunos.Location = new System.Drawing.Point(15, 50);
             this.listAlunos.Name = "listAlunos";
-            this.listAlunos.Size = new System.Drawing.Size(565, 259);
+            this.listAlunos.Size = new System.Drawing.Size(320, 499);
             this.listAlunos.TabIndex = 2;
+            this.listAlunos.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.listAlunos_ItemCheck);
             // 
             // btnCancel
             // 
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(505, 340);
+            this.btnCancel.Location = new System.Drawing.Point(269, 563);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 22;
@@ -78,7 +79,7 @@
             // 
             this.btnOk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnOk.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.btnOk.Location = new System.Drawing.Point(424, 340);
+            this.btnOk.Location = new System.Drawing.Point(188, 563);
             this.btnOk.Name = "btnOk";
             this.btnOk.Size = new System.Drawing.Size(75, 23);
             this.btnOk.TabIndex = 21;
@@ -104,11 +105,11 @@
             this.label3.TabIndex = 23;
             this.label3.Text = "Turma:";
             // 
-            // PresencaDialog
+            // ChamadaDialog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(592, 375);
+            this.ClientSize = new System.Drawing.Size(356, 598);
             this.Controls.Add(this.labelAnoTurma);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.btnCancel);
@@ -119,11 +120,11 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "PresencaDialog";
+            this.Name = "ChamadaDialog";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Registro de Presença de Alunos";
+            this.Text = "Chamada";
             this.ResumeLayout(false);
             this.PerformLayout();
 

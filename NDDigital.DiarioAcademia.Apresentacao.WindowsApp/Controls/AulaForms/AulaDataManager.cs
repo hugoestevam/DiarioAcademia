@@ -109,31 +109,25 @@ namespace NDDigital.DiarioAcademia.Apresentacao.WindowsApp.Controls.AulaForms
             }
         }
 
-        public override void RegistraPresenca()
+        public override void RealizaChamada()
         {
             AulaDTO aulaSelecionada = _control.GetAulaSelecionada();
 
             if (aulaSelecionada == null)
             {
-                MessageBox.Show("Nenhuma Aula selecionada. Selecionar uma Aula antes para Registrar a presença dos alunos");
+                MessageBox.Show("Nenhuma Aula selecionada. Selecionar uma Aula antes para realizar a chamada dos alunos");
                 return;
             }
 
-            var turma = _turmaService.GetById(aulaSelecionada.TurmaId);
+            ChamadaDTO chamada = _aulaService.GetChamada(aulaSelecionada);
 
-            var alunos = _alunoService.GetAllByTurma(turma.Ano);
-          
-            var dialog = new PresencaDialog(alunos.ToList());
+            ChamadaDialog dialog = new ChamadaDialog();
 
-            var presencas = new RegistroPresencaDTO();
-            presencas.AnoTurma = turma.Ano;
-            presencas.DataAula = aulaSelecionada.Data;
-
-            dialog.RegistroPresenca = presencas;
+            dialog.Chamada = chamada;
 
             if (dialog.ShowDialog() == DialogResult.OK)
             {
-                _aulaService.RegistraPresenca(presencas);
+                _aulaService.RealizaChamada(chamada);
             }
         }
 

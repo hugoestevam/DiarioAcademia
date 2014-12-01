@@ -18,6 +18,7 @@ namespace Uniplac.Sindicontrata.Infraestrutura.AcessoDadosRepositories
         {
             return GetQueryable()
                 .Include(x => x.Turma)
+                .Include(x => x.Presencas)
                 .Where(x => x.Turma.Ano == ano)
                 .ToList();
         }

@@ -12,7 +12,7 @@ namespace NDDigital.DiarioAcademia.Dominio
 
         public virtual Aluno Aluno { get; private set; }        
 
-        public string StatusPresenca { get; private set; }
+        public string StatusPresenca { get; set; }
 
         private Presenca()
         {
@@ -30,6 +30,8 @@ namespace NDDigital.DiarioAcademia.Dominio
             return string.Format("{0}: {1} -> {2}", Aula.Data.ToString("dd/MM/yyyy"),
                 Aluno.Nome, StatusPresenca == "F" ? "Faltou" : "Compareceu");
         }
+
+       
     }
 
     public interface IPresencaRepository : IRepository<Presenca>

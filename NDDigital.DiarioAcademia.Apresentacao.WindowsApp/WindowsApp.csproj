@@ -80,11 +80,11 @@
     <Compile Include="Controls\AulaForms\AulaDialog.Designer.cs">
       <DependentUpon>AulaDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\AulaForms\PresencaDialog.cs">
+    <Compile Include="Controls\AulaForms\ChamadaDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Controls\AulaForms\PresencaDialog.Designer.cs">
-      <DependentUpon>PresencaDialog.cs</DependentUpon>
+    <Compile Include="Controls\AulaForms\ChamadaDialog.Designer.cs">
+      <DependentUpon>ChamadaDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\Shared\DataManager.cs" />
     <Compile Include="Controls\Shared\StateButtons.cs" />
@@ -122,8 +122,8 @@
     <EmbeddedResource Include="Controls\AulaForms\AulaDialog.resx">
       <DependentUpon>AulaDialog.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\AulaForms\PresencaDialog.resx">
-      <DependentUpon>PresencaDialog.cs</DependentUpon>
+    <EmbeddedResource Include="Controls\AulaForms\ChamadaDialog.resx">
+      <DependentUpon>ChamadaDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\TurmaForms\TurmaControl.resx">
       <DependentUpon>TurmaControl.cs</DependentUpon>

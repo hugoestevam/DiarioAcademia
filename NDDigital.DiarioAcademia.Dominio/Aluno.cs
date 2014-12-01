@@ -8,13 +8,12 @@ namespace NDDigital.DiarioAcademia.Dominio
 {
     public class Aluno : Entity
     {
-        private Aluno() { }
+        private Aluno() { Presencas = new List<Presenca>(); }
 
         public Aluno(string nome, Turma turma) : this()
         {
             this.Nome = nome;
-            this.Turma = turma;
-            Presencas = new List<Presenca>();
+            this.Turma = turma;            
         }        
 
         public string Nome { get; set; }
@@ -35,15 +34,18 @@ namespace NDDigital.DiarioAcademia.Dominio
 
         public void RegistraPresenca(Aula aula, string statusPresenca)
         {
-            if (Presencas.Exists(x => x.Aula.Equals(aula)))
-                throw new PresencaJaRegistradaException();
+            Presenca presenca = Presencas.FirstOrDefault(x => x.Aula.Equals(aula));
 
-            Presenca presenca = new Presenca(aula, this, statusPresenca);
+            if (presenca == null)
+            {
+                presenca = new Presenca(aula, this, statusPresenca);
 
-            if (Presencas == null)
-                Presencas = new List<Presenca>();
-
-            Presencas.Add(presenca);
+                Presencas.Add(presenca);
+            }
+            else
+            {
+                presenca.StatusPresenca = statusPresenca;
+            }
         }
 
         public override string ToString()

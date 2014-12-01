@@ -12,22 +12,28 @@ namespace NDDigital.DiarioAcademia.Dominio
         {
         }
 
+        public bool ChamadaRealizada { get; set; }
+
         public DateTime Data { get; set; }
 
         public virtual Turma Turma { get; set; }
+
+        public virtual List<Presenca> Presencas { get; set; }
 
         public Aula(DateTime dateTime, Turma turma) : this()
         {            
             this.Data = dateTime;
             this.Turma = turma;
         }
-
+      
         public override bool Equals(object obj)
         {
             Aula aula = (Aula)obj;
 
             return this.Data.Equals(aula.Data);
         }
+
+
         
     }
 

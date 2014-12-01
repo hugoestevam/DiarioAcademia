@@ -16,16 +16,16 @@ namespace NDDigital.DiarioAcademia.UnitTests
             return new Aula(DateTime.Now, new Turma(2014));
         }        
 
-        public static RegistroPresencaDTO CriaRegistraPresencaCommand(IEnumerable<int> ids)
+        public static ChamadaDTO CriaRegistraPresencaCommand(IEnumerable<int> ids)
         {
-            var comando = Builder<RegistroPresencaDTO>.CreateNew()
+            var comando = Builder<ChamadaDTO>.CreateNew()
                 .With(x => x.AnoTurma = 2014)
-                .With(x => x.DataAula = new DateTime(2000, 10, 10))               
+                .With(x => x.Data = new DateTime(2000, 10, 10))               
                 .Build();
 
             foreach (var id in ids)
             {
-                comando.PresencaAlunos.Add(new PresencaAlunoDTO { AlunoId = id, Status = "C" });
+                comando.Alunos.Add(new ChamadaAlunoDTO { AlunoId = id, Status = "C" });
             }
 
             return comando;

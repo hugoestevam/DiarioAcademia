@@ -21,6 +21,8 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Configurations
                 .WithMany()
                 .WillCascadeOnDelete(false);
 
+            HasMany(a => a.Presencas);
+
             Property(a => a.Data)
                 .HasColumnType("Date");
         }

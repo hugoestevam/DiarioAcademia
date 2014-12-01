@@ -9,12 +9,13 @@ using System.Threading.Tasks;
 
 namespace NDDigital.DiarioAcademia.Aplicacao.Services
 {
-    public interface IAulaService 
+    public interface IAulaService
     {
         void Add(AulaDTO aulaDto);
 
-        void RegistraPresenca(RegistroPresencaDTO registroPresencaDto);
+        void RealizaChamada(ChamadaDTO registroPresencaDto);
 
+        ChamadaDTO GetChamada(AulaDTO aula);
 
         void Update(AulaDTO aulaDto);
 
@@ -46,7 +47,7 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
 
         public void Add(AulaDTO aulaDto)
         {
-            Turma turma = _turmaRepository.GetById(aulaDto.TurmaId);
+            Turma turma = _turmaRepository.GetById(aulaDto.AnoTurma);
 
             Aula aula = new Aula(aulaDto.Data, turma);
 
@@ -55,19 +56,19 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
             _unitOfWork.Commit();
         }
 
-        public void RegistraPresenca(RegistroPresencaDTO registroPresenca)
+        public void RealizaChamada(ChamadaDTO registroPresenca)
         {
             var alunos = _alunoRepository.GetAllByTurma(registroPresenca.AnoTurma);
 
             if (alunos == null || alunos.Any() == false)
                 throw new AlunoNaoEncontrado(String.Format(NENHUM_ALUNO_ENCOTRADO_PARA_TURMA, registroPresenca.AnoTurma));
 
-            var aula = _aulaRepository.GetByData(registroPresenca.DataAula);
+            var aula = _aulaRepository.GetByData(registroPresenca.Data);
 
             if (aula == null)
-                throw new AulaNaoEncontrada(String.Format(NENHUMA_AULA_ENCOTRADA_NESTA_DATA, registroPresenca.DataAula));
+                throw new AulaNaoEncontrada(String.Format(NENHUMA_AULA_ENCOTRADA_NESTA_DATA, registroPresenca.Data));
 
-            foreach (var item in registroPresenca.PresencaAlunos)
+            foreach (var item in registroPresenca.Alunos)
             {
                 var aluno = alunos.First(x => x.Id == item.AlunoId);
 
@@ -75,6 +76,10 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
 
                 _alunoRepository.Update(aluno);
             }
+
+            aula.ChamadaRealizada = true;
+
+            _aulaRepository.Update(aula);
 
             _unitOfWork.Commit();
         }
@@ -88,7 +93,7 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
             _aulaRepository.Update(aula);
 
             _unitOfWork.Commit();
-        }      
+        }
 
         public void Delete(int id)
         {
@@ -104,16 +109,41 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
             return new AulaDTO
             {
                 Id = aula.Id,
-                Data= aula.Data
+                Data = aula.Data
             };
         }
 
         public IEnumerable<AulaDTO> GetAllByTurma(int ano)
         {
             return _aulaRepository
-                .GetAllByTurma(ano)                
+                .GetAllByTurma(ano)
                 .Select(aula => new AulaDTO(aula))
                 .ToList();
+        }
+
+        public ChamadaDTO GetChamada(AulaDTO aulaDTO)
+        {
+            var chamada = new ChamadaDTO();
+            chamada.AnoTurma = aulaDTO.AnoTurma;
+            chamada.Data = aulaDTO.Data;
+
+            Aula aula = _aulaRepository.GetById(aulaDTO.Id);
+
+            if (aula.ChamadaRealizada)
+            {                
+                chamada.Alunos = aula.Presencas.
+                    Select( x => new ChamadaAlunoDTO(x.Aluno.Id, x.Aluno.Nome, x.StatusPresenca))
+                    .ToList();
+            }
+            else
+            {
+                 var alunos = _alunoRepository.GetAllByTurma(aulaDTO.AnoTurma);
+
+                 chamada.Alunos = alunos.Select(x => new ChamadaAlunoDTO(x.Id, x.Nome, "C"))
+                    .ToList();
+            }
+
+            return chamada;
         }
     }
 }
