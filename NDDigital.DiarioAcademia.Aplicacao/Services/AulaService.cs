@@ -63,7 +63,7 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
             if (alunos == null || alunos.Any() == false)
                 throw new AlunoNaoEncontrado(String.Format(NENHUM_ALUNO_ENCOTRADO_PARA_TURMA, registroPresenca.AnoTurma));
 
-            var aula = _aulaRepository.GetByData(registroPresenca.Data);
+            var aula = _aulaRepository.GetByData(registroPresenca.Data.Date);
 
             if (aula == null)
                 throw new AulaNaoEncontrada(String.Format(NENHUMA_AULA_ENCOTRADA_NESTA_DATA, registroPresenca.Data));
