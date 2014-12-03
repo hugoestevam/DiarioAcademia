@@ -73,7 +73,7 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
                 var aluno = alunos.First(x => x.Id == item.AlunoId);
 
                 aluno.RegistraPresenca(aula, item.Status);
-
+               
                 _alunoRepository.Update(aluno);
             }
 
@@ -83,6 +83,8 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
 
             _unitOfWork.Commit();
         }
+
+       
 
         public void Update(AulaDTO aulaDto)
         {

@@ -15,7 +15,7 @@ namespace NDDigital.DiarioAcademia.Aplicacao.DTOs
         public AlunoDTO(Dominio.Aluno aluno)
         {
             Id = aluno.Id;
-            Nome = aluno.Nome;
+            Descricao = aluno.ToString();
             TurmaId = aluno.Turma.Id;
         }
 
@@ -23,11 +23,11 @@ namespace NDDigital.DiarioAcademia.Aplicacao.DTOs
 
         public int TurmaId { get; set; }
 
-        public string Nome { get; set; }
+        public string Descricao { get; set; }
 
         public override string ToString()
         {
-            return Nome;
+            return Descricao;
         }
     }
 }

@@ -40,7 +40,7 @@ namespace NDDigital.DiarioAcademia.Apresentacao.WindowsApp.Controls.AlunoForms
 
                 txtId.Text = _aluno.Id.ToString();
 
-                txtNome.Text = _aluno.Nome;
+                txtNome.Text = _aluno.Descricao;
 
                 cmbTurmas.SelectedItem = new TurmaDTO(_aluno.TurmaId);
             }
@@ -52,7 +52,7 @@ namespace NDDigital.DiarioAcademia.Apresentacao.WindowsApp.Controls.AlunoForms
             {
                 _aluno.Id = int.Parse(txtId.Text);
 
-                _aluno.Nome = txtNome.Text;
+                _aluno.Descricao = txtNome.Text;
 
                 _aluno.TurmaId = ((TurmaDTO)cmbTurmas.SelectedItem).Id;
             }

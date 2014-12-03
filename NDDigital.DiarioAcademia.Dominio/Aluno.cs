@@ -34,18 +34,25 @@ namespace NDDigital.DiarioAcademia.Dominio
 
         public void RegistraPresenca(Aula aula, string statusPresenca)
         {
-            Presenca presenca = Presencas.FirstOrDefault(x => x.Aula.Equals(aula));
+            Presenca presenca = null;
 
-            if (presenca == null)
+            if (TemPresencaRegistrada(aula, out presenca))
+            {
+                presenca.StatusPresenca = statusPresenca;               
+            }
+            else
             {
                 presenca = new Presenca(aula, this, statusPresenca);
 
                 Presencas.Add(presenca);
             }
-            else
-            {
-                presenca.StatusPresenca = statusPresenca;
-            }
+        }
+
+        private bool TemPresencaRegistrada(Aula aula, out Presenca presenca)
+        {
+            presenca = Presencas.FirstOrDefault(x => x.Aula.Equals(aula));
+
+            return presenca != null;
         }
 
         public override string ToString()

@@ -10,6 +10,7 @@ namespace NDDigital.DiarioAcademia.Dominio
     {
         private Aula()
         {
+            Presencas = new List<Presenca>();
         }
 
         public bool ChamadaRealizada { get; set; }
@@ -24,6 +25,12 @@ namespace NDDigital.DiarioAcademia.Dominio
         {            
             this.Data = dateTime;
             this.Turma = turma;
+        }
+
+        public void ExcluiPresencas()
+        {            
+            //Presencas.Remove
+            Presencas = null;
         }
       
         public override bool Equals(object obj)

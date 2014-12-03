@@ -90,6 +90,19 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Common
         {
             return dbset.Find(id);
         }
+
+        public virtual T GetByIdIncluding(int id, params Expression<Func<T, object>>[] includeProperties)
+        {
+            IQueryable<T> query = dbset;
+
+            foreach (var includeProperty in includeProperties)
+            {
+                query = query.Include(includeProperty);
+            }
+
+            return query.FirstOrDefault();
+        }
+
         public virtual IEnumerable<T> GetAll()
         {            
             return dbset.ToList();

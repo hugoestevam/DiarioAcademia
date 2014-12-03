@@ -39,7 +39,7 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
         {
             Turma turma = _turmaRepository.GetById(alunoDto.TurmaId);
 
-            Aluno aluno = new Aluno(alunoDto.Nome, turma);
+            Aluno aluno = new Aluno(alunoDto.Descricao, turma);
 
             _alunoRepository.Add(aluno);
 
@@ -53,7 +53,7 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
 
             Aluno aluno = _alunoRepository.GetById(alunoDto.Id);
 
-            aluno.Nome = alunoDto.Nome;
+            aluno.Nome = alunoDto.Descricao;
             aluno.Turma = turma;
 
             _alunoRepository.Update(aluno);
@@ -75,7 +75,7 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
             return new AlunoDTO
             {
                 Id = aluno.Id,
-                Nome = aluno.Nome,
+                Descricao = aluno.Nome,
                 TurmaId = aluno.Turma.Id
             };
         }

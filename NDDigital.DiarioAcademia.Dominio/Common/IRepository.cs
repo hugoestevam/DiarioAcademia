@@ -18,6 +18,8 @@ namespace NDDigital.DiarioAcademia.Dominio
 
         T GetById(int id);
 
+        T GetByIdIncluding(int id, params Expression<Func<T, object>>[] includeProperties);
+
         IEnumerable<T> GetAll();
 
         IEnumerable<T> GetMany(Expression<Func<T, bool>> where);

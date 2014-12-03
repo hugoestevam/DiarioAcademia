@@ -31,29 +31,29 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Common
 
         public void Commit()
         {
-            try
-            {
+            //try
+            //{
                 DbContext.SaveChanges();
-            }
-            catch (OptimisticConcurrencyException ocException)
-            {
-                var context = ((IObjectContextAdapter)DbContext).ObjectContext;
+            //}
+            //catch (OptimisticConcurrencyException ocException)
+            //{
+            //    var context = ((IObjectContextAdapter)DbContext).ObjectContext;
 
-                var refreshableObjects = (from entry in context.ObjectStateManager.GetObjectStateEntries(
-                                                            EntityState.Added
-                                                           | EntityState.Deleted
-                                                           | EntityState.Modified
-                                                           | EntityState.Unchanged)
-                                          where entry.EntityKey != null
-                                          select entry.Entity).ToList();
+            //    var refreshableObjects = (from entry in context.ObjectStateManager.GetObjectStateEntries(
+            //                                                EntityState.Added
+            //                                               | EntityState.Deleted
+            //                                               | EntityState.Modified
+            //                                               | EntityState.Unchanged)
+            //                              where entry.EntityKey != null
+            //                              select entry.Entity).ToList();
 
-                context.Refresh(RefreshMode.StoreWins, refreshableObjects);
+            //    context.Refresh(RefreshMode.StoreWins, refreshableObjects);
 
-                context.SaveChanges();
-            }
-            catch (Exception exc) { 
+            //    context.SaveChanges();
+            //}
+            //catch (Exception exc) { 
             
-            }
+            //}
 
         }
 

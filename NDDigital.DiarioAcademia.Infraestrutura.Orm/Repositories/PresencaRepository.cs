@@ -14,6 +14,11 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Repositories
             : base(dbFactory)
         {
 
-        }       
+        }
+
+        public override void Delete(int id)
+        {
+            base.Delete(id);
+        }
     }
 }

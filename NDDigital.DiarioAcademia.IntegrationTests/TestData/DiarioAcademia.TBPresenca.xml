@@ -12,6 +12,12 @@
     <Aula_Id>2</Aula_Id>
     <Aluno_Id>1</Aluno_Id>    
   </TBPresenca>
+ <TBPresenca>
+    <Id>3</Id>
+    <StatusPresenca>C</StatusPresenca>
+    <Aula_Id>1</Aula_Id>
+    <Aluno_Id>2</Aluno_Id>    
+  </TBPresenca>
 </DiarioAcademia>
 
 

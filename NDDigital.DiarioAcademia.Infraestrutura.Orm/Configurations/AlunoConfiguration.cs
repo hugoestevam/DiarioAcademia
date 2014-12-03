@@ -18,7 +18,7 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Configurations
                 .WithMany()
                 .WillCascadeOnDelete(false);
 
-            HasMany(a => a.Presencas);
+            HasMany(a => a.Presencas);               
         }
     }
 

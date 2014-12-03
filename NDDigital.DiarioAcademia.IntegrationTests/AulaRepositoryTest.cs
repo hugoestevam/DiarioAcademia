@@ -16,8 +16,7 @@ namespace NDDigital.DiarioAcademia.IntegrationTests
         private IPresencaRepository presencaRepository;
         private TurmaRepository turmaRepository;   
 
-        private IUnitOfWork uow;
-             
+        private IUnitOfWork uow;             
 
         public void SetFixture(DatabaseFixture databaseFixture)
         {            
@@ -49,13 +48,13 @@ namespace NDDigital.DiarioAcademia.IntegrationTests
             aulaEncontrada.Should().NotBeNull();
         }
 
-        [Fact(DisplayName = "Deveria excluir aula e presencas relacionadas")]
+        [Fact(DisplayName = "Deveria excluir aula e presencas relacionadas"), ]
         public void Test_2()
         {            
             //arrange
-            InsertTestData(TBAula, TBPresenca);
+            InsertTestData(TBAula, TBPresenca, TBAluno, TBTurma);
 
-            Aula aula = aulaRepository.GetById(AULA_ID);
+            Aula aula = aulaRepository.GetByIdIncluding(AULA_ID, x => x.Presencas);
 
             //act
             aulaRepository.Delete(aula);
