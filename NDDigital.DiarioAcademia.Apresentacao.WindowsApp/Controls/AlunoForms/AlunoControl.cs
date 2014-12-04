@@ -32,6 +32,8 @@ namespace NDDigital.DiarioAcademia.Apresentacao.WindowsApp.Controls.AlunoForms
         {
             AlunoDTO alunoSelecionado = listAlunos.SelectedItem as AlunoDTO;
 
+             alunoSelecionado = _alunoService.GetById(alunoSelecionado.Id);
+
             return alunoSelecionado;
         }
 

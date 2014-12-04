@@ -9,7 +9,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Uniplac.Sindicontrata.Infraestrutura.AcessoDadosRepositories;
 
 namespace NDDigital.DiarioAcademia.Apresentacao.WindowsApp.Controls.AlunoForms
 {
@@ -120,7 +119,9 @@ namespace NDDigital.DiarioAcademia.Apresentacao.WindowsApp.Controls.AlunoForms
             {
                 Add = "Adiciona um novo aluno",
                 Delete = "Exclui o aluno selecionado",
-                Edit = "Atualiza o aluno selecionado"
+                Edit = "Atualiza o aluno selecionado",
+                RegistraPresenca = "Registra presenças",
+                Report = "Gera relatório de alunos"
             };
         }
 
@@ -130,7 +131,8 @@ namespace NDDigital.DiarioAcademia.Apresentacao.WindowsApp.Controls.AlunoForms
             {
                 Add = true,
                 Delete = true,
-                Update = true
+                Update = true,
+                Report = true
             };
         }
 

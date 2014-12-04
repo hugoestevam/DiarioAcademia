@@ -46,6 +46,7 @@
     <Compile Include="Common\Entity.cs" />
     <Compile Include="Common\IdentityGenerator.cs" />
     <Compile Include="Common\IRepository.cs" />
+    <Compile Include="Endereco.cs" />
     <Compile Include="Presenca.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Turma.cs" />

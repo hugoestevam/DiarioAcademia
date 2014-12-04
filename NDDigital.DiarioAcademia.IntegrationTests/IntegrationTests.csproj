@@ -138,6 +138,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="DiarioAcademia%28Dados%29.sql" />
     <Content Include="SelectAll.sql" />
     <Content Include="TestData\DiarioAcademia.TBPresenca.xml" />
     <Content Include="TestData\DiarioAcademia.TBTurma.xml" />

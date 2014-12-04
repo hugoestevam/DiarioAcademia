@@ -1,13 +1,17 @@
-﻿using NDDigital.DiarioAcademia.Aplicacao.DTOs;
+﻿using System.IO;
+using iTextSharp.text;
+using iTextSharp.text.pdf;
+using NDDigital.DiarioAcademia.Aplicacao.DTOs;
 using NDDigital.DiarioAcademia.Dominio;
 using NDDigital.DiarioAcademia.Infraestrutura.Orm.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using NDDigital.DiarioAcademia.Infraestrutura.WebServices;
 
 namespace NDDigital.DiarioAcademia.Aplicacao.Services
 {    
-    public interface IAlunoService 
+        public interface IAlunoService
     {
         void Add(AlunoDTO alunoDto);
 
@@ -19,7 +23,11 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
 
         IEnumerable<AlunoDTO> GetAll();
 
-        IEnumerable<AlunoDTO> GetAllByTurma(int ano);       
+        IEnumerable<AlunoDTO> GetAllByTurma(int ano);
+
+        Endereco BuscaEnderecoPorCep(string p);
+
+        void GerarRelatorioAlunosPdf(int ano, string path);
     }
 
     public class AlunoService : IAlunoService
@@ -27,6 +35,7 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
         private IAlunoRepository _alunoRepository;
         private IUnitOfWork _unitOfWork;
         private ITurmaRepository _turmaRepository;
+        private CepWebService _webService;
 
         public AlunoService(IAlunoRepository repoAluno, ITurmaRepository repoTurma, IUnitOfWork unitOfWork)
         {
@@ -41,11 +50,15 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
 
             Aluno aluno = new Aluno(alunoDto.Descricao, turma);
 
+            aluno.Endereco.Bairro = alunoDto.Bairro;
+            aluno.Endereco.Cep = alunoDto.Cep;
+            aluno.Endereco.Localidade = alunoDto.Localidade;
+            aluno.Endereco.Uf = alunoDto.Uf;
+
             _alunoRepository.Add(aluno);
 
             _unitOfWork.Commit();
         }
-
 
         public void Update(AlunoDTO alunoDto)
         {
@@ -55,6 +68,10 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
 
             aluno.Nome = alunoDto.Descricao;
             aluno.Turma = turma;
+            aluno.Endereco.Bairro = alunoDto.Bairro;
+            aluno.Endereco.Cep = alunoDto.Cep;
+            aluno.Endereco.Localidade = alunoDto.Localidade;
+            aluno.Endereco.Uf = alunoDto.Uf;
 
             _alunoRepository.Update(aluno);
 
@@ -76,7 +93,11 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
             {
                 Id = aluno.Id,
                 Descricao = aluno.Nome,
-                TurmaId = aluno.Turma.Id
+                TurmaId = aluno.Turma.Id,
+                Cep = aluno.Endereco.Cep,
+                Bairro = aluno.Endereco.Bairro,
+                Localidade = aluno.Endereco.Localidade,
+                Uf = aluno.Endereco.Uf
             };
         }
 
@@ -84,14 +105,50 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
         {
             return _alunoRepository.GetAll()
                 .Select(aluno => new AlunoDTO(aluno))
-                .ToList(); 
+                .ToList();
         }
 
         public IEnumerable<AlunoDTO> GetAllByTurma(int ano)
         {
             return _alunoRepository.GetAllByTurma(ano)
-              .Select(aluno => new AlunoDTO(aluno))
-              .ToList(); 
+                .Select(aluno => new AlunoDTO(aluno))
+                .ToList();
+        }
+
+        public Endereco BuscaEnderecoPorCep(string cep)
+        {
+            _webService = new CepWebService();
+
+            return _webService.PreencheEndereco(cep);
+        }
+
+        public void GerarRelatorioAlunosPdf(int ano, string path)
+        {
+            try
+            {
+                FileStream fs = new FileStream(path,
+                    FileMode.Create, FileAccess.Write, FileShare.None);
+
+                Document doc = new Document();
+
+                PdfWriter writer = PdfWriter.GetInstance(doc, fs);
+
+                doc.Open();
+
+                doc.Add(new Paragraph("Relatório de presenças - Academia do prgramador " + ano + ":\n\n"));
+                doc.Add(new Paragraph("Alunos/Presenças/Faltas:\n\n"));
+
+                foreach (var listaAluno in GetAllByTurma(ano))
+                {
+                    doc.Add(new Paragraph(listaAluno.Descricao));
+                }
+
+                doc.Close();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
     }
 }

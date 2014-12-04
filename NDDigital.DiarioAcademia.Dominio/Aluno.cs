@@ -8,7 +8,11 @@ namespace NDDigital.DiarioAcademia.Dominio
 {
     public class Aluno : Entity
     {
-        private Aluno() { Presencas = new List<Presenca>(); }
+        private Aluno()
+        {
+            Presencas = new List<Presenca>();
+            Endereco = new Endereco();
+        }
 
         public Aluno(string nome, Turma turma) : this()
         {
@@ -19,6 +23,8 @@ namespace NDDigital.DiarioAcademia.Dominio
         public string Nome { get; set; }
 
         public virtual Turma Turma { get; set; }
+
+        public Endereco Endereco { get; set; }
 
         public virtual List<Presenca> Presencas { get; set; }
         

@@ -1,4 +1,5 @@
-﻿using NDDigital.DiarioAcademia.Aplicacao.Services;
+﻿using System.Diagnostics;
+using NDDigital.DiarioAcademia.Aplicacao.Services;
 using NDDigital.DiarioAcademia.Aplicacao.DTOs;
 using NDDigital.DiarioAcademia.Apresentacao.WindowsApp.Controls.Shared;
 using NDDigital.DiarioAcademia.Apresentacao.WindowsApp.Properties;
@@ -26,6 +27,7 @@ namespace NDDigital.DiarioAcademia.Apresentacao.WindowsApp
         private UserControl _control;
        
         private ITurmaService _turmaService;
+        private IAlunoService _alunoService;
 
         private IEnumerable<TurmaDTO> turmas; 
 
@@ -41,7 +43,11 @@ namespace NDDigital.DiarioAcademia.Apresentacao.WindowsApp
 
             var turmaRepository = new TurmaRepository(factory);
 
+            var alunoRepository = new AlunoRepository(factory);
+
             _turmaService = new TurmaService(turmaRepository, unitOfWork);
+
+            _alunoService = new AlunoService(alunoRepository, turmaRepository, unitOfWork);
 
             AtualizaListaTurmas();
 
@@ -173,12 +179,14 @@ namespace NDDigital.DiarioAcademia.Apresentacao.WindowsApp
                 btnAdd.ToolTipText = _dataManager.GetToolTipMessage().Add;
                 btnRegistraPresenca.ToolTipText = _dataManager.GetToolTipMessage().RegistraPresenca;
                 btnUpdate.ToolTipText = _dataManager.GetToolTipMessage().Edit;
-                btnDelete.ToolTipText = _dataManager.GetToolTipMessage().Delete;                
-
+                btnDelete.ToolTipText = _dataManager.GetToolTipMessage().Delete;
+                btnRelatorio.ToolTipText = _dataManager.GetToolTipMessage().Report;
+      
                 btnAdd.Enabled = _dataManager.GetStateButtons().Add;
                 btnRegistraPresenca.Enabled = _dataManager.GetStateButtons().RegistraPresenca;
                 btnUpdate.Enabled = _dataManager.GetStateButtons().Update;
                 btnDelete.Enabled = _dataManager.GetStateButtons().Delete;
+                btnRelatorio.Enabled = _dataManager.GetStateButtons().Report;
 
 
                 toolbar.Enabled = _dataManager != null;
@@ -231,7 +239,27 @@ namespace NDDigital.DiarioAcademia.Apresentacao.WindowsApp
             panelPrincipal.Controls.Add(_control);
         }
 
-        
-        
+        private void btnRelatorio_Click(object sender, EventArgs e)
+        {
+            var turmaSelecionada = cmbTurmas.SelectedItem as TurmaDTO;
+            var ano = turmaSelecionada.Ano;
+
+            DialogResult dialogResult = MessageBox.Show("Você gostaria de gerar um novo relatório da " +
+                                                        "Academia do Programador " + ano + "?", "Atenção", MessageBoxButtons.YesNo);
+
+            if (dialogResult == DialogResult.Yes)
+            {
+                SaveFileDialog saveFileDialog = new SaveFileDialog();
+
+                saveFileDialog.Filter = "PDF|*.pdf";
+                saveFileDialog.Title = "Salvando relatório";
+                saveFileDialog.FileName = "Relatório Academia do Programador " + ano;
+                saveFileDialog.ShowDialog();
+
+                _alunoService.GerarRelatorioAlunosPdf(turmaSelecionada.Ano, saveFileDialog.FileName);
+                
+                Process.Start(saveFileDialog.FileName);
+            }
+        }
     }
 }

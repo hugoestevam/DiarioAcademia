@@ -24,6 +24,7 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Contexts
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Configurations.Add(new AlunoConfiguration());
+            modelBuilder.Configurations.Add(new EnderecoConfiguration());
             modelBuilder.Configurations.Add(new AulaConfiguration());
             modelBuilder.Configurations.Add(new TurmaConfiguration());
             modelBuilder.Configurations.Add(new PresencaConfiguration());

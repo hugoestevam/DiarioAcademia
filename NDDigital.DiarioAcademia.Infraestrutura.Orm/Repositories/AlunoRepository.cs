@@ -1,11 +1,10 @@
-﻿using NDDigital.DiarioAcademia.Dominio;
-using NDDigital.DiarioAcademia.Infraestrutura.Orm.Common;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using NDDigital.DiarioAcademia.Dominio;
+using NDDigital.DiarioAcademia.Infraestrutura.Orm.Common;
 
-
-namespace Uniplac.Sindicontrata.Infraestrutura.AcessoDadosRepositories
+namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Repositories
 {
     public class AlunoRepository : RepositoryBase<Aluno>, IAlunoRepository
     {

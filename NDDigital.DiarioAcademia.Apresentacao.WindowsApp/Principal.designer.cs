@@ -35,10 +35,6 @@
             this.turmasMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aulasMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolbar = new System.Windows.Forms.ToolStrip();
-            this.btnAdd = new System.Windows.Forms.ToolStripButton();
-            this.btnRegistraPresenca = new System.Windows.Forms.ToolStripButton();
-            this.btnUpdate = new System.Windows.Forms.ToolStripButton();
-            this.btnDelete = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.labelTipoCadastro = new System.Windows.Forms.ToolStripLabel();
             this.cmbTurmas = new System.Windows.Forms.ToolStripComboBox();
@@ -46,6 +42,11 @@
             this.statusImage = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusMessage = new System.Windows.Forms.ToolStripStatusLabel();
             this.panelPrincipal = new System.Windows.Forms.Panel();
+            this.btnAdd = new System.Windows.Forms.ToolStripButton();
+            this.btnRegistraPresenca = new System.Windows.Forms.ToolStripButton();
+            this.btnUpdate = new System.Windows.Forms.ToolStripButton();
+            this.btnDelete = new System.Windows.Forms.ToolStripButton();
+            this.btnRelatorio = new System.Windows.Forms.ToolStripButton();
             this.menuStrip1.SuspendLayout();
             this.toolbar.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -100,6 +101,7 @@
             this.btnRegistraPresenca,
             this.btnUpdate,
             this.btnDelete,
+            this.btnRelatorio,
             this.toolStripSeparator1,
             this.labelTipoCadastro,
             this.cmbTurmas});
@@ -108,6 +110,56 @@
             this.toolbar.Size = new System.Drawing.Size(741, 43);
             this.toolbar.TabIndex = 1;
             this.toolbar.Text = "toolStrip1";
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 43);
+            // 
+            // labelTipoCadastro
+            // 
+            this.labelTipoCadastro.Name = "labelTipoCadastro";
+            this.labelTipoCadastro.Size = new System.Drawing.Size(176, 40);
+            this.labelTipoCadastro.Text = " Cadastro selecionado: Nenhum";
+            // 
+            // cmbTurmas
+            // 
+            this.cmbTurmas.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.cmbTurmas.AutoSize = false;
+            this.cmbTurmas.Name = "cmbTurmas";
+            this.cmbTurmas.Size = new System.Drawing.Size(250, 23);
+            this.cmbTurmas.SelectedIndexChanged += new System.EventHandler(this.cmbTurmas_SelectedIndexChanged);
+            // 
+            // statusStrip1
+            // 
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.statusImage,
+            this.statusMessage});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 534);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(741, 22);
+            this.statusStrip1.TabIndex = 2;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
+            // statusImage
+            // 
+            this.statusImage.Name = "statusImage";
+            this.statusImage.Size = new System.Drawing.Size(10, 17);
+            this.statusImage.Text = " ";
+            // 
+            // statusMessage
+            // 
+            this.statusMessage.Name = "statusMessage";
+            this.statusMessage.Size = new System.Drawing.Size(74, 17);
+            this.statusMessage.Text = "[mensagem]";
+            // 
+            // panelPrincipal
+            // 
+            this.panelPrincipal.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelPrincipal.Location = new System.Drawing.Point(0, 67);
+            this.panelPrincipal.Name = "panelPrincipal";
+            this.panelPrincipal.Size = new System.Drawing.Size(741, 467);
+            this.panelPrincipal.TabIndex = 3;
             // 
             // btnAdd
             // 
@@ -161,55 +213,18 @@
             this.btnDelete.ToolTipText = " ";
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
-            // toolStripSeparator1
+            // btnRelatorio
             // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 43);
-            // 
-            // labelTipoCadastro
-            // 
-            this.labelTipoCadastro.Name = "labelTipoCadastro";
-            this.labelTipoCadastro.Size = new System.Drawing.Size(176, 40);
-            this.labelTipoCadastro.Text = " Cadastro selecionado: Nenhum";
-            // 
-            // cmbTurmas
-            // 
-            this.cmbTurmas.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.cmbTurmas.AutoSize = false;
-            this.cmbTurmas.Name = "cmbTurmas";
-            this.cmbTurmas.Size = new System.Drawing.Size(250, 23);
-            this.cmbTurmas.SelectedIndexChanged += new System.EventHandler(this.cmbTurmas_SelectedIndexChanged);
-            // 
-            // statusStrip1
-            // 
-            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.statusImage,
-            this.statusMessage});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 534);
-            this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(741, 22);
-            this.statusStrip1.TabIndex = 2;
-            this.statusStrip1.Text = "statusStrip1";
-            // 
-            // statusImage
-            // 
-            this.statusImage.Name = "statusImage";
-            this.statusImage.Size = new System.Drawing.Size(10, 17);
-            this.statusImage.Text = " ";
-            // 
-            // statusMessage
-            // 
-            this.statusMessage.Name = "statusMessage";
-            this.statusMessage.Size = new System.Drawing.Size(74, 17);
-            this.statusMessage.Text = "[mensagem]";
-            // 
-            // panelPrincipal
-            // 
-            this.panelPrincipal.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelPrincipal.Location = new System.Drawing.Point(0, 67);
-            this.panelPrincipal.Name = "panelPrincipal";
-            this.panelPrincipal.Size = new System.Drawing.Size(741, 467);
-            this.panelPrincipal.TabIndex = 3;
+            this.btnRelatorio.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnRelatorio.Image = global::NDDigital.DiarioAcademia.Apresentacao.WindowsApp.Properties.Resources.Symbol_PDF;
+            this.btnRelatorio.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnRelatorio.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnRelatorio.Name = "btnRelatorio";
+            this.btnRelatorio.Padding = new System.Windows.Forms.Padding(6);
+            this.btnRelatorio.Size = new System.Drawing.Size(36, 40);
+            this.btnRelatorio.Text = "toolStripButton1";
+            this.btnRelatorio.ToolTipText = " ";
+            this.btnRelatorio.Click += new System.EventHandler(this.btnRelatorio_Click);
             // 
             // Principal
             // 
@@ -255,6 +270,7 @@
         private System.Windows.Forms.ToolStripStatusLabel statusImage;
         private System.Windows.Forms.ToolStripComboBox cmbTurmas;
         private System.Windows.Forms.ToolStripMenuItem aulasMenuItem;
+        private System.Windows.Forms.ToolStripButton btnRelatorio;
     }
 }
 
