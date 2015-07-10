@@ -1,0 +1,62 @@
+﻿<div class="col-lg-8">
+    <h1 class="page-header">
+        {{vm.title}}
+    </h1>
+    <ol class="breadcrumb">
+        <li>
+            <i class="fa fa-home"></i>  <a ui-sref="home">Inicio</a>
+        </li>
+        <li class="active">
+            <i class="fa fa-check"></i> Realizar Chamada
+        </li>
+    </ol>
+    <form name="vm.chamadaForm" class="jumbotron">
+        <select class="form-control" ng-model="vm.chamada.turma"
+                ng-options="turma.descricao for turma in vm.turmas"
+                ng-click="vm.populateAulas(vm.chamada.turma)"
+                ng-disabled="!vm.turmas[0]"
+                ng-required="true"
+                ng-selected="vm.selected == true">
+            <option>Selecione a Turma</option>
+        </select>
+        <br />
+
+        <select class="form-control" ng-model="vm.chamada.aula"
+                ng-options="aula.dataAula | date: 'dd/MM/yyyy' for aula in vm.aulas"
+                ng-disabled="!vm.aulas[0]"
+                ng-click="vm.getChamada()"
+                ng-required="true">
+            <option>Selecione a aula de hoje</option>
+        </select><br />
+
+        <div ng-show="vm.chamadaForm.aula.$error.required && vm.chamadaForm.aula.$dirty" class=" alert alert-danger">
+            Por favor, selecione aula de hoje!
+        </div>
+
+        <div ng-show="vm.turmaSelected && vm.aulas.length == 0" class="alert alert-danger">
+            Essa turma não possui aulas cadastradas!
+        </div>
+
+        <div ng-show="vm.turmaSelected && vm.aulaSelected && vm.alunos.length == 0" class="alert alert-danger">
+            Essa turma não possui alunos cadastrados!
+        </div>
+
+        <table class="table">
+            <tr>
+                <th>Presença</th>
+                <th>Alunos</th>
+            </tr>
+            <tr ng-repeat="aluno in vm.alunos">
+                <td>
+                    <div class="switcher" ng-class="{'on': aluno.status}" ng-click="aluno.status = !aluno.status">
+                        <div class="switcherHandler"></div>
+                        <input type="checkbox" class="switcherInput" ng-model="aluno.status" />
+                    </div>
+                </td>
+                <td><h4>{{aluno.nome}}</h4></td>
+            </tr>
+        </table>
+        <button class="btn btn-success" ng-click="vm.save()" ng-disabled="vm.chamadaForm.$invalid">Chamada Realizada!</button>
+</form>
+</div>
+       

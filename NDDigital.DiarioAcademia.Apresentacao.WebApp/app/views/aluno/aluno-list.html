@@ -1,0 +1,33 @@
+﻿<div class="col-lg-8">
+    <h1 class="page-header">
+        {{vm.title}}
+    </h1>
+    <ol class="breadcrumb">
+        <li>
+            <i class="fa fa-home"></i>  <a ui-sref="home">Inicio</a>
+        </li>
+        <li class="active">
+            <i class="fa fa-users"></i> Alunos
+        </li>
+    </ol>
+    <div>
+        <div class="jumbotron">
+            <div>
+                <input class="form-control" type="text" ng-model="vm.criterioDeBusca" placeholder="O que você está procurando?" />
+                <table class="table">
+                    <tr>
+                        <th></th>
+                        <th>Descrição do aluno</th>
+                    </tr>
+                    <tr ng-class="" ng-repeat="aluno in vm.alunos | filter: vm.criterioDeBusca">
+                        <td><input type="checkbox" ng-click="vm.alunoSelecionado = aluno" /></td>
+                        <td>{{aluno.nome}}</td>
+                    </tr>
+                </table>
+                <a ui-sref="aluno.details( { alunoId : vm.alunoSelecionado.id  }  )">
+                    <button class="btn btn-info">Editar {{vm.alunoSelecionado.nome}}</button>
+                </a>
+                <button class="btn btn-danger" ng-click="vm.delete(vm.alunoSelecionado)" ng-disabled="!true">Excluir</button>
+            </div>
+        </div>
+    </div>

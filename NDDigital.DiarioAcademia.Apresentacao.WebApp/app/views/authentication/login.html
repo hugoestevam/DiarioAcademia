@@ -1,0 +1,23 @@
+﻿<div class="col-lg-4">
+    <h1 class="page-header">
+        {{vm.title}}
+    </h1>
+    <ol class="breadcrumb">
+        <li>
+            <i class="fa fa-home"></i>  <a ui-sref="home">Inicio</a>
+        </li>
+        <li class="active">
+            <i class="fa fa-user-md"></i> Entrar
+        </li>
+    </ol>
+    <div class="jumbotron">
+        <form name="vm.aulaForm" class="jumbotron">
+            <input type="text" class="form-control" placeholder="Username" data-ng-model="vm.loginData.userName" required autofocus>
+            <input type="password" class="form-control" placeholder="Password" data-ng-model="vm.loginData.password" required>
+            <button class="btn btn-lg btn-default btn-block" type="submit" data-ng-click="vm.login()">Entrar</button>
+            <div data-ng-hide="vm.message == ''" class="alert alert-danger">
+                {{vm.message}}
+            </div>
+        </form>
+    </div>
+</div>
