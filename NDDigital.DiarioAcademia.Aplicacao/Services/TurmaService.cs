@@ -1,14 +1,11 @@
 ﻿using NDDigital.DiarioAcademia.Aplicacao.DTOs;
 using NDDigital.DiarioAcademia.Dominio;
 using NDDigital.DiarioAcademia.Infraestrutura.Orm.Common;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace NDDigital.DiarioAcademia.Aplicacao.Services
 {
-
     public interface ITurmaService
     {
         void Add(TurmaDTO turmaDto);
@@ -40,7 +37,6 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
             _turmaRepository.Add(turma);
 
             _unitOfWork.Commit();
-
         }
 
         public void Update(TurmaDTO turmaDto)
@@ -52,7 +48,7 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
             _turmaRepository.Update(turma);
 
             _unitOfWork.Commit();
-        }      
+        }
 
         public void Delete(int id)
         {
@@ -68,7 +64,7 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
             return new TurmaDTO
             {
                 Id = turma.Id,
-                Ano= turma.Ano
+                Ano = turma.Ano
             };
         }
 

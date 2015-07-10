@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using NDDigital.DiarioAcademia.Dominio;
 using System.Data.Entity.ModelConfiguration;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using NDDigital.DiarioAcademia.Dominio;
 
 namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Configurations
 {
@@ -16,7 +11,6 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Configurations
             Property(a => a.Cep);
             Property(a => a.Localidade);
             Property(a => a.Uf).HasMaxLength(2);
-
         }
     }
 }

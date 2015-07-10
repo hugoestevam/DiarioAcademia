@@ -1,23 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Data.Entity;
-using System.Data;
-using System.Linq.Expressions;
+﻿using NDDigital.DiarioAcademia.Dominio.Common;
 using NDDigital.DiarioAcademia.Infraestrutura.Orm.Contexts;
-using NDDigital.DiarioAcademia.Dominio.Common;
+using System;
+using System.Collections.Generic;
+using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
-using System.Diagnostics;
+using System.Linq;
+using System.Linq.Expressions;
 
-
-namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Common 
+namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Common
 {
-    public abstract class RepositoryBase<T> where T : Entity 
+    public abstract class RepositoryBase<T> where T : Entity
     {
         protected DiarioAcademiaContext dataContext;
         protected readonly IDbSet<T> dbset;
+
         protected RepositoryBase(IDatabaseFactory databaseFactory)
         {
             DatabaseFactory = databaseFactory;
@@ -34,11 +30,13 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Common
         {
             get { return dataContext ?? (dataContext = DatabaseFactory.Get()); }
         }
+
         public virtual T Add(T entity)
         {
             dbset.Add(entity);
             return entity;
         }
+
         public virtual void Update(T entity)
         {
             DbEntityEntry dbEntityEntry = dataContext.Entry(entity);
@@ -55,7 +53,7 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Common
 
         public virtual void Delete(T entity)
         {
-            DbEntityEntry dbEntityEntry = dataContext.Entry(entity);            
+            DbEntityEntry dbEntityEntry = dataContext.Entry(entity);
 
             if (dbEntityEntry.State != EntityState.Deleted)
             {
@@ -66,7 +64,7 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Common
                 dbset.Attach(entity);
                 dbset.Remove(entity);
             }
-       
+
             //dbset.Attach(entity);
             //dataContext.Entry(entity).State = EntityState.Deleted;
 
@@ -75,9 +73,9 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Common
 
         public virtual void Delete(int id)
         {
-            var entity =  GetById(id);
-                  
-            dbset.Remove(entity);            
+            var entity = GetById(id);
+
+            dbset.Remove(entity);
         }
 
         public virtual void Delete(Expression<Func<T, bool>> where)
@@ -86,6 +84,7 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Common
             foreach (T obj in objects)
                 dbset.Remove(obj);
         }
+
         public virtual T GetById(int id)
         {
             return dbset.Find(id);
@@ -104,9 +103,10 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Common
         }
 
         public virtual IEnumerable<T> GetAll()
-        {            
+        {
             return dbset.ToList();
         }
+
         public virtual IEnumerable<T> GetMany(Expression<Func<T, bool>> where)
         {
             return dbset.Where(where).ToList();
@@ -124,11 +124,9 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Common
             return query.ToList();
         }
 
-
         protected IQueryable<T> GetQueryable()
         {
             return dbset.AsQueryable();
         }
-
     }
 }

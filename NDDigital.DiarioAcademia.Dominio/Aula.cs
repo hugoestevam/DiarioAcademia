@@ -1,8 +1,6 @@
 ﻿using NDDigital.DiarioAcademia.Dominio.Common;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace NDDigital.DiarioAcademia.Dominio
 {
@@ -21,18 +19,19 @@ namespace NDDigital.DiarioAcademia.Dominio
 
         public virtual List<Presenca> Presencas { get; set; }
 
-        public Aula(DateTime dateTime, Turma turma) : this()
-        {            
+        public Aula(DateTime dateTime, Turma turma)
+            : this()
+        {
             this.Data = dateTime;
             this.Turma = turma;
         }
 
         public void ExcluiPresencas()
-        {            
+        {
             //Presencas.Remove
             Presencas = null;
         }
-      
+
         public override bool Equals(object obj)
         {
             Aula aula = (Aula)obj;
@@ -40,14 +39,16 @@ namespace NDDigital.DiarioAcademia.Dominio
             return this.Data.Equals(aula.Data);
         }
 
-
-        
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
     }
 
     public interface IAulaRepository : IRepository<Aula>
     {
         Aula GetByData(DateTime data);
 
-        IEnumerable<Aula> GetAllByTurma(int ano);        
+        IEnumerable<Aula> GetAllByTurma(int ano);
     }
 }

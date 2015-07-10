@@ -1,8 +1,6 @@
 ﻿using NDDigital.DiarioAcademia.Dominio.Common;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace NDDigital.DiarioAcademia.Dominio
 {
@@ -14,26 +12,27 @@ namespace NDDigital.DiarioAcademia.Dominio
             Endereco = new Endereco();
         }
 
-        public Aluno(string nome, Turma turma) : this()
+        public Aluno(string nome, Turma turma)
+            : this()
         {
             this.Nome = nome;
-            this.Turma = turma;            
-        }        
+            this.Turma = turma;
+        }
+
+        public Endereco Endereco { get; set; }
 
         public string Nome { get; set; }
 
         public virtual Turma Turma { get; set; }
 
-        public Endereco Endereco { get; set; }
-
         public virtual List<Presenca> Presencas { get; set; }
-        
+
         public int ObtemQuantidadePresencas()
         {
             return Presencas.Count(x => x.StatusPresenca == "C");
         }
 
-        public int ObtemQuantidadeAusencias() 
+        public int ObtemQuantidadeAusencias()
         {
             return Presencas.Count(x => x.StatusPresenca == "F");
         }
@@ -44,7 +43,7 @@ namespace NDDigital.DiarioAcademia.Dominio
 
             if (TemPresencaRegistrada(aula, out presenca))
             {
-                presenca.StatusPresenca = statusPresenca;               
+                presenca.StatusPresenca = statusPresenca;
             }
             else
             {
@@ -56,7 +55,9 @@ namespace NDDigital.DiarioAcademia.Dominio
 
         private bool TemPresencaRegistrada(Aula aula, out Presenca presenca)
         {
-            presenca = Presencas.FirstOrDefault(x => x.Aula.Equals(aula));
+            presenca = Presencas.Find(x => x.Aula == aula);
+
+            //presenca = Presencas.FirstOrDefault(x => x.Aula.Equals(aula)); //TODO: THIAGO SARTOR
 
             return presenca != null;
         }
@@ -64,12 +65,12 @@ namespace NDDigital.DiarioAcademia.Dominio
         public override string ToString()
         {
             return string.Format("{0}: Presenças: {1}, Faltas: {2}", Nome, ObtemQuantidadePresencas(), ObtemQuantidadeAusencias());
-        }        
+        }
     }
 
     public interface IAlunoRepository : IRepository<Aluno>
     {
-        IEnumerable<Aluno> GetAllByTurma(int ano);        
+        IEnumerable<Aluno> GetAllByTurma(int ano);
+        IEnumerable<Aluno> GetAllByTurmaId(int id);
     }
-
 }

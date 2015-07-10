@@ -1,14 +1,8 @@
 ﻿using NDDigital.DiarioAcademia.Dominio;
-using System;
-using System.Collections.Generic;
 using System.Data.Entity.ModelConfiguration;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Configurations
 {
-
     public class AulaConfiguration : EntityTypeConfiguration<Aula>
     {
         public AulaConfiguration()
@@ -21,7 +15,7 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Configurations
                 .WithMany()
                 .WillCascadeOnDelete(false);
 
-            HasMany(a => a.Presencas);                
+            HasMany(a => a.Presencas);
 
             Property(a => a.Data)
                 .HasColumnType("Date");

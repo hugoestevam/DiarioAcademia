@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Common 
+namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Common
 {
     public class Disposable : IDisposable
     {
@@ -16,6 +16,7 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Common
             Dispose(true);
             GC.SuppressFinalize(this);
         }
+
         private void Dispose(bool disposing)
         {
             if (!isDisposed && disposing)
@@ -29,6 +30,5 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Common
         protected virtual void DisposeCore()
         {
         }
-    }   
+    }
 }
-

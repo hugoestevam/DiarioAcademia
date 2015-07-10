@@ -1,17 +1,17 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using iTextSharp.text;
 using iTextSharp.text.pdf;
 using NDDigital.DiarioAcademia.Aplicacao.DTOs;
 using NDDigital.DiarioAcademia.Dominio;
 using NDDigital.DiarioAcademia.Infraestrutura.Orm.Common;
-using System;
+using NDDigital.DiarioAcademia.Infraestrutura.WebServices;
 using System.Collections.Generic;
 using System.Linq;
-using NDDigital.DiarioAcademia.Infraestrutura.WebServices;
 
 namespace NDDigital.DiarioAcademia.Aplicacao.Services
-{    
-        public interface IAlunoService
+{
+    public interface IAlunoService
     {
         void Add(AlunoDTO alunoDto);
 
@@ -48,7 +48,7 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
         {
             Turma turma = _turmaRepository.GetById(alunoDto.TurmaId);
 
-            Aluno aluno = new Aluno(alunoDto.Descricao, turma);
+            Aluno aluno = new Aluno(alunoDto.Descricao.Split(':')[0], turma??new Turma(2007));//todo: turma vem null
 
             aluno.Endereco.Bairro = alunoDto.Bairro;
             aluno.Endereco.Cep = alunoDto.Cep;
@@ -66,7 +66,7 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
 
             Aluno aluno = _alunoRepository.GetById(alunoDto.Id);
 
-            aluno.Nome = alunoDto.Descricao;
+            aluno.Nome = alunoDto.Descricao.Split(':')[0];
             aluno.Turma = turma;
             aluno.Endereco.Bairro = alunoDto.Bairro;
             aluno.Endereco.Cep = alunoDto.Cep;
@@ -89,7 +89,7 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
         {
             var aluno = _alunoRepository.GetById(id);
 
-            return new AlunoDTO
+            var alunoDto = new AlunoDTO
             {
                 Id = aluno.Id,
                 Descricao = aluno.Nome,
@@ -99,6 +99,11 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
                 Localidade = aluno.Endereco.Localidade,
                 Uf = aluno.Endereco.Uf
             };
+
+            if (aluno.Turma != null)//todo: extraí turma pois este está vindo null em _alunoRepository.GetById
+                alunoDto.TurmaId = aluno.Turma.Id;
+
+            return alunoDto;
         }
 
         public IEnumerable<AlunoDTO> GetAll()
@@ -111,8 +116,8 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
         public IEnumerable<AlunoDTO> GetAllByTurma(int ano)
         {
             return _alunoRepository.GetAllByTurma(ano)
-                .Select(aluno => new AlunoDTO(aluno))
-                .ToList();
+              .Select(aluno => new AlunoDTO(aluno))
+              .ToList();
         }
 
         public Endereco BuscaEnderecoPorCep(string cep)
@@ -127,7 +132,7 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
             try
             {
                 FileStream fs = new FileStream(path,
-                    FileMode.Create, FileAccess.Write, FileShare.None);
+                           FileMode.Create, FileAccess.Write, FileShare.None);
 
                 Document doc = new Document();
 
@@ -135,7 +140,7 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
 
                 doc.Open();
 
-                doc.Add(new Paragraph("Relatório de presenças - Academia do prgramador " + ano + ":\n\n"));
+                doc.Add(new Paragraph("Relatório de presenças - Academia do prgramador " + ano +":\n\n"));
                 doc.Add(new Paragraph("Alunos/Presenças/Faltas:\n\n"));
 
                 foreach (var listaAluno in GetAllByTurma(ano))
@@ -148,7 +153,8 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
-            }
+            }     
+          
         }
     }
 }

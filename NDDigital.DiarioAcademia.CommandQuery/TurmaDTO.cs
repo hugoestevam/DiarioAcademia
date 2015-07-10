@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace NDDigital.DiarioAcademia.Aplicacao.DTOs
+﻿namespace NDDigital.DiarioAcademia.Aplicacao.DTOs
 {
     public class TurmaDTO
-    {        
+    {
         public TurmaDTO()
         {
         }
@@ -24,6 +18,8 @@ namespace NDDigital.DiarioAcademia.Aplicacao.DTOs
             Ano = turma.Ano;
         }
 
+        public string Descricao { get { return "Academia do Programador " + Ano; } }
+
         public int Id { get; set; }
 
         public override bool Equals(object obj)
@@ -34,6 +30,11 @@ namespace NDDigital.DiarioAcademia.Aplicacao.DTOs
                 return false;
 
             return this.Id == turma.Id;
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
         }
 
         public int Ano { get; set; }

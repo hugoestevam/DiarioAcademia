@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using NDDigital.DiarioAcademia.Dominio;
+using System;
 
 namespace NDDigital.DiarioAcademia.Aplicacao.DTOs
 {
@@ -10,26 +7,28 @@ namespace NDDigital.DiarioAcademia.Aplicacao.DTOs
     {
         public AulaDTO()
         {
-            Data = DateTime.Now;
+            
         }
 
-        public AulaDTO(Dominio.Aula aula)
+        public AulaDTO(Aula aula)
         {
-            Data = aula.Data;
+            DataAula = aula.Data;
             Id = aula.Id;
             AnoTurma = aula.Turma.Ano;
+            TurmaId = aula.Turma.Id;
         }
 
         public int Id { get; set; }
 
-        public DateTime Data { get; set; }
+        public DateTime DataAula { get; set; }
 
-        public int AnoTurma { get; set; }
+        public int AnoTurma { get; set; } //TODO: REVER ISSO AQUI
+
+        public int TurmaId { get; set; }  //TODO: THIAGO SARTOR 
 
         public override string ToString()
         {
-            return Data.ToString("dd/MM/yyyy");
-        }        
-
-    }    
+            return DataAula.ToString("dd/MM/yyyy");
+        }
+    }
 }

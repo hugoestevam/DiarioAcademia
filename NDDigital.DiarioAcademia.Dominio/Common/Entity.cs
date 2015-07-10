@@ -2,7 +2,6 @@
 {
     using System;
 
-
     /// <summary>
     /// Base class for entities
     /// </summary>
@@ -10,17 +9,17 @@
     {
         #region Members
 
-        int? _requestedHashCode;
-        int _Id;
-      
-        #endregion
+        private int? _requestedHashCode;
+        private int _Id;
+
+        #endregion Members
 
         #region Properties
 
         /// <summary>
         /// Get the persisten object identifier
         /// </summary>
-        public virtual int Id 
+        public virtual int Id
         {
             get
             {
@@ -32,7 +31,7 @@
             }
         }
 
-        #endregion
+        #endregion Properties
 
         #region Public Methods
 
@@ -43,9 +42,9 @@
         public bool IsTransient()
         {
             return this.Id == 0;
-        }                
+        }
 
-        #endregion
+        #endregion Public Methods
 
         #region Overrides Methods
 
@@ -85,10 +84,8 @@
             }
             else
                 return base.GetHashCode();
-
         }
 
-
-        #endregion
+        #endregion Overrides Methods
     }
 }

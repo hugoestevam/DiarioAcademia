@@ -1,8 +1,4 @@
 ﻿using NDDigital.DiarioAcademia.Dominio.Common;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace NDDigital.DiarioAcademia.Dominio
 {
@@ -10,7 +6,7 @@ namespace NDDigital.DiarioAcademia.Dominio
     {
         public virtual Aula Aula { get; private set; }
 
-        public virtual Aluno Aluno { get; private set; }        
+        public virtual Aluno Aluno { get; private set; }
 
         public string StatusPresenca { get; set; }
 
@@ -18,7 +14,8 @@ namespace NDDigital.DiarioAcademia.Dominio
         {
         }
 
-        public Presenca(Aula aula, Aluno aluno, string statusPresenca) : this()
+        public Presenca(Aula aula, Aluno aluno, string statusPresenca)
+            : this()
         {
             this.Aula = aula;
             this.Aluno = aluno;
@@ -30,12 +27,9 @@ namespace NDDigital.DiarioAcademia.Dominio
             return string.Format("{0}: {1} -> {2}", Aula.Data.ToString("dd/MM/yyyy"),
                 Aluno.Nome, StatusPresenca == "F" ? "Faltou" : "Compareceu");
         }
-
-       
     }
 
     public interface IPresencaRepository : IRepository<Presenca>
     {
-       
     }
 }

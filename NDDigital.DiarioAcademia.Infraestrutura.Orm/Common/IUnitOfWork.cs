@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Common 
+﻿namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Common
 {
     public interface IUnitOfWork
     {

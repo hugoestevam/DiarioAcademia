@@ -4,8 +4,6 @@ using NDDigital.DiarioAcademia.Infraestrutura.Orm.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NDDigital.DiarioAcademia.Aplicacao.Services
 {
@@ -36,7 +34,6 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
         private const string NENHUM_ALUNO_ENCOTRADO_PARA_TURMA = "Nenhum aluno encontrado para a turma de {0}";
         private const string NENHUMA_AULA_ENCOTRADA_NESTA_DATA = "Nenhuma aula encontrada para esta data {0}";
 
-
         public AulaService(IAulaRepository repoAula, IAlunoRepository repoAluno, ITurmaRepository repoTurma, IUnitOfWork unitOfWork)
         {
             _aulaRepository = repoAula;
@@ -47,9 +44,10 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
 
         public void Add(AulaDTO aulaDto)
         {
-            Turma turma = _turmaRepository.GetById(aulaDto.AnoTurma);
+            //Turma turma = _turmaRepository.GetById(aulaDto.AnoTurma) ?? _turmaRepository.GetAll().FirstOrDefault();//todo:está buscando o ano como id,
+            Turma turma = _turmaRepository.GetById(aulaDto.TurmaId);//TODO: THIAGO SARTOR
 
-            Aula aula = new Aula(aulaDto.Data, turma);
+            Aula aula = new Aula(aulaDto.DataAula, turma);
 
             _aulaRepository.Add(aula);
 
@@ -58,22 +56,26 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
 
         public void RealizaChamada(ChamadaDTO registroPresenca)
         {
-            var alunos = _alunoRepository.GetAllByTurma(registroPresenca.AnoTurma);
+            //var alunos = _alunoRepository.GetAllByTurma(registroPresenca.AnoTurma); //TODO: REGIS 
+
+            var alunos = _alunoRepository.GetAllByTurmaId(registroPresenca.TurmaId);//TODO:THIAGO SARTOR
 
             if (alunos == null || alunos.Any() == false)
                 throw new AlunoNaoEncontrado(String.Format(NENHUM_ALUNO_ENCOTRADO_PARA_TURMA, registroPresenca.AnoTurma));
 
-            var aula = _aulaRepository.GetByData(registroPresenca.Data.Date);
-
+            //var aula = _aulaRepository.GetByData(registroPresenca.Data.Date)??new Aula(DateTime.Now,new Turma(registroPresenca.AnoTurma));//TODO:arrumar isso aq, pror um filtro melhor, hora é ano hora data
+           
+            var aula = _aulaRepository.GetById(registroPresenca.AulaId);//TODO: THIAGO SARTOR
+            
             if (aula == null)
                 throw new AulaNaoEncontrada(String.Format(NENHUMA_AULA_ENCOTRADA_NESTA_DATA, registroPresenca.Data));
 
             foreach (var item in registroPresenca.Alunos)
             {
                 var aluno = alunos.First(x => x.Id == item.AlunoId);
-
+                
                 aluno.RegistraPresenca(aula, item.Status);
-               
+
                 _alunoRepository.Update(aluno);
             }
 
@@ -84,13 +86,11 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
             _unitOfWork.Commit();
         }
 
-       
-
         public void Update(AulaDTO aulaDto)
         {
             Aula aula = _aulaRepository.GetById(aulaDto.Id);
 
-            aula.Data = aulaDto.Data;
+            aula.Data = aulaDto.DataAula;
 
             _aulaRepository.Update(aula);
 
@@ -111,7 +111,8 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
             return new AulaDTO
             {
                 Id = aula.Id,
-                Data = aula.Data
+                DataAula = aula.Data,
+                TurmaId = aula.Turma.Id //TODO: THIAGO SARTOR                
             };
         }
 
@@ -127,25 +128,37 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
         {
             var chamada = new ChamadaDTO();
             chamada.AnoTurma = aulaDTO.AnoTurma;
-            chamada.Data = aulaDTO.Data;
+            chamada.Data = aulaDTO.DataAula;
 
             Aula aula = _aulaRepository.GetById(aulaDTO.Id);
 
             if (aula.ChamadaRealizada)
-            {                
+            {
                 chamada.Alunos = aula.Presencas.
-                    Select( x => new ChamadaAlunoDTO(x.Aluno.Id, x.Aluno.Nome, x.StatusPresenca))
+                    Select(x => new ChamadaAlunoDTO(x.Aluno.Id, x.Aluno.Nome, x.StatusPresenca))
                     .ToList();
             }
             else
             {
-                 var alunos = _alunoRepository.GetAllByTurma(aulaDTO.AnoTurma);
+                var alunos = _alunoRepository.GetAllByTurmaId(aulaDTO.TurmaId);
 
-                 chamada.Alunos = alunos.Select(x => new ChamadaAlunoDTO(x.Id, x.Nome, "C"))
-                    .ToList();
+                chamada.Alunos = alunos.Select(x => new ChamadaAlunoDTO(x.Id, x.Nome, "C"))
+                   .ToList();
             }
 
             return chamada;
+        }
+
+        public ChamadaDTO GetChamadaByAula(int id)//todo: coloquei essa sobrecarga aqui
+        {
+            return GetChamadaByAula(GetById(id));
+        }
+
+        public IEnumerable<AulaDTO> GetAll()
+        {
+            return _aulaRepository.GetAll()
+                .Select(aula => new AulaDTO(aula))
+                .ToList();
         }
     }
 }

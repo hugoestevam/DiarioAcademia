@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using NDDigital.DiarioAcademia.Dominio;
+﻿using NDDigital.DiarioAcademia.Dominio;
 
 namespace NDDigital.DiarioAcademia.Aplicacao.DTOs
 {
@@ -18,10 +13,6 @@ namespace NDDigital.DiarioAcademia.Aplicacao.DTOs
             Id = aluno.Id;
             Descricao = aluno.ToString();
             TurmaId = aluno.Turma.Id;
-            Uf = aluno.Endereco.Uf;
-            Bairro = aluno.Endereco.Bairro;
-            Localidade = aluno.Endereco.Localidade;
-            Cep = aluno.Endereco.Cep;
         }
 
         public int Id { get; set; }

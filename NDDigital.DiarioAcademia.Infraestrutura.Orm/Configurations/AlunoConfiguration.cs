@@ -3,7 +3,6 @@ using System.Data.Entity.ModelConfiguration;
 
 namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Configurations
 {
-
     public class AlunoConfiguration : EntityTypeConfiguration<Aluno>
     {
         public AlunoConfiguration()
@@ -18,8 +17,7 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Configurations
                 .WithMany()
                 .WillCascadeOnDelete(false);
 
-            HasMany(a => a.Presencas);               
+            HasMany(a => a.Presencas);
         }
     }
-
 }

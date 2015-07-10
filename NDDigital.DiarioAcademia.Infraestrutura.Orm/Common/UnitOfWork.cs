@@ -1,21 +1,18 @@
 ﻿using NDDigital.DiarioAcademia.Infraestrutura.Orm.Contexts;
 using System;
-using System.Collections.Generic;
 using System.Data.Entity;
-using System.Data.Entity.Core;
 using System.Data.Entity.Core.Objects;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Common 
+namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Common
 {
     public class UnitOfWork : IUnitOfWork
     {
-        private DiarioAcademiaContext dbContext;
+        private DiarioAcademiaContext dbContext = null;
 
         private readonly IDatabaseFactory dbFactory;
+
         protected DiarioAcademiaContext DbContext
         {
             get
@@ -33,7 +30,7 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Common
         {
             //try
             //{
-                DbContext.SaveChanges();
+            DbContext.SaveChanges();
             //}
             //catch (OptimisticConcurrencyException ocException)
             //{
@@ -51,10 +48,8 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Common
 
             //    context.SaveChanges();
             //}
-            //catch (Exception exc) { 
-            
+            //catch (Exception exc) {
             //}
-
         }
 
         public void CommitAndRefreshChanges()
@@ -82,7 +77,7 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Common
                                                                | EntityState.Unchanged)
                                               where entry.EntityKey != null && entry.Entity != null
                                               select entry.Entity)
-                                              
+
                                               .ToList();
 
                     context.Refresh(RefreshMode.StoreWins, refreshableObjects);
@@ -96,7 +91,5 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Common
         {
             DbContext.Dispose();
         }
-
-        
     }
 }

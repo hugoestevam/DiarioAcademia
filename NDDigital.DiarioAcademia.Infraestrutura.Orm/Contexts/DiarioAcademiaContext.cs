@@ -10,7 +10,8 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Contexts
             : base("DiarioAcademiaContext")
         {
             this.Configuration.LazyLoadingEnabled = true;
-            this.Configuration.ProxyCreationEnabled = true;            
+            this.Configuration.ProxyCreationEnabled = true;
+            Database.SetInitializer(new DropCreateDatabaseIfModelChanges<DiarioAcademiaContext>());
         }
 
         public DbSet<Aluno> Alunos { get; set; }
@@ -20,7 +21,7 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Contexts
         public DbSet<Turma> Turmas { get; set; }
 
         public DbSet<Presenca> Presencas { get; set; }
-       
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Configurations.Add(new AlunoConfiguration());
@@ -29,8 +30,5 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Contexts
             modelBuilder.Configurations.Add(new TurmaConfiguration());
             modelBuilder.Configurations.Add(new PresencaConfiguration());
         }
-        
     }
-
- 
 }

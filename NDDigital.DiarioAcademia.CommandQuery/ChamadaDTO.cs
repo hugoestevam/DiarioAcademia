@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NDDigital.DiarioAcademia.Aplicacao.DTOs
 {
@@ -15,16 +12,19 @@ namespace NDDigital.DiarioAcademia.Aplicacao.DTOs
 
         public int AnoTurma { get; set; }
 
+        public int TurmaId { get; set; } //TODO: THIAGO SARTOR
+
         public DateTime Data { get; set; }
 
         public List<ChamadaAlunoDTO> Alunos { get; set; }
+
+        public int AulaId { get; set; }
     }
 
     public class ChamadaAlunoDTO
     {
         public ChamadaAlunoDTO()
         {
-
         }
 
         public ChamadaAlunoDTO(int alunoId, string nome, string status)
@@ -39,7 +39,6 @@ namespace NDDigital.DiarioAcademia.Aplicacao.DTOs
         public string Nome { get; set; }
 
         public string Status { get; set; }
-
 
         public override string ToString()
         {
