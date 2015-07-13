@@ -8,21 +8,23 @@
     <meta name="author" content="">
     <title>Diário da Academia</title>
     <!-- Bootstrap Core CSS -->
-    <link href="content/css/bootstrap.min.css" rel="stylesheet">
+   <link href="content/base/bootstrap.min.css" rel="stylesheet">
     <!-- Custom CSS -->
-    <link href="content/css/sb-admin.css" rel="stylesheet">
-    <!--<link href="content/css/sb-admin-2.css" rel="stylesheet"/>-->
+    <link href="content/base/sb-admin.css" rel="stylesheet">
     <!-- Custom Fonts -->
     <link href="content/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <link href="content/css/switcher.css" rel="stylesheet" />
-    <link href="content/css/toastr.css" rel="stylesheet" />
-    <link href="content/css/loading-bar.css" rel="stylesheet" />
+    <link href="content/base/switcher.css" rel="stylesheet" />
+    <link href="content/base/toastr.css" rel="stylesheet" />
+    <link href="content/base/loading-bar.css" rel="stylesheet" />
+
+    <!--<link href="default/css" rel="stylesheet" />-->
 
 </head>
 <body>
     <div ng-controller="shellController as shell">
         <div id="wrapper">
             <div class="row" data-ng-include="'app/templates/layout/navbar.html'"></div>
+            <div ui-view ></div>
         </div>
     </div>
 

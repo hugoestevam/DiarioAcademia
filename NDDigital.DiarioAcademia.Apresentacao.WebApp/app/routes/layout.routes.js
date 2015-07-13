@@ -13,7 +13,7 @@
             state: 'home',
             url: '/home',
             controller: 'homeController as vm',
-            templateUrl: '/app/templates/components/inner-view.html'
+            templateUrl: '/app/views/layout/home.html'
         });
     }
 

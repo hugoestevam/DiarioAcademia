@@ -1,1 +1,51 @@
-﻿
+﻿<!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
+<div class="collapse navbar-collapse navbar-ex1-collapse">
+    <ul class="nav navbar-nav side-nav">
+        <li class="li">
+            <a ui-sref="home" data-toggle=" collapse"><i class="fa fa-fw fa-home"></i> Início</a>
+        </li>
+        <li class="li">
+            <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-university"></i> Turmas <i class="fa fa-fw fa-angle-down"></i></a>
+            <ul id="demo" class="collapse">
+                <li>
+                    <a ui-sref="turma.create">Nova Turma</a>
+                </li>
+                <li>
+                    <a ui-sref="turma.list">Listar Turmas</a>
+                </li>
+            </ul>
+        </li>
+        <li class="li">
+            <a href="javascript:;" data-toggle="collapse" data-target="#demo2"><i class="fa fa-fw fa-users"></i> Alunos <i class="fa fa-fw fa-angle-down"></i></a>
+            <ul id="demo2" class="collapse">
+                <li>
+                    <a ui-sref="aluno.create">Novo Aluno</a>
+                </li>
+                <li>
+                    <a ui-sref="aluno.list">Listar Alunos</a>
+                </li>
+            </ul>
+        </li>
+        <li class="li">
+            <a href="javascript:;" data-toggle="collapse" data-target="#demo3"><i class="fa fa-fw fa-calendar"></i> Aulas <i class="fa fa-fw fa-angle-down"></i></a>
+            <ul id="demo3" class="collapse">
+                <li>
+                    <a ui-sref="aula.create">Novo Aula</a>
+                </li>
+                <li>
+                    <a ui-sref="aula.list">Listar de Aulas</a>
+                </li>
+            </ul>
+        </li>
+        <li class="li">
+            <a href="javascript:;" data-toggle="collapse" data-target="#demo4"><i class="fa fa-fw fa-check"></i> Realizar Chamada <i class="fa fa-fw fa-angle-down"></i></a>
+            <ul id="demo4" class="collapse">
+                <li>
+                    <a ui-sref="chamada.create">Nova Lista</a>
+                </li>
+            </ul>
+        <li class="li">
+            <a href="#"><i class="fa fa-fw fa-database"></i> Sobre</a>
+        </li>
+    </ul>
+</div>

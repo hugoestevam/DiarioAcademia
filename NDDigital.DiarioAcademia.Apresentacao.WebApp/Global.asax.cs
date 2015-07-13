@@ -16,7 +16,12 @@ namespace WebApp
 
             BundleTable.EnableOptimizations = true;
 
-            cssBundle.IncludeDirectory("~/content/", "*.css", true);
+            cssBundle.IncludeDirectory("~/content/base/", "*.css", true);
+
+            cssBundle.IncludeDirectory("~/content/font-awesome/css", "*.css", true);
+            cssBundle.IncludeDirectory("~/content/font-awesome/fonts", "*.css", true);
+            cssBundle.IncludeDirectory("~/content/font-awesome/less", "*.css", true);
+            cssBundle.IncludeDirectory("~/content/font-awesome/scss", "*.css", true);
 
             BundleTable.Bundles.Add(cssBundle);
 

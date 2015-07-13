@@ -78,6 +78,7 @@
   <ItemGroup>
     <Content Include="app\libs\angular\angular.min.js.map" />
     <Content Include="app\libs\jquery\jquery-2.1.1.min.map" />
+    <Content Include="app\templates\layout\top-menu.html" />
     <Content Include="content\font-awesome\fonts\fontawesome-webfont.eot" />
     <Content Include="content\font-awesome\fonts\fontawesome-webfont.ttf" />
     <Content Include="content\font-awesome\fonts\fontawesome-webfont.woff" />
@@ -189,13 +190,13 @@
     <Content Include="app\views\turma\turma-create.html" />
     <Content Include="app\views\turma\turma-details.html" />
     <Content Include="app\views\turma\turma-list.html" />
-    <Content Include="content\css\bootstrap.css" />
-    <Content Include="content\css\bootstrap.min.css" />
-    <Content Include="content\css\loading-bar.css" />
-    <Content Include="content\css\plugins\morris.css" />
-    <Content Include="content\css\sb-admin.css" />
-    <Content Include="content\css\switcher.css" />
-    <Content Include="content\css\toastr.css" />
+    <Content Include="content\base\bootstrap.css" />
+    <Content Include="content\base\bootstrap.min.css" />
+    <Content Include="content\base\loading-bar.css" />
+    <Content Include="content\base\morris.css" />
+    <Content Include="content\base\sb-admin.css" />
+    <Content Include="content\base\switcher.css" />
+    <Content Include="content\base\toastr.css" />
     <Content Include="content\font-awesome\css\font-awesome.css" />
     <Content Include="content\font-awesome\css\font-awesome.min.css" />
     <Content Include="content\font-awesome\fonts\fontawesome-webfont.svg" />
