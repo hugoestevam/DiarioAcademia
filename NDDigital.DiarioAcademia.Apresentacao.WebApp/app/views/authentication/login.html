@@ -1,4 +1,4 @@
-﻿<div class="col-lg-4">
+﻿<div class="col-lg-2">
     <h1 class="page-header">
         {{vm.title}}
     </h1>
@@ -12,8 +12,8 @@
     </ol>
     <div class="jumbotron">
         <form name="vm.aulaForm" class="jumbotron">
-            <input type="text" class="form-control" placeholder="Username" data-ng-model="vm.loginData.userName" required autofocus>
-            <input type="password" class="form-control" placeholder="Password" data-ng-model="vm.loginData.password" required>
+            <input type="text" class="form-control" placeholder="Username" data-ng-model="vm.loginData.userName" required autofocus><br />
+            <input type="password" class="form-control" placeholder="Password" data-ng-model="vm.loginData.password" required><br />
             <button class="btn btn-lg btn-default btn-block" type="submit" data-ng-click="vm.login()">Entrar</button>
             <div data-ng-hide="vm.message == ''" class="alert alert-danger">
                 {{vm.message}}

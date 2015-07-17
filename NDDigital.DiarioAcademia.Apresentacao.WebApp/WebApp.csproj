@@ -83,32 +83,6 @@
     <Content Include="content\font-awesome\fonts\fontawesome-webfont.ttf" />
     <Content Include="content\font-awesome\fonts\fontawesome-webfont.woff" />
     <Content Include="content\font-awesome\fonts\FontAwesome.otf" />
-    <Content Include="content\font-awesome\less\bordered-pulled.less" />
-    <Content Include="content\font-awesome\less\core.less" />
-    <Content Include="content\font-awesome\less\fixed-width.less" />
-    <Content Include="content\font-awesome\less\font-awesome.less" />
-    <Content Include="content\font-awesome\less\icons.less" />
-    <Content Include="content\font-awesome\less\larger.less" />
-    <Content Include="content\font-awesome\less\list.less" />
-    <Content Include="content\font-awesome\less\mixins.less" />
-    <Content Include="content\font-awesome\less\path.less" />
-    <Content Include="content\font-awesome\less\rotated-flipped.less" />
-    <Content Include="content\font-awesome\less\spinning.less" />
-    <Content Include="content\font-awesome\less\stacked.less" />
-    <Content Include="content\font-awesome\less\variables.less" />
-    <Content Include="content\font-awesome\scss\font-awesome.scss" />
-    <Content Include="content\font-awesome\scss\_bordered-pulled.scss" />
-    <Content Include="content\font-awesome\scss\_core.scss" />
-    <Content Include="content\font-awesome\scss\_fixed-width.scss" />
-    <Content Include="content\font-awesome\scss\_icons.scss" />
-    <Content Include="content\font-awesome\scss\_larger.scss" />
-    <Content Include="content\font-awesome\scss\_list.scss" />
-    <Content Include="content\font-awesome\scss\_mixins.scss" />
-    <Content Include="content\font-awesome\scss\_path.scss" />
-    <Content Include="content\font-awesome\scss\_rotated-flipped.scss" />
-    <Content Include="content\font-awesome\scss\_spinning.scss" />
-    <Content Include="content\font-awesome\scss\_stacked.scss" />
-    <Content Include="content\font-awesome\scss\_variables.scss" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

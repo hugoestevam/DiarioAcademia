@@ -15,6 +15,11 @@ body {
    cursor:pointer;
 }
 
+.class1 {
+    max-width: 330px;
+    padding: 0px 15px 5px 15px;
+    margin: 0 auto;
+}
 
 .li {
   border-bottom: solid 1px #101010;
