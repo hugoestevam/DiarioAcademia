@@ -5,7 +5,7 @@
 	menuDirective.$inject = [];
 
 	//namespace
-	angular.module("diarioAcademia").directive("menu", menuDirective);
+	angular.module("diarioAcademia", []).directive("menu", menuDirective);
 
 	//class
 	function menuDirective() {

@@ -160,4 +160,4 @@ $RECYCLE.BIN/
 packages/*
 NDDigital.DiarioAcademia.Apresentacao.WebApp/bower_components/*
 NDDigital.DiarioAcademia.Apresentacao.WebApp/node_modules/*
-teste.old/*
+NDDigital.DiarioAcademia.Apresentacao.WebApp/dist/*

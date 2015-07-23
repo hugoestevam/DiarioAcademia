@@ -18,7 +18,7 @@
             all: dist + '/**/*.*',
             js: dist + '/**/*.js',
             css: dist + '/**/*.css',
-            font: dist + '/font',
+            font: dist + '/fonts',
             app: dist + "/app",
             html: dist + '/**/*.html'
         },
