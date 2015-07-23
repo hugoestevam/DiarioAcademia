@@ -92,6 +92,7 @@ DocProject/Help/html
 # Click-Once directory
 publish/
 
+
 # Publish Web Output
 *.Publish.xml
 
@@ -157,3 +158,6 @@ $RECYCLE.BIN/
 
 # Package files
 packages/*
+NDDigital.DiarioAcademia.Apresentacao.WebApp/bower_components/*
+NDDigital.DiarioAcademia.Apresentacao.WebApp/node_modules/*
+teste.old/*

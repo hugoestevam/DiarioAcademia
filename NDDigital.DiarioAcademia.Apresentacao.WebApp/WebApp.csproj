@@ -76,13 +76,21 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="app\images\favicon.ico" />
     <Content Include="app\libs\angular\angular.min.js.map" />
     <Content Include="app\libs\jquery\jquery-2.1.1.min.map" />
     <Content Include="app\templates\layout\top-menu.html" />
-    <Content Include="content\font-awesome\fonts\fontawesome-webfont.eot" />
-    <Content Include="content\font-awesome\fonts\fontawesome-webfont.ttf" />
-    <Content Include="content\font-awesome\fonts\fontawesome-webfont.woff" />
-    <Content Include="content\font-awesome\fonts\FontAwesome.otf" />
+    <Content Include="gulpfile.js" />
+    <Content Include="index.html" />
+    <Content Include="package.json" />
+    <Content Include="app\libs\bootstrap\bootstrap.min.js.map">
+      <DependentUpon>bootstrap.min.js</DependentUpon>
+    </Content>
+    <Content Include="app\libs\jquery\jquery-2.1.1.min.js.map">
+      <DependentUpon>jquery-2.1.1.min.js</DependentUpon>
+    </Content>
+    <Content Include="bower.json" />
+    <Content Include=".bowerrc" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -164,17 +172,14 @@
     <Content Include="app\views\turma\turma-create.html" />
     <Content Include="app\views\turma\turma-details.html" />
     <Content Include="app\views\turma\turma-list.html" />
-    <Content Include="content\base\bootstrap.css" />
-    <Content Include="content\base\bootstrap.min.css" />
-    <Content Include="content\base\loading-bar.css" />
-    <Content Include="content\base\morris.css" />
     <Content Include="content\base\sb-admin.css" />
     <Content Include="content\base\switcher.css" />
-    <Content Include="content\base\toastr.css" />
-    <Content Include="content\font-awesome\css\font-awesome.css" />
-    <Content Include="content\font-awesome\css\font-awesome.min.css" />
-    <Content Include="content\font-awesome\fonts\fontawesome-webfont.svg" />
-    <Content Include="index.html" />
+    <Content Include="task\server.task.js" />
+    <Content Include="task\clean.task.js" />
+    <Content Include="task\code.task.js" />
+    <Content Include="task\gulp.config.js" />
+    <Content Include="task\util\log.js" />
+    <Content Include="task\util\util.js" />
     <Content Include="Web.config" />
     <Content Include="packages.config" />
   </ItemGroup>
@@ -184,6 +189,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="app\filters\" />
+    <Folder Include="dist\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
