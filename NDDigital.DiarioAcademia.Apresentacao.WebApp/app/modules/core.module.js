@@ -33,5 +33,33 @@
                });
 
     };
+     runStateChangeStart.$inject = ['$rootScope', '$state', 'authService'];
+    function runStateChangeStart($rootScope, $state, authService) {
+        $rootScope.$on('$stateChangeStart',
+            function (event, toState, toParams, fromState, fromParams) {
+                // Somente autentica e/ou autoriza estado se o mesmo não tiver acesso anônimo permitido.
+                if (toState.data.allowAnonymous)  return false;
+
+                     var redirecToLogin = false;
+
+                    // Autoriza o acesso se o estado possui papéis definidos, caso contrário apenas autentica.
+                    if (toState.data.authorizedRoles)
+                        redirecToLogin = !authService.authorization.isAuthorized(toState.data.authorizedRoles);
+                    else {
+                        redirecToLogin = !authService.authentication.isAuth;
+                        // Guarda o estado atual para o posterior redirecionamento após autenticação.
+                       // if (redirecToLogin)
+                       //     authService.stateToGoAfterAuthenticated = toState.name;
+                    }
+
+                    // Redireciona para o estado de login, por falta de autorização ou autenticação.
+                    if (redirecToLogin) {
+                        event.preventDefault();
+                        authService.logOut();
+                        $state.go('login');
+                    }
+                
+            });
+    }
 
 })(window.angular);

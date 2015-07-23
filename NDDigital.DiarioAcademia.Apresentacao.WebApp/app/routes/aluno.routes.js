@@ -6,8 +6,8 @@
         .module('routes.module')
         .config(configRoutes);
 
-    configRoutes.$inject = [KEYS.APP_ROUTES];
-    function configRoutes(routes) {
+    configRoutes.$inject = [KEYS.APP_ROUTES,KEYS.USER_ROLES];
+    function configRoutes(routes,roles) {
         routes.push({
             state: 'aluno',
             url: '/aluno',
@@ -16,17 +16,20 @@
             state: 'aluno.list',
             url: '/list',
             controller: 'alunoListCtrl as vm',
-            templateUrl: '/app/views/aluno/aluno-list.html'
+            templateUrl: '/app/views/aluno/aluno-list.html',
+            allowAnonymous:true
         }, {
             state: 'aluno.details',
             url: '/details/:alunoId',
             controller: 'alunoDetailsCtrl as vm',
-            templateUrl: '/app/views/aluno/aluno-details.html'
+            templateUrl: '/app/views/aluno/aluno-details.html',
+            authorizedRoles: [roles.reader]
         }, {
             state: 'aluno.create',
             url: '/create',
             controller: 'alunoCreateCtrl as vm',
-            templateUrl: '/app/views/aluno/aluno-create.html'
+            templateUrl: '/app/views/aluno/aluno-create.html',
+            authorizedRoles: [roles.writer,roles.reader]
         }
 );
     }

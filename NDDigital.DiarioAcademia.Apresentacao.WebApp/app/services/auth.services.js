@@ -2,17 +2,32 @@
     
     'use strict';
 
-    authService.$inject = ['$http', '$q', 'localStorageService','logger','BASEURL'];
+    authService.$inject = ['$http', '$q', 'localStorageService','logger','BASEURL', 'LOCAL_STORAGE_KEYS'];
 
     angular.module('services.module')
         .service('authService', authService);
     
-    function authService($http, $q, localStorageService,logger,serviceBase) {
+    function authService($http, $q, localStorageService,logger,serviceBase, LOCAL_STORAGE_KEYS) {
         var self = this;
         
         var authentication = {
             isAuth: false,
             userName: ""
+        };
+        var authorization = {
+            isAuthorized: function (authorizedRoles) {
+                self = this;
+
+                if (!authentication.isAuth)
+                    return false;
+
+                if (!angular.isArray(authorizedRoles)) {
+                    authorizedRoles = [authorizedRoles];
+                }
+
+                return authorizedRoles.indexOf(self.role) !== -1;
+            },
+            role: null
         };
 
         var saveRegistration = function (registration) {
@@ -40,6 +55,7 @@
                 authentication.isAuth = true;
                 authentication.userName = loginData.userName;
 
+                authorization.role = 1//parseInt(response.role);
 
                 logger.success("Bem vindo " + authentication.userName + "! ");
                 deferred.resolve(response);
@@ -80,6 +96,7 @@
         self.logOut = logOut;
         self.fillAuthData = fillAuthData;
         self.authentication = authentication;
+        self.authorization = authorization;
 
     }
 
