@@ -89,7 +89,7 @@
             //watcher for restart
             files: [
                 app + '/**/*.*',
-                './content/**/*.*',
+                './content/**/*.css',
                 './*.html',
                 app + '/images/favicon.ico'
             ],

@@ -76,10 +76,22 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="app\controllers\manager\manager-roles.ctrl.js" />
+    <Content Include="app\controllers\manager\manager-user.ctrl.js" />
     <Content Include="app\images\favicon.ico" />
     <Content Include="app\libs\angular\angular.min.js.map" />
     <Content Include="app\libs\jquery\jquery-2.1.1.min.map" />
+    <Content Include="app\routes\manager.routes.js" />
+    <Content Include="app\services\manager.service.js" />
+    <Content Include="app\services\user.service.js" />
     <Content Include="app\templates\layout\top-menu.html" />
+    <Content Include="app\views\manager\manager-user.html" />
+    <Content Include="content\layout\manager.css">
+      <DependentUpon>manager.less</DependentUpon>
+    </Content>
+    <Content Include="content\layout\manager.min.css">
+      <DependentUpon>manager.css</DependentUpon>
+    </Content>
     <Content Include="gulpfile.js" />
     <Content Include="index.html" />
     <Content Include="package.json" />
@@ -91,6 +103,10 @@
     </Content>
     <Content Include="bower.json" />
     <Content Include=".bowerrc" />
+    <Content Include="content\layout\manager.less" />
+    <Content Include="content\layout\manager.css.map">
+      <DependentUpon>manager.css</DependentUpon>
+    </Content>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -118,7 +134,7 @@
     <Content Include="app\controllers\turma\turmaCreate.ctrl.js" />
     <Content Include="app\controllers\turma\turmaDetails.ctrl.js" />
     <Content Include="app\controllers\turma\turmaList.ctrl.js" />
-    <Content Include="app\directives\menu.directives.js" />
+    <Content Include="app\directives\menu\menu.directives.js" />
     <Content Include="app\factories\ng-automapper.js" />
     <Content Include="app\libs\angular\angular-local-storage.min.js" />
     <Content Include="app\libs\angular\angular-ui-router.min.js" />
