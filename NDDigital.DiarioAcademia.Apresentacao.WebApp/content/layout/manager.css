@@ -1,4 +1,13 @@
 ﻿.container-user {
   margin: 0 2% 0 2%;
 }
+.pagination {
+  position: absolute;
+  left: 45%;
+}
+@media screen and (max-width: 768px) {
+  .pagination {
+    left: 20%;
+  }
+}
 /*# sourceMappingURL=manager.css.map */

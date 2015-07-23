@@ -3,6 +3,7 @@
     angular.module('core.module', [
         //3th party
         'ui.router'
+        , 'ui.bootstrap'
         , 'LocalStorageModule'
         , 'angular-loading-bar'
         , 'ngAutomapper'

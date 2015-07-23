@@ -62,7 +62,7 @@
 		function createItens() {
 			var itens = [];
 			var cont = 0;
-			for (var i = 0; i < 20; i++) {
+			for (var i = 0; i < 1000; i++) {
 				itens.push({
 					"url": "http://localhost:50299/api/accounts/user/fedbf2b8-1c5c-4300-bac9-e08e2d7f630e",
 					"id": "fedbf2b8-1c5c-4300-bac9-e08e2d7f630e",

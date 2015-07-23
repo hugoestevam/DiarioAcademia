@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="pt-BR" data-ng-app="core.module">
 <head>
     <meta charset="utf-8">
@@ -13,6 +13,7 @@
     <!--build:css css/default.css-->
         <!--inject:css-->                            
         <link rel="stylesheet" href="/bower_components/angular/angular-csp.css">                            
+        <link rel="stylesheet" href="/bower_components/angular-bootstrap/ui-bootstrap-csp.css">                            
         <link rel="stylesheet" href="/bower_components/toastr/toastr.css">                            
         <link rel="stylesheet" href="/bower_components/angular-loading-bar/build/loading-bar.css">                            
         <link rel="stylesheet" href="/bower_components/angular-loading-bar/src/loading-bar.css">                            
@@ -26,6 +27,7 @@
         <link rel="stylesheet" href="/content/base/morris.css">
         <link rel="stylesheet" href="/content/base/sb-admin.css">
         <link rel="stylesheet" href="/content/base/switcher.css">
+        <link rel="stylesheet" href="/content/layout/manager.css">
         <!--endinject -->
     <!--endbuild -->
 </head>
@@ -47,6 +49,7 @@
          <script src="/bower_components/angular-local-storage/dist/angular-local-storage.js"></script>
          <script src="/bower_components/angular-ui-router/release/angular-ui-router.js"></script>
          <script src="/bower_components/angular-loading-bar/build/loading-bar.js"></script>
+         <script src="/bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
          <!-- endbower -->
     <!--endbuild-->
 
@@ -73,6 +76,7 @@
         <script src="/app/routes/authentication.routes.js"></script>
         <script src="/app/routes/chamada.routes.js"></script>
         <script src="/app/routes/layout.routes.js"></script>
+        <script src="/app/routes/manager.routes.js"></script>
         <script src="/app/routes/turma.routes.js"></script>
         <!--endinject-->
 
@@ -89,6 +93,7 @@
         <script src="/app/services/cep.services.js"></script>
         <script src="/app/services/chamada.services.js"></script>
         <script src="/app/services/logger.services.js"></script>
+        <script src="/app/services/manager.service.js"></script>
         <script src="/app/services/turma.services.js"></script>
         <script src="/app/services/user.service.js"></script>
         <!--endinject-->
@@ -110,13 +115,16 @@
         <script src="/app/controllers/layout/shell.ctrl.js"></script>  
         <script src="/app/controllers/layout/sidebar.ctrl.js"></script>  
         <script src="/app/controllers/layout/toolbar.ctrl.js"></script>  
+        <script src="/app/controllers/manager/manager-roles.ctrl.js"></script>  
+        <script src="/app/controllers/manager/manager-user.ctrl.js"></script>  
         <script src="/app/controllers/turma/turmaCreate.ctrl.js"></script>  
         <script src="/app/controllers/turma/turmaDetails.ctrl.js"></script>  
         <script src="/app/controllers/turma/turmaList.ctrl.js"></script>  
         <!--endinject-->
 
         <!--inject:directives-->
-        <script src="/app/directives/menu.directives.js"></script>
+        <script src="/app/directives/ndd-modal/ndd-modal.directives.js"></script>
+        <script src="/app/directives/menu/menu.directives.js"></script>
         <!--endinject-->    
      
         <!--inject:templates-->

@@ -62,21 +62,10 @@
                     </td>
                 </tr>
             </tbody>
-        </table>
-        <!--<nav>
-            <ul class="pager">
-                <li ng-class="{'disabled': vm.index == vm.limitUser}">
-                    <a style="cursor: pointer" ng-click="vm.prevUsers()">Previous</a>
-                </li>
-                <li ng-class="{'disabled': vm.index >= vm.length}" >
-                    <a style="cursor: pointer" ng-click="vm.nextUsers()">Next</a>
-                </li>
-            </ul>
-        </nav>-->
-
-        <pagination ng-model="currentPage"
-                    total-items="todos.length"
-                    max-size="maxSize"
+        </table>    
+        <pagination ng-model="vm.currentPage"
+                    total-items="vm.countUsers"
+                    max-size="vm.maxSize"
                     boundary-links="true">
         </pagination>
     </div>

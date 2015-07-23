@@ -11,14 +11,13 @@
         vm.title = 'Usuários';
 
         var users = [];
-        $scope.filteredTodos = []
-        $scope.currentPage = 1
-        $scope.numPerPage = 10
-        $scope.maxSize = 5;
+        vm.countUsers = 0;
 
+        vm.currentPage = 1
+        vm.numPerPage = 10
+        vm.maxSize = 5;
 
-       
-
+     
         //public methods
         vm.edit = edit;
         vm.remove = remove;
@@ -29,15 +28,17 @@
         function activate() {
             managerService.getUsers().then(function (results) {
                 users = results.data;
+                vm.countUsers = users.length;
+
+                $scope.$watch("vm.currentPage + vm.numPerPage", function () {
+                    var begin = ((vm.currentPage - 1) * vm.numPerPage)
+                    , end = begin + vm.numPerPage;
+                    vm.users = users.slice(begin, end);
+                });
             });
         }
 
-        $scope.$watch("currentPage + numPerPage", function () {
-            var begin = (($scope.currentPage - 1) * $scope.numPerPage)
-            , end = begin + $scope.numPerPage;
-
-            vm.users = users.slice(begin, end);
-        });
+       
 
         function edit(user) {
 
