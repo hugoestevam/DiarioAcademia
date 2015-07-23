@@ -6,89 +6,60 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
+
+    <link rel="icon" type="image/png" href="/app/images/favicon.ico" />
+
     <title>Diário da Academia</title>
-    <!-- Bootstrap Core CSS -->
-    <link href="content/base/bootstrap.min.css" rel="stylesheet">
-    <!-- Custom CSS -->
-    <link href="content/base/sb-admin.css" rel="stylesheet">
-    <!-- Custom Fonts -->
-    <link href="content/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <link href="content/base/switcher.css" rel="stylesheet" />
-    <link href="content/base/toastr.css" rel="stylesheet" />
-    <link href="content/base/loading-bar.css" rel="stylesheet" />
+    <!--build:css css/default.css-->
+        <!--inject:css-->                            
+        <!--endinject -->
 
-    <!--<link href="default/css" rel="stylesheet" />-->
-
+        <!--inject:appcss-->
+        <!--endinject -->
+    <!--endbuild -->
 </head>
 
 <body>
     <div ng-controller="shellController as shell">
         <div id="wrapper">
-            <div class="row" data-ng-include="'app/templates/layout/navbar.html'"></div>
-            <div ui-view ></div>
+            <div class="row" data-ng-include="'/app/templates/layout/navbar.html'"></div>
+            <div ui-view></div>
         </div>
     </div>
 
-    <!-- Navigation -->
-    <!-- 3rd party libraries -->
-    <script src="app/libs/jquery/jquery.js"></script>
-    <script src="app/libs/bootstrap/bootstrap.min.js"></script>
-    <script src="app/libs/jquery/jquery-2.1.1.js"></script>
-    <script src="app/libs/angular/angular.js"></script>
-    <script src="app/libs/angular/angular-ui-router.min.js"></script>
-    <script src="app/libs/toastr/toastr.js"></script>
-    <script src="app/factories/ng-automapper.js"></script>
-    <!--link href="content/components/font-awesome.css" rel="stylesheet" />
-    <link href="content/components/toastr.css" rel="stylesheet" />-->
+    <!--build:js js/libs.js-->
+         <!-- bower:js -->
+         <!-- endbower -->
+    <!--endbuild-->
 
-    <script src="app/libs/angular/angular-local-storage.min.js"></script>
-    <script src="app/libs/angular/loading-bar.min.js"></script>
+    <!--build:js js/app.js-->
+        <!--inject:models-->
+        <!--endinject-->
 
-    <!-- Load app models -->
-    <script src="app/models/turma.model.js"></script>
+        <!--inject:factories-->
+        <!--endinject-->
 
-    <!-- Load app modules -->
-    <script src="app/modules/core.module.js"></script>
-    <script src="app/modules/other.module.js"></script>
-    <script src="app/modules/common.module.js"></script>
-    <script src="app/modules/routes.module.js"></script>
-    <script src="app/modules/services.module.js"></script>
-    <script src="app/services/auth.services.js"></script>
-    <script src="app/services/authInterceptor.services.js"></script>
-    <!-- Load app routes-->
+        <!--inject:module-->
+        <!--endinject-->
 
-    <script src="app/routes/authentication.routes.js"></script>
-    <script src="app/routes/chamada.routes.js"></script>
-    <script src="app/routes/aula.routes.js"></script>
-    <script src="app/routes/aluno.routes.js"></script>
-    <script src="app/routes/turma.routes.js"></script>
-    <script src="app/routes/layout.routes.js"></script><!--  -->
-    <script src="app/routes/config.routes.js"></script>
+        <!--inject:routes-->
+        <!--endinject-->
 
+        <!--inject:config.routes-->
+        <!--endinject-->
 
-    <!-- Load services-->
-    <script src="app/services/logger.services.js"></script><!---->
-    <script src="app/services/turma.services.js"></script>
-    <script src="app/services/chamada.services.js"></script>
-    <script src="app/services/aula.services.js"></script>
-    <script src="app/services/aluno.services.js"></script>
-    <script src="app/services/cep.services.js"></script>
-    <script src="app/services/alunoAdapter.js"></script>
+        <!--inject:service-->
+        <!--endinject-->
 
-    <!-- Load controllers -->
-    <script src="app/controllers/layout/shell.ctrl.js"></script>
-    <script src="app/controllers/layout/home.ctrl.js"></script><!---->
-    <script src="app/controllers/turma/turmaList.ctrl.js"></script>
-    <script src="app/controllers/turma/turmaDetails.ctrl.js"></script>
-    <script src="app/controllers/turma/turmaCreate.ctrl.js"></script>
-    <script src="app/controllers/chamada/chamada.ctrl.js"></script>
-    <script src="app/controllers/aula/aulasList.ctrl.js"></script>
-    <script src="app/controllers/aula/aulaCreate.ctrl.js"></script>
-    <script src="app/controllers/aluno/alunoDetails.ctrl.js"></script>
-    <script src="app/controllers/aluno/alunosList.ctrl.js"></script>
-    <script src="app/controllers/aluno/alunoCreate.ctrl.js"></script>
-    <script src="app/controllers/authentication/login.ctrl.js"></script>
-    <script src="app/controllers/authentication/signup.ctrl.js"></script>
+        <!--inject:controllers-->  
+        <!--endinject-->
+
+        <!--inject:directives-->
+        <!--endinject-->    
+     
+        <!--inject:templates-->
+        <!--endinject-->     
+    <!--endbuild-->
 
     <!-- Load custom filters-->
     <!-- Load custom directives -->

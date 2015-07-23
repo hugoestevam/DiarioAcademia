@@ -1,0 +1,30 @@
+{
+  "name": "NDDigital.DiarioAcademia.Apresentacao.WebApp",
+  "version": "1.0.0",
+  "homepage": "https://github.com/AlexandreRech/DiarioAcademia",
+  "authors": [
+    "PDI"
+  ],
+  "main": "index.js",
+  "keywords": [
+    "DiarioAcademia",
+    "pdi",
+    "NDD"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.3.5",
+    "angular": "~1.4.3",
+    "toastr": "~2.1.1",
+    "angular-local-storage": "~0.2.2",
+    "angular-ui-router": "~0.2.15",
+    "angular-loading-bar": "~0.8.0",
+    "font-awesome": "~4.3.0"
+  },
+  "devDependencies": {}
+}
