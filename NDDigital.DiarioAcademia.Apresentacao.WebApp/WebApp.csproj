@@ -78,6 +78,8 @@
   <ItemGroup>
     <Content Include="app\controllers\manager\manager-roles.ctrl.js" />
     <Content Include="app\controllers\manager\manager-user.ctrl.js" />
+    <Content Include="app\directives\ndd-modal\ndd-modal.directives.js" />
+    <Content Include="app\directives\ndd-modal\ndd-modal.html" />
     <Content Include="app\images\favicon.ico" />
     <Content Include="app\libs\angular\angular.min.js.map" />
     <Content Include="app\libs\jquery\jquery-2.1.1.min.map" />
