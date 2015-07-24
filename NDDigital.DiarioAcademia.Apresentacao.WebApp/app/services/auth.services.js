@@ -9,11 +9,17 @@
     
     function authService($http, $q, localStorageService,logger,serviceBase, LOCAL_STORAGE_KEYS) {
         var self = this;
-        
+
+        var redirectState = "login";
+
         var authentication = {
             isAuth: false,
             userName: ""
         };
+        var _lastState = { name: redirectState };
+        
+
+
         var authorization = {
             isAuthorized: function (authorizedRoles) {
                 self = this;
@@ -50,7 +56,10 @@
 
             $http.post(serviceBase + 'token', data, { headers: headers }).success(function (response) {
 
-                localStorageService.set('authorizationData', { token: response.access_token, userName: loginData.userName });
+                localStorageService.set('authorizationData', { 
+                    token: response.access_token, 
+                    userName: loginData.userName 
+                    });
 
                 authentication.isAuth = true;
                 authentication.userName = loginData.userName;
@@ -97,6 +106,21 @@
         self.fillAuthData = fillAuthData;
         self.authentication = authentication;
         self.authorization = authorization;
+
+
+        var lastStateProperty = {
+            get: function () {
+                var value = _lastState;
+                _lastState = { name: redirectState };
+                return value;
+            },
+            set:function(value) {
+                _lastState = value;
+            }
+            
+        };
+        Object.defineProperty(self, "lastState", lastStateProperty);
+
 
     }
 

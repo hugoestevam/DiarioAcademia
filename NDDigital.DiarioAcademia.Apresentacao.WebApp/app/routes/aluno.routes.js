@@ -17,19 +17,18 @@
             url: '/list',
             controller: 'alunoListCtrl as vm',
             templateUrl: '/app/views/aluno/aluno-list.html',
-            allowAnonymous:true
+            displayName: "Aluno List",
+            allowAnnonymous:true
         }, {
             state: 'aluno.details',
             url: '/details/:alunoId',
             controller: 'alunoDetailsCtrl as vm',
             templateUrl: '/app/views/aluno/aluno-details.html',
-            authorizedRoles: [roles.reader]
         }, {
             state: 'aluno.create',
             url: '/create',
             controller: 'alunoCreateCtrl as vm',
             templateUrl: '/app/views/aluno/aluno-create.html',
-            authorizedRoles: [roles.writer,roles.reader]
         }
 );
     }
