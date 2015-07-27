@@ -13,7 +13,8 @@ gulp.task('server-dev', ['inject'], function () {
         root: [config.path], // não usar './'
         port: config.port,
     });
-    browserSync(options);
+    if (yargs.livereload)
+        browserSync(options);
 });
 
 gulp.task('server-dist', ['optimize'], function () {

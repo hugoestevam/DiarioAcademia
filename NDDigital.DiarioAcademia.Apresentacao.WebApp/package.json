@@ -35,7 +35,8 @@
     "gulp-util": "^3.0.6",
     "require-dir": "^0.3.0",
     "requirejs": "^2.1.19",
-    "wiredep": "^3.0.0-beta"
+    "wiredep": "^3.0.0-beta",
+    "yargs": "^3.15.0"
   },
   "dependencies": {
     "gulp": "^3.9.0",
