@@ -17,7 +17,7 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers
     public class AccountsController : BaseApiController
     {
 
-        [Authorize]
+        //[Authorize]
         [Route("users")]
         public IHttpActionResult GetUsers()
         {
@@ -124,7 +124,7 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers
             }
         }
 
-        [Authorize]
+       // [Authorize]
         [Route("ChangePassword")]
         public async Task<IHttpActionResult> ChangePassword(ChangePasswordBindingModel model)
         {

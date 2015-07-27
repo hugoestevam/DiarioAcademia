@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-BR" data-ng-app="core.module">
 <head>
     <meta charset="utf-8">
@@ -12,8 +12,8 @@
     <title>Diário da Academia</title>
     <!--build:css css/default.css-->
         <!--inject:css-->                            
-        <link rel="stylesheet" href="/bower_components/angular/angular-csp.css">                            
         <link rel="stylesheet" href="/bower_components/angular-bootstrap/ui-bootstrap-csp.css">                            
+        <link rel="stylesheet" href="/bower_components/angular/angular-csp.css">                            
         <link rel="stylesheet" href="/bower_components/toastr/toastr.css">                            
         <link rel="stylesheet" href="/bower_components/angular-loading-bar/build/loading-bar.css">                            
         <link rel="stylesheet" href="/bower_components/angular-loading-bar/src/loading-bar.css">                            
@@ -92,6 +92,7 @@
         <script src="/app/services/authInterceptor.services.js"></script>
         <script src="/app/services/cep.services.js"></script>
         <script src="/app/services/chamada.services.js"></script>
+        <script src="/app/services/group.services.js"></script>
         <script src="/app/services/logger.services.js"></script>
         <script src="/app/services/manager.service.js"></script>
         <script src="/app/services/turma.services.js"></script>
@@ -106,8 +107,6 @@
         <script src="/app/controllers/aula/aulasList.ctrl.js"></script>  
         <script src="/app/controllers/authentication/login.ctrl.js"></script>  
         <script src="/app/controllers/authentication/signup.ctrl.js"></script>  
-        <script src="/app/controllers/chamada/chamada.ctrl.js"></script>  
-        <script src="/app/controllers/chamada/chamadaList.ctrl.js"></script>  
         <script src="/app/controllers/layout/footer.ctrl.js"></script>  
         <script src="/app/controllers/layout/header.ctrl.js"></script>  
         <script src="/app/controllers/layout/home.ctrl.js"></script>  
@@ -120,11 +119,13 @@
         <script src="/app/controllers/turma/turmaCreate.ctrl.js"></script>  
         <script src="/app/controllers/turma/turmaDetails.ctrl.js"></script>  
         <script src="/app/controllers/turma/turmaList.ctrl.js"></script>  
+        <script src="/app/controllers/chamada/chamada.ctrl.js"></script>  
+        <script src="/app/controllers/chamada/chamadaList.ctrl.js"></script>  
         <!--endinject-->
 
         <!--inject:directives-->
-        <script src="/app/directives/ndd-modal/ndd-modal.directives.js"></script>
         <script src="/app/directives/menu/menu.directives.js"></script>
+        <script src="/app/directives/ndd-modal/ndd-modal.directives.js"></script>
         <!--endinject-->    
      
         <!--inject:templates-->
