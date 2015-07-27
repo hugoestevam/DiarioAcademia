@@ -266,9 +266,9 @@
       <Project>{3fd3156c-9f4f-4e10-8b7a-7454c803be89}</Project>
       <Name>Infraestrutura.Orm</Name>
     </ProjectReference>
-    <ProjectReference Include="..\NDDigital.DiarioAcademia.Infraestrutura.WebServices\Infraestrutura.WebServices.csproj">
+    <ProjectReference Include="..\NDDigital.DiarioAcademia.Infraestrutura.WebServices\Infraestrutura.CepServices.csproj">
       <Project>{7c91018a-6066-4ab4-bcea-7f477bb514c4}</Project>
-      <Name>Infraestrutura.WebServices</Name>
+      <Name>Infraestrutura.CepServices</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

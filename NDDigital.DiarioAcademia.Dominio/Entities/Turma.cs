@@ -1,10 +1,10 @@
 ﻿using NDDigital.DiarioAcademia.Dominio.Common;
 
-namespace NDDigital.DiarioAcademia.Dominio
+namespace NDDigital.DiarioAcademia.Dominio.Entities
 {
     public class Turma : Entity
     {
-        private Turma()
+        public Turma()
         {
         }
 
@@ -14,9 +14,5 @@ namespace NDDigital.DiarioAcademia.Dominio
         }
 
         public int Ano { get; set; }
-    }
-
-    public interface ITurmaRepository : IRepository<Turma>
-    {
     }
 }

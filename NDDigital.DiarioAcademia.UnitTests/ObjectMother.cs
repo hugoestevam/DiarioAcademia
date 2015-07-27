@@ -1,6 +1,7 @@
 ﻿using FizzWare.NBuilder;
 using NDDigital.DiarioAcademia.Aplicacao.DTOs;
 using NDDigital.DiarioAcademia.Dominio;
+using NDDigital.DiarioAcademia.Dominio.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;

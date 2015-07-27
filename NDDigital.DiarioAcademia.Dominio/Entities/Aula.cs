@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace NDDigital.DiarioAcademia.Dominio
+namespace NDDigital.DiarioAcademia.Dominio.Entities
 {
     public class Aula : Entity
     {
@@ -43,12 +43,5 @@ namespace NDDigital.DiarioAcademia.Dominio
         {
             return base.GetHashCode();
         }
-    }
-
-    public interface IAulaRepository : IRepository<Aula>
-    {
-        Aula GetByData(DateTime data);
-
-        IEnumerable<Aula> GetAllByTurma(int ano);
     }
 }

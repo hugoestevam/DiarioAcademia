@@ -5,7 +5,7 @@ using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NDDigital.DiarioAcademia.Infraestrutura.WebServices
+namespace NDDigital.DiarioAcademia.Infraestrutura.CepServices
 {
     internal class MailInfo
     {

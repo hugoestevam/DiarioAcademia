@@ -1,5 +1,6 @@
 ﻿using NDDigital.DiarioAcademia.Dominio;
-using NDDigital.DiarioAcademia.Infraestrutura.WebServices;
+using NDDigital.DiarioAcademia.Dominio.Entities;
+using NDDigital.DiarioAcademia.Infraestrutura.CepServices;
 using System;
 using System.Collections.Generic;
 using System.Linq;

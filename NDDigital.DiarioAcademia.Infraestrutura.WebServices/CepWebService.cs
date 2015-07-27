@@ -5,8 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 using NDDigital.DiarioAcademia.Dominio;
+using NDDigital.DiarioAcademia.Dominio.Entities;
 
-namespace NDDigital.DiarioAcademia.Infraestrutura.WebServices
+namespace NDDigital.DiarioAcademia.Infraestrutura.CepServices
 {
     public class CepWebService
     {

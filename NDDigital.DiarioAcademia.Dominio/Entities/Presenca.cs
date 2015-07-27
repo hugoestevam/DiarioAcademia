@@ -1,6 +1,6 @@
 ﻿using NDDigital.DiarioAcademia.Dominio.Common;
 
-namespace NDDigital.DiarioAcademia.Dominio
+namespace NDDigital.DiarioAcademia.Dominio.Entities
 {
     public class Presenca : Entity
     {
@@ -27,9 +27,5 @@ namespace NDDigital.DiarioAcademia.Dominio
             return string.Format("{0}: {1} -> {2}", Aula.Data.ToString("dd/MM/yyyy"),
                 Aluno.Nome, StatusPresenca == "F" ? "Faltou" : "Compareceu");
         }
-    }
-
-    public interface IPresencaRepository : IRepository<Presenca>
-    {
     }
 }

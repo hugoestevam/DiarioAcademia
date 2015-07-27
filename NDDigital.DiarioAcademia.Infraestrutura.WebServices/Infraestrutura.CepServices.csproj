@@ -7,8 +7,8 @@
     <ProjectGuid>{7C91018A-6066-4AB4-BCEA-7F477BB514C4}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>NDDigital.DiarioAcademia.Infraestrutura.WebServices</RootNamespace>
-    <AssemblyName>NDDigital.DiarioAcademia.Infraestrutura.WebServices</AssemblyName>
+    <RootNamespace>NDDigital.DiarioAcademia.Infraestrutura.CepServices</RootNamespace>
+    <AssemblyName>NDDigital.DiarioAcademia.Infraestrutura.CepServices</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

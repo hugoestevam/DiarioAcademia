@@ -9,7 +9,7 @@ using Xunit;
 using FluentAssertions;
 using FizzWare.NBuilder;
 using NDDigital.DiarioAcademia.UnitTests;
-
+using NDDigital.DiarioAcademia.Dominio.Entities;
 
 namespace DiarioAcademia.UnitTests.Dominio
 {
