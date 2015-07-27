@@ -1,4 +1,5 @@
 ﻿using NDDigital.DiarioAcademia.Dominio;
+using NDDigital.DiarioAcademia.Dominio.Entities;
 using NDDigital.DiarioAcademia.Infraestrutura.Orm.Contexts;
 using System;
 using System.Collections.Generic;

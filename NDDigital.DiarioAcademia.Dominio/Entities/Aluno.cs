@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace NDDigital.DiarioAcademia.Dominio
+namespace NDDigital.DiarioAcademia.Dominio.Entities
 {
     public class Aluno : Entity
     {
-        private Aluno()
+        public Aluno()
         {
             Presencas = new List<Presenca>();
             Endereco = new Endereco();
@@ -66,11 +66,5 @@ namespace NDDigital.DiarioAcademia.Dominio
         {
             return string.Format("{0}: Presenças: {1}, Faltas: {2}", Nome, ObtemQuantidadePresencas(), ObtemQuantidadeAusencias());
         }
-    }
-
-    public interface IAlunoRepository : IRepository<Aluno>
-    {
-        IEnumerable<Aluno> GetAllByTurma(int ano);
-        IEnumerable<Aluno> GetAllByTurmaId(int id);
-    }
+    }   
 }

@@ -23,9 +23,7 @@
                     templateUrl: route.templateUrl,
                     controller: route.controller,
                     data: {
-                        displayName: route.label,
-                        isFlexible: route.isFlexible,
-                        innavigable: route.innavigable
+                        displayName: route.displayName,
                     }
                 });
         }

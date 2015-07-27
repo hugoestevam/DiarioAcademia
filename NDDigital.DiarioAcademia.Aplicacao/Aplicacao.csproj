@@ -66,12 +66,13 @@
       <Project>{3fd3156c-9f4f-4e10-8b7a-7454c803be89}</Project>
       <Name>Infraestrutura.Orm</Name>
     </ProjectReference>
-    <ProjectReference Include="..\NDDigital.DiarioAcademia.Infraestrutura.WebServices\Infraestrutura.WebServices.csproj">
+    <ProjectReference Include="..\NDDigital.DiarioAcademia.Infraestrutura.WebServices\Infraestrutura.CepServices.csproj">
       <Project>{7C91018A-6066-4AB4-BCEA-7F477BB514C4}</Project>
-      <Name>Infraestrutura.WebServices</Name>
+      <Name>Infraestrutura.CepServices</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

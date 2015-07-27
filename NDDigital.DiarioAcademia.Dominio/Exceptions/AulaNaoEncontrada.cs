@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace NDDigital.DiarioAcademia.Dominio
+namespace NDDigital.DiarioAcademia.Dominio.Exceptions
 {
     public class AulaNaoEncontrada : ApplicationException
     {

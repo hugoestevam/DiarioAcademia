@@ -1,6 +1,8 @@
 ﻿using FluentAssertions;
 using NDDigital.DiarioAcademia.Aplicacao.Testes.Traits;
 using NDDigital.DiarioAcademia.Dominio;
+using NDDigital.DiarioAcademia.Dominio.Contracts;
+using NDDigital.DiarioAcademia.Dominio.Entities;
 using NDDigital.DiarioAcademia.Infraestrutura.Orm.Common;
 using NDDigital.DiarioAcademia.Infraestrutura.Orm.Repositories;
 using NDDigital.DiarioAcademia.IntegrationTests.Common;
