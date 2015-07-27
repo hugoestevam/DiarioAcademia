@@ -1,0 +1,74 @@
+﻿<div class="row">
+    <div class="col-sm-4">
+        <i class="fa fa-3x fa-chevron-circle-left" style="cursor:pointer" ui-sref="manager.user"></i>
+    </div>
+    <div class="col-sm-8">&nbsp;</div>
+</div>
+
+<div class="container-user">
+    <div class="row">
+        <h1 class="page-header">Edição de Usuário: {{vm.name}}</h1>
+        <ol class="breadcrumb">
+            <li>
+                <i class="fa fa-home"></i>  <a ui-sref="home">Inicio</a>
+            </li>
+            <li>
+                <i class="fa fa-wrench"></i> <a style="cursor: pointer">Gerenciador</a>
+            </li>
+            <li class="active">
+                <i class="fa fa-users"></i> <a ui-sref="manager.user">Usuario</a>
+            </li>
+            <li class="active">
+                <i class="fa fa-pencil"></i> <a ui-sref="manager.useredit">Edição de Usuario</a>
+            </li>
+        </ol>
+    </div>
+    <br />
+
+    <div class="row">
+        <div class="col-sm-8 clear-padding">
+            <div class="col-xs-12 clear-padding">
+                <label for="fullname">Nome</label>
+                <input type="text" ng-model="vm.user.fullName" class="form-control" id="fullname" />
+                <br />
+            </div>
+
+            <div class="col-xs-12 clear-padding">
+                <div class="col-xs-9 clear-padding">
+                    <label for="username">Nome de usuário</label>
+                    <input type="text" ng-model="vm.user.userName" class="form-control" id="username" />
+                </div>
+                <div class="col-xs-3 clear-padding">
+                    <label for="level">Level</label>
+                    <input type="number" ng-model="vm.user.level" class="form-control" id="level" />
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-4 text-center" >
+            <label>Grupos</label>
+            <div class="input-group" ng-repeat="group in vm.groups" style="padding-bottom: 2%" >
+                <span class="input-group-addon" id='chkGroup{{$index}}'>
+                    <input id="chkG{{$index}}" type="checkbox" ng-checked="vm.isChecked($index, group)" ng-click="vm.changeGroup($index, group, chkGroups)" ng-model="chkGroups">
+                </span>
+                <input type="text" class="form-control" value="{{group.name}}" disabled style="cursor: default" id='textGroup{{$index}}'>
+            </div>
+        </div>
+
+        <div class="col-sm-12 clear-padding text-center" style="padding-top: 5%;">
+            <div class="footer">
+                <button class="btn btn-success" data-toggle="modal" data-target="#modelEditUser">
+                    <i class="fa fa-user-plus fa-2x"></i>
+                </button>
+                <button class="btn btn-info" ng-click="vm.clear()">
+                    <i class="fa fa-undo fa-2x"></i>
+                </button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<ndd-modal target="modelEditUser" label="{{vm.titleModelEdit}}"  callback="vm.editUser">
+    {{vm.bodyModelEdit}}
+</ndd-modal>

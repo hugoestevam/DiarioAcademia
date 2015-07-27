@@ -1,23 +1,23 @@
 ﻿(function (angular) {
 
-    managerUserController.$inject = ['$scope','userService'];
+    managerUserListController.$inject = ['$scope', 'userService', '$state'];
 
     angular
         .module('controllers.module')
-        .controller('managerUserController', managerUserController);
+        .controller('managerUserListController', managerUserListController);
 
-    function managerUserController($scope, managerService) {
-        var vm = this;     
-        vm.title = 'Usuários';
 
+    function managerUserListController($scope, managerService, $state) {
+        var vm = this;
         var users = [];
-        vm.countUsers = 0;
-
+        vm.title = 'Usuários';
+   
+        //angular pagination
         vm.currentPage = 1
         vm.numPerPage = 10
-        vm.maxSize = 5;
+        vm.maxSize = 4;
+        vm.countUsers = 0;
 
-     
         //public methods
         vm.edit = edit;
         vm.remove = remove;
@@ -38,21 +38,21 @@
             });
         }
 
-       
-
         function edit(user) {
-
+            $state.go('manager.useredit', { userId: user.id });
         }
 
-        function remove() {
-
+        function remove(user) {
+            managerService.delete(user).then(function (results) {
+                users.remove(user);
+                vm.users.remove(user);
+            });
         }
-
 
         function modal(user) {
             vm.titleModelRemove = 'Exclusão';
             vm.bodyModelRemove = 'Remover ' + user.fullName + ' (' + user.userName + ') ?'
-           
         }
+        
     }
 })(window.angular);

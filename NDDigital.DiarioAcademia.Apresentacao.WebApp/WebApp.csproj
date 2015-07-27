@@ -76,10 +76,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="app\controllers\manager\manager-roles.ctrl.js" />
-    <Content Include="app\controllers\manager\manager-user.ctrl.js" />
+    <Content Include="app\controllers\manager\managerRoles.ctrl.js" />
+    <Content Include="app\controllers\manager\user\managerUserEdit.ctrl.js" />
+    <Content Include="app\controllers\manager\user\managerUserList.ctrl.js" />
     <Content Include="app\directives\ndd-modal\ndd-modal.directives.js" />
     <Content Include="app\directives\ndd-modal\ndd-modal.html" />
+    <Content Include="app\extentions\array.js" />
     <Content Include="app\images\favicon.ico" />
     <Content Include="app\libs\angular\angular.min.js.map" />
     <Content Include="app\libs\jquery\jquery-2.1.1.min.map" />
@@ -88,7 +90,8 @@
     <Content Include="app\services\manager.service.js" />
     <Content Include="app\services\user.service.js" />
     <Content Include="app\templates\layout\top-menu.html" />
-    <Content Include="app\views\manager\manager-user.html" />
+    <Content Include="app\views\manager\manager-user-edit.html" />
+    <Content Include="app\views\manager\manager-user-list.html" />
     <Content Include="content\layout\manager.css">
       <DependentUpon>manager.less</DependentUpon>
     </Content>

@@ -58,18 +58,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Aluno.cs" />
-    <Compile Include="AlunoNaoEncontrado.cs" />
-    <Compile Include="Aula.cs" />
-    <Compile Include="AulaNaoEncontrada.cs" />
+    <Compile Include="Contracts\IPresencaRepository.cs" />
+    <Compile Include="Entities\Aluno.cs" />
+    <Compile Include="Exceptions\AlunoNaoEncontrado.cs" />
+    <Compile Include="Entities\Aula.cs" />
+    <Compile Include="Exceptions\AulaNaoEncontrada.cs" />
     <Compile Include="Common\Entity.cs" />
     <Compile Include="Common\IdentityGenerator.cs" />
     <Compile Include="Common\IRepository.cs" />
-    <Compile Include="Endereco.cs" />
-    <Compile Include="Presenca.cs" />
+    <Compile Include="Contracts\IAlunoRepository.cs" />
+    <Compile Include="Contracts\IAulaRepository.cs" />
+    <Compile Include="Contracts\ITurmaRepository.cs" />
+    <Compile Include="Entities\Endereco.cs" />
+    <Compile Include="Exceptions\TurmaException.cs" />
+    <Compile Include="Entities\Presenca.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Turma.cs" />
-    <Compile Include="UserModel.cs" />
+    <Compile Include="Entities\Turma.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App .config" />

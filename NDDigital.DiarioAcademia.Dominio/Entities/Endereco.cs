@@ -1,4 +1,4 @@
-﻿namespace NDDigital.DiarioAcademia.Dominio
+﻿namespace NDDigital.DiarioAcademia.Dominio.Entities
 {
     public class Endereco
     {

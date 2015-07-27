@@ -1,4 +1,6 @@
-﻿namespace NDDigital.DiarioAcademia.Aplicacao.DTOs
+﻿using NDDigital.DiarioAcademia.Dominio.Entities;
+
+namespace NDDigital.DiarioAcademia.Aplicacao.DTOs
 {
     public class TurmaDTO
     {
@@ -12,7 +14,7 @@
             this.Id = id;
         }
 
-        public TurmaDTO(Dominio.Turma turma)
+        public TurmaDTO(Turma turma)
         {
             Id = turma.Id;
             Ano = turma.Ano;

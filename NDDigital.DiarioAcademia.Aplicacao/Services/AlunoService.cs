@@ -5,9 +5,11 @@ using iTextSharp.text.pdf;
 using NDDigital.DiarioAcademia.Aplicacao.DTOs;
 using NDDigital.DiarioAcademia.Dominio;
 using NDDigital.DiarioAcademia.Infraestrutura.Orm.Common;
-using NDDigital.DiarioAcademia.Infraestrutura.WebServices;
+using NDDigital.DiarioAcademia.Infraestrutura.CepServices;
 using System.Collections.Generic;
 using System.Linq;
+using NDDigital.DiarioAcademia.Dominio.Entities;
+using NDDigital.DiarioAcademia.Dominio.Contracts;
 
 namespace NDDigital.DiarioAcademia.Aplicacao.Services
 {

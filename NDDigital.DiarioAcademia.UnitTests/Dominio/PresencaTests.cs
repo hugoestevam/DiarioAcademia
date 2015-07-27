@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Xunit;
 using FluentAssertions;
 using NDDigital.DiarioAcademia.Traits;
+using NDDigital.DiarioAcademia.Dominio.Entities;
 
 namespace NDDigital.DiarioAcademia.UnitTests.Dominio
 {

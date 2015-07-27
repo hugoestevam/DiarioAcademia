@@ -12,6 +12,7 @@ requireDir = require('require-dir');
 util = require('./task/util/util.js')();
 log = util.log;
 connect = require('gulp-connect');
+yargs = require('yargs').argv;
 
 // TASKS
 requireDir('./task/');

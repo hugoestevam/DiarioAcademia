@@ -2,7 +2,7 @@
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
-using NDDigital.DiarioAcademia.Infraestrutura.WebServices;
+using NDDigital.DiarioAcademia.Infraestrutura.CepServices;
 using System;
 using System.Collections.Generic;
 using System.Linq;
