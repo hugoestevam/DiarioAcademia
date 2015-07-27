@@ -18,7 +18,7 @@
         <li class="li">
             <a href="javascript:;" data-toggle="collapse" data-target="#demo2"><i class="fa fa-fw fa-users"></i> Alunos <i class="fa fa-fw fa-angle-down"></i></a>
             <ul id="demo2" class="collapse">
-                <li ng-if="shell.authorization.isAuthorized(shell.USER_ROLES.manager)">
+                <li ng-if="shell.authorization.isAuthorized('aluno.list')">
                     <a ui-sref="aluno.create">Novo Aluno</a>
                 </li>
                 <li>

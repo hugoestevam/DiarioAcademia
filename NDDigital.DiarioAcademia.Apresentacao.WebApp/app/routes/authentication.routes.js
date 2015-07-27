@@ -13,12 +13,14 @@
             state: 'login',
             url: '/login',
             controller: 'loginController as vm',
-            templateUrl: '/app/views/authentication/login.html'
+            templateUrl: '/app/views/authentication/login.html',
+            allowAnnonymous:true
         }, {
             state: 'signup',
             url: '/signup',
             controller: 'signupController as vm',
-            templateUrl: '/app/views/authentication/signup.html'
+            templateUrl: '/app/views/authentication/signup.html',
+            allowAnnonymous:true
         });
 
     }

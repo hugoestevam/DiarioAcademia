@@ -44,12 +44,15 @@
 
                 if (toState.data.allowAnnonymous) return;
 
-                if (authService.isAuth) 
+                if (authService.authentication.isAuth){ 
 
                 if (groupSevice.checkPermission(authService.authorization.groups, toState.name)) {
                     return;
-                } else {
+                   } 
+                }
+                else {
                     authService.lastState = toState;
+                    event.preventDefault();
                     $state.go('login');
                 }
                 

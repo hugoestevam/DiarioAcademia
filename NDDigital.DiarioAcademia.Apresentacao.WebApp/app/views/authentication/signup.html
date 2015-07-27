@@ -12,7 +12,10 @@
     </ol>
     <div class="jumbotron class1">
         <form name="vm.aulaForm" class="jumbotron">
-            <input type="text" class="form-control" placeholder="Username" data-ng-model="vm.registration.userName" required autofocus><br />
+            <input type="text" class="form-control" placeholder="First Name" data-ng-model="vm.registration.firstName" required autofocus><br />
+            <input type="text" class="form-control" placeholder="Last Name" data-ng-model="vm.registration.lastName" required><br />
+            <input type="text" class="form-control" placeholder="Username" data-ng-model="vm.registration.userName" required><br />
+            <input type="email" class="form-control" placeholder="Email" data-ng-model="vm.registration.email" required><br />
             <input type="password" class="form-control" placeholder="Password" data-ng-model="vm.registration.password" required><br />
             <input type="password" class="form-control" placeholder="Confirm Password" data-ng-model="vm.registration.confirmPassword" required><br />
             <button class="btn btn-lg btn-default btn-block" type="submit" data-ng-click="vm.signUp()">Salvar</button>
