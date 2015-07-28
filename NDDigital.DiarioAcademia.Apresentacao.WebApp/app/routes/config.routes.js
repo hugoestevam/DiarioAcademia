@@ -24,6 +24,7 @@
                     controller: route.controller,
                     data: {
                         displayName: route.displayName,
+                        allowAnnonymous: route.allowAnnonymous,
                     }
                 });
         }

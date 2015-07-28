@@ -87,6 +87,10 @@
     <Content Include="app\libs\jquery\jquery-2.1.1.min.map" />
     <Content Include="app\routes\manager.routes.js" />
     <Content Include="app\services\group.services.js" />
+<<<<<<< HEAD
+=======
+    <Content Include="app\services\manager.service.js" />
+>>>>>>> origin/master
     <Content Include="app\services\user.service.js" />
     <Content Include="app\templates\layout\top-menu.html" />
     <Content Include="app\views\manager\user\manager-user-edit.html" />

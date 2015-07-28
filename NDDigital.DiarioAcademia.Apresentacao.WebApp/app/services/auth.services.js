@@ -1,13 +1,13 @@
 ﻿(function (angular) {
-    
+
     'use strict';
 
-    authService.$inject = ['$http', '$q', 'localStorageService','logger','BASEURL', 'LOCAL_STORAGE_KEYS'];
+    authService.$inject = ['$http', '$q', 'localStorageService', 'logger', 'BASEURL', 'groupService'];
 
     angular.module('services.module')
         .service('authService', authService);
-    
-    function authService($http, $q, localStorageService,logger,serviceBase, LOCAL_STORAGE_KEYS) {
+
+    function authService($http, $q, localStorageService, logger, serviceBase, groupService) {
         var self = this;
 
         var redirectState = "login";
@@ -17,21 +17,37 @@
             userName: ""
         };
         var _lastState = { name: redirectState };
-        
 
+
+
+        // var authorization = {
+        //     isAuthorized: function (authorizedRoles) {
+        //         self = this;
+        //
+        //         if (!authentication.isAuth)
+        //             return false;
+        //
+        //         if (!angular.isArray(authorizedRoles)) {
+        //             authorizedRoles = [authorizedRoles];
+        //         }
+        //
+        //         return authorizedRoles.indexOf(self.role) !== -1;
+        //     },
+        //     role: null
+        // };
 
         var authorization = {
-            isAuthorized: function (authorizedRoles) {
+            isAuthorized: function (state) {
                 self = this;
 
                 if (!authentication.isAuth)
                     return false;
 
-                if (!angular.isArray(authorizedRoles)) {
-                    authorizedRoles = [authorizedRoles];
-                }
 
-                return authorizedRoles.indexOf(self.role) !== -1;
+                var authorizedGroups = authorization.permissions.indexOf(state);
+
+                return authorizedGroups >= 0;
+
             },
             role: null
         };
@@ -40,7 +56,7 @@
 
             logOut();
 
-            return $http.post(serviceBase + 'api/account/register/', registration).then(function (response) {
+            return $http.post(serviceBase + 'api/accounts/create/', registration).then(function (response) {
                 return response;
             });
 
@@ -54,17 +70,33 @@
 
             var headers = { 'Content-Type': 'application/x-www-form-urlencoded' };
 
-            $http.post(serviceBase + 'token', data, { headers: headers }).success(function (response) {
+            $http.post(serviceBase + 'oauth/token', data, { headers: headers }).success(function (response) {
 
-                localStorageService.set('authorizationData', { 
-                    token: response.access_token, 
-                    userName: loginData.userName 
-                    });
+                localStorageService.set('authorizationData', {
+                    token: response.access_token,
+                    userName: loginData.userName
+                });
 
                 authentication.isAuth = true;
                 authentication.userName = loginData.userName;
+                groupService.getGroupById(0)
+                    .then(function (groups) {
 
-                authorization.role = 1//parseInt(response.role);
+                        var permissions = [];
+                        //sim, isso é um adapter
+                        for (var i in groups) {
+                            var group = groups[i];
+                            for (var j in group.permissions) {
+                                var name = group.permissions[j].name;
+
+                                if (permissions.indexOf(name) < 0) permissions.push(name);
+
+
+                            }
+                        }
+                        authorization.groups = groups;
+                        authorization.permissions = permissions;
+                    });
 
                 logger.success("Bem vindo " + authentication.userName + "! ");
                 deferred.resolve(response);
@@ -114,10 +146,10 @@
                 _lastState = { name: redirectState };
                 return value;
             },
-            set:function(value) {
+            set: function (value) {
                 _lastState = value;
             }
-            
+
         };
         Object.defineProperty(self, "lastState", lastStateProperty);
 

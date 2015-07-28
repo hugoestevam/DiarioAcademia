@@ -33,10 +33,10 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Identity
             appUserManager.PasswordValidator = new PasswordValidator
             {
                 RequiredLength = 6,
-                RequireNonLetterOrDigit = true,
+                RequireNonLetterOrDigit = false,
                 RequireDigit = false,
-                RequireLowercase = true,
-                RequireUppercase = true,
+                RequireLowercase = false,
+                RequireUppercase = false,
             };
             
             appUserManager.EmailService = new EmailService();

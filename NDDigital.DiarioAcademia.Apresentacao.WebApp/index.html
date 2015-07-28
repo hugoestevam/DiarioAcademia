@@ -38,7 +38,11 @@
     <div ng-controller="shellController as shell">
         <div id="wrapper">
             <div class="row" data-ng-include="'/app/templates/layout/navbar.html'"></div>
+<<<<<<< HEAD
             <div ui-view class="fader-animation"></div>
+=======
+            <div ui-view></div>
+>>>>>>> origin/master
         </div>
     </div>
 
@@ -56,10 +60,6 @@
     <!--endbuild-->
 
     <!--build:js js/app.js-->
-        <!--inject:extentions-->
-        <script src="/app/extentions/array.js"></script>
-        <!--endinject-->
-
         <!--inject:models-->
         <script src="/app/models/turma.model.js"></script>
         <!--endinject-->
@@ -121,12 +121,11 @@
         <script src="/app/controllers/layout/shell.ctrl.js"></script>  
         <script src="/app/controllers/layout/sidebar.ctrl.js"></script>  
         <script src="/app/controllers/layout/toolbar.ctrl.js"></script>  
-        <script src="/app/controllers/manager/managerRoles.ctrl.js"></script>  
+        <script src="/app/controllers/manager/manager-roles.ctrl.js"></script>  
+        <script src="/app/controllers/manager/manager-user.ctrl.js"></script>  
         <script src="/app/controllers/turma/turmaCreate.ctrl.js"></script>  
         <script src="/app/controllers/turma/turmaDetails.ctrl.js"></script>  
         <script src="/app/controllers/turma/turmaList.ctrl.js"></script>  
-        <script src="/app/controllers/manager/user/managerUserEdit.ctrl.js"></script>  
-        <script src="/app/controllers/manager/user/managerUserList.ctrl.js"></script>  
         <!--endinject-->
 
         <!--inject:directives-->
