@@ -27,26 +27,20 @@
 		function activate() {
 			userService.getUserById(params.userId).then(function (results) {
 				vm.user = results.data;
-
 				originalUser = $.extend(true, {}, vm.user);;
 				vm.name = vm.user.fullName;
 				vm.bodyModelEdit += vm.name;
 			});
 
-			//groupService.getGroups().then(function (results) {
-			//    vm.groups = results;
-			//    if (results)
-			//        originalGroups = results.slice();
-		    //});
-
-			vm.groups = [{ id: 1, name: "Aluno" },
-					{ id: 2, name: "Admin" },
-					{ id: 3, name: "RH" }];
+			groupService.getGroups().then(function (results) {
+			    vm.groups = results.data;
+			    if (results.data)
+			        originalGroups = results.data.slice();
+		    });
 		}
 
-
 		function editUser() {
-			userService.edit(user).then(function () {
+			userService.edit(vm.user).then(function () {
 				$('body').removeClass('modal-open');
 				$('.modal-backdrop').remove();
 				$state.go('manager.user');
