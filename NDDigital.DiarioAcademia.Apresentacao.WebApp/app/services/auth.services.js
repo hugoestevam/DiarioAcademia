@@ -2,12 +2,12 @@
 
     'use strict';
 
-    authService.$inject = ['$http', '$q', 'localStorageService', 'logger', 'BASEURL', 'groupService'];
+    authService.$inject = ['$http', '$q', 'localStorageService', 'logger', 'BASEURL', 'groupService', 'storageKeys'];
 
     angular.module('services.module')
         .service('authService', authService);
 
-    function authService($http, $q, localStorageService, logger, serviceBase, groupService) {
+    function authService($http, $q, localStorageService, logger, serviceBase, groupService,storageKeys) {
         var self = this;
 
         var redirectState = "login";
@@ -19,9 +19,10 @@
         var _lastState = { name: redirectState };
 
 
+        
+
         var authorization = {
             isAuthorized: function(state) {
-                self = this;
                 if (!authentication.isAuth)
                     return false;
                 var authorizedGroups = authorization.permissions ? authorization.permissions.indexOf(state) : -1;
@@ -30,13 +31,17 @@
             role: null
         };
 
+        activate();
+        function activate() {
+            fillAuthData();
+        }
+
         var saveRegistration = function(registration) {
 
             logOut();
 
             return $http.post(serviceBase + 'api/accounts/create/', registration).then(function(response) {
                 return response;
-                //todo salvar em local storage
             });
 
         };
@@ -51,11 +56,7 @@
 
             $http.post(serviceBase + 'oauth/token', data, { headers: headers }).success(function(response) {
 
-                localStorageService.set('authorizationData', {
-                    token: response.access_token,
-                    userName: loginData.userName
-                });
-
+                
                 authentication.isAuth = true;
                 authentication.userName = loginData.userName;
                 groupService.getGroupByUsername(authentication.userName)
@@ -63,8 +64,15 @@
 
                         authorization.groups = groups;
                         authorization.permissions = groupService.extractPermissions(groups);
-                        ;
+                        localStorageService.set(storageKeys.permissions, authorization.permissions);
                     });
+
+
+                localStorageService.set(storageKeys.authData, {
+                    token: response.access_token,
+                    userName: loginData.userName
+                });
+
 
                 logger.success("Bem vindo " + authentication.userName + "! ");
                 deferred.resolve(response);
@@ -84,19 +92,22 @@
         };
         var logOut = function() {
 
-            localStorageService.remove('authorizationData');
+            localStorageService.remove(storageKeys.authData);
+            localStorageService.remove(storageKeys.permissions);
 
             authentication.isAuth = false;
             authentication.userName = "User";
 
         };
 
-        var fillAuthData = function() {
+        function fillAuthData() {
 
-            var authData = localStorageService.get('authorizationData');
+            var authData = localStorageService.get(storageKeys.authData);
+            var permissions = localStorageService.get(storageKeys.permissions);
             if (authData) {
                 authentication.isAuth = true;
                 authentication.userName = authData.userName;
+                authorization.permissions = permissions;
             }
         };
 

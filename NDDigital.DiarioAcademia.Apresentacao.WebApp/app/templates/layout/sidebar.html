@@ -18,10 +18,10 @@
         <li class="li">
             <a href="javascript:;" data-toggle="collapse" data-target="#demo2"><i class="fa fa-fw fa-users"></i> Alunos <i class="fa fa-fw fa-angle-down"></i></a>
             <ul id="demo2" class="collapse">
-                <li ng-if="shell.authorization.isAuthorized('aluno.list')">
+                <li ng-if="shell.isVisible('aluno.create')">
                     <a ui-sref="aluno.create">Novo Aluno</a>
                 </li>
-                <li>
+                <li >
                     <a ui-sref="aluno.list">Listar Alunos</a>
                 </li>
             </ul>

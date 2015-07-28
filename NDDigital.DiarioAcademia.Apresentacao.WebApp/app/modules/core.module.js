@@ -17,11 +17,16 @@
         ,'services.module'
     ])
     
-    
+    .config(configInterceptors)
     .run(runStateChangeSuccess)
     .run(runStateChangeStart);
 
-    
+    configInterceptors.$inject = ['$httpProvider'];
+    function configInterceptors($httpProvider) {
+        $httpProvider.interceptors.push('authInterceptorService');
+        window.scrollTo(0, 0);
+    }
+
 
     runStateChangeSuccess.$inject = ["$rootScope"];
     function runStateChangeSuccess($rootScope) {
@@ -50,23 +55,25 @@
                 if (authService.authentication.isAuth) {
 
 
-                    var hasPermission=authService.checkAuthorize(toState.name);
-
-                    stateToGo = hasPermission ? toState.name : stateToGo;
-                    
-                    authService.lastState = toState;
+                    var hasPermission = authService.checkAuthorize(toState.name);
 
 
                     if (hasPermission) return;
-
-                    event.preventDefault();
-                    $state.go(stateToGo);
-
-
+                    
+                } else {
+                $state.go(stateToGo);
+                   
                 }
+                    event.preventDefault();
 
 
             });
+         
+
+         $rootScope.$on('$viewContentLoading',
+function (event, viewConfig) {
+    console.log('todo');
+});
     }
 
 })(window.angular);

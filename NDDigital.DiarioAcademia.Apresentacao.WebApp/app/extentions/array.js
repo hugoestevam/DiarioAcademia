@@ -16,7 +16,8 @@
     }
 
     Array.prototype.contains = function (obj) {
-        return this.indexOfObject(obj) >= 0;
+        // return this.indexOfObject(obj) >= 0; not works correcty
+        return this.indexOf(obj) >= 0;
     }
 
 })(window.angular);

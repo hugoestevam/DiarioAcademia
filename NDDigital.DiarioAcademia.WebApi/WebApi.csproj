@@ -216,7 +216,6 @@
     <Compile Include="Controllers\ClaimsController.cs" />
     <Compile Include="Controllers\GroupController.cs" />
     <Compile Include="Controllers\RolesController.cs" />
-    <Compile Include="Controllers\AlunoDTOesController.cs" />
     <Compile Include="Models\NDDigitalDiarioAcademiaWebApi.cs" />
     <Compile Include="Providers\CustomJwtFormat.cs" />
     <Compile Include="Providers\CustomOAuthProvider.cs" />

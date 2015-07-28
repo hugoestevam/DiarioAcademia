@@ -12,6 +12,10 @@
             manager: 1,
             writer: 3,
             reader: 7
+        })
+        .value('storageKeys', {
+            authData: 'authorizationData',
+            permissions:'da:permissions'
         });
 
    

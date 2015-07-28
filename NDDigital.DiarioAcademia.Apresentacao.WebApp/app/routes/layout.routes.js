@@ -13,7 +13,8 @@
             state: 'home',
             url: '/home',
             controller: 'homeController as vm',
-            templateUrl: '/app/views/layout/home.html'
+            templateUrl: '/app/views/layout/home.html',
+            allowAnnonymous:true
         });
     }
 
