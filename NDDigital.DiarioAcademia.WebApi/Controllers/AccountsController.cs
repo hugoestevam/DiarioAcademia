@@ -1,22 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Http;
-using System.Net.Http;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.Owin;
-using System.Threading.Tasks;
-using System.Security.Claims;
+﻿using Microsoft.AspNet.Identity;
 using NDDigital.DiarioAcademia.Infraestrutura.Orm.Identity;
 using NDDigital.DiarioAcademia.Infraestrutura.Orm.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Web.Http;
 
 namespace NDDigital.DiarioAcademia.WebApi.Controllers
 {
     [RoutePrefix("api/accounts")]
     public class AccountsController : BaseApiController
     {
-
         //[Authorize]
         [Route("users")]
         public IHttpActionResult GetUsers()
@@ -40,7 +35,6 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers
             }
 
             return NotFound();
-
         }
 
         [Authorize(Roles = "Admin")]
@@ -56,14 +50,12 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers
             }
 
             return NotFound();
-
         }
 
         [AllowAnonymous]
         [Route("create")]
         public async Task<IHttpActionResult> CreateUser(CreateUserBindingModel createUserModel)
         {
-
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -78,7 +70,6 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers
                 Level = 3,
                 JoinDate = DateTime.Now.Date,
             };
-
 
             IdentityResult addUserResult = await this.AppUserManager.CreateAsync(user, createUserModel.Password);
 
@@ -98,7 +89,6 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers
             Uri locationHeader = new Uri(Url.Link("GetUserById", new { id = user.Id }));
 
             return Created(locationHeader, TheModelFactory.Create(user));
-
         }
 
         [AllowAnonymous]
@@ -124,7 +114,7 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers
             }
         }
 
-       // [Authorize]
+        // [Authorize]
         [Route("ChangePassword")]
         public async Task<IHttpActionResult> ChangePassword(ChangePasswordBindingModel model)
         {
@@ -147,7 +137,6 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers
         [Route("user/{id:guid}")]
         public async Task<IHttpActionResult> DeleteUser(string id)
         {
-
             //Only SuperAdmin or Admin can delete users (Later when implement roles)
 
             var appUser = await this.AppUserManager.FindByIdAsync(id);
@@ -162,32 +151,29 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers
                 }
 
                 return Ok();
-
             }
 
             return NotFound();
-          
         }
 
-        [Authorize(Roles="Admin")]
+        [Authorize(Roles = "Admin")]
         [Route("user/{id:guid}/roles")]
         [HttpPut]
         public async Task<IHttpActionResult> AssignRolesToUser([FromUri] string id, [FromBody] string[] rolesToAssign)
         {
-
             var appUser = await this.AppUserManager.FindByIdAsync(id);
 
             if (appUser == null)
             {
                 return NotFound();
             }
-            
+
             var currentRoles = await this.AppUserManager.GetRolesAsync(appUser.Id);
 
             var rolesNotExists = rolesToAssign.Except(this.AppRoleManager.Roles.Select(x => x.Name)).ToArray();
 
-            if (rolesNotExists.Count() > 0) {
-
+            if (rolesNotExists.Count() > 0)
+            {
                 ModelState.AddModelError("", string.Format("Roles '{0}' does not exixts in the system", string.Join(",", rolesNotExists)));
                 return BadRequest(ModelState);
             }
@@ -209,20 +195,19 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers
             }
 
             return Ok();
-
         }
 
         [Authorize(Roles = "Admin")]
         [Route("user/{id:guid}/assignclaims")]
         [HttpPut]
-        public async Task<IHttpActionResult> AssignClaimsToUser([FromUri] string id, [FromBody] List<ClaimBindingModel> claimsToAssign) {
-
+        public async Task<IHttpActionResult> AssignClaimsToUser([FromUri] string id, [FromBody] List<ClaimBindingModel> claimsToAssign)
+        {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-             var appUser = await this.AppUserManager.FindByIdAsync(id);
+            var appUser = await this.AppUserManager.FindByIdAsync(id);
 
             if (appUser == null)
             {
@@ -231,14 +216,14 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers
 
             foreach (ClaimBindingModel claimModel in claimsToAssign)
             {
-                if (appUser.Claims.Any(c => c.ClaimType == claimModel.Type)) {
-                   
+                if (appUser.Claims.Any(c => c.ClaimType == claimModel.Type))
+                {
                     await this.AppUserManager.RemoveClaimAsync(id, ExtendedClaimsProvider.CreateClaim(claimModel.Type, claimModel.Value));
                 }
 
                 await this.AppUserManager.AddClaimAsync(id, ExtendedClaimsProvider.CreateClaim(claimModel.Type, claimModel.Value));
             }
-            
+
             return Ok();
         }
 
@@ -247,7 +232,6 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers
         [HttpPut]
         public async Task<IHttpActionResult> RemoveClaimsFromUser([FromUri] string id, [FromBody] List<ClaimBindingModel> claimsToRemove)
         {
-
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -270,6 +254,5 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers
 
             return Ok();
         }
-
     }
 }

@@ -6,7 +6,7 @@ namespace NDDigital.DiarioAcademia.Dominio.Entities
 {
     public class Aula : Entity
     {
-        private Aula()
+        public Aula()
         {
             Presencas = new List<Presenca>();
         }

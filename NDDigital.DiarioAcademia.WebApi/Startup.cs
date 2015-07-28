@@ -1,24 +1,19 @@
 ﻿using Microsoft.Owin;
+using Microsoft.Owin.Cors;
+using Microsoft.Owin.Security;
+using Microsoft.Owin.Security.DataHandler.Encoder;
+using Microsoft.Owin.Security.Jwt;
+using Microsoft.Owin.Security.OAuth;
+using NDDigital.DiarioAcademia.Infraestrutura.Orm.Identity;
 using NDDigital.DiarioAcademia.WebApi.App_Start;
+using NDDigital.DiarioAcademia.WebApi.Providers;
 using Owin;
 using System;
-using Microsoft.Owin.Cors;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Http;
-using System.Web.Http.Cors;
-using NDDigital.DiarioAcademia.Infraestrutura.Orm.Identity;
-using Microsoft.Owin.Security.OAuth;
-using NDDigital.DiarioAcademia.WebApi.Providers;
 using System.Configuration;
-using Microsoft.Owin.Security.DataHandler.Encoder;
-using System.Net.Http.Formatting;
-using Newtonsoft.Json.Serialization;
-using Microsoft.Owin.Security.Jwt;
-using Microsoft.Owin.Security;
+using System.Web.Http;
 
 [assembly: OwinStartup(typeof(NDDigital.DiarioAcademia.WebApi.Startup))]
+
 namespace NDDigital.DiarioAcademia.WebApi
 {
     public class Startup
@@ -65,7 +60,6 @@ namespace NDDigital.DiarioAcademia.WebApi
 
         private void ConfigureOAuthTokenConsumption(IAppBuilder app)
         {
-
             var issuer = "http://localhost:31648";
             string audienceId = ConfigurationManager.AppSettings["as:AudienceId"];
             byte[] audienceSecret = TextEncodings.Base64Url.Decode(ConfigurationManager.AppSettings["as:AudienceSecret"]);
@@ -82,6 +76,5 @@ namespace NDDigital.DiarioAcademia.WebApi
                     }
                 });
         }
-
     }
 }

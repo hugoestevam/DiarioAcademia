@@ -1,20 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Web.Http;
-using NDDigital.DiarioAcademia.Aplicacao.DTOs;
+﻿using NDDigital.DiarioAcademia.Aplicacao.DTOs;
 using NDDigital.DiarioAcademia.Aplicacao.Services;
-using NDDigital.DiarioAcademia.Dominio;
 using NDDigital.DiarioAcademia.Infraestrutura.Orm.Common;
 using NDDigital.DiarioAcademia.Infraestrutura.Orm.Repositories;
+using System.Collections.Generic;
+using System.Web.Http;
 
 namespace NDDigital.DiarioAcademia.WebApi.Controllers
 {
     public class AlunoController : ApiController
     {
-
         private AlunoService _alunoService;
 
         public AlunoController()
@@ -26,10 +20,9 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers
             var turmaRepository = new TurmaRepository(factory);
 
             var uow = new UnitOfWork(factory);
-            
-            _alunoService=new AlunoService(alunoRespository,turmaRepository,uow);
-        }
 
+            _alunoService = new AlunoService(alunoRespository, turmaRepository, uow);
+        }
 
         // GET: api/Aluno
         public IEnumerable<AlunoDTO> Get()

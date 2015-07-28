@@ -1,21 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Web.Http;
-using NDDigital.DiarioAcademia.Aplicacao.DTOs;
+﻿using NDDigital.DiarioAcademia.Aplicacao.DTOs;
 using NDDigital.DiarioAcademia.Aplicacao.Services;
 using NDDigital.DiarioAcademia.Infraestrutura.Orm.Common;
 using NDDigital.DiarioAcademia.Infraestrutura.Orm.Repositories;
+using System.Collections.Generic;
+using System.Web.Http;
 
 namespace NDDigital.DiarioAcademia.WebApi.Controllers
 {
     public class AulaController : ApiController
     {
-         private AulaService _aulaService;
+        private AulaService _aulaService;
 
-         public AulaController()
+        public AulaController()
         {
             var factory = new DatabaseFactory();
 
@@ -46,11 +42,9 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers
             _aulaService.Add(value);
         }
 
-
         // PUT: api/Aula/5
         public void Put(int id, [FromBody]AulaDTO value)
         {
-
         }
 
         // DELETE: api/Aula/5

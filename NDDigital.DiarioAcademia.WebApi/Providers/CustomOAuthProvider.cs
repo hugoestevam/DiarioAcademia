@@ -1,19 +1,14 @@
-﻿using Microsoft.Owin.Security;
+﻿using Microsoft.AspNet.Identity.Owin;
+using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.OAuth;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+using NDDigital.DiarioAcademia.Infraestrutura.Orm.Identity;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using System.Web;
-using Microsoft.AspNet.Identity.Owin;
-using NDDigital.DiarioAcademia.Infraestrutura.Orm.Identity;
 
 namespace NDDigital.DiarioAcademia.WebApi.Providers
 {
     public class CustomOAuthProvider : OAuthAuthorizationServerProvider
     {
-
         public override Task ValidateClientAuthentication(OAuthValidateClientAuthenticationContext context)
         {
             context.Validated();
@@ -22,7 +17,6 @@ namespace NDDigital.DiarioAcademia.WebApi.Providers
 
         public override async Task GrantResourceOwnerCredentials(OAuthGrantResourceOwnerCredentialsContext context)
         {
-
             var allowedOrigin = "*";
 
             context.OwinContext.Response.Headers.Add("Access-Control-Allow-Origin", new[] { allowedOrigin });
@@ -46,11 +40,10 @@ namespace NDDigital.DiarioAcademia.WebApi.Providers
             ClaimsIdentity oAuthIdentity = await user.GenerateUserIdentityAsync(userManager, "JWT");
             oAuthIdentity.AddClaims(ExtendedClaimsProvider.GetClaims(user));
             oAuthIdentity.AddClaims(RolesFromClaims.CreateRolesBasedOnClaims(oAuthIdentity));
-           
+
             var ticket = new AuthenticationTicket(oAuthIdentity, null);
-            
+
             context.Validated(ticket);
-           
         }
     }
 }

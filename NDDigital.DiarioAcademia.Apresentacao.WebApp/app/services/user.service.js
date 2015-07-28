@@ -28,12 +28,9 @@
 		};
 
 		self.getUserById = function (id) {
-			var promiseById = new Promise(function (acc) {
-				var user;
-				for (var i in users) {
-					if (users[i].id == id)
-						user = users[i];
-				}
+		    var promiseById = new Promise(function (acc) {
+		        var index = users.indexOfObject({ id: id });
+				var user = index >= 0 ? users[index] : undefined;
 				var response = {
 					data: user,
 					status: 200,

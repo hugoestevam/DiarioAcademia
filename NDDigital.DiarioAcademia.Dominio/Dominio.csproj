@@ -62,6 +62,7 @@
     <Compile Include="Entities\Aluno.cs" />
     <Compile Include="Exceptions\AlunoNaoEncontrado.cs" />
     <Compile Include="Entities\Aula.cs" />
+    <Compile Include="Exceptions\AulaException.cs" />
     <Compile Include="Exceptions\AulaNaoEncontrada.cs" />
     <Compile Include="Common\Entity.cs" />
     <Compile Include="Common\IdentityGenerator.cs" />

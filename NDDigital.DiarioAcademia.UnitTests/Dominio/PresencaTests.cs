@@ -1,17 +1,11 @@
-﻿using NDDigital.DiarioAcademia.Dominio;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Xunit;
-using FluentAssertions;
-using NDDigital.DiarioAcademia.Traits;
+﻿using FluentAssertions;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NDDigital.DiarioAcademia.Dominio.Entities;
+using System;
 
 namespace NDDigital.DiarioAcademia.UnitTests.Dominio
 {
-    [DominioTrait("")]
+    [TestClass]
     public class PresencaTests
     {
         private Presenca presenca;
@@ -23,12 +17,13 @@ namespace NDDigital.DiarioAcademia.UnitTests.Dominio
 
             Turma turma = new Turma(2012);
 
-            presenca = new Presenca(aula, new Aluno("Marco Antônio", turma), "F"); 
+            presenca = new Presenca(aula, new Aluno("Marco Antônio", turma), "F");
         }
 
-        [Fact(DisplayName = "Deveria retornar a data, nome do aluno e status da presença")]
-        public void Test_1()
-        {                        
+        [TestMethod]
+        [TestCategory("Camada de Domínio")]
+        public void Deveria_retornar_a_data_nome_do_aluno_e_status_da_presenca()
+        {
             presenca.ToString().Should().Contain("05/10/2000: Marco Antônio -> Faltou");
         }
     }

@@ -1,20 +1,15 @@
-﻿
-using Microsoft.AspNet.Identity;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Http;
-using System.Net.Http;
+﻿using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using NDDigital.DiarioAcademia.Infraestrutura.Orm.Identity;
 using NDDigital.DiarioAcademia.Infraestrutura.Orm.Models;
+using System.Net.Http;
+using System.Web;
+using System.Web.Http;
 
 namespace NDDigital.DiarioAcademia.WebApi.Controllers
 {
     public class BaseApiController : ApiController
     {
-
         private ModelFactory _modelFactory;
         private ApplicationUserManager _AppUserManager = null;
         private ApplicationRoleManager _AppRoleManager = null;

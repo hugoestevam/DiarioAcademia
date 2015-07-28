@@ -1,12 +1,8 @@
 ﻿using FizzWare.NBuilder;
 using NDDigital.DiarioAcademia.Aplicacao.DTOs;
-using NDDigital.DiarioAcademia.Dominio;
 using NDDigital.DiarioAcademia.Dominio.Entities;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NDDigital.DiarioAcademia.UnitTests
 {
@@ -15,13 +11,13 @@ namespace NDDigital.DiarioAcademia.UnitTests
         public static Aula CriaUmaAula()
         {
             return new Aula(DateTime.Now, new Turma(2014));
-        }        
+        }
 
         public static ChamadaDTO CriaRegistraPresencaCommand(IEnumerable<int> ids)
         {
             var comando = Builder<ChamadaDTO>.CreateNew()
                 .With(x => x.AnoTurma = 2014)
-                .With(x => x.Data = new DateTime(2000, 10, 10))               
+                .With(x => x.Data = new DateTime(2000, 10, 10))
                 .Build();
 
             foreach (var id in ids)
@@ -30,7 +26,7 @@ namespace NDDigital.DiarioAcademia.UnitTests
             }
 
             return comando;
-        }       
+        }
 
         internal static IEnumerable<Aluno> CriaListaAlunos(int qtdAlunos)
         {
