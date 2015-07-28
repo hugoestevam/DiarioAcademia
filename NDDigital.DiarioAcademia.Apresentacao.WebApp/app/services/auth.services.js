@@ -20,22 +20,6 @@
 
 
 
-        // var authorization = {
-        //     isAuthorized: function (authorizedRoles) {
-        //         self = this;
-        //
-        //         if (!authentication.isAuth)
-        //             return false;
-        //
-        //         if (!angular.isArray(authorizedRoles)) {
-        //             authorizedRoles = [authorizedRoles];
-        //         }
-        //
-        //         return authorizedRoles.indexOf(self.role) !== -1;
-        //     },
-        //     role: null
-        // };
-
         var authorization = {
             isAuthorized: function (state) {
                 self = this;
@@ -74,24 +58,12 @@
 
                 authentication.isAuth = true;
                 authentication.userName = loginData.userName;
-                //groupService.getGroupById(0)
-                //    .then(function (groups) {
-
-                //        var permissions = [];
-                //        //sim, isso é um adapter
-                //        for (var i in groups) {
-                //            var group = groups[i];
-                //            for (var j in group.permissions) {
-                //                var name = group.permissions[j].name;
-
-                //                if (permissions.indexOf(name) < 0) permissions.push(name);
-
-
-                //            }
-                //        }
-                //        authorization.groups = groups;
-                //        authorization.permissions = permissions;
-                //    });
+                groupService.getGroupByUsername(authentication.userName)
+                    .then(function (groups) {
+                        
+                        authorization.groups = groups;
+                        authorization.permissions = groupService.extractPermissions(groups);;
+                    });
 
                 logger.success("Bem vindo " + authentication.userName + "! ");
                 deferred.resolve(response);

@@ -63,6 +63,13 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers
             return Ok(Groups.First(g => g.Id == id));
         }
 
+        // GET: api/Group/username
+        public IHttpActionResult Get(string username)
+        {
+            //provisorio
+            return Ok(Groups[1]);
+        }
+
         // POST: api/Group
         public void Post([FromBody]Group value)
         {
@@ -81,26 +88,25 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers
 
     public class Group
     {
-        public Guid Id { get; set; }
-        public string Name { get; set; }
-        public List<ApplicationIdentityUser> User { get; set; }
-        public List<Permission> Permissions { get; set; }
-
         public Group()
         {
             Id = Guid.NewGuid();
         }
+
+        public Guid Id { get; set; }
+        public string Name { get; set; }
+        public List<ApplicationIdentityUser> User { get; set; }
+        public List<Permission> Permissions { get; set; }
     }
     public class Permission
     {
-        public Guid Id { get; set; }
-
-        public string Name { get; set; }
-
         public Permission()
         {
             Id = Guid.NewGuid();
         }
+
+        public Guid Id { get; set; }
+        public string Name { get; set; }
     }
     public class ApplicationIdentityUser
     {

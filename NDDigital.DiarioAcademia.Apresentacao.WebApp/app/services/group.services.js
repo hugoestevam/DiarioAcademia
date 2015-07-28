@@ -24,10 +24,19 @@
 
 		self.getGroupById = function (id) {
 
-			return $http.get(serviceUrl + '/' + id)
+		    return $http.get(serviceUrl + '/' + id)
 				 .then(logger.successCallback)
 				 .catch(logger.errorCallback)
 		};
+
+		self.getGroupByUsername = function (username) {
+
+		    return $http.get(serviceUrl + '/' + username)
+				 .then(logger.successCallback)
+				 .catch(logger.errorCallback)
+		};
+	    
+		
 
 		self.save = function (group) {
 			logger.success("Salvo com sucesso", group);
@@ -42,7 +51,23 @@
 		self.checkPermission = function (groups, state) {
 			return true;
 		};
+	    
+        
 
+		self.extractPermissions=function(groups) {
+		    var permissions = [];
+		    for (var i in groups) {
+		        var group = groups[i];
+		        for (var j in group.permissions) {
+		            var name = group.permissions[j].name;
+
+		            if (permissions.indexOf(name) < 0) permissions.push(name);
+
+
+		        }
+		    }
+		    return permissions;
+		}
 		var promise = new Promise(function (acc) {
 			var response = {
 				data: [{ id: 1, name: "Aluno" },
