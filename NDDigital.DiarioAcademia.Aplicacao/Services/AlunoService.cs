@@ -11,7 +11,7 @@ using System.Linq;
 using NDDigital.DiarioAcademia.Dominio.Entities;
 using NDDigital.DiarioAcademia.Dominio.Contracts;
 
-namespace NDDigital.DiarioAcademia.Aplicacao.Services
+namespace NDDigital.DiarioAcademia.Aplicacao.ORM.Services
 {
     public interface IAlunoService
     {

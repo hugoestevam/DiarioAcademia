@@ -7,8 +7,8 @@
     <ProjectGuid>{175B058E-A32A-491A-A1FD-9783EDC7A943}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>NDDigital.DiarioAcademia.Aplicacao</RootNamespace>
-    <AssemblyName>NDDigital.DiarioAcademia.Aplicacao</AssemblyName>
+    <RootNamespace>NDDigital.DiarioAcademia.Aplicacao.ORM</RootNamespace>
+    <AssemblyName>NDDigital.DiarioAcademia.Aplicacao.ORM</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>

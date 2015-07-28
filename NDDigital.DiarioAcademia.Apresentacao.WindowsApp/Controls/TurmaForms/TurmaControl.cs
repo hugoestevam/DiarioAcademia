@@ -7,14 +7,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using NDDigital.DiarioAcademia.Aplicacao.Services;
+using NDDigital.DiarioAcademia.Aplicacao.ORM.Services;
 using NDDigital.DiarioAcademia.Aplicacao.DTOs;
 
 namespace NDDigital.DiarioAcademia.Apresentacao.WindowsApp.Controls.TurmaForms
 {
     public partial class TurmaControl : UserControl
     {
-        private Aplicacao.Services.ITurmaService _turmaService;
+        private ITurmaService _turmaService;
 
         public TurmaControl()
         {

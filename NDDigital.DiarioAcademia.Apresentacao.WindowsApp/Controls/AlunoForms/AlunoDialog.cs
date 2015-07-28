@@ -1,5 +1,5 @@
 ﻿using NDDigital.DiarioAcademia.Aplicacao.DTOs;
-using NDDigital.DiarioAcademia.Aplicacao.Services;
+using NDDigital.DiarioAcademia.Aplicacao.ORM.Services;
 using NDDigital.DiarioAcademia.Dominio;
 using System;
 using System.Collections.Generic;

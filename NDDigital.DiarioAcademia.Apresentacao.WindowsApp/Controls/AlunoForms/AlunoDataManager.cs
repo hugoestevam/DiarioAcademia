@@ -1,4 +1,4 @@
-﻿using NDDigital.DiarioAcademia.Aplicacao.Services;
+﻿using NDDigital.DiarioAcademia.Aplicacao.ORM.Services;
 using NDDigital.DiarioAcademia.Aplicacao.DTOs;
 using NDDigital.DiarioAcademia.Apresentacao.WindowsApp.Controls.Shared;
 using NDDigital.DiarioAcademia.Infraestrutura.Orm.Common;

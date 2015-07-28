@@ -8,19 +8,20 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using NDDigital.DiarioAcademia.Aplicacao.DTOs;
+using NDDigital.DiarioAcademia.Aplicacao.ORM.Services;
 
 namespace NDDigital.DiarioAcademia.Apresentacao.WindowsApp.Controls.AulaForms
 {
     public partial class AulaControl : UserControl
     {
-        private Aplicacao.Services.IAulaService _aulaService;
+        private IAulaService _aulaService;
 
         public AulaControl()
         {
             InitializeComponent();
         }
 
-        public AulaControl(Aplicacao.Services.IAulaService aulaService) : this()
+        public AulaControl(IAulaService aulaService) : this()
         {
             this._aulaService = aulaService;
         }

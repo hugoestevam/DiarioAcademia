@@ -34,7 +34,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IntegrationTests", "NDDigit
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AcceptanceTests", "NDDigital.DiarioAcademia.AcceptanceTests\AcceptanceTests.csproj", "{FAC851DE-01EE-4BBE-98DF-B5BA902F9AFB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aplicacao", "NDDigital.DiarioAcademia.Aplicacao\Aplicacao.csproj", "{175B058E-A32A-491A-A1FD-9783EDC7A943}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aplicacao.ORM", "NDDigital.DiarioAcademia.Aplicacao\Aplicacao.ORM.csproj", "{175B058E-A32A-491A-A1FD-9783EDC7A943}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aplicacao.DTOs", "NDDigital.DiarioAcademia.CommandQuery\Aplicacao.DTOs.csproj", "{FAC6B57F-D8C9-4593-80F0-184F5CAB272C}"
 EndProject
@@ -59,6 +59,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infraestrutura.SQL", "NDDigital.DiarioAcademia.Infraestrutura.SQL\Infraestrutura.SQL.csproj", "{987E3D7F-EA01-45AA-8867-8E85899FC5FA}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1.5.2 External Services", "1.5.2 External Services", "{143BE81B-2851-48EC-952F-AD09E9016F0D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IntegrationTests.SQL", "NDDigital.DiarioAcademia.Integration.SQL\IntegrationTests.SQL.csproj", "{6810D8FC-8EA1-42F3-9AF8-B47709B2D98F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aplicacao.SQL", "NDDigital.DiarioAcademia.Aplicacao.SQL\Aplicacao.SQL.csproj", "{EB27D0BB-4B75-47A9-B9D3-B65C15AB076F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -118,6 +122,14 @@ Global
 		{987E3D7F-EA01-45AA-8867-8E85899FC5FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{987E3D7F-EA01-45AA-8867-8E85899FC5FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{987E3D7F-EA01-45AA-8867-8E85899FC5FA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6810D8FC-8EA1-42F3-9AF8-B47709B2D98F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6810D8FC-8EA1-42F3-9AF8-B47709B2D98F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6810D8FC-8EA1-42F3-9AF8-B47709B2D98F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6810D8FC-8EA1-42F3-9AF8-B47709B2D98F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EB27D0BB-4B75-47A9-B9D3-B65C15AB076F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EB27D0BB-4B75-47A9-B9D3-B65C15AB076F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EB27D0BB-4B75-47A9-B9D3-B65C15AB076F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EB27D0BB-4B75-47A9-B9D3-B65C15AB076F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -145,5 +157,7 @@ Global
 		{5892B3AB-0E7B-4983-83BB-355146B9D5DE} = {EB2A9331-52C7-4E23-AF46-B700C8055769}
 		{987E3D7F-EA01-45AA-8867-8E85899FC5FA} = {5892B3AB-0E7B-4983-83BB-355146B9D5DE}
 		{143BE81B-2851-48EC-952F-AD09E9016F0D} = {EB2A9331-52C7-4E23-AF46-B700C8055769}
+		{6810D8FC-8EA1-42F3-9AF8-B47709B2D98F} = {43379275-7C91-4A46-8B0C-F3E23A341ABE}
+		{EB27D0BB-4B75-47A9-B9D3-B65C15AB076F} = {2EE4498A-325B-4D91-A17F-84A7BF302C37}
 	EndGlobalSection
 EndGlobal

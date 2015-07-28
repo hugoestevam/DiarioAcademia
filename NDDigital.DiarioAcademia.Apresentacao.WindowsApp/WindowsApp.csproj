@@ -174,9 +174,9 @@
     <None Include="Resources\Symbol Check.png" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\NDDigital.DiarioAcademia.Aplicacao\Aplicacao.csproj">
+    <ProjectReference Include="..\NDDigital.DiarioAcademia.Aplicacao\Aplicacao.ORM.csproj">
       <Project>{175b058e-a32a-491a-a1fd-9783edc7a943}</Project>
-      <Name>Aplicacao</Name>
+      <Name>Aplicacao.ORM</Name>
     </ProjectReference>
     <ProjectReference Include="..\NDDigital.DiarioAcademia.CommandQuery\Aplicacao.DTOs.csproj">
       <Project>{fac6b57f-d8c9-4593-80f0-184f5cab272c}</Project>

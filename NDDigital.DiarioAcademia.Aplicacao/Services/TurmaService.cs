@@ -6,7 +6,7 @@ using NDDigital.DiarioAcademia.Infraestrutura.Orm.Common;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace NDDigital.DiarioAcademia.Aplicacao.Services
+namespace NDDigital.DiarioAcademia.Aplicacao.ORM.Services
 {
     public interface ITurmaService
     {
