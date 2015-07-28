@@ -52,8 +52,8 @@
                 }
                 else {
                     authService.lastState = toState;
-                  //  event.preventDefault();
-                    //$state.go('login');
+                    event.preventDefault();
+                    $state.go('login');
                 }
 
             });
