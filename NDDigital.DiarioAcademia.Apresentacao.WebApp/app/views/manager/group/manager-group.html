@@ -1,0 +1,28 @@
+﻿<div class="row">
+    <div class="col-sm-12">
+        <div class="container-user">
+            <div class="row">
+                <h1 class="page-header">Grupos</h1>
+                <ol class="breadcrumb">
+                    <li>
+                        <i class="fa fa-home"></i>  <a ui-sref="home">Inicio</a>
+                    </li>
+                    <li>
+                        <i class="fa fa-wrench"></i> <a style="cursor: pointer">Gerenciador</a>
+                    </li>
+                    <li class="active">
+                        <i class="fa fa-users"></i> <a ui-sref="manager.roles">Grupos</a>
+                    </li>
+                </ol>
+            </div>
+            <br />
+        </div>
+    </div>
+
+    <div class="col-sm-6">
+        <div ng-include="'app/views/manager/group/manager-group-list.html'"></div>
+    </div>
+    <div class="col-sm-6">
+        <div ui-view></div>
+    </div>
+</div>

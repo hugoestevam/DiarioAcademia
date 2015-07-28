@@ -24,9 +24,15 @@
             templateUrl: '/app/views/manager/user/manager-user-edit.html',
             controller: "managerUserEditController as vm"
         }, {
-            state: 'manager.roles',
+            state: 'manager.group',
             url: '/roles',
-            templateUrl: '/app/templates/components/inner-view.html'
+            templateUrl: '/app/views/manager/group/manager-group.html',
+            controller: "managerGroupListController as vm"
+        }, {
+            state: 'manager.group.edit',
+            url: '/edit/:groupId',
+            templateUrl: '/app/views/manager/group/manager-group-edit.html',
+            controller: "managerGroupEditController as vm"
         })
     }
 

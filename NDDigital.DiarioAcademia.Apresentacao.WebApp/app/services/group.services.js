@@ -13,6 +13,10 @@
 		var self = this;
 		var serviceUrl = baseUrl + "api/group";
 
+		var groups =  [{ id: 1, name: "Aluno" },
+					   { id: 2, name: "Admin" },
+					   { id: 3, name: "RH" }];
+
 		//public methods
 		self.getGroups = function () {
 			return promise;
@@ -23,6 +27,16 @@
 		};
 
 		self.getGroupById = function (id) {
+		   return new Promise(function (acc) {
+		       var index = groups.indexOfObject({ id: id });
+		       var group = index >= 0 ? groups[index] : undefined;
+		        var response = {
+		            data: group,
+		            status: 200,
+		            statusText: 'Fetched data'
+		        };
+		        acc(response);
+		    });
 
 		    return $http.get(serviceUrl + '/' + id)
 				 .then(logger.successCallback)
@@ -70,9 +84,7 @@
 		}
 		var promise = new Promise(function (acc) {
 			var response = {
-				data: [{ id: 1, name: "Aluno" },
-					   { id: 2, name: "Admin" },
-					   { id: 3, name: "RH" }],
+			    data: groups,
 				status: 200,
 				statusText: 'Fetched data'
 			};
