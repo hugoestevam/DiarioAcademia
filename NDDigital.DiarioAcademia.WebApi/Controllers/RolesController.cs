@@ -11,7 +11,6 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers
     [RoutePrefix("api/roles")]
     public class RolesController : BaseApiController
     {
-
         [Route("{id:guid}", Name = "GetRoleById")]
         public async Task<IHttpActionResult> GetRole(string Id)
         {
@@ -23,7 +22,6 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers
             }
 
             return NotFound();
-
         }
 
         [Route("", Name = "GetAllRoles")]
@@ -54,13 +52,11 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers
             Uri locationHeader = new Uri(Url.Link("GetRoleById", new { id = role.Id }));
 
             return Created(locationHeader, TheModelFactory.Create(role));
-
         }
 
         [Route("{id:guid}")]
         public async Task<IHttpActionResult> DeleteRole(string Id)
         {
-
             var role = await this.AppRoleManager.FindByIdAsync(Id);
 
             if (role != null)
@@ -76,7 +72,6 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers
             }
 
             return NotFound();
-
         }
 
         [Route("ManageUsersInRole")]
@@ -108,7 +103,6 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers
                     {
                         ModelState.AddModelError("", String.Format("User: {0} could not be added to role", user));
                     }
-
                 }
             }
 

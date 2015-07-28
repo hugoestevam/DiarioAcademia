@@ -7,29 +7,87 @@ using System.Threading.Tasks;
 using System.Linq.Expressions;
 using NDDigital.DiarioAcademia.Dominio.Entities;
 using NDDigital.DiarioAcademia.Dominio.Contracts;
+using NDDigital.DiarioAcademia.Dominio.Exceptions;
+using System.Data;
 
 namespace NDDigital.DiarioAcademia.Infraestrutura.SQL.Repositories
 {
     public class AulaRepositoryImpl : IAulaRepository
     {
+        #region Querys
+
+        public const string SqlInsert =
+            "INSERT INTO TBAula (DataAula) " +
+                         "VALUES ({0}DataAula)";
+
+        public const string SqlUpdate =
+         "UPDATE TBAula SET DataAula = {0}DataAula " +
+                      "WHERE Id = {0}Id";
+
+        public const string SqlDelete =
+         "DELETE FROM TBAula " +
+                       "WHERE Id = {0}Id";
+
+        public const string SqlSelect =
+         "SELECT * FROM TBAula";
+
+        public const string SqlSelectbId =
+        "SELECT * FROM TBAula WHERE Id = {0}Id";
+
+        public const string SqlSelectTexto =
+         "SELECT * FROM TBAula WHERE DataAula = {0}DataAula";
+
+        #endregion Querys
+
         public Aula Add(Aula entity)
         {
-            throw new NotImplementedException();
+            try
+            {
+                Db.Insert(SqlInsert, Take(entity));
+            }
+            catch (AulaException te)
+            {
+                throw new AulaException("Erro ao tentar adicionar uma Aula!" + te.Message);
+            }
+            return entity;
         }
 
         public void Delete(int id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var aulaRemovida = GetById(id);
+                Db.Delete(SqlDelete, Take(aulaRemovida));
+            }
+            catch (AulaException te)
+            {
+                throw new AulaException("Erro ao tentar deletar uma Aula!" + te.Message);
+            }
         }
 
         public void Delete(Aula entity)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var aulaRemovida = GetById(entity.Id);
+                Db.Delete(SqlDelete, Take(aulaRemovida));
+            }
+            catch (AulaException te)
+            {
+                throw new AulaException("Erro ao tentar deletar uma Aula!" + te.Message);
+            }
         }
 
         public IEnumerable<Aula> GetAll()
         {
-            throw new NotImplementedException();
+            try
+            {
+                return Db.GetAll<Aula>(SqlSelect, Make);
+            }
+            catch (AulaException te)
+            {
+                throw new AulaException("Erro ao tentar listar todas as Aulas!" + te.Message);
+            }
         }
 
         public IEnumerable<Aula> GetAllByTurma(int ano)
@@ -49,7 +107,16 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.SQL.Repositories
 
         public Aula GetById(int id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var parms = new object[] { "Id", id };
+
+                return Db.Get(SqlSelectbId, Make, parms);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
         }
 
         public Aula GetByIdIncluding(int id, params Expression<Func<Aula, object>>[] includeProperties)
@@ -64,7 +131,34 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.SQL.Repositories
 
         public void Update(Aula entity)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var aulaEditada = GetById(entity.Id);
+                Db.Update(SqlUpdate, Take(aulaEditada));
+            }
+            catch (AulaException te)
+            {
+                throw new AulaException("Erro ao tentar editar uma Aula!" + te.Message);
+            }
+        }
+
+        private static Aula Make(IDataReader reader)
+        {
+            Aula aula = new Aula();
+
+            aula.Id = Convert.ToInt32(reader["Id"]);
+            aula.Data = Convert.ToDateTime(reader["DataAula"]);
+
+            return aula;
+        }
+
+        private static object[] Take(Aula aula)
+        {
+            return new object[]
+            {
+                "Id", aula.Id,
+                "DataAula", aula.Data,
+            };
         }
     }
 }

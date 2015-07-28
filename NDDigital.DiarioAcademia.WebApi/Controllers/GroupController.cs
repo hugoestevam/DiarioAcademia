@@ -1,19 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 
 namespace NDDigital.DiarioAcademia.WebApi.Controllers
 {
     public class GroupController : ApiController
     {
-        List<Group> Groups { get; set; }
+        private List<Group> Groups { get; set; }
 
         public GroupController()
         {
-
             var alunoList = new Permission { Name = "aluno.list" };
             var alunoEdit = new Permission { Name = "aluno.edit" };
             var alunoCreate = new Permission { Name = "aluno.create" };
@@ -37,7 +34,6 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers
                     {
                         alunoList,
                         alunoEdit,
-                        
                     }
                 },
                 new Group
@@ -98,6 +94,7 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers
         public List<ApplicationIdentityUser> User { get; set; }
         public List<Permission> Permissions { get; set; }
     }
+
     public class Permission
     {
         public Permission()
@@ -108,6 +105,7 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers
         public Guid Id { get; set; }
         public string Name { get; set; }
     }
+
     public class ApplicationIdentityUser
     {
         public string Name { get; set; }

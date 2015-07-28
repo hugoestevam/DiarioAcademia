@@ -1,7 +1,6 @@
 ﻿using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.DataHandler.Encoder;
 using System;
-using System.Collections.Generic;
 using System.Configuration;
 using System.IdentityModel.Tokens;
 using Thinktecture.IdentityModel.Tokens;
@@ -10,7 +9,6 @@ namespace NDDigital.DiarioAcademia.WebApi.Providers
 {
     public class CustomJwtFormat : ISecureDataFormat<AuthenticationTicket>
     {
-    
         private readonly string _issuer = string.Empty;
 
         public CustomJwtFormat(string issuer)
@@ -34,7 +32,7 @@ namespace NDDigital.DiarioAcademia.WebApi.Providers
             var signingKey = new HmacSigningCredentials(keyByteArray);
 
             var issued = data.Properties.IssuedUtc;
-            
+
             var expires = data.Properties.ExpiresUtc;
 
             var token = new JwtSecurityToken(_issuer, audienceId, data.Identity.Claims, issued.Value.UtcDateTime, expires.Value.UtcDateTime, signingKey);

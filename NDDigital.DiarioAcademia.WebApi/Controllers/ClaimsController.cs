@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
+﻿using System.Linq;
 using System.Security.Claims;
 using System.Web.Http;
 
@@ -16,7 +12,7 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers
         public IHttpActionResult GetClaims()
         {
             var identity = User.Identity as ClaimsIdentity;
-            
+
             var claims = from c in identity.Claims
                          select new
                          {
@@ -27,6 +23,5 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers
 
             return Ok(claims);
         }
-
     }
 }

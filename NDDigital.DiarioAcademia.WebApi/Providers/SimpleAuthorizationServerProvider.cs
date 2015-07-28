@@ -1,15 +1,11 @@
-﻿using Microsoft.AspNet.Identity.EntityFramework;
-using Microsoft.Owin.Security.OAuth;
-using NDDigital.DiarioAcademia.Infraestrutura.Orm.Repositories;
+﻿using Microsoft.Owin.Security.OAuth;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace NDDigital.DiarioAcademia.WebApi.Providers
 {
-   
     public class SimpleAuthorizationServerProvider : OAuthAuthorizationServerProvider
     {
-
         public override async Task ValidateClientAuthentication(OAuthValidateClientAuthenticationContext context)
         {
             context.Validated();
@@ -35,7 +31,6 @@ namespace NDDigital.DiarioAcademia.WebApi.Providers
             identity.AddClaim(new Claim("role", "user"));
 
             context.Validated(identity);
-
         }
     }
 }
