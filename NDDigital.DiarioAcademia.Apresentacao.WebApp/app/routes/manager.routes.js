@@ -16,12 +16,12 @@
         }, {
             state: 'manager.user',
             url: '/user',
-            templateUrl: '/app/views/manager/manager-user-list.html',
+            templateUrl: '/app/views/manager/user/manager-user-list.html',
             controller: "managerUserListController as vm"
         }, {
             state: 'manager.useredit',
             url: '/edit/user/:userId',
-            templateUrl: '/app/views/manager/manager-user-edit.html',
+            templateUrl: '/app/views/manager/user/manager-user-edit.html',
             controller: "managerUserEditController as vm"
         }, {
             state: 'manager.roles',

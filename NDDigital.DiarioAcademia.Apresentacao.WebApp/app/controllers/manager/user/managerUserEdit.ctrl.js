@@ -3,9 +3,9 @@
         .module('controllers.module')
         .controller('managerUserEditController', managerUserEditController);
 
-    managerUserEditController.$inject = ['userService', "$stateParams", '$scope', '$state']
+    managerUserEditController.$inject = ['userService', 'groupService', "$stateParams", '$scope', '$state'];
 
-    function managerUserEditController(managerService, params, $scope, $state) {
+    function managerUserEditController(userService, groupService, params, $scope, $state) {
         var vm = this;
         vm.user = {};
         vm.groups = [];
@@ -25,25 +25,27 @@
 
         activate();
         function activate() {
-            managerService.getUserById(params.userId).then(function (results) {
+            userService.getUserById(params.userId).then(function (results) {
                 vm.user = results.data;
 
                 originalUser = $.extend(true, {}, vm.user);;
                 vm.name = vm.user.fullName;
                 vm.bodyModelEdit += vm.name;
             });
-            for (var i = 0; i < 10; i++) {
-                vm.groups.push({ id: i, name: "Group " + i });
-            }
+            vm.groups = groupService.getGroups();
+            originalGroups = vm.groups.slice();
         }
 
 
-        function editUser() {
-            $('body').removeClass('modal-open');
-            $('.modal-backdrop').remove();
-            //TODO
-            $state.go('manager.user');
+        function editUser() {       
+            userService.edit(user).then(function () {
+                $('body').removeClass('modal-open');
+                $('.modal-backdrop').remove();
+                $state.go('manager.user');
+            });        
         }
+
+        //Control Components Functions
 
         function isChecked(index, group) {
             var text = $('#textGroup' + index);
@@ -56,6 +58,9 @@
             if (result) {
                 text.addClass('border-success');
                 check.addClass('border-success');
+            } else {
+                text.removeClass('border-success');
+                check.removeClass('border-success');
             }
             return result;
         }
@@ -76,11 +81,8 @@
         }
 
         function clear() {
-            vm.groups = [];
             vm.user = $.extend(true, {}, originalUser);
-            for (var i = 0; i < 10; i++) {
-                vm.groups.push({ id: i, name: "Group " + i });
-            }
+            vm.groups = originalGroups.slice();
         }
 
     }

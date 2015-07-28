@@ -86,15 +86,27 @@
     <Content Include="app\libs\angular\angular.min.js.map" />
     <Content Include="app\libs\jquery\jquery-2.1.1.min.map" />
     <Content Include="app\routes\manager.routes.js" />
-    <Content Include="app\services\manager.service.js" />
+    <Content Include="app\services\group.services.js" />
     <Content Include="app\services\user.service.js" />
     <Content Include="app\templates\layout\top-menu.html" />
-    <Content Include="app\views\manager\manager-user-edit.html" />
-    <Content Include="app\views\manager\manager-user-list.html" />
+    <Content Include="app\views\manager\user\manager-user-edit.html" />
+    <Content Include="app\views\manager\user\manager-user-list.html" />
+    <Content Include="content\animations\animations.css">
+      <DependentUpon>animations.less</DependentUpon>
+    </Content>
+    <Content Include="content\animations\animations.min.css">
+      <DependentUpon>animations.css</DependentUpon>
+    </Content>
     <Content Include="content\layout\manager.css">
       <DependentUpon>manager.less</DependentUpon>
     </Content>
     <Content Include="content\layout\manager.min.css">
+      <DependentUpon>manager.css</DependentUpon>
+    </Content>
+    <Content Include="content\theme\default\manager.css">
+      <DependentUpon>manager.less</DependentUpon>
+    </Content>
+    <Content Include="content\theme\default\manager.min.css">
       <DependentUpon>manager.css</DependentUpon>
     </Content>
     <Content Include="gulpfile.js" />
@@ -111,6 +123,14 @@
     <Content Include="content\layout\manager.less" />
     <Content Include="content\layout\manager.css.map">
       <DependentUpon>manager.css</DependentUpon>
+    </Content>
+    <Content Include="content\theme\default\manager.less" />
+    <Content Include="content\theme\default\manager.css.map">
+      <DependentUpon>manager.css</DependentUpon>
+    </Content>
+    <Content Include="content\animations\animations.less" />
+    <Content Include="content\animations\animations.css.map">
+      <DependentUpon>animations.css</DependentUpon>
     </Content>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

@@ -47,11 +47,12 @@
 
         <div class="col-sm-4 text-center" >
             <label>Grupos</label>
-            <div class="input-group" ng-repeat="group in vm.groups" style="padding-bottom: 2%" >
-                <span class="input-group-addon" id='chkGroup{{$index}}'>
-                    <input id="chkG{{$index}}" type="checkbox" ng-checked="vm.isChecked($index, group)" ng-click="vm.changeGroup($index, group, chkGroups)" ng-model="chkGroups">
+            <div class="input-group" ng-repeat="group in vm.groups" style="padding-bottom: 2%">
+                <span class="input-group-addon" id='chkGroup{{$index}}' >
+                    <input id="chkG{{$index}}" type="checkbox" ng-checked="vm.isChecked($index, group)"
+                           ng-click="vm.changeGroup($index, group, chkGroups)" ng-model="chkGroups">
                 </span>
-                <input type="text" class="form-control" value="{{group.name}}" disabled style="cursor: default" id='textGroup{{$index}}'>
+                <input type="text" class="form-control" value="{{group.name}}" disabled id='textGroup{{$index}}' ">
             </div>
         </div>
 

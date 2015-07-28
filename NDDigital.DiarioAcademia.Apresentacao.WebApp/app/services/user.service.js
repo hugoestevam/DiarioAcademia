@@ -78,7 +78,7 @@
 				"level": 3,
 				"joinDate": "2015-07-22T00:00:00",
 				"groups": [
-					{ id: 0, name: "Aluno" }
+					{ id: 1, name: "Aluno" }
 				]
 			}, {
 				"url": "http://localhost:50299/api/accounts/user/fedbf2b8-1c5c-4300-bac9-e08e2d7f630d",
@@ -90,9 +90,9 @@
 				"level": 3,
 				"joinDate": "2015-05-22T00:00:00",
 				"groups": [
-					{ id: 0, name: "Aluno" },
-					{ id: 1, name: "Admin" },
-					{ id: 2, name: "RH" }
+					{ id: 1, name: "Aluno" },
+					{ id: 2, name: "Admin" },
+					{ id: 3, name: "RH" }
 				]
 			}, {
 				"url": "http://localhost:50299/api/accounts/user/fedbf2b8-1c5c-4300-bac9-e08e2d7f630d",

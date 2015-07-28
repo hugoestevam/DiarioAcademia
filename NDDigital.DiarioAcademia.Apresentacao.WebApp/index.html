@@ -24,10 +24,12 @@
         <!--endinject -->
 
         <!--inject:appcss-->
+        <link rel="stylesheet" href="/content/animations/animations.css">
         <link rel="stylesheet" href="/content/base/morris.css">
         <link rel="stylesheet" href="/content/base/sb-admin.css">
         <link rel="stylesheet" href="/content/base/switcher.css">
         <link rel="stylesheet" href="/content/layout/manager.css">
+        <link rel="stylesheet" href="/content/theme/default/manager.css">
         <!--endinject -->
     <!--endbuild -->
 </head>
@@ -36,7 +38,7 @@
     <div ng-controller="shellController as shell">
         <div id="wrapper">
             <div class="row" data-ng-include="'/app/templates/layout/navbar.html'"></div>
-            <div ui-view style="position:relative"></div>
+            <div ui-view class="fader-animation"></div>
         </div>
     </div>
 
@@ -96,18 +98,18 @@
         <script src="/app/services/authInterceptor.services.js"></script>
         <script src="/app/services/cep.services.js"></script>
         <script src="/app/services/chamada.services.js"></script>
+        <script src="/app/services/group.services.js"></script>
         <script src="/app/services/logger.services.js"></script>
-        <script src="/app/services/manager.service.js"></script>
         <script src="/app/services/turma.services.js"></script>
         <script src="/app/services/user.service.js"></script>
         <!--endinject-->
 
         <!--inject:controllers-->  
-        <script src="/app/controllers/aula/aulaCreate.ctrl.js"></script>  
-        <script src="/app/controllers/aula/aulasList.ctrl.js"></script>  
         <script src="/app/controllers/aluno/alunoCreate.ctrl.js"></script>  
         <script src="/app/controllers/aluno/alunoDetails.ctrl.js"></script>  
         <script src="/app/controllers/aluno/alunosList.ctrl.js"></script>  
+        <script src="/app/controllers/aula/aulaCreate.ctrl.js"></script>  
+        <script src="/app/controllers/aula/aulasList.ctrl.js"></script>  
         <script src="/app/controllers/authentication/login.ctrl.js"></script>  
         <script src="/app/controllers/authentication/signup.ctrl.js"></script>  
         <script src="/app/controllers/chamada/chamada.ctrl.js"></script>  
