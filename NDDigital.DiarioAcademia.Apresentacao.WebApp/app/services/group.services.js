@@ -31,7 +31,7 @@
 
 		self.getGroupByUsername = function (username) {
 
-		    return $http.get(serviceUrl + '/' + username)
+		    return $http.get(serviceUrl + '?username=' + username)
 				 .then(logger.successCallback)
 				 .catch(logger.errorCallback)
 		};
@@ -48,8 +48,10 @@
 			//$http.delete(serviceUrl + "/" + group.id);
 		};
 
-		self.checkPermission = function (groups, state) {
-			return true;
+		self.checkPermission = function (username, state) {
+		    return $http.get(serviceUrl + "?username=" + username + "&state=" + state)
+		        .then(logger.successCallback)
+		        .catch(logger.errorCallback);
 		};
 	    
         
@@ -60,7 +62,7 @@
 		        var group = groups[i];
 		        for (var j in group.permissions) {
 		            var name = group.permissions[j].name;
-
+                    if(name)
 		            if (permissions.indexOf(name) < 0) permissions.push(name);
 
 

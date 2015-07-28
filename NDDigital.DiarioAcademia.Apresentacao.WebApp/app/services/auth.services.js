@@ -19,9 +19,8 @@
         var _lastState = { name: redirectState };
 
 
-
         var authorization = {
-            isAuthorized: function (state) {
+            isAuthorized: function(state) {
                 self = this;
                 if (!authentication.isAuth)
                     return false;
@@ -31,17 +30,18 @@
             role: null
         };
 
-        var saveRegistration = function (registration) {
+        var saveRegistration = function(registration) {
 
             logOut();
 
-            return $http.post(serviceBase + 'api/accounts/create/', registration).then(function (response) {
+            return $http.post(serviceBase + 'api/accounts/create/', registration).then(function(response) {
                 return response;
+                //todo salvar em local storage
             });
 
         };
 
-        var login = function (loginData) {
+        var login = function(loginData) {
 
             var data = "grant_type=password&username=" + loginData.userName + "&password=" + loginData.password;
 
@@ -49,7 +49,7 @@
 
             var headers = { 'Content-Type': 'application/x-www-form-urlencoded' };
 
-            $http.post(serviceBase + 'oauth/token', data, { headers: headers }).success(function (response) {
+            $http.post(serviceBase + 'oauth/token', data, { headers: headers }).success(function(response) {
 
                 localStorageService.set('authorizationData', {
                     token: response.access_token,
@@ -59,16 +59,17 @@
                 authentication.isAuth = true;
                 authentication.userName = loginData.userName;
                 groupService.getGroupByUsername(authentication.userName)
-                    .then(function (groups) {
-                        
+                    .then(function(groups) {
+
                         authorization.groups = groups;
-                        authorization.permissions = groupService.extractPermissions(groups);;
+                        authorization.permissions = groupService.extractPermissions(groups);
+                        ;
                     });
 
                 logger.success("Bem vindo " + authentication.userName + "! ");
                 deferred.resolve(response);
 
-            }).error(function (err, status) {
+            }).error(function(err, status) {
 
                 logger.error("Não autorizado");
 
@@ -81,7 +82,7 @@
             return deferred.promise;
 
         };
-        var logOut = function () {
+        var logOut = function() {
 
             localStorageService.remove('authorizationData');
 
@@ -90,7 +91,7 @@
 
         };
 
-        var fillAuthData = function () {
+        var fillAuthData = function() {
 
             var authData = localStorageService.get('authorizationData');
             if (authData) {
@@ -99,12 +100,20 @@
             }
         };
 
-        self.saveRegistration = saveRegistration;
+        var checkAuthorize = function (toState) {
+            if (authorization.permissions)
+            return authorization.permissions.contains(toState);
+
+        };
+
+
+    self.saveRegistration = saveRegistration;
         self.login = login;
         self.logOut = logOut;
         self.fillAuthData = fillAuthData;
         self.authentication = authentication;
         self.authorization = authorization;
+        self.checkAuthorize = checkAuthorize;
 
 
         var lastStateProperty = {

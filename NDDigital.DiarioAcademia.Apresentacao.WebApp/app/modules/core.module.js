@@ -36,27 +36,34 @@
                });
 
     };
-     runStateChangeStart.$inject = ['$rootScope', '$state', 'authService','groupService'];
-     function runStateChangeStart($rootScope, $state, authService,groupSevice) {
+     runStateChangeStart.$inject = ['$rootScope', '$state', 'authService'];
+     function runStateChangeStart($rootScope, $state, authService) {
          
          $rootScope.$on('$stateChangeStart',
             function (event, toState, toParams, fromState, fromParams) {
 
                 if (toState.data.allowAnnonymous) return;
-
-                if (authService.authentication.isAuth){ 
-
-                if (groupSevice.checkPermission(authService.authorization.groups, toState.name)) {
-                    return;
-                   } 
-                }
-                else {
-                    authService.lastState = toState;
-                    event.preventDefault();
-                    $state.go('login');
-                }
                 
+                var stateToGo = 'login';
 
+
+                if (authService.authentication.isAuth) {
+
+
+                    var hasPermission=authService.checkAuthorize(toState.name);
+
+                    stateToGo = hasPermission ? toState.name : stateToGo;
+                    
+                    authService.lastState = toState;
+
+
+                    if (hasPermission) return;
+
+                    event.preventDefault();
+                    $state.go(stateToGo);
+
+
+                }
 
 
 

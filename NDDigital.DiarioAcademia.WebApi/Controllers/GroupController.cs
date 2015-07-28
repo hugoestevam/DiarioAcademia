@@ -67,7 +67,14 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers
         public IHttpActionResult Get(string username)
         {
             //provisorio
-            return Ok(Groups[1]);
+            return Ok(new List<Group>{Groups[0]});
+        }
+
+        // GET: api/Group/username
+        public IHttpActionResult Get(string username, string state)
+        {
+            //provisorio
+            return Ok(true);
         }
 
         // POST: api/Group
