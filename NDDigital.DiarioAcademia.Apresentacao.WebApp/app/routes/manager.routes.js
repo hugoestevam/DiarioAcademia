@@ -25,7 +25,7 @@
             controller: "managerUserEditController as vm"
         }, {
             state: 'manager.group',
-            url: '/roles',
+            url: '/group',
             templateUrl: '/app/views/manager/group/manager-group.html',
             controller: "managerGroupListController as vm"
         }, {

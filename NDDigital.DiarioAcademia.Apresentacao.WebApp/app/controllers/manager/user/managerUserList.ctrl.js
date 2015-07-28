@@ -42,14 +42,15 @@
             $state.go('manager.useredit', { userId: user.id });
         }
 
-        function remove(user) {
-            managerService.delete(user).then(function (results) {
+        function remove() {
+            managerService.delete(vm.user).then(function (results) {
                 users.remove(user);
                 vm.users.remove(user);
             });
         }
 
         function modal(user) {
+            vm.user = user;
             vm.titleModelRemove = 'Exclusão';
             vm.bodyModelRemove = 'Remover ' + user.fullName + ' (' + user.userName + ') ?'
         }

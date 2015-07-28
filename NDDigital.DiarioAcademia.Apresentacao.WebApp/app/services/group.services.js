@@ -13,9 +13,9 @@
 		var self = this;
 		var serviceUrl = baseUrl + "api/group";
 
-		var groups =  [{ id: 1, name: "Aluno" },
-					   { id: 2, name: "Admin" },
-					   { id: 3, name: "RH" }];
+		var groups = [{ id: 1, name: "Aluno", permissions: [{ id: 0, name: "aluno.list" }] },
+					   { id: 2, name: "Admin", permissions: [{ id: 0, name: "aluno.list" }, { id: 1, name: "aluno.create" }] },
+					   { id: 3, name: "RH", permissions: [{ id: 0, name: "aluno.list" }] }];
 
 		//public methods
 		self.getGroups = function () {
@@ -27,33 +27,34 @@
 		};
 
 		self.getGroupById = function (id) {
-		   return new Promise(function (acc) {
-		       var index = groups.indexOfObject({ id: id });
-		       var group = index >= 0 ? groups[index] : undefined;
-		        var response = {
-		            data: group,
-		            status: 200,
-		            statusText: 'Fetched data'
-		        };
-		        acc(response);
-		    });
+			return new Promise(function (acc) {
+				var index = groups.indexOfObject({ id: id });
+				var group = index >= 0 ? groups[index] : undefined;
+				var response = {
+					data: group,
+					status: 200,
+					statusText: 'Fetched data'
+				};
+				acc(response);
+			});
 
-		    return $http.get(serviceUrl + '/' + id)
+			return $http.get(serviceUrl + '/' + id)
 				 .then(logger.successCallback)
 				 .catch(logger.errorCallback)
 		};
 
 		self.getGroupByUsername = function (username) {
 
-		    return $http.get(serviceUrl + '?username=' + username)
+			return $http.get(serviceUrl + '?username=' + username)
 				 .then(logger.successCallback)
 				 .catch(logger.errorCallback)
 		};
-	    
-		
+
+
 
 		self.save = function (group) {
 			logger.success("Salvo com sucesso", group);
+			return new Promise(function (acc) { acc() })
 			// $http.post(serviceUrl, convertToDto(group));
 		};
 
@@ -63,30 +64,28 @@
 		};
 
 		self.checkPermission = function (username, state) {
-		    return $http.get(serviceUrl + "?username=" + username + "&state=" + state)
-		        .then(logger.successCallback)
-		        .catch(logger.errorCallback);
+			return $http.get(serviceUrl + "?username=" + username + "&state=" + state)
+				.then(logger.successCallback)
+				.catch(logger.errorCallback);
 		};
-	    
-        
-
-		self.extractPermissions=function(groups) {
-		    var permissions = [];
-		    for (var i in groups) {
-		        var group = groups[i];
-		        for (var j in group.permissions) {
-		            var name = group.permissions[j].name;
-                    if(name)
-		            if (permissions.indexOf(name) < 0) permissions.push(name);
 
 
-		        }
-		    }
-		    return permissions;
+
+		self.extractPermissions = function (groups) {
+			var permissions = [];
+			for (var i in groups) {
+				var group = groups[i];
+				for (var j in group.permissions) {
+					var name = group.permissions[j].name;
+					if (name)
+						if (permissions.indexOf(name) < 0) permissions.push(name);
+				}
+			}
+			return permissions;
 		}
 		var promise = new Promise(function (acc) {
 			var response = {
-			    data: groups,
+				data: groups,
 				status: 200,
 				statusText: 'Fetched data'
 			};

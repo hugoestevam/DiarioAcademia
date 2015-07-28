@@ -76,7 +76,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="app\controllers\manager\group\managerGroupEditController.js" />
+    <Content Include="app\controllers\manager\group\managerGroupEdit.ctrl.js" />
     <Content Include="app\controllers\manager\group\managerGroupList.ctrl.js" />
     <Content Include="app\controllers\manager\user\managerUserEdit.ctrl.js" />
     <Content Include="app\controllers\manager\user\managerUserList.ctrl.js" />
@@ -88,11 +88,11 @@
     <Content Include="app\libs\jquery\jquery-2.1.1.min.map" />
     <Content Include="app\routes\manager.routes.js" />
     <Content Include="app\services\group.services.js" />
+    <Content Include="app\services\permissions.service.js" />
     <Content Include="app\services\user.service.js" />
     <Content Include="app\templates\layout\top-menu.html" />
     <Content Include="app\views\manager\group\manager-group-edit.html" />
     <Content Include="app\views\manager\group\manager-group.html" />
-    <Content Include="app\views\manager\group\manager-group-list.html" />
     <Content Include="app\views\manager\user\manager-user-edit.html" />
     <Content Include="app\views\manager\user\manager-user-list.html" />
     <Content Include="content\animations\animations.css">

@@ -1,3 +1,16 @@
 ﻿<div class="container-user">
-    {{vm.group.name}}
+    <div class="row">
+        <h2 style="margin-top: 0;">Permissões {{vm.group.name}}</h2>      
+        <hr />
+    </div>
+    <div class="row">
+        <div class="input-group" ng-repeat="permission in vm.permissions" style="padding-bottom: 2%">
+            <span class="input-group-addon" id='chkGroup{{$index}}'>
+                <input id="chkG{{$index}}" type="checkbox" 
+                       ng-checked="vm.isChecked($index, permission)"
+                       ng-click="vm.changeGroup($index, permission, chkGroups)" ng-model="chkGroups">
+            </span>
+            <input type="text" class="form-control" value="{{permission.name}}" disabled id='textGroup{{$index}}'>
+        </div>
+    </div>
 </div>

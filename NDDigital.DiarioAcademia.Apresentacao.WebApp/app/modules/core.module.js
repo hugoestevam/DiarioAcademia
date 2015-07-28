@@ -19,7 +19,7 @@
     
     .config(configInterceptors)
     .run(runStateChangeSuccess)
-    .run(runStateChangeStart);
+   // .run(runStateChangeStart);
 
     configInterceptors.$inject = ['$httpProvider'];
     function configInterceptors($httpProvider) {

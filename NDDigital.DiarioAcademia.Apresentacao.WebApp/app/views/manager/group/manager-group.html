@@ -1,28 +1,51 @@
-﻿<div class="row">
-    <div class="col-sm-12">
-        <div class="container-user">
-            <div class="row">
-                <h1 class="page-header">Grupos</h1>
-                <ol class="breadcrumb">
-                    <li>
-                        <i class="fa fa-home"></i>  <a ui-sref="home">Inicio</a>
-                    </li>
-                    <li>
-                        <i class="fa fa-wrench"></i> <a style="cursor: pointer">Gerenciador</a>
-                    </li>
-                    <li class="active">
-                        <i class="fa fa-users"></i> <a ui-sref="manager.roles">Grupos</a>
-                    </li>
-                </ol>
-            </div>
-            <br />
+﻿
+<div class="col-sm-12 clear-padding">
+    <div class="container-user">
+        <div class="row">
+            <h1 class="page-header">Grupos</h1>
+            <ol class="breadcrumb">
+                <li>
+                    <i class="fa fa-home"></i>  <a ui-sref="home">Inicio</a>
+                </li>
+                <li>
+                    <i class="fa fa-wrench"></i> <a style="cursor: pointer">Gerenciador</a>
+                </li>
+                <li class="active">
+                    <i class="fa fa-users"></i> <a ui-sref="manager.roles">Grupos</a>
+                </li>
+            </ol>
         </div>
-    </div>
-
-    <div class="col-sm-6">
-        <div ng-include="'app/views/manager/group/manager-group-list.html'"></div>
-    </div>
-    <div class="col-sm-6">
-        <div ui-view></div>
+        <br />
     </div>
 </div>
+
+
+<div class="col-sm-6 clear-padding">
+    <div class="container-user">
+        <div class="row">
+            <div class="col-sm-12" style="padding-left: 2%;">
+                <div class="list-group" ng-repeat="group in vm.groups">
+                    <a style="cursor: pointer" ng-click="vm.showGroup(group)" class="list-group-item">{{group.name}}</a>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <hr />
+            <div class="col-sm-12 text-center">
+                <button class="btn btn-success" ui-sref="manager.groups.new"><i class="fa fa-plus"></i> </button>
+                <button class="btn btn-danger" ng-click="vm.modal()"
+                        data-toggle="modal" data-target="#modelRemoveGroup" ng-disabled="!vm.selectedGroup">
+                    <i class="fa fa-times"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="col-sm-6">
+    <div ui-view class="fader-animation"></div>
+</div>
+
+<ndd-modal target="modelRemoveGroup" label="{{vm.titleModelRemove}}" callback="vm.remove">
+    {{vm.bodyModelRemove}}
+</ndd-modal>
