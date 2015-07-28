@@ -39,15 +39,10 @@
         var authorization = {
             isAuthorized: function (state) {
                 self = this;
-
                 if (!authentication.isAuth)
                     return false;
-
-
-                var authorizedGroups = authorization.permissions.indexOf(state);
-
+                var authorizedGroups = authorization.permissions ? authorization.permissions.indexOf(state) : -1;
                 return authorizedGroups >= 0;
-
             },
             role: null
         };
@@ -79,24 +74,24 @@
 
                 authentication.isAuth = true;
                 authentication.userName = loginData.userName;
-                groupService.getGroupById(0)
-                    .then(function (groups) {
+                //groupService.getGroupById(0)
+                //    .then(function (groups) {
 
-                        var permissions = [];
-                        //sim, isso é um adapter
-                        for (var i in groups) {
-                            var group = groups[i];
-                            for (var j in group.permissions) {
-                                var name = group.permissions[j].name;
+                //        var permissions = [];
+                //        //sim, isso é um adapter
+                //        for (var i in groups) {
+                //            var group = groups[i];
+                //            for (var j in group.permissions) {
+                //                var name = group.permissions[j].name;
 
-                                if (permissions.indexOf(name) < 0) permissions.push(name);
+                //                if (permissions.indexOf(name) < 0) permissions.push(name);
 
 
-                            }
-                        }
-                        authorization.groups = groups;
-                        authorization.permissions = permissions;
-                    });
+                //            }
+                //        }
+                //        authorization.groups = groups;
+                //        authorization.permissions = permissions;
+                //    });
 
                 logger.success("Bem vindo " + authentication.userName + "! ");
                 deferred.resolve(response);

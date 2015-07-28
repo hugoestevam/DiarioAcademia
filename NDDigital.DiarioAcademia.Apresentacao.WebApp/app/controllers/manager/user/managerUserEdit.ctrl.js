@@ -1,90 +1,98 @@
 ﻿(function (angular) {
-    angular
-        .module('controllers.module')
-        .controller('managerUserEditController', managerUserEditController);
+	angular
+		.module('controllers.module')
+		.controller('managerUserEditController', managerUserEditController);
 
-    managerUserEditController.$inject = ['userService', 'groupService', "$stateParams", '$scope', '$state'];
+	managerUserEditController.$inject = ['userService', 'groupService', "$stateParams", '$scope', '$state'];
 
-    function managerUserEditController(userService, groupService, params, $scope, $state) {
-        var vm = this;
-        vm.user = {};
-        vm.groups = [];
-        vm.editUser = editUser;
+	function managerUserEditController(userService, groupService, params, $scope, $state) {
+		var vm = this;
+		vm.user = {};
+		vm.groups = [];
+		vm.editUser = editUser;
 
-        //public functions
-        vm.isChecked = isChecked;
-        vm.changeGroup = changeGroup;
-        vm.clear = clear;
+		//public functions
+		vm.isChecked = isChecked;
+		vm.changeGroup = changeGroup;
+		vm.clear = clear;
 
-        vm.titleModelEdit = 'Confirmar Alteração';
-        vm.bodyModelEdit = 'Deseja realmente editar o usuário ';
+		vm.titleModelEdit = 'Confirmar Alteração';
+		vm.bodyModelEdit = 'Deseja realmente editar o usuário ';
 
-        var originalUser;
-        var originalGroups;
-        var result;
+		var originalUser;
+		var originalGroups;
+		var result;
 
-        activate();
-        function activate() {
-            userService.getUserById(params.userId).then(function (results) {
-                vm.user = results.data;
+		activate();
+		function activate() {
+			userService.getUserById(params.userId).then(function (results) {
+				vm.user = results.data;
 
-                originalUser = $.extend(true, {}, vm.user);;
-                vm.name = vm.user.fullName;
-                vm.bodyModelEdit += vm.name;
-            });
-            vm.groups = groupService.getGroups();
-            originalGroups = vm.groups.slice();
-        }
+				originalUser = $.extend(true, {}, vm.user);;
+				vm.name = vm.user.fullName;
+				vm.bodyModelEdit += vm.name;
+			});
+
+			//groupService.getGroups().then(function (results) {
+			//    vm.groups = results;
+			//    if (results)
+			//        originalGroups = results.slice();
+		    //});
+
+			vm.groups = [{ id: 1, name: "Aluno" },
+					{ id: 2, name: "Admin" },
+					{ id: 3, name: "RH" }];
+		}
 
 
-        function editUser() {       
-            userService.edit(user).then(function () {
-                $('body').removeClass('modal-open');
-                $('.modal-backdrop').remove();
-                $state.go('manager.user');
-            });        
-        }
+		function editUser() {
+			userService.edit(user).then(function () {
+				$('body').removeClass('modal-open');
+				$('.modal-backdrop').remove();
+				$state.go('manager.user');
+			});
+		}
 
-        //Control Components Functions
+		//Control Components Functions
 
-        function isChecked(index, group) {
-            var text = $('#textGroup' + index);
-            var check = $('#chkGroup' + index);
+		function isChecked(index, group) {
+			var text = $('#textGroup' + index);
+			var check = $('#chkGroup' + index);
 
-            if (!vm.user.groups) {
-                return false;
-            }
-            result = vm.user.groups.contains(group);
-            if (result) {
-                text.addClass('border-success');
-                check.addClass('border-success');
-            } else {
-                text.removeClass('border-success');
-                check.removeClass('border-success');
-            }
-            return result;
-        }
+			if (!vm.user.groups) {
+				return false;
+			}
+			result = vm.user.groups.contains(group);
+			if (result) {
+				text.addClass('border-success');
+				check.addClass('border-success');
+			} else {
+				text.removeClass('border-success');
+				check.removeClass('border-success');
+			}
+			return result;
+		}
 
-        function changeGroup(index, group, chkGroups) {
-            var text = $('#textGroup' + index);
-            var check = $('#chkGroup' + index);
+		function changeGroup(index, group, chkGroups) {
+			var text = $('#textGroup' + index);
+			var check = $('#chkGroup' + index);
 
-            if (chkGroups) {
-                text.addClass('border-success');
-                check.addClass('border-success');
-                vm.user.groups.push(group);
-            } else {
-                text.removeClass('border-success');
-                check.removeClass('border-success');
-                vm.user.groups.remove(group);
-            }
-        }
+			if (chkGroups) {
+				text.addClass('border-success');
+				check.addClass('border-success');
+				vm.user.groups.push(group);
+			} else {
+				text.removeClass('border-success');
+				check.removeClass('border-success');
+				vm.user.groups.remove(group);
+			}
+		}
 
-        function clear() {
-            vm.user = $.extend(true, {}, originalUser);
-            vm.groups = originalGroups.slice();
-        }
+		function clear() {
+			vm.user = $.extend(true, {}, originalUser);
+			vm.groups = originalGroups.slice();
+		}
 
-    }
+	}
 
 })(window.angular);

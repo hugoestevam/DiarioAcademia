@@ -214,6 +214,7 @@
     <Compile Include="Controllers\AccountsController.cs" />
     <Compile Include="Controllers\BaseApiController.cs" />
     <Compile Include="Controllers\ClaimsController.cs" />
+    <Compile Include="Controllers\GroupController.cs" />
     <Compile Include="Controllers\RolesController.cs" />
     <Compile Include="Controllers\AlunoDTOesController.cs" />
     <Compile Include="Models\NDDigitalDiarioAcademiaWebApi.cs" />

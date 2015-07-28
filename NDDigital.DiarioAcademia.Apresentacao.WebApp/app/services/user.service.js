@@ -16,13 +16,15 @@
 
 		var serviceUrl = baseUrl + "api/user";
 
+
 		//public methods
 		self.getUsers = function () {
 			return promise;
-			// return $http.get(serviceUrl)
-			//      .then(logger.successCallback)
-			//      .catch(logger.errorCallback)
-			//      .then(convertToObj);
+
+			return $http.get(serviceUrl)
+				 .then(logger.successCallback)
+				 .catch(logger.errorCallback)
+				 .then(convertToObj);
 		};
 
 		self.getUserById = function (id) {
@@ -41,8 +43,9 @@
 			});
 
 			return promiseById;
-			//return $http.get(serviceUrl + '/' + id)
-			//	 .then(logger.successCallback);
+
+			return $http.get(serviceUrl + '/' + id)
+				 .then(logger.successCallback);
 		};
 
 		self.delete = function (user) {
@@ -104,10 +107,11 @@
 				"level": 3,
 				"joinDate": "2015-04-22T00:00:00",
 				"groups": [
-					{ id: 1, name: "Admin" }
+					{ id: 2, name: "Admin" }
 				]
 			});
 			return itens;
 		}
+
 	}
 })(window.angular);

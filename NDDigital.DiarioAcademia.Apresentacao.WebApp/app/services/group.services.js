@@ -15,7 +15,6 @@
 
         //public methods
         self.getGroups = function () {
-
              return $http.get(serviceUrl)
                   .then(logger.successCallback)
                   .catch(logger.errorCallback)
@@ -40,8 +39,6 @@
 
         self.checkPermission = function(groups,state) {
             return true;
-
         };
-
     }
 })();
