@@ -12,7 +12,7 @@ using Xunit;
 namespace NDDigital.DiarioAcademia.IntegrationTests
 {   
     [RepositorioTrait()]
-    public class AulaRepositoryTest : UnitTestContext, IUseFixture<DatabaseFixture>
+    public class AulaRepositoryEFTest : UnitTestContext, IUseFixture<DatabaseFixture>
     {
         private IAulaRepository aulaRepository;
         private IPresencaRepository presencaRepository;

@@ -91,7 +91,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="AulaRepositoryTest.cs" />
+    <Compile Include="Entity Framework\AulaRepositoryEFTest.cs" />
     <Compile Include="Common\DatabaseFixture.cs" />
     <Compile Include="Common\DatabaseBootstrapper.cs" />
     <Compile Include="Common\UnitTestContext.cs" />
@@ -101,6 +101,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="SQL\TurmaRepositorySQLTest.cs" />
     <Compile Include="TestData\DiarioAcademia.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -135,6 +136,10 @@
     <ProjectReference Include="..\NDDigital.DiarioAcademia.Infraestrutura.Orm\Infraestrutura.Orm.csproj">
       <Project>{3fd3156c-9f4f-4e10-8b7a-7454c803be89}</Project>
       <Name>Infraestrutura.Orm</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NDDigital.DiarioAcademia.Infraestrutura.SQL\Infraestrutura.SQL.csproj">
+      <Project>{987e3d7f-ea01-45aa-8867-8e85899fc5fa}</Project>
+      <Name>Infraestrutura.SQL</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
