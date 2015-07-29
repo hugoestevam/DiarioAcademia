@@ -12,7 +12,7 @@ using System.Data;
 
 namespace NDDigital.DiarioAcademia.Infraestrutura.SQL.Repositories
 {
-    public class AulaRepositoryImpl : IAulaRepository
+    public class AulaRepositorySql : IAulaRepository
     {
         #region Querys
 

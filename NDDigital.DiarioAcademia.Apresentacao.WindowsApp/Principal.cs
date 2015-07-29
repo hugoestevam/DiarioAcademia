@@ -41,9 +41,9 @@ namespace NDDigital.DiarioAcademia.Apresentacao.WindowsApp
 
             var unitOfWork = new UnitOfWork(factory);
 
-            var turmaRepository = new TurmaRepository(factory);
+            var turmaRepository = new TurmaRepositoryEF(factory);
 
-            var alunoRepository = new AlunoRepository(factory);
+            var alunoRepository = new AlunoRepositoryEF(factory);
 
             _turmaService = new TurmaService(turmaRepository, unitOfWork);
 

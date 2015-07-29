@@ -8,9 +8,9 @@ using System.Linq;
 
 namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Repositories
 {
-    public class AlunoRepository : RepositoryBase<Aluno>, IAlunoRepository
+    public class AlunoRepositoryEF : RepositoryBase<Aluno>, IAlunoRepository
     {
-        public AlunoRepository(IDatabaseFactory dbFactory)
+        public AlunoRepositoryEF(IDatabaseFactory dbFactory)
             : base(dbFactory)
         {
         }

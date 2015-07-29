@@ -17,7 +17,7 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers
 
             var unitOfWork = new UnitOfWork(factory);
 
-            var turmaRepository = new TurmaRepository(factory);
+            var turmaRepository = new TurmaRepositoryEF(factory);
 
             _turmaService = new TurmaService(turmaRepository, unitOfWork);
         }

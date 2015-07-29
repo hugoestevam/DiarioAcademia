@@ -15,9 +15,9 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers
         {
             var factory = new DatabaseFactory();
 
-            var alunoRespository = new AlunoRepository(factory);
+            var alunoRespository = new AlunoRepositoryEF(factory);
 
-            var turmaRepository = new TurmaRepository(factory);
+            var turmaRepository = new TurmaRepositoryEF(factory);
 
             var uow = new UnitOfWork(factory);
 

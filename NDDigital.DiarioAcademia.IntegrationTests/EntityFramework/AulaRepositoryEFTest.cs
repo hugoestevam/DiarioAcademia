@@ -9,22 +9,22 @@ using NDDigital.DiarioAcademia.IntegrationTests.Common;
 using System;
 using Xunit;
 
-namespace NDDigital.DiarioAcademia.IntegrationTests
+namespace NDDigital.DiarioAcademia.IntegrationTests.EntityFramework
 {   
     [RepositorioTrait()]
     public class AulaRepositoryEFTest : UnitTestContext, IUseFixture<DatabaseFixture>
     {
         private IAulaRepository aulaRepository;
         private IPresencaRepository presencaRepository;
-        private TurmaRepository turmaRepository;   
+        private TurmaRepositoryEF turmaRepository;   
 
         private IUnitOfWork uow;             
 
         public void SetFixture(DatabaseFixture databaseFixture)
         {            
-            aulaRepository = new AulaRepository(databaseFixture.Factory);
-            turmaRepository = new TurmaRepository(databaseFixture.Factory);
-            presencaRepository = new PresencaRepository(databaseFixture.Factory);
+            aulaRepository = new AulaRepositoryEF(databaseFixture.Factory);
+            turmaRepository = new TurmaRepositoryEF(databaseFixture.Factory);
+            presencaRepository = new PresencaRepositoryEF(databaseFixture.Factory);
 
             uow = databaseFixture.UnitOfWork;
         }

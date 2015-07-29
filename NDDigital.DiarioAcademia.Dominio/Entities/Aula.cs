@@ -9,6 +9,7 @@ namespace NDDigital.DiarioAcademia.Dominio.Entities
         public Aula()
         {
             Presencas = new List<Presenca>();
+            Turma = new Turma();
         }
 
         public bool ChamadaRealizada { get; set; }

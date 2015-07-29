@@ -1,10 +1,9 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using NDDigital.DiarioAcademia.Aplicacao.DTOs;
-using NDDigital.DiarioAcademia.Aplicacao.ORM.Services;
+using NDDigital.DiarioAcademia.Aplicacao.SQL.Services;
 using NDDigital.DiarioAcademia.Dominio.Contracts;
 using NDDigital.DiarioAcademia.Dominio.Entities;
-using NDDigital.DiarioAcademia.Infraestrutura.Orm.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,28 +11,26 @@ using System.Linq;
 namespace NDDigital.DiarioAcademia.UnitTests.Servicos
 {
     [TestClass]
-    public class PresencaServiceTests
+    public class PresencaServiceSqlTests
     {
         private readonly Mock<IAlunoRepository> _alunoRepository = null;
         private readonly Mock<IAulaRepository> _aulaRepository = null;
         private readonly Mock<ITurmaRepository> _turmaRepository = null;
-        private readonly Mock<IUnitOfWork> _unitOfWork = null;
 
         private IAulaService aulaService = null;
 
-        public PresencaServiceTests()
+        public PresencaServiceSqlTests()
         {
             _alunoRepository = new Mock<IAlunoRepository>();
             _aulaRepository = new Mock<IAulaRepository>();
             _turmaRepository = new Mock<ITurmaRepository>();
 
-            _unitOfWork = new Mock<IUnitOfWork>();
 
-            aulaService = new AulaService(_aulaRepository.Object, _alunoRepository.Object, _turmaRepository.Object, _unitOfWork.Object);
+            aulaService = new AulaService(_aulaRepository.Object, _alunoRepository.Object, _turmaRepository.Object);
         }
 
         [TestMethod]
-        [TestCategory("Camada de Serviço")]
+        [TestCategory("Camada de Serviço SQL")]
         public void RegistraPresenca_deveria_persistir_as_presencas_dos_alunos()
         {
             //arrange
@@ -56,12 +53,10 @@ namespace NDDigital.DiarioAcademia.UnitTests.Servicos
 
             //assert
             _alunoRepository.Verify(x => x.Update(It.IsAny<Aluno>()), Times.Exactly(5));
-
-            _unitOfWork.Verify(x => x.Commit(), Times.Once());
         }
 
         [TestMethod]
-        [TestCategory("Camada de Serviço")]
+        [TestCategory("Camada de Serviço SQL")]
         public void RegistraPresenca_deveria_lancar_excecao_AlunoNaoEncontrado()
         {
             //arrange
@@ -81,7 +76,7 @@ namespace NDDigital.DiarioAcademia.UnitTests.Servicos
         }
 
         [TestMethod]
-        [TestCategory("Camada de Serviço")]
+        [TestCategory("Camada de Serviço SQL")]
         public void RegistraPresenca_deveria_lancar_excecao_AulaNaoEncontrado()
         {
             //arrange

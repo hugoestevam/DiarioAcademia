@@ -1,15 +1,13 @@
-﻿using System;
-using System.IO;
-using iTextSharp.text;
+﻿using iTextSharp.text;
 using iTextSharp.text.pdf;
 using NDDigital.DiarioAcademia.Aplicacao.DTOs;
-using NDDigital.DiarioAcademia.Dominio;
-using System.Collections.Generic;
-using System.Linq;
-using NDDigital.DiarioAcademia.Dominio.Entities;
 using NDDigital.DiarioAcademia.Dominio.Contracts;
+using NDDigital.DiarioAcademia.Dominio.Entities;
+using System;
+using System.Collections.Generic;
+using System.IO;
 
-namespace NDDigital.DiarioAcademia.Aplicacao.ORM.Services
+namespace NDDigital.DiarioAcademia.Aplicacao.SQL.Services
 {
     public interface IAlunoService
     {
@@ -36,42 +34,38 @@ namespace NDDigital.DiarioAcademia.Aplicacao.ORM.Services
 
         public AlunoService()
         {
-
         }
 
         public void Add(AlunoDTO alunoDto)
         {
-
         }
 
         public void Update(AlunoDTO alunoDto)
         {
-
         }
 
         public void Delete(int id)
         {
-
         }
 
         public AlunoDTO GetById(int id)
         {
-            return null; 
+            return null;
         }
 
         public IEnumerable<AlunoDTO> GetAll()
         {
-            return null; 
+            return null;
         }
 
         public IEnumerable<AlunoDTO> GetAllByTurma(int ano)
         {
-            return null;;
+            return null; ;
         }
 
         public Endereco BuscaEnderecoPorCep(string cep)
         {
-            return null; 
+            return null;
         }
 
         public void GerarRelatorioAlunosPdf(int ano, string path)
@@ -87,7 +81,7 @@ namespace NDDigital.DiarioAcademia.Aplicacao.ORM.Services
 
                 doc.Open();
 
-                doc.Add(new Paragraph("Relatório de presenças - Academia do prgramador " + ano +":\n\n"));
+                doc.Add(new Paragraph("Relatório de presenças - Academia do prgramador " + ano + ":\n\n"));
                 doc.Add(new Paragraph("Alunos/Presenças/Faltas:\n\n"));
 
                 foreach (var listaAluno in GetAllByTurma(ano))
@@ -100,8 +94,7 @@ namespace NDDigital.DiarioAcademia.Aplicacao.ORM.Services
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
-            }     
-          
+            }
         }
     }
 }

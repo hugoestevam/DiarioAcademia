@@ -3,12 +3,12 @@ using NDDigital.DiarioAcademia.Dominio.Entities;
 using NDDigital.DiarioAcademia.Infraestrutura.SQL.Repositories;
 using System.Collections.Generic;
 
-namespace NDDigital.DiarioAcademia.IntegrationTests.SQL
+namespace NDDigital.DiarioAcademia.IntegrationTests.SQLs
 {
     [TestClass]
     public class TurmaRepositorySQLTest
     {
-        public TurmaRepositoryImpl _repo = new TurmaRepositoryImpl();
+        public TurmaRepositorySql _repo = new TurmaRepositorySql();
 
         [TestMethod]
         [TestCategory("Camada de Infraestrutura SQL")]

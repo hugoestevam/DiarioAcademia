@@ -9,9 +9,9 @@ using System.Linq;
 
 namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Repositories
 {
-    public class AulaRepository : RepositoryBase<Aula>, IAulaRepository
+    public class AulaRepositoryEF : RepositoryBase<Aula>, IAulaRepository
     {
-        public AulaRepository(IDatabaseFactory dbFactory)
+        public AulaRepositoryEF(IDatabaseFactory dbFactory)
             : base(dbFactory)
         {
         }

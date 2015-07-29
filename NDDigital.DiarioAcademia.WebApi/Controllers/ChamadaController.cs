@@ -13,9 +13,9 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers
         public ChamadaController()
         {
             var factory = new DatabaseFactory();
-            var aulaRespository = new AulaRepository(factory);
-            var alunoRepository = new AlunoRepository(factory);
-            var turmaRepository = new TurmaRepository(factory);
+            var aulaRespository = new AulaRepositoryEF(factory);
+            var alunoRepository = new AlunoRepositoryEF(factory);
+            var turmaRepository = new TurmaRepositoryEF(factory);
             var uow = new UnitOfWork(factory);
 
             _aulaService = new AulaService(aulaRespository, alunoRepository, turmaRepository, uow);

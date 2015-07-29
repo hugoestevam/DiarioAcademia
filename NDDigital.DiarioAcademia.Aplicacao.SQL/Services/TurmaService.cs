@@ -4,7 +4,7 @@ using NDDigital.DiarioAcademia.Dominio.Entities;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace NDDigital.DiarioAcademia.Aplicacao.ORM.Services
+namespace NDDigital.DiarioAcademia.Aplicacao.SQL.Services
 {
     public interface ITurmaService
     {

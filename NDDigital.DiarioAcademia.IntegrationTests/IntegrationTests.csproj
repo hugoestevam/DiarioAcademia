@@ -91,7 +91,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="Entity Framework\AulaRepositoryEFTest.cs" />
+    <Compile Include="EntityFramework\AulaRepositoryEFTest.cs" />
     <Compile Include="Common\DatabaseFixture.cs" />
     <Compile Include="Common\DatabaseBootstrapper.cs" />
     <Compile Include="Common\UnitTestContext.cs" />
@@ -101,7 +101,10 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Include="SQL\TurmaRepositorySQLTest.cs" />
+    <Compile Include="SQLs\PresencaRepositorySQLTest.cs" />
+    <Compile Include="SQLs\AlunoRepositorySQLTest.cs" />
+    <Compile Include="SQLs\AulaRepositorySQLTest.cs" />
+    <Compile Include="SQLs\TurmaRepositorySQLTest.cs" />
     <Compile Include="TestData\DiarioAcademia.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

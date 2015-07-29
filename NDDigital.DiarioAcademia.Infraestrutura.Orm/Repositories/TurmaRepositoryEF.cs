@@ -5,16 +5,11 @@ using NDDigital.DiarioAcademia.Infraestrutura.Orm.Common;
 
 namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Repositories
 {
-    public class PresencaRepository : RepositoryBase<Presenca>, IPresencaRepository
+    public class TurmaRepositoryEF : RepositoryBase<Turma>, ITurmaRepository
     {
-        public PresencaRepository(IDatabaseFactory dbFactory)
+        public TurmaRepositoryEF(IDatabaseFactory dbFactory)
             : base(dbFactory)
         {
-        }
-
-        public override void Delete(int id)
-        {
-            base.Delete(id);
         }
     }
 }

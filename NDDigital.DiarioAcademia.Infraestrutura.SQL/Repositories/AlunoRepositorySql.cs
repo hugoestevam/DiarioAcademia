@@ -12,7 +12,7 @@ using NDDigital.DiarioAcademia.Dominio.Exceptions;
 
 namespace NDDigital.DiarioAcademia.Infraestrutura.SQL.Repositories
 {
-    public class AlunoRepositoryImpl : IAlunoRepository
+    public class AlunoRepositorySql : IAlunoRepository
     {
 
         #region Querys
@@ -50,6 +50,9 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.SQL.Repositories
 
         public const string SqlSelect =
          "SELECT * FROM TBAluno";
+
+        public const string SqlSelectAllByTurma =
+       "SELECT * FROM TBAluno WHERE Turma_Id = {0}Turma_Id";
 
         public const string SqlSelectbId =
         "SELECT * FROM TBAluno WHERE Id = {0}Id";
@@ -99,7 +102,7 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.SQL.Repositories
         {
             try
             {
-                return Db.GetAll<Aluno>(SqlSelect, Make);
+                return Db.GetAll(SqlSelect, Make);
             }
             catch (AlunoNaoEncontrado te)
             {
@@ -109,14 +112,30 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.SQL.Repositories
 
         public IEnumerable<Aluno> GetAllByTurma(int ano)
         {
-            throw new NotImplementedException();
-            //TODO: 1 Implementar
+            try
+            {
+                var parms = new object[] { "ano", ano };
+
+                return Db.GetAll(SqlSelectAllByTurma, Make, parms);
+            }
+            catch (AlunoNaoEncontrado te)
+            {
+                throw new AlunoNaoEncontrado("Erro ao tentar listar todos os Alunos!" + te.Message);
+            }
         }
 
-        public IEnumerable<Aluno> GetAllByTurmaId(int id)
+        public IEnumerable<Aluno> GetAllByTurmaId(int turmaId)
         {
-            throw new NotImplementedException();
-            //TODO: 2 Implementar
+            try
+            {
+                var parms = new object[] { "Turma_Id", turmaId };
+
+                return Db.GetAll(SqlSelectAllByTurma, Make, parms);
+            }
+            catch (AlunoNaoEncontrado te)
+            {
+                throw new AlunoNaoEncontrado("Erro ao tentar listar todos os Alunos!" + te.Message);
+            }
         }
 
         public IEnumerable<Aluno> GetAllIncluding(params Expression<Func<Aluno, object>>[] includeProperties)

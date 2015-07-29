@@ -12,7 +12,7 @@ using NDDigital.DiarioAcademia.Dominio.Contracts;
 
 namespace NDDigital.DiarioAcademia.Infraestrutura.SQL.Repositories
 {
-    public class TurmaRepositoryImpl : ITurmaRepository
+    public class TurmaRepositorySql : ITurmaRepository
     {
         #region Querys
 

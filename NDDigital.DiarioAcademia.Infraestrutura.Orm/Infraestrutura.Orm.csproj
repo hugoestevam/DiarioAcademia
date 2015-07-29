@@ -123,10 +123,10 @@
     <Compile Include="Models\ModelFactory.cs" />
     <Compile Include="Models\RoleBindingModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repositories\AlunoRepository.cs" />
-    <Compile Include="Repositories\AulaRepository.cs" />
-    <Compile Include="Repositories\PresencaRepository.cs" />
-    <Compile Include="Repositories\TurmaRepository.cs" />
+    <Compile Include="Repositories\AlunoRepositoryEF.cs" />
+    <Compile Include="Repositories\AulaRepositoryEF.cs" />
+    <Compile Include="Repositories\PresencaRepositoryEF.cs" />
+    <Compile Include="Repositories\TurmaRepositoryEF.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
