@@ -80,6 +80,8 @@
     <Content Include="app\controllers\manager\group\managerGroupList.ctrl.js" />
     <Content Include="app\controllers\manager\user\managerUserEdit.ctrl.js" />
     <Content Include="app\controllers\manager\user\managerUserList.ctrl.js" />
+    <Content Include="app\directives\ndd-checkbox\ndd-checkbox.directives.js" />
+    <Content Include="app\directives\ndd-checkbox\ndd-checkbox.html" />
     <Content Include="app\directives\ndd-modal\ndd-modal.directives.js" />
     <Content Include="app\directives\ndd-modal\ndd-modal.html" />
     <Content Include="app\extentions\array.js" />
