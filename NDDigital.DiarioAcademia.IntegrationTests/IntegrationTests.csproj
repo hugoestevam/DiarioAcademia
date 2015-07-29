@@ -101,7 +101,6 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Include="SQL\TurmaRepositorySQLTest.cs" />
     <Compile Include="TestData\DiarioAcademia.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -149,6 +148,9 @@
     <Content Include="TestData\DiarioAcademia.TBTurma.xml" />
     <Content Include="TestData\DiarioAcademia.TBAula.xml" />
     <Content Include="TestData\DiarioAcademia.TBAluno.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="SQL\" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
