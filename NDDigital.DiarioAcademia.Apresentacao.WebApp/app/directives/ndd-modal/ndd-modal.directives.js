@@ -6,7 +6,7 @@
     function nddModal() {
         // Usage:
         //  <ndd-modal target= "id"  label="title" callback="vm.action"></ndd-modal>
-        //  <buton class="btn" data-toggle="modal" data-target="#id">
+        //  <button class="btn" data-toggle="modal" data-target="#id">
 
         return {
             restrict: 'EA',

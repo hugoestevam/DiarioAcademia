@@ -1,0 +1,7 @@
+﻿<div class="input-group" ng-repeat="obj in array" style="padding-bottom: 2%" id='inputGroup{{$index}}'>
+    <span class="input-group-addon">
+        <input type="checkbox" ng-checked="onstart($index, obj, compare)"
+               ng-click="onclick($index, obj, compare, chkGroup, callback)" ng-model="chkGroup">
+    </span>
+    <input type="text" class="form-control" value="{{obj.name}}" disabled>
+</div>
