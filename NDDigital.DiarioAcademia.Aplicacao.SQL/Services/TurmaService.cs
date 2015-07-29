@@ -3,6 +3,7 @@ using NDDigital.DiarioAcademia.Dominio.Contracts;
 using NDDigital.DiarioAcademia.Dominio.Entities;
 using System.Collections.Generic;
 using System.Linq;
+using NDDigital.DiarioAcademia.Infraestrutura.SQL.Repositories;
 
 namespace NDDigital.DiarioAcademia.Aplicacao.SQL.Services
 {
@@ -22,10 +23,16 @@ namespace NDDigital.DiarioAcademia.Aplicacao.SQL.Services
     public class TurmaService : ITurmaService
     {
         private ITurmaRepository _turmaRepository;
+        private TurmaRepositorySql turmaRepository;
 
         public TurmaService()
         {
 
+        }
+
+        public TurmaService(TurmaRepositorySql turmaRepository)
+        {
+            this.turmaRepository = turmaRepository;
         }
 
         public void Add(TurmaDTO turmaDto)

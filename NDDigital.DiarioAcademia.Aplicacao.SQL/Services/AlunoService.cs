@@ -6,6 +6,7 @@ using NDDigital.DiarioAcademia.Dominio.Entities;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using NDDigital.DiarioAcademia.Infraestrutura.SQL.Repositories;
 
 namespace NDDigital.DiarioAcademia.Aplicacao.SQL.Services
 {
@@ -31,9 +32,17 @@ namespace NDDigital.DiarioAcademia.Aplicacao.SQL.Services
     public class AlunoService : IAlunoService
     {
         private IAlunoRepository _alunoRepository;
+        private AlunoRepositorySql alunoRepository;
+        private TurmaRepositorySql turmaRepository;
 
         public AlunoService()
         {
+        }
+
+        public AlunoService(AlunoRepositorySql alunoRepository, TurmaRepositorySql turmaRepository)
+        {
+            this.alunoRepository = alunoRepository;
+            this.turmaRepository = turmaRepository;
         }
 
         public void Add(AlunoDTO alunoDto)

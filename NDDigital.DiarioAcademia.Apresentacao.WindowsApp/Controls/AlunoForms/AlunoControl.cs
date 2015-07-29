@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using NDDigital.DiarioAcademia.Aplicacao.ORM.Services;
+using NDDigital.DiarioAcademia.Aplicacao.Services;
 using NDDigital.DiarioAcademia.Aplicacao.DTOs;
 
 namespace NDDigital.DiarioAcademia.Apresentacao.WindowsApp.Controls.AlunoForms

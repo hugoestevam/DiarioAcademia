@@ -73,21 +73,16 @@
     <Compile Include="Dominio\PresencaTests.cs" />
     <Compile Include="ObjectMother.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Servicos\EntityFramework\PresencaServiceOrmTests.cs" />
-    <Compile Include="Servicos\SQLs\PresencaServiceSqlTests.cs" />
+    <Compile Include="Servicos\PresencaServiceTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\NDDigital.DiarioAcademia.Aplicacao.SQL\Aplicacao.SQL.csproj">
-      <Project>{eb27d0bb-4b75-47a9-b9d3-b65c15ab076f}</Project>
-      <Name>Aplicacao.SQL</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\NDDigital.DiarioAcademia.Aplicacao\Aplicacao.ORM.csproj">
+    <ProjectReference Include="..\NDDigital.DiarioAcademia.Aplicacao\Aplicacao.csproj">
       <Project>{175b058e-a32a-491a-a1fd-9783edc7a943}</Project>
-      <Name>Aplicacao.ORM</Name>
+      <Name>Aplicacao</Name>
     </ProjectReference>
     <ProjectReference Include="..\NDDigital.DiarioAcademia.CommandQuery\Aplicacao.DTOs.csproj">
       <Project>{fac6b57f-d8c9-4593-80f0-184f5cab272c}</Project>

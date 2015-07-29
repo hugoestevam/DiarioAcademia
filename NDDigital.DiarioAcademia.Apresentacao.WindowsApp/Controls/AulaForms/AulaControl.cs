@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using NDDigital.DiarioAcademia.Aplicacao.DTOs;
-using NDDigital.DiarioAcademia.Aplicacao.ORM.Services;
+using NDDigital.DiarioAcademia.Aplicacao.Services;
 
 namespace NDDigital.DiarioAcademia.Apresentacao.WindowsApp.Controls.AulaForms
 {
