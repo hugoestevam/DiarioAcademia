@@ -19,7 +19,7 @@
     
     .config(configInterceptors)
     .run(runStateChangeSuccess)
-   // .run(runStateChangeStart);
+    .run(runStateChangeStart);
 
     configInterceptors.$inject = ['$httpProvider'];
     function configInterceptors($httpProvider) {
@@ -48,6 +48,10 @@
             function (event, toState, toParams, fromState, fromParams) {
 
                 if (toState.data.allowAnnonymous) return;
+
+                var userIsAdmin = authService.authorization.groups.any('isAdmin', true);
+
+                if (userIsAdmin) return;
                 
                 var stateToGo = 'login';
 

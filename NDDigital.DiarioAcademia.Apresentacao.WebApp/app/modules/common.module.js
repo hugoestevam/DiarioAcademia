@@ -14,8 +14,8 @@
             reader: 7
         })
         .value('storageKeys', {
-            authData: 'authorizationData',
-            permissions:'da:permissions'
+            authoData: 'authorizationData',
+            autheData:'authenticationData'
         });
 
    

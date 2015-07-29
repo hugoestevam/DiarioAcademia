@@ -11,17 +11,32 @@
         var self = this;
 
         var redirectState = "login";
+        var _username = "";
 
         var authentication = {
             isAuth: false,
-            userName: ""
         };
+
+        var userNameProperty = {
+            get: function () {
+                return _username || "User" ;
+            },
+            set: function (value) {
+                _username = value;
+            }
+
+        };
+        Object.defineProperty(authentication, "userName", userNameProperty);
+
+
+
         var _lastState = { name: redirectState };
 
 
         
 
         var authorization = {
+            //used for control menus on sidebars
             isAuthorized: function(state) {
                 if (!authentication.isAuth)
                     return false;
@@ -64,11 +79,11 @@
 
                         authorization.groups = groups;
                         authorization.permissions = groupService.extractPermissions(groups);
-                        localStorageService.set(storageKeys.permissions, authorization.permissions);
+                        localStorageService.set(storageKeys.autheData, authorization);
                     });
 
-
-                localStorageService.set(storageKeys.authData, {
+                //criptografar isto
+                localStorageService.set(storageKeys.authoData, {
                     token: response.access_token,
                     userName: loginData.userName
                 });
@@ -79,8 +94,14 @@
 
             }).error(function(err, status) {
 
-                logger.error("Não autorizado");
+                if (!status) {
+                    logger.error("Servidor Indisponível");
+                } else {
 
+
+                    logger.error(err.error_description);
+
+                }
                 logOut();
 
                 deferred.reject(err);
@@ -92,25 +113,30 @@
         };
         var logOut = function() {
 
-            localStorageService.remove(storageKeys.authData);
-            localStorageService.remove(storageKeys.permissions);
+            localStorageService.remove(storageKeys.authoData);
+            localStorageService.remove(storageKeys.autheData);
 
             authentication.isAuth = false;
-            authentication.userName = "User";
+            authentication.userName = "";
 
         };
 
         function fillAuthData() {
 
-            var authData = localStorageService.get(storageKeys.authData);
-            var permissions = localStorageService.get(storageKeys.permissions);
-            if (authData) {
+            var authoData = localStorageService.get(storageKeys.authoData);
+            var autheData = localStorageService.get(storageKeys.autheData);
+            if (authoData) {
                 authentication.isAuth = true;
-                authentication.userName = authData.userName;
-                authorization.permissions = permissions;
+                authentication.userName = authoData.userName;
             }
+            if (autheData) {
+                authorization.groups = autheData.groups;
+                authorization.permissions = autheData.permissions;
+            }
+            
         };
 
+        //used for authorize the access to view
         var checkAuthorize = function (toState) {
             if (authorization.permissions)
             return authorization.permissions.contains(toState);
@@ -139,6 +165,7 @@
 
         };
         Object.defineProperty(self, "lastState", lastStateProperty);
+
 
 
     }
