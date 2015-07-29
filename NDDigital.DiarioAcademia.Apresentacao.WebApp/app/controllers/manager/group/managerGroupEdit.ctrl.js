@@ -38,7 +38,7 @@
 			if (!vm.group || !vm.group.permissions) {
 				return false;
 			}
-			var result = vm.group.permissions.contains(permission);
+			var result = vm.group.permissions.containsObject(permission);
 			if (result) {
 				text.addClass('border-success');
 				check.addClass('border-success');

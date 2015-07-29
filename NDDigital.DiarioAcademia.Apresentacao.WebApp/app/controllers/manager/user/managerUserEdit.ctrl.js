@@ -56,7 +56,7 @@
 			if (!vm.user.groups) {
 				return false;
 			}
-			result = vm.user.groups.contains(group);
+			result = vm.user.groups.containsObject(group);
 			if (result) {
 				text.addClass('border-success');
 				check.addClass('border-success');
