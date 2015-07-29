@@ -24,8 +24,9 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers
                     {
                         alunoList,
                         alunoEdit,
-                        alunoCreate,
-                    }
+                        alunoCreate
+                    },
+                    IsAdmin = true
                 },
                 new Group
                 {
@@ -98,6 +99,7 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers
 
         public Guid Id { get; set; }
         public string Name { get; set; }
+        public bool IsAdmin { get; set; }
         public List<ApplicationIdentityUser> User { get; set; }
         public List<Permission> Permissions { get; set; }
     }

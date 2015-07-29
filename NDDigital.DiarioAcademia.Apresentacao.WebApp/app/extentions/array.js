@@ -24,4 +24,15 @@
         return this.indexOfObject(obj) >= 0; // works correcty - compare using id
     }
 
+    
+    Array.prototype.any = function(property,expected) {
+        var founded = false;
+
+        for (var i in this) {
+            founded = this[i][property] === expected;
+            if (founded) break;
+        }
+        return founded;
+    };
+
 })(window.angular);
