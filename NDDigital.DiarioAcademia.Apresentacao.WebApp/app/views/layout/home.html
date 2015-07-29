@@ -1,23 +1,38 @@
 ﻿<div id="page-wrapper">
-    <div class="container-fluid">
+    <div class="container-fluid container-user">
         <!-- Page Heading -->
         <div class="row">
-            <div class="col-lg-6">
-                <h1 class="page-header">
-                    Diário<small> Academia de Programador</small>
-                </h1>
+            <div class="col-lg-10">
+                <h1> Diário </h1>
+                <h4><em>Academia do Programador</em></h4>
+                <hr />
                 <ol class="breadcrumb">
                     <li class="active">
                         <i class="fa fa-home"></i> Início
                     </li>
                 </ol>
-                <p></p>
-                <p>
-                    Academia do Programador é um curso que forma desenvolvedores para a empresa NDDigital.
-                </p>
-                <p>
-                    Anualmente a empresa garimpa novos talentos para área de desenvolvimento como para outros setores da empresa.
-                </p>
+                <div class="panel panel-default">
+                    <div class="panel-heading">Diario da Academia</div>
+                    <div class="panel-body">
+                        <div class="alert alert-primary">
+                            Gerenciador da academia do programador. É possivel gerenciar:
+                        </div>
+                        <ndd-panel title="Alunos" icon="fa-users" ui-sref="aluno.list"></ndd-panel>
+                        <ndd-panel title="Turmas" icon="fa-university" ui-sref="turma.list"></ndd-panel>
+                        <ndd-panel title="Aulas" icon="fa-calendar" ui-sref="aula.list"></ndd-panel>
+                        <ndd-panel title="Chamada" icon="fa-check" ui-sref="chamada.create"></ndd-panel>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">Sobre a academia do programador</div>
+                    <div class="panel-body">
+                        <div class="alert alert-success">
+                            <strong>Objetivo do curso: </strong>
+                            É um curso que forma desenvolvedores para a empresa NDDigital. Anualmente a empresa garimpa talentos
+                            tanto para área de desenvolvimento como para outros setores da empresa.
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

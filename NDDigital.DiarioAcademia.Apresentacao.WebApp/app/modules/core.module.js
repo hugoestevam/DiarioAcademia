@@ -3,6 +3,7 @@
     angular.module('core.module', [
         //3th party
         'ui.router'
+        , 'ngAnimate'
         , 'ui.bootstrap'
         , 'LocalStorageModule'
         , 'angular-loading-bar'
@@ -19,7 +20,7 @@
     
     .config(configInterceptors)
     .run(runStateChangeSuccess)
-   // .run(runStateChangeStart);
+    //.run(runStateChangeStart);
 
     configInterceptors.$inject = ['$httpProvider'];
     function configInterceptors($httpProvider) {

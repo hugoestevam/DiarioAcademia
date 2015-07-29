@@ -14,6 +14,10 @@ namespace NDDigital.DiarioAcademia.Aplicacao.DTOs
             Id = aluno.Id;
             Descricao = aluno.ToString();
             TurmaId = aluno.Turma.Id;
+            Bairro = aluno.Endereco.Bairro;
+            Cep = aluno.Endereco.Cep;
+            Localidade = aluno.Endereco.Localidade;
+            Uf = aluno.Endereco.Uf;
         }
 
         public int Id { get; set; }

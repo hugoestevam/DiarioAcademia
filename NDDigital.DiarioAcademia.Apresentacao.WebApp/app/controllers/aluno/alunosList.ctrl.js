@@ -25,7 +25,9 @@
 
         //public methods
         vm.delete = function (aluno) {
-            alunoService.delete(aluno);
+            alunoService.delete(aluno).then(function () {
+                vm.alunos.remove(aluno);
+            });
             makeRequest();
         }
 

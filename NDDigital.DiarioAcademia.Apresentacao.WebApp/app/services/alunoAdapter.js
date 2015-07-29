@@ -17,6 +17,7 @@
 
         function init() {
             automapper.createMap("aluno", "alunoDto")
+                        .forMember("id", function () { return this.id })
                         .forMember("descricao", function () { return this.nome; })
                         .forMember("turmaId", function () { return this.turma.id; })
                         .forMember("cep", function () { return this.endereco.cep; })
@@ -28,6 +29,7 @@
                         .forAllMembers(function (property) { return this[property]; });
 
             automapper.createMap("alunoDto", "aluno")
+               .forMember("id", function () { return this.id })
                .forMember("nome", function () { return this.descricao; })
                .forMember("turma", function () { return { id: this.turmaId }; })
                .forMember("endereco", function () {

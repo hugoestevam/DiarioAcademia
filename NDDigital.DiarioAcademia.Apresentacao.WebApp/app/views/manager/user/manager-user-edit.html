@@ -7,7 +7,7 @@
 
 <div class="container-user">
     <div class="row">
-        <h1 class="page-header">Edição de Usuário: {{vm.name}}</h1>
+        <h1 class="page-header">Edição de Usuário</h1>
         <ol class="breadcrumb">
             <li>
                 <i class="fa fa-home"></i>  <a ui-sref="home">Inicio</a>
@@ -26,7 +26,7 @@
     <br />
 
     <div class="row">
-        <div class="col-sm-8 clear-padding">
+        <div class="col-sm-7 clear-padding">
             <div class="col-xs-12 clear-padding">
                 <label for="fullname">Nome</label>
                 <input type="text" ng-model="vm.user.fullName" class="form-control" id="fullname" />
@@ -45,7 +45,7 @@
             </div>
         </div>
 
-        <div class="col-sm-4 text-center" >
+        <div class="col-sm-5 text-center" >
             <label>Grupos</label>
             <ndd-checkbox array="vm.groups" compare="vm.user.groups" callback=""></ndd-checkbox>
         </div>
