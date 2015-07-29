@@ -13,10 +13,9 @@
 		var self = this;
 		var serviceUrl = baseUrl + "api/permissions";
 
-		var permissions = [
-			{ id: 0, name: "aluno.list" },
-			{ id: 1, name: "aluno.create" },
-			{ id: 2, name: "manager.user" }];
+		var permissions = [ { id: 0, name: "aluno.list" },
+			                { id: 1, name: "aluno.create" },
+			                { id: 2, name: "manager.user" }];
 
 		//public methods
 		self.getPermissions = function () {

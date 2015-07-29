@@ -21,7 +21,7 @@
                 <li ng-if="shell.isVisible('aluno.create')">
                     <a ui-sref="aluno.create">Novo Aluno</a>
                 </li>
-                <li >
+                <li>
                     <a ui-sref="aluno.list">Listar Alunos</a>
                 </li>
             </ul>
@@ -44,7 +44,7 @@
                     <a ui-sref="chamada.create">Nova Lista</a>
                 </li>
             </ul>
-        <li class="li">
+        </li>
         <li class="li">
             <a href="javascript:;" data-toggle="collapse" data-target="#demo5"><i class="fa fa-fw fa-wrench"></i> Gerenciador <i class="fa fa-fw fa-angle-down"></i></a>
             <ul id="demo5" class="collapse">
@@ -54,7 +54,11 @@
                 <li>
                     <a ui-sref="manager.group">Grupos</a>
                 </li>
+                <li>
+                    <a ui-sref="manager.permissions">Permissões</a>
+                </li>
             </ul>
+        </li>
         <li class="li">
             <a href="#"><i class="fa fa-fw fa-database"></i> Sobre</a>
         </li>

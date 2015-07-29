@@ -2,17 +2,22 @@
     angular.module('controllers.module')
         .controller('managerGroupListController', managerGroupListController);
 
-    managerGroupListController.$inject = ['groupService', '$state', '$location'];
+    managerGroupListController.$inject = ['groupService', '$state', '$location', '$scope'];
 
-    function managerGroupListController(groupService, $state, $location) {
+    function managerGroupListController(groupService, $state, $location, $scope) {
         var vm = this;
 
         vm.groups = [];
-        vm.showGroup = showGroup;
-        vm.selectedGroup = undefined;
-        vm.remove = remove;
-        vm.modal = modal;
 
+        vm.new = createGroup;
+        vm.remove = remove;
+        vm.showGroup = showGroup;
+
+        vm.newGroup = {};
+        vm.creating = false;
+        vm.selectedGroup = undefined;
+
+        vm.modal = modal;
         var params = getParams();
 
         activate();
@@ -28,9 +33,23 @@
         }
 
         // public methods
+        function createGroup() {
+            save();
+            vm.creating = false;
+        }
+
         function showGroup(group) {
             $state.go('manager.group.edit', { groupId: group.id });
             vm.selectedGroup = group;
+        }
+
+        //actions
+        function save() {
+            groupService.save(vm.newGroup).then(function (results) {
+                vm.groups.push(results);
+                $scope.$apply();
+                vm.newGroup = {};
+            });
         }
 
         function remove() {
@@ -39,6 +58,7 @@
             });
         }
 
+        // helpers
         function modal() {
             vm.titleModelRemove = 'Exclusão';
             vm.bodyModelRemove = 'Remover ' + vm.selectedGroup.name + ' ?';
@@ -51,5 +71,4 @@
             return path;
         }
     }
-
 })(window.angular);

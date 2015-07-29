@@ -17,6 +17,15 @@
 					   { id: 2, name: "Admin", permissions: [{ id: 0, name: "aluno.list" }, { id: 1, name: "aluno.create" }] },
 					   { id: 3, name: "RH", permissions: [{ id: 0, name: "aluno.list" }] }];
 
+		var promise = new Promise(function (acc) {
+			var response = {
+				data: groups,
+				status: 200,
+				statusText: 'Fetched data'
+			};
+			acc(response);
+		});
+
 		//public methods
 		self.getGroups = function () {
 			return promise;
@@ -44,18 +53,23 @@
 		};
 
 		self.getGroupByUsername = function (username) {
-
 			return $http.get(serviceUrl + '?username=' + username)
 				 .then(logger.successCallback)
 				 .catch(logger.errorCallback)
 		};
 
-
-
 		self.save = function (group) {
 			logger.success("Salvo com sucesso", group);
-			return new Promise(function (acc) { acc() })
-			// $http.post(serviceUrl, convertToDto(group));
+
+			if (group.id == undefined) {
+				group.id = groups[groups.length - 1].id + 1;
+				group.permissions = [];
+			}
+
+			return new Promise(function (acc) {
+				acc(group)
+			})
+			// $http.post(serviceUrl, group);
 		};
 
 		self.delete = function (group) {
@@ -69,8 +83,6 @@
 				.catch(logger.errorCallback);
 		};
 
-
-
 		self.extractPermissions = function (groups) {
 			var permissions = [];
 			for (var i in groups) {
@@ -83,13 +95,5 @@
 			}
 			return permissions;
 		}
-		var promise = new Promise(function (acc) {
-			var response = {
-				data: groups,
-				status: 200,
-				statusText: 'Fetched data'
-			};
-			acc(response);
-		});
 	}
 })();

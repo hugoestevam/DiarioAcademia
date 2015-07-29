@@ -83,7 +83,7 @@
 			}, {
 				"url": "http://localhost:50299/api/accounts/user/fedbf2b8-1c5c-4300-bac9-e08e2d7f630d",
 				"id": "fedbf2b8-1c5c-4300-bac9-e08e2d7f630d",
-				"userName": "guitoniello",
+				"userName": "gui",
 				"fullName": "Guilherme Toniello",
 				"email": "guitoniello@gmail.com",
 				"emailConfirmed": false,

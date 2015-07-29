@@ -26,7 +26,7 @@
 
         function onstart(index, obj, compare) {
             var element = $('#inputGroup' + index + " *");
-            var result = compare.containsObject(obj);
+            var result = compare ? compare.containsObject(obj) : false;
             if (result) {
                 element.addClass('border-success');
             } else {

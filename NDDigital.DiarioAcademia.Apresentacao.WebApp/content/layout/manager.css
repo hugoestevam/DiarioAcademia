@@ -9,8 +9,14 @@
   .pagination {
     left: 20%;
   }
+  .input-search {
+    left: 0 !important;
+  }
 }
 .clear-padding {
   padding: 0 1% 0 0;
+}
+.input-search {
+  left: 20%;
 }
 /*# sourceMappingURL=manager.css.map */

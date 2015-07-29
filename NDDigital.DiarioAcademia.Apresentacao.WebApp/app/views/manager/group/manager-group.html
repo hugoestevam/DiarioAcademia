@@ -11,7 +11,7 @@
                     <i class="fa fa-wrench"></i> <a style="cursor: pointer">Gerenciador</a>
                 </li>
                 <li class="active">
-                    <i class="fa fa-users"></i> <a ui-sref="manager.roles">Grupos</a>
+                    <i class="fa fa-users"></i> Grupos
                 </li>
             </ol>
         </div>
@@ -23,16 +23,28 @@
 <div class="col-sm-6 clear-padding">
     <div class="container-user">
         <div class="row">
+            <div class="col-sm-7 input-search">
+                <div class="input-group">
+                    <div class="input-group-btn">
+                        <button disabled type="button" class="btn btn-default" style="cursor:default;"><i class="fa fa-search"></i></button>
+                    </div>
+                    <input type="text" class="form-control ng-pristine ng-valid ng-touched" ng-model="nameFilter" aria-label="">
+                </div>
+            </div>
+        </div>
+        <br />
+        <div class="row">
             <div class="col-sm-12" style="padding-left: 2%;">
-                <div class="list-group" ng-repeat="group in vm.groups">
+                <div class="list-group" ng-repeat="group in vm.groups | filter: nameFilter">
                     <a style="cursor: pointer" ng-click="vm.showGroup(group)" class="list-group-item">{{group.name}}</a>
                 </div>
+                <input type="text" class="form-control" value="" ng-show="vm.creating" ng-blur="vm.new()" autofocus ng-model="vm.newGroup.name" />
             </div>
         </div>
         <div class="row">
             <hr />
             <div class="col-sm-12 text-center">
-                <button class="btn btn-success" ui-sref="manager.groups.new"><i class="fa fa-plus"></i> </button>
+                <button class="btn btn-success" ng-click="vm.creating = !vm.creating"><i class="fa fa-plus"></i> </button>
                 <button class="btn btn-danger" ng-click="vm.modal()"
                         data-toggle="modal" data-target="#modelRemoveGroup" ng-disabled="!vm.selectedGroup">
                     <i class="fa fa-times"></i>

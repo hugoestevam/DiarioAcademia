@@ -33,6 +33,11 @@
             url: '/edit/:groupId',
             templateUrl: '/app/views/manager/group/manager-group-edit.html',
             controller: "managerGroupEditController as vm"
+        }, {
+            state: 'manager.permissions',
+            url: '/permissions',
+            templateUrl: '/app/views/manager/permission/manager-permission.html',
+            controller: "managerPermissionController as vm"
         })
     }
 

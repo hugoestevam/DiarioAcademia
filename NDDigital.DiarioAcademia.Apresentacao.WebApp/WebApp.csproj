@@ -78,6 +78,7 @@
   <ItemGroup>
     <Content Include="app\controllers\manager\group\managerGroupEdit.ctrl.js" />
     <Content Include="app\controllers\manager\group\managerGroupList.ctrl.js" />
+    <Content Include="app\controllers\manager\permission\managerPermission.ctrl.js" />
     <Content Include="app\controllers\manager\user\managerUserEdit.ctrl.js" />
     <Content Include="app\controllers\manager\user\managerUserList.ctrl.js" />
     <Content Include="app\directives\ndd-checkbox\ndd-checkbox.directives.js" />
@@ -95,6 +96,7 @@
     <Content Include="app\templates\layout\top-menu.html" />
     <Content Include="app\views\manager\group\manager-group-edit.html" />
     <Content Include="app\views\manager\group\manager-group.html" />
+    <Content Include="app\views\manager\permission\manager-permission.html" />
     <Content Include="app\views\manager\user\manager-user-edit.html" />
     <Content Include="app\views\manager\user\manager-user-list.html" />
     <Content Include="content\animations\animations.css">
@@ -165,7 +167,6 @@
     <Content Include="app\controllers\turma\turmaCreate.ctrl.js" />
     <Content Include="app\controllers\turma\turmaDetails.ctrl.js" />
     <Content Include="app\controllers\turma\turmaList.ctrl.js" />
-    <Content Include="app\directives\menu\menu.directives.js" />
     <Content Include="app\factories\ng-automapper.js" />
     <Content Include="app\libs\angular\angular-local-storage.min.js" />
     <Content Include="app\libs\angular\angular-ui-router.min.js" />
