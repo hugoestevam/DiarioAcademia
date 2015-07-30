@@ -6,11 +6,14 @@
         .module('routes.module')
         .config(configRoutes);
 
-    configRoutes.$inject = [KEYS.APP_ROUTES,KEYS.USER_ROLES];
-    function configRoutes(routes,roles) {
+    configRoutes.$inject = [KEYS.APP_ROUTES, KEYS.USER_ROLES];
+
+    function configRoutes(routes, roles) {
         routes.push({
             state: 'aluno',
             url: '/aluno',
+            'abstract': true,
+            redirect: '/aluno/list',
             templateUrl: '/app/templates/components/inner-view.html'
         }, {
             state: 'aluno.list',
@@ -18,7 +21,7 @@
             controller: 'alunoListCtrl as vm',
             templateUrl: '/app/views/aluno/aluno-list.html',
             displayName: "Aluno List",
-            allowAnnonymous:true
+            allowAnnonymous: true
         }, {
             state: 'aluno.details',
             url: '/details/:alunoId',

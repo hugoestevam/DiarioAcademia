@@ -1,5 +1,4 @@
-﻿
-<div class="col-sm-12 clear-padding">
+﻿<div class="col-sm-12 clear-padding">
     <div class="container-user">
         <div class="row">
             <h1 class="page-header">Grupos</h1>
@@ -19,7 +18,6 @@
     </div>
 </div>
 
-
 <div class="col-sm-6 clear-padding">
     <div class="container-user">
         <div class="row">
@@ -38,13 +36,13 @@
                 <div class="list-group" ng-repeat="group in vm.groups | filter: nameFilter">
                     <a style="cursor: pointer" ng-click="vm.showGroup(group)" class="list-group-item">{{group.name}}</a>
                 </div>
-                <input type="text" class="form-control" value="" ng-show="vm.creating" ng-blur="vm.new()" autofocus ng-model="vm.newGroup.name" />
+                <input type="text" class="form-control" ng-show="vm.creating" ng-blur="vm.new()"  ng-model="vm.newGroup.name" />
             </div>
         </div>
         <div class="row">
             <hr />
             <div class="col-sm-12 text-center">
-                <button class="btn btn-success" ng-click="vm.creating = !vm.creating"><i class="fa fa-plus"></i> </button>
+                <button class="btn btn-success" ng-click="vm.creating = true"><i class="fa fa-plus"></i> </button>
                 <button class="btn btn-danger" ng-click="vm.modal()"
                         data-toggle="modal" data-target="#modelRemoveGroup" ng-disabled="!vm.selectedGroup">
                     <i class="fa fa-times"></i>

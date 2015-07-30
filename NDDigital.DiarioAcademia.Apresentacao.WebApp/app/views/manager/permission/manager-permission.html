@@ -1,14 +1,13 @@
-﻿
-<div class="col-sm-12 clear-padding">
+﻿<div class="col-sm-12 clear-padding">
     <div class="container-user">
         <div class="row">
             <h1 class="page-header">Permissões</h1>
             <ol class="breadcrumb">
                 <li>
-                    <i class="fa fa-home"></i>  <a ui-sref="home">Inicio</a>
+                    <i class="fa fa-home"></i><a ui-sref="home"> Inicio</a>
                 </li>
                 <li>
-                    <i class="fa fa-wrench"></i> <a style="cursor: pointer">Gerenciador</a>
+                    <i class="fa fa-wrench"></i><a style="cursor: pointer"> Gerenciador</a>
                 </li>
                 <li class="active">
                     <i class="fa fa-users"></i> Permissões
@@ -19,4 +18,16 @@
     </div>
 </div>
 
+<div class="row">
+    <div class="col-sm-4" ng-repeat="filter in vm.filters">
+        <div class="panel panel-success text-center">
+            <div class="panel-body">
+                <ndd-group-checkbox array="vm.permission[filter]" compare="vm.routes" method="vm.compareState"></ndd-group-checkbox>
+            </div>
+            <div class="panel-footer">
+                <b class="text-capitalize">{{filter}}</b>
+            </div>
+        </div>
+    </div>
+</div>
 

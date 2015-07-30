@@ -25,7 +25,7 @@
 		function activate() {
 			userService.getUserById(params.userId).then(function (results) {
 				vm.user = results.data;
-				originalUser = $.extend(true, {}, vm.user);;
+				originalUser = $.extend(true, {}, vm.user);
 				vm.name = vm.user.fullName;
 				vm.bodyModelEdit += vm.name;
 			});

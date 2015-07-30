@@ -9,7 +9,7 @@
 
         vm.groups = [];
 
-        vm.new = createGroup;
+        vm.new = save;
         vm.remove = remove;
         vm.showGroup = showGroup;
 
@@ -33,11 +33,6 @@
         }
 
         // public methods
-        function createGroup() {
-            save();
-            vm.creating = false;
-        }
-
         function showGroup(group) {
             $state.go('manager.group.edit', { groupId: group.id });
             vm.selectedGroup = group;
@@ -46,8 +41,9 @@
         //actions
         function save() {
             groupService.save(vm.newGroup).then(function (results) {
-                vm.groups.push(results);
+                vm.creating = false;
                 $scope.$apply();
+                vm.groups.push(results);
                 vm.newGroup = {};
             });
         }
@@ -65,10 +61,8 @@
         }
 
         function getParams() {
-            var path = $location.path();
-            path = path.replace('/manager/group', "")
-            path = path.slice(path.lastIndexOf('/') + 1, path.length);
-            return path;
+            var path = $location.path().replace('/manager/group', "")
+            return path.slice(path.lastIndexOf('/') + 1, path.length);
         }
     }
 })(window.angular);

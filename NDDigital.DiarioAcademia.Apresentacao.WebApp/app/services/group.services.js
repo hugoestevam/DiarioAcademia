@@ -13,9 +13,9 @@
 		var self = this;
 		var serviceUrl = baseUrl + "api/group";
 
-		var groups = [{ id: 1, name: "Aluno", permissions: [{ id: 0, name: "aluno.list" }] },
-					   { id: 2, name: "Admin", permissions: [{ id: 0, name: "aluno.list" }, { id: 1, name: "aluno.create" }] },
-					   { id: 3, name: "RH", permissions: [{ id: 0, name: "aluno.list" }] }];
+		var groups = [{ id: 1, name: "Aluno", permissions: [{  name: "aluno.list" }] },
+					   { id: 2, name: "Admin", permissions: [{ name: "aluno.list" }, {  name: "aluno.create" }] },
+					   { id: 3, name: "RH", permissions: [{ name: "aluno.list" }] }];
 
 		var promise = new Promise(function (acc) {
 			var response = {

@@ -1,7 +1,5 @@
 ﻿(function () {
-
-    angular.module("ngAutomapper", []);
-    angular.module("ngAutomapper").factory("automapper", automapper);
+    angular.module("ngAutomapper", []).factory("automapper", automapper);
 
     function automapper() {
 

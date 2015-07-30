@@ -2,7 +2,7 @@
 	'use strict';
 
 	//using
-	permissionsService.$inject = ['$http', 'logger', 'BASEURL'];
+	permissionsService.$inject = ['$http', 'logger', 'BASEURL', '$state'];
 
 	//namespace
 	angular.module('services.module')
@@ -13,9 +13,9 @@
 		var self = this;
 		var serviceUrl = baseUrl + "api/permissions";
 
-		var permissions = [ { id: 0, name: "aluno.list" },
-			                { id: 1, name: "aluno.create" },
-			                { id: 2, name: "manager.user" }];
+		var permissions = [{  name: "aluno.list" },
+						   {  name: "aluno.create" },
+						   {  name: "manager.user" }];
 
 		//public methods
 		self.getPermissions = function () {
@@ -42,7 +42,6 @@
 				 .then(logger.successCallback)
 				 .catch(logger.errorCallback)
 		};
-
 
 		self.save = function (group) {
 			logger.success("Salvo com sucesso", group);

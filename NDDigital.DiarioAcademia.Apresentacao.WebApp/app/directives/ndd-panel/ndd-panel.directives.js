@@ -9,7 +9,7 @@
         return {
             restrict: 'EA',
             link: link,
-            transclude: false,
+            transclude: true,
             replace: false,
             scope: {
                 title: "@",

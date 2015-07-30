@@ -11,11 +11,12 @@
     
         //app modules
         , 'common.module'
+        , 'factories.module'
         , 'controllers.module'
         , 'directives.module'
         , 'filters.module'
         , 'routes.module'
-        ,'services.module'
+        , 'services.module'
     ])
     
     .config(configInterceptors)

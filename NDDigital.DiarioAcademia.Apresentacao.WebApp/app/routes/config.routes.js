@@ -22,11 +22,15 @@
                     url: route.url,
                     templateUrl: route.templateUrl,
                     controller: route.controller,
+                    abstract: route.abstract,
                     data: {
                         displayName: route.displayName,
                         allowAnnonymous: route.allowAnnonymous,
                     }
                 });
+
+             if(route.abstract)
+                $urlRouterProvider.when(route.url, route.redirect);
         }
     }
 

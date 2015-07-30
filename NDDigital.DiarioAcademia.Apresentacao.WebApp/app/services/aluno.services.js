@@ -16,7 +16,6 @@
         //public methods
         self.getAlunos = function () {
             return $http.get(serviceUrl)
-
                  .then(logger.successCallback)
                  .catch(logger.errorCallback)
                   .then(convertToObj);

@@ -11,6 +11,8 @@
         routes.push({
             state: 'aula',
             url: '/aula',
+            'abstract': true,
+            redirect: '/aula/list',
             templateUrl: '/app/templates/components/inner-view.html'
         }, {
             state: 'aula.list',

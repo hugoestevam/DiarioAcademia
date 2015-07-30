@@ -11,6 +11,8 @@
         routes.push({
             state: 'chamada',
             url: '/chamada',
+            'abstract': true,
+            redirect: '/chamada/list',
             templateUrl: '/app/templates/components/inner-view.html'
         }, {
             state: 'chamada.create',

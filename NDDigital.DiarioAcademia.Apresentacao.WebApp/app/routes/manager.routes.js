@@ -12,7 +12,9 @@
         routes.push({
             state: 'manager',
             url: '/manager',
-            templateUrl: '/app/templates/components/inner-view.html'
+            templateUrl: '/app/templates/components/inner-view.html',
+            'abstract': true,
+            redirect: '/manager/user',
         }, {
             state: 'manager.user',
             url: '/user',

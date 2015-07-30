@@ -11,6 +11,8 @@
         routes.push({
             state: 'turma',
             url: '/turma',
+            'abstract': true,
+            redirect: '/turma/list',
             templateUrl: '/app/templates/components/inner-view.html'
         }, {
             state: 'turma.list',
