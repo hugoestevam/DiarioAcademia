@@ -2,14 +2,14 @@
     'use strict';
 
     //using
-    alunoService.$inject = ['$http', 'logger', 'BASEURL', "alunoAdapter"];
+    alunoService.$inject = ['$http', 'logger', 'BASEURL', "alunoAdapter",'resource'];
 
     //namespace
     angular.module('services.module')
        .service('alunoService', alunoService);
 
     //class
-    function alunoService($http, logger, baseUrl, adapter) {
+    function alunoService($http, logger, baseUrl, adapter,res) {
         var self = this;
         var serviceUrl = baseUrl + "api/aluno";
 
@@ -29,17 +29,17 @@
         };        
 
         self.save = function (aluno) {
-            logger.success("Salvo com sucesso", aluno);
+            logger.success(res.saved_successful, aluno);
             $http.post(serviceUrl, convertToDto(aluno));
         };
 
         self.delete = function (aluno) {
-            logger.error("Excluido com sucesso", aluno, "Delete");
+            logger.error(res.deleted_successful, aluno, "Delete");
             $http.delete(serviceUrl + "/" + aluno.id);
         };
 
         self.getTurmaById = function (id) {
-            logger.success("Aluno com id " + id + " encontrada", null, "GetById");
+            logger.success(res.student_founded(id), null, "GetById");
             return $http.get(serviceUrl + "/" + id)
                 .then(function (response) {
                     return response.data;
@@ -47,7 +47,7 @@
         };
 
         self.edit = function (aluno) {
-            logger.success("Aluno " + aluno.nome + " editada", null, "Edição");
+            logger.success(res.student_edited(aluno.nome), null, "Edição");
             $http.put(serviceUrl + "/" + aluno.id, aluno);
         };
 

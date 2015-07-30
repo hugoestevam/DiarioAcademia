@@ -1,13 +1,13 @@
 ﻿(function (angular) {
     'use strict';
 
-    logger.$inject = ['$log'];
+    logger.$inject = ['$log','resource'];
     angular
         .module('services.module')
         .factory('logger', logger);
 
 
-    function logger($log) {
+    function logger($log,res) {
         var service = {
             showToasts: true,
 
@@ -56,7 +56,7 @@
         //}
 
         function successCallback(response) {
-            success("Solicitação realizada com sucesso!");
+            success(res.success_request);
             return response.data.results || response.data;
         }
 
@@ -74,7 +74,7 @@
                  service[infolog.type](infolog.message, info.content, infolog.title);
                  
                 } else
-                    error(response.message,null,"Servidor Indisponível.");
+                 error(response.message, null, res.unavailable_server);
                 throw new Error(response);
             }
     }

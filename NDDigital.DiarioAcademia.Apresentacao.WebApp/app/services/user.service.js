@@ -2,14 +2,14 @@
 	'use strict';
 
 	//using
-	userService.$inject = ['$http', 'logger', 'BASEURL'];
+	userService.$inject = ['$http', 'logger', 'BASEURL', 'resource'];
 
 	//namespace
 	angular.module('services.module')
 	   .service('userService', userService);
 
 	//class
-	function userService($http, logger, baseUrl) {
+	function userService($http, logger, baseUrl,res) {
 		var self = this;
 
 		var users = createItens();
@@ -46,7 +46,7 @@
 		};
 
 		self.delete = function (user) {
-			logger.error("Excluido com sucesso", user, "Delete");
+			logger.error(res.deleted_successful, user, "Delete");
 			// $http.delete(serviceUrl + "/" + user.id);
 		};
 

@@ -2,14 +2,14 @@
 	'use strict';
 
 	//using
-	groupService.$inject = ['$http', 'logger', 'BASEURL'];
+	groupService.$inject = ['$http', 'logger', 'BASEURL', 'resource'];
 
 	//namespace
 	angular.module('services.module')
 	   .service('groupService', groupService);
 
 	//class
-	function groupService($http, logger, baseUrl) {
+	function groupService($http, logger, baseUrl,res) {
 		var self = this;
 		var serviceUrl = baseUrl + "api/group";
 
@@ -59,7 +59,7 @@
 		};
 
 		self.save = function (group) {
-			logger.success("Salvo com sucesso", group);
+			logger.success(res.saved_successful, group);
 
 			if (group.id == undefined) {
 				group.id = groups[groups.length - 1].id + 1;
@@ -73,7 +73,7 @@
 		};
 
 		self.delete = function (group) {
-			logger.error("Excluido com sucesso", group, "Delete");
+			logger.error(res.deleted_successful, group, "Delete");
 			//$http.delete(serviceUrl + "/" + group.id);
 		};
 

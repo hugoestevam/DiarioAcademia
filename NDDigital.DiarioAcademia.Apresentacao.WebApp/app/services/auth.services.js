@@ -2,12 +2,12 @@
 
     'use strict';
 
-    authService.$inject = ['$http', '$q', 'localStorageService', 'logger', 'BASEURL', 'groupService', 'storageKeys'];
+    authService.$inject = ['$http', '$q', 'localStorageService', 'logger', 'BASEURL', 'groupService', 'storageKeys', 'resource'];
 
     angular.module('services.module')
         .service('authService', authService);
 
-    function authService($http, $q, localStorageService, logger, serviceBase, groupService,storageKeys) {
+    function authService($http, $q, localStorageService, logger, serviceBase, groupService,storageKeys,res) {
         var self = this;
 
         var redirectState = "login";
@@ -89,13 +89,13 @@
                 });
 
 
-                logger.success("Bem vindo " + authentication.userName + "! ");
+                logger.success(res.welcome(authentication.userName));
                 deferred.resolve(response);
 
             }).error(function(err, status) {
 
                 if (!status) {
-                    logger.error("Servidor Indisponível");
+                    logger.error(res.unavailable_server);
                 } else {
 
 

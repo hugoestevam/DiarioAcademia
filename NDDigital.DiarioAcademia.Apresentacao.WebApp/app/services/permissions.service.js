@@ -2,14 +2,14 @@
 	'use strict';
 
 	//using
-	permissionsService.$inject = ['$http', 'logger', 'BASEURL'];
+	permissionsService.$inject = ['$http', 'logger', 'BASEURL','resource'];
 
 	//namespace
 	angular.module('services.module')
 	   .service('permissionsService', permissionsService);
 
 	//class
-	function permissionsService($http, logger, baseUrl) {
+	function permissionsService($http, logger, baseUrl, res) {
 		var self = this;
 		var serviceUrl = baseUrl + "api/permissions";
 
@@ -45,12 +45,12 @@
 
 
 		self.save = function (group) {
-			logger.success("Salvo com sucesso", group);
+		    logger.success(res.saved_successful, group);
 			// $http.post(serviceUrl, convertToDto(group));
 		};
 
 		self.delete = function (group) {
-			logger.error("Excluido com sucesso", group, "Delete");
+		    logger.error(res.deleted_successful, group, "Delete");
 			//$http.delete(serviceUrl + "/" + group.id);
 		};
 
