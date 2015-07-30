@@ -2,14 +2,14 @@
     'use strict';
 
     //using
-    aulaService.$inject = ['$http', 'logger', 'BASEURL'];
+    aulaService.$inject = ['$http', 'logger', 'BASEURL', 'resource'];
 
     //namespace
     angular.module('services.module')
        .service('aulaService', aulaService);
 
     //class
-    function aulaService($http, logger, baseUrl) {
+    function aulaService($http, logger, baseUrl,res) {
         var self = this;
         var serviceUrl = baseUrl + "api/aula";
 
@@ -27,13 +27,13 @@
         };
 
         self.save = function (aula) {
-            logger.success("Salvo com sucesso", aula);
+            logger.success(res.saved_successful, aula);
 
             $http.post(serviceUrl, aula);
         };
 
         self.delete = function (aula) {
-            logger.error("Excluido com sucesso", aula, "Delete");
+            logger.error(res.deleted_successful, aula, "Delete");
             $http.delete(serviceUrl + "/" + aula.id);
         };
 

@@ -2,20 +2,22 @@
 	'use strict';
 
 	//using
-	permissionsService.$inject = ['$http', 'logger', 'BASEURL', '$state'];
+
+	permissionsService.$inject = ['$http', 'logger', 'BASEURL', '$state', 'resource'];
+
 
 	//namespace
 	angular.module('services.module')
 	   .service('permissionsService', permissionsService);
 
 	//class
-	function permissionsService($http, logger, baseUrl) {
+	function permissionsService($http, logger, baseUrl, $state, res) {
 		var self = this;
 		var serviceUrl = baseUrl + "api/permissions";
 
-		var permissions = [{  name: "aluno.list" },
-						   {  name: "aluno.create" },
-						   {  name: "manager.user" }];
+		var permissions = [{ name: "aluno.list" },
+						   { name: "aluno.create" },
+						   { name: "manager.user" }];
 
 		//public methods
 		self.getPermissions = function () {
@@ -44,12 +46,12 @@
 		};
 
 		self.save = function (group) {
-			logger.success("Salvo com sucesso", group);
+			logger.success(res.saved_successful, group);
 			// $http.post(serviceUrl, convertToDto(group));
 		};
 
 		self.delete = function (group) {
-			logger.error("Excluido com sucesso", group, "Delete");
+			logger.error(res.deleted_successful, group, "Delete");
 			//$http.delete(serviceUrl + "/" + group.id);
 		};
 

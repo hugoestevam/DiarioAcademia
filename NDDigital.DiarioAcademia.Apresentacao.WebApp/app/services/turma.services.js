@@ -2,14 +2,14 @@
     'use strict';
 
     //using
-    turmaService.$inject = ['$http', 'logger', 'BASEURL'];
+    turmaService.$inject = ['$http', 'logger', 'BASEURL', 'resource'];
 
     //namespace
     angular.module('services.module')
        .service('turmaService', turmaService);
 
     //class
-    function turmaService($http, logger, baseUrl) {
+    function turmaService($http, logger, baseUrl,res) {
         var self = this;
         var serviceUrl = baseUrl + "api/turma";
 
@@ -21,12 +21,12 @@
         };
 
         self.save = function (turma) {
-            logger.success("Salvo com sucesso", turma);
+            logger.success(res.saved_successful, turma);
             return $http.post(serviceUrl, turma);
         };
 
         self.delete = function (turma) {
-            logger.error("Excluido com sucesso!", turma, "Delete");
+            logger.error(res.deleted_successful, turma, "Delete");
 
             $http.delete(serviceUrl + "/" + turma.id);
 

@@ -16,6 +16,9 @@
         .value('storageKeys', {
             authoData: 'authorizationData',
             autheData:'authenticationData'
+        })
+        .value('settings', {
+            language:'pt-br'
         });
 
    

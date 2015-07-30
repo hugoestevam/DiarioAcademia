@@ -2,20 +2,20 @@
     'use strict';
 
     //using
-    chamadaService.$inject = ['$http', 'logger', 'BASEURL'];
+    chamadaService.$inject = ['$http', 'logger', 'BASEURL','resource'];
 
     //namespace
     angular.module('services.module')
        .service('chamadaService', chamadaService);
 
     //class
-    function chamadaService($http, logger, baseUrl) {
+    function chamadaService($http, logger, baseUrl, res) {
         var self = this;
         var serviceUrl = baseUrl + "api/chamada";
 
         //public methods
         self.realizarChamada = function (chamada) {
-            logger.success("Salvo com sucesso", chamada);
+            logger.success(res.saved_successful, chamada);
 
             $http.post(serviceUrl, chamada);
         };
