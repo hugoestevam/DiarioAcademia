@@ -42,6 +42,7 @@
             saved_successful: 'Excluido com sucesso',
             deleted_successful: 'Excluido com sucesso',
             unavailable_server: 'Servidor Indisponível',
+            success_request:"Solicitação realizada com sucesso!",
             student_founded: function (id) { return "Aluno com id " + id + " encontrada"; },
             student_edited: function (name) { return "Aluno " + name + " editado"; },
             welcome: function (username) { return "Bem vindo " + username + "!"; },

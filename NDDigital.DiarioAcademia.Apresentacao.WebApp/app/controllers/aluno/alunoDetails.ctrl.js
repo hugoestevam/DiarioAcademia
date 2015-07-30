@@ -33,7 +33,9 @@
 
         //public methods
         vm.save = function () {
-            alunoService.edit(convertDto(vm.aluno));
+            alunoService.edit(convertDto(vm.aluno)).then(function () {
+                $state.go('aluno.list');
+            });
             vm.clearFields();
         };
 
@@ -81,16 +83,17 @@
         function convertDtoToAluno(alunoDto) {
             return {
                 id: alunoDto.id,
-                nome: alunoDto.descricao.split(':')[0],
-                turma: getTurmaById(alunoDto.turmaId),
+                nome: alunoDto.nome.split(':')[0],
+                turma: getTurmaById(alunoDto.turma.id),
                 endereco: {
-                    cep: alunoDto.cep,
-                    bairro: alunoDto.bairro,
-                    localidade: alunoDto.localidade,
-                    uf: alunoDto.uf
+                    cep: alunoDto.endereco.cep,
+                    bairro: alunoDto.endereco.bairro,
+                    localidade: alunoDto.endereco.localidade,
+                    uf: alunoDto.endereco.uf
                 }
             };
         }
+
     }
 
 })();
