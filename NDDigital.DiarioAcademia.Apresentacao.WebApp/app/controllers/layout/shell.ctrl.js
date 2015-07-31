@@ -3,7 +3,7 @@
     'use strict';
 
     //using
-    shellController.$inject = ['$state','$location', 'authService'];
+    shellController.$inject = ['$rootScope','$state', '$location', 'authService', 'languageService', 'resource'];
 
     //namespace
     angular
@@ -11,7 +11,7 @@
         .controller('shellController', shellController);
     
     //class
-    function shellController($state,$location, authService) {
+    function shellController($rootScope,$state, $location, authService, languageService, res) {
         var self = this;
 
         //script load
@@ -21,10 +21,12 @@
             self.authentication = authService.authentication;
             self.authorization = authService.authorization;
             
-
-
+            self.currentLanguage = languageService.currentLanguage;
+            reTranslate('pt-br');
         }
-        
+
+        self.reTranslate = reTranslate;
+
         //public methods
         self.logOut = function () {
             authService.logOut();
@@ -33,6 +35,13 @@
 
         self.isVisible = function (state) {
             return self.authorization.isAuthorized(state);
+        };
+        
+        //private methods
+        function reTranslate(language) {
+
+            languageService.updateLanguage(language);
+
         };
     }
 })();

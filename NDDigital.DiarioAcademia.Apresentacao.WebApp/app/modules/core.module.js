@@ -51,7 +51,11 @@
 
                 if (toState.data.allowAnnonymous) return;
 
-                var userIsAdmin = authService.authorization.groups.any('isAdmin', true);
+
+                var userIsAdmin=false;
+            
+                if (authService.authorization.groups)
+                    userIsAdmin = authService.authorization.groups.any('isAdmin', true);
 
                 if (userIsAdmin) return;
                 
@@ -67,10 +71,13 @@
                     if (hasPermission) return;
                     
                 } else {
+
+                    authService.lastState = toState.name;
+                    event.preventDefault();
+
                 $state.go(stateToGo);
                    
                 }
-                    event.preventDefault();
 
 
             });

@@ -1,12 +1,12 @@
 ﻿(function(angular) {
     'use strict';
 
-    authInterceptorService.$inject = ['$q', '$location', 'localStorageService'];
+    authInterceptorService.$inject = ['$q', '$location', 'localStorageService','logger'];
     angular
         .module('services.module')
         .factory('authInterceptorService', authInterceptorService);
     
-    function authInterceptorService($q, $location, localStorageService) {
+    function authInterceptorService($q, $location, localStorageService, logger) {
         var authInterceptorFactory = {};
         
         var request = function (config) {
@@ -22,6 +22,12 @@
         };
 
         var responseError = function (rejection) {
+            
+            if (!status) {
+                logger.error("Servidor indisponível");
+                $location.path('/');
+            }
+
             if (rejection.status === 401) {
                 $location.path('/login');
             }
