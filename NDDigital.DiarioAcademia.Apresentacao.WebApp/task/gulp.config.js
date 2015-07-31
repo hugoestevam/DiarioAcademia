@@ -39,6 +39,8 @@
 
             css: ["./content/**/**/*.css",
                   "!./content/**/**/*.min.css"],
+
+            images: [app + '/**/**/*.png', app + '/**/**/*.gif', app + '/**/**/*.jpg']
         },
 
         templatecache: {

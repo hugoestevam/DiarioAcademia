@@ -1,27 +1,21 @@
-﻿<div class="col-lg-2">
-    <h1 class="page-header">
-        {{vm.title}}
-    </h1>
-    <ol class="breadcrumb">
-        <li>
-            <i class="fa fa-home"></i>  <a ui-sref="home">Inicio</a>
-        </li>
-        <li class="active">
-            <i class="fa fa-sign-in"></i> Cadastro
-        </li>
-    </ol>
-    <div class="jumbotron class1">
-        <form name="vm.aulaForm" class="jumbotron">
-            <input type="text" class="form-control" placeholder="First Name" data-ng-model="vm.registration.firstName" required autofocus><br />
-            <input type="text" class="form-control" placeholder="Last Name" data-ng-model="vm.registration.lastName" required><br />
-            <input type="text" class="form-control" placeholder="Username" data-ng-model="vm.registration.userName" required><br />
-            <input type="email" class="form-control" placeholder="Email" data-ng-model="vm.registration.email" required><br />
-            <input type="password" class="form-control" placeholder="Password" data-ng-model="vm.registration.password" required><br />
-            <input type="password" class="form-control" placeholder="Confirm Password" data-ng-model="vm.registration.confirmPassword" required><br />
-            <button class="btn btn-lg btn-default btn-block" type="submit" data-ng-click="vm.signUp()">Salvar</button>
-            <div data-ng-hide="vm.message == ''" data-ng-class="(vm.savedSuccessfully) ? 'alert alert-success' : 'alert alert-danger'">
-                {{vm.message}}
-            </div>
-        </form>
+﻿<div class="container-user">
+    <ndd-head title="Cadastro"></ndd-head>
+    <div class="col-md-offset-4 col-md-4 col-sm-offset-3 col-sm-6">
+        <div class="jumbotron class1">
+            <br />
+            <img id="profile-img" class="profile-img-card" src="/app/images/avatar_plus.gif" />
+            <form name="vm.aulaForm" class="jumbotron" style="padding-top: 0; padding-bottom: 0; margin-bottom: 3%">
+                <input type="text" class="form-control" placeholder="First Name" data-ng-model="vm.registration.firstName" required autofocus><br />
+                <input type="text" class="form-control" placeholder="Last Name" data-ng-model="vm.registration.lastName" required><br />
+                <input type="text" class="form-control" placeholder="Username" data-ng-model="vm.registration.userName" required><br />
+                <input type="email" class="form-control" placeholder="Email" data-ng-model="vm.registration.email" required><br />
+                <input type="password" class="form-control" placeholder="Password" data-ng-model="vm.registration.password" required><br />
+                <input type="password" class="form-control" placeholder="Confirm Password" data-ng-model="vm.registration.confirmPassword" required><br />
+                <button class="btn btn-lg btn-info btn-block" type="submit" data-ng-click="vm.signUp()">Salvar</button>
+                <div data-ng-hide="vm.message == ''" data-ng-class="(vm.savedSuccessfully) ? 'alert alert-success' : 'alert alert-danger'">
+                    {{vm.message}}
+                </div>
+            </form>
+        </div>
     </div>
 </div>

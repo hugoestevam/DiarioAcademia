@@ -23,7 +23,9 @@
             url: '/signup',
             controller: 'signupController as vm',
             templateUrl: '/app/views/authentication/signup.html',
-            allowAnnonymous:true
+            allowAnnonymous: true,
+            displayName: "Registre-se",
+            displayIcon: "fa-sign-in"
         });
 
     }

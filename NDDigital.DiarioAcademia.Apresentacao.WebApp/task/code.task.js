@@ -40,7 +40,7 @@ gulp.task('inject-lib', function (callback) {
 
 
 // Optimize css/html/js and generate file concatenated
-gulp.task('optimize', ['inject', 'deploy-fonts', 'deploy-views'], function () {
+gulp.task('optimize', ['inject', 'deploy-fonts', 'deploy-views', 'deploy-images'], function () {
     var builder = loader.useref.assets({ searchPath: "./" });
     var cssFilter = loader.filter('**/*.css');
     var jsAppFilter = loader.filter('**/app.js');
@@ -74,5 +74,16 @@ gulp.task('deploy-fonts', function () {
 
 gulp.task('deploy-views', function () {
     return gulp.src(config.app.html)
+                .pipe(gulp.dest(config.dist.app));
+});
+
+gulp.task('deploy-images', function () {
+    log('Copying and compressing the images');
+    return gulp.src(config.app.images)
+                .pipe(loader.imagemin({
+                    progressive: true, //jpg
+                    interlaced: true, //gif
+                    optmizationLevel: 7  // 0 - 7
+                }))
                 .pipe(gulp.dest(config.dist.app));
 });
