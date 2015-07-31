@@ -43,6 +43,7 @@
                });
     };
 
+
     runStateChangeStart.$inject = ['$rootScope', '$state', 'authService'];
     function runStateChangeStart($rootScope, $state, authService) {
         $rootScope.$on('$stateChangeStart',
@@ -58,11 +59,19 @@
                if (authService.authentication.isAuth) {
                    var hasPermission = authService.checkAuthorize(toState.name);
 
+
                    if (hasPermission) return;
+
+
                } else {
+
+                   authService.lastState = toState.name;
+                   event.preventDefault();
+
                    $state.go(stateToGo);
+
                }
-               event.preventDefault();
+
            });
 
         $rootScope.$on('$viewContentLoading', function (event, viewConfig) {

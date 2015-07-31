@@ -161,3 +161,5 @@ packages/*
 NDDigital.DiarioAcademia.Apresentacao.WebApp/bower_components/*
 NDDigital.DiarioAcademia.Apresentacao.WebApp/node_modules/*
 NDDigital.DiarioAcademia.Apresentacao.WebApp/dist/*
+NDDigital.DiarioAcademia.Apresentacao.WebApp/index.html
+NDDigital.DiarioAcademia.Apresentacao.WebApp/task/temp/templates.js

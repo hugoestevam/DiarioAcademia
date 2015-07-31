@@ -10,7 +10,7 @@
     function authService($http, $q, localStorageService, logger, serviceBase, groupService,storageKeys,res) {
         var self = this;
 
-        var redirectState = "login";
+        var redirectState = "home";
         var _username = "";
 
         var authentication = {
@@ -30,7 +30,7 @@
 
 
 
-        var _lastState = { name: redirectState };
+        var _lastState = redirectState;
 
 
         
@@ -89,7 +89,7 @@
                 });
 
 
-                logger.success(res.welcome(authentication.userName));
+                logger.success(res.welcome+" "+(authentication.userName));
                 deferred.resolve(response);
 
             }).error(function(err, status) {
@@ -118,6 +118,8 @@
 
             authentication.isAuth = false;
             authentication.userName = "";
+
+            authorization.groups = authorization.permissions = undefined;
 
         };
 
@@ -156,7 +158,7 @@
         var lastStateProperty = {
             get: function () {
                 var value = _lastState;
-                _lastState = { name: redirectState };
+                _lastState = redirectState;
                 return value;
             },
             set: function (value) {

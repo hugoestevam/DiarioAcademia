@@ -2,7 +2,7 @@
  
     'use strict';
     //using
-    loginController.$inject = ['$location', 'authService'];
+    loginController.$inject = ['$state', 'authService'];
     
     //namespace
     angular
@@ -10,7 +10,7 @@
         .controller('loginController', loginController);
     
     //class
-    function loginController($location, auth) {
+    function loginController($state, auth) {
         var vm = this;
         vm.title = "Entrar";
         vm.user = "User";
@@ -29,7 +29,8 @@
         //public methods
         vm.login = function () {
             auth.login(vm.loginData).then(function () {
-                $location.path('/home');
+
+                $state.go(auth.lastState);
             },
             function (err) {
                 vm.message = "Erro ao logar";
