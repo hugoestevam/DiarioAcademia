@@ -14,25 +14,31 @@
             url: '/aluno',
             'abstract': true,
             redirect: '/aluno/list',
-            templateUrl: '/app/templates/components/inner-view.html'
+            templateUrl: '/app/templates/components/inner-view.html',
+            displayName: "Aluno",
+            displayIcon: "fa-user",
         }, {
             state: 'aluno.list',
             url: '/list',
             controller: 'alunoListCtrl as vm',
             templateUrl: '/app/views/aluno/aluno-list.html',
-            displayName: "Aluno List",
-            allowAnnonymous: true
+            allowAnnonymous: true,
+            displayName: "Lista de Aluno",
+            displayIcon: "fa-user"
+           
         }, {
             state: 'aluno.details',
             url: '/details/:alunoId',
             controller: 'alunoDetailsCtrl as vm',
             templateUrl: '/app/views/aluno/aluno-details.html',
+            displayName: "Detalhes do Aluno"
         }, {
             state: 'aluno.create',
             url: '/create',
             controller: 'alunoCreateCtrl as vm',
             templateUrl: '/app/views/aluno/aluno-create.html',
-        }
-);
+            displayName: "Criação de Aluno",
+            displayIcon: "fa-user-plus"
+        });
     }
 })();

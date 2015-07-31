@@ -9,9 +9,9 @@
 
         vm.permission = [];
         vm.compareState = compareState;
-        vm.filters = ['aluno', 'turma', 'other', 'manager'];
+        vm.filters = ['aluno', 'turma', 'other', 'manager', 'aula', 'chamada'];
 
-       activate();
+        activate();
         function activate() {
             permissionService.getPermissions().then(function (results) {
                 vm.routes = results.data;

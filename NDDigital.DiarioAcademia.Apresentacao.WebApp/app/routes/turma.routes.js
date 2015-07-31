@@ -13,22 +13,32 @@
             url: '/turma',
             'abstract': true,
             redirect: '/turma/list',
-            templateUrl: '/app/templates/components/inner-view.html'
+            templateUrl: '/app/templates/components/inner-view.html',
+            displayName: "Turma",
+            displayIcon: 'fa-university'
         }, {
             state: 'turma.list',
             url: '/list',
             controller: 'turmaListCtrl as vm',
-            templateUrl: '/app/views/turma/turma-list.html'
+            templateUrl: '/app/views/turma/turma-list.html',
+            displayName: "Lista de Turmas",
+            displayIcon: 'fa-bars'
+
         }, {
             state: 'turma.details',
             url: '/details/:turmaId',
             controller: 'turmaDetailsCtrl as vm',
-            templateUrl: '/app/views/turma/turma-details.html'
+            templateUrl: '/app/views/turma/turma-details.html',
+            displayName: "Detalhes da Turma",
+            displayIcon: 'fa-pencil'
+
         }, {
             state: 'turma.create',
             url: '/create',
             controller: 'turmaCreateCtrl as vm',
-            templateUrl: '/app/views/turma/turma-create.html'
+            templateUrl: '/app/views/turma/turma-create.html',
+            displayName: "Criação da Turma",
+            displayIcon: 'fa-plus'
         }
 );
     }

@@ -1,22 +1,4 @@
-﻿<div class="col-sm-12 clear-padding">
-    <div class="container-user">
-        <div class="row">
-            <h1 class="page-header">Grupos</h1>
-            <ol class="breadcrumb">
-                <li>
-                    <i class="fa fa-home"></i>  <a ui-sref="home">Inicio</a>
-                </li>
-                <li>
-                    <i class="fa fa-wrench"></i> <a style="cursor: pointer">Gerenciador</a>
-                </li>
-                <li class="active">
-                    <i class="fa fa-users"></i> Grupos
-                </li>
-            </ol>
-        </div>
-        <br />
-    </div>
-</div>
+﻿<ndd-head title="Grupos"></ndd-head>
 
 <div class="col-sm-6 clear-padding">
     <div class="container-user">
@@ -43,8 +25,12 @@
             <hr />
             <div class="col-sm-12 text-center">
                 <button class="btn btn-success" ng-click="vm.creating = true"><i class="fa fa-plus"></i> </button>
+                <button class="btn btn-info" ng-click="vm.modal()"  
+                        data-toggle="modal" data-target="#modalEditGroup" ng-disabled="!vm.selectedGroup">
+                    <i class="fa fa-save"></i>
+                </button>
                 <button class="btn btn-danger" ng-click="vm.modal()"
-                        data-toggle="modal" data-target="#modelRemoveGroup" ng-disabled="!vm.selectedGroup">
+                        data-toggle="modal" data-target="#modalRemoveGroup" ng-disabled="!vm.selectedGroup">
                     <i class="fa fa-times"></i>
                 </button>
             </div>
@@ -56,6 +42,10 @@
     <div ui-view class="fader-animation container-group"></div>
 </div>
 
-<ndd-modal target="modelRemoveGroup" label="{{vm.titleModelRemove}}" callback="vm.remove">
-    {{vm.bodyModelRemove}}
+<ndd-modal target="modalRemoveGroup" label="{{vm.titleModalRemove}}" callback="vm.remove">
+    {{vm.bodyModalRemove}}
+</ndd-modal>
+
+<ndd-modal target="modalEditGroup" label="{{vm.titleModalEdit}}" callback="vm.edit">
+    {{vm.bodyModalEdit}}
 </ndd-modal>

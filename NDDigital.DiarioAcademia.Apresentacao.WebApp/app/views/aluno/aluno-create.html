@@ -1,22 +1,13 @@
 ﻿<div class="col-lg-8">
-    <h1 class="page-header">
-        {{vm.title}}
-    </h1>
-    <ol class="breadcrumb">
-        <li>
-            <i class="fa fa-home"></i>  <a ui-sref="home">Inicio</a>
-        </li>
-        <li class="active">
-            <i class="fa fa-users"></i> Alunos
-        </li>
-    </ol>
-    <div>
+    <ndd-head title="{{vm.title}}"></ndd-head>
+
+    <div class="col-lg-12 clear-padding">
         <form name="vm.alunoForm" class="jumbotron">
             <input class="form-control" type="text" ng-model="vm.aluno.nome" name="nome" placeholder="Nome" ng-required="true" ng-minlength="10" /><br>
             <input class="form-control" type="text" ng-model="vm.aluno.endereco.cep" name="cep" placeholder="CEP" ng-required="true" ng-minlength="8" /><br>
-            <input class="form-control" type="text" ng-model="vm.aluno.endereco.bairro" name="bairro" placeholder="Bairro" ng-required="true"  /><br>
-            <input class="form-control" type="text" ng-model="vm.aluno.endereco.localidade" name="localidade" placeholder="Localidade" ng-required="true"  /><br>
-            <input class="form-control" type="text" ng-model="vm.aluno.endereco.uf" name="uf" placeholder="UF" ng-required="true"  /><br>
+            <input class="form-control" type="text" ng-model="vm.aluno.endereco.bairro" name="bairro" placeholder="Bairro" ng-required="true" /><br>
+            <input class="form-control" type="text" ng-model="vm.aluno.endereco.localidade" name="localidade" placeholder="Localidade" ng-required="true" /><br>
+            <input class="form-control" type="text" ng-model="vm.aluno.endereco.uf" name="uf" placeholder="UF" ng-required="true" /><br>
             <input class="form-control" type="text" ng-model="vm.aluno.turma" name="turma" ng-hide="true" ng-required="true" />
             <select class="form-control" ng-model="vm.aluno.turma" ng-options="turma.descricao for turma in vm.turmas">
                 <option>Selecione a Turma</option>
@@ -28,7 +19,7 @@
                 O campo nome deve ter mais de 10 caractéres!
             </div>
             <!--<div ng-show="vm.alunoForm.endereco.cep.$error.minlength && vm.alunoForm.endereco.cep.$dirty"    class="alert alert-danger">
-                O campo CEP deve ter 8 caractéres!
+                O campo CEP deve ter 8 caracteres!
             </div>-->
             <div ng-show="vm.alunoForm.turma.$error.required && vm.alunoForm.uf.$dirty" class="alert alert-danger">
                 Selecione uma turma válida!

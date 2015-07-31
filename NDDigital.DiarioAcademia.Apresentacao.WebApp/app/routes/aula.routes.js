@@ -13,17 +13,23 @@
             url: '/aula',
             'abstract': true,
             redirect: '/aula/list',
-            templateUrl: '/app/templates/components/inner-view.html'
+            templateUrl: '/app/templates/components/inner-view.html',
+            displayName: 'Aula',
+            displayIcon: "fa-calendar"
         }, {
             state: 'aula.list',
             url: '/list',
             controller: 'aulaListCtrl as vm',
-            templateUrl: '/app/views/aula/aula-list.html'
+            templateUrl: '/app/views/aula/aula-list.html',
+            displayName: 'Lista de Aulas',
+            displayIcon: "fa-calendar-check-o"
         }, {
             state: 'aula.create',
             url: '/create',
             controller: 'aulaCreateCtrl as vm',
-            templateUrl: '/app/views/aula/aula-create.html'
+            templateUrl: '/app/views/aula/aula-create.html',
+            displayName: 'Criação de Aulas',
+            displayIcon: "fa-calendar-plus-o"
         }
 );
     }

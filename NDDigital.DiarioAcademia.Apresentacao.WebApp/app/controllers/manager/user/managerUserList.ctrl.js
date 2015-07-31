@@ -10,8 +10,7 @@
     function managerUserListController($scope, managerService, $state) {
         var vm = this;
         var users = [];
-        vm.title = 'Usuários';
-   
+
         //angular pagination
         vm.currentPage = 1
         vm.numPerPage = 10

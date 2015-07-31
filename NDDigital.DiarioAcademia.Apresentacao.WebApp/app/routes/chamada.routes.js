@@ -13,12 +13,16 @@
             url: '/chamada',
             'abstract': true,
             redirect: '/chamada/list',
-            templateUrl: '/app/templates/components/inner-view.html'
+            templateUrl: '/app/templates/components/inner-view.html',
+            displayName: 'Chamada',
+            displayIcon: 'fa-check'
         }, {
             state: 'chamada.create',
             url: '/create',
             controller: 'chamadaCtrl as vm',
-            templateUrl: '/app/views/chamada/chamada.html'
+            templateUrl: '/app/views/chamada/chamada.html',
+            displayName: 'Realizar Chamada',
+            displayIcon: 'fa-plus'
         }
 );
     }

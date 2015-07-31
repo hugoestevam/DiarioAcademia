@@ -4,8 +4,7 @@
 
     function nddGroupCheckbox() {
         // Usage:
-        //  <ndd-group-checkbox array="vm.myArray" compare="vm.compareArray" 
-        //                      callback="vm.actionOnChange" method="vm.compareMethod"></ndd-group-checkbox>
+        //  <ndd-group-checkbox array="vm.myArray" compare="vm.compareArray" method="vm.compareMethod"></ndd-group-checkbox>
 
         return {
             restrict: 'E',
@@ -16,11 +15,11 @@
                 array: "=",
                 compare: "=",
                 callback: "=",
-                method: "="
+                method: "=",
+                label: "@"
             },
             templateUrl: 'app/directives/ndd-group-checkbox/ndd-group-checkbox.html'
         };
-
 
         function link(scope, element, attrs) {
             scope.check = check;

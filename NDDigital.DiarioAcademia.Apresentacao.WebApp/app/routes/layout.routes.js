@@ -14,6 +14,8 @@
             url: '/home',
             controller: 'homeController as vm',
             templateUrl: '/app/views/layout/home.html',
+            displayName: "Inicio",
+            displayIcon: "fa-home",
             allowAnnonymous:true
         });
     }

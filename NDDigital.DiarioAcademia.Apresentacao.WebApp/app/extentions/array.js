@@ -8,20 +8,19 @@
     };
 
     Array.prototype.remove = function (obj) {
-        var index = this.indexOfObject(obj); // works correcty - compare using id
+        var index = this.indexOfObject(obj); 
         if (index < 0)
             return false;
         this.splice(index, 1);
         return true;
     }
 
-
     Array.prototype.contains = function (obj) {
         return this.indexOf(obj) >= 0;
     }
 
     Array.prototype.containsObject = function (obj) {
-        return this.indexOfObject(obj) >= 0; // works correcty - compare using id
+        return this.indexOfObject(obj) >= 0; 
     }
 
     

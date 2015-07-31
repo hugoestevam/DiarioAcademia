@@ -1,23 +1,30 @@
-﻿<div class="col-lg-2">
-    <h1 class="page-header">
-        {{vm.title}}
-    </h1>
-    <ol class="breadcrumb">
-        <li>
-            <i class="fa fa-home"></i>  <a ui-sref="home">Inicio</a>
-        </li>
-        <li class="active">
-            <i class="fa fa-user-md"></i> Entrar
-        </li>
-    </ol>
-    <div class="jumbotron">
-        <form name="vm.aulaForm" class="jumbotron">
-            <input type="text" class="form-control" placeholder="Username" data-ng-model="vm.loginData.userName" required autofocus><br />
-            <input type="password" class="form-control" placeholder="Password" data-ng-model="vm.loginData.password" required><br />
-            <button class="btn btn-lg btn-default btn-block" type="submit" data-ng-click="vm.login()">Entrar</button>
-            <div data-ng-hide="vm.message == ''" class="alert alert-danger">
+﻿<div class="container-user">
+    <ndd-head title="Login"></ndd-head>
+</div>
+<div class="col-sm-offset-4 col-sm-4 login">
+
+    <div class="card card-container">
+        <img id="profile-img" class="profile-img-card" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" />
+        <p id="profile-name" class="profile-name-card"></p>
+
+        <form class="form-signin" name="login">
+            <span class="reauth-email"></span>
+
+            <input type="text" name="inputEmail"
+                   class="form-control" placeholder="Username" required autofocus ng-model="vm.loginData.userName">
+
+            <input type="password" name="inputPassword"
+                   class="form-control" placeholder="Password" required ng-model="vm.loginData.password">
+
+            <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit"
+                    ng-click="login.$valid ? vm.login(): false">
+                Entrar
+            </button>
+
+            <div ng-hide="vm.message == ''" class="alert alert-danger">
                 {{vm.message}}
             </div>
         </form>
     </div>
+
 </div>

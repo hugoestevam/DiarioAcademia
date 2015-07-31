@@ -26,7 +26,11 @@
                     data: {
                         displayName: route.displayName,
                         allowAnnonymous: route.allowAnnonymous,
-                    }
+                    },
+                    ncyBreadcrumb: {
+                        label: route.displayName,
+                        icon: route.displayIcon,
+                    },
                 });
 
              if(route.abstract)

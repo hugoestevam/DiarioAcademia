@@ -83,6 +83,8 @@
     <Content Include="app\controllers\manager\user\managerUserList.ctrl.js" />
     <Content Include="app\directives\ndd-group-checkbox\ndd-group-checkbox.directives.js" />
     <Content Include="app\directives\ndd-group-checkbox\ndd-group-checkbox.html" />
+    <Content Include="app\directives\ndd-head\ndd-head.directives.js" />
+    <Content Include="app\directives\ndd-head\ndd-head.html" />
     <Content Include="app\directives\ndd-modal\ndd-modal.directives.js" />
     <Content Include="app\directives\ndd-modal\ndd-modal.html" />
     <Content Include="app\directives\ndd-panel\ndd-panel.directives.js" />
@@ -97,6 +99,7 @@
     <Content Include="app\services\language.service.js" />
     <Content Include="app\services\permissions.service.js" />
     <Content Include="app\services\user.service.js" />
+    <Content Include="app\templates\layout\breadcrumb.html" />
     <Content Include="app\templates\layout\top-menu.html" />
     <Content Include="app\views\manager\group\manager-group-edit.html" />
     <Content Include="app\views\manager\group\manager-group.html" />
@@ -108,6 +111,12 @@
     </Content>
     <Content Include="content\animations\animations.min.css">
       <DependentUpon>animations.css</DependentUpon>
+    </Content>
+    <Content Include="content\layout\login.css">
+      <DependentUpon>login.less</DependentUpon>
+    </Content>
+    <Content Include="content\layout\login.min.css">
+      <DependentUpon>login.css</DependentUpon>
     </Content>
     <Content Include="content\layout\manager.css">
       <DependentUpon>manager.less</DependentUpon>
@@ -143,6 +152,10 @@
     <Content Include="content\animations\animations.less" />
     <Content Include="content\animations\animations.css.map">
       <DependentUpon>animations.css</DependentUpon>
+    </Content>
+    <Content Include="content\layout\login.less" />
+    <Content Include="content\layout\login.css.map">
+      <DependentUpon>login.css</DependentUpon>
     </Content>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

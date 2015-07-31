@@ -6,6 +6,7 @@
         .module('routes.module')
         .config(configRoutes);
 
+
     configRoutes.$inject = [KEYS.APP_ROUTES];
     function configRoutes(routes) {
 
@@ -14,7 +15,9 @@
             url: '/login',
             controller: 'loginController as vm',
             templateUrl: '/app/views/authentication/login.html',
-            allowAnnonymous:true
+            allowAnnonymous: true,
+            displayName: 'Login',
+            displayIcon: 'fa-user'
         }, {
             state: 'signup',
             url: '/signup',

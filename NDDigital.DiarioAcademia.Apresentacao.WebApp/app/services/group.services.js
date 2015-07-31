@@ -2,20 +2,23 @@
 	'use strict';
 
 	//using
-	groupService.$inject = ['$http', 'logger', 'BASEURL', 'resource'];
+	groupService.$inject = ['$http', 'logger', 'BASEURL', 'resource', '$state'];
 
 	//namespace
 	angular.module('services.module')
 	   .service('groupService', groupService);
 
 	//class
-	function groupService($http, logger, baseUrl, res) {
+	function groupService($http, logger, baseUrl, res, $state) {
 		var self = this;
 		var serviceUrl = baseUrl + "api/group";
 
-		var groups = [{ id: 1, name: "Aluno", permissions: [{ name: "aluno.list" }] },
-					   { id: 2, name: "Admin", permissions: [{ name: "aluno.list" }, { name: "aluno.create" }] },
-					   { id: 3, name: "RH", permissions: [{ name: "aluno.list" }] }];
+		//temporario
+		var permission = $state.get();
+		var groups = [{ id: 1, name: "Aluno", permissions: [permission[2]] },
+					   { id: 2, name: "Admin", permissions: [permission[2], permission[3]] },
+					   { id: 3, name: "RH", permissions: [permission[2]] }];
+
 
 		var promise = new Promise(function (acc) {
 			var response = {
@@ -70,6 +73,11 @@
 				acc(group)
 			})
 			// $http.post(serviceUrl, group);
+		};
+
+
+		self.edit = function (group) {
+			//   $http.put(serviceUrl + "/" +  group.id, group);
 		};
 
 		self.delete = function (group) {
