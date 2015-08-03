@@ -17,7 +17,8 @@
             templateUrl: '/app/views/authentication/login.html',
             allowAnnonymous: true,
             displayName: 'Login',
-            displayIcon: 'fa-user'
+            displayIcon: 'fa-user',
+            $$permissionId: "06"
         }, {
             state: 'signup',
             url: '/signup',
@@ -25,7 +26,8 @@
             templateUrl: '/app/views/authentication/signup.html',
             allowAnnonymous: true,
             displayName: "Registre-se",
-            displayIcon: "fa-sign-in"
+            displayIcon: "fa-sign-in",
+            $$permissionId: "07"
         });
 
     }

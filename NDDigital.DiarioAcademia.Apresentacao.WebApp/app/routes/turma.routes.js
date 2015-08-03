@@ -22,15 +22,16 @@
             controller: 'turmaListCtrl as vm',
             templateUrl: '/app/views/turma/turma-list.html',
             displayName: "Lista de Turmas",
-            displayIcon: 'fa-bars'
-
+            displayIcon: 'fa-bars',
+            $$permissionId: "14"
         }, {
             state: 'turma.details',
             url: '/details/:turmaId',
             controller: 'turmaDetailsCtrl as vm',
             templateUrl: '/app/views/turma/turma-details.html',
             displayName: "Detalhes da Turma",
-            displayIcon: 'fa-pencil'
+            displayIcon: 'fa-pencil',
+            $$permissionId: "15"
 
         }, {
             state: 'turma.create',
@@ -38,7 +39,8 @@
             controller: 'turmaCreateCtrl as vm',
             templateUrl: '/app/views/turma/turma-create.html',
             displayName: "Criação da Turma",
-            displayIcon: 'fa-plus'
+            displayIcon: 'fa-plus',
+            $$permissionId: "16"
         }
 );
     }

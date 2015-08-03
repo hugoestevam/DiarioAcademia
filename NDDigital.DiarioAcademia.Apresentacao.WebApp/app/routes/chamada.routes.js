@@ -22,7 +22,8 @@
             controller: 'chamadaCtrl as vm',
             templateUrl: '/app/views/chamada/chamada.html',
             displayName: 'Realizar Chamada',
-            displayIcon: 'fa-plus'
+            displayIcon: 'fa-plus',
+            $$permissionId: "08"
         }
 );
     }

@@ -20,20 +20,4 @@
         .value('settings', {
             language:'pt-br'
         });
-
-   
-    //Extensions Méthods
-    (function() {
-       Array.prototype.remove = function (item) {
-           var index = typeof item === 'number' ? item : this.indexOf(item);
-           this.splice(index, 1);          
-        };
-        Array.prototype.contains = function (item) {
-            return this.indexOf(item) >= 0;
-        };
-    });
-
-    
-
-
 })();

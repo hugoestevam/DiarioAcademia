@@ -15,9 +15,10 @@
 		var self = this;
 		var serviceUrl = baseUrl + "api/permissions";
 
-		var permissions = [{ name: "aluno.list" },
-						   { name: "aluno.create" },
-						   { name: "manager.user" }];
+		var permissions = [{ name: "aluno.list", data: { displayName: 'Lista de Alunos' } },
+						   { name: "aluno.create", data: {displayName: 'Criação de Aluno'} },
+						   { name: "aluno.details",data: { displayName: 'Detalhes do Aluno'} },
+						   { name: "manager.user", data: { displayName: 'Usuário' } }];
 
 		//public methods
 		self.getPermissions = function () {

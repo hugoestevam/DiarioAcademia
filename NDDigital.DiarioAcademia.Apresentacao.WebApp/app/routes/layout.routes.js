@@ -16,7 +16,8 @@
             templateUrl: '/app/views/layout/home.html',
             displayName: "Inicio",
             displayIcon: "fa-home",
-            allowAnnonymous:true
+            allowAnnonymous: true,
+            $$permissionId: "00"
         });
     }
 

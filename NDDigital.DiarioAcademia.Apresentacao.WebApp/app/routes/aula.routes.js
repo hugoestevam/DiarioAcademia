@@ -22,14 +22,16 @@
             controller: 'aulaListCtrl as vm',
             templateUrl: '/app/views/aula/aula-list.html',
             displayName: 'Lista de Aulas',
-            displayIcon: "fa-calendar-check-o"
+            displayIcon: "fa-calendar-check-o",
+            $$permissionId: "04"
         }, {
             state: 'aula.create',
             url: '/create',
             controller: 'aulaCreateCtrl as vm',
             templateUrl: '/app/views/aula/aula-create.html',
             displayName: 'Criação de Aulas',
-            displayIcon: "fa-calendar-plus-o"
+            displayIcon: "fa-calendar-plus-o",
+            $$permissionId: "05"
         }
 );
     }
