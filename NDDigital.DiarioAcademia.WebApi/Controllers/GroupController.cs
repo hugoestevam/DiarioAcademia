@@ -113,6 +113,7 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers
 
         public Guid Id { get; set; }
         public string Name { get; set; }
+        public string PermissionId { get; set; }
     }
 
     public class ApplicationIdentityUser
