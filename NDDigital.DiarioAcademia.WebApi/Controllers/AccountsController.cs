@@ -169,7 +169,30 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers
             }
 
             var currentRoles = await this.AppUserManager.GetRolesAsync(appUser.Id);
-         
+
+            var rolesNotExists = rolesToAssign.Except(this.AppRoleManager.Roles.Select(x => x.Name)).ToArray();
+
+            if (rolesNotExists.Count() > 0)
+            {
+                ModelState.AddModelError("", string.Format("Roles '{0}' does not exixts in the system", string.Join(",", rolesNotExists)));
+                return BadRequest(ModelState);
+            }
+
+            IdentityResult removeResult = await this.AppUserManager.RemoveFromRolesAsync(appUser.Id, currentRoles.ToArray());
+
+            if (!removeResult.Succeeded)
+            {
+                ModelState.AddModelError("", "Failed to remove user roles");
+                return BadRequest(ModelState);
+            }
+
+            IdentityResult addResult = await this.AppUserManager.AddToRolesAsync(appUser.Id, rolesToAssign);
+
+            if (!addResult.Succeeded)
+            {
+                ModelState.AddModelError("", "Failed to add user roles");
+                return BadRequest(ModelState);
+            }
 
             return Ok();
         }
@@ -190,7 +213,16 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers
             {
                 return NotFound();
             }
-            
+
+            foreach (ClaimBindingModel claimModel in claimsToAssign)
+            {
+                if (appUser.Claims.Any(c => c.ClaimType == claimModel.Type))
+                {
+                    await this.AppUserManager.RemoveClaimAsync(id, ExtendedClaimsProvider.CreateClaim(claimModel.Type, claimModel.Value));
+                }
+
+                await this.AppUserManager.AddClaimAsync(id, ExtendedClaimsProvider.CreateClaim(claimModel.Type, claimModel.Value));
+            }
 
             return Ok();
         }
@@ -210,7 +242,15 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers
             if (appUser == null)
             {
                 return NotFound();
-            }          
+            }
+
+            foreach (ClaimBindingModel claimModel in claimsToRemove)
+            {
+                if (appUser.Claims.Any(c => c.ClaimType == claimModel.Type))
+                {
+                    await this.AppUserManager.RemoveClaimAsync(id, ExtendedClaimsProvider.CreateClaim(claimModel.Type, claimModel.Value));
+                }
+            }
 
             return Ok();
         }
