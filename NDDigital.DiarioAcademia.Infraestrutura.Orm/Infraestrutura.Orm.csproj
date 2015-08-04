@@ -110,6 +110,7 @@
     <Compile Include="Configurations\TurmaConfiguration.cs" />
     <Compile Include="Contexts\DiarioAcademiaContext.cs" />
     <Compile Include="Identity\ApplicationDbContext.cs" />
+    <Compile Include="Identity\ApplicationIdentityUser.cs" />
     <Compile Include="Identity\ApplicationUser.cs" />
     <Compile Include="Identity\ApplicationUserManager.cs" />
     <Compile Include="Identity\Group.cs" />

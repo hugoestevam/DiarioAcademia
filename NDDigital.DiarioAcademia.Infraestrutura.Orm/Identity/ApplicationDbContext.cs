@@ -1,5 +1,8 @@
 ﻿using Microsoft.AspNet.Identity.EntityFramework;
-using System.Data.Entity;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
 
 namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Identity
 {
@@ -8,7 +11,6 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Identity
         public ApplicationDbContext()
             : base("DiarioAuthContext", throwIfV1Schema: false)
         {
-            Database.SetInitializer(new DropCreateDatabaseIfModelChanges<ApplicationDbContext>());
             Configuration.ProxyCreationEnabled = false;
             Configuration.LazyLoadingEnabled = false;
         }
@@ -17,5 +19,6 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Identity
         {
             return new ApplicationDbContext();
         }
+
     }
 }
