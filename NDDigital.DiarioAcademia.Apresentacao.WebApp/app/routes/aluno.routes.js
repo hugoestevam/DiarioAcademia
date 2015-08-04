@@ -24,23 +24,21 @@
             templateUrl: '/app/views/aluno/aluno-list.html',
             allowAnnonymous: true,
             displayName: "Lista de Aluno",
-            displayIcon: "fa-user",
-            $$permissionId: "01"
+            displayIcon: "fa-user"
+           
         }, {
             state: 'aluno.details',
             url: '/details/:alunoId',
             controller: 'alunoDetailsCtrl as vm',
             templateUrl: '/app/views/aluno/aluno-details.html',
-            displayName: "Detalhes do Aluno",
-            $$permissionId: "02"
+            displayName: "Detalhes do Aluno"
         }, {
             state: 'aluno.create',
             url: '/create',
             controller: 'alunoCreateCtrl as vm',
             templateUrl: '/app/views/aluno/aluno-create.html',
             displayName: "Criação de Aluno",
-            displayIcon: "fa-user-plus",
-            $$permissionId: "03"
+            displayIcon: "fa-user-plus"
         });
     }
 })();
