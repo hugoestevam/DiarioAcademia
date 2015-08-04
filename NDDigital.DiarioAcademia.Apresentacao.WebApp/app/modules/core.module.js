@@ -48,42 +48,29 @@
     function runStateChangeStart($rootScope, $state, authService) {
         $rootScope.$on('$stateChangeStart',
            function (event, toState, toParams, fromState, fromParams) {
+               if (toState.data.allowAnnonymous) return;
+
+               var userIsAdmin = authService.authorization.groups.any('isAdmin', true);
+
+               if (userIsAdmin) return;
 
                var stateToGo = 'login';
 
-               try {
-
-                   if (toState.data.allowAnnonymous) return;
-
-                   var userIsAdmin = false;
-
-                   if (authService.authorization.groups)
-                       userIsAdmin = authService.authorization.groups.any('isAdmin', true);
-
-                   if (userIsAdmin) return;
-
-                   if (authService.authentication.isAuth) {
-                       var hasPermission = authService.checkAuthorize(toState.name);
+               if (authService.authentication.isAuth) {
+                   var hasPermission = authService.checkAuthorize(toState.name);
 
 
-                       if (hasPermission) return;
-                       
-                   }
+                   if (hasPermission) return;
 
 
-                   throw new Error("Not Authenticated");
+               } else {
 
-               } catch (err) {
-                   console.error(err.message);
-                   cancelRouting();
+                   authService.lastState = toState.name;
+                   event.preventDefault();
+
+                   $state.go(stateToGo);
+
                }
-                   function cancelRouting() {
-                       authService.lastState = toState.name;
-                       event.preventDefault();
-
-                       $state.go(stateToGo);
-                   }
-
 
            });
 
