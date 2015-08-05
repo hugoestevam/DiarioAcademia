@@ -207,7 +207,6 @@
     <Compile Include="Controllers\Entities\ChamadaController.cs" />
     <Compile Include="Controllers\Entities\TurmaController.cs" />
     <Compile Include="Controllers\Translate\LanguageController.cs" />
-    <Compile Include="Models\NDDigitalDiarioAcademiaWebApi.cs" />
     <Compile Include="Providers\CustomJwtFormat.cs" />
     <Compile Include="Providers\CustomOAuthProvider.cs" />
     <Compile Include="Providers\SimpleAuthorizationServerProvider.cs" />
@@ -225,6 +224,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\NDDigital.DiarioAcademia.Aplicacao\Aplicacao.csproj">
