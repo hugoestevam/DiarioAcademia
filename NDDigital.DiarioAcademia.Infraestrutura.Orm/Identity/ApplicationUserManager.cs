@@ -3,10 +3,8 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using NDDigital.DiarioAcademia.Infraestrutura.CepServices;
+using NDDigital.DiarioAcademia.Infraestrutura.Orm.Contexts;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Identity
 {
@@ -19,7 +17,7 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Identity
 
         public static ApplicationUserManager Create(IdentityFactoryOptions<ApplicationUserManager> options, IOwinContext context)
         {
-            var appDbContext = context.Get<ApplicationDbContext>();
+            var appDbContext = context.Get<AuthenticationContext>();
             var appUserManager = new ApplicationUserManager(new UserStore<ApplicationUser>(appDbContext));
 
             // Configure validation logic for usernames
@@ -38,7 +36,7 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Identity
                 RequireLowercase = false,
                 RequireUppercase = false,
             };
-            
+
             appUserManager.EmailService = new EmailService();
 
             var dataProtectionProvider = options.DataProtectionProvider;
@@ -50,7 +48,7 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Identity
                     TokenLifespan = TimeSpan.FromHours(6)
                 };
             }
-           
+
             return appUserManager;
         }
     }

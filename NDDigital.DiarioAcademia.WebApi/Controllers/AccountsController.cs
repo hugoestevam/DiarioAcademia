@@ -67,8 +67,7 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers
                 FirstName = createUserModel.FirstName,
                 LastName = createUserModel.LastName,
                 Level = 3,
-                JoinDate = DateTime.Now.Date,
-                EmailConfirmed = true //TODO: GAMBI
+                JoinDate = DateTime.Now.Date
             };
 
             IdentityResult addUserResult = await this.AppUserManager.CreateAsync(user, createUserModel.Password);

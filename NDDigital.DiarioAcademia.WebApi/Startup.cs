@@ -4,6 +4,7 @@ using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.DataHandler.Encoder;
 using Microsoft.Owin.Security.Jwt;
 using Microsoft.Owin.Security.OAuth;
+using NDDigital.DiarioAcademia.Infraestrutura.Orm.Contexts;
 using NDDigital.DiarioAcademia.Infraestrutura.Orm.Identity;
 using NDDigital.DiarioAcademia.WebApi.App_Start;
 using NDDigital.DiarioAcademia.WebApi.Providers;
@@ -40,7 +41,7 @@ namespace NDDigital.DiarioAcademia.WebApi
         private void ConfigureOAuthTokenGeneration(IAppBuilder app)
         {
             // Configure the db context and user manager to use a single instance per request
-            app.CreatePerOwinContext(ApplicationDbContext.Create);
+            app.CreatePerOwinContext(AuthenticationContext.Create);
             app.CreatePerOwinContext<ApplicationUserManager>(ApplicationUserManager.Create);
 
             OAuthAuthorizationServerOptions OAuthServerOptions = new OAuthAuthorizationServerOptions()
