@@ -50,7 +50,7 @@
         }
 
         function edit() {
-            groupService.edit(vm.newGroup).then(function (results) {});
+            //groupService.edit(vm.newGroup).then(function (results) {});
         }
 
         function remove() {

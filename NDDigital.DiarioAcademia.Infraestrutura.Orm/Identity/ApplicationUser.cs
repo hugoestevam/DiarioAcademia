@@ -25,7 +25,7 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Identity
 
         [Required]
         public DateTime JoinDate { get; set; }
-
+        
         public List<Group> Groups { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager, string authenticationType)

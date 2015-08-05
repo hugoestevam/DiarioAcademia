@@ -2,7 +2,6 @@
 using NDDigital.DiarioAcademia.Infraestrutura.Orm.Identity;
 using NDDigital.DiarioAcademia.Infraestrutura.Orm.Models;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Http;
@@ -22,7 +21,7 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers
             return Ok(this.AppUserManager.Users.ToList().Select(u => this.TheModelFactory.Create(u)));
         }
 
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         [Route("user/{id:guid}", Name = "GetUserById")]
         public async Task<IHttpActionResult> GetUser(string Id)
         {
@@ -37,7 +36,7 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers
             return NotFound();
         }
 
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         [Route("user/{username}")]
         public async Task<IHttpActionResult> GetUserByName(string username)
         {
@@ -69,6 +68,7 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers
                 LastName = createUserModel.LastName,
                 Level = 3,
                 JoinDate = DateTime.Now.Date,
+                EmailConfirmed = true //TODO: GAMBI
             };
 
             IdentityResult addUserResult = await this.AppUserManager.CreateAsync(user, createUserModel.Password);
@@ -83,30 +83,7 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers
             return Created(locationHeader, TheModelFactory.Create(user));
         }
 
-        [AllowAnonymous]
-        [HttpGet]
-        [Route("ConfirmEmail", Name = "ConfirmEmailRoute")]
-        public async Task<IHttpActionResult> ConfirmEmail(string userId = "", string code = "")
-        {
-            if (string.IsNullOrWhiteSpace(userId) || string.IsNullOrWhiteSpace(code))
-            {
-                ModelState.AddModelError("", "User Id and Code are required");
-                return BadRequest(ModelState);
-            }
-
-            IdentityResult result = await this.AppUserManager.ConfirmEmailAsync(userId, code);
-
-            if (result.Succeeded)
-            {
-                return Ok();
-            }
-            else
-            {
-                return GetErrorResult(result);
-            }
-        }
-
-        // [Authorize]
+        //[Authorize]
         [Route("ChangePassword")]
         public async Task<IHttpActionResult> ChangePassword(ChangePasswordBindingModel model)
         {
@@ -125,7 +102,7 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers
             return Ok();
         }
 
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         [Route("user/{id:guid}")]
         public async Task<IHttpActionResult> DeleteUser(string id)
         {

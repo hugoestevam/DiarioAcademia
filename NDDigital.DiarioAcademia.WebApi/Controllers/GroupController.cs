@@ -36,18 +36,13 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers
                 },
                 new Group
                 {
-                    Name = "Viwer",
+                    Name = "Viewr",
                     Permissions = new List<Permission>
                     {
                         alunoList,
                     }
                 }
             };
-
-        public GroupController()
-        {
-            
-        }
 
         // GET: api/Group
         public IHttpActionResult Get()
@@ -65,7 +60,7 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers
         public IHttpActionResult Get(string username)
         {
             //provisorio
-            return Ok(new List<Group>{Groups[0]});
+            return Ok(new List<Group> { Groups[0] });
         }
 
         // GET: api/Group/username
