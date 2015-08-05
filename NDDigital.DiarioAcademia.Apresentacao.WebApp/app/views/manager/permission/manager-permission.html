@@ -1,23 +1,24 @@
 ﻿<ndd-head title="Permissões"></ndd-head>
 
-<div class="row">
-    <div class="col-sm-12 clear-padding">
-        <div class="container-user">
-            <div class="col-sm-4 clear-padding" ng-repeat="filter in vm.filters">
-                <div class="panel panel-primary text-center">
-                    <div class="panel-heading">
-                        <b class="text-capitalize">{{filter}}</b>
-                    </div>
-                    <div class="panel-body">
-                        <ndd-group-checkbox array="vm.permission[filter]" compare="vm.showRoutes" method="vm.compareState" callback="vm.onchange"></ndd-group-checkbox>
-                    </div>
-                </div>
+
+
+<div class="container-permission">
+    <div class="col-sm-4 clear-padding col-grid" ng-repeat="filter in vm.filters">
+        <div class="panel panel-primary text-center">
+            <div class="panel-heading">
+                <b class="text-capitalize">{{filter}}</b>
+            </div>
+            <div class="panel-body">
+                <ndd-group-checkbox array="vm.permission[filter]" compare="vm.showRoutes"
+                                    method="vm.compareState" callback="vm.onchange"></ndd-group-checkbox>
             </div>
         </div>
     </div>
+</div>
 
-    <div class="col-sm-12 clear-padding text-center">
-        <hr />
-        <button class="btn btn-success" ng-disabled="!vm.hasChange" ng-click="vm.saveChanges()"><i class="fa fa-check"></i> </button>
-    </div>
+<div class="col-sm-12 clear-padding text-center">
+    <hr />
+    <button class="btn btn-info" ng-disabled="" ng-click=""><i class="fa fa-plus"></i> </button>
+    <button class="btn btn-success" ng-disabled="!vm.hasChange" ng-click="vm.saveChanges()"><i class="fa fa-save"></i> </button>
+
 </div>

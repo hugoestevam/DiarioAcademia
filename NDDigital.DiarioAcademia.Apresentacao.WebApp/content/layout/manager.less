@@ -2,10 +2,11 @@
     margin: 0 2% 0 2%;
 }
 
-.container-group{
-    position:absolute !important; 
+.container-group {
+    position: absolute !important;
     width: 95% !important;
 }
+
 .pagination {
     position: absolute;
     left: 45%;
@@ -28,4 +29,23 @@
 
 .input-search {
     left: 20%;
+}
+
+@media screen and (min-width: 768px) {
+    .container-grid {
+        -moz-column-count: 4;
+        -moz-column-gap: 20px;
+        -webkit-column-count: 4;
+        -webkit-column-gap: 20px;
+        column-count: 4;
+        column-gap: 20px;
+        width: 98%;
+        margin-left: 1%;
+        column-fill:balance;
+        & .col-grid {
+            display: inline-block;
+            margin-bottom: 20px;
+            width: 100%;
+        }
+    }
 }

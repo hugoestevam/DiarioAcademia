@@ -2,10 +2,10 @@
 	angular.module('controllers.module')
 		.controller('managerGroupEditController', managerGroupEditController);
 
-	managerGroupEditController.$inject = ['groupService', 'permissionsService', 'compareState',
+	managerGroupEditController.$inject = ['groupService', 'permissionsService', 'permissions.factory', 'compareState',
 		'$state', '$stateParams'];
 
-	function managerGroupEditController(groupService, permissionsService,
+	function managerGroupEditController(groupService, permissionsService, permissionsFactory,
 		compareState, $state, params) {
 
 		var vm = this;
@@ -13,6 +13,7 @@
 		//public functions
 		vm.save = save;
 		vm.comparePermissions = compareState;
+		vm.permissions = [];
 
 		activate();
 		function activate() {
@@ -23,7 +24,11 @@
 			});
 
 			permissionsService.getPermissions().then(function (results) {
-				vm.permissions = results.data;
+			    var permissions = results.data;
+			    for (var i = 0; i < permissions.length; i++) {
+			        var permission = permissionsFactory.getPermissionById(permissions[i].permissionId);
+			        vm.permissions.push(permission);
+			    }
 			});
 		}
 

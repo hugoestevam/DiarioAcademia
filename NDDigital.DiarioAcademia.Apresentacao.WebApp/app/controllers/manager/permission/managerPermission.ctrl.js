@@ -2,13 +2,12 @@
     angular.module('controllers.module')
         .controller('managerPermissionController', managerPermissionController);
 
-    managerPermissionController.$inject = ['permissionsService', 'compareState', '$state'];
+    managerPermissionController.$inject = ['permissionsService', 'compareState', 'permissions.factory', '$state'];
 
-    function managerPermissionController(permissionService, compareState, $state) {
+    function managerPermissionController(permissionService, compareState, permissionsFactory, $state) {
         var vm = this;
-
-        vm.permission = [];
-        vm.filters = ['aluno', 'turma', 'other', 'manager', 'aula', 'chamada'];
+      
+        vm.filters = ['aluno', 'turma', 'other', 'manager', 'aula', 'chamada', 'customize'];
         vm.showRoutes = [];
         vm.hasChange = false;
         vm.changes = [];
@@ -24,12 +23,10 @@
                 vm.routes = results.data;
                 vm.showRoutes = vm.routes.slice();
             });
-            vm.permission = filterPermissions($state.get());
+            vm.permission = filterPermissions(permissionsFactory.getDefaultPermissions());
         }
 
-
         //public methods
-
         function onchange(obj, check) {
             vm.hasChange = true;
             if (compareState(vm.changes, obj) < 0)
@@ -48,8 +45,8 @@
             vm.changes = [];
         }
 
-        //private methods
 
+        //private methods
         function save(item) {
             permissionService.save(item)
                 .then(function (data, status, headers, config) {
@@ -68,23 +65,19 @@
                 });
         }
 
-        function filterPermissions(states) {
+        function filterPermissions(permissions) {
             var filtered = [];
-            for (var i = 0; i < states.length; i++) {
-                var state = states[i];
-                if (state.abstract) {
-                    states.splice(i, 1);
-                    i--;
-                    continue;
-                }
-                var filter = state.name.split(".");
-                filter = filter.length >= 2 ? filter[0] : 'other';
+            for (var i = 0; i < permissions.length; i++) {
+                var permission = permissions[i];
+                var filter = permission.name.split(".");
+                filter = filter.length >= 2 ? filter[0]:  'other';
                 if (!filtered[filter])
                     filtered[filter] = [];
                 if (!vm.filters.contains(filter))
                     vm.filters.push(filter);
-                filtered[filter].push(state);
+                filtered[filter].push(permission); // parse state for permission
             }
+            filtered['customize'] = permissionsFactory.getCustomPermissions();
             return filtered;
         }
 

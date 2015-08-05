@@ -3,5 +3,5 @@
         <input type="checkbox" ng-checked="check(obj, compare, method)"
                ng-click="onclick(obj, compare, chkGroup, callback, method)" ng-model="chkGroup">
     </span>
-    <input type="text" class="form-control" value="{{obj.data.displayName ? obj.data.displayName: obj.name}}" disabled ng-class="{'border-success': check(obj, compare, method)}">
+    <input type="text" class="form-control" value="{{obj.displayName || obj.name}}" disabled ng-class="{'border-success': check(obj, compare, method)}">
 </div>

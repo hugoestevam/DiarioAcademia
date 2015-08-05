@@ -6,7 +6,7 @@ using System.Web.Http;
 
 namespace NDDigital.DiarioAcademia.WebApi.Controllers
 {
-    [Authorize(Roles = "Admin")]
+   // [Authorize(Roles = "Admin")]
     [RoutePrefix("api/permissions")]
     public class PermissionController : BaseApiController
     {

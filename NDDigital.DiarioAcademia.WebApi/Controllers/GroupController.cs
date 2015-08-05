@@ -36,7 +36,7 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers
                 },
                 new Group
                 {
-                    Name = "Viewr",
+                    Name = "Viewer",
                     Permissions = new List<Permission>
                     {
                         alunoList,

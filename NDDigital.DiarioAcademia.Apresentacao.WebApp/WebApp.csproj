@@ -102,6 +102,7 @@
     <Content Include="app\services\permissions.service.js" />
     <Content Include="app\services\user.service.js" />
     <Content Include="app\templates\layout\top-menu.html" />
+    <Content Include="app\factories\permissions.factory.js" />
     <Content Include="app\views\manager\group\manager-group-edit.html" />
     <Content Include="app\views\manager\group\manager-group.html" />
     <Content Include="app\views\manager\permission\manager-permission.html" />
@@ -255,6 +256,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="app\filters\" />
+    <Folder Include="app\values\" />
     <Folder Include="dist\" />
   </ItemGroup>
   <PropertyGroup>

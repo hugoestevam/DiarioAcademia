@@ -14,7 +14,11 @@
 		var serviceUrl = baseUrl + "api/group";
 
 		//temporario
-		var permission = $state.get();
+		var permission = [{ name: "aluno.list", displayName: 'Lista de Aluno', permissionId: '01' },
+						   { name: "aluno.create", displayName: 'Criação de Aluno', permissionId: '03' },
+						   { name: "aluno.details", displayName: 'Detalhes do Aluno', permissionId: '02' },
+						   { name: "manager.user", displayName: 'Usuário', permissionId: '09' }];
+
 		var groups = [{ id: 1, name: "Aluno", permissions: [permission[2]] },
 					   { id: 2, name: "Admin", permissions: [permission[2], permission[3]] },
 					   { id: 3, name: "RH", permissions: [permission[2]] }];
@@ -53,7 +57,7 @@
 			});
 			return promiseId.then(function (results) {
 			    return results.data;
-			})
+			});
 
 			return $http.get(serviceUrl + '/' + id)
 				 .then(logger.successCallback)

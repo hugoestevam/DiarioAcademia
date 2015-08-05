@@ -50,7 +50,7 @@
             if (other.$$permissionId == route.$$permissionId)
                 throwRouteError(routes[i].state, error$$permissionIdAlreadyExists);
         }
-        return "0x" + route.$$permissionId;
+        return route.$$permissionId;
     }
 
     function throwRouteError(route, msg) {
