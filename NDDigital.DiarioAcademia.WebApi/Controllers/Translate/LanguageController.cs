@@ -8,7 +8,7 @@ using System.Net.Http;
 using System.Web;
 using System.Web.Http;
 
-namespace NDDigital.DiarioAcademia.WebApi.Controllers
+namespace NDDigital.DiarioAcademia.WebApi.Controllers.Translate
 {
     public class LanguageController : ApiController
     {

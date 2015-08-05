@@ -5,7 +5,7 @@ using NDDigital.DiarioAcademia.Infraestrutura.Orm.Repositories;
 using System.Collections.Generic;
 using System.Web.Http;
 
-namespace NDDigital.DiarioAcademia.WebApi.Controllers
+namespace NDDigital.DiarioAcademia.WebApi.Controllers.Entities
 {
     public class AulaController : ApiController
     {

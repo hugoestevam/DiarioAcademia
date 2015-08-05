@@ -3,10 +3,8 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using NDDigital.DiarioAcademia.Infraestrutura.CepServices;
+using NDDigital.DiarioAcademia.Infraestrutura.Orm.Contexts;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Identity
 {
@@ -19,14 +17,13 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Identity
 
         public static ApplicationUserManager Create(IdentityFactoryOptions<ApplicationUserManager> options, IOwinContext context)
         {
-            var appDbContext = context.Get<ApplicationDbContext>();
+            var appDbContext = context.Get<AuthenticationContext>();
             var appUserManager = new ApplicationUserManager(new UserStore<ApplicationUser>(appDbContext));
 
             // Configure validation logic for usernames
             appUserManager.UserValidator = new UserValidator<ApplicationUser>(appUserManager)
             {
-                AllowOnlyAlphanumericUserNames = true,
-                RequireUniqueEmail = true
+                AllowOnlyAlphanumericUserNames = true
             };
 
             // Configure validation logic for passwords
@@ -38,19 +35,15 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Identity
                 RequireLowercase = false,
                 RequireUppercase = false,
             };
-            
+
             appUserManager.EmailService = new EmailService();
 
             var dataProtectionProvider = options.DataProtectionProvider;
             if (dataProtectionProvider != null)
             {
-                appUserManager.UserTokenProvider = new DataProtectorTokenProvider<ApplicationUser>(dataProtectionProvider.Create("ASP.NET Identity"))
-                {
-                    //Code for email confirmation and reset password life time
-                    TokenLifespan = TimeSpan.FromHours(6)
-                };
+                appUserManager.UserTokenProvider = new DataProtectorTokenProvider<ApplicationUser>(dataProtectionProvider.Create("ASP.NET Identity"));
             }
-           
+
             return appUserManager;
         }
     }

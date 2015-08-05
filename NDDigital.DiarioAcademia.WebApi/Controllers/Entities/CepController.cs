@@ -2,7 +2,7 @@
 using NDDigital.DiarioAcademia.Infraestrutura.CepServices;
 using System.Web.Http;
 
-namespace NDDigital.DiarioAcademia.WebApi.Controllers
+namespace NDDigital.DiarioAcademia.WebApi.Controllers.Entities
 {
     public class CepController : ApiController
     {

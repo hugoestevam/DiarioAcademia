@@ -10,7 +10,6 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Identity
         }
 
         public Guid Id { get; set; }
-        public string Name { get; set; }
         public string PermissionId { get; set; }
     }
 }

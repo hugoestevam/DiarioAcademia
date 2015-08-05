@@ -28,6 +28,12 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Identity
         
         public List<Group> Groups { get; set; }
 
+        public ApplicationUser()
+        {
+            EmailConfirmed = true;
+        }
+   
+
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager, string authenticationType)
         {
             var userIdentity = await manager.CreateIdentityAsync(this, authenticationType);

@@ -6,7 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Http;
 
-namespace NDDigital.DiarioAcademia.WebApi.Controllers
+namespace NDDigital.DiarioAcademia.WebApi.Controllers.Authentication
 {
     [RoutePrefix("api/accounts")]
     public class AccountsController : BaseApiController
@@ -67,12 +67,11 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers
                 FirstName = createUserModel.FirstName,
                 LastName = createUserModel.LastName,
                 Level = 3,
-                JoinDate = DateTime.Now.Date,
-                EmailConfirmed = true //TODO: GAMBI
+                JoinDate = DateTime.Now.Date
             };
 
             IdentityResult addUserResult = await this.AppUserManager.CreateAsync(user, createUserModel.Password);
-
+            
             if (!addUserResult.Succeeded)
             {
                 return GetErrorResult(addUserResult);

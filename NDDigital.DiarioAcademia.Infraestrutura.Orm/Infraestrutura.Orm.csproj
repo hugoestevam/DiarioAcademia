@@ -109,7 +109,7 @@
     <Compile Include="Configurations\PresencaConfiguration.cs" />
     <Compile Include="Configurations\TurmaConfiguration.cs" />
     <Compile Include="Contexts\DiarioAcademiaContext.cs" />
-    <Compile Include="Identity\ApplicationDbContext.cs" />
+    <Compile Include="Contexts\AuthenticationContext.cs" />
     <Compile Include="Identity\ApplicationUser.cs" />
     <Compile Include="Identity\ApplicationUserManager.cs" />
     <Compile Include="Identity\Group.cs" />
