@@ -24,7 +24,7 @@
         activate();
         function activate() {
             groupService.getGroups().then(function (results) {
-                vm.groups = results.data;
+                vm.groups = results;
             });
             if (params == "")
                 return;

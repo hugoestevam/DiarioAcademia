@@ -17,9 +17,9 @@
 		activate();
 		function activate() {
 			groupService.getGroupById(params.groupId).then(function (results) {
-				if (results.data == undefined)
+				if (results == undefined)
 					$state.go('manager.group');
-				vm.group = results.data;
+				vm.group = results;
 			});
 
 			permissionsService.getPermissions().then(function (results) {

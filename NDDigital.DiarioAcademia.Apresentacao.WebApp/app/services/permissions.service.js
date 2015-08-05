@@ -15,10 +15,10 @@
 		var self = this;
 		var serviceUrl = baseUrl + "api/permissions";
 
-		var permissions = [{ name: "aluno.list", data: { displayName: 'Lista de Alunos' } },
-						   { name: "aluno.create", data: {displayName: 'Criação de Aluno'} },
-						   { name: "aluno.details",data: { displayName: 'Detalhes do Aluno'} },
-						   { name: "manager.user", data: { displayName: 'Usuário' } }];
+		var permissions = [{ name: "aluno.list", data: { displayName: 'Lista de Aluno', $$permissionId: '0x01' } },
+						   { name: "aluno.create", data: { displayName: 'Criação de Aluno', $$permissionId: '0x03' } },
+						   { name: "aluno.details", data: { displayName: 'Detalhes do Aluno', $$permissionId: '0x02' } },
+						   { name: "manager.user", data: { displayName: 'Usuário', $$permissionId: '0x09' } }];
 
 		//public methods
 		self.getPermissions = function () {
@@ -41,6 +41,7 @@
 				acc(response);
 			});
 
+
 			return $http.get(serviceUrl + '/' + id)
 				 .then(logger.successCallback)
 				 .catch(logger.errorCallback)
@@ -48,12 +49,16 @@
 
 		self.save = function (group) {
 			logger.success(res.saved_successful, group);
-			// $http.post(serviceUrl, convertToDto(group));
+		    // $http.post(serviceUrl, convertToDto(group));
+			return new Promise(function (acc) { acc() });;
 		};
+		 
+
 
 		self.delete = function (group) {
 			logger.error(res.deleted_successful, group, "Delete");
-			//$http.delete(serviceUrl + "/" + group.id);
+		    //$http.delete(serviceUrl + "/" + group.id);
+			return new Promise(function (acc) { acc() });;
 		};
 
 		var promise = new Promise(function (acc) {

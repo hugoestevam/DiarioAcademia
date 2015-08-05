@@ -43,16 +43,13 @@
                });
     };
 
-
     runStateChangeStart.$inject = ['$rootScope', '$state', 'authService'];
     function runStateChangeStart($rootScope, $state, authService) {
         $rootScope.$on('$stateChangeStart',
            function (event, toState, toParams, fromState, fromParams) {
-
                var stateToGo = 'login';
 
                try {
-
                    if (toState.data.allowAnnonymous) return;
 
                    var userIsAdmin = false;
@@ -64,27 +61,19 @@
 
                    if (authService.authentication.isAuth) {
                        var hasPermission = authService.checkAuthorize(toState.name);
-
-
                        if (hasPermission) return;
-                       
                    }
-
-
                    throw new Error("Not Authenticated");
-
                } catch (err) {
                    console.error(err.message);
                    cancelRouting();
                }
-                   function cancelRouting() {
-                       authService.lastState = toState.name;
-                       event.preventDefault();
+               function cancelRouting() {
+                   authService.lastState = toState.name;
+                   event.preventDefault();
 
-                       $state.go(stateToGo);
-                   }
-
-
+                   $state.go(stateToGo);
+               }
            });
 
         $rootScope.$on('$viewContentLoading', function (event, viewConfig) {

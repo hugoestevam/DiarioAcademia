@@ -99,7 +99,6 @@
     <Content Include="app\routes\manager.routes.js" />
     <Content Include="app\services\group.services.js" />
     <Content Include="app\services\language.service.js" />
-    <Content Include="app\services\manager.service.js" />
     <Content Include="app\services\permissions.service.js" />
     <Content Include="app\services\user.service.js" />
     <Content Include="app\templates\layout\top-menu.html" />

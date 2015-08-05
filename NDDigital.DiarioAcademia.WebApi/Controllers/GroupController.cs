@@ -8,15 +8,11 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers
 {
     public class GroupController : ApiController
     {
-        private List<Group> Groups { get; set; }
+        private static Permission alunoList = new Permission { Name = "aluno.list", PermissionId ="01" };
+        private static Permission alunoEdit = new Permission { Name = "aluno.details", PermissionId = "02" };
+        private static Permission alunoCreate = new Permission { Name = "aluno.create", PermissionId= "03" };
 
-        public GroupController()
-        {
-            var alunoList = new Permission { Name = "aluno.list" };
-            var alunoEdit = new Permission { Name = "aluno.edit" };
-            var alunoCreate = new Permission { Name = "aluno.create" };
-
-            Groups = new List<Group>()
+        private static List<Group> Groups = new List<Group>()
             {
                 new Group
                 {
@@ -47,6 +43,10 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers
                     }
                 }
             };
+
+        public GroupController()
+        {
+            
         }
 
         // GET: api/Group
@@ -58,7 +58,7 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers
         // GET: api/Group/bca443c4a
         public IHttpActionResult Get(Guid id)
         {
-            return Ok(Groups.First(g => g.Id == id));
+            return Ok(Groups.FirstOrDefault(g => g.Id.CompareTo(id) == 0 ));
         }
 
         // GET: api/Group/username

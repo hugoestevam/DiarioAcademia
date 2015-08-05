@@ -41,7 +41,7 @@
                     compare.splice(index, 1);
             }
             if (callback)
-                callback();
+                callback(obj, chkGroups);
         }
     }
 

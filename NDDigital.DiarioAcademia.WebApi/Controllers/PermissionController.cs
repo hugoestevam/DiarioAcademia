@@ -8,19 +8,19 @@ using System.Web.Http;
 namespace NDDigital.DiarioAcademia.WebApi.Controllers
 {
     [Authorize(Roles = "Admin")]
-    [RoutePrefix("api/roles")]
+    [RoutePrefix("api/permissions")]
     public class PermissionController : BaseApiController
     {
-        [Route("{id:guid}", Name = "GetRoleById")]
-        public async Task<IHttpActionResult> GetRole(string Id)
+        [Route("{id:guid}", Name = "GetPermissionsById")]
+        public async Task<IHttpActionResult> GetPermissions(string Id)
         {
           
 
             return NotFound();
         }
 
-        [Route("", Name = "GetAllRoles")]
-        public IHttpActionResult GetAllRoles()
+        [Route("", Name = "GetAllPermissions")]
+        public IHttpActionResult GetAllPermissions()
         {
           
 
@@ -44,13 +44,13 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers
         }
 
         [Route("{id:guid}")]
-        public async Task<IHttpActionResult> DeleteRole(string Id)
+        public async Task<IHttpActionResult> DeletePermissions(string Id)
         {
            return NotFound();
         }
 
         [Route("ManageUsersInRole")]
-        public async Task<IHttpActionResult> ManageUsersInRole(UsersInRoleModel model)
+        public async Task<IHttpActionResult> ManageUsersInPermissions(UsersInRoleModel model)
         {
             return Ok();
         }

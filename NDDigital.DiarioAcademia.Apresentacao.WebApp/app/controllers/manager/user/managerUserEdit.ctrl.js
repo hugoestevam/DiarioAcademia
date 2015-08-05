@@ -31,9 +31,9 @@
 			});
 
 			groupService.getGroups().then(function (results) {
-				vm.groups = results.data;
-				if (results.data)
-					originalGroups = results.data.slice();
+				vm.groups = results;
+				if (results)
+					originalGroups = results.slice();
 			});
 		}
 

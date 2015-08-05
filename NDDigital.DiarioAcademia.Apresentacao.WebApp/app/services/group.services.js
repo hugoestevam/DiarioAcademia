@@ -31,7 +31,9 @@
 
 		//public methods
 		self.getGroups = function () {
-			return promise;
+		    return promise.then(function (results) {
+		        return results.data
+		    });
 
 			return $http.get(serviceUrl)
 				 .then(logger.successCallback)
@@ -39,7 +41,7 @@
 		};
 
 		self.getGroupById = function (id) {
-			return new Promise(function (acc) {
+			var promiseId = new Promise(function (acc) {
 				var index = groups.indexOfObject({ id: id });
 				var group = index >= 0 ? groups[index] : undefined;
 				var response = {
@@ -49,6 +51,9 @@
 				};
 				acc(response);
 			});
+			return promiseId.then(function (results) {
+			    return results.data;
+			})
 
 			return $http.get(serviceUrl + '/' + id)
 				 .then(logger.successCallback)

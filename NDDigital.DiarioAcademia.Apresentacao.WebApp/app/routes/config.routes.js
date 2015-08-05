@@ -23,7 +23,7 @@
                     data: {
                         displayName: route.displayName,
                         allowAnnonymous: route.allowAnnonymous,
-                        $$permissionId: 'a'
+                        $$permissionId: verififyPermission(routes, i, route)
                     },
                     ncyBreadcrumb: {
                         label: route.displayName,

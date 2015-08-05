@@ -5,7 +5,7 @@
     function compareState() {
         return function (array, obj) {
             for (var i = 0; i < array.length; i++) {
-                if (array[i].name == obj.name)
+                if (array[i].data.$$permissionId == obj.data.$$permissionId )
                     return i;
             }
             return -1;

@@ -9,7 +9,7 @@
                         <b class="text-capitalize">{{filter}}</b>
                     </div>
                     <div class="panel-body">
-                        <ndd-group-checkbox array="vm.permission[filter]" compare="vm.routes" method="vm.compareState"></ndd-group-checkbox>
+                        <ndd-group-checkbox array="vm.permission[filter]" compare="vm.showRoutes" method="vm.compareState" callback="vm.onchange"></ndd-group-checkbox>
                     </div>
                 </div>
             </div>
@@ -18,6 +18,6 @@
 
     <div class="col-sm-12 clear-padding text-center">
         <hr />
-        <button class="btn btn-success" ng-click="vm.save()"><i class="fa fa-check"></i> </button>
+        <button class="btn btn-success" ng-disabled="!vm.hasChange" ng-click="vm.saveChanges()"><i class="fa fa-check"></i> </button>
     </div>
 </div>

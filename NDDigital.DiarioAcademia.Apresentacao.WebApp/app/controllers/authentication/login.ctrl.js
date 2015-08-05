@@ -29,8 +29,7 @@
         //public methods
         vm.login = function () {
             auth.login(vm.loginData).then(function () {
-
-                $state.go(auth.lastState);
+                $state.go(auth.lastState == "login" ? 'home' : auth.lastState );
             },
             function (err) {
                 vm.message = "Erro ao logar";

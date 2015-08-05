@@ -51,7 +51,7 @@
 		};
 
 		self.edit = function (user) {
-			logger.success("User " + user.nome + " editada", null, "Edição");
+			logger.success("User " + user.fullName + " editado", null, "Edição");
 			// $http.put(serviceUrl + "/" + user.id, user);
 		};
 
