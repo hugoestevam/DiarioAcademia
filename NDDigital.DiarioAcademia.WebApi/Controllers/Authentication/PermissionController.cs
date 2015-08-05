@@ -4,7 +4,7 @@ using System;
 using System.Threading.Tasks;
 using System.Web.Http;
 
-namespace NDDigital.DiarioAcademia.WebApi.Controllers
+namespace NDDigital.DiarioAcademia.WebApi.Controllers.Authentication
 {
     [Authorize(Roles = "Admin")]
     [RoutePrefix("api/permissions")]

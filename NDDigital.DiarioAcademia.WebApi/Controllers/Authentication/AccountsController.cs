@@ -6,7 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Http;
 
-namespace NDDigital.DiarioAcademia.WebApi.Controllers
+namespace NDDigital.DiarioAcademia.WebApi.Controllers.Authentication
 {
     [RoutePrefix("api/accounts")]
     public class AccountsController : BaseApiController
@@ -71,7 +71,7 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers
             };
 
             IdentityResult addUserResult = await this.AppUserManager.CreateAsync(user, createUserModel.Password);
-
+            
             if (!addUserResult.Succeeded)
             {
                 return GetErrorResult(addUserResult);

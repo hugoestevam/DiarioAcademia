@@ -23,8 +23,7 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Identity
             // Configure validation logic for usernames
             appUserManager.UserValidator = new UserValidator<ApplicationUser>(appUserManager)
             {
-                AllowOnlyAlphanumericUserNames = true,
-                RequireUniqueEmail = true
+                AllowOnlyAlphanumericUserNames = true
             };
 
             // Configure validation logic for passwords
@@ -42,11 +41,7 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Identity
             var dataProtectionProvider = options.DataProtectionProvider;
             if (dataProtectionProvider != null)
             {
-                appUserManager.UserTokenProvider = new DataProtectorTokenProvider<ApplicationUser>(dataProtectionProvider.Create("ASP.NET Identity"))
-                {
-                    //Code for email confirmation and reset password life time
-                    TokenLifespan = TimeSpan.FromHours(6)
-                };
+                appUserManager.UserTokenProvider = new DataProtectorTokenProvider<ApplicationUser>(dataProtectionProvider.Create("ASP.NET Identity"));
             }
 
             return appUserManager;
