@@ -5,11 +5,6 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Identity
 {
     public class Group
     {
-        public Group()
-        {
-            Id = Guid.NewGuid();
-        }
-
         public Guid Id { get; set; }
         public string Name { get; set; }
         public bool IsAdmin { get; set; }
