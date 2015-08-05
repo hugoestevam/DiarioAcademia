@@ -15,6 +15,9 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Contexts
             Configuration.LazyLoadingEnabled = false;
         }
 
+        public DbSet<Group> Groups { get; set; }
+        public DbSet<Permission> Permissions { get; set; }
+
         public static AuthenticationContext Create()
         {
             return new AuthenticationContext();
@@ -28,29 +31,8 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Contexts
                 .ToTable("TBUser")
                 .Ignore(c => c.EmailConfirmed);
             modelBuilder.Entity<Group>().ToTable("TBGroup");
+            //TODO: DAR UM JEITO DE RENOMEAR A TABELA INTERMEDIARIA
             modelBuilder.Entity<Permission>().ToTable("TBPermission");
-        }
-
-        /// <summary>
-        /// Em algum momento vamos chamar esse método que mata as tabelas que não serão usadas
-        /// </summary>
-        /// <param name="context"></param>
-        public void DropTables(AuthenticationContext context)
-        {
-            var listOfTables = new List<string> { "[dbo].[AspNetRoles]", "[dbo].[AspNetUserClaims]", "[dbo].[AspNetUserLogins]", "[dbo].[AspNetUserRoles]" };
-
-            foreach (var tableName in listOfTables)
-            {
-                try
-                {
-                    context.Database.ExecuteSqlCommand("DROP TABLE " + tableName );
-                }
-                catch (System.Exception)
-                {
-                    return;
-                }
-            }
-            context.SaveChanges();
         }
     }
 }

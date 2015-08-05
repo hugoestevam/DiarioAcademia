@@ -1,9 +1,10 @@
-﻿using System;
+﻿using NDDigital.DiarioAcademia.Dominio.Common;
+using System;
 using System.Collections.Generic;
 
 namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Identity
 {
-    public class Group
+    public class Group : Entity
     {
         public Guid Id { get; set; }
         public string Name { get; set; }
