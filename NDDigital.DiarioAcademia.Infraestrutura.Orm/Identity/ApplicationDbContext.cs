@@ -13,6 +13,7 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Identity
         public ApplicationDbContext()
             : base("DiarioAuthContext", throwIfV1Schema: false)
         {
+            Database.SetInitializer(new DropCreateDatabaseIfModelChanges<ApplicationDbContext>());
             Configuration.ProxyCreationEnabled = false;
             Configuration.LazyLoadingEnabled = false;
         }
