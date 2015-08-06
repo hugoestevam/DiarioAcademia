@@ -10,7 +10,6 @@
         vm.groups = [];
 
         vm.new = save;
-        vm.edit = edit;
         vm.remove = remove;
         vm.showGroup = showGroup;
 
@@ -29,7 +28,7 @@
             if (params == "")
                 return;
             groupService.getGroupById(parseInt(params)).then(function (results) {
-                vm.selectedGroup = results.data;
+                vm.selectedGroup = results;
             });
         }
 
@@ -49,13 +48,10 @@
             });
         }
 
-        function edit() {
-            //groupService.edit(vm.newGroup).then(function (results) {});
-        }
-
         function remove() {
             groupService.delete(vm.selectedGroup).then(function (results) {
                 vm.groups.remove(vm.selectedGroup);
+                $state.go('manager.group');;
             });
         }
 
@@ -63,9 +59,6 @@
         function modal() {
             vm.titleModalRemove = 'Exclusão';
             vm.bodyModalRemove = 'Remover ' + vm.selectedGroup.name + ' ?';
-
-            vm.titleModalEdit= 'Edição';
-            vm.bodyModalEdit = 'Editar ' + vm.selectedGroup.name + ' ?';
         }
 
         function getParams() {

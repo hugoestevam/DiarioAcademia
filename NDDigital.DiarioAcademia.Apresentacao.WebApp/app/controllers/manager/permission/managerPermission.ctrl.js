@@ -20,7 +20,7 @@
         activate();
         function activate() {
             permissionService.getPermissions().then(function (results) {
-                vm.routes = results.data;
+                vm.routes = results;
                 vm.showRoutes = vm.routes.slice();
             });
             vm.permission = filterPermissions(permissionsFactory.getDefaultPermissions());

@@ -1,23 +1,23 @@
 ﻿<ul class="nav navbar-right top-nav">
     <li class="dropdown">
-        <a class="dropdown-toggle cursorUser" data-toggle="dropdown"><i class="fa fa-user"></i> {{shell.authentication.userName}}<b class="caret"></b></a>
+        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+            <span class="profile-ava">
+                <img alt="" src="/app/images/avatar_login.png">
+            </span>
+            <span class="username">{{shell.authentication.userName}}</span>
+            <b class="caret"></b>
+        </a>
         <ul class="dropdown-menu">
-            <li>
-                <a href="#"><i class="fa fa-fw fa-user"></i> Perfil</a>
+            <li ng-hide="shell.authentication.isAuth">
+                <a ui-sref="login" href="#"><i class="fa fa-fw fa-sign-in"></i> Entrar</a>
             </li>
-            <li>
-                <a href="#"><i class="fa fa-fw fa-gear"></i> Configurações</a>
-            </li>
-            <li data-ng-hide="shell.authentication.isAuth">
+            <li ng-hide="shell.authentication.isAuth">
                 <a ui-sref="signup" class="text">Registrar-se</a>
             </li>
-            <li data-ng-hide="shell.authentication.isAuth">
-                <a ui-sref="login" class="text">Entrar</a>
+            <li data-ng-show="shell.authentication.isAuth">
+                <a href="" class="text" ng-click="shell.logOut()"><i class="fa fa-fw fa-sign-out"></i>Sair</a>
             </li>
             <li class="divider"></li>
-            <li data-ng-show="shell.authentication.isAuth">
-                <a href="" class="text" data-ng-click="shell.logOut()">Sair</a>
-            </li>
         </ul>
     </li>
 </ul>

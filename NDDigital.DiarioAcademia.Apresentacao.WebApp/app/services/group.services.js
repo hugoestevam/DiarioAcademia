@@ -15,13 +15,13 @@
 
 		//temporario
 		var permission = [{ name: "aluno.list", displayName: 'Lista de Aluno', permissionId: '01' },
-						   { name: "aluno.create", displayName: 'Criação de Aluno', permissionId: '03' },
-						   { name: "aluno.details", displayName: 'Detalhes do Aluno', permissionId: '02' },
-						   { name: "manager.user", displayName: 'Usuário', permissionId: '09' }];
+						  { name: "aluno.create", displayName: 'Criação de Aluno', permissionId: '03' },
+						  { name: "aluno.details", displayName: 'Detalhes do Aluno', permissionId: '02' },
+						  { name: "manager.user", displayName: 'Usuário', permissionId: '09' }];
 
 		var groups = [{ id: 1, name: "Aluno", permissions: [permission[2]] },
-					   { id: 2, name: "Admin", permissions: [permission[2], permission[3]] },
-					   { id: 3, name: "RH", permissions: [permission[2]] }];
+					  { id: 2, name: "Admin", permissions: [permission[2], permission[3]] },
+					  { id: 3, name: "RH", permissions: [permission[2]] }];
 
 
 		var promise = new Promise(function (acc) {
@@ -35,9 +35,7 @@
 
 		//public methods
 		self.getGroups = function () {
-		    return promise.then(function (results) {
-		        return results.data
-		    });
+		    return promise.then(logger.successCallback);
 
 			return $http.get(serviceUrl)
 				 .then(logger.successCallback)
@@ -55,9 +53,8 @@
 				};
 				acc(response);
 			});
-			return promiseId.then(function (results) {
-			    return results.data;
-			});
+
+			return promiseId.then(logger.successCallback);
 
 			return $http.get(serviceUrl + '/' + id)
 				 .then(logger.successCallback)
@@ -81,17 +78,24 @@
 			return new Promise(function (acc) {
 				acc(group)
 			})
-			// $http.post(serviceUrl, group);
+			// return $http.post(serviceUrl, group);
 		};
 
 
 		self.edit = function (group) {
-			//   $http.put(serviceUrl + "/" +  group.id, group);
+		    return new Promise(function (acc) {
+		        acc(group)
+		    })
+
+			// return $http.put(serviceUrl + "/" +  group.id, group);
 		};
 
 		self.delete = function (group) {
+		    return new Promise(function (acc) {
+		        acc(group)
+		    })
 			logger.error(res.deleted_successful, group, "Delete");
-			//$http.delete(serviceUrl + "/" + group.id);
+			//return $http.delete(serviceUrl + "/" + group.id);
 		};
 
 		self.checkPermission = function (username, state) {

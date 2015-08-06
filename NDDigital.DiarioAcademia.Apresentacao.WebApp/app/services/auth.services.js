@@ -7,11 +7,12 @@
     angular.module('services.module')
         .service('authService', authService);
 
-    function authService($http, $q, localStorageService, logger, serviceBase, groupService,storageKeys,res) {
+    function authService($http, $q, localStorageService, logger, serviceBase, groupService, storageKeys, res) {
         var self = this;
 
         var redirectState = "home";
         var _username = "";
+        var _fullname = "";
 
         var authentication = {
             isAuth: false,
@@ -19,25 +20,36 @@
 
         var userNameProperty = {
             get: function () {
-                return _username || "User" ;
+                return _username;
             },
             set: function (value) {
                 _username = value;
             }
 
         };
-        Object.defineProperty(authentication, "userName", userNameProperty);
 
+        var fullNameProperty = {
+            get: function () {
+                return _fullname;
+            },
+            set: function (value) {
+                _fullname = value;
+            }
+
+        };
+
+        Object.defineProperty(authentication, "userName", userNameProperty);
+        Object.defineProperty(authentication, "fullName", fullNameProperty);
 
 
         var _lastState = redirectState;
 
 
-        
+
 
         var authorization = {
             //used for control menus on sidebars
-            isAuthorized: function(state) {
+            isAuthorized: function (state) {
                 if (!authentication.isAuth)
                     return false;
                 var authorizedGroups = authorization.permissions ? authorization.permissions.indexOf(state) : -1;
@@ -51,17 +63,17 @@
             fillAuthData();
         }
 
-        var saveRegistration = function(registration) {
+        var saveRegistration = function (registration) {
 
             logOut();
 
-            return $http.post(serviceBase + 'api/accounts/create/', registration).then(function(response) {
+            return $http.post(serviceBase + 'api/accounts/create/', registration).then(function (response) {
                 return response;
             });
 
         };
 
-        var login = function(loginData) {
+        var login = function (loginData) {
 
             var data = "grant_type=password&username=" + loginData.userName + "&password=" + loginData.password;
 
@@ -69,14 +81,14 @@
 
             var headers = { 'Content-Type': 'application/x-www-form-urlencoded' };
 
-            $http.post(serviceBase + 'oauth/token', data, { headers: headers }).success(function(response) {
+            $http.post(serviceBase + 'oauth/token', data, { headers: headers }).success(function (response) {
 
-                
+
                 authentication.isAuth = true;
                 authentication.userName = loginData.userName;
+                authentication.fullName = loginData.fullName;
                 groupService.getGroupByUsername(authentication.userName)
-                    .then(function(groups) {
-
+                    .then(function (groups) {
                         authorization.groups = groups;
                         authorization.permissions = groupService.extractPermissions(groups);
                         localStorageService.set(storageKeys.autheData, authorization);
@@ -89,10 +101,10 @@
                 });
 
 
-                logger.success(res.welcome+" "+(authentication.userName));
+                logger.success(res.welcome + " " + (authentication.userName));
                 deferred.resolve(response);
 
-            }).error(function(err, status) {
+            }).error(function (err, status) {
 
                 if (!status) {
                     logger.error(res.unavailable_server);
@@ -111,7 +123,7 @@
             return deferred.promise;
 
         };
-        var logOut = function() {
+        var logOut = function () {
 
             localStorageService.remove(storageKeys.authoData);
             localStorageService.remove(storageKeys.autheData);
@@ -135,18 +147,18 @@
                 authorization.groups = autheData.groups;
                 authorization.permissions = autheData.permissions;
             }
-            
+
         };
 
         //used for authorize the access to view
         var checkAuthorize = function (toState) {
             if (authorization.permissions)
-            return authorization.permissions.contains(toState);
+                return authorization.permissions.contains(toState);
 
         };
 
 
-    self.saveRegistration = saveRegistration;
+        self.saveRegistration = saveRegistration;
         self.login = login;
         self.logOut = logOut;
         self.fillAuthData = fillAuthData;

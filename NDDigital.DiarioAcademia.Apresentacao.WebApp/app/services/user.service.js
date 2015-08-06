@@ -19,7 +19,7 @@
 
 		//public methods
 		self.getUsers = function () {
-			return promise;
+		    return promise.then(logger.successCallback);
 
 			return $http.get(serviceUrl)
 				 .then(logger.successCallback)
@@ -39,7 +39,7 @@
 				acc(response);
 			});
 
-			return promiseById;
+		    return promiseById.then(logger.successCallback);
 
 			return $http.get(serviceUrl + '/' + id)
 				 .then(logger.successCallback);

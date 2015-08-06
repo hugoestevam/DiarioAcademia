@@ -11,9 +11,10 @@
 		var vm = this;
 
 		//public functions
-		vm.save = save;
 		vm.comparePermissions = compareState;
 		vm.permissions = [];
+		vm.modal = modal;
+		vm.edit = edit;
 
 		activate();
 		function activate() {
@@ -24,7 +25,7 @@
 			});
 
 			permissionsService.getPermissions().then(function (results) {
-			    var permissions = results.data;
+			    var permissions = results;
 			    for (var i = 0; i < permissions.length; i++) {
 			        var permission = permissionsFactory.getPermissionById(permissions[i].permissionId);
 			        vm.permissions.push(permission);
@@ -32,8 +33,13 @@
 			});
 		}
 
-		function save() {
-			groupService.save(vm.group);
+		function modal() {
+		    vm.titleModalEdit = 'Edição';
+		    vm.bodyModalEdit = 'Editar ' + vm.group.name + ' ?';
+		}
+
+		function edit() {
+		    groupService.edit(vm.group).then(function (results) { });
 		}
 	}
 })(window.angular);

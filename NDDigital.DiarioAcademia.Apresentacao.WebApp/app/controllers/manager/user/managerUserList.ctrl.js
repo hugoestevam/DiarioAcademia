@@ -1,11 +1,10 @@
 ﻿(function (angular) {
 
-    managerUserListController.$inject = ['$scope', 'userService', '$state'];
-
     angular
         .module('controllers.module')
         .controller('managerUserListController', managerUserListController);
 
+    managerUserListController.$inject = ['$scope', 'userService', '$state'];
 
     function managerUserListController($scope, managerService, $state) {
         var vm = this;
@@ -26,7 +25,7 @@
         activate();
         function activate() {
             managerService.getUsers().then(function (results) {
-                users = results.data;
+                users = results;
                 vm.countUsers = users.length;
 
                 $scope.$watch("vm.currentPage + vm.numPerPage", function () {

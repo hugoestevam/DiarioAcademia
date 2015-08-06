@@ -12,7 +12,9 @@
                 </div>
             </div>
         </div>
+
         <br />
+
         <div class="row">
             <div class="col-sm-12" style="padding-left: 2%;">
                 <div class="list-group" ng-repeat="group in vm.groups | filter: nameFilter">
@@ -21,14 +23,12 @@
                 <input type="text" class="form-control" ng-show="vm.creating" ng-blur="vm.new()"  ng-model="vm.newGroup.name" />
             </div>
         </div>
+
         <div class="row">
             <hr />
             <div class="col-sm-12 text-center">
                 <button class="btn btn-success" ng-click="vm.creating = true"><i class="fa fa-plus"></i> </button>
-                <button class="btn btn-info" ng-click="vm.modal()"  
-                        data-toggle="modal" data-target="#modalEditGroup" ng-disabled="!vm.selectedGroup">
-                    <i class="fa fa-save"></i>
-                </button>
+
                 <button class="btn btn-danger" ng-click="vm.modal()"
                         data-toggle="modal" data-target="#modalRemoveGroup" ng-disabled="!vm.selectedGroup">
                     <i class="fa fa-times"></i>
@@ -37,15 +37,11 @@
         </div>
     </div>
 </div>
-
+<br />
 <div class="col-sm-6">
     <div ui-view class="fader-animation container-group"></div>
 </div>
 
 <ndd-modal target="modalRemoveGroup" label="{{vm.titleModalRemove}}" callback="vm.remove">
     {{vm.bodyModalRemove}}
-</ndd-modal>
-
-<ndd-modal target="modalEditGroup" label="{{vm.titleModalEdit}}" callback="vm.edit">
-    {{vm.bodyModalEdit}}
 </ndd-modal>
