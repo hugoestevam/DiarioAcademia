@@ -18,7 +18,7 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Security
 
         public static UserRepository Create(IdentityFactoryOptions<UserRepository> options, IOwinContext context)
         {
-            var appDbContext = context.Get<AuthenticationContext>();
+            var appDbContext = context.Get<DiarioAcademiaContext>();
             var userManager = new UserRepository(new UserStore<User>(appDbContext));
 
             // Configure validation logic for usernames

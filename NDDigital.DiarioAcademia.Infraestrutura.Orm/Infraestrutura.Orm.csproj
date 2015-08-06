@@ -106,10 +106,12 @@
     <Compile Include="Configurations\AlunoConfiguration.cs" />
     <Compile Include="Configurations\AulaConfiguration.cs" />
     <Compile Include="Configurations\EnderecoConfiguration.cs" />
+    <Compile Include="Configurations\GroupConfiguration.cs" />
+    <Compile Include="Configurations\PermissionConfiguration.cs" />
     <Compile Include="Configurations\PresencaConfiguration.cs" />
     <Compile Include="Configurations\TurmaConfiguration.cs" />
+    <Compile Include="Configurations\UserConfiguration.cs" />
     <Compile Include="Contexts\DiarioAcademiaContext.cs" />
-    <Compile Include="Contexts\AuthenticationContext.cs" />
     <Compile Include="Security\UserRepository.cs" />
     <Compile Include="Security\GroupRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

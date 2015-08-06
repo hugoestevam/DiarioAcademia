@@ -15,7 +15,7 @@ namespace NDDigital.DiarioAcademia.WebApi.App_Start
         public static void ConfigureOAuth(IAppBuilder app)
         {
             // Configure the db context and user manager to use a single instance per request
-            app.CreatePerOwinContext(AuthenticationContext.Create);
+            app.CreatePerOwinContext(DiarioAcademiaContext.Create);
             app.CreatePerOwinContext<UserRepository>(UserRepository.Create);
 
             OAuthServerOptions = new OAuthAuthorizationServerOptions()

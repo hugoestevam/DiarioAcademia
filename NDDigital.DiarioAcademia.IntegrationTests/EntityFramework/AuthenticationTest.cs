@@ -12,7 +12,7 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.EntityFramework
         private static Permission alunoEdit = new Permission { PermissionId = "02" };
         private static Permission alunoCreate = new Permission { PermissionId = "03" };
 
-        public AuthenticationContext _context = new AuthenticationContext();
+        public DiarioAcademiaContext _context = new DiarioAcademiaContext();
 
         private static List<Group> Groups = new List<Group>()
             {
