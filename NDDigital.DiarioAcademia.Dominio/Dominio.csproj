@@ -60,6 +60,9 @@
   <ItemGroup>
     <Compile Include="Contracts\IPresencaRepository.cs" />
     <Compile Include="Entities\Aluno.cs" />
+    <Compile Include="Entities\Security\User.cs" />
+    <Compile Include="Entities\Security\Group.cs" />
+    <Compile Include="Entities\Security\Permission.cs" />
     <Compile Include="Exceptions\AlunoNaoEncontrado.cs" />
     <Compile Include="Entities\Aula.cs" />
     <Compile Include="Exceptions\AulaException.cs" />

@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNet.Identity;
-using NDDigital.DiarioAcademia.Infraestrutura.Orm.Identity;
-using NDDigital.DiarioAcademia.Infraestrutura.Orm.Models;
+using NDDigital.DiarioAcademia.Dominio.Entities.Security;
+using NDDigital.DiarioAcademia.WebApi.Models;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -18,7 +18,7 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers.Authentication
             //Only SuperAdmin or Admin can delete users (Later when implement roles)
             var identity = User.Identity as System.Security.Claims.ClaimsIdentity;
 
-            return Ok(this.AppUserManager.Users.ToList().Select(u => this.TheModelFactory.Create(u)));
+            return Ok(this.UserRepository.Users.ToList().Select(u => this.TheModelFactory.Create(u)));
         }
 
         //[Authorize(Roles = "Admin")]
@@ -26,7 +26,7 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers.Authentication
         public async Task<IHttpActionResult> GetUser(string Id)
         {
             //Only SuperAdmin or Admin can delete users (Later when implement roles)
-            var user = await this.AppUserManager.FindByIdAsync(Id);
+            var user = await this.UserRepository.FindByIdAsync(Id);
 
             if (user != null)
             {
@@ -41,7 +41,7 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers.Authentication
         public async Task<IHttpActionResult> GetUserByName(string username)
         {
             //Only SuperAdmin or Admin can delete users (Later when implement roles)
-            var user = await this.AppUserManager.FindByNameAsync(username);
+            var user = await this.UserRepository.FindByNameAsync(username);
 
             if (user != null)
             {
@@ -60,7 +60,7 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers.Authentication
                 return BadRequest(ModelState);
             }
 
-            var user = new ApplicationUser()
+            var user = new User()
             {
                 UserName = createUserModel.Username,
                 Email = createUserModel.Email,
@@ -70,8 +70,8 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers.Authentication
                 JoinDate = DateTime.Now.Date
             };
 
-            IdentityResult addUserResult = await this.AppUserManager.CreateAsync(user, createUserModel.Password);
-            
+            IdentityResult addUserResult = await this.UserRepository.CreateAsync(user, createUserModel.Password);
+
             if (!addUserResult.Succeeded)
             {
                 return GetErrorResult(addUserResult);
@@ -91,7 +91,7 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers.Authentication
                 return BadRequest(ModelState);
             }
 
-            IdentityResult result = await this.AppUserManager.ChangePasswordAsync(User.Identity.GetUserId(), model.OldPassword, model.NewPassword);
+            IdentityResult result = await this.UserRepository.ChangePasswordAsync(User.Identity.GetUserId(), model.OldPassword, model.NewPassword);
 
             if (!result.Succeeded)
             {
@@ -107,11 +107,11 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers.Authentication
         {
             //Only SuperAdmin or Admin can delete users (Later when implement roles)
 
-            var appUser = await this.AppUserManager.FindByIdAsync(id);
+            var appUser = await this.UserRepository.FindByIdAsync(id);
 
             if (appUser != null)
             {
-                IdentityResult result = await this.AppUserManager.DeleteAsync(appUser);
+                IdentityResult result = await this.UserRepository.DeleteAsync(appUser);
 
                 if (!result.Succeeded)
                 {

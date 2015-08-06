@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
-using NDDigital.DiarioAcademia.Infraestrutura.Orm.Identity;
-using NDDigital.DiarioAcademia.Infraestrutura.Orm.Models;
+using NDDigital.DiarioAcademia.Infraestrutura.Orm.Security;
+using NDDigital.DiarioAcademia.WebApi.Models;
 using System.Net.Http;
 using System.Web;
 using System.Web.Http;
@@ -11,13 +11,13 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers
     public class BaseApiController : ApiController
     {
         private ModelFactory _modelFactory;
-        private ApplicationUserManager _AppUserManager = null;
+        private UserRepository _userRepository = null;
 
-        protected ApplicationUserManager AppUserManager
+        protected UserRepository UserRepository
         {
             get
             {
-                return _AppUserManager ?? Request.GetOwinContext().GetUserManager<ApplicationUserManager>();
+                return _userRepository ?? Request.GetOwinContext().GetUserManager<UserRepository>();
             }
         }
 
@@ -31,7 +31,7 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers
             {
                 if (_modelFactory == null)
                 {
-                    _modelFactory = new ModelFactory(this.Request, this.AppUserManager);
+                    _modelFactory = new ModelFactory(this.Request, this.UserRepository);
                 }
                 return _modelFactory;
             }

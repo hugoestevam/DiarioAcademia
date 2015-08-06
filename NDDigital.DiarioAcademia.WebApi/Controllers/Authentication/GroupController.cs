@@ -1,14 +1,11 @@
-﻿using NDDigital.DiarioAcademia.Infraestrutura.Orm.Identity;
+﻿using NDDigital.DiarioAcademia.Dominio.Entities.Security;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Web.Http;
 
 namespace NDDigital.DiarioAcademia.WebApi.Controllers.Authentication
 {
     public class GroupController : ApiController
     {
-
         // GET: api/Group
         public IHttpActionResult Get()
         {

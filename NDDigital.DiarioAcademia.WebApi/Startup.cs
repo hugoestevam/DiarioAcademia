@@ -3,13 +3,8 @@ using Microsoft.Owin.Cors;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.DataHandler.Encoder;
 using Microsoft.Owin.Security.Jwt;
-using Microsoft.Owin.Security.OAuth;
-using NDDigital.DiarioAcademia.Infraestrutura.Orm.Contexts;
-using NDDigital.DiarioAcademia.Infraestrutura.Orm.Identity;
 using NDDigital.DiarioAcademia.WebApi.App_Start;
-using NDDigital.DiarioAcademia.WebApi.Providers;
 using Owin;
-using System;
 using System.Configuration;
 using System.Web.Http;
 

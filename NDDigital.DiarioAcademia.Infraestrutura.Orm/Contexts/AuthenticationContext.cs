@@ -1,11 +1,10 @@
 ﻿using Microsoft.AspNet.Identity.EntityFramework;
-using NDDigital.DiarioAcademia.Infraestrutura.Orm.Identity;
-using System.Collections.Generic;
+using NDDigital.DiarioAcademia.Dominio.Entities.Security;
 using System.Data.Entity;
 
 namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Contexts
 {
-    public class AuthenticationContext : IdentityDbContext<ApplicationUser>
+    public class AuthenticationContext : IdentityDbContext<User>
     {
         public AuthenticationContext()
             : base("DiarioAuthContext", throwIfV1Schema: false)
@@ -27,7 +26,7 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Contexts
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<ApplicationUser>()
+            modelBuilder.Entity<User>()
                 .ToTable("TBUser")
                 .Ignore(c => c.EmailConfirmed);
             modelBuilder.Entity<Group>().ToTable("TBGroup");

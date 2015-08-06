@@ -1,6 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NDDigital.DiarioAcademia.Dominio.Entities.Security;
 using NDDigital.DiarioAcademia.Infraestrutura.Orm.Contexts;
-using NDDigital.DiarioAcademia.Infraestrutura.Orm.Identity;
 using System.Collections.Generic;
 
 namespace NDDigital.DiarioAcademia.IntegrationTests.EntityFramework
@@ -49,7 +49,6 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.EntityFramework
         [TestMethod]
         public void Teste()
         {
-            _context.Permissions.Add(new Permission { PermissionId = "01" });
             _context.SaveChanges();
         }
     }

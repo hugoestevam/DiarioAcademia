@@ -1,12 +1,9 @@
-﻿using Microsoft.AspNet.Identity.EntityFramework;
-using NDDigital.DiarioAcademia.Infraestrutura.Orm.Models;
-using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using System.Web.Http;
 
 namespace NDDigital.DiarioAcademia.WebApi.Controllers.Authentication
 {
-   // [Authorize(Roles = "Admin")]
+    // [Authorize(Roles = "Admin")]
     [RoutePrefix("api/permissions")]
     public class PermissionController : BaseApiController
     {
