@@ -1,5 +1,5 @@
-﻿using Microsoft.AspNet.Identity.EntityFramework;
-using NDDigital.DiarioAcademia.Infraestrutura.Orm.Identity;
+﻿using NDDigital.DiarioAcademia.Dominio.Entities.Security;
+using NDDigital.DiarioAcademia.Infraestrutura.Orm.Security;
 using System;
 using System.Collections.Generic;
 
@@ -7,21 +7,20 @@ using System.Net.Http;
 
 using System.Web.Http.Routing;
 
-namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Models
+namespace NDDigital.DiarioAcademia.WebApi.Models
 {
     public class ModelFactory
     {
-
         private UrlHelper _UrlHelper;
-        private ApplicationUserManager _AppUserManager;
+        private UserRepository _UserRepository;
 
-        public ModelFactory(HttpRequestMessage request, ApplicationUserManager appUserManager)
+        public ModelFactory(HttpRequestMessage request, UserRepository appUserManager)
         {
             _UrlHelper = new UrlHelper(request);
-            _AppUserManager = appUserManager;
+            _UserRepository = appUserManager;
         }
 
-        public UserReturnModel Create(ApplicationUser appUser)
+        public UserReturnModel Create(User appUser)
         {
             return new UserReturnModel
             {
@@ -33,28 +32,13 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Models
                 EmailConfirmed = appUser.EmailConfirmed,
                 Level = appUser.Level,
                 JoinDate = appUser.JoinDate,
-                Roles = _AppUserManager.GetRolesAsync(appUser.Id).Result,
-                Claims = _AppUserManager.GetClaimsAsync(appUser.Id).Result
+                Roles = _UserRepository.GetRolesAsync(appUser.Id).Result,
+                Claims = _UserRepository.GetClaimsAsync(appUser.Id).Result
             };
-
         }
-
-        public RoleReturnModel Create(IdentityRole appRole)
-        {
-
-            return new RoleReturnModel
-            {
-                Url = _UrlHelper.Link("GetRoleById", new { id = appRole.Id }),
-                Id = appRole.Id,
-                Name = appRole.Name
-            };
-
-        }
-
 
         public class UserReturnModel
         {
-
             public string Url { get; set; }
             public string Id { get; set; }
             public string UserName { get; set; }
@@ -65,14 +49,6 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Models
             public DateTime JoinDate { get; set; }
             public IList<string> Roles { get; set; }
             public IList<System.Security.Claims.Claim> Claims { get; set; }
-
-        }
-
-        public class RoleReturnModel
-        {
-            public string Url { get; set; }
-            public string Id { get; set; }
-            public string Name { get; set; }
         }
     }
 }

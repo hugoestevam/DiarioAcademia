@@ -1,7 +1,8 @@
 ﻿using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.OAuth;
-using NDDigital.DiarioAcademia.Infraestrutura.Orm.Identity;
+using NDDigital.DiarioAcademia.Dominio.Entities.Security;
+using NDDigital.DiarioAcademia.Infraestrutura.Orm.Security;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
@@ -21,9 +22,9 @@ namespace NDDigital.DiarioAcademia.WebApi.Providers
 
             context.OwinContext.Response.Headers.Add("Access-Control-Allow-Origin", new[] { allowedOrigin });
 
-            var userManager = context.OwinContext.GetUserManager<ApplicationUserManager>();
+            var userRepository = context.OwinContext.GetUserManager<UserRepository>();
 
-            ApplicationUser user = await userManager.FindAsync(context.UserName, context.Password);
+            User user = await userRepository.FindAsync(context.UserName, context.Password);
 
             if (user == null)
             {
@@ -37,7 +38,7 @@ namespace NDDigital.DiarioAcademia.WebApi.Providers
                 return;
             }
 
-            ClaimsIdentity oAuthIdentity = await user.GenerateUserIdentityAsync(userManager, "JWT");
+            ClaimsIdentity oAuthIdentity = await user.GenerateUserIdentityAsync(userRepository, "JWT");
 
             var ticket = new AuthenticationTicket(oAuthIdentity, null);
 
