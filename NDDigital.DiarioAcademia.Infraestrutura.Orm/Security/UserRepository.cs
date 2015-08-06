@@ -9,7 +9,11 @@ using System;
 
 namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Security
 {
-    public class UserRepository : UserManager<User>
+    public interface IUserRepository
+    {
+
+    }
+    public class UserRepository : UserManager<User>, IUserRepository
     {
         public UserRepository(IUserStore<User> store)
             : base(store)

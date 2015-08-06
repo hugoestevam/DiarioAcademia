@@ -112,6 +112,7 @@
     <Compile Include="Configurations\TurmaConfiguration.cs" />
     <Compile Include="Configurations\UserConfiguration.cs" />
     <Compile Include="Contexts\DiarioAcademiaContext.cs" />
+    <Compile Include="Security\PermissionRepository.cs" />
     <Compile Include="Security\UserRepository.cs" />
     <Compile Include="Security\GroupRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

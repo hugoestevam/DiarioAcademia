@@ -103,6 +103,10 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="Security\GroupRepositoryTest.cs" />
+    <Compile Include="Security\ObjectBuilder.cs" />
+    <Compile Include="Security\PermissionRepositoryTest.cs" />
+    <Compile Include="Security\UserRepositoryTest.cs" />
     <Compile Include="SQLs\PresencaRepositorySQLTest.cs" />
     <Compile Include="SQLs\AlunoRepositorySQLTest.cs" />
     <Compile Include="SQLs\AulaRepositorySQLTest.cs" />

@@ -6,33 +6,33 @@ using System.Linq;
 
 namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Security
 {
-    public interface IGroupRepository
+    public interface IPermissionRepository
     {
-        void Add(Group group);
+        void Add(Permission permission);
 
-        void Update(Group group);
+        void Update(Permission permission);
 
-        void Delete(Group group);
+        void Delete(Permission permission);
 
-        IList<Group> GetAll(Group group);
+        IList<Permission> GetAll(Permission permission);
 
-        Group GetById(int id);
+        Permission GetById(int id);
     }
 
-    public class GroupRepository : IGroupRepository
+    public class PermissionRepository : IPermissionRepository
     {
         public DiarioAcademiaContext _context;
 
-        public GroupRepository()
+        public PermissionRepository()
         {
             _context = new DiarioAcademiaContext();
         }
 
-        public void Add(Group group)
+        public void Add(Permission permission)
         {
             try
             {
-                _context.Groups.Add(group);
+                _context.Permissions.Add(permission);
                 _context.SaveChanges();
             }
             catch (Exception e)
@@ -41,11 +41,11 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Security
             }
         }
 
-        public void Delete(Group group)
+        public void Delete(Permission permission)
         {
             try
             {
-                _context.Groups.Remove(group);
+                _context.Permissions.Remove(permission);
                 _context.SaveChanges();
             }
             catch (Exception e)
@@ -54,11 +54,11 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Security
             }
         }
 
-        public IList<Group> GetAll(Group group)
+        public IList<Permission> GetAll(Permission permission)
         {
             try
             {
-                return _context.Groups.ToList();
+                return _context.Permissions.ToList();
             }
             catch (Exception e)
             {
@@ -66,11 +66,11 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Security
             }
         }
 
-        public Group GetById(int id)
+        public Permission GetById(int id)
         {
             try
             {
-                return _context.Groups.Find(id);
+                return _context.Permissions.Find(id);
             }
             catch (Exception e)
             {
@@ -78,9 +78,9 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Security
             }
         }
 
-        public void Update(Group group)
+        public void Update(Permission permission)
         {
-            if (group != null)
+            if (permission != null)
             {
                 try
                 {
