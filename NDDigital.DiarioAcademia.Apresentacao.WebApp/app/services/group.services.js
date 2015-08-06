@@ -20,7 +20,7 @@
 						  { name: "manager.user", displayName: 'Usuário', permissionId: '09' }];
 
 		var groups = [{ id: 1, name: "Aluno", permissions: [permission[2]] },
-					  { id: 2, name: "Admin", permissions: [permission[2], permission[3]] },
+					  { id: 2, name: "Admin", permissions: [permission[1], permission[2], permission[3]], isAdmin: true },
 					  { id: 3, name: "RH", permissions: [permission[2]] }];
 
 
@@ -62,6 +62,8 @@
 		};
 
 		self.getGroupByUsername = function (username) {
+		    return promise.then(logger.successCallback);
+
 			return $http.get(serviceUrl + '?username=' + username)
 				 .then(logger.successCallback)
 				 .catch(logger.errorCallback)

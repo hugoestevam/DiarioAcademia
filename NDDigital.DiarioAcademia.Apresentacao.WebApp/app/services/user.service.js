@@ -45,6 +45,11 @@
 				 .then(logger.successCallback);
 		};
 
+		self.getUserByUsername = function (username) {
+		    return $http.get(baseUrl + 'api/accounts/user/getuserbyname/' + username)
+				 .then(logger.successCallback);
+		}
+
 		self.delete = function (user) {
 			logger.error(res.deleted_successful, user, "Delete");
 			// $http.delete(serviceUrl + "/" + user.id);

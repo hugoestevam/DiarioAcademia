@@ -2,12 +2,12 @@
 
     'use strict';
 
-    authService.$inject = ['$http', '$q', 'localStorageService', 'logger', 'BASEURL', 'groupService', 'storageKeys', 'resource'];
+    authService.$inject = ['$http', '$q', 'localStorageService', 'logger', 'BASEURL', 'groupService', 'storageKeys', 'resource', 'userService'];
 
     angular.module('services.module')
         .service('authService', authService);
 
-    function authService($http, $q, localStorageService, logger, serviceBase, groupService, storageKeys, res) {
+    function authService($http, $q, localStorageService, logger, serviceBase, groupService, storageKeys, res, userService) {
         var self = this;
 
         var redirectState = "home";
@@ -86,20 +86,23 @@
 
                 authentication.isAuth = true;
                 authentication.userName = loginData.userName;
-                authentication.fullName = loginData.fullName;
                 groupService.getGroupByUsername(authentication.userName)
                     .then(function (groups) {
                         authorization.groups = groups;
                         authorization.permissions = groupService.extractPermissions(groups);
                         localStorageService.set(storageKeys.autheData, authorization);
                     });
+                userService.getUserByUsername(authentication.userName)
+                    .then(function (results) {
+                        authentication.fullName = results.fullName;
+                        //criptografar isto
+                        localStorageService.set(storageKeys.authoData, {
+                            token: response.access_token,
+                            userName: loginData.userName,
+                            fullName: authentication.fullName
+                        });
 
-                //criptografar isto
-                localStorageService.set(storageKeys.authoData, {
-                    token: response.access_token,
-                    userName: loginData.userName
                 });
-
 
                 logger.success(res.welcome + " " + (authentication.userName));
                 deferred.resolve(response);
@@ -142,6 +145,7 @@
             if (authoData) {
                 authentication.isAuth = true;
                 authentication.userName = authoData.userName;
+                authentication.fullName = authoData.fullName;
             }
             if (autheData) {
                 authorization.groups = autheData.groups;
