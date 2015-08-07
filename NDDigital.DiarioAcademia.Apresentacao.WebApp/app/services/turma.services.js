@@ -15,9 +15,7 @@
 
         self.getTurmas = function () {
             return $http.get(serviceUrl)
-                .then(function (response) {
-                return response.data;
-            });
+                .then(logger.successCallback);
         };
 
         self.save = function (turma) {
@@ -36,9 +34,7 @@
             logger.success("Turma com id " + id + " encontrada", null, "Busca");
 
             return $http.get(serviceUrl + "/" + id)
-                .then(function (response) {
-            return response.data;
-        });
+                            .then(logger.successCallback);
         };
 
         self.edit = function (turma) {

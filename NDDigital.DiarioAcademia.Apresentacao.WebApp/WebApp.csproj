@@ -96,8 +96,6 @@
     <Content Include="app\images\avatar_plus.gif" />
     <Content Include="app\images\favicon.ico" />
     <Content Include="app\images\profile-menu.png" />
-    <Content Include="app\libs\angular\angular.min.js.map" />
-    <Content Include="app\libs\jquery\jquery-2.1.1.min.map" />
     <Content Include="app\routes\manager.routes.js" />
     <Content Include="app\services\group.services.js" />
     <Content Include="app\services\language.service.js" />
@@ -149,12 +147,6 @@
     <Content Include="gulpfile.js" />
     <Content Include="index.html" />
     <Content Include="package.json" />
-    <Content Include="app\libs\bootstrap\bootstrap.min.js.map">
-      <DependentUpon>bootstrap.min.js</DependentUpon>
-    </Content>
-    <Content Include="app\libs\jquery\jquery-2.1.1.min.js.map">
-      <DependentUpon>jquery-2.1.1.min.js</DependentUpon>
-    </Content>
     <Content Include="bower.json" />
     <Content Include=".bowerrc" />
     <Content Include="content\layout\manager.less" />
@@ -209,18 +201,6 @@
     <Content Include="app\controllers\turma\turmaDetails.ctrl.js" />
     <Content Include="app\controllers\turma\turmaList.ctrl.js" />
     <Content Include="app\factories\ng-automapper.js" />
-    <Content Include="app\libs\angular\angular-local-storage.min.js" />
-    <Content Include="app\libs\angular\angular-ui-router.min.js" />
-    <Content Include="app\libs\angular\angular.js" />
-    <Content Include="app\libs\angular\angular.min.js" />
-    <Content Include="app\libs\angular\loading-bar.min.js" />
-    <Content Include="app\libs\bootstrap\bootstrap.js" />
-    <Content Include="app\libs\bootstrap\bootstrap.min.js" />
-    <None Include="app\libs\jquery\jquery-2.1.1.intellisense.js" />
-    <Content Include="app\libs\jquery\jquery-2.1.1.js" />
-    <Content Include="app\libs\jquery\jquery-2.1.1.min.js" />
-    <Content Include="app\libs\jquery\jquery.js" />
-    <Content Include="app\libs\toastr\toastr.js" />
     <Content Include="app\models\turma.model.js" />
     <Content Include="app\modules\common.module.js" />
     <Content Include="app\modules\core.module.js" />
