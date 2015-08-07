@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using NDDigital.DiarioAcademia.Dominio.Common;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -28,7 +29,7 @@ namespace NDDigital.DiarioAcademia.Dominio.Entities.Security
 
         public User()
         {
-            EmailConfirmed = true;
+            EmailConfirmed = true;           
         }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<User> manager, string authenticationType)
