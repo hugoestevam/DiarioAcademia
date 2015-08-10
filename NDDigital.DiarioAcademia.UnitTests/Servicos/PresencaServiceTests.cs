@@ -7,7 +7,6 @@ using NDDigital.DiarioAcademia.Dominio.Entities;
 using NDDigital.DiarioAcademia.Infraestrutura.Orm.Common;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace NDDigital.DiarioAcademia.UnitTests.Servicos
 {
@@ -41,7 +40,14 @@ namespace NDDigital.DiarioAcademia.UnitTests.Servicos
 
             var alunos = ObjectMother.CriaListaAlunos(qtdAlunos);
 
-            var comando = ObjectMother.CriaRegistraPresencaCommand(alunos.Select(x => x.Id));
+            var ids = new List<int>();
+
+            foreach (var item in alunos)
+            {
+                ids.Add(item.Id);
+            }
+
+            var comando = ObjectMother.CriaRegistraPresencaCommand(ids);
 
             _alunoRepository
                 .Setup(x => x.GetAllByTurma(It.IsAny<int>()))

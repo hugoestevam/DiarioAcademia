@@ -1,6 +1,5 @@
-﻿using System;
-using NDDigital.DiarioAcademia.Infraestrutura.Orm.Common;
-using System.Data.Entity;
+﻿using NDDigital.DiarioAcademia.Infraestrutura.Orm.Common;
+using System;
 
 namespace NDDigital.DiarioAcademia.IntegrationTests.Common
 {
@@ -19,17 +18,15 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.Common
         }
 
         public DatabaseFixture()
-        {            
+        {
             Factory = new DatabaseFactory();
 
             UnitOfWork = new UnitOfWork(Factory);
         }
 
         public void Dispose()
-        {            
+        {
             Factory.Dispose();
         }
     }
-
-    
 }

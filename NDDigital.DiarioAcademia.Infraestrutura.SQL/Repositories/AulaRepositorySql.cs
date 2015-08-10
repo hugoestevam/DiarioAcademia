@@ -1,14 +1,10 @@
-﻿using NDDigital.DiarioAcademia.Dominio;
+﻿using NDDigital.DiarioAcademia.Dominio.Contracts;
+using NDDigital.DiarioAcademia.Dominio.Entities;
+using NDDigital.DiarioAcademia.Dominio.Exceptions;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Linq.Expressions;
-using NDDigital.DiarioAcademia.Dominio.Entities;
-using NDDigital.DiarioAcademia.Dominio.Contracts;
-using NDDigital.DiarioAcademia.Dominio.Exceptions;
 using System.Data;
+using System.Linq.Expressions;
 
 namespace NDDigital.DiarioAcademia.Infraestrutura.SQL.Repositories
 {
@@ -78,7 +74,7 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.SQL.Repositories
             }
         }
 
-        public IEnumerable<Aula> GetAll()
+        public IList<Aula> GetAll()
         {
             try
             {
@@ -90,12 +86,12 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.SQL.Repositories
             }
         }
 
-        public IEnumerable<Aula> GetAllByTurma(int ano)
+        public IList<Aula> GetAllByTurma(int ano)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Aula> GetAllIncluding(params Expression<Func<Aula, object>>[] includeProperties)
+        public IList<Aula> GetAllIncluding(params Expression<Func<Aula, object>>[] includeProperties)
         {
             throw new NotImplementedException();
         }
@@ -124,7 +120,7 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.SQL.Repositories
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Aula> GetMany(Expression<Func<Aula, bool>> where)
+        public IList<Aula> GetMany(Expression<Func<Aula, bool>> where)
         {
             throw new NotImplementedException();
         }

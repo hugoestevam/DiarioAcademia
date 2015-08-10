@@ -80,7 +80,7 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Common
 
         public virtual void Delete(Expression<Func<T, bool>> where)
         {
-            IEnumerable<T> objects = dbset.Where<T>(where).AsEnumerable();
+            IList<T> objects = dbset.Where<T>(where).ToList();
             foreach (T obj in objects)
                 dbset.Remove(obj);
         }
@@ -102,17 +102,17 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Common
             return query.FirstOrDefault();
         }
 
-        public virtual IEnumerable<T> GetAll()
+        public virtual IList<T> GetAll()
         {
             return dbset.ToList();
         }
 
-        public virtual IEnumerable<T> GetMany(Expression<Func<T, bool>> where)
+        public virtual IList<T> GetMany(Expression<Func<T, bool>> where)
         {
             return dbset.Where(where).ToList();
         }
 
-        public virtual IEnumerable<T> GetAllIncluding(params Expression<Func<T, object>>[] includeProperties)
+        public virtual IList<T> GetAllIncluding(params Expression<Func<T, object>>[] includeProperties)
         {
             IQueryable<T> query = dbset;
 

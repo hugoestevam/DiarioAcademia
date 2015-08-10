@@ -13,7 +13,7 @@ namespace NDDigital.DiarioAcademia.UnitTests
             return new Aula(DateTime.Now, new Turma(2014));
         }
 
-        public static ChamadaDTO CriaRegistraPresencaCommand(IEnumerable<int> ids)
+        public static ChamadaDTO CriaRegistraPresencaCommand(IList<int> ids)
         {
             var comando = Builder<ChamadaDTO>.CreateNew()
                 .With(x => x.AnoTurma = 2014)
@@ -28,7 +28,7 @@ namespace NDDigital.DiarioAcademia.UnitTests
             return comando;
         }
 
-        internal static IEnumerable<Aluno> CriaListaAlunos(int qtdAlunos)
+        internal static IList<Aluno> CriaListaAlunos(int qtdAlunos)
         {
             return Builder<Aluno>
                 .CreateListOfSize(qtdAlunos)

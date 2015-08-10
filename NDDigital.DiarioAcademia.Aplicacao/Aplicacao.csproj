@@ -50,6 +50,7 @@
   <ItemGroup>
     <Compile Include="Services\AlunoService.cs" />
     <Compile Include="Services\AulaService.cs" />
+    <Compile Include="Services\AuthorizationService.cs" />
     <Compile Include="Services\TurmaService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

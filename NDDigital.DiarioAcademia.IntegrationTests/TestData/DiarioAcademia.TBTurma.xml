@@ -1,9 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
-<DiarioAcademia xmlns="http://tempuri.org/DiarioAcademia.xsd">
-  <TBTurma>
-    <Id>1</Id>
-    <Ano>2014</Ano>
-  </TBTurma>
-</DiarioAcademia>
-
-

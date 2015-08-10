@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using NDDigital.DiarioAcademia.Dominio.Contracts;
+﻿using NDDigital.DiarioAcademia.Dominio.Contracts;
 using NDDigital.DiarioAcademia.Dominio.Entities;
 using NDDigital.DiarioAcademia.Dominio.Exceptions;
+using System;
+using System.Collections.Generic;
+using System.Linq.Expressions;
 
 namespace NDDigital.DiarioAcademia.Infraestrutura.SQL.Repositories
 {
@@ -11,14 +11,12 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.SQL.Repositories
     {
         #region Querys
 
-
         public const string SqlDelete =
          "DELETE FROM TBPresenca " +
                        "WHERE Id = {0}Id";
 
-
-
         #endregion Querys
+
         public Presenca Add(Presenca entity)
         {
             throw new NotImplementedException();
@@ -53,12 +51,12 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.SQL.Repositories
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Presenca> GetAll()
+        public IList<Presenca> GetAll()
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Presenca> GetAllIncluding(params Expression<Func<Presenca, object>>[] includeProperties)
+        public IList<Presenca> GetAllIncluding(params Expression<Func<Presenca, object>>[] includeProperties)
         {
             throw new NotImplementedException();
         }
@@ -73,7 +71,7 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.SQL.Repositories
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Presenca> GetMany(Expression<Func<Presenca, bool>> where)
+        public IList<Presenca> GetMany(Expression<Func<Presenca, bool>> where)
         {
             throw new NotImplementedException();
         }

@@ -1,18 +1,15 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using NDDigital.DiarioAcademia.Infraestrutura.Orm.Security;
-using Microsoft.AspNet.Identity;
 using NDDigital.DiarioAcademia.Dominio.Entities.Security;
-using Microsoft.AspNet.Identity.EntityFramework;
+using NDDigital.DiarioAcademia.Infraestrutura.Orm.Security;
 
-namespace NDDigital.DiarioAcademia.SecurityTests
+namespace NDDigital.DiarioAcademia.IntegrationTests.Security
 {
     [TestClass]
     public class UserTest
     {
         public IUserRepository _userRepository;
         public IUserStore<User> _store;
-
 
         [TestInitialize]
         public void Initialize()
@@ -21,38 +18,31 @@ namespace NDDigital.DiarioAcademia.SecurityTests
         }
 
         [TestMethod]
+        [Ignore]
         [TestCategory("Athentication")]
         public void Deveria_Adicionar_Um_Usuario()
         {
+
         }
 
         [TestMethod]
+        [Ignore]
         [TestCategory("Athentication")]
         public void Deveria_Excluir_Um_Usuario()
         {
         }
 
         [TestMethod]
+        [Ignore]
         [TestCategory("Athentication")]
         public void Deveria_Buscar_Todos_Usuarios()
         {
         }
 
         [TestMethod]
+        [Ignore]
         [TestCategory("Athentication")]
         public void Deveria_Buscar_Usuario_Por_Grupo()
-        {
-        }
-
-        [TestMethod]
-        [TestCategory("Authorization")]
-        public void Deveria_Adicionar_Grupos_ao_Usuario()
-        {
-        }
-
-        [TestMethod]
-        [TestCategory("Authorization")]
-        public void Deveria_Excluir_Grupos_de_Usuario()
         {
         }
     }

@@ -1,5 +1,4 @@
-﻿using NDDigital.DiarioAcademia.Dominio;
-using NDDigital.DiarioAcademia.Dominio.Contracts;
+﻿using NDDigital.DiarioAcademia.Dominio.Contracts;
 using NDDigital.DiarioAcademia.Dominio.Entities;
 using NDDigital.DiarioAcademia.Infraestrutura.Orm.Common;
 using System.Collections.Generic;
@@ -15,7 +14,7 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Repositories
         {
         }
 
-        public IEnumerable<Aluno> GetAllByTurma(int ano)
+        public IList<Aluno> GetAllByTurma(int ano)
         {
             return GetQueryable()
                 .Include(x => x.Turma)
@@ -24,7 +23,7 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Repositories
                 .ToList();
         }
 
-        public override IEnumerable<Aluno> GetAll()
+        public override IList<Aluno> GetAll()
         {
             return GetQueryable()
                 .Include(x => x.Turma)
@@ -42,7 +41,7 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Repositories
             return aluno;
         }
 
-        public IEnumerable<Aluno> GetAllByTurmaId(int id)
+        public IList<Aluno> GetAllByTurmaId(int id)
         {
             return GetQueryable()
                     .Include(x => x.Turma)

@@ -1,23 +1,18 @@
-﻿using NDDigital.DiarioAcademia.Dominio;
+﻿using NDDigital.DiarioAcademia.Dominio.Contracts;
+using NDDigital.DiarioAcademia.Dominio.Entities;
+using NDDigital.DiarioAcademia.Dominio.Exceptions;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Linq.Expressions;
-using NDDigital.DiarioAcademia.Dominio.Contracts;
-using NDDigital.DiarioAcademia.Dominio.Entities;
 using System.Data;
-using NDDigital.DiarioAcademia.Dominio.Exceptions;
+using System.Linq.Expressions;
 
 namespace NDDigital.DiarioAcademia.Infraestrutura.SQL.Repositories
 {
     public class AlunoRepositorySql : IAlunoRepository
     {
-
         #region Querys
 
-        public const string SqlInsert = 
+        public const string SqlInsert =
          @"INSERT INTO TBAluno
                ([Endereco_Cep]
                ,[Endereco_Bairro]
@@ -27,12 +22,11 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.SQL.Repositories
                ,[Turma_Id])
          VALUES
                ({0} Endereco_Cep,
-                {0} Endereco_Bairro, 
-                {0} Endereco_Localidade, 
-                {0} Endereco_Uf, 
-                {0} Nome, 
+                {0} Endereco_Bairro,
+                {0} Endereco_Localidade,
+                {0} Endereco_Uf,
+                {0} Nome,
                 {0}Turma_Id)";
-
 
         public const string SqlUpdate =
         @"UPDATE TBAluno SET
@@ -57,7 +51,7 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.SQL.Repositories
         public const string SqlSelectbId =
         "SELECT * FROM TBAluno WHERE Id = {0}Id";
 
-        #endregion
+        #endregion Querys
 
         public Aluno Add(Aluno entity)
         {
@@ -98,7 +92,7 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.SQL.Repositories
             }
         }
 
-        public IEnumerable<Aluno> GetAll()
+        public IList<Aluno> GetAll()
         {
             try
             {
@@ -110,7 +104,7 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.SQL.Repositories
             }
         }
 
-        public IEnumerable<Aluno> GetAllByTurma(int ano)
+        public IList<Aluno> GetAllByTurma(int ano)
         {
             try
             {
@@ -124,7 +118,7 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.SQL.Repositories
             }
         }
 
-        public IEnumerable<Aluno> GetAllByTurmaId(int turmaId)
+        public IList<Aluno> GetAllByTurmaId(int turmaId)
         {
             try
             {
@@ -138,7 +132,7 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.SQL.Repositories
             }
         }
 
-        public IEnumerable<Aluno> GetAllIncluding(params Expression<Func<Aluno, object>>[] includeProperties)
+        public IList<Aluno> GetAllIncluding(params Expression<Func<Aluno, object>>[] includeProperties)
         {
             throw new NotImplementedException();
             //TODO: 3 Implementar
@@ -164,7 +158,7 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.SQL.Repositories
             //TODO: 4 Implementar
         }
 
-        public IEnumerable<Aluno> GetMany(Expression<Func<Aluno, bool>> where)
+        public IList<Aluno> GetMany(Expression<Func<Aluno, bool>> where)
         {
             throw new NotImplementedException();
             //TODO: 5 Implementar

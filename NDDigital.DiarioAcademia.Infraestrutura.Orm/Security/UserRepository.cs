@@ -5,14 +5,13 @@ using Microsoft.Owin;
 using NDDigital.DiarioAcademia.Dominio.Entities.Security;
 using NDDigital.DiarioAcademia.Infraestrutura.CepServices;
 using NDDigital.DiarioAcademia.Infraestrutura.Orm.Contexts;
-using System;
 
 namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Security
 {
     public interface IUserRepository
     {
-
     }
+
     public class UserRepository : UserManager<User>, IUserRepository
     {
         public UserRepository(IUserStore<User> store)

@@ -1,9 +1,6 @@
 ﻿using NDDigital.DiarioAcademia.Dominio.Entities;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NDDigital.DiarioAcademia.Dominio.Contracts
 {
@@ -11,6 +8,6 @@ namespace NDDigital.DiarioAcademia.Dominio.Contracts
     {
         Aula GetByData(DateTime data);
 
-        IEnumerable<Aula> GetAllByTurma(int ano);
+        IList<Aula> GetAllByTurma(int ano);
     }
 }
