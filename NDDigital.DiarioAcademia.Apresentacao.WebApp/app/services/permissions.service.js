@@ -32,7 +32,7 @@
 
 		//public methods
 		self.getPermissions = function () {
-			return promise;
+		    return promise.then(logger.successCallback);
 
 			return $http.get(serviceUrl)
 				 .then(logger.successCallback)

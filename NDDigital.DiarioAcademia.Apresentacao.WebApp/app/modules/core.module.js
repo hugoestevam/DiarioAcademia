@@ -35,6 +35,7 @@
         $rootScope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams) {
             $rootScope.previousState = fromState;
             $rootScope.title = toState.data.displayName;
+            $rootScope.state = toState.name;
             console.log({ Change: "succes: ", fromState: fromState.name, toState: toState.name });
         });
         $rootScope.$on('$stateNotFound',

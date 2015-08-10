@@ -17,10 +17,10 @@
         //script load
         activate();
         function activate() {
-            authService.authentication.userName = authService.authentication.userName;
+            //authService.authentication.userName = authService.authentication.userName;
             self.authentication = authService.authentication;
             self.authorization = authService.authorization;
-            
+            toastr.options.preventDuplicates = true;
             self.currentLanguage = languageService.currentLanguage;
             reTranslate('pt-br');
         }

@@ -1,5 +1,4 @@
 ﻿(function () {
-
     'use strict';
 
     angular.module('routes.module')
@@ -35,7 +34,6 @@
         }
     }
 
-
     function verififyPermission(routes, startIndex, route) {
         var error$$permissionIdUndefined = " can't have the attribute $$permissionId to be undefined",
             error$$permissionIdAlreadyExists = " can't have the attribute $$permissionId because already exists";
@@ -56,5 +54,4 @@
     function throwRouteError(route, msg) {
         throw new Error("The route " + route + msg);
     }
-
 })();

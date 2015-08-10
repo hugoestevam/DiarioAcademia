@@ -51,6 +51,20 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers.Authentication
             return NotFound();
         }
 
+        //[Authorize(Roles = "Admin")]
+        [Route("user/getuserbyname/{username}", Name = "GetUserByUsername")]
+        public async Task<IHttpActionResult> GetUserByUsername(string username)
+        {
+            var user = await this.UserRepository.FindByNameAsync(username);
+
+            if (user != null)
+            {
+                return Ok(this.TheModelFactory.Create(user));
+            }
+
+            return NotFound();
+        }
+
         [AllowAnonymous]
         [Route("create")]
         public async Task<IHttpActionResult> CreateUser(CreateUserBindingModel createUserModel)

@@ -1,9 +1,25 @@
 ﻿<div class="container-user fadeIn enter-fadeIn ">
     <div class="row">
-        <h2 style="margin-top: 0;">Permissões {{vm.group.name}}</h2>
-        <hr />
+        <div class="col-xs-10 clear-padding">
+            <h2 style="margin-top: 0;">Permissões {{vm.group.name}}</h2>
+        </div>
+        <div class="col-xs-2 clear-padding">
+            <button class="btn btn-info" ng-click="vm.modal()" style="float: right"
+                    data-toggle="modal" data-target="#modalEditGroup">
+                <i class="fa fa-save"></i>
+            </button>
+        </div>
     </div>
+</div>
+
+<hr  style="margin-top: 2%"/>
+
+<div class="container-user fadeIn enter-fadeIn ">
     <div class="row">
         <ndd-group-checkbox array="vm.permissions" compare="vm.group.permissions" method="vm.comparePermissions"></ndd-group-checkbox>
     </div>
 </div>
+    
+<ndd-modal target="modalEditGroup" label="{{vm.titleModalEdit}}" callback="vm.edit">
+    {{vm.bodyModalEdit}}
+</ndd-modal>
