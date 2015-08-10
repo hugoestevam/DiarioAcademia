@@ -3,7 +3,6 @@ using NDDigital.DiarioAcademia.Dominio.Entities;
 using NDDigital.DiarioAcademia.Dominio.Entities.Security;
 using NDDigital.DiarioAcademia.Infraestrutura.Orm.Configurations;
 using System.Data.Entity;
-using System.Data.Entity.ModelConfiguration.Conventions;
 
 namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Contexts
 {
@@ -37,8 +36,6 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Contexts
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
-
             modelBuilder.Configurations.Add(new AlunoConfiguration());
             modelBuilder.Configurations.Add(new EnderecoConfiguration());
             modelBuilder.Configurations.Add(new AulaConfiguration());
@@ -47,7 +44,6 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Contexts
             modelBuilder.Configurations.Add(new PresencaConfiguration());
             modelBuilder.Configurations.Add(new GroupConfiguration());
             modelBuilder.Configurations.Add(new PermissionConfiguration());
-
         }
     }
 }

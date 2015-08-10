@@ -4,16 +4,11 @@ using System.Collections.Generic;
 
 namespace NDDigital.DiarioAcademia.Dominio.Entities.Security
 {
-    public class Group : Entity
+    public class Group
     {
-        
+        public Guid Id { get; set; }
         public string Name { get; set; }
         public bool IsAdmin { get; set; }
-        public IList<Permission> Permissions { get; set; }
-
-        public Group()
-        {
-            Permissions = new List<Permission>();
-        }
+        public List<Permission> Permissions { get; set; }
     }
 }

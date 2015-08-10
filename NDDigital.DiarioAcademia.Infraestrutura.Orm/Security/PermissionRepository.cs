@@ -1,37 +1,96 @@
-﻿using NDDigital.DiarioAcademia.Dominio;
-using NDDigital.DiarioAcademia.Dominio.Entities.Security;
-using NDDigital.DiarioAcademia.Infraestrutura.Orm.Common;
+﻿using NDDigital.DiarioAcademia.Dominio.Entities.Security;
 using NDDigital.DiarioAcademia.Infraestrutura.Orm.Contexts;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
 
 namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Security
 {
-    public interface IPermissionRepository : IRepository<Permission>
-    {        
-       // void GetByGroup(Group administrador);
+    public interface IPermissionRepository
+    {
+        void Add(Permission permission);
+
+        void Update(Permission permission);
+
+        void Delete(Permission permission);
+
+        IList<Permission> GetAll(Permission permission);
+
+        Permission GetById(int id);
     }
 
-    public class PermissionRepository : RepositoryBase<Permission>, IPermissionRepository
+    public class PermissionRepository : IPermissionRepository
     {
+        public DiarioAcademiaContext _context;
 
-        public PermissionRepository(IDatabaseFactory dbFactory)
-            : base(dbFactory)
+        public PermissionRepository()
         {
+            _context = new DiarioAcademiaContext();
         }
 
-        //public IList<Permission> GetByGroup(Group administrador)
-        //{ 
-        //    try
-        //    {
-        //         _context.Permissions.ToList().Where(c => c.);
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        throw new Exception(e.Message);
-        //    }
-        //}TODO: Implementar
+        public void Add(Permission permission)
+        {
+            try
+            {
+                _context.Permissions.Add(permission);
+                _context.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+
+        public void Delete(Permission permission)
+        {
+            try
+            {
+                _context.Permissions.Remove(permission);
+                _context.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+
+        public IList<Permission> GetAll(Permission permission)
+        {
+            try
+            {
+                return _context.Permissions.ToList();
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+
+        public Permission GetById(int id)
+        {
+            try
+            {
+                return _context.Permissions.Find(id);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+
+        public void Update(Permission permission)
+        {
+            if (permission != null)
+            {
+                try
+                {
+                    _context.SaveChanges();
+                }
+                catch (Exception e)
+                {
+                    throw new Exception(e.Message);
+                }
+            }
+        }
     }
 }

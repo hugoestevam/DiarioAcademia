@@ -1,10 +1,10 @@
-﻿using NDDigital.DiarioAcademia.Dominio.Common;
-using System;
+﻿using System;
 
 namespace NDDigital.DiarioAcademia.Dominio.Entities.Security
 {
-    public class Permission : Entity
+    public class Permission
     {
+        public Guid Id { get; set; }
         public string PermissionId { get; set; }
     }
 }
