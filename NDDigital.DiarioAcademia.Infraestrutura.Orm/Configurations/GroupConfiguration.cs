@@ -9,10 +9,13 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Configurations
         {
             ToTable("TBGroup");
 
-            HasMany(x => x.Permissions).WithMany().Map(x =>
+            HasMany(x => x.Permissions)
+                .WithMany().Map(x =>
             {
+                x.MapLeftKey("Group_Id");
+                x.MapRightKey("Permission_Id");
                 x.ToTable("TBGroupPermission");
-            });
+            });           
         }            
     }
 }

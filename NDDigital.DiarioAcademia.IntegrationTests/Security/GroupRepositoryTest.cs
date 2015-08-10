@@ -2,8 +2,10 @@
 using NDDigital.DiarioAcademia.Aplicacao.Services;
 using NDDigital.DiarioAcademia.Infraestrutura.Orm.Common;
 using NDDigital.DiarioAcademia.Infraestrutura.Orm.Security;
+using NDDigital.DiarioAcademia.IntegrationTests.Base;
 using NDDigital.DiarioAcademia.IntegrationTests.Common;
 using NDDigital.DiarioAcademia.SecurityTests;
+using System.Data.Entity;
 
 namespace NDDigital.DiarioAcademia.IntegrationTests.Security
 {
@@ -14,19 +16,21 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.Security
         public IPermissionRepository _repoPermission;
         private AuthorizationService _service;
 
-        private IUnitOfWork uow;
+        public DatabaseFixture databaseFixture = new DatabaseFixture();
 
-        public GroupRepositoryTest(DatabaseFixture databaseFixture)
-        {
-            _repoGroup = new GroupRepository(databaseFixture.Factory);
-            uow = databaseFixture.UnitOfWork;
-        }
+        private IUnitOfWork uow;
 
         [TestInitialize]
         public void Initialize()
         {
-            //Database.SetInitializer(new BaseTest());
+            _repoGroup = new GroupRepository(databaseFixture.Factory);
+            _repoPermission = new PermissionRepository(databaseFixture.Factory);
+
+            uow = databaseFixture.UnitOfWork;
+
             _service = new AuthorizationService(_repoGroup, _repoPermission, uow);
+
+            Database.SetInitializer(new BaseTest());
         }
 
         [TestMethod]
@@ -35,9 +39,11 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.Security
         {
             _repoGroup.Add(ObjectBuilder.CreateGroup());
 
+            uow.Commit();
+
             var list = _repoGroup.GetAll();
 
-            Assert.IsNotNull(list);
+            Assert.AreEqual(3, list.Count);
         }
 
         [TestMethod]
@@ -48,9 +54,11 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.Security
 
             _repoGroup.Delete(group);
 
+            uow.Commit();
+
             var list = _repoGroup.GetAll();
 
-            Assert.IsNotNull(list);
+            Assert.AreEqual(1, list.Count);
         }
 
         [TestMethod]
@@ -59,7 +67,7 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.Security
         {
             var list = _repoGroup.GetAll();
 
-            Assert.IsNotNull(list);
+            Assert.AreEqual(2, list.Count);
         }
 
         [TestMethod]

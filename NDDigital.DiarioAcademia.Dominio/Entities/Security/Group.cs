@@ -8,5 +8,10 @@ namespace NDDigital.DiarioAcademia.Dominio.Entities.Security
         public string Name { get; set; }
         public bool IsAdmin { get; set; }
         public List<Permission> Permissions { get; set; }
+
+        public Group()
+        {
+            Permissions = new List<Permission>();
+        }
     }
 }

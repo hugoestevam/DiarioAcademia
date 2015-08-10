@@ -30,9 +30,11 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
             var listPermissions = _permissionRepository.GetAll();
 
             if (groupEncontrado != null)
-                groupEncontrado.Permissions = (List<Permission>)listPermissions;
+                groupEncontrado.Permissions.AddRange(listPermissions);
 
             _groupRepository.Update(groupEncontrado);
+
+            _unitOfWork.Commit();
         }
     }
 }
