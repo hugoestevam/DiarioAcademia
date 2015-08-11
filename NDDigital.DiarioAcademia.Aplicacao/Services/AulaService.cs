@@ -68,6 +68,7 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
 
             //var aula = _aulaRepository.GetByData(registroPresenca.Data.Date)??new Aula(DateTime.Now,new Turma(registroPresenca.AnoTurma));//TODO:arrumar isso aq, pror um filtro melhor, hora é ano hora data
            
+            //tem que separar bem o que esta buscando por ano e o que busca por id, to fazendo tudo por id pq data pode gerar discrepancias
             var aula = _aulaRepository.GetById(registroPresenca.AulaId);//TODO: THIAGO SARTOR
             
             if (aula == null)

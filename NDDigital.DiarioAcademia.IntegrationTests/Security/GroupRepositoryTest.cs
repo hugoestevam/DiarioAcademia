@@ -73,7 +73,7 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.Security
         [TestMethod]
         [TestCategory("Authorization - Group")]
         public void Deveria_Adicionar_Prermissoes_do_Grupo()
-        {
+         {
             //Deve receber o Id do grupo
             //E um array de string
             var group = _repoGroup.GetById(1);

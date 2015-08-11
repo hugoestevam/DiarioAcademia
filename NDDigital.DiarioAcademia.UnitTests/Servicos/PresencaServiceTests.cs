@@ -4,6 +4,7 @@ using NDDigital.DiarioAcademia.Aplicacao.DTOs;
 using NDDigital.DiarioAcademia.Aplicacao.Services;
 using NDDigital.DiarioAcademia.Dominio.Contracts;
 using NDDigital.DiarioAcademia.Dominio.Entities;
+using NDDigital.DiarioAcademia.Dominio.Exceptions;
 using NDDigital.DiarioAcademia.Infraestrutura.Orm.Common;
 using System;
 using System.Collections.Generic;
@@ -50,11 +51,11 @@ namespace NDDigital.DiarioAcademia.UnitTests.Servicos
             var comando = ObjectMother.CriaRegistraPresencaCommand(ids);
 
             _alunoRepository
-                .Setup(x => x.GetAllByTurma(It.IsAny<int>()))
+                .Setup(x => x.GetAllByTurmaId(It.IsAny<int>()))
                 .Returns(alunos);
 
             _aulaRepository
-                .Setup(x => x.GetByData(It.IsAny<DateTime>()))
+                .Setup(x => x.GetById(It.IsAny<int>()))
                 .Returns(new Aula(DateTime.Now, new Turma(2014)));
 
             //act
@@ -68,6 +69,7 @@ namespace NDDigital.DiarioAcademia.UnitTests.Servicos
 
         [TestMethod]
         [TestCategory("Camada de Serviço ORM")]
+        [ExpectedException(typeof(AlunoNaoEncontrado))]
         public void RegistraPresenca_deveria_lancar_excecao_AlunoNaoEncontrado()
         {
             //arrange
@@ -78,16 +80,14 @@ namespace NDDigital.DiarioAcademia.UnitTests.Servicos
             var comando = new ChamadaDTO { AnoTurma = 2000 };
 
             // act
-            //Exception ex = Record.Exception(new Assert.ThrowsDelegate(() => { aulaService.RealizaChamada(comando); })); TODO: Implementar
+            aulaService.RealizaChamada(comando);
 
-            // assert
-            //Assert.IsType(typeof(AlunoNaoEncontrado), ex);
-
-            //Assert.Throws<AlunoNaoEncontrado>(() => presencaService.RegistraPresenca(comando));
+            // assert is [ExpectedException]
         }
 
         [TestMethod]
         [TestCategory("Camada de Serviço ORM")]
+        [ExpectedException(typeof(AulaNaoEncontrada))]
         public void RegistraPresenca_deveria_lancar_excecao_AulaNaoEncontrado()
         {
             //arrange
@@ -96,7 +96,7 @@ namespace NDDigital.DiarioAcademia.UnitTests.Servicos
             var alunos = ObjectMother.CriaListaAlunos(qtdAlunos);
 
             _alunoRepository
-                .Setup(x => x.GetAllByTurma(It.IsAny<int>()))
+                .Setup(x => x.GetAllByTurmaId(It.IsAny<int>()))
                 .Returns(alunos);
 
             _aulaRepository
@@ -107,9 +107,8 @@ namespace NDDigital.DiarioAcademia.UnitTests.Servicos
 
             //act
             //Exception ex = Record.Exception(new Assert.ThrowsDelegate(() => aulaService.RealizaChamada(comando))); TODO: Implementar
-
-            //assert
-            //Assert.IsType<AulaNaoEncontrada>(ex);
+            aulaService.RealizaChamada(comando);
+            // assert is [ExpectedException]
         }
     }
 }

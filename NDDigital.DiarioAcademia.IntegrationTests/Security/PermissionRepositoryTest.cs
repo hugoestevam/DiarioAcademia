@@ -11,7 +11,8 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.Security
     [TestClass]
     public class PermissionRepositoryTest
     {
-        public IPermissionRepository _repo;
+        public IPermissionRepository _permissionRepo;
+        public IGroupRepository _groupRepo;
 
         private IUnitOfWork uow;
 
@@ -20,7 +21,8 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.Security
         [TestInitialize]
         public void Initialize()
         {
-            _repo = new PermissionRepository(databaseFixture.Factory);
+            _permissionRepo = new PermissionRepository(databaseFixture.Factory);
+            _groupRepo = new GroupRepository(databaseFixture.Factory);
             uow = databaseFixture.UnitOfWork;
 
             Database.SetInitializer(new BaseTest());
@@ -30,9 +32,9 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.Security
         [TestCategory("Authorization - Permission")]
         public void Deveria_Adicionar_Uma_Permissao()
         {
-            _repo.Add(ObjectBuilder.CreatePermission());
+            _permissionRepo.Add(ObjectBuilder.CreatePermission());
 
-            var list = _repo.GetAll();
+            var list = _permissionRepo.GetAll();
 
             Assert.AreEqual(2, list.Count);
         }
@@ -41,13 +43,13 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.Security
         [TestCategory("Authorization - Permission")]
         public void Deveria_Excluir_Uma_Permissao()
         {
-            var permissao = _repo.GetById(1);
+            var permissao = _permissionRepo.GetById(1);
 
-            _repo.Delete(permissao);
+            _permissionRepo.Delete(permissao);
 
             uow.Commit();
 
-            var list = _repo.GetAll();
+            var list = _permissionRepo.GetAll();
 
             Assert.AreEqual(1, list.Count);
         }
@@ -56,16 +58,16 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.Security
         [TestCategory("Authorization - Permission")]
         public void Deveria_Atualizar_Uma_Permissao()
         {
-            var permissao = _repo.GetById(1);
+            var permissao = _permissionRepo.GetById(1);
             permissao.PermissionId = "02";
 
-            _repo.Update(permissao);
+            _permissionRepo.Update(permissao);
 
-            var permissaoEditada = _repo.GetById(1);
+            var permissaoEditada = _permissionRepo.GetById(1);
 
             Assert.AreEqual("02", permissaoEditada.PermissionId);
 
-            permissaoEditada = _repo.GetById(2);
+            permissaoEditada = _permissionRepo.GetById(2);
 
             Assert.AreEqual("02", permissaoEditada.PermissionId);
         }
@@ -74,7 +76,7 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.Security
         [TestCategory("Authorization - Permission")]
         public void Deveria_Buscar_Todas_Permissoes()
         {
-            var list = _repo.GetAll();
+            var list = _permissionRepo.GetAll();
 
             Assert.IsNotNull(list);
         }
@@ -83,13 +85,22 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.Security
         [TestCategory("Authorization - Permission")]
         public void Deveria_Buscar_Permissoes_Por_Grupo()
         {
-            //var administrador = _repo.GetById(1);
 
-            //_repo.GetByGroup(administrador);
+            //arrange
+            var administrador = _groupRepo.GetById(1);
 
-            //var list = _repo.GetAll();
+            var permissao = ObjectBuilder.CreatePermission();
 
-            //Assert.AreEqual(1, list.Count);
-        }
+            administrador.Permissions.Add(permissao);
+
+            uow.Commit();
+
+            //act
+            var list = _permissionRepo.GetByGroup(administrador.Id);
+            
+            //asert
+            Assert.AreEqual(1, list.Count);
+
+;        }
     }
 }
