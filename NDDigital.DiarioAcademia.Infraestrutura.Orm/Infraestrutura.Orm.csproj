@@ -120,6 +120,7 @@
     <Compile Include="Repositories\AulaRepositoryEF.cs" />
     <Compile Include="Repositories\PresencaRepositoryEF.cs" />
     <Compile Include="Repositories\TurmaRepositoryEF.cs" />
+    <Compile Include="_appDbContext\Users.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

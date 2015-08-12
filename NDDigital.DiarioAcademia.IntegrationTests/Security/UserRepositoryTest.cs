@@ -15,6 +15,7 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.Security
     public class UserTest
     {
         public UserRepository _userRepository;
+        public GroupRepository _groupRepository;
         public IUserStore<User> _store;
         private IUnitOfWork uow;
         private User _user;
@@ -23,9 +24,19 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.Security
         [TestInitialize]
         public void Initialize()
         {
-            _store = new MyUserStore();
+
+            var fixture = new DatabaseFixture();
+
+            var factory = fixture.Factory;
+
+            var context = factory.Get();
+
+            uow = fixture.UnitOfWork;
+
+            _store = new MyUserStore(context);
             _userRepository = new UserRepository(_store);
-            uow = new DatabaseFixture().UnitOfWork;
+            _groupRepository = new GroupRepository(fixture.Factory);
+
 
             _user = ObjectBuilder.CreateUser();
 
@@ -57,6 +68,8 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.Security
         {
             _userRepository.Delete(_user);
 
+            uow.Commit();
+
             var count = _userRepository.Users.ToList().Count;
 
             Assert.IsTrue(count == 0);
@@ -77,9 +90,19 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.Security
         {
             var grupo = _user.Groups.First();
 
+            _groupRepository.Add(grupo);
+
+            uow.Commit();
+            
+            _user.Groups.Add(grupo);
+
+            uow.Commit();
+
             var users = _userRepository.GetUsersByGroup(grupo);
 
+            var count = users.Count;
 
+            Assert.IsTrue(count > 0);
 
 
         }

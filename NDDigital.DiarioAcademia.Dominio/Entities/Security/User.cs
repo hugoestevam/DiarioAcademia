@@ -39,7 +39,7 @@ namespace NDDigital.DiarioAcademia.Dominio.Entities.Security
         }
         public override string ToString()
         {
-            return String.Format("{0} - {1}",FirstName.ToUpper(), UserName);
+            return String.Format("{0} - {1}",LastName.ToUpper(), UserName);
         }
     }
 }

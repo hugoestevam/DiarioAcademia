@@ -21,15 +21,17 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Security
 
     public class UserRepository : UserManager<User>, IUserRepository
     {
+        private  static DiarioAcademiaContext _appDbContext;
+
         public UserRepository(IUserStore<User> store)
             : base(store)
         {
+            _appDbContext = _appDbContext ?? new DiarioAcademiaContext();
         }
-
         public static UserRepository Create(IdentityFactoryOptions<UserRepository> options, IOwinContext context)
         {
-            var appDbContext = context.Get<DiarioAcademiaContext>();
-            var userManager = new UserRepository(new UserStore<User>(appDbContext));
+            _appDbContext = context.Get<DiarioAcademiaContext>();
+            var userManager = new UserRepository(new UserStore<User>(_appDbContext));
 
             // Configure validation logic for usernames
             userManager.UserValidator = new UserValidator<User>(userManager)
@@ -60,15 +62,33 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Security
 
         public IList<User> GetUsersByGroup(Group group)
         {
-            return new List<User> { new DiarioAcademiaContext().Users.Find(group.IsAdmin) };
+            var gr = group; //key "group" is reserved
+            return (
+                from c 
+                in _appDbContext.Users
+                where c.Groups.Any(g => g.Id == gr.Id)
+                select c
+                ).ToList();
+            
         }
     }
     //recurso: não temos uma implementação de IUserStore: http://weblogs.asp.net/imranbaloch/a-simple-implementation-of-microsoft-aspnet-identity
-    public class MyUserStore : IUserStore<User>, IUserPasswordStore<User>, IUserSecurityStampStore<User>
+    public class MyUserStore : IUserStore<User>, IUserPasswordStore<User>, IUserSecurityStampStore<User>, IQueryableUserStore<User>
     {
-        UserStore<IdentityUser> userStore = new UserStore<IdentityUser>(new DiarioAcademiaContext());
-        public MyUserStore()
+        UserStore<IdentityUser> userStore;
+
+        public IQueryable<User> Users
         {
+            get
+            {
+                return (userStore.Context as DiarioAcademiaContext).Users;
+            }
+        }
+
+        public MyUserStore(DiarioAcademiaContext context)
+        {
+            
+            userStore = new UserStore<IdentityUser>(context);
         }
         public Task CreateAsync(User user)
         {
@@ -80,7 +100,10 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Security
         public Task DeleteAsync(User user)
         {
             var context = userStore.Context as DiarioAcademiaContext;
-            context.Users.Remove(user);
+
+            var userLocated = context.Users.First(u=>u.UserName==user.UserName);
+
+            context.Users.Remove(userLocated);
             context.Configuration.ValidateOnSaveEnabled = false;
             return context.SaveChangesAsync();
         }
@@ -158,6 +181,11 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Security
                 SecurityStamp = user.SecurityStamp,
                 UserName = user.UserName
             };
+        }
+
+        public Task<User> FindByIdAsync(int userId)
+        {
+            throw new NotImplementedException();
         }
     }
 

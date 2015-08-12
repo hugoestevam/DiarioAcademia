@@ -18,5 +18,14 @@ namespace NDDigital.DiarioAcademia.Dominio.Entities.Security
         {
             return Name + (IsAdmin?" [Admin]":"");
         }
+        public override bool Equals(object obj)
+        {
+            var group = obj as Group;
+
+            if (group == null) return false;
+
+            return group.Id == this.Id;
+
+        }
     }
 }
