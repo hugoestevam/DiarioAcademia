@@ -82,6 +82,8 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.Security
 
             _service.AddPermissionsGroup(1);
 
+            uow.Commit();
+
             group = _repoGroup.GetById(1);
 
             Assert.IsTrue(group.Permissions.Count > 0);
