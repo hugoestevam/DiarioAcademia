@@ -13,5 +13,10 @@ namespace NDDigital.DiarioAcademia.Dominio.Entities.Security
         {
             Permissions = new List<Permission>();
         }
+
+        public override string ToString()
+        {
+            return Name + (IsAdmin?" [Admin]":"");
+        }
     }
 }

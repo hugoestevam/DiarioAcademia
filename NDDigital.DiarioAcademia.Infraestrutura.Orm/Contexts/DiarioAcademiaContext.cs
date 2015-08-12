@@ -2,7 +2,11 @@
 using NDDigital.DiarioAcademia.Dominio.Entities;
 using NDDigital.DiarioAcademia.Dominio.Entities.Security;
 using NDDigital.DiarioAcademia.Infraestrutura.Orm.Configurations;
+using System;
+using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Validation;
+using System.Linq;
 
 namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Contexts
 {
@@ -44,6 +48,24 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Contexts
             modelBuilder.Configurations.Add(new PresencaConfiguration());
             modelBuilder.Configurations.Add(new GroupConfiguration());
             modelBuilder.Configurations.Add(new PermissionConfiguration());
+        }
+
+        public override int SaveChanges()
+        {
+            try
+            {
+                return base.SaveChanges();
+            }
+            catch (DbEntityValidationException e)
+            {
+                IEnumerable<string> errors = e.EntityValidationErrors.SelectMany(
+                    x =>
+                        x.ValidationErrors).Select(
+                    x =>
+                        String.Format("{0}: {1}", x.PropertyName, x.ErrorMessage));
+
+                throw new DbEntityValidationException(String.Join("; ", errors), e.EntityValidationErrors);
+            }
         }
     }
 }
