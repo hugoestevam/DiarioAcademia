@@ -43,7 +43,7 @@ namespace NDDigital.DiarioAcademia.SecurityTests
 
         public static User CreateUser()
         {
-            return new User { FirstName = "thiago", JoinDate = DateTime.Now, LastName = "sartor", Level = 2, Groups = CreateListGroups() ,UserName="ttt"};
+            return new User { FirstName = "thiago", LastName = "sartor",Level = 2, Groups = CreateListGroups() ,UserName="ttt"};
         }
 
         public static Group CreateGroup()

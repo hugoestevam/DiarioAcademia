@@ -31,7 +31,6 @@ namespace NDDigital.DiarioAcademia.WebApi.Models
                 Email = appUser.Email,
                 EmailConfirmed = appUser.EmailConfirmed,
                 Level = appUser.Level,
-                JoinDate = appUser.JoinDate,
                 Roles = _UserRepository.GetRolesAsync(appUser.Id).Result,
                 Claims = _UserRepository.GetClaimsAsync(appUser.Id).Result
             };

@@ -2,12 +2,14 @@
 using NDDigital.DiarioAcademia.Infraestrutura.Orm.Common;
 using NDDigital.DiarioAcademia.Infraestrutura.Orm.Security;
 using System.Collections.Generic;
+using System;
 
 namespace NDDigital.DiarioAcademia.Aplicacao.Services
 {
     public interface IAuthorizationService
     {
-        void AddPermissionsGroup(int id);
+        void AddPermissionsGroup(int id, string[] permissions);
+        void AddPermissionsGroup(Group group, string[] permissions);
     }
 
     public class AuthorizationService : IAuthorizationService
@@ -24,10 +26,10 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
             _unitOfWork = uow;
         }
 
-        public void AddPermissionsGroup(int id)
+        public void AddPermissionsGroup(int id,string[] permissions)
         {
             var groupEncontrado = _groupRepository.GetById(id);
-            var listPermissions = _permissionRepository.GetAll();
+            var listPermissions = _permissionRepository.GetAllSpecific(permissions);
 
             if (groupEncontrado != null)
                 groupEncontrado.Permissions.AddRange(listPermissions);
@@ -35,6 +37,13 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
             _groupRepository.Update(groupEncontrado);
 
             _unitOfWork.Commit();
+        }
+
+        public void AddPermissionsGroup(Group group, string[] permissions)
+        {
+            //_groupRepository.IsEntry(group);
+
+            AddPermissionsGroup(group.Id,permissions);
         }
     }
 }

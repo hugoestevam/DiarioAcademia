@@ -19,7 +19,7 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.Security
         public IUserStore<User> _store;
         private IUnitOfWork uow;
         private User _user;
-
+        public const string SqlCleanDB = @"DBCC CHECKIDENT ('[TBPresenca]', RESEED, 0) DBCC CHECKIDENT ('[TBAula]', RESEED, 0) DBCC CHECKIDENT ('[TBAluno]', RESEED, 0)DBCC CHECKIDENT ('[TBTurma]', RESEED, 0)DBCC CHECKIDENT ('[TBGroup]', RESEED, 0)DBCC CHECKIDENT ('[TBPermission]', RESEED, 0)DELETE FROM TBPresenca DELETE FROM TBAula DELETE FROM TBAluno DELETE FROM TBTurma DELETE FROM TBUserGroups DELETE FROM TBGroupPermission DELETE FROM TBGroup DELETE FROM TBPermission DELETE FROM TBUser";
 
         [TestInitialize]
         public void Initialize()
@@ -40,8 +40,11 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.Security
 
             _user = ObjectBuilder.CreateUser();
 
+            context.Database.ExecuteSqlCommand(SqlCleanDB);
+            context.SaveChanges();
+
             _userRepository.Create(_user);
-            uow.Commit();
+           // uow.Commit();
 
         }
 
@@ -49,13 +52,19 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.Security
         [TestCategory("Athentication")]
         public void Deveria_Adicionar_Um_Usuario()
         {
-            var user = ObjectBuilder.CreateUser();
+            //var user = ObjectBuilder.CreateUser();
+            var user = new User {
+                FirstName ="Wesley",
+                LastName="Lemos",
+                UserName="anisan"
+            };
+
             var username = user.UserName += '2';
 
 
             _userRepository.Create(user);
 
-            uow.Commit();
+           // uow.Commit();
 
             var user2 =_userRepository.FindByName(username);
 
@@ -66,9 +75,11 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.Security
         [TestCategory("Athentication")]
         public void Deveria_Excluir_Um_Usuario()
         {
-            _userRepository.Delete(_user);
+            var user = _userRepository.Users.First();
+                
+            _userRepository.Delete(user);
 
-            uow.Commit();
+            //uow.Commit();
 
             var count = _userRepository.Users.ToList().Count;
 
@@ -96,7 +107,7 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.Security
             
             _user.Groups.Add(grupo);
 
-            uow.Commit();
+           // uow.Commit();
 
             var users = _userRepository.GetUsersByGroup(grupo);
 

@@ -36,11 +36,32 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.Base
 
         public BaseTest()
         {
-            Db.Update(SqlCleanDB);
-
             _userRepository = new Mock<UserRepository>();
 
             _context = new DiarioAcademiaContext();
+
+            //Db.Update(SqlCleanDB); //R.I.P. Classe Db :(
+  //                           _//)
+  //                         /  / )
+  //                         |/)\)
+  //                         /\_
+  //                         \__ |=
+  //                        (    )
+  //                        __)(__
+  //                  _____ /      \\_____
+  //                 | _     ___ _      ||
+  //                 | | \     |   | \  ||
+  //                 | |  |    |   |  | ||
+  //                 | |_ /    |   |_ / ||
+  //                 | | \     |   |    ||
+  //                 | |  \    |   |    ||
+  //                 | |   \._ | _.| .  ||
+  //                 |                  ||
+  //                 |    classe Db     ||
+  //                 |    2010~2015     ||
+  //*                | ******   | ****  ||
+         _context.Database.ExecuteSqlCommand(SqlCleanDB);
+            _context.SaveChanges();
 
             Seed(_context);
         }

@@ -1,5 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NDDigital.DiarioAcademia.Aplicacao.Services;
+using NDDigital.DiarioAcademia.Dominio.Entities.Security;
 using NDDigital.DiarioAcademia.Infraestrutura.Orm.Common;
 using NDDigital.DiarioAcademia.Infraestrutura.Orm.Security;
 using NDDigital.DiarioAcademia.IntegrationTests.Base;
@@ -80,13 +81,19 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.Security
 
             Assert.IsTrue(group.Permissions.Count == 0);
 
-            _service.AddPermissionsGroup(1);
+            var newPermission = new Permission { PermissionId = "03" };
+
+            _repoPermission.Add(newPermission);
+
+            uow.Commit();
+
+            _service.AddPermissionsGroup(1,new[] {"03"});
 
             uow.Commit();
 
             group = _repoGroup.GetById(1);
 
-            Assert.IsTrue(group.Permissions.Count > 0);
+            Assert.AreEqual(1,group.Permissions.Count);
         }
     }
 }

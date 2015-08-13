@@ -21,9 +21,6 @@ namespace NDDigital.DiarioAcademia.Dominio.Entities.Security
         [Required]
         public byte Level { get; set; }
 
-        [Required]
-        public DateTime JoinDate { get; set; }
-
         public List<Group> Groups { get; set; }
 
         public User()

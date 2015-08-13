@@ -64,12 +64,16 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Security
         {
             var gr = group; //key "group" is reserved
             return (
-                from c 
+                from c
                 in _appDbContext.Users
                 where c.Groups.Any(g => g.Id == gr.Id)
                 select c
                 ).ToList();
-            
+
+        }
+        public IList<User> GetUsers()
+        {
+            return _appDbContext.Users.ToList();
         }
     }
     //recurso: não temos uma implementação de IUserStore: http://weblogs.asp.net/imranbaloch/a-simple-implementation-of-microsoft-aspnet-identity

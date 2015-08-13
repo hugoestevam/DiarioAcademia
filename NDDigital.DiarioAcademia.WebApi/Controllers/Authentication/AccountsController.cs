@@ -81,7 +81,6 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers.Authentication
                 FirstName = createUserModel.FirstName,
                 LastName = createUserModel.LastName,
                 Level = 3,
-                JoinDate = DateTime.Now.Date
             };
 
             IdentityResult addUserResult = await this.UserRepository.CreateAsync(user, createUserModel.Password);
