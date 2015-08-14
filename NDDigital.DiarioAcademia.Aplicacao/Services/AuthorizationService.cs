@@ -10,6 +10,7 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
     {
         void AddPermissionsGroup(int id, string[] permissions);
         void AddPermissionsGroup(Group group, string[] permissions);
+        void RemovePermissionsGroup(int id, string[] permissions);
     }
 
     public class AuthorizationService : IAuthorizationService
@@ -44,6 +45,11 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
             //_groupRepository.IsEntry(group);
 
             AddPermissionsGroup(group.Id,permissions);
+        }
+
+        public void RemovePermissionsGroup(int v1, string[] v2)
+        {
+            throw new NotImplementedException();
         }
     }
 }

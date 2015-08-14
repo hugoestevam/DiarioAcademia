@@ -6,6 +6,7 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers.Authentication
 {
     public class GroupController : ApiController
     {
+
         // GET: api/Group
         public IHttpActionResult Get()
         {

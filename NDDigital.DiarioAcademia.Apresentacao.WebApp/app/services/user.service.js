@@ -14,50 +14,50 @@
 
 		var users = createItens();
 
-		var serviceUrl = baseUrl + "api/user";
+		var serviceUrl = baseUrl + "api/accounts/user/";
 
 
 		//public methods
 		self.getUsers = function () {
-		    return promise.then(logger.successCallback);
+		   // return promise.then(logger.successCallback);
 
 			return $http.get(serviceUrl)
 				 .then(logger.successCallback)
 				 .catch(logger.errorCallback)
-				 .then(convertToObj);
+				 //.then(convertToObj);
 		};
 
 		self.getUserById = function (id) {
-		    var promiseById = new Promise(function (acc) {
-		        var index = users.indexOfObject({ id: id });
-				var user = index >= 0 ? users[index] : undefined;
-				var response = {
-					data: user,
-					status: 200,
-					statusText: 'Fetched data'
-				};
-				acc(response);
-			});
+		   // var promiseById = new Promise(function (acc) {
+		   //     var index = users.indexOfObject({ id: id });
+			//	var user = index >= 0 ? users[index] : undefined;
+			//	var response = {
+			//		data: user,
+			//		status: 200,
+			//		statusText: 'Fetched data'
+			//	};
+			//	acc(response);
+			//});
+           //
+		   // return promiseById.then(logger.successCallback);
 
-		    return promiseById.then(logger.successCallback);
-
-			return $http.get(serviceUrl + '/' + id)
+			return $http.get(serviceUrl  + id)
 				 .then(logger.successCallback);
 		};
 
 		self.getUserByUsername = function (username) {
-		    return $http.get(baseUrl + 'api/accounts/user/getuserbyname/' + username)
+		    return $http.get(serviceUrl+ 'getuserbyname/' + username)
 				 .then(logger.successCallback);
 		}
 
 		self.delete = function (user) {
 			logger.error(res.deleted_successful, user, "Delete");
-			// $http.delete(serviceUrl + "/" + user.id);
+			 $http.delete(serviceUrl + "/" + user.id);
 		};
 
 		self.edit = function (user) {
 			logger.success("User " + user.fullName + " editado", null, "Edição");
-			// $http.put(serviceUrl + "/" + user.id, user);
+			 $http.put(serviceUrl + "/" + user.id, user);
 		};
 
 		var promise = new Promise(function (acc) {

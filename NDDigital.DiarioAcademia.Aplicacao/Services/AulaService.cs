@@ -10,19 +10,11 @@ using System.Linq;
 
 namespace NDDigital.DiarioAcademia.Aplicacao.Services
 {
-    public interface IAulaService
+    public interface IAulaService :IService<AulaDTO>
     {
-        void Add(AulaDTO aulaDto);
-
         void RealizaChamada(ChamadaDTO registroPresencaDto);
 
         ChamadaDTO GetChamadaByAula(AulaDTO aula);
-
-        void Update(AulaDTO aulaDto);
-
-        void Delete(int id);
-
-        AulaDTO GetById(int id);
 
         IEnumerable<AulaDTO> GetAllByTurma(int anoTurma);
     }

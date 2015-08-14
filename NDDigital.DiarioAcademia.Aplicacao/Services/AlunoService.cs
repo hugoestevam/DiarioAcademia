@@ -13,21 +13,11 @@ using NDDigital.DiarioAcademia.Dominio.Contracts;
 
 namespace NDDigital.DiarioAcademia.Aplicacao.Services
 {
-    public interface IAlunoService
-    {
-        void Add(AlunoDTO alunoDto);
-
-        void Update(AlunoDTO alunoDto);
-
-        void Delete(int id);
-
-        AlunoDTO GetById(int id);
-
-        IEnumerable<AlunoDTO> GetAll();
-
+    public interface IAlunoService:IService<AlunoDTO>
+    {          
         IEnumerable<AlunoDTO> GetAllByTurma(int ano);
 
-        Endereco BuscaEnderecoPorCep(string p);
+        Endereco BuscaEnderecoPorCep(string cep);
 
         void GerarRelatorioAlunosPdf(int ano, string path);
     }

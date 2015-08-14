@@ -12,7 +12,7 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers.Authentication
     public class AccountsController : BaseApiController
     {
         //[Authorize]
-        [Route("users")]
+        [Route("user")]
         public IHttpActionResult GetUsers()
         {
             //Only SuperAdmin or Admin can delete users (Later when implement roles)
@@ -41,20 +41,6 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers.Authentication
         public async Task<IHttpActionResult> GetUserByName(string username)
         {
             //Only SuperAdmin or Admin can delete users (Later when implement roles)
-            var user = await this.UserRepository.FindByNameAsync(username);
-
-            if (user != null)
-            {
-                return Ok(this.TheModelFactory.Create(user));
-            }
-
-            return NotFound();
-        }
-
-        //[Authorize(Roles = "Admin")]
-        [Route("user/getuserbyname/{username}", Name = "GetUserByUsername")]
-        public async Task<IHttpActionResult> GetUserByUsername(string username)
-        {
             var user = await this.UserRepository.FindByNameAsync(username);
 
             if (user != null)

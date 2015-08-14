@@ -33,6 +33,11 @@
         }
 
         function onclick(obj, compare, chkGroups, callback, method) {
+            if (!compare) {
+                console.warn("Compare is null");
+                return;
+            }
+
             if (chkGroups) {
                 compare.push(obj);
             } else {

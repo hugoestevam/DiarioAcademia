@@ -74,7 +74,7 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.Security
         [TestMethod]
         [TestCategory("Authorization - Group")]
         public void Deveria_Adicionar_Prermissoes_do_Grupo()
-         {
+        {
             //Deve receber o Id do grupo
             //E um array de string
             var group = _repoGroup.GetById(1);
@@ -87,13 +87,42 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.Security
 
             uow.Commit();
 
-            _service.AddPermissionsGroup(1,new[] {"03"});
+            _service.AddPermissionsGroup(1, new[] { "03" });
 
             uow.Commit();
 
             group = _repoGroup.GetById(1);
 
-            Assert.AreEqual(1,group.Permissions.Count);
+            Assert.AreEqual(1, group.Permissions.Count);
+        }
+        [TestMethod]
+        [TestCategory("Authorization - Group")]
+        public void Deveria_Remover_Prermissoes_do_Grupo()
+        {
+            //Deve receber o Id do grupo
+            //E um array de string
+            var group = _repoGroup.GetById(1);
+
+            Assert.IsTrue(group.Permissions.Count == 0);
+
+            var newPermission = new Permission { PermissionId = "03" };
+
+            _repoPermission.Add(newPermission);
+
+            uow.Commit();
+
+            _service.AddPermissionsGroup(1, new[] { "03" });
+
+            uow.Commit();
+
+            group = _repoGroup.GetById(1);
+
+            Assert.AreEqual(1, group.Permissions.Count);
+
+            _service.RemovePermissionsGroup(1, new[] { "03" });
+
+            Assert.AreEqual(0, group.Permissions.Count);
+
         }
     }
 }

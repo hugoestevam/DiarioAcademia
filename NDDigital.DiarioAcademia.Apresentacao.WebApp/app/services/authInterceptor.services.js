@@ -23,7 +23,7 @@
 
         var responseError = function (rejection) {
             
-            if (!status) {
+            if (!rejection.status) {
                 logger.error("Servidor indisponível");
                 $location.path('/');
             }

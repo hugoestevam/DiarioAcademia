@@ -55,6 +55,7 @@
     <Compile Include="Services\AlunoService.cs" />
     <Compile Include="Services\AulaService.cs" />
     <Compile Include="Services\AuthorizationService.cs" />
+    <Compile Include="Services\IService.cs" />
     <Compile Include="Services\TurmaService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -80,6 +81,7 @@
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
