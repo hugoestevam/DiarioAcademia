@@ -51,6 +51,7 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers.Authentication
             return NotFound();
         }
 
+
         [AllowAnonymous]
         [Route("create")]
         public async Task<IHttpActionResult> CreateUser(CreateUserBindingModel createUserModel)

@@ -38,7 +38,7 @@
 			//	};
 			//	acc(response);
 			//});
-           //
+		   //
 		   // return promiseById.then(logger.successCallback);
 
 			return $http.get(serviceUrl  + id)
@@ -46,7 +46,7 @@
 		};
 
 		self.getUserByUsername = function (username) {
-		    return $http.get(serviceUrl+ 'getuserbyname/' + username)
+			return $http.get(serviceUrl+ username)
 				 .then(logger.successCallback);
 		}
 
