@@ -14,8 +14,8 @@ using NDDigital.DiarioAcademia.Dominio.Contracts;
 namespace NDDigital.DiarioAcademia.Aplicacao.Services
 {
     public interface IAlunoService:IService<AlunoDTO>
-    {          
-        IEnumerable<AlunoDTO> GetAllByTurma(int ano);
+    {
+        IList<AlunoDTO> GetAllByTurma(int ano);
 
         Endereco BuscaEnderecoPorCep(string cep);
 
@@ -98,14 +98,14 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
             return alunoDto;
         }
 
-        public IEnumerable<AlunoDTO> GetAll()
+        public IList<AlunoDTO> GetAll()
         {
             return _alunoRepository.GetAll()
                 .Select(aluno => new AlunoDTO(aluno))
                 .ToList();
         }
 
-        public IEnumerable<AlunoDTO> GetAllByTurma(int ano)
+        public IList<AlunoDTO> GetAllByTurma(int ano)
         {
             return _alunoRepository.GetAllByTurma(ano)
               .Select(aluno => new AlunoDTO(aluno))

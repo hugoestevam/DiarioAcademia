@@ -1,5 +1,8 @@
 ﻿using Microsoft.AspNet.Identity;
+using NDDigital.DiarioAcademia.Aplicacao.Services;
 using NDDigital.DiarioAcademia.Dominio.Entities.Security;
+using NDDigital.DiarioAcademia.Infraestrutura.Orm.Common;
+using NDDigital.DiarioAcademia.Infraestrutura.Orm.Security;
 using NDDigital.DiarioAcademia.WebApi.Models;
 using System;
 using System.Linq;
@@ -11,6 +14,22 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers.Authentication
     [RoutePrefix("api/accounts")]
     public class AccountsController : BaseApiController
     {
+        IAuthorizationService _authservice;
+
+        public AccountsController()
+        {
+
+            var factory = new DatabaseFactory();
+
+            var uow = new UnitOfWork(factory);
+
+            var groupRepository = new GroupRepository(factory);
+            
+            var permissionRepository = new PermissionRepository(factory);
+
+            _authservice = new AuthorizationService(groupRepository, permissionRepository,uow);
+        }
+
         //[Authorize]
         [Route("user")]
         public IHttpActionResult GetUsers()
@@ -99,6 +118,27 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers.Authentication
             }
 
             return Ok();
+        } 
+        
+        //[Authorize]
+        [Route("AddPermission")]
+        public IHttpActionResult AddPermissionsToGroup(int groupId, [FromBody]string[] permissions)
+        {
+
+            try
+            {
+
+                
+
+
+return Ok();}
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+            
         }
 
         //[Authorize(Roles = "Admin")]

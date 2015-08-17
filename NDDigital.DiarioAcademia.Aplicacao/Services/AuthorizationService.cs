@@ -29,7 +29,7 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
 
         public void AddPermissionsGroup(int id,string[] permissions)
         {
-            var groupEncontrado = _groupRepository.GetById(id);
+            var groupEncontrado = _groupRepository.GetByIdIncluding(id);
             var listPermissions = _permissionRepository.GetAllSpecific(permissions);
 
             if (groupEncontrado != null)
@@ -47,9 +47,26 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
             AddPermissionsGroup(group.Id,permissions);
         }
 
-        public void RemovePermissionsGroup(int v1, string[] v2)
+        public void RemovePermissionsGroup(int id, string[] permissions)
         {
-            throw new NotImplementedException();
+            var groupEncontrado = _groupRepository.GetByIdIncluding(id);
+
+            foreach (var permId in permissions)
+            {
+                for (var i=0; i<groupEncontrado.Permissions.Count;i++)
+                {
+                    var per = groupEncontrado.Permissions[i];  
+
+                    if (per.PermissionId == permId)
+                    {
+                        groupEncontrado.Permissions.Remove(per);i--;
+                    }
+                }
+            }
+
+            _groupRepository.Update(groupEncontrado);
+
+            _unitOfWork.Commit();
         }
     }
 }

@@ -10,9 +10,12 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Security
 
     public class GroupRepository : RepositoryBase<Group>, IGroupRepository
     {
+        private UnitOfWork uow;
+
         public GroupRepository(IDatabaseFactory dbFactory)
          : base(dbFactory)
         {
         }
+
     }
 }

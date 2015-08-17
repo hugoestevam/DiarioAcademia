@@ -150,11 +150,12 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
             return GetChamadaByAula(GetById(id));
         }
 
-        public IEnumerable<AulaDTO> GetAll()
+        public IList<AulaDTO> GetAll()
         {
             return _aulaRepository.GetAll()
                 .Select(aula => new AulaDTO(aula))
                 .ToList();
         }
+
     }
 }

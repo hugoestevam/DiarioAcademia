@@ -59,7 +59,7 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
             };
         }
 
-        public IEnumerable<TurmaDTO> GetAll()
+        public IList<TurmaDTO> GetAll()
         {
             return _turmaRepository
                 .GetAll()
