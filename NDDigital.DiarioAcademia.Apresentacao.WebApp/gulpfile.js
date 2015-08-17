@@ -4,7 +4,7 @@
  */
 
 // GLOBAL VARIABLES
-gulp = require('gulp');
+gulp = require('gulp-help')(require('gulp'));
 config = require('./task/gulp.config.js')();
 loader = require('gulp-load-plugins')({ lazy: true });
 del = require('del');
@@ -19,4 +19,3 @@ requireDir('./task/');
 
 // list tasks
 gulp.task('default', ['help']);
-gulp.task('help', loader.taskListing);

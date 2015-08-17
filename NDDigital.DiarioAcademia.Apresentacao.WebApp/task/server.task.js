@@ -6,18 +6,18 @@
  *
  */
 
-gulp.task('server-dev', ['inject'], function () {
+gulp.task('start', 'Start dev app.--livereload: use livereload', ['inject'], function () {
     var browserSync = require('browser-sync');
     var options = config.getBrowsersyncOptionsDefault();
     connect.server({
-        root: [config.path], // não usar './'
+        root: [config.path], // do not use './'
         port: config.port,
     });
     if (yargs.livereload)
         browserSync(options);
 });
 
-gulp.task('server-dist', ['optimize'], function () {
+gulp.task('start-app','Start publish version of app optimized', ['build-optimized'], function () {
     var open = require('gulp-open');
     //start application
     connect.server({
@@ -31,7 +31,3 @@ gulp.task('server-dist', ['optimize'], function () {
               app: 'Chrome'
           }));
 });
-
-// start tasks
-gulp.task('start', ['server-dev']);
-gulp.task('start-app', ['server-dist']);
