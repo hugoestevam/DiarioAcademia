@@ -56,7 +56,7 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers.Authentication
         }
 
         //[Authorize(Roles = "Admin")]
-        [Route("user/{username}")]
+        [Route("user/username/{username}")]
         public async Task<IHttpActionResult> GetUserByName(string username)
         {
             //Only SuperAdmin or Admin can delete users (Later when implement roles)
@@ -118,27 +118,47 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers.Authentication
             }
 
             return Ok();
-        } 
-        
+        }
+
         //[Authorize]
-        [Route("AddPermission")]
+        [Route("AddPermission/{groupId:int}")]
         public IHttpActionResult AddPermissionsToGroup(int groupId, [FromBody]string[] permissions)
         {
 
             try
             {
+                _authservice.AddPermissionsGroup(groupId, permissions);
 
-                
 
-
-return Ok();}
+                return Ok();
+            }
             catch (Exception)
             {
 
                 throw;
             }
 
-            
+
+        }
+        //[Authorize]
+        [Route("RemovePermission/{groupId:int}")]
+        public IHttpActionResult RemovePermissionsToGroup(int groupId, [FromBody]string[] permissions)
+        {
+
+            try
+            {
+                _authservice.AddPermissionsGroup(groupId, permissions);
+
+
+                return Ok();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+
         }
 
         //[Authorize(Roles = "Admin")]

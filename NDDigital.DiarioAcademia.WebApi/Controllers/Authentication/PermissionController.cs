@@ -1,40 +1,55 @@
-﻿using System.Threading.Tasks;
+﻿using NDDigital.DiarioAcademia.Aplicacao.Services;
+using NDDigital.DiarioAcademia.Dominio.Entities.Security;
+using NDDigital.DiarioAcademia.Infraestrutura.Orm.Common;
+using NDDigital.DiarioAcademia.Infraestrutura.Orm.Security;
+using System.Threading.Tasks;
 using System.Web.Http;
 
 namespace NDDigital.DiarioAcademia.WebApi.Controllers.Authentication
 {
-    // [Authorize(Roles = "Admin")]
-    [RoutePrefix("api/permissions")]
     public class PermissionController : BaseApiController
     {
-        [Route("{id:guid}", Name = "GetPermissionsById")]
-        public async Task<IHttpActionResult> GetPermissions(string Id)
+        IPermissionService _permissionService;
+
+        public PermissionController()
         {
-            return NotFound();
+
+            var factory = new DatabaseFactory();
+
+            var uow = new UnitOfWork(factory);
+
+            var permissionRepo = new PermissionRepository(factory);
+
+            _permissionService = new PermissionService(permissionRepo, uow);
+
         }
 
-        [Route("", Name = "GetAllPermissions")]
-        public IHttpActionResult GetAllPermissions()
+        // GET: api/Permission
+        public IHttpActionResult Get()
         {
-            return Ok();
+            return Ok(_permissionService.GetAll());
         }
 
-        [Route("create")]
-        public async Task<IHttpActionResult> Create()
+        // GET: api/Permission/group-id
+        public IHttpActionResult Get(int id)//neste caso e o id do grupo
         {
-            return Ok();
+            return Ok(_permissionService.GetById(id));
         }
 
-        [Route("{id:guid}")]
-        public async Task<IHttpActionResult> DeletePermissions(string Id)
+        // POST: api/Permission
+        public IHttpActionResult Post([FromBody]Permission value)
         {
-            return NotFound();
+            _permissionService.Add(value);
+            return Ok(value);
         }
 
-        [Route("ManageUsersInRole")]
-        public async Task<IHttpActionResult> ManageUsersInPermissions(/*UsersInRoleModel model*/)
+        // DELETE: api/Permission/5
+        public void Delete(string id)
         {
-            return Ok();
+            var permission = _permissionService.GetByPermissionId(id);
+
+            _permissionService.Delete(permission.Id);
+
         }
     }
 }

@@ -10,24 +10,25 @@ using NDDigital.DiarioAcademia.Infraestrutura.Orm.Common;
 
 namespace NDDigital.DiarioAcademia.Aplicacao.Services
 {
-   public  interface IGroupService : IService<Group>
+    public interface IPermissionService : IService<Permission>
     {
+        Permission GetByPermissionId(string id);
     }
 
 
-    public class GroupService :IGroupService
+    public class PermissionService :IPermissionService
     {
         private IUnitOfWork _uow;
-        IGroupRepository _repo;
+        IPermissionRepository _repo;
 
 
-        public GroupService(IGroupRepository repo, IUnitOfWork uow)
+        public PermissionService(IPermissionRepository repo, IUnitOfWork uow)
         {
             _repo = repo;
             _uow = uow;
         }
 
-        public void Add(Dominio.Entities.Security.Group obj)
+        public void Add(Dominio.Entities.Security.Permission obj)
         {
             _repo.Add(obj);
             _uow.Commit();
@@ -39,20 +40,25 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
             _uow.Commit();
         }
 
-        public void Update(Dominio.Entities.Security.Group obj)
+        public void Update(Dominio.Entities.Security.Permission obj)
         {
              _repo.Update(obj);
             _uow.Commit();
         }
 
-        IList<Dominio.Entities.Security.Group> IService<Dominio.Entities.Security.Group>.GetAll()
+        IList<Dominio.Entities.Security.Permission> IService<Dominio.Entities.Security.Permission>.GetAll()
         {
              return _repo.GetAll(); throw new NotImplementedException();
         }
 
-        Dominio.Entities.Security.Group IService<Dominio.Entities.Security.Group>.GetById(int id)
+        Dominio.Entities.Security.Permission IService<Dominio.Entities.Security.Permission>.GetById(int id)
         {
              return _repo.GetById(id);  throw new NotImplementedException();
+        }
+
+        public Permission GetByPermissionId(string id)
+        {
+            return (from p in _repo.GetAll() where p.PermissionId==id select p).First(); 
         }
     }
 

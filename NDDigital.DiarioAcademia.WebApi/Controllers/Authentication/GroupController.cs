@@ -7,7 +7,7 @@ using System.Web.Http;
 
 namespace NDDigital.DiarioAcademia.WebApi.Controllers.Authentication
 {
-    public class GroupController : ApiController
+    public class GroupController : BaseApiController
     {
         IGroupService _groupService;
         IUserService _userService;
