@@ -35,14 +35,14 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
 
         public void Delete(int id)
         {
-            _uow.Commit();
             _repo.Delete(id);
+            _uow.Commit();
         }
 
         public void Update(Dominio.Entities.Security.Group obj)
         {
-            _uow.Commit();
              _repo.Update(obj);
+            _uow.Commit();
         }
 
         IList<Dominio.Entities.Security.Group> IService<Dominio.Entities.Security.Group>.GetAll()

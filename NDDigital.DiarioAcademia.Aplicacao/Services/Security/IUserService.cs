@@ -12,7 +12,7 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
 {
     public interface IUserService : IService<User>
     {
-        List<Group> FindGroupByUsername();
+        List<Group> FindGroupByUsername(string username);
     }
 
 
@@ -27,32 +27,37 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
 
         public void Add(User obj)
         {
-          //  _repo.Create(obj);
+            _repo.CreateAsync(obj);
         }
 
         public void Delete(int id)
         {
-          //  _repo.Delete(id);
+            //_repo.Delete(id);
         }
 
-        public List<Group> FindGroupByUsername()
+        public List<Group> FindGroupByUsername(string username)
         {
-            throw new NotImplementedException();
+            return _repo.GetGroupsByUser(username).ToList();
         }
 
         public IList<User> GetAll()
         {
-            return null; // _repo.GetAll();
+            return _repo.GetUsers();
         }
 
         public User GetById(int id)
         {
-            return null;// _repo.GetById(id);
+            return _repo.GetUserById(id.ToString());//todo
+        }
+
+        public User GetById(string id)
+        {
+            return _repo.GetUserById(id);
         }
 
         public void Update(User obj)
         {
-           // _repo.Update(obj);
+            throw new NotImplementedException(); ;
         }
     }
 

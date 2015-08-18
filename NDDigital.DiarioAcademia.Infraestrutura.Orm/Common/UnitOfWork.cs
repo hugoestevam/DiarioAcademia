@@ -50,6 +50,8 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Common
                 context.SaveChanges();
             }
             catch (Exception exc) {
+                for (; exc.InnerException != null; exc = exc.InnerException) { }
+                throw exc;
             }
         }
 

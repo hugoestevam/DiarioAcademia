@@ -17,6 +17,12 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Security
 {
     public interface IUserRepository
     {
+        IList<User> GetUsersByGroup(Group group);
+        IList<Group> GetGroupsByUser(string username);
+        IList<User> GetUsers();
+        User GetUserById(string id);
+        User GetByUserName(string username);
+        void Delete(string username);
     }
 
     public class UserRepository : UserManager<User>, IUserRepository
@@ -73,7 +79,38 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Security
         }
         public IList<User> GetUsers()
         {
-            return _appDbContext.Users.ToList();
+            return (from c 
+                    in _appDbContext.Users
+                    select c
+                    ).ToList();
+        }
+
+        public IList<Group> GetGroupsByUser(string username)
+        {
+            var user = GetByUserName(username);
+            return user.Groups;
+        }
+
+        public User GetUserById(string id)
+        {
+            return (from c
+                    in _appDbContext.Users
+                    where c.Id == id
+                    select c).FirstOrDefault(); ;
+        }
+
+        public User GetByUserName(string username)
+        {
+           return (from c 
+                    in _appDbContext.Users
+                    where c.UserName==username
+                    select c).First();
+        }
+
+        public void Delete(string username)
+        {
+            var user = GetByUserName(username);
+            _appDbContext.Users.Remove(user);
         }
     }
     //recurso: não temos uma implementação de IUserStore: http://weblogs.asp.net/imranbaloch/a-simple-implementation-of-microsoft-aspnet-identity

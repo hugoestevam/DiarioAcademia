@@ -44,10 +44,10 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers.Authentication
             return Ok(_groupService.GetById(id));
         }
 
-        // GET: api/Group/username
+        // GET: api/Group?username=username
         public IHttpActionResult Get(string username)
         {
-            var list = _userService.FindGroupByUsername();
+            var list = _userService.FindGroupByUsername(username);
 
             return Ok(list);
         }
@@ -62,9 +62,14 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers.Authentication
         // PUT: api/Group/5
         public IHttpActionResult Put(int id, [FromBody]Group value)
         {
+            Group group;
             try
             {
-                _groupService.Update(value);
+                group = _groupService.GetById(id);
+
+                group.Name = value.Name;
+
+                _groupService.Update(group);
             }
             catch (Exception ex)
             {
@@ -72,7 +77,7 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers.Authentication
                     throw ex;
             }
 
-            return Ok();
+            return Ok(group);
         }
 
         // DELETE: api/Group/5
