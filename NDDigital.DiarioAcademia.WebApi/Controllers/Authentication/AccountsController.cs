@@ -124,34 +124,7 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers.Authentication
             return Ok();
         }
 
-        //[Authorize]
-        [Route("addpermission/{groupId:int}")]
-        public IHttpActionResult AddPermissionsToGroup(int groupId, [FromBody]string[] permissions)
-        {
-            _authservice.AddPermissionsToGroup(groupId, permissions);
-            return Ok();
-        }
-        //[Authorize]
-        [Route("removepermission/{groupId:int}")]
-        public IHttpActionResult RemovePermissionsToGroup(int groupId, [FromBody]string[] permissions)
-        {
-            _authservice.RemovePermissionsFromGroup(groupId, permissions);
-            return Ok();
-        }
-        //[Authorize]
-        [Route("addgroup/{username}")]
-        public IHttpActionResult AddGroupToUser(string username, [FromBody]int[] groups)
-        {
-            _authservice.AddGroupToUser(username, groups);
-            return Ok();
-        }
-        //[Authorize]
-        [Route("removegroup/{username}")]
-        public IHttpActionResult removeGroupToUser(string username, [FromBody]int[] groups)
-        {
-            _authservice.RemoveGroupFromUser(username, groups);
-            return Ok();
-        }
+        
 
         //[Authorize(Roles = "Admin")]
         [Route("user/{id:guid}")]

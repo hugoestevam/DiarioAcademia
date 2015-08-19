@@ -83,7 +83,7 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.Security
         {
             //Deve receber o Id do grupo
             //E um array de string
-            var group = _repoGroup.GetById(1);
+            var group = _repoGroup.GetByIdIncluding(1,g=>g.Permissions);
 
             Assert.IsTrue(group.Permissions.Count == 0);
 
