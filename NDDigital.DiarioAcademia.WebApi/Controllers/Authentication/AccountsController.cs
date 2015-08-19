@@ -147,7 +147,7 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers.Authentication
 
             try
             {
-                _authservice.AddPermissionsGroup(groupId, permissions);
+                _authservice.RemovePermissionsGroup(groupId, permissions);
 
 
                 return Ok();

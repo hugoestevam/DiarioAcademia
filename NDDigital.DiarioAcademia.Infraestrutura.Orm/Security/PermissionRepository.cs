@@ -29,6 +29,7 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Security
             {
                 list.Add(dataContext.Permissions.Where(p=>p.PermissionId==id).FirstOrDefault());
             }
+                list.RemoveAll(x => x == null);
             return list;
         }
 
