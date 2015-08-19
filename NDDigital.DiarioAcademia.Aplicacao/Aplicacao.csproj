@@ -63,6 +63,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Infraestrutura.Extensions\Infraestrutura.Extensions.csproj">
+      <Project>{f30eb086-5008-4235-9d2f-5b061a0a3685}</Project>
+      <Name>Infraestrutura.Extensions</Name>
+    </ProjectReference>
     <ProjectReference Include="..\NDDigital.DiarioAcademia.CommandQuery\Aplicacao.DTOs.csproj">
       <Project>{fac6b57f-d8c9-4593-80f0-184f5cab272c}</Project>
       <Name>Aplicacao.DTOs</Name>

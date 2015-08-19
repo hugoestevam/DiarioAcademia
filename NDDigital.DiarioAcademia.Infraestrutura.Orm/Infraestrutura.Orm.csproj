@@ -127,6 +127,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Infraestrutura.Extensions\Infraestrutura.Extensions.csproj">
+      <Project>{f30eb086-5008-4235-9d2f-5b061a0a3685}</Project>
+      <Name>Infraestrutura.Extensions</Name>
+    </ProjectReference>
     <ProjectReference Include="..\NDDigital.DiarioAcademia.Dominio\Dominio.csproj">
       <Project>{98aeeab1-ab78-451a-ae88-c852c6bc3c31}</Project>
       <Name>Dominio</Name>
