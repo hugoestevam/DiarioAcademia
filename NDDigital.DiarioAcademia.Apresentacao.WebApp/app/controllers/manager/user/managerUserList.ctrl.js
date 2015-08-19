@@ -42,8 +42,9 @@
 
         function remove() {
             managerService.delete(vm.user).then(function (results) {
-                users.remove(user);
-                vm.users.remove(user);
+                users.remove(vm.user);
+                vm.users.remove(vm.user);
+                vm.user = undefined;
             });
         }
 

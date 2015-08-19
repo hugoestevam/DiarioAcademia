@@ -6,7 +6,7 @@
 
     function managerPermissionController(permissionService, compareState, permissionsFactory, $state) {
         var vm = this;
-      
+
         vm.filters = ['aluno', 'turma', 'other', 'manager', 'aula', 'chamada', 'customize'];
         vm.showRoutes = [];
         vm.hasChange = false;
@@ -57,10 +57,12 @@
         function remove(item) {
             if (compareState(vm.routes, item) < 0)
                 return;
-            permissionService.delete(item)
+
+            var index = compareState(vm.routes, item);
+            if (index >= 0)
+                var permission = vm.routes[index];
+            permissionService.delete(permission)
                 .then(function (data, status, headers, config) {
-                    var index = compareState(vm.routes, item)
-                    if (index >= 0)
                         vm.routes.splice(index, 1);
                 });
         }
@@ -70,7 +72,7 @@
             for (var i = 0; i < permissions.length; i++) {
                 var permission = permissions[i];
                 var filter = permission.name.split(".");
-                filter = filter.length >= 2 ? filter[0]:  'other';
+                filter = filter.length >= 2 ? filter[0] : 'other';
                 if (!filtered[filter])
                     filtered[filter] = [];
                 if (!vm.filters.contains(filter))

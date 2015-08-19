@@ -39,7 +39,9 @@
 		}
 
 		function edit() {
-		    groupService.edit(vm.group).then(function (results) { });
+		    groupService.edit(vm.group).then(function (results) {
+		        vm.group = results;
+		    });
 		}
 	}
 })(window.angular);

@@ -15,7 +15,7 @@
             , info: info
             , success: success
             ,warning: warning
-            
+            ,danger: danger
             // straight to console; bypass toastr
             ,log: $log.log
             
@@ -30,6 +30,10 @@
         function error(message, data, title) {
             toastr.error(message, title);
             $log.error('Error: ' + message, data);
+        }
+
+        function danger(message, data, title) {
+            toastr.error(message, title);
         }
 
         function info(message, data, title) {

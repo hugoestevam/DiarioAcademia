@@ -42,7 +42,6 @@
         function save() {
             groupService.save(vm.newGroup).then(function (results) {
                 vm.creating = false;
-                $scope.$apply();
                 vm.groups.push(results);
                 vm.newGroup = {};
             });
