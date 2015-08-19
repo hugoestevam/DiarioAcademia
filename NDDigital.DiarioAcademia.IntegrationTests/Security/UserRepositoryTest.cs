@@ -49,7 +49,7 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.Security
         }
 
         [TestMethod]
-        [TestCategory("Athentication")]
+        [TestCategory("Athentication - User")]
         public void Deveria_Adicionar_Um_Usuario()
         {
             //var user = ObjectBuilder.CreateUser();
@@ -72,7 +72,7 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.Security
         }
 
         [TestMethod]
-        [TestCategory("Athentication")]
+        [TestCategory("Athentication - User")]
         public void Deveria_Excluir_Um_Usuario()
         {
             var user = _userRepository.Users.First();
@@ -87,7 +87,7 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.Security
         }
 
         [TestMethod]
-        [TestCategory("Athentication")]
+        [TestCategory("Athentication - User")]
         public void Deveria_Buscar_Todos_Usuarios()
         {
             var count = _userRepository.Users.ToList().Count;
@@ -96,7 +96,7 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.Security
         }
 
         [TestMethod]
-        [TestCategory("Athentication")]
+        [TestCategory("Athentication - User")]
         public void Deveria_Buscar_Usuario_Por_Grupo()
         {
             var grupo = _user.Groups.First();

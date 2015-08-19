@@ -12,7 +12,7 @@
 	function groupService($http, logger, baseUrl, res, $state) {
 		var self = this;
 		var serviceUrl = baseUrl + "api/group";
-		var serviceAccountsUrl = baseUrl + "api/accounts";
+		var serviceAuthenticationUrl = baseUrl + "api/authentication";
 
 		//public methods
 		self.getGroups = function () {
@@ -62,13 +62,13 @@
 		//permissions
 
 		self.addPermission = function (group, permissions) {
-			return $http.post(serviceAccountsUrl + "/addPermission/" + group.id, permissions)
+		    return $http.post(serviceAuthenticationUrl + "/addPermission/" + group.id, permissions)
 			 .then(logger.successCallback)
 			 .catch(logger.errorCallback);;
 		};
 
 		self.removePermission = function (group, permissions) {
-			return $http.post(serviceUrl + "/removePermission/" + group.id, permissions)
+		    return $http.post(serviceAuthenticationUrl + "/removePermission/" + group.id, permissions)
 			 .then(logger.successCallback)
 			 .catch(logger.errorCallback);;
 		};

@@ -23,10 +23,15 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers.Authentication
             var uow = new UnitOfWork(factory);
 
             var groupRepository = new GroupRepository(factory);
-
+            
             var permissionRepository = new PermissionRepository(factory);
 
-            _authservice = new AuthorizationService(groupRepository, permissionRepository, uow);
+            var store = new MyUserStore(factory.Get());
+
+            var userRepository = new UserRepository(store);
+
+            _authservice = new AuthorizationService(groupRepository, permissionRepository, userRepository, uow);
+
         }
 
         //[Authorize]
@@ -118,6 +123,7 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers.Authentication
             return Ok();
         }
 
+
         //[Authorize(Roles = "Admin")]
         [Route("user/{id:guid}")]
         public async Task<IHttpActionResult> DeleteUser(string id)
@@ -141,36 +147,5 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers.Authentication
             return NotFound();
         }
 
-        //[Authorize]
-        [Route("addPermission/{groupId:int}")]
-        public IHttpActionResult AddPermissionsToGroup(int groupId, [FromBody]string[] permissions)
-        {
-            try
-            {
-                _authservice.AddPermissionsGroup(groupId, permissions);
-
-                return Ok();
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-
-        //[Authorize]
-        [Route("removePermission/{groupId:int}")]
-        public IHttpActionResult RemovePermissionsToGroup(int groupId, [FromBody]string[] permissions)
-        {
-            try
-            {
-                _authservice.RemovePermissionsGroup(groupId, permissions);
-
-                return Ok();
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
     }
 }

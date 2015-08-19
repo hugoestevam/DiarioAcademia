@@ -8,9 +8,11 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
 {
     public interface IAuthorizationService
     {
-        void AddPermissionsGroup(int id, string[] permissions);
-        void AddPermissionsGroup(Group group, string[] permissions);
-        void RemovePermissionsGroup(int id, string[] permissions);
+        void AddPermissionsToGroup(int id, string[] permissions);
+        void RemovePermissionsFromGroup(int id, string[] permissions);
+
+        void AddGroupToUser(string username, int[] groups);
+        void RemoveGroupFromUser(string username, int[] groups);
     }
 
     public class AuthorizationService : IAuthorizationService
@@ -20,14 +22,15 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
         private UserRepository _userRepository;
         private IUnitOfWork _unitOfWork;
 
-        public AuthorizationService(IGroupRepository groupRepository, IPermissionRepository permissionRepository, IUnitOfWork uow)
+        public AuthorizationService(IGroupRepository groupRepository, IPermissionRepository permissionRepository, UserRepository userRepository, IUnitOfWork uow)
         {
             _permissionRepository = permissionRepository;
             _groupRepository = groupRepository;
             _unitOfWork = uow;
+            _userRepository = userRepository;
         }
 
-        public void AddPermissionsGroup(int id,string[] permissions)
+        public void AddPermissionsToGroup(int id,string[] permissions)
         {
             var groupEncontrado = _groupRepository.GetByIdIncluding(id,x=>x.Permissions);
             var listPermissions = _permissionRepository.GetAllSpecific(permissions);
@@ -51,10 +54,10 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
         {
             //_groupRepository.IsEntry(group);
 
-            AddPermissionsGroup(group.Id,permissions);
+            AddPermissionsToGroup(group.Id,permissions);
         }
 
-        public void RemovePermissionsGroup(int id, string[] permissions)
+        public void RemovePermissionsFromGroup(int id, string[] permissions)
         {
             var groupEncontrado = _groupRepository.GetByIdIncluding(id, x => x.Permissions);
 
@@ -76,6 +79,30 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
             _unitOfWork.Commit();
         }
 
-       
+        public void AddGroupToUser(string username, int[] groups)
+        {
+            var userEncontrado = _userRepository.GetByUserName(username);
+            var listGroups= _groupRepository.GetAllSpecific(groups);
+
+            if (userEncontrado != null)
+            {
+                userEncontrado.Groups = userEncontrado.Groups ?? new List<Group>();
+                foreach (var item in listGroups)
+                {
+                    if (!userEncontrado.Groups.Contains(item))
+                    {
+                        userEncontrado.Groups.Add(item);
+                    }
+                }
+            }
+            _userRepository.UpdateAsync(userEncontrado);
+
+            _unitOfWork.Commit();
+        }
+
+        public void RemoveGroupFromUser(string username, int[] groups)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
