@@ -35,6 +35,8 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
             var groupEncontrado = _groupRepository.GetByIdIncluding(id,x=>x.Permissions);
             var listPermissions = _permissionRepository.GetAllSpecific(permissions);
 
+
+
             if (groupEncontrado != null)
             {
                 foreach (var item in listPermissions)
@@ -48,13 +50,6 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
             _groupRepository.Update(groupEncontrado);
 
             _unitOfWork.Commit();
-        }
-
-        public void AddPermissionsGroup(Group group, string[] permissions)
-        {
-            //_groupRepository.IsEntry(group);
-
-            AddPermissionsToGroup(group.Id,permissions);
         }
 
         public void RemovePermissionsFromGroup(int id, string[] permissions)

@@ -11,7 +11,7 @@ using System.Data.Entity;
 namespace NDDigital.DiarioAcademia.IntegrationTests.Security
 {
     [TestClass]
-    public class GroupRepositoryTest
+    public class AuthenticationTest
     {
         public IGroupRepository _repoGroup;
         public IPermissionRepository _repoPermission;
@@ -35,46 +35,58 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.Security
 
             var userRepository = new UserRepository(store);
 
-            _service = new AuthorizationService(_repoGroup, _repoPermission,userRepository, uow);
+            _service = new AuthorizationService(_repoGroup, _repoPermission, userRepository, uow);
 
             Database.SetInitializer(new BaseTest());
         }
 
         [TestMethod]
-        [TestCategory("Authorization - Group")]
-        public void Deveria_Adicionar_Um_Grupo()
+        [TestCategory("Authentication")]
+        public void Deveria_Adicionar_Permissao_ao_Grupo()
         {
-            _repoGroup.Add(ObjectBuilder.CreateGroup());
+
+            var grupo = _repoGroup.GetByIdIncluding(2, g => g.Permissions);
+
+            var permissions = new[] { "03" };
+
+            _service.AddPermissionsToGroup(grupo.Id, permissions);
 
             uow.Commit();
 
-            var list = _repoGroup.GetAll();
+            var permission = _repoPermission.GetByPermissionId("03");
 
-            Assert.AreEqual(3, list.Count);
+            Assert.IsNotNull(permission);
+            Assert.AreEqual("03", permission.PermissionId);
+
+            Assert.AreEqual(3, grupo.Permissions.Count);
+
         }
 
         [TestMethod]
-        [TestCategory("Authorization - Group")]
-        public void Deveria_Excluir_Um_Grupo()
+        [TestCategory("Authentication")]
+        public void Deveria_Excluir_Permissoes_do_Grupo()
         {
-            var group = _repoGroup.GetById(1);
+            var grupo = _repoGroup.GetByIdIncluding(2, g => g.Permissions);
 
-            _repoGroup.Delete(group);
+            var permissions = new[] { "03" };
+
+            _service.AddPermissionsToGroup(grupo.Id, permissions);
 
             uow.Commit();
 
-            var list = _repoGroup.GetAll();
+            var removedPermissions = new[] { "01", "03" };
 
-            Assert.AreEqual(1, list.Count);
-        }
 
-        [TestMethod]
-        [TestCategory("Authorization - Group")]
-        public void Deveria_Buscar_Todos_Grupos()
-        {
-            var list = _repoGroup.GetAll();
+            _service.RemovePermissionsFromGroup(grupo.Id, removedPermissions);
 
-            Assert.AreEqual(2, list.Count);
+            var permission = _repoPermission.GetByPermissionId("02");
+
+            uow.Commit();
+
+            Assert.IsNotNull(permission);
+            Assert.AreEqual("02", permission.PermissionId);
+
+            Assert.AreEqual(1, grupo.Permissions.Count);
         }
 
     }

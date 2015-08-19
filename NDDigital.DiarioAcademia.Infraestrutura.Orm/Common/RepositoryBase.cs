@@ -99,7 +99,7 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Common
                 query = query.Include(includeProperty);
             }
 
-            return query.FirstOrDefault();
+            return query.FirstOrDefault(t=>t.Id==id);
         }
 
         public virtual IList<T> GetAll()

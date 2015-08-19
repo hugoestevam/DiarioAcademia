@@ -10,5 +10,11 @@ namespace NDDigital.DiarioAcademia.Dominio.Entities.Security
         {
             return PermissionId;
         }
+
+        public Permission(){}
+        public Permission(string id)
+        {
+            PermissionId = id;
+        }
     }
 }

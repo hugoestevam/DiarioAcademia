@@ -11,6 +11,7 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Security
     {
         IList<Permission> GetByGroup(int groupId);
         IList<Permission> GetAllSpecific(string[] permissions);
+        Permission GetByPermissionId(string v);
     }
 
     public class PermissionRepository : RepositoryBase<Permission>, IPermissionRepository
@@ -27,7 +28,9 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Security
             var list = new List<Permission>();
             foreach (var id in ids)
             {
-                list.Add(dataContext.Permissions.Where(p=>p.PermissionId==id).FirstOrDefault());
+                var permission = dataContext.Permissions.Where(p => p.PermissionId == id).FirstOrDefault();
+
+                list.Add(permission ?? new Permission(id));
             }
                 list.RemoveAll(x => x == null);
             return list;
@@ -37,6 +40,11 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Security
         {
             var group = dataContext.Groups.Find(groupId);
             return group.Permissions;
+        }
+
+        public Permission GetByPermissionId(string id)
+        {
+            return (from p in dataContext.Permissions where p.PermissionId == id select p).FirstOrDefault(); ;
         }
     }
 
