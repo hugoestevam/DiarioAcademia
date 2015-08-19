@@ -38,7 +38,7 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers.Authentication
             return Ok(_groupService.GetAll());
         }
 
-        // GET: api/Group/bca443c4a
+        // GET: api/Group/1
         public IHttpActionResult Get(int id)
         {
             return Ok(_groupService.GetById(id));

@@ -38,7 +38,7 @@
 
 		self.edit = function (user) {
 			logger.success("User " + user.fullName + " editado", null, "Edição");
-			return $http.put(serviceUrl + "/" + user.id, user);
+			return $http.put(serviceUrl + user.id, user);
 		};
 	}
 })(window.angular);

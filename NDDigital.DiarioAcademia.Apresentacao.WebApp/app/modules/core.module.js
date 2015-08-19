@@ -72,6 +72,7 @@
         $rootScope.$on('$viewContentLoading', function (event, viewConfig) {
             console.log('todo');
         });
+
     }
 
     configBreadcrumb.$inject = ["$breadcrumbProvider"];

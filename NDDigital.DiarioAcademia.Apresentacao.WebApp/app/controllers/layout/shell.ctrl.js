@@ -21,6 +21,7 @@
             self.authentication = authService.authentication;
             self.authorization = authService.authorization;
             toastr.options.preventDuplicates = true;
+            toastr.options.timeOut = 880;
             self.currentLanguage = languageService.currentLanguage;
             reTranslate('pt-br');
         }

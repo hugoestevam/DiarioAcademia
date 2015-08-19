@@ -5,7 +5,7 @@
         </div>
         <div class="col-xs-2 clear-padding">
             <button class="btn btn-info" ng-click="vm.modal()" style="float: right"
-                    data-toggle="modal" data-target="#modalEditGroup">
+                    data-toggle="modal" data-target="#modalEditGroup" ng-disabled="!vm.hasChange">
                 <i class="fa fa-save"></i>
             </button>
         </div>
@@ -16,10 +16,11 @@
 
 <div class="container-user fadeIn enter-fadeIn ">
     <div class="row">
-        <ndd-group-checkbox array="vm.permissions" compare="vm.group.permissions" method="vm.comparePermissions"></ndd-group-checkbox>
+        <ndd-group-checkbox array="vm.permissions" compare="vm.group.permissions" method="vm.comparePermissions" callback="vm.onchange"></ndd-group-checkbox>
     </div>
 </div>
     
-<ndd-modal target="modalEditGroup" label="{{vm.titleModalEdit}}" callback="vm.edit">
+<ndd-modal target="modalEditGroup" label="{{vm.titleModalEdit}}" callback="vm.saveChanges">
     {{vm.bodyModalEdit}}
 </ndd-modal>
+<ndd-confirm-exit controller="vm"><ndd-confirm-exit>

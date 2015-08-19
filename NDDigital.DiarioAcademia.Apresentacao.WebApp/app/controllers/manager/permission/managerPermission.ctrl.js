@@ -2,9 +2,9 @@
     angular.module('controllers.module')
         .controller('managerPermissionController', managerPermissionController);
 
-    managerPermissionController.$inject = ['permissionsService', 'compareState', 'permissions.factory', '$state'];
+    managerPermissionController.$inject = ['permissionsService', 'compareState', 'permissions.factory', '$state', '$rootScope'];
 
-    function managerPermissionController(permissionService, compareState, permissionsFactory, $state) {
+    function managerPermissionController(permissionService, compareState, permissionsFactory, $state, $rootScope) {
         var vm = this;
 
         vm.filters = ['aluno', 'turma', 'other', 'manager', 'aula', 'chamada', 'customize'];
@@ -16,6 +16,7 @@
         vm.onchange = onchange;
         vm.saveChanges = saveChanges;
 
+     
 
         activate();
         function activate() {
@@ -24,7 +25,10 @@
                 vm.showRoutes = vm.routes.slice();
             });
             vm.permission = filterPermissions(permissionsFactory.getDefaultPermissions());
+
+           
         }
+
 
         //public methods
         function onchange(obj, check) {

@@ -47,12 +47,12 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
 
         IList<Dominio.Entities.Security.Group> IService<Dominio.Entities.Security.Group>.GetAll()
         {
-             return _repo.GetAllIncluding(g=>g.Permissions); throw new NotImplementedException();
+             return _repo.GetAllIncluding(g=>g.Permissions); 
         }
 
         Dominio.Entities.Security.Group IService<Dominio.Entities.Security.Group>.GetById(int id)
         {
-             return _repo.GetByIdIncluding(id, g => g.Permissions);  throw new NotImplementedException();
+            return _repo.GetByIdIncluding(id, g => g.Permissions);
         }
     }
 

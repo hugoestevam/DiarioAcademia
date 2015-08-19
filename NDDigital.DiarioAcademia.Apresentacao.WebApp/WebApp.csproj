@@ -82,6 +82,8 @@
     <Content Include="app\controllers\manager\permission\managerPermission.ctrl.js" />
     <Content Include="app\controllers\manager\user\managerUserEdit.ctrl.js" />
     <Content Include="app\controllers\manager\user\managerUserList.ctrl.js" />
+    <Content Include="app\directives\ndd-confirm-exit\ndd-confirm-exit.directives.js" />
+    <Content Include="app\directives\ndd-confirm-exit\ndd-confirm-exit.html" />
     <Content Include="app\directives\ndd-group-checkbox\ndd-group-checkbox.directives.js" />
     <Content Include="app\directives\ndd-group-checkbox\ndd-group-checkbox.html" />
     <Content Include="app\directives\ndd-head\ndd-head.directives.js" />

@@ -14,7 +14,11 @@
 		vm.comparePermissions = compareState;
 		vm.permissions = [];
 		vm.modal = modal;
-		vm.edit = edit;
+		vm.saveChanges = saveChanges;
+		vm.onchange = onchange;
+		vm.hasChange = false;
+		vm.changes = [];
+
 
 		activate();
 		function activate() {
@@ -25,23 +29,53 @@
 			});
 
 			permissionsService.getPermissions().then(function (results) {
-			    var permissions = results;
-			    for (var i = 0; i < permissions.length; i++) {
-			        var permission = permissionsFactory.getPermissionById(permissions[i].permissionId);
-			        vm.permissions.push(permission);
-			    }
+				var permissionsDb = results;
+				for (var i = 0; i < permissionsDb.length; i++) {
+					var permission = permissionsFactory.getPermissionById(permissionsDb[i].permissionId);
+					vm.permissions.push(permission);
+				}
 			});
 		}
 
+		function onchange(obj, check) {
+			vm.hasChange = true;
+			if (compareState(vm.changes, obj) < 0)
+				vm.changes.push(obj);
+			obj.action = check;
+		}
+
+		function saveChanges() {
+			vm.hasChange = false;
+			var add = [], exclude = [];
+			for (var i = 0; i < vm.changes.length; i++) {
+				if (vm.changes[i].action)
+					add.push(vm.changes[i].permissionId);
+				else
+					exclude.push(vm.changes[i].permissionId);
+			}
+			if (add.length > 0)
+				save(add);
+			if (exclude.length > 0)
+				remove(exclude);
+		}
+
+		function save(permission) {
+			groupService.addPermission(vm.group, permission).then(function (results) { });
+		}
+
+		function remove(permission) {
+			groupService.removePermission(vm.group, permission).then(function (results) { });
+		}
+
 		function modal() {
-		    vm.titleModalEdit = 'Edição';
-		    vm.bodyModalEdit = 'Editar ' + vm.group.name + ' ?';
+			vm.titleModalEdit = 'Edição';
+			vm.bodyModalEdit = 'Editar ' + vm.group.name + ' ?';
 		}
 
 		function edit() {
-		    groupService.edit(vm.group).then(function (results) {
-		        vm.group = results;
-		    });
+			groupService.edit(vm.group).then(function (results) {
+				vm.group = results;
+			});
 		}
 	}
 })(window.angular);

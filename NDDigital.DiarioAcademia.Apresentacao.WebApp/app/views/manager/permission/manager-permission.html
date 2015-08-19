@@ -1,7 +1,5 @@
 ﻿<ndd-head title="Permissões"></ndd-head>
 
-
-
 <div class="container-permission">
     <div class="col-sm-4 clear-padding col-grid" ng-repeat="filter in vm.filters">
         <div class="panel panel-primary text-center">
@@ -19,5 +17,6 @@
 <div class="col-sm-12 clear-padding text-center">
     <hr />
     <button class="btn btn-success" ng-disabled="!vm.hasChange" ng-click="vm.saveChanges()"><i class="fa fa-save"></i> </button>
-
 </div>
+
+<ndd-confirm-exit controller="vm"><ndd-confirm-exit>
