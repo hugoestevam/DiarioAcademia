@@ -27,7 +27,11 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers.Authentication
             
             var permissionRepository = new PermissionRepository(factory);
 
-            _authservice = new AuthorizationService(groupRepository, permissionRepository,uow);
+            var store = new MyUserStore(factory.Get());
+
+            var userRepository = new UserRepository(store);
+
+            _authservice = new AuthorizationService(groupRepository, permissionRepository, userRepository, uow);
         }
 
         //[Authorize]
@@ -121,44 +125,32 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers.Authentication
         }
 
         //[Authorize]
-        [Route("AddPermission/{groupId:int}")]
+        [Route("addpermission/{groupId:int}")]
         public IHttpActionResult AddPermissionsToGroup(int groupId, [FromBody]string[] permissions)
         {
-
-            try
-            {
-                _authservice.AddPermissionsGroup(groupId, permissions);
-
-
-                return Ok();
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-
-
+            _authservice.AddPermissionsToGroup(groupId, permissions);
+            return Ok();
         }
         //[Authorize]
-        [Route("RemovePermission/{groupId:int}")]
+        [Route("removepermission/{groupId:int}")]
         public IHttpActionResult RemovePermissionsToGroup(int groupId, [FromBody]string[] permissions)
         {
-
-            try
-            {
-                _authservice.RemovePermissionsGroup(groupId, permissions);
-
-
-                return Ok();
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-
-
+            _authservice.RemovePermissionsFromGroup(groupId, permissions);
+            return Ok();
+        }
+        //[Authorize]
+        [Route("addgroup/{username}")]
+        public IHttpActionResult AddGroupToUser(string username, [FromBody]int[] groups)
+        {
+            _authservice.AddGroupToUser(username, groups);
+            return Ok();
+        }
+        //[Authorize]
+        [Route("removegroup/{username}")]
+        public IHttpActionResult removeGroupToUser(string username, [FromBody]int[] groups)
+        {
+            _authservice.RemoveGroupFromUser(username, groups);
+            return Ok();
         }
 
         //[Authorize(Roles = "Admin")]

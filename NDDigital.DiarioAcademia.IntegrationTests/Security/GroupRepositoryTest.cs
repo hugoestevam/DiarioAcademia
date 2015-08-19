@@ -29,7 +29,13 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.Security
 
             uow = databaseFixture.UnitOfWork;
 
-            _service = new AuthorizationService(_repoGroup, _repoPermission, uow);
+
+
+            var store = new MyUserStore(databaseFixture.Factory.Get());
+
+            var userRepository = new UserRepository(store);
+
+            _service = new AuthorizationService(_repoGroup, _repoPermission,userRepository, uow);
 
             Database.SetInitializer(new BaseTest());
         }
@@ -87,7 +93,7 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.Security
 
             uow.Commit();
 
-            _service.AddPermissionsGroup(1, new[] { "03" });
+            _service.AddPermissionsToGroup(1, new[] { "03" });
 
             uow.Commit();
 
@@ -111,7 +117,7 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.Security
 
             uow.Commit();
 
-            _service.AddPermissionsGroup(1, new[] { "03" });
+            _service.AddPermissionsToGroup(1, new[] { "03" });
 
             uow.Commit();
 
@@ -119,7 +125,7 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.Security
 
             Assert.AreEqual(1, group.Permissions.Count);
 
-            _service.RemovePermissionsGroup(1, new[] { "03" });
+            _service.RemovePermissionsFromGroup(1, new[] { "03" });
 
             Assert.AreEqual(0, group.Permissions.Count);
 

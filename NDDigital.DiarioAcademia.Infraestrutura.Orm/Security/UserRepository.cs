@@ -12,6 +12,7 @@ using NDDigital.DiarioAcademia.Infraestrutura.CepServices;
 using NDDigital.DiarioAcademia.Infraestrutura.Orm.Contexts;
 using System.Data.Entity;
 using System.Linq;
+using System.Diagnostics;
 
 namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Security
 {
@@ -88,6 +89,7 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Security
         public IList<Group> GetGroupsByUser(string username)
         {
             var user = GetByUserName(username);
+            user.Groups = user.Groups ?? new List<Group>();
             return user.Groups;
         }
 
@@ -98,13 +100,13 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Security
                     where c.Id == id
                     select c).FirstOrDefault(); ;
         }
-
+        [DebuggerStepThrough]
         public User GetByUserName(string username)
         {
            return (from c 
                     in _appDbContext.Users
                     where c.UserName==username
-                    select c).First();
+                   select c).First();
         }
 
         public void Delete(string username)
