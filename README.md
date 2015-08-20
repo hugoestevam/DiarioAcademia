@@ -1,6 +1,6 @@
 # DiarioAcademia
 
-Para executar este projeto em seu potencial é necessário tem um servidor Node rodando na máquina.
+Para executar este projeto em seu potencial é necessário ter um servidor Node rodando na máquina.
 
 #### Instalando NodeJS
 * Instale o NodeJS pelo:
