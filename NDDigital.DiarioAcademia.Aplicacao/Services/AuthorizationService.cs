@@ -3,6 +3,8 @@ using NDDigital.DiarioAcademia.Infraestrutura.Orm.Common;
 using NDDigital.DiarioAcademia.Infraestrutura.Orm.Security;
 using System.Collections.Generic;
 using System;
+using Microsoft.AspNet.Identity;
+using System.Text;
 
 namespace NDDigital.DiarioAcademia.Aplicacao.Services
 {
@@ -79,6 +81,20 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
             var userEncontrado = _userRepository.GetByUserName(username);
             var listGroups= _groupRepository.GetAllSpecific(groups);
 
+            SetGroups(userEncontrado, listGroups);
+
+            _userRepository.Update(userEncontrado);
+
+            _unitOfWork.Commit();
+        }
+
+        public void RemoveGroupFromUser(string username, int[] groups)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void SetGroups(User userEncontrado,IList<Group>listGroups)
+        {
             if (userEncontrado != null)
             {
                 userEncontrado.Groups = userEncontrado.Groups ?? new List<Group>();
@@ -90,14 +106,12 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
                     }
                 }
             }
-            _userRepository.UpdateAsync(userEncontrado);
-
-            _unitOfWork.Commit();
         }
 
-        public void RemoveGroupFromUser(string username, int[] groups)
-        {
-            throw new NotImplementedException();
-        }
+
+
+
+
+        
     }
 }

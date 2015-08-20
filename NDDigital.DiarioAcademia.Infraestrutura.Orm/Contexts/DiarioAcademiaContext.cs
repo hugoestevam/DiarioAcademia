@@ -5,6 +5,8 @@ using NDDigital.DiarioAcademia.Infraestrutura.Orm.Configurations;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Core.Objects;
+using System.Data.Entity.Infrastructure;
 using System.Data.Entity.Validation;
 using System.Linq;
 
@@ -49,6 +51,10 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Contexts
             modelBuilder.Configurations.Add(new GroupConfiguration());
             modelBuilder.Configurations.Add(new PermissionConfiguration());
         }
+        public void Detach(object entity)
+        {
+            ((IObjectContextAdapter)this).ObjectContext.Detach(entity);
+        }//spotify:user:anisanwesley
 
         public override int SaveChanges()
         {

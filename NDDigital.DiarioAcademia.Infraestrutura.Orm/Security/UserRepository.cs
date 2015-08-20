@@ -13,6 +13,7 @@ using NDDigital.DiarioAcademia.Infraestrutura.Orm.Contexts;
 using System.Data.Entity;
 using System.Linq;
 using System.Diagnostics;
+using System.Text;
 
 namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Security
 {
@@ -86,21 +87,24 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Security
                     ).ToList();
         }
 
-        public IList<Group> GetGroupsByUser(string username)
-        {
-            var user = GetByUserName(username);
-            user.Groups = user.Groups ?? new List<Group>();
-            return user.Groups;
-        }
 
         public User GetUserById(string id)
         {
             return (from c
-                    in _appDbContext.Users
+                    in _appDbContext.Users.Include(u=>u.Groups)
                     where c.Id == id
                     select c).FirstOrDefault(); ;
         }
-        [DebuggerStepThrough]
+
+        public User GetUserByUsername(string username)
+        {
+            return (from c 
+                    in (_appDbContext.Users.Include(u => u.Groups))
+                    where c.UserName==username
+                    select c
+                    ).FirstOrDefault();
+        }
+
         public User GetByUserName(string username)
         {
            return (from c 
@@ -114,11 +118,17 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Security
             var user = GetByUserName(username);
             _appDbContext.Users.Remove(user);
         }
+
+        public IList<Group> GetGroupsByUser(string username)
+        {
+            throw new NotImplementedException();
+        }
     }
     //recurso: não temos uma implementação de IUserStore: http://weblogs.asp.net/imranbaloch/a-simple-implementation-of-microsoft-aspnet-identity
     public class MyUserStore : IUserStore<User>, IUserPasswordStore<User>, IUserSecurityStampStore<User>, IQueryableUserStore<User>
     {
         UserStore<IdentityUser> userStore;
+        DiarioAcademiaContext _context;
 
         public IQueryable<User> Users
         {
@@ -130,43 +140,57 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Security
 
         public MyUserStore(DiarioAcademiaContext context)
         {
-            
-            userStore = new UserStore<IdentityUser>(context);
+            userStore = new UserStore<IdentityUser>(_context = context);
         }
         public Task CreateAsync(User user)
         {
-            var context = userStore.Context as DiarioAcademiaContext;
-            context.Users.Add(user);
-            context.Configuration.ValidateOnSaveEnabled = false;
-            return context.SaveChangesAsync();
+            _context.Users.Add(user);
+            _context.Configuration.ValidateOnSaveEnabled = false;
+            return _context.SaveChangesAsync();
         }
         public Task DeleteAsync(User user)
         {
-            var context = userStore.Context as DiarioAcademiaContext;
+          
+            var userLocated = _context.Users.First(u=>u.UserName==user.UserName);
 
-            var userLocated = context.Users.First(u=>u.UserName==user.UserName);
-
-            context.Users.Remove(userLocated);
-            context.Configuration.ValidateOnSaveEnabled = false;
-            return context.SaveChangesAsync();
+            _context.Users.Remove(userLocated);
+            _context.Configuration.ValidateOnSaveEnabled = false;
+            return _context.SaveChangesAsync();
         }
         public Task<User> FindByIdAsync(string userId)
         {
-            var context = userStore.Context as DiarioAcademiaContext;
-            return context.Users.Where(u => u.Id.ToLower() == userId.ToLower()).FirstOrDefaultAsync();
+            return _context.Users.Where(u => u.Id.ToLower() == userId.ToLower()).FirstOrDefaultAsync();
         }
         public Task<User> FindByNameAsync(string userName)
         {
-            var context = userStore.Context as DiarioAcademiaContext;
-            return context.Users.Where(u => u.UserName.ToLower() == userName.ToLower()).FirstOrDefaultAsync();
+             return _context.Users.Where(u => u.UserName.ToLower() == userName.ToLower()).FirstOrDefaultAsync();
         }
         public Task UpdateAsync(User user)
         {
-            var context = userStore.Context as DiarioAcademiaContext;
-            context.Users.Attach(user);
-            context.Entry(user).State = EntityState.Modified;
-            context.Configuration.ValidateOnSaveEnabled = false;
-            return context.SaveChangesAsync();
+            var entry = _context.Entry(user);
+            // if (entry.State == EntityState.Detached)
+            // {
+            //    context.Detach(user);
+            // }
+            // _context.Users.Attach(user);
+            foreach(var group in user.Groups)
+            {
+                var groupEntry = _context.Entry(group);
+
+                if (groupEntry.State == EntityState.Unchanged) { 
+                    groupEntry.State=EntityState.Modified;      //1st try
+                    //context.Groups.Attach(group);              //2nd try
+                    //groupEntry.State = EntityState.Detached;  //3rd try 
+                }
+            }
+           // entry.State = EntityState.Modified;
+
+
+            _context.SaveChanges();
+
+            //context.Entry(user).State = EntityState.Modified;
+            //context.Configuration.ValidateOnSaveEnabled = false;
+            return _context.SaveChangesAsync();
         }
         public void Dispose()
         {
@@ -230,6 +254,23 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Security
         {
             throw new NotImplementedException();
         }
+
+
+
+
+        //Just for debug, call in Imediate Window
+        private string LogEntry(User user, DiarioAcademiaContext ctx)
+        {
+            var sb = new StringBuilder(user.ToString());
+
+            sb.Append(" - " + ctx.Entry(user).State);
+
+            foreach (var g in user.Groups)
+                sb.Append("{" + g.Name + " - [" + ctx.Entry(g).State + "]}");
+            return sb.ToString();
+        }
+
+
     }
 
 
