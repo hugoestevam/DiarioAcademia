@@ -4,7 +4,8 @@ using NDDigital.DiarioAcademia.Infraestrutura.Orm.Security;
 using System.Collections.Generic;
 using System;
 using Microsoft.AspNet.Identity;
-using System.Text;
+using System.Linq;
+
 
 namespace NDDigital.DiarioAcademia.Aplicacao.Services
 {
@@ -60,15 +61,13 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
 
             foreach (var permId in permissions)
             {
-                for (var i=0; i<groupEncontrado.Permissions.Count;i++)
+                var perm = groupEncontrado.Permissions.FirstOrDefault(p => p.PermissionId==permId);
+                if (perm != null)
                 {
-                    var per = groupEncontrado.Permissions[i];  
+                    groupEncontrado.Permissions.Remove(perm);
+                };
 
-                    if (per.PermissionId == permId)
-                    {
-                        groupEncontrado.Permissions.Remove(per);i--;
-                    }
-                }
+
             }
 
             _groupRepository.Update(groupEncontrado);
@@ -90,7 +89,21 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
 
         public void RemoveGroupFromUser(string username, int[] groups)
         {
-            throw new NotImplementedException();
+            var userEncontrado = _userRepository.GetByUserName(username);
+
+            foreach(var groupId in groups)
+            {
+                var group = userEncontrado.Groups.FirstOrDefault(p => p.Id == groupId);
+
+                if (group != null)
+                {
+                    userEncontrado.Groups.Remove(group);
+                    _groupRepository.Update(group);
+                }
+            }
+            _userRepository.Update(userEncontrado);
+            _unitOfWork.Commit();
+
         }
 
         private void SetGroups(User userEncontrado,IList<Group>listGroups)
@@ -99,13 +112,10 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
             {
                 userEncontrado.Groups = userEncontrado.Groups ?? new List<Group>();
                 foreach (var item in listGroups)
-                {
                     if (!userEncontrado.Groups.Contains(item))
-                    {
                         userEncontrado.Groups.Add(item);
-                    }
-                }
             }
+            _unitOfWork.Commit();
         }
 
 
