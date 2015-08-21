@@ -15,6 +15,7 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers.Authentication
     public class AccountsController : BaseApiController
     {
         private IAuthorizationService _authservice;
+        private UserRepository _userRepository;
 
         public AccountsController()
         {
@@ -23,14 +24,14 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers.Authentication
             var uow = new UnitOfWork(factory);
 
             var groupRepository = new GroupRepository(factory);
-            
+
             var permissionRepository = new PermissionRepository(factory);
 
             var store = new MyUserStore(factory.Get());
 
-            var userRepository = new UserRepository(store);
+            _userRepository = new UserRepository(store);
 
-            _authservice = new AuthorizationService(groupRepository, permissionRepository, userRepository, uow);
+            _authservice = new AuthorizationService(groupRepository, permissionRepository, _userRepository, uow);
 
         }
 
@@ -145,5 +146,20 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers.Authentication
 
             return NotFound();
         }
+        [HttpPut]
+        [Route("edit")]
+        public IHttpActionResult EditUser([FromBody] User user)
+        {
+            var u = _userRepository.GetUserByUsername(user.UserName);
+
+            u.FirstName = user.FirstName;
+            u.LastName = user.LastName;
+
+            _userRepository.Update(u);
+
+
+            return Ok();
+        }
+
     }
 }

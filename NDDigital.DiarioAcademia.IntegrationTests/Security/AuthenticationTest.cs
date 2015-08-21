@@ -104,7 +104,7 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.Security
 
            _service.AddGroupToUser(user.UserName, new[] {1});
 
-            uow.Commit();
+           // uow.Commit();
             var userAgain = _userRepo.GetUserByUsername("ttt");
 
              Assert.AreEqual(3, userAgain.Groups.Count);
