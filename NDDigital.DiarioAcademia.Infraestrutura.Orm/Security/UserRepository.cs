@@ -14,12 +14,9 @@ using System.Data.Entity;
 using System.Linq;
 using System.Diagnostics;
 using System.Text;
-<<<<<<< HEAD
 using System.Data.Entity.Infrastructure;
 using System.ComponentModel.DataAnnotations;
-=======
-using System.Text;
->>>>>>> origin/master
+
 
 namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Security
 {
