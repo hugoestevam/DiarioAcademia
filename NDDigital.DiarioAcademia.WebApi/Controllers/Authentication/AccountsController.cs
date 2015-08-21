@@ -158,7 +158,7 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers.Authentication
             _userRepository.Update(u);
 
 
-            return Ok();
+            return Ok(u);
         }
 
     }

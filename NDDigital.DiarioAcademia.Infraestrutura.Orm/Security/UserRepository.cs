@@ -125,7 +125,8 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Security
 
         public IList<Group> GetGroupsByUser(string username)
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
+            return new List<Group>(); // TODO: Implementar metodo - retorn mock para não dar erro no login
         }
     }
 

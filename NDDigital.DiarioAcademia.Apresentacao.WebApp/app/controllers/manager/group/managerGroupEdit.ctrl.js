@@ -2,7 +2,7 @@
 	angular.module('controllers.module')
 		.controller('managerGroupEditController', managerGroupEditController);
 
-	managerGroupEditController.$inject = ['groupService', 'permissionsService', 'permissions.factory','compareState',
+	managerGroupEditController.$inject = ['groupService', 'permissionsService', 'permissions.factory', 'compareState',
 		'$state', '$stateParams'];
 
 	function managerGroupEditController(groupService, permissionsService, permissionsFactory,
@@ -18,10 +18,14 @@
 		vm.onchange = onchange;
 		vm.hasChange = false;
 		vm.changes = [];
-
+		vm.setAdmin = setAdmin;
 
 		activate();
 		function activate() {
+			$(function () {
+				$('[data-toggle="tooltip"]').tooltip();
+			});
+
 			groupService.getGroupById(params.groupId).then(function (results) {
 				if (results == undefined)
 					$state.go('manager.group');
@@ -75,8 +79,15 @@
 		}
 
 		function edit() {
-			groupService.edit(vm.group).then(function (results) {
+			return groupService.edit(vm.group).then(function (results) {
 				vm.group = results;
+			});
+		}
+
+		function setAdmin() {
+			vm.group.isAdmin = !vm.group.isAdmin;
+			edit().then(function () {
+			    $('[data-toggle="tooltip"]').tooltip('hide').tooltip();
 			});
 		}
 	}

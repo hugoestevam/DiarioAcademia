@@ -65,11 +65,7 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers.Authentication
             Group group;
             try
             {
-                group = _groupService.GetById(id);
-
-                group.Name = value.Name;
-
-                _groupService.Update(group);
+                _groupService.Update(value);
             }
             catch (Exception ex)
             {
@@ -77,7 +73,7 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers.Authentication
                     throw ex;
             }
 
-            return Ok(group);
+            return Ok(value);
         }
 
         // DELETE: api/Group/5

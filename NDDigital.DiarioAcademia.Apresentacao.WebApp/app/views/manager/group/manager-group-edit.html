@@ -4,6 +4,10 @@
             <h2 style="margin-top: 0;">Permissões {{vm.group.name}}</h2>
         </div>
         <div class="col-xs-2 clear-padding">
+            <button type="button" class="btn" aria-label="isAdmin" ng-class="{'btn-warning': vm.group.isAdmin}" ng-click="vm.setAdmin()" id="admin"
+                    data-toggle="tooltip" data-placement="top" title="a" data-original-title="{{vm.group.isAdmin ? 'É administrador' : 'Não é Administrador'}}">
+                <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+            </button>
             <button class="btn btn-info" ng-click="vm.modal()" style="float: right"
                     data-toggle="modal" data-target="#modalEditGroup" ng-disabled="!vm.hasChange">
                 <i class="fa fa-save"></i>
@@ -13,8 +17,7 @@
 </div>
 
 <hr  style="margin-top: 2%"/>
-
-<div class="container-user fadeIn enter-fadeIn ">
+<div class="container-user fadeIn enter-fadeIn" ng-class="{'disabled': vm.group.isAdmin}">
     <div class="row">
         <ndd-group-checkbox array="vm.permissions" compare="vm.group.permissions" method="vm.comparePermissions" callback="vm.onchange"></ndd-group-checkbox>
     </div>
