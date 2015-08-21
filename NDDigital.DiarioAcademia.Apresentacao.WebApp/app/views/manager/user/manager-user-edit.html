@@ -9,8 +9,13 @@
 <ndd-head title="Edição de Usuario"></ndd-head>
 
 <div class="container-user">
-    <div class="row">
-        <div class="col-sm-7 clear-padding">
+
+    <div class="col-sm-6 clear-padding">
+        <div class="row">
+            <div class="col-xs-12 clear-padding">
+                <h3 style="margin-top: 0;">Perfil</h3>
+                <hr style="margin-top: 2%" />
+            </div>
             <form name="vm.formUser">
                 <div class="col-xs-12 clear-padding" style="padding-bottom: 2%">
                     <div class="col-xs-6 clear-padding">
@@ -35,12 +40,30 @@
                 </div>
             </form>
         </div>
+        <div class="row" style="margin-top: 6%;">
 
-        <div class="col-sm-5 text-center">
-            <label>Grupos</label>
+            <div class="col-xs-12 clear-padding">
+                <h3 style="margin-top: 0;">Grupos</h3>
+                <hr style="margin-top: 2%" />
+            </div>
             <ndd-group-checkbox array="vm.groups" compare="vm.user.groups" callback="vm.onchange"></ndd-group-checkbox>
         </div>
+    </div>
 
+    <div class="col-sm-6" style="padding-left: 4%;">
+
+        <div class="col-xs-12 clear-padding">
+            <h3 style="margin-top: 0;">Configurações</h3>
+        </div>
+        <hr style="margin-top: 5%" />
+        <div class="jumbotron">
+             Em breve configurações
+        </div>
+    </div>
+
+
+
+    <div class="row">
         <div class="col-sm-12 clear-padding text-center" style="padding-top: 5%;">
             <div class="footer">
                 <button class="btn btn-success" data-toggle="modal" data-target="#modelEditUser" ng-disabled="!vm.hasChange && vm.formUser.$pristine">
@@ -51,7 +74,6 @@
                 </button>
             </div>
         </div>
-
     </div>
 </div>
 

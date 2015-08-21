@@ -26,7 +26,6 @@
                     <th>Login</th>
                     <th>Email</th>
                     <th>Level</th>
-                    <th>Data de Inscrição</th>
                     <th>&nbsp;</th>
                     <th>&nbsp;</th>
                 </tr>
@@ -37,7 +36,6 @@
                     <td>{{user.userName}}</td>
                     <td>{{user.email}}</td>
                     <td>{{user.level}}</td>
-                    <td>{{user.joinDate | date:'dd/MM/yyyy'}}</td>
                     <td class="text-right">
                         <button class="btn btn-info" ng-click="vm.edit(user)">
                             <i class="fa fa-pencil-square-o"></i>

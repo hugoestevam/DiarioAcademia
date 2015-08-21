@@ -89,7 +89,7 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers.Authentication
                 UserName = createUserModel.Username,
                 Email = createUserModel.Email,
                 FirstName = createUserModel.FirstName,
-                LastName = createUserModel.LastName,
+                LastName = createUserModel.LastName,               
                 Level = 3,
             };
 

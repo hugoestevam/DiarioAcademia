@@ -35,13 +35,13 @@
 				vm.bodyModelEdit += vm.name;
 
 				groupService.getGroups().then(function (results) {
-				    vm.groups = results;
-				    if (results)
-				        originalGroups = results.slice();
+					vm.groups = results;
+					if (results)
+						originalGroups = results.slice();
 				});
 			});
 
-			
+
 		}
 
 		//public methods
@@ -54,7 +54,6 @@
 
 
 		function editUser() {
-			//userService.edit(vm.user).then(function () { });
 			$('body').removeClass('modal-open');
 			$('.modal-backdrop').remove();
 			saveChanges();
@@ -64,22 +63,19 @@
 			vm.hasChange = false;
 			var include = [], exclude = [];
 			for (var i = 0; i < vm.changes.length; i++) {
-				if (vm.changes[i].action) {
-					if (!vm.user.groups.containsObject(vm.changes[i]))
-						include.push(vm.changes[i].id);
-				}
+				if (vm.changes[i].action) 
+					include.push(vm.changes[i].id);
 				else
 					exclude.push(vm.changes[i].id);
 			}
 			if (!vm.formUser.$pristine)
-			    userService.edit(vm.user);
-			else {
-			    if (include > 0)
-			        userService.addUserInGroup(vm.user, include);
-			    if (exclude > 0)
-			        userService.addUserInGroup(vm.user, exclude);
-			}
-		   
+				userService.edit(vm.user);
+			if (include > 0)
+				userService.addUserGroup(vm.user, include);
+			if (exclude > 0)
+			    userService.removeUserGroup(vm.user, exclude);
+			originalUser = $.extend(true, {}, vm.user);
+			vm.groups = originalUser.groups.slice();
 		}
 
 		function clear() {
