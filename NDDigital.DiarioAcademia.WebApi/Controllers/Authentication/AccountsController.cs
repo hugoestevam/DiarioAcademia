@@ -49,11 +49,11 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers.Authentication
         public async Task<IHttpActionResult> GetUser(string Id)
         {
             //Only SuperAdmin or Admin can delete users (Later when implement roles)
-            var user = await this.UserRepository.FindByIdAsync(Id);
+            var user = this.UserRepository.GetUserById(Id);
 
             if (user != null)
             {
-                return Ok(this.TheModelFactory.Create(user));
+                return Ok(user);
             }
 
             return NotFound();
@@ -123,7 +123,6 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers.Authentication
             return Ok();
         }
 
-
         //[Authorize(Roles = "Admin")]
         [Route("user/{id:guid}")]
         public async Task<IHttpActionResult> DeleteUser(string id)
@@ -146,6 +145,5 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers.Authentication
 
             return NotFound();
         }
-
     }
 }

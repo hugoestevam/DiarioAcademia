@@ -19,7 +19,7 @@ namespace NDDigital.DiarioAcademia.WebApi.Models
             _UrlHelper = new UrlHelper(request);
             _UserRepository = appUserManager;
         }
-
+        //TODO: rrever necessidade dessa implementação
         public UserReturnModel Create(User appUser)
         {
             return new UserReturnModel

@@ -13,6 +13,8 @@ using NDDigital.DiarioAcademia.Infraestrutura.Orm.Contexts;
 using System.Data.Entity;
 using System.Linq;
 using System.Diagnostics;
+using System.Data.Entity.Infrastructure;
+using System.ComponentModel.DataAnnotations;
 
 namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Security
 {
@@ -28,7 +30,8 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Security
 
     public class UserRepository : UserManager<User>, IUserRepository
     {
-        private  static DiarioAcademiaContext _appDbContext;
+        private static DiarioAcademiaContext _appDbContext;
+        public IUserStore<User> _store { get; set; }
 
         public UserRepository(IUserStore<User> store)
             : base(store)
@@ -80,7 +83,7 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Security
         }
         public IList<User> GetUsers()
         {
-            return (from c 
+            return (from c
                     in _appDbContext.Users
                     select c
                     ).ToList();
@@ -96,17 +99,17 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Security
         public User GetUserById(string id)
         {
             return (from c
-                    in _appDbContext.Users
+               in _appDbContext.Users.Include(u => u.Groups)
                     where c.Id == id
-                    select c).FirstOrDefault(); ;
+                    select c).FirstOrDefault();
         }
         [DebuggerStepThrough]
         public User GetByUserName(string username)
         {
-           return (from c 
-                    in _appDbContext.Users
-                    where c.UserName==username
-                   select c).First();
+            return (from c
+                     in _appDbContext.Users
+                    where c.UserName == username
+                    select c).First();
         }
 
         public void Delete(string username)
@@ -115,6 +118,9 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Security
             _appDbContext.Users.Remove(user);
         }
     }
+
+
+
     //recurso: não temos uma implementação de IUserStore: http://weblogs.asp.net/imranbaloch/a-simple-implementation-of-microsoft-aspnet-identity
     public class MyUserStore : IUserStore<User>, IUserPasswordStore<User>, IUserSecurityStampStore<User>, IQueryableUserStore<User>
     {
@@ -130,7 +136,7 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Security
 
         public MyUserStore(DiarioAcademiaContext context)
         {
-            
+
             userStore = new UserStore<IdentityUser>(context);
         }
         public Task CreateAsync(User user)
@@ -144,7 +150,7 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Security
         {
             var context = userStore.Context as DiarioAcademiaContext;
 
-            var userLocated = context.Users.First(u=>u.UserName==user.UserName);
+            var userLocated = context.Users.First(u => u.UserName == user.UserName);
 
             context.Users.Remove(userLocated);
             context.Configuration.ValidateOnSaveEnabled = false;
@@ -160,14 +166,20 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Security
             var context = userStore.Context as DiarioAcademiaContext;
             return context.Users.Where(u => u.UserName.ToLower() == userName.ToLower()).FirstOrDefaultAsync();
         }
+
+        //TODO: rever implementação (possivel chance de gambi pattern)
         public Task UpdateAsync(User user)
         {
             var context = userStore.Context as DiarioAcademiaContext;
-            context.Users.Attach(user);
-            context.Entry(user).State = EntityState.Modified;
-            context.Configuration.ValidateOnSaveEnabled = false;
+
+            var set = context.Users.Include(u => u.Groups).SingleOrDefault(u => u.Id == user.Id); // get o do banco
+            context.Entry(set).CurrentValues.SetValues(user); // atualiza as propriedades simples
+            set.Groups = set.Groups.Concat(user.Groups).ToList(); // atualiza a colletion de group
+
+            context.SaveChanges(); // save
             return context.SaveChangesAsync();
         }
+
         public void Dispose()
         {
             userStore.Dispose();
@@ -180,6 +192,7 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Security
             SetUser(user, identityUser);
             return task;
         }
+
         public Task<bool> HasPasswordAsync(User user)
         {
             var identityUser = ToIdentityUser(user);
@@ -187,6 +200,7 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Security
             SetUser(user, identityUser);
             return task;
         }
+
         public Task SetPasswordHashAsync(User user, string passwordHash)
         {
             var identityUser = ToIdentityUser(user);
@@ -194,6 +208,7 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Security
             SetUser(user, identityUser);
             return task;
         }
+
         public Task<string> GetSecurityStampAsync(User user)
         {
             var identityUser = ToIdentityUser(user);
@@ -201,6 +216,7 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Security
             SetUser(user, identityUser);
             return task;
         }
+
         public Task SetSecurityStampAsync(User user, string stamp)
         {
             var identityUser = ToIdentityUser(user);
@@ -208,6 +224,7 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Security
             SetUser(user, identityUser);
             return task;
         }
+
         private static void SetUser(User user, IdentityUser identityUser)
         {
             user.PasswordHash = identityUser.PasswordHash;
@@ -215,6 +232,7 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Security
             user.Id = identityUser.Id;
             user.UserName = identityUser.UserName;
         }
+
         private IdentityUser ToIdentityUser(User user)
         {
             return new IdentityUser

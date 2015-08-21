@@ -2,7 +2,7 @@
 	angular.module('controllers.module')
 		.controller('managerGroupEditController', managerGroupEditController);
 
-	managerGroupEditController.$inject = ['groupService', 'permissionsService', 'permissions.factory', 'compareState',
+	managerGroupEditController.$inject = ['groupService', 'permissionsService', 'permissions.factory','compareState',
 		'$state', '$stateParams'];
 
 	function managerGroupEditController(groupService, permissionsService, permissionsFactory,
@@ -26,20 +26,21 @@
 				if (results == undefined)
 					$state.go('manager.group');
 				vm.group = results;
-			});
 
-			permissionsService.getPermissions().then(function (results) {
-				var permissionsDb = results;
-				for (var i = 0; i < permissionsDb.length; i++) {
-					var permission = permissionsFactory.getPermissionById(permissionsDb[i].permissionId);
-					vm.permissions.push(permission);
-				}
+				permissionsService.getPermissions().then(function (results) {
+					var permissionsDb = results;
+					for (var i = 0; i < permissionsDb.length; i++) {
+						var permission = permissionsFactory.getPermissionById(permissionsDb[i].permissionId);
+						vm.permissions.push(permission);
+					}
+				});
+
 			});
 		}
 
 		function onchange(obj, check) {
 			vm.hasChange = true;
-			if (compareState(vm.changes, obj) < 0)
+			if (compareState(vm.changes, obj))
 				vm.changes.push(obj);
 			obj.action = check;
 		}
@@ -53,6 +54,7 @@
 				else
 					exclude.push(vm.changes[i].permissionId);
 			}
+
 			if (add.length > 0)
 				save(add);
 			if (exclude.length > 0)

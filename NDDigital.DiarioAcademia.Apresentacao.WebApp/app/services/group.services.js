@@ -45,7 +45,6 @@
 							 .catch(logger.errorCallback);
 		};
 
-
 		self.edit = function (group) {
 			return $http.put(serviceUrl + "/" + group.id, group)
 			 .then(logger.successCallback)
@@ -60,7 +59,6 @@
 		};
 
 		//permissions
-
 		self.addPermission = function (group, permissions) {
 		    return $http.post(serviceAuthenticationUrl + "/addPermission/" + group.id, permissions)
 			 .then(logger.successCallback)

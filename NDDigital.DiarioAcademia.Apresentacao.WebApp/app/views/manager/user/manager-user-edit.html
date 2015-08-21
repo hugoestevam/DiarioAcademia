@@ -11,36 +11,43 @@
 <div class="container-user">
     <div class="row">
         <div class="col-sm-7 clear-padding">
-            <div class="col-xs-12 clear-padding">
-                <label for="fullname">Nome</label>
-                <input type="text" ng-model="vm.user.fullName" class="form-control" id="fullname" />
-                <br />
-            </div>
+            <form name="vm.formUser">
+                <div class="col-xs-12 clear-padding" style="padding-bottom: 2%">
+                    <div class="col-xs-6 clear-padding">
+                        <label for="name">Nome</label>
+                        <input type="text" ng-model="vm.user.firstName" class="form-control" id="name" />
+                    </div>
+                    <div class="col-xs-6 clear-padding">
+                        <label for="lastname">Sobrenome</label>
+                        <input type="text" ng-model="vm.user.lastName" class="form-control" id="lastname" />
+                    </div>
 
-            <div class="col-xs-12 clear-padding">
-                <div class="col-xs-9 clear-padding">
-                    <label for="username">Nome de usuário</label>
-                    <input type="text" ng-model="vm.user.userName" class="form-control" id="username" />
                 </div>
-                <div class="col-xs-3 clear-padding">
-                    <label for="level">Level</label>
-                    <input type="number" ng-model="vm.user.level" class="form-control" id="level" />
+                <div class="col-xs-12 clear-padding">
+                    <div class="col-xs-9 clear-padding">
+                        <label for="username">Nome de usuário</label>
+                        <input type="text" ng-model="vm.user.userName" class="form-control" id="username" />
+                    </div>
+                    <div class="col-xs-3 clear-padding">
+                        <label for="level">Level</label>
+                        <input type="number" ng-model="vm.user.level" class="form-control" id="level" />
+                    </div>
                 </div>
-            </div>
+            </form>
         </div>
 
         <div class="col-sm-5 text-center">
             <label>Grupos</label>
-            <ndd-group-checkbox array="vm.groups" compare="vm.user.groups"></ndd-group-checkbox>
+            <ndd-group-checkbox array="vm.groups" compare="vm.user.groups" callback="vm.onchange"></ndd-group-checkbox>
         </div>
 
         <div class="col-sm-12 clear-padding text-center" style="padding-top: 5%;">
             <div class="footer">
-                <button class="btn btn-success" data-toggle="modal" data-target="#modelEditUser">
+                <button class="btn btn-success" data-toggle="modal" data-target="#modelEditUser" ng-disabled="!vm.hasChange && vm.formUser.$pristine">
                     <i class="fa fa-user-plus fa-2x"></i>
                 </button>
                 <button class="btn btn-info" ng-click="vm.clear()">
-                    <i class="fa fa-undo fa-2x"></i>
+                    <i class="fa fa-history fa-2x"></i>
                 </button>
             </div>
         </div>
