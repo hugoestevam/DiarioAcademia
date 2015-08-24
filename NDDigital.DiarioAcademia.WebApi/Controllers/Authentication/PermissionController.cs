@@ -39,20 +39,26 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers.Authentication
             return Ok(_permissionService.GetById(id));
         }
 
-        // POST: api/Permission
-        public IHttpActionResult Post([FromBody]Permission value)
+        public IHttpActionResult Post([FromBody]Permission[] values)
         {
-            _permissionService.Add(value);
-            return Ok(value);
+
+            foreach (var item in values)
+            
+               _permissionService.Add(item);
+            
+            return Ok(values);
         }
 
         // DELETE: api/Permission/5
-        public void Delete(string id)
+        public void Delete([FromBody]string[] ids)
         {
-            var permission = _permissionService.GetByPermissionId(id);
+            foreach (var id in ids)
+            {
+                var permission = _permissionService.GetByPermissionId(id);
 
-            _permissionService.Delete(permission.Id);
+                _permissionService.Delete(permission.Id);
 
+            }
         }
     }
 }
