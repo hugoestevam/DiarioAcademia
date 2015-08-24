@@ -1,14 +1,14 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.AspNet.Identity;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NDDigital.DiarioAcademia.Aplicacao.Services;
-using NDDigital.DiarioAcademia.Infraestrutura.Orm.Common;
+using NDDigital.DiarioAcademia.Dominio.Entities.Security;
+using NDDigital.DiarioAcademia.Infraestrutura.DAO.Common.Uow;
 using NDDigital.DiarioAcademia.Infraestrutura.Orm.Security;
+using NDDigital.DiarioAcademia.IntegrantionTests.Base;
 using NDDigital.DiarioAcademia.IntegrationTests.Base;
 using NDDigital.DiarioAcademia.IntegrationTests.Common;
-using NDDigital.DiarioAcademia.SecurityTests;
 using System.Data.Entity;
-using Microsoft.AspNet.Identity;
 using System.Linq;
-using NDDigital.DiarioAcademia.Dominio.Entities.Security;
 
 namespace NDDigital.DiarioAcademia.IntegrationTests.Security
 {
@@ -38,26 +38,22 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.Security
 
             _userRepo = new UserRepository(store);
 
-            _service = new AuthorizationService(_groupRepo, _permissionRepo, _userRepo, uow);
-
-            //var user = ObjectBuilder.CreateUser();
+            _service = new AuthorizationService(_groupRepo, _permissionRepo, _userRepo, uow);           
 
             var user = new User
             {
-                FirstName="Wesley",
-                LastName="Lemos",
+                FirstName = "Wesley",
+                LastName = "Lemos",
                 UserName = "anisan",
             };
 
             _userRepo.Create(user);
-            
         }
 
         [TestMethod]
         [TestCategory("Authentication")]
         public void Deveria_Adicionar_Permissao_ao_Grupo()
         {
-
             var grupo = _groupRepo.GetByIdIncluding(2, g => g.Permissions);
 
             var permissions = new[] { "03" };
@@ -70,7 +66,6 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.Security
             Assert.AreEqual("03", permission.PermissionId);
 
             Assert.AreEqual(3, grupo.Permissions.Count);
-
         }
 
         [TestMethod]
@@ -83,8 +78,7 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.Security
 
             _service.AddPermissionsToGroup(grupo.Id, permissions);
 
-             var removedPermissions = new[] { "01", "03" };
-
+            var removedPermissions = new[] { "01", "03" };
 
             _service.RemovePermissionsFromGroup(grupo.Id, removedPermissions);
 
@@ -96,17 +90,18 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.Security
 
             Assert.AreEqual(1, grupo.Permissions.Count);
         }
+
         [TestMethod]
         [TestCategory("Authentication")]
         public void Deveria_Adicionar_Grupo_ao_Usuario()
-         {
+        {
             var user = _userRepo.GetUserByUsername("anisan");
 
-           _service.AddGroupToUser(user.UserName, new[] {1});
+            _service.AddGroupToUser(user.UserName, new[] { 1 });
 
             var userAgain = _userRepo.GetUserByUsername("anisan");
 
-             Assert.AreEqual(1, userAgain.Groups.Count);
+            Assert.AreEqual(2, userAgain.Groups.Count);
         }
 
         [TestMethod]
@@ -115,7 +110,7 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.Security
         {
             var user = _userRepo.GetUserByUsername("anisan");
 
-            _service.AddGroupToUser(user.UserName, new[] { 1,2 });
+            _service.AddGroupToUser(user.UserName, new[] { 1, 2 });
 
             user = _userRepo.GetUserByUsername("anisan");
 
@@ -130,12 +125,6 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.Security
 
             Assert.AreEqual(2,
                  user.Groups.First().Id);
-
-
-
-
-
         }
-
     }
 }

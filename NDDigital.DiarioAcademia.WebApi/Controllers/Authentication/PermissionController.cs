@@ -1,5 +1,9 @@
-﻿using NDDigital.DiarioAcademia.Aplicacao.Services;
+﻿using Infrastructure.DAO.ORM.Common;
+using NDDigital.DiarioAcademia.Aplicacao.Services;
 using NDDigital.DiarioAcademia.Dominio.Entities.Security;
+using NDDigital.DiarioAcademia.Infraestrutura.DAO.Common.Factorys;
+using NDDigital.DiarioAcademia.Infraestrutura.DAO.Common.Uow;
+using NDDigital.DiarioAcademia.Infraestrutura.IoC;
 using NDDigital.DiarioAcademia.Infraestrutura.Orm.Common;
 using NDDigital.DiarioAcademia.Infraestrutura.Orm.Security;
 using System.Threading.Tasks;
@@ -11,16 +15,15 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers.Authentication
     {
         IPermissionService _permissionService;
 
-        public PermissionController()
+        public PermissionController() //TODO: IOC
         {
+            var factory = new EntityFrameworkFactory();
 
-            var factory = new DatabaseFactory();
+            var unitOfWork = new EntityFrameworkUnitOfWork(factory);
 
-            var uow = new UnitOfWork(factory);
+            var permissionRepo = new PermissionRepository(factory); //Container.Get<IPermissionRepository>();
 
-            var permissionRepo = new PermissionRepository(factory);
-
-            _permissionService = new PermissionService(permissionRepo, uow);
+            _permissionService = new PermissionService(permissionRepo, unitOfWork);
 
         }
 

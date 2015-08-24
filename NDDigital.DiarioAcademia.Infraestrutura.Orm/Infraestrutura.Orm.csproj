@@ -17,6 +17,7 @@
     <SccLocalPath>SAK</SccLocalPath>
     <SccAuxPath>SAK</SccAuxPath>
     <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -97,12 +98,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Common\DatabaseFactory.cs" />
     <Compile Include="Common\Disposable.cs" />
-    <Compile Include="Common\IDatabaseFactory.cs" />
-    <Compile Include="Common\IUnitOfWork.cs" />
-    <Compile Include="Common\RepositoryBase.cs" />
-    <Compile Include="Common\UnitOfWork.cs" />
+    <Compile Include="Common\EntityFrameworkFactory.cs" />
+    <Compile Include="Common\EntityFrameworkUnitOfWork.cs" />
+    <Compile Include="Common\RepositoryBaseEF.cs" />
     <Compile Include="Configurations\AlunoConfiguration.cs" />
     <Compile Include="Configurations\AulaConfiguration.cs" />
     <Compile Include="Configurations\EnderecoConfiguration.cs" />
@@ -111,7 +110,7 @@
     <Compile Include="Configurations\PresencaConfiguration.cs" />
     <Compile Include="Configurations\TurmaConfiguration.cs" />
     <Compile Include="Configurations\UserConfiguration.cs" />
-    <Compile Include="Contexts\DiarioAcademiaContext.cs" />
+    <Compile Include="Contexts\EntityFrameworkContext.cs" />
     <Compile Include="Security\MyUserStore.cs" />
     <Compile Include="Security\PermissionRepository.cs" />
     <Compile Include="Security\UserRepository.cs" />
@@ -121,7 +120,6 @@
     <Compile Include="Repositories\AulaRepositoryEF.cs" />
     <Compile Include="Repositories\PresencaRepositoryEF.cs" />
     <Compile Include="Repositories\TurmaRepositoryEF.cs" />
-    <Compile Include="_appDbContext\Users.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -135,6 +133,10 @@
     <ProjectReference Include="..\NDDigital.DiarioAcademia.Dominio\Dominio.csproj">
       <Project>{98aeeab1-ab78-451a-ae88-c852c6bc3c31}</Project>
       <Name>Dominio</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NDDigital.DiarioAcademia.Infraestrutura.DAO\Infraestrutura.DAO.csproj">
+      <Project>{a797581c-2ba5-4d68-a3d3-cd68818f9b84}</Project>
+      <Name>Infraestrutura.DAO</Name>
     </ProjectReference>
     <ProjectReference Include="..\NDDigital.DiarioAcademia.Infraestrutura.WebServices\Infraestrutura.CepServices.csproj">
       <Project>{7c91018a-6066-4ab4-bcea-7f477bb514c4}</Project>

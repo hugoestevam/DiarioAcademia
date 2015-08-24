@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data.Common;
 
-namespace NDDigital.DiarioAcademia.SecurityTests
+namespace NDDigital.DiarioAcademia.IntegrantionTests.Base
 {
     public class ObjectBuilder
     {

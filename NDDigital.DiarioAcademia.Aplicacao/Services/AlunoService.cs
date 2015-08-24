@@ -1,21 +1,20 @@
-﻿using System;
-using System.IO;
-using iTextSharp.text;
+﻿using iTextSharp.text;
 using iTextSharp.text.pdf;
 using NDDigital.DiarioAcademia.Aplicacao.DTOs;
-using NDDigital.DiarioAcademia.Dominio;
-using NDDigital.DiarioAcademia.Infraestrutura.Orm.Common;
-using NDDigital.DiarioAcademia.Infraestrutura.CepServices;
-using System.Collections.Generic;
-using System.Linq;
-using NDDigital.DiarioAcademia.Dominio.Entities;
 using NDDigital.DiarioAcademia.Dominio.Contracts;
+using NDDigital.DiarioAcademia.Dominio.Entities;
+using NDDigital.DiarioAcademia.Infraestrutura.CepServices;
+using NDDigital.DiarioAcademia.Infraestrutura.DAO.Common.Uow;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 
 namespace NDDigital.DiarioAcademia.Aplicacao.Services
 {
-    public interface IAlunoService:IService<AlunoDTO>
+    public interface IAlunoService : IService<AlunoDTO>
     {
-        IList<AlunoDTO> GetAllByTurma(int ano);
+        IList<AlunoDTO> GetAllByTurmaId(int id);
 
         Endereco BuscaEnderecoPorCep(string cep);
 
@@ -40,7 +39,7 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
         {
             Turma turma = _turmaRepository.GetById(alunoDto.TurmaId);
 
-            Aluno aluno = new Aluno(alunoDto.Descricao.Split(':')[0], turma??new Turma(2007));//todo: turma vem null
+            Aluno aluno = new Aluno(alunoDto.Descricao.Split(':')[0], turma ?? new Turma(2007));//todo: turma vem null
 
             aluno.Endereco.Bairro = alunoDto.Bairro;
             aluno.Endereco.Cep = alunoDto.Cep;
@@ -105,10 +104,10 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
                 .ToList();
         }
 
-        public IList<AlunoDTO> GetAllByTurma(int ano)
+        public IList<AlunoDTO> GetAllByTurmaId(int id)
         {
-            return _alunoRepository.GetAllByTurma(ano)
-              .Select(aluno => new AlunoDTO(aluno))
+            return _alunoRepository.GetAllByTurmaId(id)
+              .Select(aluno => new AlunoDTO())
               .ToList();
         }
 
@@ -119,7 +118,7 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
             return _webService.PreencheEndereco(cep);
         }
 
-        public void GerarRelatorioAlunosPdf(int ano, string path)
+        public void GerarRelatorioAlunosPdf(int id, string path)
         {
             try
             {
@@ -132,10 +131,10 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
 
                 doc.Open();
 
-                doc.Add(new Paragraph("Relatório de presenças - Academia do prgramador " + ano +":\n\n"));
+                doc.Add(new Paragraph("Relatório de presenças - Academia do prgramador " + id + ":\n\n"));
                 doc.Add(new Paragraph("Alunos/Presenças/Faltas:\n\n"));
 
-                foreach (var listaAluno in GetAllByTurma(ano))
+                foreach (var listaAluno in GetAllByTurmaId(id))
                 {
                     doc.Add(new Paragraph(listaAluno.Descricao));
                 }
@@ -145,8 +144,7 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
-            }     
-          
+            }
         }
     }
 }

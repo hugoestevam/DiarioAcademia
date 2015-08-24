@@ -1,4 +1,5 @@
-﻿using NDDigital.DiarioAcademia.Aplicacao.DTOs;
+﻿using Infrastructure.DAO.ORM.Common;
+using NDDigital.DiarioAcademia.Aplicacao.DTOs;
 using NDDigital.DiarioAcademia.Aplicacao.Services;
 using NDDigital.DiarioAcademia.Infraestrutura.Orm.Common;
 using NDDigital.DiarioAcademia.Infraestrutura.Orm.Repositories;
@@ -11,13 +12,13 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers.Entities
     {
         private TurmaService _turmaService;
 
-        public TurmaController()
+        public TurmaController() //TODO: IOC
         {
-            var factory = new DatabaseFactory();
+            var factory = new EntityFrameworkFactory();
 
-            var unitOfWork = new UnitOfWork(factory);
+            var unitOfWork = new EntityFrameworkUnitOfWork(factory);
 
-            var turmaRepository = new TurmaRepositoryEF(factory);
+            var turmaRepository = new TurmaRepositoryEF(factory); //Container.Get<ITurmaRepository>();
 
             _turmaService = new TurmaService(turmaRepository, unitOfWork);
         }

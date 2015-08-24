@@ -31,6 +31,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Ninject, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ninject.3.2.3-unstable-012\lib\net45-full\Ninject.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
@@ -42,6 +46,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\AdoNetFactory.cs" />
+    <Compile Include="Common\ADOUnitOfWork.cs" />
+    <Compile Include="Common\RepositoryBaseADO.cs" />
+    <Compile Include="Modules\AdoNetNinjectModule.cs" />
     <Compile Include="Repositories\AlunoRepositorySql.cs" />
     <Compile Include="Repositories\AulaRepositorySql.cs" />
     <Compile Include="Db.cs" />
@@ -54,6 +62,13 @@
       <Project>{98aeeab1-ab78-451a-ae88-c852c6bc3c31}</Project>
       <Name>Dominio</Name>
     </ProjectReference>
+    <ProjectReference Include="..\NDDigital.DiarioAcademia.Infraestrutura.DAO\Infraestrutura.DAO.csproj">
+      <Project>{a797581c-2ba5-4d68-a3d3-cd68818f9b84}</Project>
+      <Name>Infraestrutura.DAO</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

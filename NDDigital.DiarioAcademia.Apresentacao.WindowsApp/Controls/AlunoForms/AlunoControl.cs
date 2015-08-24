@@ -39,9 +39,9 @@ namespace NDDigital.DiarioAcademia.Apresentacao.WindowsApp.Controls.AlunoForms
 
         public void RefreshGrid()
         {
-            int anoTurma = Principal.Instance.AnoTurmaSelecionado;
+            int anoTurma = Principal.Instance.AnoTurmaSelecionado;//TODO:ARRUMAR ISSO DESKTOP
 
-            var alunos = _alunoService.GetAllByTurma(anoTurma);
+            var alunos = _alunoService.GetAllByTurmaId(anoTurma);
 
             listAlunos.Items.Clear();
 

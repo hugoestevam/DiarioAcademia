@@ -1,5 +1,7 @@
-﻿using NDDigital.DiarioAcademia.Dominio.Contracts;
+﻿using Infrastructure.DAO.ORM.Common.Base;
+using NDDigital.DiarioAcademia.Dominio.Contracts;
 using NDDigital.DiarioAcademia.Dominio.Entities;
+using NDDigital.DiarioAcademia.Infraestrutura.DAO.Common.Factorys;
 using NDDigital.DiarioAcademia.Infraestrutura.Orm.Common;
 using System;
 using System.Collections.Generic;
@@ -8,9 +10,9 @@ using System.Linq;
 
 namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Repositories
 {
-    public class AulaRepositoryEF : RepositoryBase<Aula>, IAulaRepository
+    public class AulaRepositoryEF : RepositoryBaseEF<Aula>, IAulaRepository
     {
-        public AulaRepositoryEF(IDatabaseFactory dbFactory)
+        public AulaRepositoryEF(UnitOfWorkFactory dbFactory) 
             : base(dbFactory)
         {
         }

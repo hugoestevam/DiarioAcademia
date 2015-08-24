@@ -1,5 +1,9 @@
-﻿using NDDigital.DiarioAcademia.Aplicacao.Services;
+﻿using Infrastructure.DAO.ORM.Common;
+using NDDigital.DiarioAcademia.Aplicacao.Services;
 using NDDigital.DiarioAcademia.Dominio.Entities.Security;
+using NDDigital.DiarioAcademia.Infraestrutura.DAO.Common.Factorys;
+using NDDigital.DiarioAcademia.Infraestrutura.DAO.Common.Uow;
+using NDDigital.DiarioAcademia.Infraestrutura.IoC;
 using NDDigital.DiarioAcademia.Infraestrutura.Orm.Common;
 using NDDigital.DiarioAcademia.Infraestrutura.Orm.Security;
 using System;
@@ -9,19 +13,20 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers.Authentication
 {
     public class GroupController : BaseApiController
     {
-        IGroupService _groupService;
-        IUserService _userService;
+        private IGroupService _groupService;
+        private IUserService _userService;
 
-        public GroupController()
+        public GroupController() //TODO: IOC
         {
+            var factory = new EntityFrameworkFactory();
 
-            var factory = new DatabaseFactory();
+            var unitOfWork = new EntityFrameworkUnitOfWork(factory);
 
-        var    uow = new UnitOfWork(factory);
+            var groupRepository = new GroupRepository(factory); //Container.Get<IGroupRepository>();
 
-            var groupRepo = new GroupRepository(factory);
+            var permissionRepository = new PermissionRepository(factory); //Container.Get<IPermissionRepository>();
 
-            _groupService = new GroupService(groupRepo,uow);
+            _groupService = new GroupService(groupRepository, unitOfWork);
 
             var context = factory.Get();
 
@@ -29,7 +34,9 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers.Authentication
 
             var userRepo = new UserRepository(store);
 
-            _userService = new UserService(userRepo);
+            var userRepository = new UserRepository(store);
+
+            _userService = new UserService(userRepository);
         }
 
         // GET: api/Group
@@ -69,8 +76,8 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers.Authentication
             }
             catch (Exception ex)
             {
-                for (;ex.InnerException!=null ; ex = ex.InnerException) { }
-                    throw ex;
+                for (; ex.InnerException != null; ex = ex.InnerException) { }
+                throw ex;
             }
 
             return Ok(value);
@@ -80,7 +87,6 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers.Authentication
         public void Delete(int id)
         {
             _groupService.Delete(id);
-
         }
     }
 }

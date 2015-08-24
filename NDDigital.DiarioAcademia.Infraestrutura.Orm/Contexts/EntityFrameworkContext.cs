@@ -5,19 +5,18 @@ using NDDigital.DiarioAcademia.Infraestrutura.Orm.Configurations;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
-using System.Data.Entity.Core.Objects;
 using System.Data.Entity.Infrastructure;
 using System.Data.Entity.Validation;
 using System.Linq;
 
-namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Contexts
+namespace Infrasctructure.DAO.ORM.Contexts
 {
-    public class DiarioAcademiaContext : IdentityDbContext<User>
+    public class EntityFrameworkContext : IdentityDbContext<User>
     {
-        public DiarioAcademiaContext()
+        public EntityFrameworkContext()
             : base("DiarioAcademiaContext", throwIfV1Schema: false)
         {
-            Database.SetInitializer(new DropCreateDatabaseIfModelChanges<DiarioAcademiaContext>());
+            Database.SetInitializer(new DropCreateDatabaseIfModelChanges<EntityFrameworkContext>());
             Configuration.ProxyCreationEnabled = false;
             Configuration.LazyLoadingEnabled = false;
         }
@@ -33,9 +32,9 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Contexts
 
         public DbSet<Presenca> Presencas { get; set; }
 
-        public static DiarioAcademiaContext Create()
+        public static EntityFrameworkContext Create()
         {
-            return new DiarioAcademiaContext();
+            return new EntityFrameworkContext();
         }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -51,6 +50,7 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Contexts
             modelBuilder.Configurations.Add(new GroupConfiguration());
             modelBuilder.Configurations.Add(new PermissionConfiguration());
         }
+
         public void Detach(object entity)
         {
             ((IObjectContextAdapter)this).ObjectContext.Detach(entity);

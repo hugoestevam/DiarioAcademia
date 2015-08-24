@@ -1,6 +1,7 @@
-﻿using NDDigital.DiarioAcademia.Dominio.Contracts;
+﻿using Infrasctructure.DAO.SQL.Common;
+using NDDigital.DiarioAcademia.Infraestrutura.SQL.Common;
+using NDDigital.DiarioAcademia.Dominio.Contracts;
 using NDDigital.DiarioAcademia.Dominio.Entities;
-using NDDigital.DiarioAcademia.Dominio.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -8,7 +9,8 @@ using System.Linq.Expressions;
 
 namespace NDDigital.DiarioAcademia.Infraestrutura.SQL.Repositories
 {
-    public class AlunoRepositorySql : IAlunoRepository
+    //TODO: IMPLEMENTAR
+    public class AlunoRepositorySql : RepositoryBaseADO, IAlunoRepository
     {
         #region Querys
 
@@ -21,11 +23,11 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.SQL.Repositories
                ,[Nome]
                ,[Turma_Id])
          VALUES
-               ({0} Endereco_Cep,
-                {0} Endereco_Bairro,
-                {0} Endereco_Localidade,
-                {0} Endereco_Uf,
-                {0} Nome,
+               ({0}Endereco_Cep,
+                {0}Endereco_Bairro,
+                {0}Endereco_Localidade,
+                {0}Endereco_Uf,
+                {0}Nome,
                 {0}Turma_Id)";
 
         public const string SqlUpdate =
@@ -34,9 +36,9 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.SQL.Repositories
                ,[Endereco_Bairro] = {0}Endereco_Bairro
                ,[Endereco_Localidade] = {0}Endereco_Localidade
                ,[Endereco_Uf] = {0}Endereco_Uf
-               ,[Nome] = = {0}Nome
+               ,[Nome] = {0}Nome
                ,[Turma_Id] = {0}Turma_Id
-         WHERE [Id] = {0}Id";
+          WHERE [Id] = {0}Id";
 
         public const string SqlDelete =
          "DELETE FROM TBAluno " +
@@ -53,128 +55,58 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.SQL.Repositories
 
         #endregion Querys
 
+        public AlunoRepositorySql(AdoNetFactory factory): base(factory)
+        {
+
+        }
+
         public Aluno Add(Aluno entity)
         {
-            try
-            {
-                Db.Insert(SqlInsert, Take(entity));
-            }
-            catch (AlunoNaoEncontrado te)
-            {
-                throw new AlunoNaoEncontrado("Erro ao tentar adicionar um Aluno!" + te.Message);
-            }
+            Insert(SqlInsert, Take(entity));
 
             return entity;
         }
 
         public void Delete(int id)
         {
-            try
-            {
-                var alunoRemovido = GetById(id);
-                Db.Delete(SqlDelete, Take(alunoRemovido));
-            }
-            catch (AlunoNaoEncontrado te)
-            {
-                throw new AlunoNaoEncontrado("Erro ao tentar deletar um Aluno!" + te.Message);
-            }
+            var alunoRemovido = GetById(id);
+            Delete(SqlDelete, Take(alunoRemovido));
         }
 
         public void Delete(Aluno entity)
         {
-            try
-            {
-                Db.Delete(SqlDelete, Take(entity));
-            }
-            catch (AlunoNaoEncontrado te)
-            {
-                throw new AlunoNaoEncontrado("Erro ao tentar deletar um Aluno!" + te.Message);
-            }
+            Delete(SqlDelete, Take(entity));
         }
 
         public IList<Aluno> GetAll()
         {
-            try
-            {
-                return Db.GetAll(SqlSelect, Make);
-            }
-            catch (AlunoNaoEncontrado te)
-            {
-                throw new AlunoNaoEncontrado("Erro ao tentar listar todos os Alunos!" + te.Message);
-            }
+            return GetAll(SqlSelect, Make);
         }
 
         public IList<Aluno> GetAllByTurma(int ano)
         {
-            try
-            {
-                var parms = new object[] { "ano", ano };
+            var parms = new object[] { "ano", ano };
 
-                return Db.GetAll(SqlSelectAllByTurma, Make, parms);
-            }
-            catch (AlunoNaoEncontrado te)
-            {
-                throw new AlunoNaoEncontrado("Erro ao tentar listar todos os Alunos!" + te.Message);
-            }
+            return GetAll(SqlSelectAllByTurma, Make, parms);
         }
 
         public IList<Aluno> GetAllByTurmaId(int turmaId)
         {
-            try
-            {
-                var parms = new object[] { "Turma_Id", turmaId };
+            var parms = new object[] { "Turma_Id", turmaId };
 
-                return Db.GetAll(SqlSelectAllByTurma, Make, parms);
-            }
-            catch (AlunoNaoEncontrado te)
-            {
-                throw new AlunoNaoEncontrado("Erro ao tentar listar todos os Alunos!" + te.Message);
-            }
-        }
-
-        public IList<Aluno> GetAllIncluding(params Expression<Func<Aluno, object>>[] includeProperties)
-        {
-            throw new NotImplementedException();
-            //TODO: 3 Implementar
+            return GetAll(SqlSelectAllByTurma, Make, parms);
         }
 
         public Aluno GetById(int id)
         {
-            try
-            {
-                var parms = new object[] { "Id", id };
+            var parms = new object[] { "Id", id };
 
-                return Db.Get(SqlSelectbId, Make, parms);
-            }
-            catch (AlunoNaoEncontrado te)
-            {
-                throw new AlunoNaoEncontrado("Erro ao tentar buscar um Aluno!" + te.Message);
-            }
-        }
-
-        public Aluno GetByIdIncluding(int id, params Expression<Func<Aluno, object>>[] includeProperties)
-        {
-            throw new NotImplementedException();
-            //TODO: 4 Implementar
-        }
-
-        public IList<Aluno> GetMany(Expression<Func<Aluno, bool>> where)
-        {
-            throw new NotImplementedException();
-            //TODO: 5 Implementar
+            return Get(SqlSelectbId, Make, parms);
         }
 
         public void Update(Aluno entity)
         {
-            try
-            {
-                var alunoEditado = GetById(entity.Id);
-                Db.Update(SqlUpdate, Take(alunoEditado));
-            }
-            catch (AlunoNaoEncontrado te)
-            {
-                throw new AlunoNaoEncontrado("Erro ao tentar editar um Aluno!" + te.Message);
-            }
+            Update(SqlUpdate, Take(entity));
         }
 
         private static Aluno Make(IDataReader reader)
@@ -182,7 +114,11 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.SQL.Repositories
             Aluno aluno = new Aluno();
             aluno.Id = Convert.ToInt32(reader["Id"]);
             aluno.Nome = Convert.ToString(reader["Nome"]);
-            aluno.Turma.Id = Convert.ToInt32(reader["TurmaId"]); //TODO: Tirei o protected da Entity
+            aluno.Turma.Id = Convert.ToInt32(reader["Turma_Id"]); //TODO: Tirei o protected da Entity
+            aluno.Endereco.Cep = Convert.ToString(reader["Endereco_Cep"]);
+            aluno.Endereco.Localidade = Convert.ToString(reader["Endereco_Localidade"]);
+            aluno.Endereco.Bairro = Convert.ToString(reader["Endereco_Bairro"]);
+            aluno.Endereco.Uf = Convert.ToString(reader["Endereco_Uf"]);
 
             return aluno;
         }
@@ -193,12 +129,27 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.SQL.Repositories
             {
                 "Id", aluno.Id,
                 "Nome", aluno.Nome,
-                "TurmaId", aluno.Turma.Id,
-                "Cep", aluno.Endereco.Cep,
-                "Localidade", aluno.Endereco.Localidade,
-                "Bairro", aluno.Endereco.Bairro,
-                "UF", aluno.Endereco.Uf
+                "Turma_Id", aluno.Turma.Id,
+                "Endereco_Cep", aluno.Endereco.Cep,
+                "Endereco_Localidade", aluno.Endereco.Localidade,
+                "Endereco_Bairro", aluno.Endereco.Bairro,
+                "Endereco_Uf", aluno.Endereco.Uf
             };
+        }
+
+        public Aluno GetByIdIncluding(int id, params Expression<Func<Aluno, object>>[] includeProperties)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IList<Aluno> GetMany(Expression<Func<Aluno, bool>> where)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IList<Aluno> GetAllIncluding(params Expression<Func<Aluno, object>>[] includeProperties)
+        {
+            throw new NotImplementedException();
         }
     }
 }

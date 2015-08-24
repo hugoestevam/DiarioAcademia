@@ -1,19 +1,18 @@
-﻿using Microsoft.AspNet.Identity;
+﻿using Infrasctructure.DAO.ORM.Contexts;
+using Microsoft.AspNet.Identity;
 using Moq;
 using NDDigital.DiarioAcademia.Dominio.Entities;
 using NDDigital.DiarioAcademia.Dominio.Entities.Security;
-using NDDigital.DiarioAcademia.Infraestrutura.Orm.Contexts;
 using NDDigital.DiarioAcademia.Infraestrutura.Orm.Security;
-
-using NDDigital.DiarioAcademia.SecurityTests;
+using NDDigital.DiarioAcademia.IntegrantionTests.Base;
 using System.Data.Entity;
 using System.Linq;
 
 namespace NDDigital.DiarioAcademia.IntegrationTests.Base
 {
-    public class BaseTest : DropCreateDatabaseAlways<DiarioAcademiaContext>
+    public class BaseTest : DropCreateDatabaseAlways<EntityFrameworkContext>
     {
-        public DiarioAcademiaContext _context;
+        public EntityFrameworkContext _context;
         private readonly Mock<UserRepository> _userRepository = null;
         public IUserStore<User> _store;
 
@@ -38,35 +37,15 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.Base
         {
             _userRepository = new Mock<UserRepository>();
 
-            _context = new DiarioAcademiaContext();
+            _context = new EntityFrameworkContext();
 
-            //Db.Update(SqlCleanDB); //R.I.P. Classe Db :(
-  //                           _//)
-  //                         /  / )
-  //                         |/)\)
-  //                         /\_
-  //                         \__ |=
-  //                        (    )
-  //                        __)(__
-  //                  _____ /      \\_____
-  //                 | _     ___ _      ||
-  //                 | | \     |   | \  ||
-  //                 | |  |    |   |  | ||
-  //                 | |_ /    |   |_ / ||
-  //                 | | \     |   |    ||
-  //                 | |  \    |   |    ||
-  //                 | |   \._ | _.| .  ||
-  //                 |                  ||
-  //                 |    classe Db     ||
-  //                 |    2010~2015     ||
-  //*                | ******   | ****  ||
-         _context.Database.ExecuteSqlCommand(SqlCleanDB);
+            _context.Database.ExecuteSqlCommand(SqlCleanDB);
             _context.SaveChanges();
 
             Seed(_context);
         }
 
-        protected override void Seed(DiarioAcademiaContext context)
+        protected override void Seed(EntityFrameworkContext context)
         {
             base.Seed(context);
 

@@ -4,6 +4,8 @@ using NDDigital.DiarioAcademia.Infraestrutura.Orm.Common;
 using System.Collections.Generic;
 using System.Linq;
 using System;
+using NDDigital.DiarioAcademia.Infraestrutura.DAO.Common.Factorys;
+using Infrastructure.DAO.ORM.Common.Base;
 
 namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Security
 {
@@ -14,13 +16,12 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Security
         Permission GetByPermissionId(string v);
     }
 
-    public class PermissionRepository : RepositoryBase<Permission>, IPermissionRepository
+    public class PermissionRepository : RepositoryBaseEF<Permission>, IPermissionRepository
     {
 
-        public PermissionRepository(IDatabaseFactory dbFactory)
-            : base(dbFactory)
+        public PermissionRepository(UnitOfWorkFactory dbFactory)
+         : base(dbFactory)
         {
-            
         }
 
         public IList<Permission> GetAllSpecific(string[] ids)
@@ -28,7 +29,7 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Security
             var list = new List<Permission>();
             foreach (var id in ids)
             {
-                var permission = dataContext.Permissions.Where(p => p.PermissionId == id).FirstOrDefault();
+                var permission = DataContext.Permissions.Where(p => p.PermissionId == id).FirstOrDefault();
 
                 list.Add(permission ?? new Permission(id));
             }
@@ -38,13 +39,13 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Security
 
         public IList<Permission> GetByGroup(int groupId)
         {
-            var group = dataContext.Groups.Find(groupId);
+            var group = DataContext.Groups.Find(groupId);
             return group.Permissions;
         }
 
         public Permission GetByPermissionId(string id)
         {
-            return (from p in dataContext.Permissions where p.PermissionId == id select p).FirstOrDefault(); ;
+            return (from p in DataContext.Permissions where p.PermissionId == id select p).FirstOrDefault(); ;
         }
     }
 

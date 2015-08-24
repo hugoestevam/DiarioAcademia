@@ -1,20 +1,21 @@
-﻿using NDDigital.DiarioAcademia.Infraestrutura.Orm.Contexts;
+﻿using Infrasctructure.DAO.ORM.Contexts;
+using NDDigital.DiarioAcademia.Infraestrutura.DAO.Common.Uow;
+using NDDigital.DiarioAcademia.Infraestrutura.Orm.Common;
 using System;
 using System.Data.Entity;
-using System.Data.Entity.Core;
 using System.Data.Entity.Core.Objects;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 
-namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Common
+namespace Infrastructure.DAO.ORM.Common
 {
-    public class UnitOfWork : IUnitOfWork
+    public class EntityFrameworkUnitOfWork : IUnitOfWork
     {
-        private DiarioAcademiaContext dbContext = null;
+        private EntityFrameworkContext dbContext = null;
 
-        private readonly IDatabaseFactory dbFactory;
+        private readonly EntityFrameworkFactory dbFactory;
 
-        protected DiarioAcademiaContext DbContext
+        protected EntityFrameworkContext DbContext
         {
             get
             {
@@ -22,37 +23,14 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Common
             }
         }
 
-        public UnitOfWork(IDatabaseFactory dbFactory)
+        public EntityFrameworkUnitOfWork(EntityFrameworkFactory dbFactory)
         {
             this.dbFactory = dbFactory;
         }
 
         public void Commit()
         {
-            try
-            {
-                     DbContext.SaveChanges();
-            }
-            catch (OptimisticConcurrencyException ocException)
-            {
-                var context = ((IObjectContextAdapter)DbContext).ObjectContext;
-
-                var refreshableObjects = (from entry in context.ObjectStateManager.GetObjectStateEntries(
-                                                            EntityState.Added
-                                                           | EntityState.Deleted
-                                                           | EntityState.Modified
-                                                           | EntityState.Unchanged)
-                                          where entry.EntityKey != null
-                                          select entry.Entity).ToList();
-
-                context.Refresh(RefreshMode.StoreWins, refreshableObjects);
-
-                context.SaveChanges();
-            }
-            catch (Exception exc) {
-                for (; exc.InnerException != null; exc = exc.InnerException) { }
-                throw exc;
-            }
+            DbContext.SaveChanges();
         }
 
         public void CommitAndRefreshChanges()
@@ -90,7 +68,12 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Common
             } while (saveFailed);
         }
 
-        public void Roolback()
+        public void Rollback()
+        {
+            DbContext.Dispose();
+        }
+
+        public void Dispose()
         {
             DbContext.Dispose();
         }

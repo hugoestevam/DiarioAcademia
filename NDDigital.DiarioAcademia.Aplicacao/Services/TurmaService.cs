@@ -1,14 +1,13 @@
 ﻿using NDDigital.DiarioAcademia.Aplicacao.DTOs;
-using NDDigital.DiarioAcademia.Dominio;
 using NDDigital.DiarioAcademia.Dominio.Contracts;
 using NDDigital.DiarioAcademia.Dominio.Entities;
-using NDDigital.DiarioAcademia.Infraestrutura.Orm.Common;
+using NDDigital.DiarioAcademia.Infraestrutura.DAO.Common.Uow;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace NDDigital.DiarioAcademia.Aplicacao.Services
 {
-    public interface ITurmaService:IService<TurmaDTO>{}
+    public interface ITurmaService : IService<TurmaDTO> { }
 
     public class TurmaService : ITurmaService
     {

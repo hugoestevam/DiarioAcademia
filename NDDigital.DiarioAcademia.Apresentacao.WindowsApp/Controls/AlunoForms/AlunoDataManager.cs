@@ -1,13 +1,12 @@
-﻿using NDDigital.DiarioAcademia.Aplicacao.Services;
+﻿using Infrastructure.DAO.ORM.Common;
 using NDDigital.DiarioAcademia.Aplicacao.DTOs;
+using NDDigital.DiarioAcademia.Aplicacao.Services;
 using NDDigital.DiarioAcademia.Apresentacao.WindowsApp.Controls.Shared;
+using NDDigital.DiarioAcademia.Dominio.Contracts;
+using NDDigital.DiarioAcademia.Infraestrutura.IoC;
 using NDDigital.DiarioAcademia.Infraestrutura.Orm.Common;
 using NDDigital.DiarioAcademia.Infraestrutura.Orm.Repositories;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace NDDigital.DiarioAcademia.Apresentacao.WindowsApp.Controls.AlunoForms
@@ -16,18 +15,18 @@ namespace NDDigital.DiarioAcademia.Apresentacao.WindowsApp.Controls.AlunoForms
     {
         private IAlunoService _alunoService;
         private ITurmaService _turmaService;
-        
+
         private AlunoControl _control;
 
-        public AlunoDataManager()
+        public AlunoDataManager() //TODO: IOC
         {
-            var factory = new DatabaseFactory();
+            var factory = new EntityFrameworkFactory();//Container.Get<UnitOfWorkFactory>();
 
-            var unitOfWork = new UnitOfWork(factory);
+            var unitOfWork = new EntityFrameworkUnitOfWork(factory);//Container.Get<IUnitOfWork>();
 
-            var alunoRepository = new AlunoRepositoryEF(factory);
+            var alunoRepository = new AlunoRepositoryEF(factory); ;//Container.Get<IAlunoRepository>();
 
-            var turmaRepository = new TurmaRepositoryEF(factory);
+            var turmaRepository = Container.Get<ITurmaRepository>();
 
             _turmaService = new TurmaService(turmaRepository, unitOfWork);
 
@@ -135,6 +134,5 @@ namespace NDDigital.DiarioAcademia.Apresentacao.WindowsApp.Controls.AlunoForms
                 Report = true
             };
         }
-
     }
 }

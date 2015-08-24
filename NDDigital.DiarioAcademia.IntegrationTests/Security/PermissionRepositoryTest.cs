@@ -1,9 +1,9 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using NDDigital.DiarioAcademia.Infraestrutura.Orm.Common;
+using NDDigital.DiarioAcademia.Infraestrutura.DAO.Common.Uow;
 using NDDigital.DiarioAcademia.Infraestrutura.Orm.Security;
+using NDDigital.DiarioAcademia.IntegrantionTests.Base;
 using NDDigital.DiarioAcademia.IntegrationTests.Base;
 using NDDigital.DiarioAcademia.IntegrationTests.Common;
-using NDDigital.DiarioAcademia.SecurityTests;
 using System.Data.Entity;
 
 namespace NDDigital.DiarioAcademia.IntegrationTests.Security
@@ -85,7 +85,6 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.Security
         [TestCategory("Authorization - Permission")]
         public void Deveria_Buscar_Permissoes_Por_Grupo()
         {
-
             //arrange
             var administrador = _groupRepo.GetById(1);
 
@@ -97,10 +96,9 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.Security
 
             //act
             var list = _permissionRepo.GetByGroup(administrador.Id);
-            
+
             //asert
             Assert.AreEqual(1, list.Count);
-
-;        }
+        }
     }
 }

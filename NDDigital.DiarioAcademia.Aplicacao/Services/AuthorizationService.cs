@@ -1,20 +1,20 @@
-﻿using NDDigital.DiarioAcademia.Dominio.Entities.Security;
-using NDDigital.DiarioAcademia.Infraestrutura.Orm.Common;
+﻿using Microsoft.AspNet.Identity;
+using NDDigital.DiarioAcademia.Dominio.Entities.Security;
+using NDDigital.DiarioAcademia.Infraestrutura.DAO.Common.Uow;
 using NDDigital.DiarioAcademia.Infraestrutura.Orm.Security;
 using System.Collections.Generic;
-using System;
-using Microsoft.AspNet.Identity;
 using System.Linq;
-
 
 namespace NDDigital.DiarioAcademia.Aplicacao.Services
 {
     public interface IAuthorizationService
     {
         void AddPermissionsToGroup(int id, string[] permissions);
+
         void RemovePermissionsFromGroup(int id, string[] permissions);
 
         void AddGroupToUser(string username, int[] groups);
+
         void RemoveGroupFromUser(string username, int[] groups);
     }
 
@@ -33,12 +33,10 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
             _userRepository = userRepository;
         }
 
-        public void AddPermissionsToGroup(int id,string[] permissions)
+        public void AddPermissionsToGroup(int id, string[] permissions)
         {
-            var groupEncontrado = _groupRepository.GetByIdIncluding(id,x=>x.Permissions);
+            var groupEncontrado = _groupRepository.GetByIdIncluding(id, x => x.Permissions);
             var listPermissions = _permissionRepository.GetAllSpecific(permissions);
-
-
 
             if (groupEncontrado != null)
             {
@@ -61,13 +59,11 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
 
             foreach (var permId in permissions)
             {
-                var perm = groupEncontrado.Permissions.FirstOrDefault(p => p.PermissionId==permId);
+                var perm = groupEncontrado.Permissions.FirstOrDefault(p => p.PermissionId == permId);
                 if (perm != null)
                 {
                     groupEncontrado.Permissions.Remove(perm);
                 };
-
-
             }
 
             _groupRepository.Update(groupEncontrado);
@@ -78,7 +74,7 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
         public void AddGroupToUser(string username, int[] groups)
         {
             var userEncontrado = _userRepository.GetByUserName(username);
-            var listGroups= _groupRepository.GetAllSpecific(groups);
+            var listGroups = _groupRepository.GetAllSpecific(groups);
 
             SetGroups(userEncontrado, listGroups);
 
@@ -91,7 +87,7 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
         {
             var userEncontrado = _userRepository.GetByUserName(username);
 
-            foreach(var groupId in groups)
+            foreach (var groupId in groups)
             {
                 var group = userEncontrado.Groups.FirstOrDefault(p => p.Id == groupId);
 
@@ -103,10 +99,9 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
             }
             _userRepository.Update(userEncontrado);
             _unitOfWork.Commit();
-
         }
 
-        private void SetGroups(User userEncontrado,IList<Group>listGroups)
+        private void SetGroups(User userEncontrado, IList<Group> listGroups)
         {
             if (userEncontrado != null)
             {
@@ -117,11 +112,5 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
             }
             _unitOfWork.Commit();
         }
-
-
-
-
-
-        
     }
 }

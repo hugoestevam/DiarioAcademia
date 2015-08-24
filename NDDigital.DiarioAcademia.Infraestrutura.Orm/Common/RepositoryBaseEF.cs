@@ -1,5 +1,7 @@
-﻿using NDDigital.DiarioAcademia.Dominio.Common;
-using NDDigital.DiarioAcademia.Infraestrutura.Orm.Contexts;
+﻿using Infrasctructure.DAO.ORM.Contexts;
+using NDDigital.DiarioAcademia.Dominio.Common;
+using NDDigital.DiarioAcademia.Infraestrutura.DAO.Common.Factorys;
+using NDDigital.DiarioAcademia.Infraestrutura.Orm.Common;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -7,28 +9,29 @@ using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Linq.Expressions;
 
-namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Common
+namespace Infrastructure.DAO.ORM.Common.Base
 {
-    public abstract class RepositoryBase<T> where T : Entity
+    public abstract class RepositoryBaseEF<T> where T : Entity
     {
-        protected DiarioAcademiaContext dataContext;
+        protected EntityFrameworkContext dataContext;
         protected readonly IDbSet<T> dbset;
 
-        protected RepositoryBase(IDatabaseFactory databaseFactory)
+        protected RepositoryBaseEF(UnitOfWorkFactory databaseFactory)
         {
-            DatabaseFactory = databaseFactory;
+            DatabaseFactory = (EntityFrameworkFactory)databaseFactory;
             dbset = DataContext.Set<T>();
+            dataContext = dataContext ?? (DatabaseFactory.Get());
         }
 
-        protected IDatabaseFactory DatabaseFactory
+        protected EntityFrameworkFactory DatabaseFactory
         {
             get;
             private set;
         }
 
-        protected DiarioAcademiaContext DataContext
+        protected EntityFrameworkContext DataContext
         {
-            get { return dataContext ?? (dataContext = DatabaseFactory.Get()); }
+            get { return dataContext ?? (DatabaseFactory.Get()); }
         }
 
         public virtual T Add(T entity)
@@ -39,7 +42,7 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Common
 
         public virtual void Update(T entity)
         {
-            DbEntityEntry dbEntityEntry = dataContext.Entry(entity);
+            DbEntityEntry dbEntityEntry = DataContext.Entry(entity);
 
             if (dbEntityEntry.State == EntityState.Detached)
             {
@@ -47,13 +50,13 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Common
             }
             dbEntityEntry.State = EntityState.Modified;
 
-            //dbset.Attach(entity);
-            //dataContext.Entry(entity).State = EntityState.Modified;
+            dbset.Attach(entity);
+            DataContext.Entry(entity).State = EntityState.Modified;
         }
 
         public virtual void Delete(T entity)
         {
-            DbEntityEntry dbEntityEntry = dataContext.Entry(entity);
+            DbEntityEntry dbEntityEntry = DataContext.Entry(entity);
 
             if (dbEntityEntry.State != EntityState.Deleted)
             {
@@ -65,10 +68,10 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Common
                 dbset.Remove(entity);
             }
 
-            //dbset.Attach(entity);
-            //dataContext.Entry(entity).State = EntityState.Deleted;
+            dbset.Attach(entity);
+            DataContext.Entry(entity).State = EntityState.Deleted;
 
-            //dbset.Remove(entity);
+            dbset.Remove(entity);
         }
 
         public virtual void Delete(int id)
@@ -99,7 +102,7 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Common
                 query = query.Include(includeProperty);
             }
 
-            return query.FirstOrDefault(t=>t.Id==id);
+            return query.FirstOrDefault();
         }
 
         public virtual IList<T> GetAll()
