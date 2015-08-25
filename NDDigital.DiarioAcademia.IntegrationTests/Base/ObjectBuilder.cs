@@ -43,7 +43,7 @@ namespace NDDigital.DiarioAcademia.IntegrantionTests.Base
 
         public static User CreateUser()
         {
-            return new User { FirstName = "thiago", LastName = "sartor",Level = 2, Groups = CreateListGroups() ,UserName="ttt"};
+            return new User { FirstName = "thiago", LastName = "sartor", Level = 2, Groups = CreateListGroups(), UserName = "ttt" };
         }
 
         public static Group CreateGroup()

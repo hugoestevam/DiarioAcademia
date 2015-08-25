@@ -1,4 +1,6 @@
-﻿using Ninject;
+﻿using NDDigital.DiarioAcademia.Infraestrutura.Orm.Modules;
+using NDDigital.DiarioAcademia.Infraestrutura.SQL.Modules;
+using Ninject;
 using System.Configuration;
 using System.IO;
 using System.Reflection;

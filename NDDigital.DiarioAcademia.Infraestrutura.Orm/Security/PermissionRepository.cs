@@ -1,25 +1,24 @@
-﻿using NDDigital.DiarioAcademia.Dominio;
+﻿using Infrastructure.DAO.ORM.Common.Base;
+using NDDigital.DiarioAcademia.Dominio;
 using NDDigital.DiarioAcademia.Dominio.Entities.Security;
 using NDDigital.DiarioAcademia.Infraestrutura.Orm.Common;
 using System.Collections.Generic;
 using System.Linq;
-using System;
-using NDDigital.DiarioAcademia.Infraestrutura.DAO.Common.Factorys;
-using Infrastructure.DAO.ORM.Common.Base;
 
 namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Security
 {
     public interface IPermissionRepository : IRepository<Permission>
     {
         IList<Permission> GetByGroup(int groupId);
+
         IList<Permission> GetAllSpecific(string[] permissions);
+
         Permission GetByPermissionId(string v);
     }
 
     public class PermissionRepository : RepositoryBaseEF<Permission>, IPermissionRepository
     {
-
-        public PermissionRepository(UnitOfWorkFactory dbFactory)
+        public PermissionRepository(EntityFrameworkFactory dbFactory)
          : base(dbFactory)
         {
         }
@@ -33,7 +32,7 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Security
 
                 list.Add(permission ?? new Permission(id));
             }
-                list.RemoveAll(x => x == null);
+            list.RemoveAll(x => x == null);
             return list;
         }
 
@@ -48,7 +47,4 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Security
             return (from p in DataContext.Permissions where p.PermissionId == id select p).FirstOrDefault(); ;
         }
     }
-
-   
-
 }

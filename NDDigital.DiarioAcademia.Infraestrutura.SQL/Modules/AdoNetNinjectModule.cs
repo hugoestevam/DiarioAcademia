@@ -1,7 +1,5 @@
-﻿
-
+﻿using NDDigital.DiarioAcademia.Dominio.Contracts;
 using NDDigital.DiarioAcademia.Infraestrutura.SQL.Repositories;
-using NDDigital.DiarioAcademia.Dominio.Contracts;
 using Ninject.Modules;
 
 namespace NDDigital.DiarioAcademia.Infraestrutura.SQL.Modules

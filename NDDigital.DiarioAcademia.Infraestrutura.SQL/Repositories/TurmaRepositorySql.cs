@@ -1,12 +1,11 @@
 ﻿using Infrasctructure.DAO.SQL.Common;
-using NDDigital.DiarioAcademia.Infraestrutura.SQL.Common;
 using NDDigital.DiarioAcademia.Dominio.Contracts;
 using NDDigital.DiarioAcademia.Dominio.Entities;
+using NDDigital.DiarioAcademia.Infraestrutura.SQL.Common;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq.Expressions;
-using NDDigital.DiarioAcademia.Infraestrutura.DAO.Common.Factorys;
 
 namespace NDDigital.DiarioAcademia.Infraestrutura.SQL.Repositories
 {
@@ -35,7 +34,7 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.SQL.Repositories
 
         #endregion Querys
 
-        public TurmaRepositorySql(UnitOfWorkFactory factory) : base(factory)
+        public TurmaRepositorySql(AdoNetFactory factory) : base(factory)
         {
         }
 

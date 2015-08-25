@@ -1,7 +1,8 @@
 ﻿using Infrasctructure.DAO.SQL.Common;
-using NDDigital.DiarioAcademia.Infraestrutura.SQL.Common;
 using NDDigital.DiarioAcademia.Dominio.Contracts;
 using NDDigital.DiarioAcademia.Dominio.Entities;
+using NDDigital.DiarioAcademia.Infraestrutura.DAO.Common.Factorys;
+using NDDigital.DiarioAcademia.Infraestrutura.SQL.Common;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -9,7 +10,6 @@ using System.Linq.Expressions;
 
 namespace NDDigital.DiarioAcademia.Infraestrutura.SQL.Repositories
 {
-    //TODO: IMPLEMENTAR
     public class AlunoRepositorySql : RepositoryBaseADO, IAlunoRepository
     {
         #region Querys
@@ -55,9 +55,8 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.SQL.Repositories
 
         #endregion Querys
 
-        public AlunoRepositorySql(AdoNetFactory factory): base(factory)
+        public AlunoRepositorySql(AdoNetFactory factory) : base(factory)
         {
-
         }
 
         public Aluno Add(Aluno entity)

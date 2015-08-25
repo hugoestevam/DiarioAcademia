@@ -1,7 +1,7 @@
 ﻿using Infrasctructure.DAO.SQL.Common;
-using NDDigital.DiarioAcademia.Infraestrutura.SQL.Common;
 using NDDigital.DiarioAcademia.Dominio.Contracts;
 using NDDigital.DiarioAcademia.Dominio.Entities;
+using NDDigital.DiarioAcademia.Infraestrutura.SQL.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;

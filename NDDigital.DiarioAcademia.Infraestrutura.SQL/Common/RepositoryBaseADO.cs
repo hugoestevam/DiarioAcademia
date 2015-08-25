@@ -13,9 +13,9 @@ namespace Infrasctructure.DAO.SQL.Common
     {
         public AdoNetFactory _factory;
 
-        public RepositoryBaseADO(UnitOfWorkFactory factory)
+        public RepositoryBaseADO(AdoNetFactory factory)
         {
-            _factory = (AdoNetFactory)factory;
+            _factory = factory;
         }
 
         public int Insert(string sql, object[] parms = null)

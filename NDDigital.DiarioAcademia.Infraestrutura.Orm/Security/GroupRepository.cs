@@ -1,12 +1,10 @@
-﻿using System;
+﻿using Infrastructure.DAO.ORM.Common.Base;
 using NDDigital.DiarioAcademia.Dominio;
 using NDDigital.DiarioAcademia.Dominio.Entities.Security;
+using NDDigital.DiarioAcademia.Infraestrutura.DAO.Common.Uow;
 using NDDigital.DiarioAcademia.Infraestrutura.Orm.Common;
 using System.Collections.Generic;
 using System.Linq;
-using Infrastructure.DAO.ORM.Common.Base;
-using NDDigital.DiarioAcademia.Infraestrutura.DAO.Common.Uow;
-using NDDigital.DiarioAcademia.Infraestrutura.DAO.Common.Factorys;
 
 namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Security
 {
@@ -19,7 +17,7 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Security
     {
         private IUnitOfWork uow;
 
-        public GroupRepository(UnitOfWorkFactory dbFactory)
+        public GroupRepository(EntityFrameworkFactory dbFactory)
          : base(dbFactory)
         {
         }

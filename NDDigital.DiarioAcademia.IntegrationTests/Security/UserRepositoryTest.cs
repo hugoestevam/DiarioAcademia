@@ -17,18 +17,19 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.Security
         public IUserStore<User> _store;
         private IUnitOfWork uow;
         private User _user;
-        public const string SqlCleanDB = @"DBCC CHECKIDENT ('[TBPresenca]', RESEED, 0) 
-                                           DBCC CHECKIDENT ('[TBAula]', RESEED, 0) 
+
+        public const string SqlCleanDB = @"DBCC CHECKIDENT ('[TBPresenca]', RESEED, 0)
+                                           DBCC CHECKIDENT ('[TBAula]', RESEED, 0)
                                            DBCC CHECKIDENT ('[TBAluno]', RESEED, 0)
                                            DBCC CHECKIDENT ('[TBTurma]', RESEED, 0)
                                            DBCC CHECKIDENT ('[TBGroup]', RESEED, 0)
                                            DBCC CHECKIDENT ('[TBPermission]', RESEED, 0)
-                                           DELETE FROM TBPresenca DELETE FROM TBAula 
-                                           DELETE FROM TBAluno DELETE FROM TBTurma 
-                                           DELETE FROM TBUserGroups 
-                                           DELETE FROM TBGroupPermission 
-                                           DELETE FROM TBGroup 
-                                           DELETE FROM TBPermission 
+                                           DELETE FROM TBPresenca DELETE FROM TBAula
+                                           DELETE FROM TBAluno DELETE FROM TBTurma
+                                           DELETE FROM TBUserGroups
+                                           DELETE FROM TBGroupPermission
+                                           DELETE FROM TBGroup
+                                           DELETE FROM TBPermission
                                            DELETE FROM TBUser";
 
         [TestInitialize]

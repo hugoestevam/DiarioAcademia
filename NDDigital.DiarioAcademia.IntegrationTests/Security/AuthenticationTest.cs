@@ -4,7 +4,6 @@ using NDDigital.DiarioAcademia.Aplicacao.Services;
 using NDDigital.DiarioAcademia.Dominio.Entities.Security;
 using NDDigital.DiarioAcademia.Infraestrutura.DAO.Common.Uow;
 using NDDigital.DiarioAcademia.Infraestrutura.Orm.Security;
-using NDDigital.DiarioAcademia.IntegrantionTests.Base;
 using NDDigital.DiarioAcademia.IntegrationTests.Base;
 using NDDigital.DiarioAcademia.IntegrationTests.Common;
 using System.Data.Entity;
@@ -38,7 +37,7 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.Security
 
             _userRepo = new UserRepository(store);
 
-            _service = new AuthorizationService(_groupRepo, _permissionRepo, _userRepo, uow);           
+            _service = new AuthorizationService(_groupRepo, _permissionRepo, _userRepo, uow);
 
             var user = new User
             {

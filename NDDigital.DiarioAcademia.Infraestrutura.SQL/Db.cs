@@ -24,8 +24,7 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.SQL
         private static readonly DbProviderFactory factory =
             DbProviderFactories.GetFactory(providerName);
 
-
-        #endregion Attributes
+        #endregion Attributos
 
         public static int Insert(string sql, object[] parms = null)
         {
@@ -182,7 +181,6 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.SQL
                 default:
                     return "@";
             }
-
         }
 
         #endregion Private methods

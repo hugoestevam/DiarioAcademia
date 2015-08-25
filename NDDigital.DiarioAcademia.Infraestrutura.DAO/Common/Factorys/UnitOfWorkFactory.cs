@@ -1,5 +1,4 @@
 ﻿using NDDigital.DiarioAcademia.Infraestrutura.DAO.Common.Uow;
-using System;
 
 namespace NDDigital.DiarioAcademia.Infraestrutura.DAO.Common.Factorys
 {
