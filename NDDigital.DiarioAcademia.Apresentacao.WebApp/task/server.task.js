@@ -9,15 +9,22 @@
 gulp.task('start', 'Start dev app.--livereload: use livereload', ['inject'], function () {
     var browserSync = require('browser-sync');
     var options = config.getBrowsersyncOptionsDefault();
+    if (yargs.livereload)
+        browserSync(options);
+    else {
+        gulp.src(config.index)
+        .pipe(open({
+            uri: "http:\\localhost:" + config.port,
+            app: 'Chrome'
+        }));
+    }
     connect.server({
         root: [config.path], // do not use './'
         port: config.port,
     });
-    if (yargs.livereload)
-        browserSync(options);
 });
 
-gulp.task('start-app','Start publish version of app optimized', ['build-optimized'], function () {
+gulp.task('start-app', 'Start publish version of app optimized', ['build-optimized'], function () {
     var open = require('gulp-open');
     //start application
     connect.server({
