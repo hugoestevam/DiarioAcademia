@@ -113,12 +113,12 @@
     <Compile Include="Configurations\PermissionConfiguration.cs" />
     <Compile Include="Configurations\PresencaConfiguration.cs" />
     <Compile Include="Configurations\TurmaConfiguration.cs" />
-    <Compile Include="Configurations\UserConfiguration.cs" />
+    <Compile Include="Configurations\AccountConfiguration.cs" />
     <Compile Include="Contexts\EntityFrameworkContext.cs" />
     <Compile Include="Modules\EntityFrameworkNinjectModule.cs" />
     <Compile Include="Security\MyUserStore.cs" />
     <Compile Include="Security\PermissionRepository.cs" />
-    <Compile Include="Security\UserRepository.cs" />
+    <Compile Include="Security\AccountRepository.cs" />
     <Compile Include="Security\GroupRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\AlunoRepositoryEF.cs" />

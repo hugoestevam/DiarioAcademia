@@ -10,22 +10,22 @@ using Microsoft.AspNet.Identity;
 
 namespace NDDigital.DiarioAcademia.Aplicacao.Services
 {
-    public interface IUserService : IService<User>
+    public interface IAccountService : IService<Account>
     {
         List<Group> FindGroupByUsername(string username);
     }
 
 
-    public class UserService : IUserService
+    public class AccountService : IAccountService
     {
-        UserRepository _repo;
+        AccountRepository _repo;
 
-        public UserService(UserRepository repo)
+        public AccountService(AccountRepository repo)
         {
             _repo = repo;
         }
 
-        public void Add(User obj)
+        public void Add(Account obj)
         {
             _repo.CreateAsync(obj);
         }
@@ -40,22 +40,22 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
             return _repo.GetGroupsByUser(username).ToList();
         }
 
-        public IList<User> GetAll()
+        public IList<Account> GetAll()
         {
             return _repo.GetUsers();
         }
 
-        public User GetById(int id)
+        public Account GetById(int id)
         {
-            return _repo.GetUserById(id.ToString());//todo
+            return _repo.GetUserById(id.ToString());//TODO
         }
 
-        public User GetById(string id)
+        public Account GetById(string id)
         {
             return _repo.GetUserById(id);
         }
 
-        public void Update(User obj)
+        public void Update(Account obj)
         {
             throw new NotImplementedException(); ;
         }

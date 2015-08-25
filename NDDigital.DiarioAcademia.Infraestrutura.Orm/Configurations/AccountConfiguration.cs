@@ -3,14 +3,15 @@ using System.Data.Entity.ModelConfiguration;
 
 namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Configurations
 {
-    internal class UserConfiguration : EntityTypeConfiguration<User>
+    internal class AccountConfiguration : EntityTypeConfiguration<Account>
     {
-        public UserConfiguration()
+        public AccountConfiguration()
         {
-            ToTable("TBUser");
+            ToTable("TBAccount");
             Ignore(c => c.EmailConfirmed);
             HasMany(x => x.Groups)
             .WithMany()
+           //TODO: Passa pra User
             .Map(x =>
             {
                 x.ToTable("TBUserGroups");

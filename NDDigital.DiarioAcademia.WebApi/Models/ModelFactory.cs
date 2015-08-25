@@ -12,15 +12,15 @@ namespace NDDigital.DiarioAcademia.WebApi.Models
     public class ModelFactory
     {
         private UrlHelper _UrlHelper;
-        private UserRepository _UserRepository;
+        private AccountRepository _UserRepository;
 
-        public ModelFactory(HttpRequestMessage request, UserRepository appUserManager)
+        public ModelFactory(HttpRequestMessage request, AccountRepository appUserManager)
         {
             _UrlHelper = new UrlHelper(request);
             _UserRepository = appUserManager;
         }
         //TODO: rrever necessidade dessa implementação
-        public UserReturnModel Create(User appUser)
+        public UserReturnModel Create(Account appUser)
         {
             return new UserReturnModel
             {
@@ -30,7 +30,6 @@ namespace NDDigital.DiarioAcademia.WebApi.Models
                 FullName = string.Format("{0} {1}", appUser.FirstName, appUser.LastName),
                 Email = appUser.Email,
                 EmailConfirmed = appUser.EmailConfirmed,
-                Level = appUser.Level,
                 Roles = _UserRepository.GetRolesAsync(appUser.Id).Result,
                 Claims = _UserRepository.GetClaimsAsync(appUser.Id).Result
             };

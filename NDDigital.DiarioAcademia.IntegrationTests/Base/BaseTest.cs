@@ -13,8 +13,8 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.Base
     public class BaseTest : DropCreateDatabaseAlways<EntityFrameworkContext>
     {
         public EntityFrameworkContext _context;
-        private readonly Mock<UserRepository> _userRepository = null;
-        public IUserStore<User> _store;
+        private readonly Mock<AccountRepository> _userRepository = null;
+        public IUserStore<Account> _store;
 
         public const string SqlCleanDB = @"DBCC CHECKIDENT ('[TBPresenca]', RESEED, 0)
                                            DBCC CHECKIDENT ('[TBAula]', RESEED, 0)
@@ -31,11 +31,11 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.Base
                                            DELETE FROM TBGroupPermission
                                            DELETE FROM TBGroup
                                            DELETE FROM TBPermission
-										   DELETE FROM TBUser";
+										   DELETE FROM TBAccount";
 
         public BaseTest()
         {
-            _userRepository = new Mock<UserRepository>();
+            _userRepository = new Mock<AccountRepository>();
 
             _context = new EntityFrameworkContext();
 

@@ -28,9 +28,9 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.Security
 
             uow = databaseFixture.UnitOfWork;
 
-            var store = new MyUserStore(databaseFixture.Factory.Get());
+            var store = new MyAccountStore(databaseFixture.Factory.Get());
 
-            var userRepository = new UserRepository(store);
+            var userRepository = new AccountRepository(store);
 
             _service = new AuthorizationService(_repoGroup, _repoPermission, userRepository, uow);
 

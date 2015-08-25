@@ -11,12 +11,12 @@ using System.Threading.Tasks;
 
 namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Security
 {
-    public class MyUserStore : IUserStore<User>, IUserPasswordStore<User>, IUserSecurityStampStore<User>, IQueryableUserStore<User>
+    public class MyAccountStore : IUserStore<Account>, IUserPasswordStore<Account>, IUserSecurityStampStore<Account>, IQueryableUserStore<Account>
     {
         private UserStore<IdentityUser> userStore;
         private EntityFrameworkContext _context;
 
-        public IQueryable<User> Users
+        public IQueryable<Account> Users
         {
             get
             {
@@ -24,19 +24,19 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Security
             }
         }
 
-        public MyUserStore(EntityFrameworkContext context)
+        public MyAccountStore(EntityFrameworkContext context)
         {
             userStore = new UserStore<IdentityUser>(_context = context);
         }
 
-        public Task CreateAsync(User user)
+        public Task CreateAsync(Account user)
         {
             _context.Users.Add(user);
             _context.Configuration.ValidateOnSaveEnabled = false;
             return _context.SaveChangesAsync();
         }
 
-        public Task DeleteAsync(User user)
+        public Task DeleteAsync(Account user)
         {
             var userLocated = _context.Users.First(u => u.UserName == user.UserName);
             _context.Users.Remove(userLocated);
@@ -44,18 +44,18 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Security
             return _context.SaveChangesAsync();
         }
 
-        public Task<User> FindByIdAsync(string userId)
+        public Task<Account> FindByIdAsync(string userId)
         {
             return _context.Users.Where(u => u.Id.ToLower() == userId.ToLower()).FirstOrDefaultAsync();
         }
 
-        public Task<User> FindByNameAsync(string userName)
+        public Task<Account> FindByNameAsync(string userName)
         {
             return _context.Users.Where(u => u.UserName.ToLower() == userName.ToLower()).FirstOrDefaultAsync();
         }
 
         //TODO: rever implementação (possivel chance de gambi pattern XGH)
-        public Task UpdateAsync(User user)
+        public Task UpdateAsync(Account user)
         {
             var context = userStore.Context as EntityFrameworkContext;
 
@@ -66,36 +66,6 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Security
             context.SaveChanges(); // save
             return context.SaveChangesAsync();
 
-            #region Implementacao Alternativa
-
-            //=======
-            //            var entry = _context.Entry(user);
-            //            // if (entry.State == EntityState.Detached)
-            //            // {
-            //            //    context.Detach(user);
-            //            // }
-            //            // _context.Users.Attach(user);
-            //            foreach(var group in user.Groups)
-            //            {
-            //                var groupEntry = _context.Entry(group);
-            //
-            //                if (groupEntry.State == EntityState.Unchanged) {
-            //                    groupEntry.State=EntityState.Modified;      //1st try
-            //                    //context.Groups.Attach(group);              //2nd try
-            //                    //groupEntry.State = EntityState.Detached;  //3rd try
-            //                }
-            //            }
-            //           // entry.State = EntityState.Modified;
-            //
-            //
-            //            _context.SaveChanges();
-            //
-            //            //context.Entry(user).State = EntityState.Modified;
-            //            //context.Configuration.ValidateOnSaveEnabled = false;
-            //            return _context.SaveChangesAsync();
-            //>>>>>>>
-
-            #endregion Implementacao Alternativa
         }
 
         public void Dispose()
@@ -103,7 +73,7 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Security
             userStore.Dispose();
         }
 
-        public Task<string> GetPasswordHashAsync(User user)
+        public Task<string> GetPasswordHashAsync(Account user)
         {
             var identityUser = ToIdentityUser(user);
             var task = userStore.GetPasswordHashAsync(identityUser);
@@ -111,7 +81,7 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Security
             return task;
         }
 
-        public Task<bool> HasPasswordAsync(User user)
+        public Task<bool> HasPasswordAsync(Account user)
         {
             var identityUser = ToIdentityUser(user);
             var task = userStore.HasPasswordAsync(identityUser);
@@ -119,7 +89,7 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Security
             return task;
         }
 
-        public Task SetPasswordHashAsync(User user, string passwordHash)
+        public Task SetPasswordHashAsync(Account user, string passwordHash)
         {
             var identityUser = ToIdentityUser(user);
             var task = userStore.SetPasswordHashAsync(identityUser, passwordHash);
@@ -127,7 +97,7 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Security
             return task;
         }
 
-        public Task<string> GetSecurityStampAsync(User user)
+        public Task<string> GetSecurityStampAsync(Account user)
         {
             var identityUser = ToIdentityUser(user);
             var task = userStore.GetSecurityStampAsync(identityUser);
@@ -135,7 +105,7 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Security
             return task;
         }
 
-        public Task SetSecurityStampAsync(User user, string stamp)
+        public Task SetSecurityStampAsync(Account user, string stamp)
         {
             var identityUser = ToIdentityUser(user);
             var task = userStore.SetSecurityStampAsync(identityUser, stamp);
@@ -143,7 +113,7 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Security
             return task;
         }
 
-        private static void SetUser(User user, IdentityUser identityUser)
+        private static void SetUser(Account user, IdentityUser identityUser)
         {
             user.PasswordHash = identityUser.PasswordHash;
             user.SecurityStamp = identityUser.SecurityStamp;
@@ -151,7 +121,7 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Security
             user.UserName = identityUser.UserName;
         }
 
-        private IdentityUser ToIdentityUser(User user)
+        private IdentityUser ToIdentityUser(Account user)
         {
             return new IdentityUser
             {
@@ -162,21 +132,20 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Security
             };
         }
 
-        public Task<User> FindByIdAsync(int userId)
+        public Task<Account> FindByIdAsync(int userId)
         {
             throw new NotImplementedException();
         }
 
         [DebuggerStepThrough]
         //Just for debug, call in Imediate Window
-        private string LogEntry(User user, EntityFrameworkContext ctx)
+        private string LogEntry(Account user, EntityFrameworkContext ctx)
         {
             var sb = new StringBuilder(user.ToString());
 
             sb.Append(" - " + ctx.Entry(user).State);
 
-            foreach (var g in user.Groups)
-                sb.Append("{" + g.Name + " - [" + ctx.Entry(g).State + "]}");
+            foreach (var g in user.Groups) sb.Append("  {" + g.Name + " - [" + ctx.Entry(g).State + "]}");
             return sb.ToString();
         }
     }

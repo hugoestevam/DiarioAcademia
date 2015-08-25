@@ -22,10 +22,10 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
     {
         private IPermissionRepository _permissionRepository;
         private IGroupRepository _groupRepository;
-        private UserRepository _userRepository;
+        private AccountRepository _userRepository;
         private IUnitOfWork _unitOfWork;
 
-        public AuthorizationService(IGroupRepository groupRepository, IPermissionRepository permissionRepository, UserRepository userRepository, IUnitOfWork uow)
+        public AuthorizationService(IGroupRepository groupRepository, IPermissionRepository permissionRepository, AccountRepository userRepository, IUnitOfWork uow)
         {
             _permissionRepository = permissionRepository;
             _groupRepository = groupRepository;
@@ -101,7 +101,7 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
             _unitOfWork.Commit();
         }
 
-        private void SetGroups(User userEncontrado, IList<Group> listGroups)
+        private void SetGroups(Account userEncontrado, IList<Group> listGroups)
         {
             if (userEncontrado != null)
             {

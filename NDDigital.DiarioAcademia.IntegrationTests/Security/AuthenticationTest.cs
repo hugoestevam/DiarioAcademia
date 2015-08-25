@@ -16,7 +16,7 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.Security
     {
         public IGroupRepository _groupRepo;
         public IPermissionRepository _permissionRepo;
-        public UserRepository _userRepo;
+        public AccountRepository _userRepo;
         private AuthorizationService _service;
 
         public DatabaseFixture databaseFixture = new DatabaseFixture();
@@ -33,13 +33,13 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.Security
 
             uow = databaseFixture.UnitOfWork;
 
-            var store = new MyUserStore(databaseFixture.Factory.Get());
+            var store = new MyAccountStore(databaseFixture.Factory.Get());
 
-            _userRepo = new UserRepository(store);
+            _userRepo = new AccountRepository(store);
 
             _service = new AuthorizationService(_groupRepo, _permissionRepo, _userRepo, uow);
 
-            var user = new User
+            var user = new Account
             {
                 FirstName = "Wesley",
                 LastName = "Lemos",

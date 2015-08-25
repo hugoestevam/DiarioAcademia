@@ -11,39 +11,39 @@ using System.Linq;
 
 namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Security
 {
-    public interface IUserRepository
+    public interface IAccountRepository
     {
-        IList<User> GetUsersByGroup(Group group);
+        IList<Account> GetUsersByGroup(Group group);
 
         IList<Group> GetGroupsByUser(string username);
 
-        IList<User> GetUsers();
+        IList<Account> GetUsers();
 
-        User GetUserById(string id);
+        Account GetUserById(string id);
 
-        User GetByUserName(string username);
+        Account GetByUserName(string username);
 
         void Delete(string username);
     }
 
-    public class UserRepository : UserManager<User>, IUserRepository
+    public class AccountRepository : UserManager<Account>, IAccountRepository
     {
         private static EntityFrameworkContext _appDbContext;
-        public IUserStore<User> _store { get; set; }
+        public IUserStore<Account> _store { get; set; }
 
-        public UserRepository(IUserStore<User> store)
+        public AccountRepository(IUserStore<Account> store)
             : base(store)
         {
             _appDbContext = _appDbContext ?? new EntityFrameworkContext();
         }
 
-        public static UserRepository Create(IdentityFactoryOptions<UserRepository> options, IOwinContext context)
+        public static AccountRepository Create(IdentityFactoryOptions<AccountRepository> options, IOwinContext context)
         {
             _appDbContext = context.Get<EntityFrameworkContext>();
-            var userManager = new UserRepository(new UserStore<User>(_appDbContext));
+            var userManager = new AccountRepository(new UserStore<Account>(_appDbContext));
 
             // Configure validation logic for usernames
-            userManager.UserValidator = new UserValidator<User>(userManager)
+            userManager.UserValidator = new UserValidator<Account>(userManager)
             {
                 AllowOnlyAlphanumericUserNames = true
             };
@@ -63,13 +63,13 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Security
             var dataProtectionProvider = options.DataProtectionProvider;
             if (dataProtectionProvider != null)
             {
-                userManager.UserTokenProvider = new DataProtectorTokenProvider<User>(dataProtectionProvider.Create("ASP.NET Identity"));
+                userManager.UserTokenProvider = new DataProtectorTokenProvider<Account>(dataProtectionProvider.Create("ASP.NET Identity"));
             }
 
             return userManager;
         }
 
-        public IList<User> GetUsersByGroup(Group group)
+        public IList<Account> GetUsersByGroup(Group group)
         {
             var gr = group; //key "group" is reserved
             return (
@@ -80,7 +80,7 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Security
                 ).ToList();
         }
 
-        public IList<User> GetUsers()
+        public IList<Account> GetUsers()
         {
             return (from c
                     in _appDbContext.Users
@@ -88,7 +88,7 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Security
                     ).ToList();
         }
 
-        public User GetUserById(string id)
+        public Account GetUserById(string id)
         {
             return (from c
                     in _appDbContext.Users.Include(u => u.Groups)
@@ -96,7 +96,7 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Security
                     select c).FirstOrDefault();
         }
 
-        public User GetUserByUsername(string username)
+        public Account GetUserByUsername(string username)
         {
             return (from c
                     in (_appDbContext.Users).Include(x => x.Groups)
@@ -105,7 +105,7 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Security
                     ).FirstOrDefault();
         }
 
-        public User GetByUserName(string username)
+        public Account GetByUserName(string username)
         {
             return (from c
                      in _appDbContext.Users
@@ -131,5 +131,4 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Security
         }
     }
 
-    //recurso: não temos uma implementação de IUserStore: http://weblogs.asp.net/imranbaloch/a-simple-implementation-of-microsoft-aspnet-identity
 }

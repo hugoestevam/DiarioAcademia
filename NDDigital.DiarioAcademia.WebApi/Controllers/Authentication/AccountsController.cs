@@ -16,7 +16,7 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers.Authentication
     public class AccountsController : BaseApiController
     {
         private IAuthorizationService _authservice;
-        private UserRepository _userRepository;
+        private AccountRepository _userRepository;
 
         public AccountsController()//TODO: IOC
         {
@@ -28,9 +28,9 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers.Authentication
 
             var permissionRepository = new PermissionRepository(factory); //Container.Get<IPermissionRepository>();
 
-            var store = new MyUserStore(factory.Get());
+            var store = new MyAccountStore(factory.Get());
 
-            _userRepository = new UserRepository(store);
+            _userRepository = new AccountRepository(store);
 
             _authservice = new AuthorizationService(groupRepository, permissionRepository, _userRepository, unitOfWork);
         }
@@ -84,13 +84,12 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers.Authentication
                 return BadRequest(ModelState);
             }
 
-            var user = new User()
+            var user = new Account()
             {
                 UserName = createUserModel.Username,
                 Email = createUserModel.Email,
                 FirstName = createUserModel.FirstName,
                 LastName = createUserModel.LastName,
-                Level = 3,
             };
 
             IdentityResult addUserResult = await this.UserRepository.CreateAsync(user, createUserModel.Password);
@@ -149,7 +148,7 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers.Authentication
 
         [HttpPut]
         [Route("edit")]
-        public IHttpActionResult EditUser([FromBody] User user)
+        public IHttpActionResult EditUser([FromBody] Account user)
         {
             var u = _userRepository.GetUserByUsername(user.UserName);
 

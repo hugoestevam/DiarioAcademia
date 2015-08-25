@@ -12,11 +12,11 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.Security
     [TestClass]
     public class UserTest
     {
-        public UserRepository _userRepository;
+        public AccountRepository _userRepository;
         public GroupRepository _groupRepository;
-        public IUserStore<User> _store;
+        public IUserStore<Account> _store;
         private IUnitOfWork uow;
-        private User _user;
+        private Account _user;
 
         public const string SqlCleanDB = @"DBCC CHECKIDENT ('[TBPresenca]', RESEED, 0)
                                            DBCC CHECKIDENT ('[TBAula]', RESEED, 0)
@@ -30,7 +30,7 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.Security
                                            DELETE FROM TBGroupPermission
                                            DELETE FROM TBGroup
                                            DELETE FROM TBPermission
-                                           DELETE FROM TBUser";
+                                           DELETE FROM TBAccount";
 
         [TestInitialize]
         public void Initialize()
@@ -43,8 +43,8 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.Security
 
             uow = fixture.UnitOfWork;
 
-            _store = new MyUserStore(context);
-            _userRepository = new UserRepository(_store);
+            _store = new MyAccountStore(context);
+            _userRepository = new AccountRepository(_store);
             _groupRepository = new GroupRepository(fixture.Factory);
 
             _user = ObjectBuilder.CreateUser();
@@ -61,7 +61,7 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.Security
         public void Deveria_Adicionar_Um_Usuario()
         {
             //var user = ObjectBuilder.CreateUser();
-            var user = new User
+            var user = new Account
             {
                 FirstName = "Wesley",
                 LastName = "Lemos",

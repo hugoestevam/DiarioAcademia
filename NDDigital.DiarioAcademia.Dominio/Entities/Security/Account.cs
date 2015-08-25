@@ -8,8 +8,10 @@ using System.Threading.Tasks;
 
 namespace NDDigital.DiarioAcademia.Dominio.Entities.Security
 {
-    public class User : IdentityUser
+    public class Account: IdentityUser
     {
+        //TODO: Mover pra User essas prop
+
         [Required]
         [MaxLength(100)]
         public string FirstName { get; set; }
@@ -18,17 +20,14 @@ namespace NDDigital.DiarioAcademia.Dominio.Entities.Security
         [MaxLength(100)]
         public string LastName { get; set; }
 
-        [Required]
-        public byte Level { get; set; }
-
         public List<Group> Groups { get; set; }
 
-        public User()
+        public Account()
         {
             EmailConfirmed = true;
         }
 
-        public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<User> manager, string authenticationType)
+        public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<Account> manager, string authenticationType)
         {
             var userIdentity = await manager.CreateIdentityAsync(this, authenticationType);
 

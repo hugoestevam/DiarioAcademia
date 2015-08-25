@@ -41,9 +41,9 @@ namespace NDDigital.DiarioAcademia.IntegrantionTests.Base
             new Aula(DateTime.Now, turma)).Build();
         }
 
-        public static User CreateUser()
+        public static Account CreateUser()
         {
-            return new User { FirstName = "thiago", LastName = "sartor", Level = 2, Groups = CreateListGroups(), UserName = "ttt" };
+            return new Account { FirstName = "thiago", LastName = "sartor",  Groups = CreateListGroups(), UserName = "ttt" };
         }
 
         public static Group CreateGroup()

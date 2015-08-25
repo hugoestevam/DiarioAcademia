@@ -69,7 +69,7 @@
     <Compile Include="Services\AulaService.cs" />
     <Compile Include="Services\AuthorizationService.cs" />
     <Compile Include="Services\Security\IPermissionService.cs" />
-    <Compile Include="Services\Security\IUserService.cs" />
+    <Compile Include="Services\Security\IAccountService.cs" />
     <Compile Include="Services\Security\IGroupService.cs" />
     <Compile Include="Services\IService.cs" />
     <Compile Include="Services\TurmaService.cs" />

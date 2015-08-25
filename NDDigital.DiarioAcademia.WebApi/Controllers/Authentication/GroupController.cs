@@ -14,7 +14,7 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers.Authentication
     public class GroupController : BaseApiController
     {
         private IGroupService _groupService;
-        private IUserService _userService;
+        private IAccountService _userService;
 
         public GroupController() //TODO: IOC
         {
@@ -30,13 +30,13 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers.Authentication
 
             var context = factory.Get();
 
-            var store = new MyUserStore(context);
+            var store = new MyAccountStore(context);
 
-            var userRepo = new UserRepository(store);
+            var userRepo = new AccountRepository(store);
 
-            var userRepository = new UserRepository(store);
+            var userRepository = new AccountRepository(store);
 
-            _userService = new UserService(userRepository);
+            _userService = new AccountService(userRepository);
         }
 
         // GET: api/Group
