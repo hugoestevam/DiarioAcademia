@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq.Expressions;
+using NDDigital.DiarioAcademia.Infraestrutura.DAO.Common.Factorys;
 
 namespace NDDigital.DiarioAcademia.Infraestrutura.SQL.Repositories
 {
@@ -34,7 +35,7 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.SQL.Repositories
 
         #endregion Querys
 
-        public TurmaRepositorySql(AdoNetFactory factory) : base(factory)
+        public TurmaRepositorySql(UnitOfWorkFactory factory) : base(factory)
         {
         }
 

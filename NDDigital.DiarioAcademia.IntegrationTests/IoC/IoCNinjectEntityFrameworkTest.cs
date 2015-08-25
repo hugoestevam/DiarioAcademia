@@ -14,7 +14,7 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.IoC
         [TestInitialize]
         public void Initialize()
         {
-            ConfigurationManager.AppSettings["Infrasctructure.DAO"] = "Infrasctructure.DAO.ORM.dll";
+            ConfigurationManager.AppSettings["Infrasctructure.DAO"] = "NDDigital.DiarioAcademia.Infraestrutura.Orm.dll";
         }
 
         [TestMethod]

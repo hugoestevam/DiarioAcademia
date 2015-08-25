@@ -1,4 +1,5 @@
-﻿using NDDigital.DiarioAcademia.Infraestrutura.SQL.Common;
+﻿using NDDigital.DiarioAcademia.Infraestrutura.DAO.Common.Factorys;
+using NDDigital.DiarioAcademia.Infraestrutura.SQL.Common;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -12,9 +13,9 @@ namespace Infrasctructure.DAO.SQL.Common
     {
         public AdoNetFactory _factory;
 
-        public RepositoryBaseADO(AdoNetFactory factory)
+        public RepositoryBaseADO(UnitOfWorkFactory factory)
         {
-            _factory = factory;
+            _factory = (AdoNetFactory)factory;
         }
 
         public int Insert(string sql, object[] parms = null)
