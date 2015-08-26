@@ -41,4 +41,26 @@
     width: 100%;
   }
 }
+.input-group-edit {
+  width: calc(100% - 60px);
+  margin-right: 3%;
+  float: left;
+  padding-left: 2%;
+}
+.margin-row {
+  margin-bottom: 3%;
+}
+.container-scroll {
+  height: 45vh;
+  overflow: auto;
+}
+.msgAllPermission {
+  margin-left: 2%;
+}
+.msgAllPermission i {
+  color: #f0ad4e;
+}
+.separator {
+  border-right: solid 2px rgba(204, 204, 204, 0.4);
+}
 /*# sourceMappingURL=manager.css.map */

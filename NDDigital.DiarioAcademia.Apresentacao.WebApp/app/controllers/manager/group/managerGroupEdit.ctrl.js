@@ -1,94 +1,66 @@
 ﻿(function (angular) {
-	angular.module('controllers.module')
-		.controller('managerGroupEditController', managerGroupEditController);
+    angular.module('controllers.module')
+        .controller('managerGroupEditController', managerGroupEditController);
 
-	managerGroupEditController.$inject = ['groupService', 'permissionsService', 'permissions.factory', 'compareState',
-		'$state', '$stateParams'];
+    managerGroupEditController.$inject = ['groupService', 'permissionsService', '$state', '$stateParams', 'logger', "$scope"];
 
-	function managerGroupEditController(groupService, permissionsService, permissionsFactory,
-		compareState, $state, params) {
+    function managerGroupEditController(groupService, permissionsService, $state, $stateParams, log, $scope) {
+        var vm = this;
+        vm.group = [];
+        vm.hasChange = false;;
 
-		var vm = this;
+        // public methods
+        vm.setAdmin = setAdmin;
+        vm.remove = remove;
+        vm.modal = modal;
+        vm.save = save;
+        vm.editPermission = editPermission;
+       
 
-		//public functions
-		vm.comparePermissions = compareState;
-		vm.permissions = [];
-		vm.modal = modal;
-		vm.saveChanges = saveChanges;
-		vm.onchange = onchange;
-		vm.hasChange = false;
-		vm.changes = [];
-		vm.setAdmin = setAdmin;
+        activate();
+        function activate() {
+            if (!$stateParams.groupId) {
+                log.error('Grupo não informado !!');
+                return;
+            }
+            groupService.getGroupById($stateParams.groupId).then(function (results) {
+                vm.group = results;
+                vm.name = results.name;
+            });
+        }
 
-		activate();
-		function activate() {
-			$(function () {
-				$('[data-toggle="tooltip"]').tooltip();
-			});
 
-			groupService.getGroupById(params.groupId).then(function (results) {
-				if (results == undefined)
-					$state.go('manager.group');
-				vm.group = results;
+        function setAdmin() {
+            vm.hasChange = true;
+            vm.group.isAdmin = !vm.group.isAdmin;
+            $('[data-toggle="tooltip"]').tooltip('hide').tooltip();
+        }
 
-				permissionsService.getPermissions().then(function (results) {
-					var permissionsDb = results;
-					for (var i = 0; i < permissionsDb.length; i++) {
-						var permission = permissionsFactory.getPermissionById(permissionsDb[i].permissionId);
-						vm.permissions.push(permission);
-					}
-				});
 
-			});
-		}
+        function save() {
+            return groupService.edit(vm.group).then(function () {
+                vm.hasChange = false;
+                $state.go('manager.group', {}, {reload: true});
+            });
+        }
 
-		function onchange(obj, check) {
-			vm.hasChange = true;
-			if (compareState(vm.changes, obj))
-				vm.changes.push(obj);
-			obj.action = check;
-		}
+        function remove() {
+            groupService.delete(vm.group).then(function (results) {
+                vm.hasChange = false;
+                $state.go('manager.group', {}, { reload: true });
+            });
+        }
 
-		function saveChanges() {
-			vm.hasChange = false;
-			var add = [], exclude = [];
-			for (var i = 0; i < vm.changes.length; i++) {
-				if (vm.changes[i].action)
-					add.push(vm.changes[i].permissionId);
-				else
-					exclude.push(vm.changes[i].permissionId);
-			}
 
-			if (add.length > 0)
-				save(add);
-			if (exclude.length > 0)
-				remove(exclude);
-		}
+        // helpers
+        function modal(cb) {
+            vm.titleModal = 'Edição';
+            vm.bodyModal = 'Salvar as alterações realizadas no grupo ' + vm.name + ' ?';
+            vm.callback = cb;
+        }
 
-		function save(permission) {
-			groupService.addPermission(vm.group, permission).then(function (results) { });
-		}
-
-		function remove(permission) {
-			groupService.removePermission(vm.group, permission).then(function (results) { });
-		}
-
-		function modal() {
-			vm.titleModalEdit = 'Edição';
-			vm.bodyModalEdit = 'Editar ' + vm.group.name + ' ?';
-		}
-
-		function edit() {
-			return groupService.edit(vm.group).then(function (results) {
-				vm.group = results;
-			});
-		}
-
-		function setAdmin() {
-			vm.group.isAdmin = !vm.group.isAdmin;
-			edit().then(function () {
-			    $('[data-toggle="tooltip"]').tooltip('hide').tooltip();
-			});
-		}
-	}
+        function editPermission() {
+            $state.go('manager.groupPermissionsEdit', { groupId: vm.group.id });
+        }
+    }
 })(window.angular);

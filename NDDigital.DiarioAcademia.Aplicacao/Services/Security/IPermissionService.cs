@@ -58,7 +58,7 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
 
         public Permission GetByPermissionId(string id)
         {
-            return (from p in _repo.GetAll() where p.PermissionId==id select p).First(); 
+            return (from p in _repo.GetAll() where p.PermissionId==id select p).FirstOrDefault(); 
         }
     }
 

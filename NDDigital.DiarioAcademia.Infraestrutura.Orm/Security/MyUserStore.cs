@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.Entity;
 using System.Diagnostics;
+using System.Data.Entity.Infrastructure;
 
 namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Security
 {
@@ -46,52 +47,65 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Security
         }
         public Task<User> FindByIdAsync(string userId)
         {
-            return _context.Users.Where(u => u.Id.ToLower() == userId.ToLower()).FirstOrDefaultAsync();
+            return _context.Users.AsNoTracking().Where(u => u.Id.ToLower() == userId.ToLower()).FirstOrDefaultAsync();
         }
         public Task<User> FindByNameAsync(string userName)
         {
-            return _context.Users.Where(u => u.UserName.ToLower() == userName.ToLower()).FirstOrDefaultAsync();
+            return _context.Users.AsNoTracking().Where(u => u.UserName.ToLower() == userName.ToLower()).FirstOrDefaultAsync();
         }
 
         //TODO: rever implementação (possivel chance de gambi pattern XGH)
         public Task UpdateAsync(User user)
         {
-            var context = userStore.Context as DiarioAcademiaContext;
 
-            var set = context.Users.Include(u => u.Groups).SingleOrDefault(u => u.Id == user.Id); // get o do banco
-            context.Entry(set).CurrentValues.SetValues(user); // atualiza as propriedades simples
-            set.Groups = set.Groups.Concat(user.Groups).ToList(); // atualiza a colletion de group
+            DbEntityEntry dbEntityEntry = _context.Entry(user);
 
-            context.SaveChanges(); // save
-            return context.SaveChangesAsync();
+            if (dbEntityEntry.State == EntityState.Detached)
+            {
+                _context.Users.Attach(user);
+            }
+            dbEntityEntry.State = EntityState.Modified;
+            user.Groups.ForEach(p => _context.Entry(p).State = EntityState.Modified);
+
+            _context.SaveChanges();
+
+            #region Implementação
+            //var set = context.Users.Include(u => u.Groups).FirstOrDefault(u => u.Id == user.Id); // get o do banco
+
+            //context.Entry(set).CurrentValues.SetValues(user); // atualiza as propriedades simples
+            //set.Groups = user.Groups; // atualiza a colletion de group
+            //context.SaveChanges(); // save
+            #endregion
+
+            return _context.SaveChangesAsync();
 
             #region Implementacao Alternativa
-            //=======
-            //            var entry = _context.Entry(user);
-            //            // if (entry.State == EntityState.Detached)
-            //            // {
-            //            //    context.Detach(user);
-            //            // }
-            //            // _context.Users.Attach(user);
-            //            foreach(var group in user.Groups)
-            //            {
-            //                var groupEntry = _context.Entry(group);
-            //
-            //                if (groupEntry.State == EntityState.Unchanged) { 
-            //                    groupEntry.State=EntityState.Modified;      //1st try
-            //                    //context.Groups.Attach(group);              //2nd try
-            //                    //groupEntry.State = EntityState.Detached;  //3rd try 
-            //                }
-            //            }
-            //           // entry.State = EntityState.Modified;
-            //
-            //
-            //            _context.SaveChanges();
-            //
-            //            //context.Entry(user).State = EntityState.Modified;
-            //            //context.Configuration.ValidateOnSaveEnabled = false;
-            //            return _context.SaveChangesAsync();
-            //>>>>>>>
+            ////=======
+            ////            var entry = _context.Entry(user);
+            ////            // if (entry.State == EntityState.Detached)
+            ////            // {
+            ////            //    context.Detach(user);
+            ////            // }
+            ////            // _context.Users.Attach(user);
+            ////            foreach(var group in user.Groups)
+            ////            {
+            ////                var groupEntry = _context.Entry(group);
+            ////
+            ////                if (groupEntry.State == EntityState.Unchanged) { 
+            ////                    groupEntry.State=EntityState.Modified;      //1st try
+            ////                    //context.Groups.Attach(group);              //2nd try
+            ////                    //groupEntry.State = EntityState.Detached;  //3rd try 
+            ////                }
+            ////            }
+            ////           // entry.State = EntityState.Modified;
+            ////
+            ////
+            ////            _context.SaveChanges();
+            ////
+            ////            //context.Entry(user).State = EntityState.Modified;
+            ////            //context.Configuration.ValidateOnSaveEnabled = false;
+            ////            return _context.SaveChangesAsync();
+            ////>>>>>>>
 
             #endregion
         }

@@ -21,6 +21,7 @@
 
             , successCallback: successCallback
             , errorCallback: errorCallback
+            , emptyMessageCallback: emptyMessageCallback
 
         };
 
@@ -80,6 +81,10 @@
             } else
                 error(response.message, null, res.unavailable_server);
             throw new Error(response);
+        }
+
+        function emptyMessageCallback(response) {
+            return response.data.results || response.data;
         }
     }
 }(window.angular));

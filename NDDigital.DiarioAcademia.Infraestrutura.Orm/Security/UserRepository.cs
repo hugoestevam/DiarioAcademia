@@ -103,7 +103,7 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Security
         public User GetUserByUsername(string username)
         {
             return (from c
-                    in (_appDbContext.Users).Include(x => x.Groups)
+                    in (_appDbContext.Users).Include(u => u.Groups)
                     where c.UserName == username
                     select c
                     ).FirstOrDefault();
@@ -114,7 +114,7 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Security
             return (from c
                      in _appDbContext.Users
                     where c.UserName == username
-                    select c).FirstOrDefault();
+                    select c).Include(u => u.Groups).FirstOrDefault();
         }
 
         public void Delete(string username)

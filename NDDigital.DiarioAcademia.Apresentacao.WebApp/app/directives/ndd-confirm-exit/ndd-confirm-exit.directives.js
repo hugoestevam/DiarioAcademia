@@ -5,7 +5,7 @@
     function nddConfirmExit() {
         //Usage:
         //<ndd-confirm-exit controller="vm"><ndd-confirm-exit>
-        var nextState, _event, vm, state;
+        var nextState, _event, vm, state, nextParams;
         controller.$inject = ['$rootScope', '$state'];
 
         return {
@@ -33,6 +33,7 @@
                 if (vm.hasChange) {
                     event.preventDefault();
                     nextState = toState;
+                    nextParams = toParams;
                     $('#modalConfirmExit').modal();
                     _event = event;
                 }
@@ -44,7 +45,7 @@
             $('.modal-backdrop').remove();
             $('body').removeClass('modal-open');
             vm.hasChange = false;
-            state.go(nextState.name);
+            state.go(nextState.name, nextParams);
         }
     }
 

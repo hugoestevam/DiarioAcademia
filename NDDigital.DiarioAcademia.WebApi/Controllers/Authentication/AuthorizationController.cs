@@ -40,8 +40,6 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers.Authentication
         {
             _authservice.RemovePermissionsFromGroup(groupId, permissions);
             return Ok();
-        
-        
         }
 
         //[Authorize]

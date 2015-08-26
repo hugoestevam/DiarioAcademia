@@ -33,8 +33,17 @@
 		};
 
 		self.delete = function (permission) {
+		    permission = getPermissionsId(permission);
 			logger.danger(res.deleted_successful, permission, "Delete");
-			return $http.delete(serviceUrl + "/" + permission.permissionId)
+			return $http.delete(serviceUrl + "/" + permission)
 		};
+
+		function getPermissionsId(array) {
+		    var permissionsIds = [];
+		    for (var i = 0; i < array.length; i++) {
+		        permissionsIds.push(array[i].permissionId);
+		    }
+		    return permissionsIds;
+		}
 	}
 })();

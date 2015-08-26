@@ -1,29 +1,45 @@
 ﻿<div class="container-user fadeIn enter-fadeIn ">
     <div class="row">
-        <div class="col-xs-10 clear-padding">
-            <h2 style="margin-top: 0;">Permissões {{vm.group.name}}</h2>
+        <div class="col-xs-10 clear-padding text-capitalize">
+            <h2 style="margin-top: 0;">{{vm.name}}</h2>
+            <hr />
         </div>
-        <div class="col-xs-2 clear-padding">
-            <button type="button" class="btn" aria-label="isAdmin" ng-class="{'btn-warning': vm.group.isAdmin}" ng-click="vm.setAdmin()" id="admin"
-                    data-toggle="tooltip" data-placement="top" title="a" data-original-title="{{vm.group.isAdmin ? 'É administrador' : 'Não é Administrador'}}">
-                <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+    </div>
+    <br />
+    <div class="row">
+        <form>
+            <label>Grupo</label>
+            <input type="text" class="form-control" ng-model="vm.group.name" ng-change="vm.hasChange = true"/>
+            <br />
+            <label>Adminstrador:</label>
+            <button type="button" class="btn" aria-label="isAdmin" ng-class="{'btn-warning': vm.group.isAdmin}" ng-click="vm.setAdmin()"
+                    data-toggle="tooltip" data-placement="top" title="" data-original-title="{{teste}}">
+                <span class="glyphicon glyphicon-star"></span>
+                {{teste = vm.group.isAdmin ? 'É administrador' : 'Não é Administrador'}}
             </button>
-            <button class="btn btn-info" ng-click="vm.modal()" style="float: right"
-                    data-toggle="modal" data-target="#modalEditGroup" ng-disabled="!vm.hasChange">
+            <br /><br />
+            <label>Permissões:</label>
+            <button class="btn btn-default" ng-click="vm.editPermission()" ng-disabled="vm.group.isAdmin">Gerenciar Permissões</button>
+            <span class="msgAllPermission" ng-show="vm.group.isAdmin">
+                <i class="fa fa-star"></i> Possui todas as permissões
+            </span>
+        </form>
+    </div>
+    <div class="row">
+        <hr />
+        <div class="text-center col-sm-12 clear-padding">
+            <button class="btn btn-success" ng-click="vm.modal(vm.save)" data-toggle="modal" data-target="#modalGroup">
                 <i class="fa fa-save"></i>
             </button>
+
+            <button class="btn btn-danger" ng-click="vm.modal(vm.remove)"
+                    data-toggle="modal" data-target="#modalGroup" ng-disabled="!vm.group">
+                <i class="fa fa-times"></i>
+            </button>
         </div>
     </div>
 </div>
-
-<hr  style="margin-top: 2%"/>
-<div class="container-user fadeIn enter-fadeIn" ng-class="{'disabled': vm.group.isAdmin}">
-    <div class="row">
-        <ndd-group-checkbox array="vm.permissions" compare="vm.group.permissions" method="vm.comparePermissions" callback="vm.onchange"></ndd-group-checkbox>
-    </div>
-</div>
-    
-<ndd-modal target="modalEditGroup" label="{{vm.titleModalEdit}}" callback="vm.saveChanges">
-    {{vm.bodyModalEdit}}
+<ndd-modal target="modalGroup" label="{{vm.titleModal}}" callback="vm.callback">
+    {{vm.bodyModal}}
 </ndd-modal>
 <ndd-confirm-exit controller="vm"><ndd-confirm-exit>
