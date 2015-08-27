@@ -15,7 +15,7 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.ADO
         [TestInitialize]
         public void Initialize()
         {
-            new BaseTest();
+            new BaseTestInitializer();
 
             var factory = new AdoNetFactory();
 

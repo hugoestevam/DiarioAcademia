@@ -34,15 +34,13 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.Security
 
             _service = new AuthorizationService(_repoGroup, _repoPermission, userRepository, uow);
 
-            Database.SetInitializer(new BaseTest());
+            Database.SetInitializer(new BaseTestInitializer());
         }
 
         [TestMethod]
         [TestCategory("Authorization - Group")]
         public void Deveria_Adicionar_Um_Grupo()
         {
-            Assert.Inconclusive();
-            Assert.Inconclusive();
             _repoGroup.Add(ObjectBuilder.CreateGroup());
 
             uow.Commit();
@@ -56,7 +54,6 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.Security
         [TestCategory("Authorization - Group")]
         public void Deveria_Excluir_Um_Grupo()
         {
-            Assert.Inconclusive();
             var group = _repoGroup.GetById(1);
 
             _repoGroup.Delete(group);
@@ -72,7 +69,6 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.Security
         [TestCategory("Authorization - Group")]
         public void Deveria_Buscar_Todos_Grupos()
         {
-            Assert.Inconclusive();
             var list = _repoGroup.GetAll();
 
             Assert.AreEqual(2, list.Count);

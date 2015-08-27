@@ -20,7 +20,7 @@ namespace Test
         [TestInitialize]
         public void Initialize()
         {
-            Database.SetInitializer(new BaseTest());
+            Database.SetInitializer(new BaseTestInitializer());
 
             _factory = new EntityFrameworkFactory();
 

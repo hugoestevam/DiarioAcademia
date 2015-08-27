@@ -10,6 +10,12 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.Base
 {
     public class ObjectBuilder
     {
+
+        static int _index = 0;
+        static bool _admin = false;
+        static string Index { get { return (++_index).ToString(); } }
+
+
         public static Turma CreateTurma()
         {
             return Builder<Turma>.CreateNew()
@@ -43,40 +49,58 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.Base
 
         public static User CreateUser()
         {
-            return null;// new User { FirstName = "thiago", LastName = "sartor",  UserName = "ttt" };
+            var names = new[] { "joao", "jose", "pedro", "mariah", "sabrina" };
+
+            var user = new User { FirstName = names[ _index % 5 ], LastName = "da silva"};
+
+            user.Account = CreateAccount();
+
+            user.UserName = user.Account.Username;
+
+            return user;
         }
-        public static Account CreateAccount()
+        public static Account CreateAccount(bool full = true)
         {
-            return null;// new User { FirstName = "thiago", LastName = "sartor",  UserName = "ttt" };
+            var username = "username " + Index;
+
+            return (full)
+                ? new Account(username) { Groups = CreateListGroups() }
+                : new Account(username);
+        }
+        public static Group CreateGroup(bool full = true)
+        {
+            var group = new Group { Name = "Grupo " + Index, IsAdmin = _admin = ! _admin };
+
+            if (full) group.Permissions = CreateListPermissions();
+
+            return group;
         }
 
-        public static Group CreateGroup()
-        {
-            return null;// new Group { Name = "Administrador", IsAdmin = true, Permissions = CreateListPermissions() };
-        }
 
+
+        public static List<Group> CreateListGroups(int count = 2)
+        {
+            var list = new List<Group>();
+
+            for (int i = 0; i < count; i += 1)
+                list.Add(CreateGroup(true));
+
+            return list;
+        }
         public static Permission CreatePermission()
         {
-            return null;// new Permission { PermissionId = "01" };
+            return new Permission(Index);
         }
 
-        public static List<Permission> CreateListPermissions()
+        public static List<Permission> CreateListPermissions(int count = 2)
         {
-            return null;// new List<Permission>
-                        //     {
-                        //         new Permission { PermissionId = "01" },
-                        //         new Permission { PermissionId = "02" }
-                        //     };
+            var list = new List<Permission>();
+
+            for (int i = 0; i < count; i += 1)
+                list.Add(CreatePermission());
+
+            return list;
         }
 
-        public static List<Group> CreateListGroups()
-        {
-            return null;//new List<Group>
-                        //   {
-                        //        new Group { Name = "Administrador", IsAdmin = true, Permissions = CreateListPermissions() },
-                        //        new Group { Name = "Editores", IsAdmin = false, Permissions = CreateListPermissions() }
-                        //   };
-        }
-        //                                                                                                                                      :(
     }
 }

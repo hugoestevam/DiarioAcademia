@@ -23,7 +23,9 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Security
 
         public Account GetByUserName(string username)
         {
-            return (from c in DataContext.Accounts where c.Username == username select c).FirstOrDefault();
+            return (from c in DataContext.Accounts.Include("Groups") where c.Username == username select c).FirstOrDefault();
         }
+
+        
     }
 }

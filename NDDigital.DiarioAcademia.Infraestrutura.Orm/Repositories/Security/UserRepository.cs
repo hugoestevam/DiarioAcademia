@@ -89,7 +89,7 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Security
         public User GetUserByUsername(string username)
         {
             return (from c
-                    in (_appDbContext.Users).Include(x => x.Account)
+                    in (_appDbContext.Users).Include(x => x.Account).Include(x=>x.Account.Groups)
                     where c.UserName == username
                     select c
                     ).FirstOrDefault();
@@ -113,11 +113,7 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Security
         {
             var user = GetUserByUsername(username);
 
-            if (user != null && user.Account != null)
-
-                return user.Account.Groups;
-
-            return new List<Group>();
+            return user?.Account?.Groups ?? new List<Group>();
         }
 
      

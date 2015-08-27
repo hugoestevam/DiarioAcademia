@@ -9,7 +9,7 @@ using System.Linq;
 
 namespace NDDigital.DiarioAcademia.IntegrationTests.Base
 {
-    public class BaseTest : DropCreateDatabaseAlways<EntityFrameworkContext>
+    public class BaseTestInitializer : DropCreateDatabaseAlways<EntityFrameworkContext>
     {
         public EntityFrameworkContext _context;
         private readonly Mock<UserRepository> _userRepository = null;
@@ -20,18 +20,20 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.Base
                                            DBCC CHECKIDENT ('[TBAluno]', RESEED, 0)
                                            DBCC CHECKIDENT ('[TBTurma]', RESEED, 0)
                                            DBCC CHECKIDENT ('[TBGroup]', RESEED, 0)
+                                           DBCC CHECKIDENT ('[TBAccount]', RESEED, 0)
                                            DBCC CHECKIDENT ('[TBPermission]', RESEED, 0)
 
+                                           DELETE FROM TBAccountGroups
+                                           DELETE FROM TBGroupPermission
                                            DELETE FROM TBPresenca
                                            DELETE FROM TBAula
                                            DELETE FROM TBAluno
                                            DELETE FROM TBTurma
-                                           DELETE FROM TBAccountGroups
-                                           DELETE FROM TBGroupPermission
+                                           DELETE FROM TBUser
+                                           DELETE FROM TBAccount
                                            DELETE FROM TBGroup
-                                           DELETE FROM TBPermission
-                                           DELETE FROM TBUser";
-        public BaseTest()
+                                           DELETE FROM TBPermission";
+        public BaseTestInitializer()
         {
             _userRepository = new Mock<UserRepository>();
 
@@ -65,50 +67,47 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.Base
             context.Set<Aula>().Add(ObjectBuilder.CreateAula(turmEncontrada));
             context.SaveChanges();
 
-            //todo: refatorar object builder
-            /*
-            //Adiciona uma permissao
-            context.Set<Permission>().Add(ObjectBuilder.CreatePermission());
+            context.Set<User>().Add(ObjectBuilder.CreateUser());
             context.SaveChanges();
 
-			var otherPermission = ObjectBuilder.CreatePermission();
-			otherPermission.PermissionId = "02";
 
-			//Adiciona outra permissao
-			context.Set<Permission>().Add(otherPermission);
-			context.SaveChanges();
-
-			//Busca permissioes
-			var listPermissions = context.Set<Permission>().ToList();
-
-			//Adiciona lista de permissoes no grupo
-			var group = ObjectBuilder.CreateGroup();
-			group.Permissions = listPermissions;
-
-			//Adiciona um group
-			context.Set<Group>().Add(group);
-			context.SaveChanges();
-
-			var otherGroup = ObjectBuilder.CreateGroup();
-
-			group.Name = "Editor";
-
-			//Adiciona outro group
-			context.Set<Group>().Add(group);
-			context.SaveChanges();
-
-			//Busca permissioes
-			var listGroups = context.Set<Group>().ToList();
-
-            //Adiciona lista de grupos
-            var user = ObjectBuilder.CreateUser();
-            //  user.Account ObjectBuilder.
-            var password = "123456";
+			//var otherPermission = ObjectBuilder.CreatePermission();
+			//otherPermission.PermissionId = "02";
+            //
+			////Adiciona outra permissao
+			//context.Set<Permission>().Add(otherPermission);
+			//context.SaveChanges();
+            //
+			////Busca permissioes
+			//var listPermissions = context.Set<Permission>().ToList();
+            //
+			////Adiciona lista de permissoes no grupo
+			//var group = ObjectBuilder.CreateGroup();
+			//group.Permissions = listPermissions;
+            //
+			////Adiciona um group
+			//context.Set<Group>().Add(group);
+			//context.SaveChanges();
+            //
+			//var otherGroup = ObjectBuilder.CreateGroup();
+            //
+			//group.Name = "Editor";
+            //
+			////Adiciona outro group
+			//context.Set<Group>().Add(group);
+			//context.SaveChanges();
+            //
+			////Busca permissioes
+			//var listGroups = context.Set<Group>().ToList();
+            //
+            ////Adiciona lista de grupos
+            //var user = ObjectBuilder.CreateUser();
+            ////  user.Account ObjectBuilder.
+            //var password = "123456";
 
             //Adiciona um usuário
-            _userRepository
-            .Setup(x => x.CreateAsync(user, password));
-            */
+            //_userRepository
+            //.Setup(x => x.CreateAsync(user, password));
         }
     }
 }

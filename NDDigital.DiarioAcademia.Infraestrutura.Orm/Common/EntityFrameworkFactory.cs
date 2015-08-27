@@ -21,8 +21,7 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Common
 
         public void Dispose()
         {
-            if (dataContext != null)
-                dataContext.Dispose();
+             dataContext?.Dispose();
         }
 
         public override IUnitOfWork Create()

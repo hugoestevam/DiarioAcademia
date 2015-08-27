@@ -19,6 +19,7 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.Security
         public IPermissionRepository _permissionRepo;
         public UserRepository _userRepo;
         private AuthorizationService _service;
+        private AccountRepository _accountRepo;
 
         public DatabaseFixture databaseFixture = new DatabaseFixture();
 
@@ -27,7 +28,7 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.Security
         [TestInitialize]
         public void Initialize()
         {
-            Database.SetInitializer(new BaseTest());
+            Database.SetInitializer(new BaseTestInitializer());
 
             var factory = databaseFixture.Factory;
 
@@ -39,35 +40,27 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.Security
             var store = new MyUserStore(factory.Get());
 
             _userRepo = new UserRepository(store);
-            var accountRepo = new AccountRepository(factory);
 
-            _service = new AuthorizationService(_groupRepo, _permissionRepo, accountRepo, uow);
+            _accountRepo = new AccountRepository(factory);
 
-            var user = new User
-            {
-                FirstName = "Wesley",
-                LastName = "Lemos",
-                UserName = "anisan",
-            };
+            _service = new AuthorizationService(_groupRepo, _permissionRepo, _accountRepo, uow);
 
-            _userRepo.Create(user);
         }
 
         [TestMethod]
         [TestCategory("Authentication")]
         public void Deveria_Adicionar_Permissao_ao_Grupo()
         {
-            Assert.Inconclusive();
             var grupo = _groupRepo.GetByIdIncluding(2, g => g.Permissions);
 
-            var permissions = new[] { "03" };
+            var permissions = new[] { "9" };
 
             _service.AddPermissionsToGroup(grupo.Id, permissions);
 
-            var permission = _permissionRepo.GetByPermissionId("03");
+            var permission = _permissionRepo.GetByPermissionId("9");
 
             Assert.IsNotNull(permission);
-            Assert.AreEqual("03", permission.PermissionId);
+            Assert.AreEqual("9", permission.PermissionId);
 
             Assert.AreEqual(3, grupo.Permissions.Count);
         }
@@ -76,62 +69,59 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.Security
         [TestCategory("Authentication")]
         public void Deveria_Excluir_Permissoes_do_Grupo()
         {
-            Assert.Inconclusive();
             var grupo = _groupRepo.GetByIdIncluding(2, g => g.Permissions);
 
-            var permissions = new[] { "03" };
+            var id = grupo.Permissions.First().PermissionId;
 
-            _service.AddPermissionsToGroup(grupo.Id, permissions);
+            var permissions = new[] { id };
 
-            var removedPermissions = new[] { "01", "03" };
+            _service.RemovePermissionsFromGroup(grupo.Id, permissions);
 
-            _service.RemovePermissionsFromGroup(grupo.Id, removedPermissions);
-
-            var permission = _permissionRepo.GetByPermissionId("02");
+            var permission = _permissionRepo.GetByPermissionId(id);
 
             Assert.IsNotNull(permission);
 
             grupo = _groupRepo.GetByIdIncluding(2, g => g.Permissions);
 
             Assert.AreEqual(1, grupo.Permissions.Count);
+            Assert.IsFalse(grupo.Permissions.Contains(permission));
         }
 
         [TestMethod]
         [TestCategory("Authentication")]
         public void Deveria_Adicionar_Grupo_ao_Usuario()
         {
-            Assert.Inconclusive();
-            var user = _userRepo.GetUserByUsername("anisan");
+            var newGroup = ObjectBuilder.CreateGroup(false);
 
-            _service.AddGroupToUser(user.UserName, new[] { 1 });
+            _groupRepo.Add(newGroup);
 
-            var userAgain = _userRepo.GetUserByUsername("anisan");
+            uow.Commit();
 
-           // Assert.AreEqual(2, userAgain.Groups.Count);
+            var account = _accountRepo.GetByUserName("username 1");
+
+            _service.AddGroupToUser(account.Username, new[] { newGroup.Id });
+
+            var user = _userRepo.GetUserByUsername("username 1");
+
+            Assert.AreEqual(3, user.Account.Groups.Count);
         }
 
         [TestMethod]
         [TestCategory("Authentication")]
         public void Deveria_Excluir_Grupo_do_Usuario()
         {
-            Assert.Inconclusive();
-            var user = _userRepo.GetUserByUsername("anisan");
-
-            _service.AddGroupToUser(user.UserName, new[] { 1, 2 });
-
-            user = _userRepo.GetUserByUsername("anisan");
-
-           // Assert.AreEqual(2,
-           //      user.Groups.Count);
+            var user = _userRepo.GetUserByUsername("username 1");
 
             _service.RemoveGroupFromUser(user.UserName, new[] { 1 });
 
-            user = _userRepo.GetUserByUsername("anisan");
-           // Assert.AreEqual(1,
-           //      user.Groups.Count);
-           //
-           // Assert.AreEqual(2,
-           //      user.Groups.First().Id);
+            uow.Commit();
+
+            var acc = _userRepo.GetUserByUsername(user.Account.Username).Account;
+            Assert.AreEqual(1,
+                 acc.Groups.Count);
+           
+            Assert.AreEqual(2,
+                 acc.Groups.First().Id);
         }
     }
 }
