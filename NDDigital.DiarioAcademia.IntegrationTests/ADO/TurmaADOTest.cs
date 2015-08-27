@@ -1,4 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NDDigital.DiarioAcademia.Dominio.Contracts;
+using NDDigital.DiarioAcademia.Infraestrutura.DAO.Common.Uow;
 using NDDigital.DiarioAcademia.Infraestrutura.SQL.Common;
 using NDDigital.DiarioAcademia.Infraestrutura.SQL.Repositories;
 using NDDigital.DiarioAcademia.IntegrationTests.Base;
@@ -8,8 +10,8 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.ADO
     [TestClass]
     public class TurmaADOTest
     {
-        private TurmaRepositorySql _repo;
-        private ADOUnitOfWork _uow;
+        private ITurmaRepository _repo;
+        private IUnitOfWork _uow;
         private AdoNetFactory _factory;
 
         [TestInitialize]

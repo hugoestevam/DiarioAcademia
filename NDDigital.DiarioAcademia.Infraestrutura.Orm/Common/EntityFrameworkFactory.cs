@@ -8,16 +8,15 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Common
 {
     public class EntityFrameworkFactory : UnitOfWorkFactory, IDisposable
     {
-        private EntityFrameworkContext dataContext;
-
-        public override IUnitOfWork Create()
-        {
-            return new EntityFrameworkUnitOfWork(null);
-        }
+        private EntityFrameworkContext dataContext;       
 
         public EntityFrameworkContext Get()
         {
-            return dataContext ?? (dataContext = new EntityFrameworkContext());
+            if (dataContext == null)
+            {
+                dataContext = new EntityFrameworkContext();
+            }
+            return dataContext;
         }
 
         public void Dispose()
@@ -25,5 +24,11 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Common
             if (dataContext != null)
                 dataContext.Dispose();
         }
+
+        public override IUnitOfWork Create()
+        {
+            return new EntityFrameworkUnitOfWork(null);
+        }
+
     }
 }

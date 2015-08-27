@@ -1,5 +1,10 @@
-﻿using NDDigital.DiarioAcademia.Infraestrutura.Orm.Modules;
+﻿using NDDigital.DiarioAcademia.Dominio.Contracts;
+using NDDigital.DiarioAcademia.Infraestrutura.DAO.Common.Factorys;
+using NDDigital.DiarioAcademia.Infraestrutura.DAO.Common.Uow;
+using NDDigital.DiarioAcademia.Infraestrutura.Orm.Modules;
+using NDDigital.DiarioAcademia.Infraestrutura.SQL.Common;
 using NDDigital.DiarioAcademia.Infraestrutura.SQL.Modules;
+using NDDigital.DiarioAcademia.Infraestrutura.SQL.Repositories;
 using Ninject;
 using System.Configuration;
 using System.IO;
@@ -23,7 +28,8 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.IoC
 
         private static void ConfigContainer()
         {
-            _container = new StandardKernel();
+            _container = new StandardKernel();         
+
 
             string path
                    = new FileInfo(
@@ -34,6 +40,7 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.IoC
 
             string fileName
                     = ConfigurationSettings.AppSettings["Infrasctructure.DAO"];
+
 
             string assemblyFile
                     = string.Format("{0}\\{1}", path, fileName);

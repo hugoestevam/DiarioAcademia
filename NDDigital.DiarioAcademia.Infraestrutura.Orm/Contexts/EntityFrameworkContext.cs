@@ -54,9 +54,9 @@ namespace Infrasctructure.DAO.ORM.Contexts
         public void Detach(object entity)
         {
             ((IObjectContextAdapter)this).ObjectContext.Detach(entity);
-        }//spotify:user:anisanwesley
+        }
 
-        public override int SaveChanges()
+        public override int SaveChanges() //TODO: MUITO BUGADO ISSO AQUI
         {
             try
             {

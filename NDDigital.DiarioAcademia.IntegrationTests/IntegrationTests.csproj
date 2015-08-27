@@ -114,6 +114,10 @@
       <Project>{175b058e-a32a-491a-a1fd-9783edc7a943}</Project>
       <Name>Aplicacao</Name>
     </ProjectReference>
+    <ProjectReference Include="..\NDDigital.DiarioAcademia.CommandQuery\Aplicacao.DTOs.csproj">
+      <Project>{fac6b57f-d8c9-4593-80f0-184f5cab272c}</Project>
+      <Name>Aplicacao.DTOs</Name>
+    </ProjectReference>
     <ProjectReference Include="..\NDDigital.DiarioAcademia.Dominio\Dominio.csproj">
       <Project>{98aeeab1-ab78-451a-ae88-c852c6bc3c31}</Project>
       <Name>Dominio</Name>
