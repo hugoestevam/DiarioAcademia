@@ -1,4 +1,4 @@
-﻿using FizzWare.NBuilder;
+using FizzWare.NBuilder;
 using NDDigital.DiarioAcademia.Dominio.Entities;
 using NDDigital.DiarioAcademia.Dominio.Entities.Security;
 using System;
@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data.Common;
 
-namespace NDDigital.DiarioAcademia.IntegrantionTests.Base
+namespace NDDigital.DiarioAcademia.IntegrationTests.Base
 {
     public class ObjectBuilder
     {
@@ -63,10 +63,10 @@ namespace NDDigital.DiarioAcademia.IntegrantionTests.Base
         public static List<Permission> CreateListPermissions()
         {
             return null;// new List<Permission>
-       //     {
-       //         new Permission { PermissionId = "01" },
-       //         new Permission { PermissionId = "02" }
-       //     };
+                        //     {
+                        //         new Permission { PermissionId = "01" },
+                        //         new Permission { PermissionId = "02" }
+                        //     };
         }
 
         public static List<Group> CreateListGroups()
@@ -77,5 +77,6 @@ namespace NDDigital.DiarioAcademia.IntegrantionTests.Base
                         //        new Group { Name = "Editores", IsAdmin = false, Permissions = CreateListPermissions() }
                         //   };
         }
-    }  
+        //                                                                                                                                      :(
+    }
 }

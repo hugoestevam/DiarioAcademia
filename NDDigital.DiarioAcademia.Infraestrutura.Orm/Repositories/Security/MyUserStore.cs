@@ -8,6 +8,9 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data.Entity;
+using System.Diagnostics;
+using System.Data.Entity.Infrastructure;
 
 namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Security
 {
@@ -46,12 +49,12 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Security
 
         public Task<User> FindByIdAsync(string userId)
         {
-            return _context.Users.Where(u => u.Id.ToLower() == userId.ToLower()).FirstOrDefaultAsync();
+            return _context.Users.AsNoTracking().Where(u => u.Id.ToLower() == userId.ToLower()).FirstOrDefaultAsync();
         }
 
         public Task<User> FindByNameAsync(string userName)
         {
-            return _context.Users.Where(u => u.UserName.ToLower() == userName.ToLower()).FirstOrDefaultAsync();
+            return _context.Users.AsNoTracking().Where(u => u.UserName.ToLower() == userName.ToLower()).FirstOrDefaultAsync();
         }
 
         //TODO: rever implementação (possivel chance de gambi pattern XGH)
@@ -59,14 +62,18 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Security
         {
             var context = userStore.Context as EntityFrameworkContext;
 
-            //todo: remover ao garantir que accounts o substitui
-          //  var set = context.Users.Include(u => u.Groups).SingleOrDefault(u => u.Id == user.Id); // get o do banco
-          //  context.Entry(set).CurrentValues.SetValues(user); // atualiza as propriedades simples
-          //  set.Groups = set.Groups.Concat(user.Groups).ToList(); // atualiza a colletion de group
+            DbEntityEntry dbEntityEntry = _context.Entry(user);
 
-            context.SaveChanges(); // save
-            return context.SaveChangesAsync();
+            if (dbEntityEntry.State == EntityState.Detached)
+            {
+                _context.Users.Attach(user);
+            }
+            dbEntityEntry.State = EntityState.Modified;
+            
+            _context.SaveChanges();
 
+            return _context.SaveChangesAsync();
+            
         }
 
         public void Dispose()

@@ -1,7 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NDDigital.DiarioAcademia.Infraestrutura.SQL.Common;
 using NDDigital.DiarioAcademia.Infraestrutura.SQL.Repositories;
-using NDDigital.DiarioAcademia.IntegrantionTests.Base;
 using NDDigital.DiarioAcademia.IntegrationTests.Base;
 
 namespace NDDigital.DiarioAcademia.IntegrationTests.ADO

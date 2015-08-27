@@ -3,7 +3,6 @@
 
 <div class="row container-user">
     <div class="col-sm-6 clear-padding">
-        <br />
         <div class="row">
             <div class="col-xs-12 clear-padding">
                 <h3 style="margin-top: 0;">Perfil</h3>
@@ -35,36 +34,38 @@
             </form>
         </div>
 
-        <div class="row" style="margin-top: 6%;">
+        <div class="row">
+            <hr />
             <div class="col-xs-12 clear-padding">
-                <h3 style="margin-top: 0;">Grupos</h3>
-                <hr style="margin-top: 2%" />
+                <h3 style="margin-top: 0;">Configurações</h3>
             </div>
-            <ndd-group-checkbox array="vm.groups" compare="vm.user.groups" callback="vm.onchange"></ndd-group-checkbox>
+            <hr style="margin-top: 8%" />
+            <div class="jumbotron">
+                Em breve configurações
+            </div>
         </div>
     </div>
 
     <div class="col-sm-6" style="padding-left: 4%;">
-        <br />
         <div class="col-xs-12 clear-padding">
-            <h3 style="margin-top: 0;">Configurações</h3>
+            <h3 style="margin-top: 0;">Grupos</h3>
+            <hr style="margin-top: 2%" />
         </div>
-        <hr style="margin-top: 5%" />
-        <div class="jumbotron">
-            Em breve configurações
-        </div>
+        <ndd-group-checkbox array="vm.groups" compare="vm.user.groups" callback="vm.onchange"></ndd-group-checkbox>
     </div>
 </div>
 
 <div class="row">
-    <div class="col-sm-6 clear-padding text-center" style="padding-top: 5%;">
+    <div class="col-sm-12 clear-padding text-center">
+      
         <div class="footer">
-            <i class="fa fa-3x fa-chevron-circle-left pull-left" style="cursor:pointer; margin-left:3%;" ui-sref="manager.user" href="#/manager/user"></i>
+            <hr />
+            <i class="fa fa-2x fa-chevron-circle-left pull-left" style="cursor:pointer; margin-left:2%;" ui-sref="manager.user" href="#/manager/user"></i>
             <button class="btn btn-success" data-toggle="modal" data-target="#modelEditUser" ng-disabled="!vm.hasChange && vm.formUser.$pristine">
-                <i class="fa fa-user-plus fa-2x"></i>
+                <i class="fa fa-user-plus"></i>
             </button>
             <button class="btn btn-info" ng-click="vm.clear()">
-                <i class="fa fa-history fa-2x"></i>
+                <i class="fa fa-history"></i>
             </button>
         </div>
     </div>
@@ -73,7 +74,3 @@
 <ndd-modal target="modelEditUser" label="{{vm.titleModelEdit}}" callback="vm.editUser">
     {{vm.bodyModelEdit}}
 </ndd-modal>
-
-<div class="row">
-
-</div>

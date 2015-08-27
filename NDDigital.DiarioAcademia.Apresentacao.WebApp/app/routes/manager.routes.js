@@ -36,7 +36,7 @@
         }, {
             state: 'manager.group',
             url: '/group',
-            templateUrl: '/app/views/manager/group/manager-group.html',
+            templateUrl: '/app/views/manager/group/manager-group-list.html',
             controller: "managerGroupListController as vm",
             displayName: "Grupo",
             displayIcon: 'fa-users',
@@ -50,13 +50,21 @@
             displayIcon: 'fa-pencil',
             $$permissionId: "12"
         }, {
+            state: 'manager.groupPermissionsEdit',
+            url: '/edit/permissions/:groupId',
+            templateUrl: '/app/views/manager/group/manager-group-permission-edit.html',
+            controller: "managerGroupPermissionEditController as vm",
+            displayName: "Edição de Permissões de Grupo",
+            displayIcon: 'fa-pencil',
+            $$permissionId: "13"
+        }, {
             state: 'manager.permissions',
             url: '/permissions',
             templateUrl: '/app/views/manager/permission/manager-permission.html',
             controller: "managerPermissionController as vm",
             displayName: "Permissões",
             displayIcon: 'fa-key',
-            $$permissionId: "13"
+            $$permissionId: "14"
         })
     }
 

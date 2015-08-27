@@ -4,7 +4,6 @@ using Moq;
 using NDDigital.DiarioAcademia.Dominio.Entities;
 using NDDigital.DiarioAcademia.Dominio.Entities.Security;
 using NDDigital.DiarioAcademia.Infraestrutura.Orm.Security;
-using NDDigital.DiarioAcademia.IntegrantionTests.Base;
 using System.Data.Entity;
 using System.Linq;
 
@@ -31,8 +30,7 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.Base
                                            DELETE FROM TBGroupPermission
                                            DELETE FROM TBGroup
                                            DELETE FROM TBPermission
-										   DELETE FROM TBUser";
-
+                                           DELETE FROM TBUser";
         public BaseTest()
         {
             _userRepository = new Mock<UserRepository>();
@@ -73,44 +71,44 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.Base
             context.Set<Permission>().Add(ObjectBuilder.CreatePermission());
             context.SaveChanges();
 
-            var otherPermission = ObjectBuilder.CreatePermission();
-            otherPermission.PermissionId = "02";
+			var otherPermission = ObjectBuilder.CreatePermission();
+			otherPermission.PermissionId = "02";
 
-            //Adiciona outra permissao
-            context.Set<Permission>().Add(otherPermission);
-            context.SaveChanges();
+			//Adiciona outra permissao
+			context.Set<Permission>().Add(otherPermission);
+			context.SaveChanges();
 
-            //Busca permissioes
-            var listPermissions = context.Set<Permission>().ToList();
+			//Busca permissioes
+			var listPermissions = context.Set<Permission>().ToList();
 
-            //Adiciona lista de permissoes no grupo
-            var group = ObjectBuilder.CreateGroup();
-            group.Permissions = listPermissions;
+			//Adiciona lista de permissoes no grupo
+			var group = ObjectBuilder.CreateGroup();
+			group.Permissions = listPermissions;
 
-            //Adiciona um group
-            context.Set<Group>().Add(group);
-            context.SaveChanges();
+			//Adiciona um group
+			context.Set<Group>().Add(group);
+			context.SaveChanges();
 
-            var otherGroup = ObjectBuilder.CreateGroup();
+			var otherGroup = ObjectBuilder.CreateGroup();
 
-            group.Name = "Editor";
+			group.Name = "Editor";
 
-            //Adiciona outro group
-            context.Set<Group>().Add(group);
-            context.SaveChanges();
+			//Adiciona outro group
+			context.Set<Group>().Add(group);
+			context.SaveChanges();
 
-            //Busca permissioes
-            var listGroups = context.Set<Group>().ToList();
+			//Busca permissioes
+			var listGroups = context.Set<Group>().ToList();
 
             //Adiciona lista de grupos
             var user = ObjectBuilder.CreateUser();
-          //  user.Account ObjectBuilder.
+            //  user.Account ObjectBuilder.
             var password = "123456";
 
             //Adiciona um usuário
             _userRepository
             .Setup(x => x.CreateAsync(user, password));
-            */    
-    }
+            */
+        }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using NDDigital.DiarioAcademia.Infraestrutura.DAO.Common.Factorys;
 using NDDigital.DiarioAcademia.Infraestrutura.DAO.Common.Uow;
 using System.Configuration;
+using System.Data;
 using System.Data.Common;
 
 namespace NDDigital.DiarioAcademia.Infraestrutura.SQL.Common
@@ -42,6 +43,16 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.SQL.Common
             Command.Transaction = Connection.BeginTransaction();
         }
 
+        public override IUnitOfWork Create()
+        {
+            if (Connection.State == ConnectionState.Open)
+            {
+                Connection.Close();
+            }
+
+            return new ADOUnitOfWork(new AdoNetFactory());
+        }
+
         public DbConnection Connection
         {
             get { return _connection; }
@@ -61,11 +72,6 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.SQL.Common
             get { return _command; }
 
             set { _command = value; }
-        }
-
-        public override IUnitOfWork Create()
-        {
-            return new ADOUnitOfWork(new AdoNetFactory());
         }
     }
 }

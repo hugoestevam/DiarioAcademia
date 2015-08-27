@@ -49,9 +49,11 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers.Authentication
             return Ok(values);
         }
 
-        // DELETE: api/Permission/5
-        public void Delete([FromBody]string[] ids)
+        // DELETE: api/Permission/
+        public IHttpActionResult Delete([FromBody]string[] ids)
         {
+            if(ids == null)
+                return BadRequest();
             foreach (var id in ids)
             {
                 var permission = _permissionService.GetByPermissionId(id);
@@ -59,6 +61,7 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers.Authentication
                 _permissionService.Delete(permission.Id);
 
             }
+            return Ok();
         }
     }
 }

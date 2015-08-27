@@ -1,16 +1,16 @@
 ﻿(function () {
-    angular.module('factories.module').factory('permissions.factory', permissionValue);
+    angular.module('factories.module').factory('permissions.factory', permissionFactory);
 
-    permissionValue.$inject = ['$state'];
+    permissionFactory.$inject = ['$state'];
 
-    function permissionValue($state) {
+    function permissionFactory($state) {
 
         return {
             getPermissions: getPermissions,
             getPermissionById: getPermissionById,
             getCustomPermissions: getCustomPermissions,
             getDefaultPermissions: getDefaultPermissions
-        }
+        };
 
 
         //public methods
@@ -34,7 +34,7 @@
         function getCustomPermissions() {
             var customPermissions = [
                 { name: "Excluir Aluno", permissionId: '20' },
-                { name: "Adicionar Turma", permissionId: '20' }];
+                { name: "Adicionar Turma", permissionId: '21' }];
 
             return customPermissions;
         }

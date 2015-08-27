@@ -3,6 +3,10 @@ using NDDigital.DiarioAcademia.Dominio.Entities.Security;
 using NDDigital.DiarioAcademia.Infraestrutura.DAO.Common.Uow;
 using NDDigital.DiarioAcademia.Infraestrutura.Orm.Security;
 using System.Collections.Generic;
+using System.Linq;
+using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
+using System.Linq.Expressions;
 
 namespace NDDigital.DiarioAcademia.Aplicacao.Services
 {

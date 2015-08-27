@@ -11,8 +11,8 @@
         var users = [];
 
         //angular pagination
-        vm.currentPage = 1
-        vm.numPerPage = 10
+        vm.currentPage = 1;
+        vm.numPerPage = 10;
         vm.maxSize = 4;
         vm.countUsers = 0;
 

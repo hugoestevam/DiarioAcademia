@@ -10,7 +10,6 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Configurations
             ToTable("TBAccount");
             HasMany(x => x.Groups)
             .WithMany()
-           //TODO: Passa pra User
             .Map(x =>
             {
                 x.ToTable("TBAccountGroups");

@@ -43,7 +43,7 @@
     <div ng-controller="shellController as shell">
         <div id="wrapper">
             <div class="row" data-ng-include="'/app/templates/layout/navbar.html'"></div>
-            <div ui-view class="fader-animation"></div>
+            <div ui-view class="fader-animation" id="index"></div>
         </div>
     </div>
 
@@ -82,8 +82,9 @@
         <!--endinject-->
 
         <!--inject:factories-->
-        <script src="/app/factories/compare-state.js"></script>
-        <script src="/app/factories/ng-automapper.js"></script>
+        <script src="/app/factories/changes.factory.js"></script>
+        <script src="/app/factories/compare-state.factory.js"></script>
+        <script src="/app/factories/ng-automapper.factory.js"></script>
         <script src="/app/factories/permissions.factory.js"></script>
         <!--endinject-->
 
@@ -139,6 +140,7 @@
         <script src="/app/controllers/turma/turmaList.ctrl.js"></script>
         <script src="/app/controllers/manager/group/managerGroupEdit.ctrl.js"></script>
         <script src="/app/controllers/manager/group/managerGroupList.ctrl.js"></script>
+        <script src="/app/controllers/manager/group/managerGroupPermissionEdit.ctrl.js"></script>
         <script src="/app/controllers/manager/permission/managerPermission.ctrl.js"></script>
         <script src="/app/controllers/manager/user/managerUserEdit.ctrl.js"></script>
         <script src="/app/controllers/manager/user/managerUserList.ctrl.js"></script>

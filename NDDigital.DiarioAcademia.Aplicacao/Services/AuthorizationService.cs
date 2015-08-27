@@ -48,9 +48,8 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
                 foreach (var item in listPermissions)
                 {
                     if (!groupEncontrado.Permissions.Contains(item))
-                    {
                         groupEncontrado.Permissions.Add(item);
-                    }
+
                 }
             }
             _groupRepository.Update(groupEncontrado);
@@ -70,10 +69,9 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
                     groupEncontrado.Permissions.Remove(perm);
                 };
             }
-
             _groupRepository.Update(groupEncontrado);
 
-            _unitOfWork.Commit();
+             _unitOfWork.Commit();
         }
 
         public void AddGroupToUser(string username, int[] groups)
@@ -95,12 +93,9 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
             foreach (var groupId in groups)
             {
                 var group = userEncontrado.Groups.FirstOrDefault(p => p.Id == groupId);
-
                 if (group != null)
-                {
                     userEncontrado.Groups.Remove(group);
-                    _groupRepository.Update(group);
-                }
+                
             }
             _accountRepository.Update(userEncontrado);
             _unitOfWork.Commit();
@@ -115,7 +110,6 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
                     if (!userEncontrado.Groups.Contains(item))
                         userEncontrado.Groups.Add(item);
             }
-            _unitOfWork.Commit();
         }
     }
 }

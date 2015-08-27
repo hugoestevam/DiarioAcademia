@@ -51,6 +51,10 @@
     <Reference Include="Moq">
       <HintPath>..\packages\Moq.4.2.1409.1722\lib\net40\Moq.dll</HintPath>
     </Reference>
+    <Reference Include="Ninject, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ninject.3.2.3-unstable-012\lib\net45-full\Ninject.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Xml" />
@@ -71,11 +75,12 @@
   <ItemGroup>
     <Compile Include="Dominio\AlunoTests.cs" />
     <Compile Include="Dominio\PresencaTests.cs" />
-    <Compile Include="ObjectMother.cs" />
+    <Compile Include="ObjectBuilder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Servicos\AuthenticationServiceTest.cs" />
     <Compile Include="Servicos\AuthorizationServiceTest.cs" />
     <Compile Include="Servicos\PresencaServiceTests.cs" />
+    <Compile Include="Servicos\TurmaServiceTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -98,9 +103,17 @@
       <Project>{a797581c-2ba5-4d68-a3d3-cd68818f9b84}</Project>
       <Name>Infraestrutura.DAO</Name>
     </ProjectReference>
+    <ProjectReference Include="..\NDDigital.DiarioAcademia.Infraestrutura.IoC\Infraestrutura.IoC.csproj">
+      <Project>{3962128f-2227-4078-8ff7-d8b624648e08}</Project>
+      <Name>Infraestrutura.IoC</Name>
+    </ProjectReference>
     <ProjectReference Include="..\NDDigital.DiarioAcademia.Infraestrutura.Orm\Infraestrutura.ORM.csproj">
       <Project>{3fd3156c-9f4f-4e10-8b7a-7454c803be89}</Project>
       <Name>Infraestrutura.ORM</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NDDigital.DiarioAcademia.Infraestrutura.SQL\Infraestrutura.SQL.csproj">
+      <Project>{987e3d7f-ea01-45aa-8867-8e85899fc5fa}</Project>
+      <Name>Infraestrutura.SQL</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

@@ -1,4 +1,4 @@
-﻿using Infrasctructure.DAO.ORM.Contexts;
+using Infrasctructure.DAO.ORM.Contexts;
 using NDDigital.DiarioAcademia.Infraestrutura.DAO.Common.Uow;
 using NDDigital.DiarioAcademia.Infraestrutura.Orm.Common;
 using System;

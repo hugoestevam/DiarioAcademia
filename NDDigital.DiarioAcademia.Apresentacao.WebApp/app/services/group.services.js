@@ -54,19 +54,21 @@
 		self.delete = function (group) {
 			logger.danger(res.deleted_successful, group, "Delete");
 			return $http.delete(serviceUrl + "/" + group.id)
-			   .then(logger.successCallback)
-			   .catch(logger.errorCallback);;
+			   .then(logger.emptyMessageCallback)
+			   .catch(logger.errorCallback);
 		};
 
 		//permissions
 		self.addPermission = function (group, permissions) {
-		    return $http.post(serviceAuthenticationUrl + "/addPermission/" + group.id, permissions)
+			var permissionsIds = getPermissionId(permissions);
+			return $http.post(serviceAuthenticationUrl + "/addPermission/" + group.id, permissionsIds)
 			 .then(logger.successCallback)
 			 .catch(logger.errorCallback);;
 		};
 
 		self.removePermission = function (group, permissions) {
-		    return $http.post(serviceAuthenticationUrl + "/removePermission/" + group.id, permissions)
+		    var permissionsIds = getPermissionId(permissions);
+		    return $http.post(serviceAuthenticationUrl + "/removePermission/" + group.id, permissionsIds)
 			 .then(logger.successCallback)
 			 .catch(logger.errorCallback);;
 		};
@@ -88,6 +90,16 @@
 				}
 			}
 			return permissions;
+		}
+
+		//private methods
+		function getPermissionId(array) {
+			var pemissionsIds = [];
+			for (var i = 0; i < array.length; i++) {
+				if (array[i].permissionId)
+					pemissionsIds.push(array[i].permissionId);
+			}
+			return pemissionsIds;
 		}
 	}
 })();

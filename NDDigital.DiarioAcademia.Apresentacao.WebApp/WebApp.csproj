@@ -77,6 +77,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="app\controllers\manager\group\managerGroupPermissionEdit.ctrl.js" />
     <Content Include="app\controllers\manager\group\managerGroupEdit.ctrl.js" />
     <Content Include="app\controllers\manager\group\managerGroupList.ctrl.js" />
     <Content Include="app\controllers\manager\permission\managerPermission.ctrl.js" />
@@ -94,7 +95,8 @@
     <Content Include="app\directives\ndd-panel\ndd-panel.html" />
     <Content Include="app\extentions\array.js" />
     <Content Include="app\extentions\string.js" />
-    <Content Include="app\factories\compare-state.js" />
+    <Content Include="app\factories\changes.factory.js" />
+    <Content Include="app\factories\compare-state.factory.js" />
     <Content Include="app\images\avatar_login.png" />
     <Content Include="app\images\avatar_plus.gif" />
     <Content Include="app\images\favicon.ico" />
@@ -106,8 +108,9 @@
     <Content Include="app\services\user.service.js" />
     <Content Include="app\templates\layout\top-menu.html" />
     <Content Include="app\factories\permissions.factory.js" />
+    <Content Include="app\views\manager\group\manager-group-permission-edit.html" />
     <Content Include="app\views\manager\group\manager-group-edit.html" />
-    <Content Include="app\views\manager\group\manager-group.html" />
+    <Content Include="app\views\manager\group\manager-group-list.html" />
     <Content Include="app\views\manager\permission\manager-permission.html" />
     <Content Include="app\views\manager\user\manager-user-edit.html" />
     <Content Include="app\views\manager\user\manager-user-list.html" />
@@ -203,7 +206,7 @@
     <Content Include="app\controllers\turma\turmaCreate.ctrl.js" />
     <Content Include="app\controllers\turma\turmaDetails.ctrl.js" />
     <Content Include="app\controllers\turma\turmaList.ctrl.js" />
-    <Content Include="app\factories\ng-automapper.js" />
+    <Content Include="app\factories\ng-automapper.factory.js" />
     <Content Include="app\models\turma.model.js" />
     <Content Include="app\modules\common.module.js" />
     <Content Include="app\modules\core.module.js" />

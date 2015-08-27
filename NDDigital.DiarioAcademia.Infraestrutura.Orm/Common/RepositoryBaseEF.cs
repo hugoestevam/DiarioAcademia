@@ -1,4 +1,4 @@
-﻿using Infrasctructure.DAO.ORM.Contexts;
+using Infrasctructure.DAO.ORM.Contexts;
 using NDDigital.DiarioAcademia.Dominio.Common;
 using NDDigital.DiarioAcademia.Infraestrutura.Orm.Common;
 using System;
@@ -101,7 +101,7 @@ namespace Infrastructure.DAO.ORM.Common.Base
                 query = query.Include(includeProperty);
             }
 
-            return query.FirstOrDefault();
+            return query.Where(g=> g.Id == id).FirstOrDefault();
         }
 
         public virtual IList<T> GetAll()

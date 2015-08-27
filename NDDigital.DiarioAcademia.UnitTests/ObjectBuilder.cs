@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace NDDigital.DiarioAcademia.UnitTests
 {
-    public class ObjectMother
+    public class ObjectBuilder
     {
         public static Aula CriaUmaAula()
         {
@@ -35,6 +35,13 @@ namespace NDDigital.DiarioAcademia.UnitTests
                 .All().With(
                     x => x.Presencas = new List<Presenca>())
                 .Build();
+        }
+
+        internal static Turma CreateTurma()
+        {
+            return Builder<Turma>.CreateNew()
+        .WithConstructor(() =>
+        new Turma(2014)).Build();
         }
     }
 }

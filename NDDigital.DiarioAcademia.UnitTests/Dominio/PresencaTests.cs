@@ -12,7 +12,7 @@ namespace NDDigital.DiarioAcademia.UnitTests.Dominio
 
         public PresencaTests()
         {
-            Aula aula = ObjectMother.CriaUmaAula();
+            Aula aula = ObjectBuilder.CriaUmaAula();
             aula.Data = new DateTime(2000, 10, 5);
 
             Turma turma = new Turma(2012);

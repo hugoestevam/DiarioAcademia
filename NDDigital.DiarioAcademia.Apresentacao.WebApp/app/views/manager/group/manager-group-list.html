@@ -1,0 +1,40 @@
+﻿<ndd-head title="Grupos"></ndd-head>
+<div class="col-sm-5 clear-padding separator">
+    <div class="container-user">
+
+        <div class="row margin-row">
+            <div class="col-sm-8 input-search">
+                <div class="input-group">
+                    <div class="input-group-btn">
+                        <button disabled type="button" class="btn btn-default" style="cursor:default;"><i class="fa fa-search"></i></button>
+                    </div>
+                    <input type="text" class="form-control ng-pristine ng-valid ng-touched" ng-model="nameFilter">
+                </div>
+
+            </div>
+        </div>
+        <br />
+
+        <div class="row margin-row">
+            <div class="col-sm-12">
+                <h3 ng-show=" vm.countTotalGroups == 0">Nenhum grupo cadastrado.</h3>
+                <div class="list-group" ng-repeat="group in vm.groups | filter: nameFilter">
+                    <a style="cursor: pointer" ng-click="vm.showGroup(group)" class="list-group-item">{{group.name}}</a>
+                </div>
+                <pager total-items="vm.countGroups" ng-model="vm.currentPage" ng-hide="vm.countTotalGroups == 0 ||  vm.countTotalGroups <= vm.numPerPage"></pager>
+                <hr />
+                <input type="text" class="form-control input-group-edit" ng-model="vm.newGroup.name" />
+                <button class="btn btn-success" ng-click="vm.new()">
+                    <i class="fa fa-plus"></i>
+                </button>
+
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+<div class="col-sm-7" >
+
+    <div style="padding-left: 3%" ui-view class="fader-animation container-group"></div>
+
+</div>

@@ -2,9 +2,9 @@
     angular.module('controllers.module')
         .controller('managerPermissionController', managerPermissionController);
 
-    managerPermissionController.$inject = ['permissionsService', 'compareState', 'permissions.factory', '$state', '$rootScope'];
+    managerPermissionController.$inject = ['permissionsService', 'compareState', 'permissions.factory', '$state', '$rootScope', 'changes.factory'];
 
-    function managerPermissionController(permissionService, compareState, permissionsFactory, $state, $rootScope) {
+    function managerPermissionController(permissionService, compareState, permissionsFactory, $state, $rootScope, changesFactory) {
         var vm = this;
 
         vm.filters = ['aluno', 'turma', 'other', 'manager', 'aula', 'chamada', 'customize'];
@@ -16,7 +16,7 @@
         vm.onchange = onchange;
         vm.saveChanges = saveChanges;
 
-     
+
 
         activate();
         function activate() {
@@ -25,10 +25,7 @@
                 vm.showRoutes = vm.routes.slice();
             });
             vm.permission = filterPermissions(permissionsFactory.getDefaultPermissions());
-
-           
         }
-
 
         //public methods
         function onchange(obj, check) {
@@ -40,12 +37,14 @@
 
         function saveChanges() {
             vm.hasChange = false;
-            for (var i = 0; i < vm.changes.length; i++) {
-                if (vm.changes[i].action)
-                    save(vm.changes[i]);
-                else
-                    remove(vm.changes[i]);
-            }
+            if (vm.changes.length == 0)
+                return;
+            var include = changesFactory.getInclude(vm.changes),
+                exclude = changesFactory.getExclude(vm.changes);
+            if (include.length != 0)
+                save(include);
+            if (exclude.length != 0)
+                remove(exclude);
             vm.changes = [];
         }
 
@@ -59,15 +58,9 @@
         }
 
         function remove(item) {
-            if (compareState(vm.routes, item) < 0)
-                return;
-
-            var index = compareState(vm.routes, item);
-            if (index >= 0)
-                var permission = vm.routes[index];
-            permissionService.delete(permission)
-                .then(function (data, status, headers, config) {
-                        vm.routes.splice(index, 1);
+            permissionService.delete(item)
+                .then(function (results) {
+                    $state.reload();
                 });
         }
 

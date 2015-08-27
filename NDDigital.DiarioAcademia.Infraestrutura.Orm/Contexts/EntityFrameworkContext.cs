@@ -58,7 +58,7 @@ namespace Infrasctructure.DAO.ORM.Contexts
             ((IObjectContextAdapter)this).ObjectContext.Detach(entity);
         }
 
-        public override int SaveChanges()
+        public override int SaveChanges() //TODO: MUITO BUGADO ISSO AQUI
         {
             try
             {

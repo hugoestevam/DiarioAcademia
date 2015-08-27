@@ -39,7 +39,7 @@ namespace NDDigital.DiarioAcademia.UnitTests.Servicos
             //arrange
             int qtdAlunos = 5;
 
-            var alunos = ObjectMother.CriaListaAlunos(qtdAlunos);
+            var alunos = ObjectBuilder.CriaListaAlunos(qtdAlunos);
 
             var ids = new List<int>();
 
@@ -48,7 +48,7 @@ namespace NDDigital.DiarioAcademia.UnitTests.Servicos
                 ids.Add(item.Id);
             }
 
-            var comando = ObjectMother.CriaRegistraPresencaCommand(ids);
+            var comando = ObjectBuilder.CriaRegistraPresencaCommand(ids);
 
             _alunoRepository
                 .Setup(x => x.GetAllByTurmaId(It.IsAny<int>()))
@@ -93,7 +93,7 @@ namespace NDDigital.DiarioAcademia.UnitTests.Servicos
             //arrange
             int qtdAlunos = 1;
 
-            var alunos = ObjectMother.CriaListaAlunos(qtdAlunos);
+            var alunos = ObjectBuilder.CriaListaAlunos(qtdAlunos);
 
             _alunoRepository
                 .Setup(x => x.GetAllByTurmaId(It.IsAny<int>()))
