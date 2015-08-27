@@ -1,31 +1,26 @@
 ﻿using NDDigital.DiarioAcademia.Dominio.Contracts;
 using NDDigital.DiarioAcademia.Dominio.Entities.Security;
 using NDDigital.DiarioAcademia.Infraestrutura.DAO.Common.Uow;
-using NDDigital.DiarioAcademia.Infraestrutura.Orm.Security;
 using System.Collections.Generic;
-using System.Linq;
-using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
-using System.Linq.Expressions;
 
 namespace NDDigital.DiarioAcademia.Aplicacao.Services
 {
-    public interface IGroupService : IService<Group>
+    public interface IAccountService: IService<Account>
     {
     }
 
-    public class GroupService : IGroupService
+    public class AccountService : IAccountService
     {
         private IUnitOfWork _uow;
-        private IGroupRepository _repo;
+        private IAccountRepository _repo;
 
-        public GroupService(IGroupRepository repo, IUnitOfWork uow)
+        public AccountService(IAccountRepository repo, IUnitOfWork uow)
         {
             _repo = repo;
             _uow = uow;
         }
 
-        public void Add(Group obj)
+        public void Add(Account obj)
         {
             _repo.Add(obj);
             _uow.Commit();
@@ -37,20 +32,20 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
             _uow.Commit();
         }
 
-        public void Update(Group obj)
+        public void Update(Account obj)
         {
             _repo.Update(obj);
             _uow.Commit();
         }
 
-        IList<Group> IService<Group>.GetAll()
+        IList<Account> IService<Account>.GetAll()
         {
-            return _repo.GetAllIncluding(g => g.Permissions);
+            return _repo.GetAllIncluding(g => g.Groups);
         }
 
-       Group IService<Group>.GetById(int id)
+        Account IService<Account>.GetById(int id)
         {
-            return _repo.GetByIdIncluding(id, g => g.Permissions);
+            return _repo.GetByIdIncluding(id, g => g.Groups);
         }
     }
 }

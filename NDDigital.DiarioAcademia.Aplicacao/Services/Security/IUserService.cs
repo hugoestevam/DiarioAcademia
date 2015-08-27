@@ -47,7 +47,7 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
 
         public User GetById(int id)
         {
-            return _repo.GetUserById(id.ToString());//todo
+            return _repo.GetUserById(id.ToString());//TODO
         }
 
         public User GetById(string id)

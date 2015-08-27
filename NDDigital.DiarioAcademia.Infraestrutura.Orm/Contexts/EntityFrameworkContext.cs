@@ -23,6 +23,7 @@ namespace Infrasctructure.DAO.ORM.Contexts
 
         public DbSet<Group> Groups { get; set; }
         public DbSet<Permission> Permissions { get; set; }
+        public DbSet<Account> Accounts { get; set; }
 
         public DbSet<Aluno> Alunos { get; set; }
 
@@ -49,6 +50,7 @@ namespace Infrasctructure.DAO.ORM.Contexts
             modelBuilder.Configurations.Add(new PresencaConfiguration());
             modelBuilder.Configurations.Add(new GroupConfiguration());
             modelBuilder.Configurations.Add(new PermissionConfiguration());
+            modelBuilder.Configurations.Add(new AccountConfiguration());
         }
 
         public void Detach(object entity)

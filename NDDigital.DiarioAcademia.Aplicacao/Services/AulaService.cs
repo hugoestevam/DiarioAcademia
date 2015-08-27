@@ -38,7 +38,7 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
 
         public void Add(AulaDTO aulaDto)
         {
-            //Turma turma = _turmaRepository.GetById(aulaDto.AnoTurma) ?? _turmaRepository.GetAll().FirstOrDefault();//todo:está buscando o ano como id,
+            //Turma turma = _turmaRepository.GetById(aulaDto.AnoTurma) ?? _turmaRepository.GetAll().FirstOrDefault();//TODO:está buscando o ano como id,
             Turma turma = _turmaRepository.GetById(aulaDto.TurmaId);//TODO: THIAGO SARTOR
 
             Aula aula = new Aula(aulaDto.DataAula, turma);
@@ -144,7 +144,7 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
             return chamada;
         }
 
-        public ChamadaDTO GetChamadaByAula(int id)//todo: coloquei essa sobrecarga aqui
+        public ChamadaDTO GetChamadaByAula(int id)//TODO: coloquei essa sobrecarga aqui
         {
             return GetChamadaByAula(GetById(id));
         }

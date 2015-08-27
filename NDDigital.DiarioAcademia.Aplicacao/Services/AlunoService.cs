@@ -39,7 +39,7 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
         {
             Turma turma = _turmaRepository.GetById(alunoDto.TurmaId);
 
-            Aluno aluno = new Aluno(alunoDto.Descricao.Split(':')[0], turma ?? new Turma(2007));//todo: turma vem null
+            Aluno aluno = new Aluno(alunoDto.Descricao.Split(':')[0], turma ?? new Turma(2007));//TODO: turma vem null
 
             aluno.Endereco.Bairro = alunoDto.Bairro;
             aluno.Endereco.Cep = alunoDto.Cep;
@@ -91,7 +91,7 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
                 Uf = aluno.Endereco.Uf
             };
 
-            if (aluno.Turma != null)//todo: extraí turma pois este está vindo null em _alunoRepository.GetById
+            if (aluno.Turma != null)//TODO: extraí turma pois este está vindo null em _alunoRepository.GetById
                 alunoDto.TurmaId = aluno.Turma.Id;
 
             return alunoDto;

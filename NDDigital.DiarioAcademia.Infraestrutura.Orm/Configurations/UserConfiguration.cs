@@ -9,12 +9,6 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Configurations
         {
             ToTable("TBUser");
             Ignore(c => c.EmailConfirmed);
-            HasMany(x => x.Groups)
-            .WithMany()
-            .Map(x =>
-            {
-                x.ToTable("TBUserGroups");
-            });
         }
     }
 }

@@ -30,7 +30,6 @@ namespace NDDigital.DiarioAcademia.WebApi.Models
                 FullName = string.Format("{0} {1}", appUser.FirstName, appUser.LastName),
                 Email = appUser.Email,
                 EmailConfirmed = appUser.EmailConfirmed,
-                Level = appUser.Level,
                 Roles = _UserRepository.GetRolesAsync(appUser.Id).Result,
                 Claims = _UserRepository.GetClaimsAsync(appUser.Id).Result
             };
