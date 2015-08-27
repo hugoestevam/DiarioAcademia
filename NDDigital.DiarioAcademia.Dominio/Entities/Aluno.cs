@@ -10,6 +10,7 @@ namespace NDDigital.DiarioAcademia.Dominio.Entities
         {
             Presencas = new List<Presenca>();
             Endereco = new Endereco();
+            Turma = new Turma();
         }
 
         public Aluno(string nome, Turma turma)

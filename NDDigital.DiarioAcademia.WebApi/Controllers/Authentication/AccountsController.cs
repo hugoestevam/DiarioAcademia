@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNet.Identity;
+﻿using Infrastructure.DAO.ORM.Common;
+using Microsoft.AspNet.Identity;
 using NDDigital.DiarioAcademia.Aplicacao.Services;
 using NDDigital.DiarioAcademia.Dominio.Entities.Security;
 using NDDigital.DiarioAcademia.Infraestrutura.Orm.Common;
@@ -17,22 +18,21 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers.Authentication
         private IAuthorizationService _authservice;
         private UserRepository _userRepository;
 
-        public AccountsController()
+        public AccountsController()//TODO: IOC
         {
-            var factory = new DatabaseFactory();
+            var factory = new EntityFrameworkFactory();
 
-            var uow = new UnitOfWork(factory);
+            var unitOfWork = new EntityFrameworkUnitOfWork(factory);
 
-            var groupRepository = new GroupRepository(factory);
+            var groupRepository = new GroupRepository(factory); //Container.Get<IGroupRepository>();
 
-            var permissionRepository = new PermissionRepository(factory);
+            var permissionRepository = new PermissionRepository(factory); //Container.Get<IPermissionRepository>();
 
             var store = new MyUserStore(factory.Get());
 
             _userRepository = new UserRepository(store);
 
-            _authservice = new AuthorizationService(groupRepository, permissionRepository, _userRepository, uow);
-
+            _authservice = new AuthorizationService(groupRepository, permissionRepository, _userRepository, unitOfWork);
         }
 
         //[Authorize]
@@ -89,7 +89,7 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers.Authentication
                 UserName = createUserModel.Username,
                 Email = createUserModel.Email,
                 FirstName = createUserModel.FirstName,
-                LastName = createUserModel.LastName,               
+                LastName = createUserModel.LastName,
                 Level = 3,
             };
 
@@ -146,6 +146,7 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers.Authentication
 
             return NotFound();
         }
+
         [HttpPut]
         [Route("edit")]
         public IHttpActionResult EditUser([FromBody] User user)
@@ -157,9 +158,7 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers.Authentication
 
             _userRepository.Update(u);
 
-
             return Ok(u);
         }
-
     }
 }

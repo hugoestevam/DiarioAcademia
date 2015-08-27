@@ -1,24 +1,17 @@
-﻿using NDDigital.DiarioAcademia.Dominio;
+﻿using Infrasctructure.DAO.ORM.Contexts;
 using NDDigital.DiarioAcademia.Dominio.Entities;
-using NDDigital.DiarioAcademia.Infraestrutura.Orm.Contexts;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NDDigital.DiarioAcademia.Apresentacao.ConsoleApp
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
-            DiarioAcademiaContext context = new DiarioAcademiaContext();
+            EntityFrameworkContext context = new EntityFrameworkContext();
 
             context.Turmas.Add(new Turma(2100));
 
             context.SaveChanges();
-
         }
     }
 }

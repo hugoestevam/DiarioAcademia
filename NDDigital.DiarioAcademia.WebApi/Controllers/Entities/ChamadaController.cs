@@ -1,4 +1,5 @@
-﻿using NDDigital.DiarioAcademia.Aplicacao.DTOs;
+﻿using Infrastructure.DAO.ORM.Common;
+using NDDigital.DiarioAcademia.Aplicacao.DTOs;
 using NDDigital.DiarioAcademia.Aplicacao.Services;
 using NDDigital.DiarioAcademia.Infraestrutura.Orm.Common;
 using NDDigital.DiarioAcademia.Infraestrutura.Orm.Repositories;
@@ -10,15 +11,19 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers.Entities
     {
         private AulaService _aulaService;
 
-        public ChamadaController()
+        public ChamadaController() //TODO: IOC
         {
-            var factory = new DatabaseFactory();
-            var aulaRespository = new AulaRepositoryEF(factory);
-            var alunoRepository = new AlunoRepositoryEF(factory);
-            var turmaRepository = new TurmaRepositoryEF(factory);
-            var uow = new UnitOfWork(factory);
+            var factory = new EntityFrameworkFactory();
 
-            _aulaService = new AulaService(aulaRespository, alunoRepository, turmaRepository, uow);
+            var unitOfWork = new EntityFrameworkUnitOfWork(factory);
+
+            var alunoRepository = new AlunoRepositoryEF(factory); //Container.Get<IAlunoRepository>();
+
+            var turmaRepository = new TurmaRepositoryEF(factory); //Container.Get<ITurmaRepository>();
+
+            var aulaRepository = new AulaRepositoryEF(factory); //Container.Get<IAulaRepository>();
+
+            _aulaService = new AulaService(aulaRepository, alunoRepository, turmaRepository, unitOfWork);
         }
 
         // GET: api/Chamada

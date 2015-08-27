@@ -1,22 +1,21 @@
-﻿using System.Diagnostics;
-using NDDigital.DiarioAcademia.Aplicacao.Services;
+﻿using Infrastructure.DAO.ORM.Common;
 using NDDigital.DiarioAcademia.Aplicacao.DTOs;
+using NDDigital.DiarioAcademia.Aplicacao.Services;
+using NDDigital.DiarioAcademia.Apresentacao.WindowsApp.Controls.AlunoForms;
+using NDDigital.DiarioAcademia.Apresentacao.WindowsApp.Controls.AulaForms;
 using NDDigital.DiarioAcademia.Apresentacao.WindowsApp.Controls.Shared;
+using NDDigital.DiarioAcademia.Apresentacao.WindowsApp.Controls.TurmaForms;
 using NDDigital.DiarioAcademia.Apresentacao.WindowsApp.Properties;
+using NDDigital.DiarioAcademia.Dominio.Contracts;
+using NDDigital.DiarioAcademia.Infraestrutura.DAO.Common.Factorys;
+using NDDigital.DiarioAcademia.Infraestrutura.DAO.Common.Uow;
 using NDDigital.DiarioAcademia.Infraestrutura.Orm.Common;
 using NDDigital.DiarioAcademia.Infraestrutura.Orm.Repositories;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
+using System.Diagnostics;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using NDDigital.DiarioAcademia.Apresentacao.WindowsApp.Controls.AlunoForms;
-using NDDigital.DiarioAcademia.Apresentacao.WindowsApp.Controls.TurmaForms;
-using NDDigital.DiarioAcademia.Apresentacao.WindowsApp.Controls.AulaForms;
 
 namespace NDDigital.DiarioAcademia.Apresentacao.WindowsApp
 {
@@ -25,25 +24,25 @@ namespace NDDigital.DiarioAcademia.Apresentacao.WindowsApp
         private static Principal _instance;
         private DataManager _dataManager;
         private UserControl _control;
-       
+
         private ITurmaService _turmaService;
         private IAlunoService _alunoService;
 
-        private IEnumerable<TurmaDTO> turmas; 
+        private IEnumerable<TurmaDTO> turmas;
 
-        public Principal()
+        public Principal()//TODO: IOC
         {
             InitializeComponent();
 
             _instance = this;
 
-            var factory = new DatabaseFactory();
+            var factory = new EntityFrameworkFactory();
 
-            var unitOfWork = new UnitOfWork(factory);
+            var unitOfWork = new EntityFrameworkUnitOfWork(factory);
 
-            var turmaRepository = new TurmaRepositoryEF(factory);
+            var alunoRepository = new AlunoRepositoryEF(factory);//Container.Get<IAlunoRepository>();
 
-            var alunoRepository = new AlunoRepositoryEF(factory);
+            var turmaRepository = new TurmaRepositoryEF(factory);//Container.Get<ITurmaRepository>();
 
             _turmaService = new TurmaService(turmaRepository, unitOfWork);
 
@@ -60,7 +59,7 @@ namespace NDDigital.DiarioAcademia.Apresentacao.WindowsApp
 
             if (turmaSelecionada != null)
                 cmbTurmas.SelectedItem = turmaSelecionada;
-        }       
+        }
 
         public static Principal Instance
         {
@@ -74,7 +73,6 @@ namespace NDDigital.DiarioAcademia.Apresentacao.WindowsApp
         {
             get
             {
-
                 var turmaSelecionada = cmbTurmas.SelectedItem as TurmaDTO;
 
                 if (turmaSelecionada == null) return 0;
@@ -143,7 +141,6 @@ namespace NDDigital.DiarioAcademia.Apresentacao.WindowsApp
             }
         }
 
-
         /// <summary>
         /// O Método LoadDataManager() é responsável por definir o contexto de cadastro da tela principal,
         /// ou seja, quando o usuário seleciona uma opção da barra de menu, esta operação carrega o UserControl
@@ -175,19 +172,17 @@ namespace NDDigital.DiarioAcademia.Apresentacao.WindowsApp
 
                 labelTipoCadastro.Text = "Operação selecionada: " + _dataManager.GetDescription();
 
-                
                 btnAdd.ToolTipText = _dataManager.GetToolTipMessage().Add;
                 btnRegistraPresenca.ToolTipText = _dataManager.GetToolTipMessage().RegistraPresenca;
                 btnUpdate.ToolTipText = _dataManager.GetToolTipMessage().Edit;
                 btnDelete.ToolTipText = _dataManager.GetToolTipMessage().Delete;
                 btnRelatorio.ToolTipText = _dataManager.GetToolTipMessage().Report;
-      
+
                 btnAdd.Enabled = _dataManager.GetStateButtons().Add;
                 btnRegistraPresenca.Enabled = _dataManager.GetStateButtons().RegistraPresenca;
                 btnUpdate.Enabled = _dataManager.GetStateButtons().Update;
                 btnDelete.Enabled = _dataManager.GetStateButtons().Delete;
                 btnRelatorio.Enabled = _dataManager.GetStateButtons().Report;
-
 
                 toolbar.Enabled = _dataManager != null;
             }
@@ -206,6 +201,7 @@ namespace NDDigital.DiarioAcademia.Apresentacao.WindowsApp
         {
             LoadDataManager(new TurmaDataManager());
         }
+
         private void aulasMenuItem_Click(object sender, EventArgs e)
         {
             LoadDataManager(new AulaDataManager());
@@ -257,7 +253,7 @@ namespace NDDigital.DiarioAcademia.Apresentacao.WindowsApp
                 saveFileDialog.ShowDialog();
 
                 _alunoService.GerarRelatorioAlunosPdf(turmaSelecionada.Ano, saveFileDialog.FileName);
-                
+
                 Process.Start(saveFileDialog.FileName);
             }
         }

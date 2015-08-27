@@ -1,13 +1,11 @@
 ﻿using NDDigital.DiarioAcademia.Aplicacao.DTOs;
 using NDDigital.DiarioAcademia.Aplicacao.Services;
 using NDDigital.DiarioAcademia.Apresentacao.WindowsApp.Controls.Shared;
-using NDDigital.DiarioAcademia.Infraestrutura.Orm.Common;
-using NDDigital.DiarioAcademia.Infraestrutura.Orm.Repositories;
+using NDDigital.DiarioAcademia.Dominio.Contracts;
+using NDDigital.DiarioAcademia.Infraestrutura.DAO.Common.Factorys;
+using NDDigital.DiarioAcademia.Infraestrutura.DAO.Common.Uow;
+using NDDigital.DiarioAcademia.Infraestrutura.IoC;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace NDDigital.DiarioAcademia.Apresentacao.WindowsApp.Controls.AulaForms
@@ -16,7 +14,7 @@ namespace NDDigital.DiarioAcademia.Apresentacao.WindowsApp.Controls.AulaForms
     {
         private IAulaService _aulaService;
 
-        private ITurmaService _turmaService;                       
+        private ITurmaService _turmaService;
 
         private AlunoService _alunoService;
 
@@ -24,22 +22,22 @@ namespace NDDigital.DiarioAcademia.Apresentacao.WindowsApp.Controls.AulaForms
 
         public AulaDataManager()
         {
-            var factory = new DatabaseFactory();
+            var _factory = Container.Get<UnitOfWorkFactory>(); //new AdoNetFactory();
 
-            var unitOfWork = new UnitOfWork(factory);
+            var unitOfWork = Container.Get<IUnitOfWork>(); //new ADOUnitOfWork(_factory);
 
-            var aulaRepository = new AulaRepositoryEF(factory);
+            var aulaRepository = Container.Get<IAulaRepository>();
 
-            var turmaRepository = new TurmaRepositoryEF(factory);
+            var alunoRepository = Container.Get<IAlunoRepository>();
 
-            var alunoRepository = new AlunoRepositoryEF(factory);
+            var turmaRepository = Container.Get<ITurmaRepository>();
 
             _aulaService = new AulaService(aulaRepository, alunoRepository, turmaRepository, unitOfWork);
 
             _alunoService = new AlunoService(alunoRepository, turmaRepository, unitOfWork);
 
             _turmaService = new TurmaService(turmaRepository, unitOfWork);
-           
+
             _control = new AulaControl(_aulaService);
         }
 
@@ -161,7 +159,7 @@ namespace NDDigital.DiarioAcademia.Apresentacao.WindowsApp.Controls.AulaForms
                 Add = true,
                 Delete = true,
                 Update = true,
-                RegistraPresenca=true
+                RegistraPresenca = true
             };
         }
     }

@@ -1,6 +1,7 @@
-﻿using System;
+﻿using Infrastructure.DAO.ORM.Common.Base;
 using NDDigital.DiarioAcademia.Dominio;
 using NDDigital.DiarioAcademia.Dominio.Entities.Security;
+using NDDigital.DiarioAcademia.Infraestrutura.DAO.Common.Uow;
 using NDDigital.DiarioAcademia.Infraestrutura.Orm.Common;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,11 +13,11 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Security
         IList<Group> GetAllSpecific(int[] groups);
     }
 
-    public class GroupRepository : RepositoryBase<Group>, IGroupRepository
+    public class GroupRepository : RepositoryBaseEF<Group>, IGroupRepository
     {
-        private UnitOfWork uow;
+        private IUnitOfWork uow;
 
-        public GroupRepository(IDatabaseFactory dbFactory)
+        public GroupRepository(EntityFrameworkFactory dbFactory)
          : base(dbFactory)
         {
         }
@@ -26,7 +27,7 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Security
             var list = new List<Group>();
             foreach (var id in ids)
             {
-                list.Add(dataContext.Groups.Where(p => p.Id == id).FirstOrDefault());
+                list.Add(DataContext.Groups.Where(p => p.Id == id).FirstOrDefault());
             }
             list.RemoveAll(x => x == null);
             return list;

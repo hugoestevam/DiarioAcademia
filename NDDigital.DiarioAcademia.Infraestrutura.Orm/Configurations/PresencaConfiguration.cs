@@ -1,5 +1,4 @@
-﻿using NDDigital.DiarioAcademia.Dominio;
-using NDDigital.DiarioAcademia.Dominio.Entities;
+﻿using NDDigital.DiarioAcademia.Dominio.Entities;
 using System.Data.Entity.ModelConfiguration;
 
 namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Configurations

@@ -1,16 +1,15 @@
 ﻿using NDDigital.DiarioAcademia.Aplicacao.DTOs;
-using NDDigital.DiarioAcademia.Dominio;
 using NDDigital.DiarioAcademia.Dominio.Contracts;
 using NDDigital.DiarioAcademia.Dominio.Entities;
 using NDDigital.DiarioAcademia.Dominio.Exceptions;
-using NDDigital.DiarioAcademia.Infraestrutura.Orm.Common;
+using NDDigital.DiarioAcademia.Infraestrutura.DAO.Common.Uow;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace NDDigital.DiarioAcademia.Aplicacao.Services
 {
-    public interface IAulaService :IService<AulaDTO>
+    public interface IAulaService : IService<AulaDTO>
     {
         void RealizaChamada(ChamadaDTO registroPresencaDto);
 
@@ -51,7 +50,7 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
 
         public void RealizaChamada(ChamadaDTO registroPresenca)
         {
-            //var alunos = _alunoRepository.GetAllByTurma(registroPresenca.AnoTurma); //TODO: REGIS 
+            //var alunos = _alunoRepository.GetAllByTurma(registroPresenca.AnoTurma); //TODO: REGIS
 
             var alunos = _alunoRepository.GetAllByTurmaId(registroPresenca.TurmaId);//TODO:THIAGO SARTOR
 
@@ -59,17 +58,17 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
                 throw new AlunoNaoEncontrado(String.Format(NENHUM_ALUNO_ENCOTRADO_PARA_TURMA, registroPresenca.AnoTurma));
 
             //var aula = _aulaRepository.GetByData(registroPresenca.Data.Date)??new Aula(DateTime.Now,new Turma(registroPresenca.AnoTurma));//TODO:arrumar isso aq, pror um filtro melhor, hora é ano hora data
-           
+
             //tem que separar bem o que esta buscando por ano e o que busca por id, to fazendo tudo por id pq data pode gerar discrepancias
             var aula = _aulaRepository.GetById(registroPresenca.AulaId);//TODO: THIAGO SARTOR
-            
+
             if (aula == null)
                 throw new AulaNaoEncontrada(String.Format(NENHUMA_AULA_ENCOTRADA_NESTA_DATA, registroPresenca.Data));
 
             foreach (var item in registroPresenca.Alunos)
             {
                 var aluno = alunos.First(x => x.Id == item.AlunoId);
-                
+
                 aluno.RegistraPresenca(aula, item.Status);
 
                 _alunoRepository.Update(aluno);
@@ -108,7 +107,7 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
             {
                 Id = aula.Id,
                 DataAula = aula.Data,
-                TurmaId = aula.Turma.Id //TODO: THIAGO SARTOR                
+                TurmaId = aula.Turma.Id //TODO: THIAGO SARTOR
             };
         }
 
@@ -156,6 +155,5 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
                 .Select(aula => new AulaDTO(aula))
                 .ToList();
         }
-
     }
 }

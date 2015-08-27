@@ -1,17 +1,18 @@
-﻿using NDDigital.DiarioAcademia.Infraestrutura.Orm.Common;
+﻿using Infrastructure.DAO.ORM.Common;
+using NDDigital.DiarioAcademia.Infraestrutura.Orm.Common;
 using System;
 
 namespace NDDigital.DiarioAcademia.IntegrationTests.Common
 {
     public class DatabaseFixture : IDisposable
     {
-        public DatabaseFactory Factory
+        public EntityFrameworkFactory Factory
         {
             get;
             private set;
         }
 
-        public UnitOfWork UnitOfWork
+        public EntityFrameworkUnitOfWork UnitOfWork
         {
             get;
             private set;
@@ -19,9 +20,9 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.Common
 
         public DatabaseFixture()
         {
-            Factory = new DatabaseFactory();
+            Factory = new EntityFrameworkFactory();
 
-            UnitOfWork = new UnitOfWork(Factory);
+            UnitOfWork = new EntityFrameworkUnitOfWork(Factory);
         }
 
         public void Dispose()

@@ -1,6 +1,7 @@
-﻿using NDDigital.DiarioAcademia.Dominio.Contracts;
+﻿using Infrasctructure.DAO.SQL.Common;
+using NDDigital.DiarioAcademia.Dominio.Contracts;
 using NDDigital.DiarioAcademia.Dominio.Entities;
-using NDDigital.DiarioAcademia.Dominio.Exceptions;
+using NDDigital.DiarioAcademia.Infraestrutura.SQL.Common;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -8,42 +9,47 @@ using System.Linq.Expressions;
 
 namespace NDDigital.DiarioAcademia.Infraestrutura.SQL.Repositories
 {
-    public class AulaRepositorySql : IAulaRepository
+    //TODO: IMPLEMENTAR
+    public class AulaRepositorySql : RepositoryBaseADO, IAulaRepository
     {
         #region Querys
 
-        public const string SqlInsert =
-            "INSERT INTO TBAula (DataAula) " +
-                         "VALUES ({0}DataAula)";
+        public const string SqlInsert = @"INSERT INTO TBAula
+            (Data, ChamadaRealizada, Turma_Id) VALUES
+            ({0}Data, {0}ChamadaRealizada, {0}Turma_Id)";
 
-        public const string SqlUpdate =
-         "UPDATE TBAula SET DataAula = {0}DataAula " +
-                      "WHERE Id = {0}Id";
+        public const string SqlUpdate = @"UPDATE TBAula SET
+            Data = {0}Data,
+            ChamadaRealizada = {0}ChamadaRealizada,
+            Turma_Id = {0}Turma_Id
+            WHERE Id = {0}Id";
 
-        public const string SqlDelete =
-         "DELETE FROM TBAula " +
-                       "WHERE Id = {0}Id";
+        public const string SqlDelete = @"DELETE FROM TBAula
+            WHERE Id = {0}Id";
 
-        public const string SqlSelect =
-         "SELECT * FROM TBAula";
+        public const string SqlSelect = @"SELECT * FROM TBAula";
 
-        public const string SqlSelectbId =
-        "SELECT * FROM TBAula WHERE Id = {0}Id";
+        public const string SqlSelectbId = @"SELECT * FROM TBAula
+            WHERE Id = {0}Id";
 
-        public const string SqlSelectTexto =
-         "SELECT * FROM TBAula WHERE DataAula = {0}DataAula";
+        public const string SqlSelectTexto = @"SELECT * FROM TBAula
+            WHERE Data = {0}Data";
 
         #endregion Querys
+
+        public AulaRepositorySql(AdoNetFactory factory) : base(factory)
+        {
+        }
 
         public Aula Add(Aula entity)
         {
             try
             {
-                Db.Insert(SqlInsert, Take(entity));
+                Insert(SqlInsert, Take(entity));
             }
-            catch (AulaException te)
+            catch (Exception te)
             {
-                throw new AulaException("Erro ao tentar adicionar uma Aula!" + te.Message);
+                throw new Exception("Erro ao tentar adicionar uma Aula!" + te.Message);
             }
             return entity;
         }
@@ -53,11 +59,11 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.SQL.Repositories
             try
             {
                 var aulaRemovida = GetById(id);
-                Db.Delete(SqlDelete, Take(aulaRemovida));
+                Delete(SqlDelete, Take(aulaRemovida));
             }
-            catch (AulaException te)
+            catch (Exception te)
             {
-                throw new AulaException("Erro ao tentar deletar uma Aula!" + te.Message);
+                throw new Exception("Erro ao tentar deletar uma Aula!" + te.Message);
             }
         }
 
@@ -66,11 +72,11 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.SQL.Repositories
             try
             {
                 var aulaRemovida = GetById(entity.Id);
-                Db.Delete(SqlDelete, Take(aulaRemovida));
+                Delete(SqlDelete, Take(aulaRemovida));
             }
-            catch (AulaException te)
+            catch (Exception te)
             {
-                throw new AulaException("Erro ao tentar deletar uma Aula!" + te.Message);
+                throw new Exception("Erro ao tentar deletar uma Aula!" + te.Message);
             }
         }
 
@@ -78,11 +84,11 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.SQL.Repositories
         {
             try
             {
-                return Db.GetAll<Aula>(SqlSelect, Make);
+                return GetAll<Aula>(SqlSelect, Make);
             }
-            catch (AulaException te)
+            catch (Exception te)
             {
-                throw new AulaException("Erro ao tentar listar todas as Aulas!" + te.Message);
+                throw new Exception("Erro ao tentar listar todas as Aulas!" + te.Message);
             }
         }
 
@@ -107,7 +113,7 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.SQL.Repositories
             {
                 var parms = new object[] { "Id", id };
 
-                return Db.Get(SqlSelectbId, Make, parms);
+                return Get(SqlSelectbId, Make, parms);
             }
             catch (Exception)
             {
@@ -129,12 +135,11 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.SQL.Repositories
         {
             try
             {
-                var aulaEditada = GetById(entity.Id);
-                Db.Update(SqlUpdate, Take(aulaEditada));
+                Update(SqlUpdate, Take(entity));
             }
-            catch (AulaException te)
+            catch (Exception te)
             {
-                throw new AulaException("Erro ao tentar editar uma Aula!" + te.Message);
+                throw new Exception("Erro ao tentar editar uma Aula!" + te.Message);
             }
         }
 
@@ -143,7 +148,9 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.SQL.Repositories
             Aula aula = new Aula();
 
             aula.Id = Convert.ToInt32(reader["Id"]);
-            aula.Data = Convert.ToDateTime(reader["DataAula"]);
+            aula.Data = Convert.ToDateTime(reader["Data"]);
+            aula.ChamadaRealizada = Convert.ToBoolean(reader["ChamadaRealizada"]);
+            aula.Turma.Id = Convert.ToInt32(reader["Turma_Id"]);
 
             return aula;
         }
@@ -153,7 +160,9 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.SQL.Repositories
             return new object[]
             {
                 "Id", aula.Id,
-                "DataAula", aula.Data,
+                "Data", aula.Data,
+                "ChamadaRealizada", aula.ChamadaRealizada,
+                "Turma_Id", aula.Turma.Id
             };
         }
     }

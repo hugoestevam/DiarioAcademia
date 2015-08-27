@@ -240,9 +240,21 @@
       <Project>{98aeeab1-ab78-451a-ae88-c852c6bc3c31}</Project>
       <Name>Dominio</Name>
     </ProjectReference>
-    <ProjectReference Include="..\NDDigital.DiarioAcademia.Infraestrutura.Orm\Infraestrutura.Orm.csproj">
+    <ProjectReference Include="..\NDDigital.DiarioAcademia.Infraestrutura.DAO\Infraestrutura.DAO.csproj">
+      <Project>{a797581c-2ba5-4d68-a3d3-cd68818f9b84}</Project>
+      <Name>Infraestrutura.DAO</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NDDigital.DiarioAcademia.Infraestrutura.IoC\Infraestrutura.IoC.csproj">
+      <Project>{3962128f-2227-4078-8ff7-d8b624648e08}</Project>
+      <Name>Infraestrutura.IoC</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NDDigital.DiarioAcademia.Infraestrutura.Orm\Infraestrutura.ORM.csproj">
       <Project>{3fd3156c-9f4f-4e10-8b7a-7454c803be89}</Project>
-      <Name>Infraestrutura.Orm</Name>
+      <Name>Infraestrutura.ORM</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NDDigital.DiarioAcademia.Infraestrutura.SQL\Infraestrutura.SQL.csproj">
+      <Project>{987e3d7f-ea01-45aa-8867-8e85899fc5fa}</Project>
+      <Name>Infraestrutura.SQL</Name>
     </ProjectReference>
     <ProjectReference Include="..\NDDigital.DiarioAcademia.Infraestrutura.WebServices\Infraestrutura.CepServices.csproj">
       <Project>{7c91018a-6066-4ab4-bcea-7f477bb514c4}</Project>

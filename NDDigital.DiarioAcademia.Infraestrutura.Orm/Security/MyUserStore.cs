@@ -1,9 +1,10 @@
-﻿using Microsoft.AspNet.Identity;
+﻿using Infrasctructure.DAO.ORM.Contexts;
+using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using NDDigital.DiarioAcademia.Dominio.Entities.Security;
-using NDDigital.DiarioAcademia.Infraestrutura.Orm.Contexts;
 using System;
-using System.Collections.Generic;
+using System.Data.Entity;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,40 +16,42 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Security
 {
     public class MyUserStore : IUserStore<User>, IUserPasswordStore<User>, IUserSecurityStampStore<User>, IQueryableUserStore<User>
     {
-        UserStore<IdentityUser> userStore;
-        DiarioAcademiaContext _context;
+        private UserStore<IdentityUser> userStore;
+        private EntityFrameworkContext _context;
 
         public IQueryable<User> Users
         {
             get
             {
-                return (userStore.Context as DiarioAcademiaContext).Users;
+                return (userStore.Context as EntityFrameworkContext).Users;
             }
         }
 
-        public MyUserStore(DiarioAcademiaContext context)
+        public MyUserStore(EntityFrameworkContext context)
         {
             userStore = new UserStore<IdentityUser>(_context = context);
-
         }
+
         public Task CreateAsync(User user)
         {
             _context.Users.Add(user);
             _context.Configuration.ValidateOnSaveEnabled = false;
             return _context.SaveChangesAsync();
         }
+
         public Task DeleteAsync(User user)
         {
-
             var userLocated = _context.Users.First(u => u.UserName == user.UserName);
             _context.Users.Remove(userLocated);
             _context.Configuration.ValidateOnSaveEnabled = false;
             return _context.SaveChangesAsync();
         }
+
         public Task<User> FindByIdAsync(string userId)
         {
             return _context.Users.AsNoTracking().Where(u => u.Id.ToLower() == userId.ToLower()).FirstOrDefaultAsync();
         }
+
         public Task<User> FindByNameAsync(string userName)
         {
             return _context.Users.AsNoTracking().Where(u => u.UserName.ToLower() == userName.ToLower()).FirstOrDefaultAsync();
@@ -57,6 +60,7 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Security
         //TODO: rever implementação (possivel chance de gambi pattern XGH)
         public Task UpdateAsync(User user)
         {
+            var context = userStore.Context as EntityFrameworkContext;
 
             DbEntityEntry dbEntityEntry = _context.Entry(user);
 
@@ -68,14 +72,6 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Security
             user.Groups.ForEach(p => _context.Entry(p).State = EntityState.Modified);
 
             _context.SaveChanges();
-
-            #region Implementação
-            //var set = context.Users.Include(u => u.Groups).FirstOrDefault(u => u.Id == user.Id); // get o do banco
-
-            //context.Entry(set).CurrentValues.SetValues(user); // atualiza as propriedades simples
-            //set.Groups = user.Groups; // atualiza a colletion de group
-            //context.SaveChanges(); // save
-            #endregion
 
             return _context.SaveChangesAsync();
 
@@ -107,7 +103,7 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Security
             ////            return _context.SaveChangesAsync();
             ////>>>>>>>
 
-            #endregion
+            #endregion Implementacao Alternativa
         }
 
         public void Dispose()
@@ -179,11 +175,9 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Security
             throw new NotImplementedException();
         }
 
-
-
         [DebuggerStepThrough]
         //Just for debug, call in Imediate Window
-        private string LogEntry(User user, DiarioAcademiaContext ctx)
+        private string LogEntry(User user, EntityFrameworkContext ctx)
         {
             var sb = new StringBuilder(user.ToString());
 
@@ -193,7 +187,5 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Security
                 sb.Append("{" + g.Name + " - [" + ctx.Entry(g).State + "]}");
             return sb.ToString();
         }
-
-
     }
 }

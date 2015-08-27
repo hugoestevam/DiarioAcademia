@@ -1,6 +1,7 @@
-﻿using NDDigital.DiarioAcademia.Dominio.Contracts;
+﻿using Infrasctructure.DAO.SQL.Common;
+using NDDigital.DiarioAcademia.Dominio.Contracts;
 using NDDigital.DiarioAcademia.Dominio.Entities;
-using NDDigital.DiarioAcademia.Dominio.Exceptions;
+using NDDigital.DiarioAcademia.Infraestrutura.SQL.Common;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -8,7 +9,8 @@ using System.Linq.Expressions;
 
 namespace NDDigital.DiarioAcademia.Infraestrutura.SQL.Repositories
 {
-    public class TurmaRepositorySql : ITurmaRepository
+    //TODO: IMPLEMENTAR
+    public class TurmaRepositorySql : RepositoryBaseADO, ITurmaRepository
     {
         #region Querys
 
@@ -18,30 +20,35 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.SQL.Repositories
 
         public const string SqlUpdate =
          "UPDATE TBTurma SET Ano = {0}Ano " +
-                      "WHERE Id = {0}Id";
+                      "WHERE Id = {0}Id_Turma";
 
         public const string SqlDelete =
          "DELETE FROM TBTurma " +
-                       "WHERE Id = {0}Id";
+                       "WHERE Id = {0}Id_Turma";
 
         public const string SqlSelect =
          "SELECT * FROM TBTurma";
 
         public const string SqlSelectbId =
-        "SELECT * FROM TBTurma WHERE Id = {0}Id";
+        "SELECT * FROM TBTurma WHERE Id = {0}Id_Turma";
 
         #endregion Querys
+
+        public TurmaRepositorySql(AdoNetFactory factory) : base(factory)
+        {
+        }
 
         public Turma Add(Turma turma)
         {
             try
             {
-                Db.Insert(SqlInsert, Take(turma));
+                Insert(SqlInsert, Take(turma));
             }
-            catch (TurmaException te)
+            catch (Exception te)
             {
-                throw new TurmaException("Erro ao tentar adicionar uma Turma!" + te.Message);
+                throw new Exception("Erro ao tentar adicionar uma Turma!" + te.Message);
             }
+
             return turma;
         }
 
@@ -50,11 +57,11 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.SQL.Repositories
             try
             {
                 var turmaRemovida = GetById(id);
-                Db.Delete(SqlDelete, Take(turmaRemovida));
+                Delete(SqlDelete, Take(turmaRemovida));
             }
-            catch (TurmaException te)
+            catch (Exception te)
             {
-                throw new TurmaException("Erro ao tentar deletar uma Turma!" + te.Message);
+                throw new Exception("Erro ao tentar deletar uma Turma!" + te.Message);
             }
         }
 
@@ -63,11 +70,11 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.SQL.Repositories
             try
             {
                 var turmaRemovida = GetById(entity.Id);
-                Db.Delete(SqlDelete, Take(turmaRemovida));
+                Delete(SqlDelete, Take(turmaRemovida));
             }
-            catch (TurmaException te)
+            catch (Exception te)
             {
-                throw new TurmaException("Erro ao tentar deletar uma Turma!" + te.Message);
+                throw new Exception("Erro ao tentar deletar uma Turma!" + te.Message);
             }
         }
 
@@ -75,11 +82,11 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.SQL.Repositories
         {
             try
             {
-                return Db.GetAll<Turma>(SqlSelect, Make);
+                return GetAll<Turma>(SqlSelect, Make);
             }
-            catch (TurmaException te)
+            catch (Exception te)
             {
-                throw new TurmaException("Erro ao tentar listar todas as Turmas!" + te.Message);
+                throw new Exception("Erro ao tentar listar todas as Turmas!" + te.Message);
             }
         }
 
@@ -87,14 +94,14 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.SQL.Repositories
         {
             try
             {
-                var parms = new object[] { "Id", id };
+                var parms = new object[] { "Id_Turma", id };
 
-                return Db.Get(SqlSelectbId, Make, parms);
+                return Get(SqlSelectbId, Make, parms);
             }
             catch (Exception te)
             {
                 return null;
-                throw new TurmaException("Erro ao tentar encontrar a turma!" + te.Message);
+                throw new Exception("Erro ao tentar encontrar a turma!" + te.Message);
             }
         }
 
@@ -102,12 +109,11 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.SQL.Repositories
         {
             try
             {
-                var turmaEditada = GetById(entity.Id);
-                Db.Update(SqlUpdate, Take(turmaEditada));
+                Update(SqlUpdate, Take(entity));
             }
-            catch (TurmaException te)
+            catch (Exception te)
             {
-                throw new TurmaException("Erro ao tentar editar uma Turma!" + te.Message);
+                throw new Exception("Erro ao tentar editar uma Turma!" + te.Message);
             }
         }
 

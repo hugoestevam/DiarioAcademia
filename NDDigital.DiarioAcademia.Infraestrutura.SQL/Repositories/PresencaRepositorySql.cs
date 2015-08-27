@@ -1,13 +1,15 @@
-﻿using NDDigital.DiarioAcademia.Dominio.Contracts;
+﻿using Infrasctructure.DAO.SQL.Common;
+using NDDigital.DiarioAcademia.Dominio.Contracts;
 using NDDigital.DiarioAcademia.Dominio.Entities;
-using NDDigital.DiarioAcademia.Dominio.Exceptions;
+using NDDigital.DiarioAcademia.Infraestrutura.SQL.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 
 namespace NDDigital.DiarioAcademia.Infraestrutura.SQL.Repositories
 {
-    public class PresencaRepositorySql : IPresencaRepository
+    //TODO: IMPLEMENTAR
+    public class PresencaRepositorySql : RepositoryBaseADO, IPresencaRepository
     {
         #region Querys
 
@@ -16,6 +18,10 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.SQL.Repositories
                        "WHERE Id = {0}Id";
 
         #endregion Querys
+
+        public PresencaRepositorySql(AdoNetFactory factory) : base(factory)
+        {
+        }
 
         public Presenca Add(Presenca entity)
         {
@@ -27,11 +33,11 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.SQL.Repositories
             try
             {
                 var presencaRemovida = GetById(id);
-                Db.Delete(SqlDelete, Take(presencaRemovida));
+                Delete(SqlDelete, Take(presencaRemovida));
             }
-            catch (PresencaException te)
+            catch (Exception te)
             {
-                throw new PresencaException("Erro ao tentar deletar uma Presenca!" + te.Message);
+                throw new Exception("Erro ao tentar deletar uma Presenca!" + te.Message);
             }
         }
 

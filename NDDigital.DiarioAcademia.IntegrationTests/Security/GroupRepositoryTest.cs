@@ -1,11 +1,10 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NDDigital.DiarioAcademia.Aplicacao.Services;
-using NDDigital.DiarioAcademia.Dominio.Entities.Security;
-using NDDigital.DiarioAcademia.Infraestrutura.Orm.Common;
+using NDDigital.DiarioAcademia.Infraestrutura.DAO.Common.Uow;
 using NDDigital.DiarioAcademia.Infraestrutura.Orm.Security;
+using NDDigital.DiarioAcademia.IntegrantionTests.Base;
 using NDDigital.DiarioAcademia.IntegrationTests.Base;
 using NDDigital.DiarioAcademia.IntegrationTests.Common;
-using NDDigital.DiarioAcademia.SecurityTests;
 using System.Data.Entity;
 
 namespace NDDigital.DiarioAcademia.IntegrationTests.Security
@@ -29,13 +28,11 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.Security
 
             uow = databaseFixture.UnitOfWork;
 
-
-
             var store = new MyUserStore(databaseFixture.Factory.Get());
 
             var userRepository = new UserRepository(store);
 
-            _service = new AuthorizationService(_repoGroup, _repoPermission,userRepository, uow);
+            _service = new AuthorizationService(_repoGroup, _repoPermission, userRepository, uow);
 
             Database.SetInitializer(new BaseTest());
         }
@@ -76,6 +73,5 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.Security
 
             Assert.AreEqual(2, list.Count);
         }
-
     }
 }

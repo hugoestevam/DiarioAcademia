@@ -1,12 +1,9 @@
-﻿using NDDigital.DiarioAcademia.Aplicacao.Services;
-using NDDigital.DiarioAcademia.Dominio.Entities.Security;
+﻿using NDDigital.DiarioAcademia.Dominio.Entities.Security;
+using NDDigital.DiarioAcademia.Infraestrutura.DAO.Common.Uow;
 using NDDigital.DiarioAcademia.Infraestrutura.Orm.Security;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using NDDigital.DiarioAcademia.Infraestrutura.Orm.Common;
 
 namespace NDDigital.DiarioAcademia.Aplicacao.Services
 {
@@ -15,12 +12,10 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
         Permission GetByPermissionId(string id);
     }
 
-
-    public class PermissionService :IPermissionService
+    public class PermissionService : IPermissionService
     {
         private IUnitOfWork _uow;
-        IPermissionRepository _repo;
-
+        private IPermissionRepository _repo;
 
         public PermissionService(IPermissionRepository repo, IUnitOfWork uow)
         {
@@ -42,18 +37,18 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
 
         public void Update(Dominio.Entities.Security.Permission obj)
         {
-             _repo.Update(obj);
+            _repo.Update(obj);
             _uow.Commit();
         }
 
         IList<Dominio.Entities.Security.Permission> IService<Dominio.Entities.Security.Permission>.GetAll()
         {
-             return _repo.GetAll(); throw new NotImplementedException();
+            return _repo.GetAll(); throw new NotImplementedException();
         }
 
         Dominio.Entities.Security.Permission IService<Dominio.Entities.Security.Permission>.GetById(int id)
         {
-             return _repo.GetById(id);  throw new NotImplementedException();
+            return _repo.GetById(id); throw new NotImplementedException();
         }
 
         public Permission GetByPermissionId(string id)
@@ -61,8 +56,4 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
             return (from p in _repo.GetAll() where p.PermissionId==id select p).FirstOrDefault(); 
         }
     }
-
-
-
-
 }

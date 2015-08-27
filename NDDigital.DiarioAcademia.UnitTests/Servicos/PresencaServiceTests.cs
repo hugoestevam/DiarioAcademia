@@ -5,7 +5,7 @@ using NDDigital.DiarioAcademia.Aplicacao.Services;
 using NDDigital.DiarioAcademia.Dominio.Contracts;
 using NDDigital.DiarioAcademia.Dominio.Entities;
 using NDDigital.DiarioAcademia.Dominio.Exceptions;
-using NDDigital.DiarioAcademia.Infraestrutura.Orm.Common;
+using NDDigital.DiarioAcademia.Infraestrutura.DAO.Common.Uow;
 using System;
 using System.Collections.Generic;
 
@@ -74,7 +74,7 @@ namespace NDDigital.DiarioAcademia.UnitTests.Servicos
         {
             //arrange
             _alunoRepository
-                .Setup(x => x.GetAllByTurma(It.IsAny<int>()))
+                .Setup(x => x.GetAllByTurmaId(It.IsAny<int>()))
                 .Returns(null as List<Aluno>);
 
             var comando = new ChamadaDTO { AnoTurma = 2000 };

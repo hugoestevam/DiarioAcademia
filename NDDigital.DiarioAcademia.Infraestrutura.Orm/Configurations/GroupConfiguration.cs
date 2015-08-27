@@ -15,7 +15,7 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Configurations
                 x.MapLeftKey("Group_Id");
                 x.MapRightKey("Permission_Id");
                 x.ToTable("TBGroupPermission");
-            });           
-        }            
+            });
+        }
     }
 }

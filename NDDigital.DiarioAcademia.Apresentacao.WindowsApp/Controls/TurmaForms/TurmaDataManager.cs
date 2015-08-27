@@ -1,8 +1,10 @@
 ﻿using NDDigital.DiarioAcademia.Aplicacao.DTOs;
 using NDDigital.DiarioAcademia.Aplicacao.Services;
 using NDDigital.DiarioAcademia.Apresentacao.WindowsApp.Controls.Shared;
-using NDDigital.DiarioAcademia.Infraestrutura.Orm.Common;
-using NDDigital.DiarioAcademia.Infraestrutura.Orm.Repositories;
+using NDDigital.DiarioAcademia.Dominio.Contracts;
+using NDDigital.DiarioAcademia.Infraestrutura.DAO.Common.Factorys;
+using NDDigital.DiarioAcademia.Infraestrutura.DAO.Common.Uow;
+using NDDigital.DiarioAcademia.Infraestrutura.IoC;
 using System;
 using System.Windows.Forms;
 
@@ -11,19 +13,19 @@ namespace NDDigital.DiarioAcademia.Apresentacao.WindowsApp.Controls.TurmaForms
     public class TurmaDataManager : DataManager
     {
         private ITurmaService _turmaService;
-        
+
         private TurmaControl _control;
 
         public TurmaDataManager()
         {
-            var factory = new DatabaseFactory();
+            var _factory = Container.Get<UnitOfWorkFactory>();
 
-            var unitOfWork = new UnitOfWork(factory);
+            var unitOfWork = Container.Get<IUnitOfWork>();
 
-            var turmaRepository = new TurmaRepositoryEF(factory);
+            var turmaRepository = Container.Get<ITurmaRepository>();
 
             _turmaService = new TurmaService(turmaRepository, unitOfWork);
-           
+
             _control = new TurmaControl(_turmaService);
         }
 

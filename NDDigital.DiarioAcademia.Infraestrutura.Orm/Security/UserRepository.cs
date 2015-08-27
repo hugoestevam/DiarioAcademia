@@ -1,48 +1,45 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Threading.Tasks;
+﻿using Infrasctructure.DAO.ORM.Contexts;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
-using NDDigital.DiarioAcademia.Dominio;
 using NDDigital.DiarioAcademia.Dominio.Entities.Security;
 using NDDigital.DiarioAcademia.Infraestrutura.CepServices;
-using NDDigital.DiarioAcademia.Infraestrutura.Orm.Contexts;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Diagnostics;
-using System.Text;
-using System.Data.Entity.Infrastructure;
-using System.ComponentModel.DataAnnotations;
-
 
 namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Security
 {
     public interface IUserRepository
     {
         IList<User> GetUsersByGroup(Group group);
+
         IList<Group> GetGroupsByUser(string username);
+
         IList<User> GetUsers();
+
         User GetUserById(string id);
+
         User GetByUserName(string username);
+
         void Delete(string username);
     }
 
     public class UserRepository : UserManager<User>, IUserRepository
     {
-        private static DiarioAcademiaContext _appDbContext;
+        private static EntityFrameworkContext _appDbContext;
         public IUserStore<User> _store { get; set; }
 
         public UserRepository(IUserStore<User> store)
             : base(store)
         {
-            _appDbContext = _appDbContext ?? new DiarioAcademiaContext();
+            _appDbContext = _appDbContext ?? new EntityFrameworkContext();
         }
+
         public static UserRepository Create(IdentityFactoryOptions<UserRepository> options, IOwinContext context)
         {
-            _appDbContext = context.Get<DiarioAcademiaContext>();
+            _appDbContext = context.Get<EntityFrameworkContext>();
             var userManager = new UserRepository(new UserStore<User>(_appDbContext));
 
             // Configure validation logic for usernames
@@ -81,8 +78,8 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Security
                 where c.Groups.Any(g => g.Id == gr.Id)
                 select c
                 ).ToList();
-
         }
+
         public IList<User> GetUsers()
         {
             return (from c
@@ -90,7 +87,6 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Security
                     select c
                     ).ToList();
         }
-
 
         public User GetUserById(string id)
         {
@@ -136,6 +132,4 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Security
     }
 
     //recurso: não temos uma implementação de IUserStore: http://weblogs.asp.net/imranbaloch/a-simple-implementation-of-microsoft-aspnet-identity
-
-
 }

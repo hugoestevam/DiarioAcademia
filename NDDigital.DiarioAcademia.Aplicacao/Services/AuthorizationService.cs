@@ -1,20 +1,20 @@
-﻿using NDDigital.DiarioAcademia.Dominio.Entities.Security;
-using NDDigital.DiarioAcademia.Infraestrutura.Orm.Common;
+﻿using Microsoft.AspNet.Identity;
+using NDDigital.DiarioAcademia.Dominio.Entities.Security;
+using NDDigital.DiarioAcademia.Infraestrutura.DAO.Common.Uow;
 using NDDigital.DiarioAcademia.Infraestrutura.Orm.Security;
 using System.Collections.Generic;
-using System;
-using Microsoft.AspNet.Identity;
 using System.Linq;
-
 
 namespace NDDigital.DiarioAcademia.Aplicacao.Services
 {
     public interface IAuthorizationService
     {
         void AddPermissionsToGroup(int id, string[] permissions);
+
         void RemovePermissionsFromGroup(int id, string[] permissions);
 
         void AddGroupToUser(string username, int[] groups);
+
         void RemoveGroupFromUser(string username, int[] groups);
     }
 
@@ -94,7 +94,6 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
             }
             _userRepository.Update(userEncontrado);
             _unitOfWork.Commit();
-
         }
 
         private void SetGroups(User userEncontrado, IList<Group> listGroups)
@@ -107,6 +106,5 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
                         userEncontrado.Groups.Add(item);
             }
         }
-
     }
 }

@@ -33,17 +33,24 @@
 		};
 
 		self.delete = function (permission) {
-		    permission = getPermissionsId(permission);
+			permission = getPermissionsId(permission);
 			logger.danger(res.deleted_successful, permission, "Delete");
-			return $http.delete(serviceUrl + "/" + permission)
+			return $http({
+			    url: serviceUrl,
+			    method: 'DELETE',
+			    data:  permission,
+			    headers: { "Content-Type": "application/json;charset=utf-8" }
+			})
+				.then(logger.successCallback)
+				.catch(logger.errorCallback);
 		};
 
 		function getPermissionsId(array) {
-		    var permissionsIds = [];
-		    for (var i = 0; i < array.length; i++) {
-		        permissionsIds.push(array[i].permissionId);
-		    }
-		    return permissionsIds;
+			var permissionsIds = [];
+			for (var i = 0; i < array.length; i++) {
+				permissionsIds.push(array[i].permissionId);
+			}
+			return permissionsIds;
 		}
 	}
 })();
