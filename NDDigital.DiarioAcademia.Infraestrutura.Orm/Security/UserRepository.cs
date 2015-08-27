@@ -21,7 +21,7 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Security
 
         User GetUserById(string id);
 
-        User GetByUserName(string username);
+        User GetUserByUsername(string username);
 
         void Delete(string username);
     }
@@ -105,17 +105,9 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Security
                     ).FirstOrDefault();
         }
 
-        public User GetByUserName(string username)
-        {
-            return (from c
-                     in _appDbContext.Users
-                    where c.UserName == username
-                    select c).Include(u => u.Groups).FirstOrDefault();
-        }
-
         public void Delete(string username)
         {
-            var user = GetByUserName(username);
+            var user = GetUserByUsername(username);
             _appDbContext.Users.Remove(user);
         }
 

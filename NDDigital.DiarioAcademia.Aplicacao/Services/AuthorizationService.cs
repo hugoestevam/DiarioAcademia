@@ -71,7 +71,7 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
 
         public void AddGroupToUser(string username, int[] groups)
         {
-            var userEncontrado = _userRepository.GetByUserName(username);
+            var userEncontrado = _userRepository.GetUserByUsername(username);
             var listGroups = _groupRepository.GetAllSpecific(groups);
 
             SetGroups(userEncontrado, listGroups);
@@ -83,7 +83,7 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
 
         public void RemoveGroupFromUser(string username, int[] groups)
         {
-            var userEncontrado = _userRepository.GetByUserName(username);
+            var userEncontrado = _userRepository.GetUserByUsername(username);
 
             foreach (var groupId in groups)
             {
