@@ -3,47 +3,37 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
+using NDDigital.DiarioAcademia.Dominio.Contracts;
 using NDDigital.DiarioAcademia.Dominio.Entities.Security;
 using NDDigital.DiarioAcademia.Infraestrutura.CepServices;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System;
+using System.Linq.Expressions;
 
 namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Security
 {
-    public interface IAccountRepository
-    {
-        IList<Account> GetUsersByGroup(Group group);
 
-        IList<Group> GetGroupsByUser(string username);
 
-        IList<Account> GetUsers();
-
-        Account GetUserById(string id);
-
-        Account GetByUserName(string username);
-
-        void Delete(string username);
-    }
-
-    public class AccountRepository : UserManager<Account>, IAccountRepository
+    public class UserRepository : UserManager<User>
     {
         private static EntityFrameworkContext _appDbContext;
-        public IUserStore<Account> _store { get; set; }
+        public IUserStore<User> _store { get; set; }
 
-        public AccountRepository(IUserStore<Account> store)
+        public UserRepository(IUserStore<User> store)
             : base(store)
         {
             _appDbContext = _appDbContext ?? new EntityFrameworkContext();
         }
 
-        public static AccountRepository Create(IdentityFactoryOptions<AccountRepository> options, IOwinContext context)
+        public static UserRepository Create(IdentityFactoryOptions<UserRepository> options, IOwinContext context)
         {
             _appDbContext = context.Get<EntityFrameworkContext>();
-            var userManager = new AccountRepository(new UserStore<Account>(_appDbContext));
+            var userManager = new UserRepository(new UserStore<User>(_appDbContext));
 
             // Configure validation logic for usernames
-            userManager.UserValidator = new UserValidator<Account>(userManager)
+            userManager.UserValidator = new UserValidator<User>(userManager)
             {
                 AllowOnlyAlphanumericUserNames = true
             };
@@ -63,24 +53,24 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Security
             var dataProtectionProvider = options.DataProtectionProvider;
             if (dataProtectionProvider != null)
             {
-                userManager.UserTokenProvider = new DataProtectorTokenProvider<Account>(dataProtectionProvider.Create("ASP.NET Identity"));
+                userManager.UserTokenProvider = new DataProtectorTokenProvider<User>(dataProtectionProvider.Create("ASP.NET Identity"));
             }
 
             return userManager;
         }
 
-        public IList<Account> GetUsersByGroup(Group group)
+        public IList<User> GetUsersByGroup(Group group)
         {
             var gr = group; //key "group" is reserved
             return (
                 from c
                 in _appDbContext.Users
-                where c.Groups.Any(g => g.Id == gr.Id)
+                where c.Account.Groups.Any(g => g.Id == gr.Id)
                 select c
                 ).ToList();
         }
 
-        public IList<Account> GetUsers()
+        public IList<User> GetUsers()
         {
             return (from c
                     in _appDbContext.Users
@@ -88,24 +78,24 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Security
                     ).ToList();
         }
 
-        public Account GetUserById(string id)
+        public User GetUserById(string id)
         {
             return (from c
-                    in _appDbContext.Users.Include(u => u.Groups)
+                    in _appDbContext.Users.Include(u => u.Account)
                     where c.Id == id
                     select c).FirstOrDefault();
         }
 
-        public Account GetUserByUsername(string username)
+        public User GetUserByUsername(string username)
         {
             return (from c
-                    in (_appDbContext.Users).Include(x => x.Groups)
+                    in (_appDbContext.Users).Include(x => x.Account)
                     where c.UserName == username
                     select c
                     ).FirstOrDefault();
         }
 
-        public Account GetByUserName(string username)
+        public User GetByUserName(string username)
         {
             return (from c
                      in _appDbContext.Users
@@ -123,12 +113,14 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Security
         {
             var user = GetUserByUsername(username);
 
-            if (user != null)
+            if (user != null && user.Account != null)
 
-                return user.Groups;
+                return user.Account.Groups;
 
             return new List<Group>();
         }
+
+     
     }
 
 }

@@ -22,9 +22,9 @@ namespace NDDigital.DiarioAcademia.WebApi.Providers
 
             context.OwinContext.Response.Headers.Add("Access-Control-Allow-Origin", new[] { allowedOrigin });
 
-            var userRepository = context.OwinContext.GetUserManager<AccountRepository>();
+            var userRepository = context.OwinContext.GetUserManager<UserRepository>();
 
-            Account user = await userRepository.FindAsync(context.UserName, context.Password);
+            User user = await userRepository.FindAsync(context.UserName, context.Password);
 
             if (user == null)
             {

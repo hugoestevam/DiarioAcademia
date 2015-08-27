@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNet.Identity;
+using NDDigital.DiarioAcademia.Dominio.Contracts;
 using NDDigital.DiarioAcademia.Dominio.Entities.Security;
 using NDDigital.DiarioAcademia.Infraestrutura.DAO.Common.Uow;
 using NDDigital.DiarioAcademia.Infraestrutura.Orm.Security;
@@ -22,15 +23,19 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
     {
         private IPermissionRepository _permissionRepository;
         private IGroupRepository _groupRepository;
-        private AccountRepository _userRepository;
+        private IAccountRepository _accountRepository;
         private IUnitOfWork _unitOfWork;
 
-        public AuthorizationService(IGroupRepository groupRepository, IPermissionRepository permissionRepository, AccountRepository userRepository, IUnitOfWork uow)
+        public AuthorizationService(
+            IGroupRepository groupRepository,
+            IPermissionRepository permissionRepository,
+            IAccountRepository accountRepository,
+            IUnitOfWork uow)
         {
             _permissionRepository = permissionRepository;
             _groupRepository = groupRepository;
             _unitOfWork = uow;
-            _userRepository = userRepository;
+            _accountRepository = accountRepository;
         }
 
         public void AddPermissionsToGroup(int id, string[] permissions)
@@ -73,19 +78,19 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
 
         public void AddGroupToUser(string username, int[] groups)
         {
-            var userEncontrado = _userRepository.GetByUserName(username);
+            var userEncontrado = _accountRepository.GetByUserName(username);
             var listGroups = _groupRepository.GetAllSpecific(groups);
 
             SetGroups(userEncontrado, listGroups);
 
-            _userRepository.Update(userEncontrado);
+            _accountRepository.Update(userEncontrado);
 
             _unitOfWork.Commit();
         }
 
         public void RemoveGroupFromUser(string username, int[] groups)
         {
-            var userEncontrado = _userRepository.GetByUserName(username);
+            var userEncontrado = _accountRepository.GetByUserName(username);
 
             foreach (var groupId in groups)
             {
@@ -97,7 +102,7 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
                     _groupRepository.Update(group);
                 }
             }
-            _userRepository.Update(userEncontrado);
+            _accountRepository.Update(userEncontrado);
             _unitOfWork.Commit();
         }
 

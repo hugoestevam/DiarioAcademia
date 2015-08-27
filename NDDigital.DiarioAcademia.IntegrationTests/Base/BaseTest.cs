@@ -13,8 +13,8 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.Base
     public class BaseTest : DropCreateDatabaseAlways<EntityFrameworkContext>
     {
         public EntityFrameworkContext _context;
-        private readonly Mock<AccountRepository> _userRepository = null;
-        public IUserStore<Account> _store;
+        private readonly Mock<UserRepository> _userRepository = null;
+        public IUserStore<User> _store;
 
         public const string SqlCleanDB = @"DBCC CHECKIDENT ('[TBPresenca]', RESEED, 0)
                                            DBCC CHECKIDENT ('[TBAula]', RESEED, 0)
@@ -27,15 +27,15 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.Base
                                            DELETE FROM TBAula
                                            DELETE FROM TBAluno
                                            DELETE FROM TBTurma
-                                           DELETE FROM TBUserGroups
+                                           DELETE FROM TBAccountGroups
                                            DELETE FROM TBGroupPermission
                                            DELETE FROM TBGroup
                                            DELETE FROM TBPermission
-										   DELETE FROM TBAccount";
+										   DELETE FROM TBUser";
 
         public BaseTest()
         {
-            _userRepository = new Mock<AccountRepository>();
+            _userRepository = new Mock<UserRepository>();
 
             _context = new EntityFrameworkContext();
 
@@ -67,6 +67,8 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.Base
             context.Set<Aula>().Add(ObjectBuilder.CreateAula(turmEncontrada));
             context.SaveChanges();
 
+            //todo: refatorar object builder
+            /*
             //Adiciona uma permissao
             context.Set<Permission>().Add(ObjectBuilder.CreatePermission());
             context.SaveChanges();
@@ -102,12 +104,13 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.Base
 
             //Adiciona lista de grupos
             var user = ObjectBuilder.CreateUser();
-            user.Groups = listGroups;
+          //  user.Account ObjectBuilder.
             var password = "123456";
 
             //Adiciona um usuário
             _userRepository
             .Setup(x => x.CreateAsync(user, password));
-        }
+            */    
+    }
     }
 }

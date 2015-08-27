@@ -1,4 +1,5 @@
-﻿using NDDigital.DiarioAcademia.Dominio.Entities.Security;
+﻿using NDDigital.DiarioAcademia.Dominio.Contracts;
+using NDDigital.DiarioAcademia.Dominio.Entities.Security;
 using NDDigital.DiarioAcademia.Infraestrutura.DAO.Common.Uow;
 using NDDigital.DiarioAcademia.Infraestrutura.Orm.Security;
 using System.Collections.Generic;
@@ -20,7 +21,7 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
             _uow = uow;
         }
 
-        public void Add(Dominio.Entities.Security.Group obj)
+        public void Add(Group obj)
         {
             _repo.Add(obj);
             _uow.Commit();
@@ -32,18 +33,18 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
             _uow.Commit();
         }
 
-        public void Update(Dominio.Entities.Security.Group obj)
+        public void Update(Group obj)
         {
             _repo.Update(obj);
             _uow.Commit();
         }
 
-        IList<Dominio.Entities.Security.Group> IService<Dominio.Entities.Security.Group>.GetAll()
+        IList<Group> IService<Group>.GetAll()
         {
             return _repo.GetAllIncluding(g => g.Permissions);
         }
 
-        Dominio.Entities.Security.Group IService<Dominio.Entities.Security.Group>.GetById(int id)
+       Group IService<Group>.GetById(int id)
         {
             return _repo.GetByIdIncluding(id, g => g.Permissions);
         }

@@ -11,13 +11,13 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers
     public class BaseApiController : ApiController
     {
         private ModelFactory _modelFactory;
-        private AccountRepository _userRepository = null;
+        private UserRepository _userRepository = null;
 
-        protected AccountRepository UserRepository
+        protected UserRepository UserRepository
         {
             get
             {
-                return _userRepository ?? Request.GetOwinContext().GetUserManager<AccountRepository>();
+                return _userRepository ?? Request.GetOwinContext().GetUserManager<UserRepository>();
             }
         }
 

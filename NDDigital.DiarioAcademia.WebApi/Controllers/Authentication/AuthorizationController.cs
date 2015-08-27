@@ -24,11 +24,11 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers.Authentication
 
             var permissionRepository = new PermissionRepository(factory); //Container.Get<IPermissionRepository>();
 
-            var store = new MyAccountStore(factory.Get());
+            var store = new MyUserStore(factory.Get());
 
-            var userRepository = new AccountRepository(store);
+            var accountRepository = new AccountRepository(factory);
 
-            _authservice = new AuthorizationService(groupRepository, permissionRepository, userRepository, unitOfWork);
+            _authservice = new AuthorizationService(groupRepository, permissionRepository, accountRepository, unitOfWork);
         }
 
         //[Authorize]

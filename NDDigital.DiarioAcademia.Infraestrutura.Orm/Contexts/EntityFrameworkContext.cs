@@ -11,7 +11,7 @@ using System.Linq;
 
 namespace Infrasctructure.DAO.ORM.Contexts
 {
-    public class EntityFrameworkContext : IdentityDbContext<Account>
+    public class EntityFrameworkContext : IdentityDbContext<User>
     {
         public EntityFrameworkContext()
             : base("DiarioAcademiaContext", throwIfV1Schema: false)
@@ -23,6 +23,7 @@ namespace Infrasctructure.DAO.ORM.Contexts
 
         public DbSet<Group> Groups { get; set; }
         public DbSet<Permission> Permissions { get; set; }
+        public DbSet<Account> Accounts { get; set; }
 
         public DbSet<Aluno> Alunos { get; set; }
 
@@ -45,16 +46,17 @@ namespace Infrasctructure.DAO.ORM.Contexts
             modelBuilder.Configurations.Add(new EnderecoConfiguration());
             modelBuilder.Configurations.Add(new AulaConfiguration());
             modelBuilder.Configurations.Add(new TurmaConfiguration());
-            modelBuilder.Configurations.Add(new AccountConfiguration());
+            modelBuilder.Configurations.Add(new UserConfiguration());
             modelBuilder.Configurations.Add(new PresencaConfiguration());
             modelBuilder.Configurations.Add(new GroupConfiguration());
             modelBuilder.Configurations.Add(new PermissionConfiguration());
+            modelBuilder.Configurations.Add(new AccountConfiguration());
         }
 
         public void Detach(object entity)
         {
             ((IObjectContextAdapter)this).ObjectContext.Detach(entity);
-        }//spotify:user:anisanwesley
+        }
 
         public override int SaveChanges()
         {

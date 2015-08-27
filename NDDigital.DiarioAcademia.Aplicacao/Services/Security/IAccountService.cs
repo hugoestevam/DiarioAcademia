@@ -1,67 +1,51 @@
-﻿using NDDigital.DiarioAcademia.Aplicacao.Services;
+﻿using NDDigital.DiarioAcademia.Dominio.Contracts;
 using NDDigital.DiarioAcademia.Dominio.Entities.Security;
-using NDDigital.DiarioAcademia.Infraestrutura.Orm.Security;
-using System;
+using NDDigital.DiarioAcademia.Infraestrutura.DAO.Common.Uow;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.AspNet.Identity;
 
 namespace NDDigital.DiarioAcademia.Aplicacao.Services
 {
-    public interface IAccountService : IService<Account>
+    public interface IAccountService: IService<Account>
     {
-        List<Group> FindGroupByUsername(string username);
     }
-
 
     public class AccountService : IAccountService
     {
-        AccountRepository _repo;
+        private IUnitOfWork _uow;
+        private IAccountRepository _repo;
 
-        public AccountService(AccountRepository repo)
+        public AccountService(IAccountRepository repo, IUnitOfWork uow)
         {
             _repo = repo;
+            _uow = uow;
         }
 
         public void Add(Account obj)
         {
-            _repo.CreateAsync(obj);
+            _repo.Add(obj);
+            _uow.Commit();
         }
 
         public void Delete(int id)
         {
-            //_repo.Delete(id);
-        }
-
-        public List<Group> FindGroupByUsername(string username)
-        {
-            return _repo.GetGroupsByUser(username).ToList();
-        }
-
-        public IList<Account> GetAll()
-        {
-            return _repo.GetUsers();
-        }
-
-        public Account GetById(int id)
-        {
-            return _repo.GetUserById(id.ToString());//TODO
-        }
-
-        public Account GetById(string id)
-        {
-            return _repo.GetUserById(id);
+            _repo.Delete(id);
+            _uow.Commit();
         }
 
         public void Update(Account obj)
         {
-            throw new NotImplementedException(); ;
+            _repo.Update(obj);
+            _uow.Commit();
+        }
+
+        IList<Account> IService<Account>.GetAll()
+        {
+            return _repo.GetAllIncluding(g => g.Groups);
+        }
+
+        Account IService<Account>.GetById(int id)
+        {
+            return _repo.GetByIdIncluding(id, g => g.Groups);
         }
     }
-
-
-
-
 }

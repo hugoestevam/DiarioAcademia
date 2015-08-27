@@ -12,15 +12,15 @@ namespace NDDigital.DiarioAcademia.WebApi.Models
     public class ModelFactory
     {
         private UrlHelper _UrlHelper;
-        private AccountRepository _UserRepository;
+        private UserRepository _UserRepository;
 
-        public ModelFactory(HttpRequestMessage request, AccountRepository appUserManager)
+        public ModelFactory(HttpRequestMessage request, UserRepository appUserManager)
         {
             _UrlHelper = new UrlHelper(request);
             _UserRepository = appUserManager;
         }
         //TODO: rrever necessidade dessa implementação
-        public UserReturnModel Create(Account appUser)
+        public UserReturnModel Create(User appUser)
         {
             return new UserReturnModel
             {

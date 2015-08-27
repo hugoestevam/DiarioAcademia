@@ -16,7 +16,6 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers.Authentication
     public class AccountsController : BaseApiController
     {
         private IAuthorizationService _authservice;
-        private AccountRepository _userRepository;
 
         public AccountsController()//TODO: IOC
         {
@@ -28,11 +27,13 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers.Authentication
 
             var permissionRepository = new PermissionRepository(factory); //Container.Get<IPermissionRepository>();
 
-            var store = new MyAccountStore(factory.Get());
+            var store = new MyUserStore(factory.Get());
 
-            _userRepository = new AccountRepository(store);
+            var userRepository = new UserRepository(store);
 
-            _authservice = new AuthorizationService(groupRepository, permissionRepository, _userRepository, unitOfWork);
+            var accountRepository = new AccountRepository(factory);
+
+            _authservice = new AuthorizationService(groupRepository, permissionRepository,accountRepository, unitOfWork);
         }
 
         //[Authorize]
@@ -84,7 +85,7 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers.Authentication
                 return BadRequest(ModelState);
             }
 
-            var user = new Account()
+            var user = new User()
             {
                 UserName = createUserModel.Username,
                 Email = createUserModel.Email,
@@ -148,14 +149,14 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers.Authentication
 
         [HttpPut]
         [Route("edit")]
-        public IHttpActionResult EditUser([FromBody] Account user)
+        public IHttpActionResult EditUser([FromBody] User user)
         {
-            var u = _userRepository.GetUserByUsername(user.UserName);
+            var u = UserRepository.GetUserByUsername(user.UserName);
 
             u.FirstName = user.FirstName;
             u.LastName = user.LastName;
 
-            _userRepository.Update(u);
+            UserRepository.Update(u);
 
             return Ok(u);
         }

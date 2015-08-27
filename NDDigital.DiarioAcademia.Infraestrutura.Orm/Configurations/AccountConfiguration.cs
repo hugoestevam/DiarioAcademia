@@ -8,13 +8,12 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Configurations
         public AccountConfiguration()
         {
             ToTable("TBAccount");
-            Ignore(c => c.EmailConfirmed);
             HasMany(x => x.Groups)
             .WithMany()
            //TODO: Passa pra User
             .Map(x =>
             {
-                x.ToTable("TBUserGroups");
+                x.ToTable("TBAccountGroups");
             });
         }
     }

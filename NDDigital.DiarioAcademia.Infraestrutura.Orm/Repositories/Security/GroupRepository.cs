@@ -1,5 +1,6 @@
 ﻿using Infrastructure.DAO.ORM.Common.Base;
 using NDDigital.DiarioAcademia.Dominio;
+using NDDigital.DiarioAcademia.Dominio.Contracts;
 using NDDigital.DiarioAcademia.Dominio.Entities.Security;
 using NDDigital.DiarioAcademia.Infraestrutura.DAO.Common.Uow;
 using NDDigital.DiarioAcademia.Infraestrutura.Orm.Common;
@@ -8,10 +9,7 @@ using System.Linq;
 
 namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Security
 {
-    public interface IGroupRepository : IRepository<Group>
-    {
-        IList<Group> GetAllSpecific(int[] groups);
-    }
+
 
     public class GroupRepository : RepositoryBaseEF<Group>, IGroupRepository
     {

@@ -19,40 +19,5 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
 
         IList<T> GetAll();
     }
-
-   //  public class GenericService<T> : IService<T>
-   // {
-   //     private IRepository<T> _repo;
-   //
-   //     public GenericService(IRepository<T> repo)
-   //     {
-   //         _repo = service;
-   //     }
-   //
-   //     public void Add(T obj)
-   //     {
-   //         _repo.Add(obj);
-   //     }
-   //
-   //     public void Delete(int id)
-   //     {
-   //         _repo.Delete(id);
-   //     }
-   //
-   //     public IEnumerable<T> GetAll()
-   //     {
-   //         return _repo.GetAll();
-   //     }
-   //
-   //     public T GetById(int id)
-   //     {
-   //         return _repo.GetById(id);
-   //     }
-   //
-   //     public void Update(T obj)
-   //     {
-   //         _repo.Update(obj);
-   //     }
-   // }  TODO: nao deu liga
-   //
+//TODO: Fazer service genérico
 }
