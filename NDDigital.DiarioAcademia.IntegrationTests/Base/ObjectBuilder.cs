@@ -14,6 +14,7 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.Base
         static int _index = 0;
         static bool _admin = false;
         static string Index { get { return (++_index).ToString(); } }
+        public static void Reset() => _index = 0;
 
 
         public static Turma CreateTurma()
@@ -47,13 +48,13 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.Base
             new Aula(DateTime.Now, turma)).Build();
         }
 
-        public static User CreateUser()
+        public static User CreateUser(bool full = true)
         {
             var names = new[] { "joao", "jose", "pedro", "mariah", "sabrina" };
 
             var user = new User { FirstName = names[ _index % 5 ], LastName = "da silva"};
 
-            user.Account = CreateAccount();
+            user.Account = CreateAccount(full);
 
             user.UserName = user.Account.Username;
 

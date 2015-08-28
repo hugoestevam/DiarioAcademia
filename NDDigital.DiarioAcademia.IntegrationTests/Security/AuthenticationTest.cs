@@ -21,7 +21,7 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.Security
         private AuthorizationService _service;
         private AccountRepository _accountRepo;
 
-        public DatabaseFixture databaseFixture = new DatabaseFixture();
+        
 
         private IUnitOfWork uow;
 
@@ -30,16 +30,20 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.Security
         {
             Database.SetInitializer(new BaseTestInitializer());
 
-            var factory = databaseFixture.Factory;
+            ObjectBuilder.Reset(); ;
+
+            var fixture = new DatabaseFixture();
+
+            var factory = fixture.Factory;
 
             _groupRepo = new GroupRepository(factory);
             _permissionRepo = new PermissionRepository(factory);
 
-            uow = databaseFixture.UnitOfWork;
+            uow = fixture.UnitOfWork;
 
             var store = new MyUserStore(factory.Get());
 
-            _userRepo = new UserRepository(store);
+            _userRepo = new UserRepository(store,factory);
 
             _accountRepo = new AccountRepository(factory);
 
@@ -97,26 +101,24 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.Security
 
             uow.Commit();
 
-            var account = _accountRepo.GetByUserName("username 1");
+            var account = _accountRepo.GetAllIncluding(a => a.Groups).First(); ;
 
             _service.AddGroupToUser(account.Username, new[] { newGroup.Id });
 
-            var user = _userRepo.GetUserByUsername("username 1");
+            var acc= _accountRepo.GetByUserName(account.Username);
 
-            Assert.AreEqual(3, user.Account.Groups.Count);
+            Assert.AreEqual(3, acc.Groups.Count);
         }
 
         [TestMethod]
         [TestCategory("Authentication")]
         public void Deveria_Excluir_Grupo_do_Usuario()
-        {
-            var user = _userRepo.GetUserByUsername("username 1");
+                    {
+                        var user = _userRepo.GetUsers().First();
 
             _service.RemoveGroupFromUser(user.UserName, new[] { 1 });
 
-            uow.Commit();
-
-            var acc = _userRepo.GetUserByUsername(user.Account.Username).Account;
+             var acc = _accountRepo.GetAllIncluding(a => a.Groups).First(); ;
             Assert.AreEqual(1,
                  acc.Groups.Count);
            

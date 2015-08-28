@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNet.Identity;
+using NDDigital.DiarioAcademia.Aplicacao.Services.Security;
 using NDDigital.DiarioAcademia.Dominio.Contracts;
 using NDDigital.DiarioAcademia.Dominio.Entities.Security;
 using NDDigital.DiarioAcademia.Infraestrutura.DAO.Common.Uow;
@@ -8,16 +9,7 @@ using System.Linq;
 
 namespace NDDigital.DiarioAcademia.Aplicacao.Services
 {
-    public interface IAuthorizationService
-    {
-        void AddPermissionsToGroup(int id, string[] permissions);
-
-        void RemovePermissionsFromGroup(int id, string[] permissions);
-
-        void AddGroupToUser(string username, int[] groups);
-
-        void RemoveGroupFromUser(string username, int[] groups);
-    }
+    
 
     public class AuthorizationService : IAuthorizationService
     {

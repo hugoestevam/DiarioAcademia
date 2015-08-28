@@ -5,9 +5,11 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using NDDigital.DiarioAcademia.Dominio.Entities.Security;
 using NDDigital.DiarioAcademia.Infraestrutura.CepServices;
+using NDDigital.DiarioAcademia.Infraestrutura.Orm.Common;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System;
 
 namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Security
 {
@@ -28,19 +30,21 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Security
 
     public class UserRepository : UserManager<User>, IUserRepository
     {
-        private static EntityFrameworkContext _appDbContext;
+        private static EntityFrameworkContext dataContext;
+        private static EntityFrameworkFactory _databaseFactory;
         public IUserStore<User> _store { get; set; }
 
-        public UserRepository(IUserStore<User> store)
+        public UserRepository(IUserStore<User> store, EntityFrameworkFactory databaseFactory)
             : base(store)
         {
-            _appDbContext = _appDbContext ?? new EntityFrameworkContext();
+            _databaseFactory = databaseFactory;
+            dataContext = dataContext ?? (databaseFactory.Get());
         }
 
         public static UserRepository Create(IdentityFactoryOptions<UserRepository> options, IOwinContext context)
         {
-            _appDbContext = context.Get<EntityFrameworkContext>();
-            var userManager = new UserRepository(new UserStore<User>(_appDbContext));
+            dataContext = context.Get<EntityFrameworkContext>();
+            var userManager = new UserRepository(new UserStore<User>(), _databaseFactory);
 
             // Configure validation logic for usernames
             userManager.UserValidator = new UserValidator<User>(userManager)
@@ -69,13 +73,22 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Security
             return userManager;
         }
 
+        public void AddUser(User user)
+        {
+            var dbuser = dataContext.Users.Where(u => u.UserName == user.UserName).FirstOrDefault();
+
+            if (dbuser != null)
+                throw new ApplicationException("UsernameJaExisteException");
+            dataContext.Users.Add(user);
+        }
+
         public IList<User> GetUsersByGroup(Group group)
         {
             var gr = group; //key "group" is reserved
             return (
                 from c
-                in _appDbContext.Users
-               // where c.Groups.Any(g => g.Id == gr.Id)
+                in dataContext.Users
+                where c.Account.Groups.Any(g => g.Id == gr.Id)
                 select c
                 ).ToList();
         }
@@ -83,7 +96,7 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Security
         public IList<User> GetUsers()
         {
             return (from c
-                    in _appDbContext.Users
+                    in dataContext.Users
                     select c
                     ).ToList();
         }
@@ -91,7 +104,7 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Security
         public User GetUserById(string id)
         {
             return (from c
-                    in _appDbContext.Users.Include(u => u.Account)
+                    in dataContext.Users.Include(u => u.Account)
                     where c.Id == id
                     select c).FirstOrDefault();
         }
@@ -99,7 +112,7 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Security
         public User GetUserByUsername(string username)
         {
             return (from c
-                    in (_appDbContext.Users).Include(x => x.Account).Include(x=>x.Account.Groups)
+                    in (dataContext.Users).Include(x => x.Account).Include(x=>x.Account.Groups)
                     where c.UserName == username
                     select c
                     ).FirstOrDefault();
@@ -108,7 +121,7 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Security
         public void Delete(string username)
         {
             var user = GetUserByUsername(username);
-            _appDbContext.Users.Remove(user);
+            dataContext.Users.Remove(user);
         }
 
         public IList<Group> GetGroupsByUser(string username)

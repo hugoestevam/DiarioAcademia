@@ -1,6 +1,7 @@
 ﻿using Infrastructure.DAO.ORM.Common;
 using Microsoft.AspNet.Identity;
 using NDDigital.DiarioAcademia.Aplicacao.Services;
+using NDDigital.DiarioAcademia.Aplicacao.Services.Security;
 using NDDigital.DiarioAcademia.Dominio.Entities.Security;
 using NDDigital.DiarioAcademia.Infraestrutura.Orm.Common;
 using NDDigital.DiarioAcademia.Infraestrutura.Orm.Security;
@@ -29,7 +30,7 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers.Authentication
 
             var store = new MyUserStore(factory.Get());
 
-            var userRepository = new UserRepository(store);
+            var userRepository = new UserRepository(store, factory);
 
             var accountRepository = new AccountRepository(factory);
 

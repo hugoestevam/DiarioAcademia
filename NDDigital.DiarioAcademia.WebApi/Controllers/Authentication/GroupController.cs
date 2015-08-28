@@ -32,9 +32,7 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers.Authentication
 
             var store = new MyUserStore(context);
 
-            var userRepo = new UserRepository(store);
-
-            var userRepository = new UserRepository(store);
+            var userRepository = new UserRepository(store, factory);
 
             _userService = new UserService(userRepository);
         }
