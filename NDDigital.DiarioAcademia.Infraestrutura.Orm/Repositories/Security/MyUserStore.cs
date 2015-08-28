@@ -8,12 +8,11 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Data.Entity;
-using System.Diagnostics;
 using System.Data.Entity.Infrastructure;
 
 namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Security
 {
+    //recurso: não temos uma implementação de IUserStore: http://weblogs.asp.net/imranbaloch/a-simple-implementation-of-microsoft-aspnet-identity
     public class MyUserStore : IUserStore<User>, IUserPasswordStore<User>, IUserSecurityStampStore<User>, IQueryableUserStore<User>
     {
         private UserStore<IdentityUser> userStore;
@@ -54,7 +53,8 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Security
 
         public Task<User> FindByNameAsync(string userName)
         {
-            return _context.Users.AsNoTracking().Where(u => u.UserName.ToLower() == userName.ToLower()).FirstOrDefaultAsync();
+            return _context.Users.AsNoTracking()
+                .Where(u => u.UserName.ToLower() == userName.ToLower()).FirstOrDefaultAsync();
         }
 
         //TODO: rever implementação (possivel chance de gambi pattern XGH)
@@ -69,11 +69,11 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Security
                 _context.Users.Attach(user);
             }
             dbEntityEntry.State = EntityState.Modified;
-            
+
             _context.SaveChanges();
 
             return _context.SaveChangesAsync();
-            
+
         }
 
         public void Dispose()
@@ -145,5 +145,6 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Security
             throw new NotImplementedException();
         }
 
+       
     }
 }

@@ -86,23 +86,25 @@
 
                 authentication.isAuth = true;
                 authentication.userName = loginData.userName;
-                groupService.getGroupByUsername(authentication.userName)
-                    .then(function (groups) {
-                        authorization.groups = groups;
-                        authorization.permissions = groupService.extractPermissions(groups);
-                        localStorageService.set(storageKeys.autheData, authorization);
-                    });
                 userService.getUserByUsername(authentication.userName)
-                    .then(function (results) {
-                        authentication.fullName = results.fullName;
-                        //criptografar isto
-                        localStorageService.set(storageKeys.authoData, {
-                            token: response.access_token,
-                            userName: loginData.userName,
-                            fullName: authentication.fullName
-                        });
+                         .then(function (results) {
+                             authentication.fullName = results.firstName + " " + results.lastName;;
+                             //criptografar isto
+                             localStorageService.set(storageKeys.authoData, {
+                                 token: response.access_token,
+                                 userName: loginData.userName,
+                                 fullName: authentication.fullName
+                             });
+                             groupService.getGroupByUsername(authentication.userName)
+                                 .then(function (groups) {
+                                     authorization.groups = groups;
+                                     authorization.permissions = groupService.extractPermissions(groups);
+                                     localStorageService.set(storageKeys.autheData, authorization);
 
-                });
+
+                                 });
+
+                         });
 
                 logger.success(res.welcome + " " + (authentication.userName));
                 deferred.resolve(response);

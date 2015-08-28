@@ -3,20 +3,30 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
-using NDDigital.DiarioAcademia.Dominio.Contracts;
 using NDDigital.DiarioAcademia.Dominio.Entities.Security;
 using NDDigital.DiarioAcademia.Infraestrutura.CepServices;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System;
-using System.Linq.Expressions;
 
 namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Security
 {
+    public interface IUserRepository
+    {
+        IList<User> GetUsersByGroup(Group group);
 
+        IList<Group> GetGroupsByUser(string username);
 
-    public class UserRepository : UserManager<User>
+        IList<User> GetUsers();
+
+        User GetUserById(string id);
+
+        User GetUserByUsername(string username);
+
+        void Delete(string username);
+    }
+
+    public class UserRepository : UserManager<User>, IUserRepository
     {
         private static EntityFrameworkContext _appDbContext;
         public IUserStore<User> _store { get; set; }
@@ -65,7 +75,7 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Security
             return (
                 from c
                 in _appDbContext.Users
-                where c.Account.Groups.Any(g => g.Id == gr.Id)
+               // where c.Groups.Any(g => g.Id == gr.Id)
                 select c
                 ).ToList();
         }
@@ -95,17 +105,9 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Security
                     ).FirstOrDefault();
         }
 
-        public User GetByUserName(string username)
-        {
-            return (from c
-                     in _appDbContext.Users
-                    where c.UserName == username
-                    select c).FirstOrDefault();
-        }
-
         public void Delete(string username)
         {
-            var user = GetByUserName(username);
+            var user = GetUserByUsername(username);
             _appDbContext.Users.Remove(user);
         }
 
@@ -115,8 +117,7 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Security
 
             return user?.Account?.Groups ?? new List<Group>();
         }
-
-     
     }
 
+   
 }

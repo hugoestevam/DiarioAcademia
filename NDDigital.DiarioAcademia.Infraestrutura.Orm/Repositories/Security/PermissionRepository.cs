@@ -8,7 +8,7 @@ using System.Linq;
 
 namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Security
 {
-
+    
 
     public class PermissionRepository : RepositoryBaseEF<Permission>, IPermissionRepository
     {

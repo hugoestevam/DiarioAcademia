@@ -66,11 +66,11 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers.Authentication
         public async Task<IHttpActionResult> GetUserByName(string username)
         {
             //Only SuperAdmin or Admin can delete users (Later when implement roles)
-            var user = await this.UserRepository.FindByNameAsync(username);
+            var user = this.UserRepository.GetUserByUsername(username);
 
             if (user != null)
             {
-                return Ok(this.TheModelFactory.Create(user));
+                return Ok(user);
             }
 
             return NotFound();
