@@ -21,7 +21,7 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.EF
         [TestInitialize]
         public void Initialize()
         {
-            Database.SetInitializer(new BaseTest());
+            Database.SetInitializer(new BaseTestInitializer());
 
             _factory = new EntityFrameworkFactory();
 

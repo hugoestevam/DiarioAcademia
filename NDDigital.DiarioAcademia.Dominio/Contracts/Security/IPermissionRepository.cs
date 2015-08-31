@@ -5,7 +5,8 @@ using System.Collections.Generic;
 namespace NDDigital.DiarioAcademia.Dominio.Contracts
 {
     public interface IPermissionRepository : IRepository<Permission>
-    {  IList<Permission> GetByGroup(int groupId);
+    {
+        IList<Permission> GetByGroup(int groupId);
 
         IList<Permission> GetAllSpecific(string[] permissions);
 

@@ -25,26 +25,25 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.Security
             _groupRepo = new GroupRepository(databaseFixture.Factory);
             uow = databaseFixture.UnitOfWork;
 
-            Database.SetInitializer(new BaseTest());
+            Database.SetInitializer(new BaseTestInitializer());
         }
 
         [TestMethod]
         [TestCategory("Authorization - Permission")]
         public void Deveria_Adicionar_Uma_Permissao()
         {
-            Assert.Inconclusive();
             _permissionRepo.Add(ObjectBuilder.CreatePermission());
+            uow.Commit();
 
             var list = _permissionRepo.GetAll();
 
-            Assert.AreEqual(2, list.Count);
+            Assert.AreEqual(5, list.Count);
         }
 
         [TestMethod]
         [TestCategory("Authorization - Permission")]
         public void Deveria_Excluir_Uma_Permissao()
         {
-            Assert.Inconclusive();
             var permissao = _permissionRepo.GetById(1);
 
             _permissionRepo.Delete(permissao);
@@ -53,26 +52,24 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.Security
 
             var list = _permissionRepo.GetAll();
 
-            Assert.AreEqual(1, list.Count);
+            Assert.AreEqual(3, list.Count);
         }
 
         [TestMethod]
         [TestCategory("Authorization - Permission")]
         public void Deveria_Atualizar_Uma_Permissao()
         {
-            Assert.Inconclusive();
             var permissao = _permissionRepo.GetById(1);
             permissao.PermissionId = "02";
 
             _permissionRepo.Update(permissao);
 
+            uow.Commit();
+
             var permissaoEditada = _permissionRepo.GetById(1);
 
             Assert.AreEqual("02", permissaoEditada.PermissionId);
 
-            permissaoEditada = _permissionRepo.GetById(2);
-
-            Assert.AreEqual("02", permissaoEditada.PermissionId);
         }
 
         [TestMethod]
@@ -82,14 +79,13 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.Security
             var list = _permissionRepo.GetAll();
 
             Assert.IsNotNull(list);
+            Assert.AreEqual(4,list.Count);
         }
 
         [TestMethod]
         [TestCategory("Authorization - Permission")]
         public void Deveria_Buscar_Permissoes_Por_Grupo()
-        {
-            Assert.Inconclusive();
-            //arrange
+         {
             var administrador = _groupRepo.GetById(1);
 
             var permissao = ObjectBuilder.CreatePermission();
@@ -98,11 +94,13 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.Security
 
             uow.Commit();
 
-            //act
-            var list = _permissionRepo.GetByGroup(administrador.Id);
+            var adminPermissions = _permissionRepo.GetByGroup(administrador.Id);
 
-            //asert
-            Assert.AreEqual(1, list.Count);
+            Assert.AreEqual(3, adminPermissions.Count);
+
+            var allPermissions = _permissionRepo.GetAll();
+
+            Assert.AreEqual(5, allPermissions.Count);
         }
     }
 }

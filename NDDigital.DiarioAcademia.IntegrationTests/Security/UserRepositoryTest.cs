@@ -1,10 +1,13 @@
 ﻿using Microsoft.AspNet.Identity;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NDDigital.DiarioAcademia.Dominio.Contracts;
 using NDDigital.DiarioAcademia.Dominio.Entities.Security;
 using NDDigital.DiarioAcademia.Infraestrutura.DAO.Common.Uow;
 using NDDigital.DiarioAcademia.Infraestrutura.Orm.Security;
 using NDDigital.DiarioAcademia.IntegrationTests.Base;
 using NDDigital.DiarioAcademia.IntegrationTests.Common;
+using System;
+using System.Data.Entity;
 using System.Linq;
 
 namespace NDDigital.DiarioAcademia.IntegrationTests.Security
@@ -13,28 +16,19 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.Security
     public class UserTest
     {
         public UserRepository _userRepository;
-        public GroupRepository _groupRepository;
+        public IAccountRepository _accountRepository;
+        public IGroupRepository _groupRepository;
         public IUserStore<User> _store;
         private IUnitOfWork uow;
         private User _user;
 
-        public const string SqlCleanDB = @"DBCC CHECKIDENT ('[TBPresenca]', RESEED, 0)
-                                           DBCC CHECKIDENT ('[TBAula]', RESEED, 0)
-                                           DBCC CHECKIDENT ('[TBAluno]', RESEED, 0)
-                                           DBCC CHECKIDENT ('[TBTurma]', RESEED, 0)
-                                           DBCC CHECKIDENT ('[TBGroup]', RESEED, 0)
-                                           DBCC CHECKIDENT ('[TBPermission]', RESEED, 0)
-                                           DELETE FROM TBPresenca DELETE FROM TBAula
-                                           DELETE FROM TBAluno DELETE FROM TBTurma
-                                           DELETE FROM TBAccountGroups
-                                           DELETE FROM TBGroupPermission
-                                           DELETE FROM TBGroup
-                                           DELETE FROM TBPermission
-                                           DELETE FROM TBUser";
-
         [TestInitialize]
         public void Initialize()
         {
+            Database.SetInitializer(new BaseTestInitializer());
+
+            ObjectBuilder.Reset();
+
             var fixture = new DatabaseFixture();
 
             var factory = fixture.Factory;
@@ -44,53 +38,53 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.Security
             uow = fixture.UnitOfWork;
 
             _store = new MyUserStore(context);
-            _userRepository = new UserRepository(_store);
-            _groupRepository = new GroupRepository(fixture.Factory);
+            _userRepository = new UserRepository(_store,factory);
+            _groupRepository = new GroupRepository(factory);
+            _accountRepository = new AccountRepository(factory);
 
-            _user = ObjectBuilder.CreateUser();
-
-            context.Database.ExecuteSqlCommand(SqlCleanDB);
-            context.SaveChanges();
-
-            _userRepository.Create(_user);
-            // uow.Commit();
         }
+
+       
 
         [TestMethod]
         [TestCategory("Athentication - User")]
+        [ExpectedException(typeof(ApplicationException))]
+        public void Nao_Deveria_Adicionar_Um_Usuario_Repetido()
+        {
+            var user = ObjectBuilder.CreateUser(full: false);
+
+            var dbuser = _userRepository.GetUsers().First();
+
+            user.UserName = dbuser.UserName;
+
+            _userRepository.AddUser(user);
+
+        }
+[TestMethod]
+        [TestCategory("Athentication - User")]
         public void Deveria_Adicionar_Um_Usuario()
         {
-            //var user = ObjectBuilder.CreateUser();
-            Assert.Inconclusive();
-            var user = new User
-            {
-                FirstName = "Wesley",
-                LastName = "Lemos",
-                UserName = "anisan"
-            };
+            var user = ObjectBuilder.CreateUser(full: false);
 
-            var username = user.UserName += '2';
+            user.UserName = user.Account.Username="New username";
 
-            _userRepository.Create(user);
+            _userRepository.AddUser(user);
 
-            // uow.Commit();
+            uow.Commit();
 
-            var user2 = _userRepository.FindByName(username);
+            var user2 = _userRepository.GetUserByUsername(user.UserName);
+
+            Assert.IsNotNull(user2);
 
             Assert.AreEqual(user.FirstName, user2.FirstName);
         }
-
         [TestMethod]
         [TestCategory("Athentication - User")]
         public void Deveria_Excluir_Um_Usuario()
         {
-            Assert.Inconclusive();
             var user = _userRepository.Users.First();
-            Assert.Inconclusive();
 
             _userRepository.Delete(user);
-
-            //uow.Commit();
 
             var count = _userRepository.Users.ToList().Count;
 
@@ -101,8 +95,8 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.Security
         [TestCategory("Athentication - User")]
         public void Deveria_Buscar_Todos_Usuarios()
         {
-            Assert.Inconclusive();
-            var count = _userRepository.Users.ToList().Count;
+
+            var count = _userRepository.GetUsers().Count;
 
             Assert.IsTrue(count > 0);
         }
@@ -111,23 +105,14 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.Security
         [TestCategory("Athentication - User")]
         public void Deveria_Buscar_Usuario_Por_Grupo()
         {
+            var grupo = _groupRepository.GetAll().First();
 
-            Assert.Inconclusive();
-            //var grupo = _user.Groups.First();
+            var users = _userRepository.GetUsersByGroup(grupo);
 
-          //_groupRepository.Add(grupo);
-          //
-          //uow.Commit();
-          //
-          //  _user.Groups.Add(grupo);
-          //
-          //// uow.Commit();
-          //
-          //var users = _userRepository.GetUsersByGroup(grupo);
-          //
-          //var count = users.Count;
-          //
-          //Assert.IsTrue(count > 0);
-        }
+
+            Assert.AreEqual(1,users.Count);
+
+
+        } 
     }
 }

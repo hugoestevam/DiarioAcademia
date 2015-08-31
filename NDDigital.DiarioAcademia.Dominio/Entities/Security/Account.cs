@@ -20,6 +20,9 @@ namespace NDDigital.DiarioAcademia.Dominio.Entities.Security
         {
             Username = username;
         }
+        public Account()
+        {
+        }
 
     }
 }

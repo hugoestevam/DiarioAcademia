@@ -97,8 +97,7 @@ namespace NDDigital.DiarioAcademia.Apresentacao.WindowsApp.Controls.AlunoForms
 
         public override UserControl GetControl()
         {
-            if (_control != null)
-                _control.RefreshGrid();
+                _control?.RefreshGrid();
 
             return _control;
         }

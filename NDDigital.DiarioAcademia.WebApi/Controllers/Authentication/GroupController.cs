@@ -4,6 +4,7 @@ using NDDigital.DiarioAcademia.Dominio.Contracts;
 using NDDigital.DiarioAcademia.Dominio.Entities.Security;
 using NDDigital.DiarioAcademia.Infraestrutura.DAO.Common.Uow;
 using NDDigital.DiarioAcademia.Infraestrutura.IoC;
+using NDDigital.DiarioAcademia.Infraestrutura.Orm.Common;
 using NDDigital.DiarioAcademia.Infraestrutura.Orm.Security;
 using System;
 using System.Web.Http;
@@ -15,7 +16,7 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers.Authentication
         private IGroupService _groupService;
         private IUserService _userService;
 
-        public GroupController() //TODO: IOC
+        public GroupController()
         {
             var unitOfWork = Injection.Get<IUnitOfWork>();
 
@@ -33,9 +34,9 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers.Authentication
 
             //var store = new MyUserStore(context);
 
-            var userRepo = new UserRepository(store);
+            var factory = new EntityFrameworkFactory(); //TODO: Implementar dois contextos
 
-            var userRepository = new UserRepository(store);
+            var userRepository = new UserRepository(store, factory);
 
             _userService = new UserService(userRepository);
         }

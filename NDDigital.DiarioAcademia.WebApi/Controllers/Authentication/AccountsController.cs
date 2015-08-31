@@ -2,6 +2,7 @@
 using Microsoft.AspNet.Identity;
 using NDDigital.DiarioAcademia.Aplicacao.Services;
 using NDDigital.DiarioAcademia.Dominio.Contracts;
+using NDDigital.DiarioAcademia.Aplicacao.Services.Security;
 using NDDigital.DiarioAcademia.Dominio.Entities.Security;
 using NDDigital.DiarioAcademia.Infraestrutura.DAO.Common.Uow;
 using NDDigital.DiarioAcademia.Infraestrutura.IoC;
@@ -20,7 +21,7 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers.Authentication
     {
         private IAuthorizationService _authservice;
 
-        public AccountsController()//TODO: IOC
+        public AccountsController()
         {
             var unitOfWork = Injection.Get<IUnitOfWork>();
 
@@ -30,7 +31,9 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers.Authentication
 
             var store = Injection.Get<IUserStore<User>>();//var store = new MyUserStore(factory.Get());
 
-            var userRepository = new UserRepository(store);
+            var factory = new EntityFrameworkFactory(); //TODO: Implementar dois contextos
+
+            var userRepository = new UserRepository(store, factory);
 
             var accountRepository = Injection.Get<IAccountRepository>();//var accountRepository = new AccountRepository(factory);
 
@@ -67,11 +70,11 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers.Authentication
         public async Task<IHttpActionResult> GetUserByName(string username)
         {
             //Only SuperAdmin or Admin can delete users (Later when implement roles)
-            var user = await this.UserRepository.FindByNameAsync(username);
+            var user = this.UserRepository.GetUserByUsername(username);
 
             if (user != null)
             {
-                return Ok(this.TheModelFactory.Create(user));
+                return Ok(user);
             }
 
             return NotFound();
