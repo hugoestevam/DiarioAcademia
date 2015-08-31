@@ -10,6 +10,11 @@ namespace NDDigital.DiarioAcademia.Dominio.Entities.Security
 {
     public class Account : Entity
     {
+        public Account()
+        {
+
+        }
+
         [Required]
         [MaxLength(100)]
         public string Username { get; set; }

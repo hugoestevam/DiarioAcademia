@@ -25,14 +25,14 @@
             allowAnnonymous: true,
             displayName: "Lista de Aluno",
             displayIcon: "fa-user",
-            $$permissionId: "01"
+            $$permissionId: "02"
         }, {
             state: 'aluno.details',
             url: '/details/:alunoId',
             controller: 'alunoDetailsCtrl as vm',
             templateUrl: '/app/views/aluno/aluno-details.html',
             displayName: "Detalhes do Aluno",
-            $$permissionId: "02"
+            $$permissionId: "03"
         }, {
             state: 'aluno.create',
             url: '/create',
@@ -40,7 +40,7 @@
             templateUrl: '/app/views/aluno/aluno-create.html',
             displayName: "Criação de Aluno",
             displayIcon: "fa-user-plus",
-            $$permissionId: "03"
+            $$permissionId: "04"
         });
     }
 })();

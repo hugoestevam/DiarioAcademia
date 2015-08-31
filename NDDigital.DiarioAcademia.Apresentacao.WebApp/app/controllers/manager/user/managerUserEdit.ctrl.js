@@ -13,70 +13,43 @@
 
 		//public functions
 		vm.clear = clear;
-
 		vm.titleModelEdit = 'Confirmar Alteração';
 		vm.bodyModelEdit = 'Deseja realmente editar o usuário ';
-		vm.onchange = onchange;
-		vm.changes = [];
-		vm.hasChange = false;
+		vm.editGroups = editGroups;
+
 
 		var originalUser;
-		var originalGroups;
 
 		activate();
 		function activate() {
 			userService.getUserById(params.userId).then(function (results) {
 				vm.user = results;
-				vm.user.groups = vm.user.groups ? vm.user.groups : [];
 				originalUser = $.extend(true, {}, vm.user);
 				vm.name = vm.user.firstName;
 				vm.bodyModelEdit += vm.name;
-
-				groupService.getGroups().then(function (results) {
-					vm.groups = results;
-					if (results)
-						originalGroups = results.slice();
-				});
 			});
 		}
 
 		//public methods
-		function onchange(obj, check) {
-			vm.hasChange = true;
-			if (vm.changes.indexOfObject(obj) < 0)
-				vm.changes.push(obj);
-			obj.action = check;
-		}
-
-
 		function editUser() {
 			$('body').removeClass('modal-open');
 			$('.modal-backdrop').remove();
 			saveChanges();
 		}
 
+		function editGroups() {
+			$state.go('manager.userGroupEdit', { userId: vm.user.id });
+		}
+
 		function saveChanges() {
 			vm.hasChange = false;
-			var include = [], exclude = [];
-			for (var i = 0; i < vm.changes.length; i++) {
-				if (vm.changes[i].action)
-					include.push(vm.changes[i].id);
-				else
-					exclude.push(vm.changes[i].id);
-			}
 			if (!vm.formUser.$pristine)
 				userService.edit(vm.user);
-			if (include.length > 0)
-				userService.addUserGroup(vm.user, include);
-			if (exclude.length > 0)
-				userService.removeUserGroup(vm.user, exclude);
 			originalUser = $.extend(true, {}, vm.user);
 		}
 
 		function clear() {
 			vm.user = $.extend(true, {}, originalUser);
-			vm.groups = originalGroups.slice();
-			vm.hasChange = false;
 		}
 	}
 })(window.angular);

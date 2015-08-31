@@ -82,6 +82,7 @@
     <Content Include="app\controllers\manager\group\managerGroupList.ctrl.js" />
     <Content Include="app\controllers\manager\permission\managerPermission.ctrl.js" />
     <Content Include="app\controllers\manager\user\managerUserEdit.ctrl.js" />
+    <Content Include="app\controllers\manager\user\managerUserEditGroupController.ctrl.js" />
     <Content Include="app\controllers\manager\user\managerUserList.ctrl.js" />
     <Content Include="app\directives\ndd-confirm-exit\ndd-confirm-exit.directives.js" />
     <Content Include="app\directives\ndd-confirm-exit\ndd-confirm-exit.html" />
@@ -101,6 +102,9 @@
     <Content Include="app\images\avatar_plus.gif" />
     <Content Include="app\images\favicon.ico" />
     <Content Include="app\images\profile-menu.png" />
+    <Content Include="app\images\slides\slide_one.jpg" />
+    <Content Include="app\images\slides\slide_three.jpg" />
+    <Content Include="app\images\slides\slide_two.jpg" />
     <Content Include="app\routes\manager.routes.js" />
     <Content Include="app\services\group.services.js" />
     <Content Include="app\services\language.service.js" />
@@ -108,10 +112,12 @@
     <Content Include="app\services\user.service.js" />
     <Content Include="app\templates\layout\top-menu.html" />
     <Content Include="app\factories\permissions.factory.js" />
+    <Content Include="app\views\layout\home-app.html" />
     <Content Include="app\views\manager\group\manager-group-permission-edit.html" />
     <Content Include="app\views\manager\group\manager-group-edit.html" />
     <Content Include="app\views\manager\group\manager-group-list.html" />
     <Content Include="app\views\manager\permission\manager-permission.html" />
+    <Content Include="app\views\manager\user\manager-user-edit-group.html" />
     <Content Include="app\views\manager\user\manager-user-edit.html" />
     <Content Include="app\views\manager\user\manager-user-list.html" />
     <Content Include="content\animations\animations.css">
@@ -126,11 +132,29 @@
     <Content Include="content\layout\layout.min.css">
       <DependentUpon>layout.css</DependentUpon>
     </Content>
+    <Content Include="content\layout\login.css">
+      <DependentUpon>login.less</DependentUpon>
+    </Content>
+    <Content Include="content\layout\login.min.css">
+      <DependentUpon>login.css</DependentUpon>
+    </Content>
     <Content Include="content\layout\manager.css">
       <DependentUpon>manager.less</DependentUpon>
     </Content>
     <Content Include="content\layout\manager.min.css">
       <DependentUpon>manager.css</DependentUpon>
+    </Content>
+    <Content Include="content\theme\default\home.css">
+      <DependentUpon>home.less</DependentUpon>
+    </Content>
+    <Content Include="content\theme\default\home.min.css">
+      <DependentUpon>home.css</DependentUpon>
+    </Content>
+    <Content Include="content\theme\default\layout.css">
+      <DependentUpon>layout.less</DependentUpon>
+    </Content>
+    <Content Include="content\theme\default\layout.min.css">
+      <DependentUpon>layout.css</DependentUpon>
     </Content>
     <Content Include="content\theme\default\manager.css">
       <DependentUpon>manager.less</DependentUpon>
@@ -178,6 +202,18 @@
     <Content Include="content\layout\layout.less" />
     <Content Include="content\layout\layout.css.map">
       <DependentUpon>layout.css</DependentUpon>
+    </Content>
+    <Content Include="content\theme\default\layout.less" />
+    <Content Include="content\theme\default\layout.css.map">
+      <DependentUpon>layout.css</DependentUpon>
+    </Content>
+    <Content Include="content\layout\login.less" />
+    <Content Include="content\layout\login.css.map">
+      <DependentUpon>login.css</DependentUpon>
+    </Content>
+    <Content Include="content\theme\default\home.less" />
+    <Content Include="content\theme\default\home.css.map">
+      <DependentUpon>home.css</DependentUpon>
     </Content>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

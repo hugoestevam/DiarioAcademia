@@ -1,10 +1,10 @@
 ﻿<!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
-<div class="collapse navbar-collapse navbar-ex1-collapse">
-    <ul class="nav navbar-nav side-nav sidemenu-custom">
-        <li class="li" ng-show="shell.authentication.isAuth">
+<div class="collapse navbar-collapse navbar-ex1-collapse" ng-controller="sidebarController as vm">
+    <ul class="nav navbar-nav side-nav sidemenu-custom " ng-show="shell.authentication.isAuth" ng-class="{'slider-enter': shell.authentication.isAuth, 'slider-leave': !shell.authentication.isAuth  }">
+        <li class="li">
             <a class="user-back text-center">
                 <img src="/app/images/avatar_login.png" alt="" class="user-avatar" />
-                <div href="javascript:;" data-toggle="collapse" data-target="#log" class="menu-user text-left">
+                <div href="javascript:;" data-toggle="collapse" data-target="#log" class="menu-user text-left text-capitalize">
                     {{shell.authentication.fullName}}
                 </div>
             </a>
@@ -12,20 +12,22 @@
 
         <li class="li" style="width: 100%" ng-show="shell.authentication.isAuth">
             <ul id="log" class="collapse">
-                <li>
-                    <a href="#" class="user-option"><i class="fa fa-fw fa-user"></i> Perfil</a>
+                <li ng-class="{actived: state.contains('useredit')}">
+                    <a style="cursor:pointer" ng-click="vm.editUser()" class="user-option"><i class="fa fa-fw fa-user"></i> Perfil</a>
                 </li>
                 <li></li>
             </ul>
         </li>
 
         <li class="li" ng-class="{actived: state.contains('home')}">
-            <a ui-sref="home" data-toggle=" collapse"><i class="fa fa-fw fa-home"></i> Início</a>
+            <a ui-sref="homeapp" data-toggle=" collapse"><i class="fa fa-fw fa-home"></i> Início</a>
         </li>
 
         <li class="li" ng-class="{actived: state.contains('turma')}">
-            <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-university">
-                </i> Turmas <i class="fa fa-fw fa-angle-down"></i></a>
+            <a href="javascript:;" data-toggle="collapse" data-target="#demo">
+                <i class="fa fa-fw fa-university">
+                </i> Turmas <i class="fa fa-fw fa-angle-down"></i>
+            </a>
             <ul id="demo" class="collapse">
                 <li>
                     <a ui-sref="turma.create">Nova Turma</a>

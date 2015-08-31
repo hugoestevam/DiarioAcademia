@@ -1,0 +1,64 @@
+﻿@import url(https://fonts.googleapis.com/css?family=Roboto:100,300);
+
+.custom-carousel {
+   height: 100%;
+   width: 100%;
+   pointer-events:none;
+}
+
+.container-home{
+     height: ~"calc(100% - 64px)" !important;
+    width: 100%;
+    position: fixed;
+
+}
+
+.carousel-control.left,
+.carousel-control.right {
+    background-image: none !important;
+    display: none;
+}
+
+.carousel-inner {
+    height: 100%;
+}
+
+.footer-carousel {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+}
+
+.header-carousel {
+    position: fixed;
+    top: 30%;
+    z-index: 9;
+    padding: 1% 1% 1% 2%;
+    color: white;
+    width: 100%;
+    background-color: rgba(0,0,0, 0.5);
+    font-family: 'Roboto', sans-serif;
+    & h1{
+        font-weight:bold;
+    }
+    & h3{
+        font-size: large !important;
+    }
+}
+
+.btn-header {
+    float: right;
+    font-size: 25px;
+    margin-right: 3%;
+    margin-top: 3%;
+     pointer-events:all !important;
+}
+
+.slide{
+    height: 100%;
+
+    & img{
+        height: 100% !important;
+        width: 100%
+    }
+}

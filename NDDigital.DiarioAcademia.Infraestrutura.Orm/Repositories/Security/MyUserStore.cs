@@ -54,8 +54,7 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Security
 
         public Task<User> FindByNameAsync(string userName)
         {
-            return _context.Users.AsNoTracking()
-                .Include(u => u.Groups).Where(u => u.UserName.ToLower() == userName.ToLower()).FirstOrDefaultAsync();
+            return _context.Users.AsNoTracking().Where(u => u.UserName.ToLower() == userName.ToLower()).FirstOrDefaultAsync();
         }
 
         //TODO: rever implementação (possivel chance de gambi pattern XGH)
@@ -70,41 +69,11 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Security
                 _context.Users.Attach(user);
             }
             dbEntityEntry.State = EntityState.Modified;
-            user.Groups.ForEach(p => _context.Entry(p).State = EntityState.Modified);
-
+            
             _context.SaveChanges();
 
             return _context.SaveChangesAsync();
-
-            #region Implementacao Alternativa
-            ////=======
-            ////            var entry = _context.Entry(user);
-            ////            // if (entry.State == EntityState.Detached)
-            ////            // {
-            ////            //    context.Detach(user);
-            ////            // }
-            ////            // _context.Users.Attach(user);
-            ////            foreach(var group in user.Groups)
-            ////            {
-            ////                var groupEntry = _context.Entry(group);
-            ////
-            ////                if (groupEntry.State == EntityState.Unchanged) { 
-            ////                    groupEntry.State=EntityState.Modified;      //1st try
-            ////                    //context.Groups.Attach(group);              //2nd try
-            ////                    //groupEntry.State = EntityState.Detached;  //3rd try 
-            ////                }
-            ////            }
-            ////           // entry.State = EntityState.Modified;
-            ////
-            ////
-            ////            _context.SaveChanges();
-            ////
-            ////            //context.Entry(user).State = EntityState.Modified;
-            ////            //context.Configuration.ValidateOnSaveEnabled = false;
-            ////            return _context.SaveChangesAsync();
-            ////>>>>>>>
-
-            #endregion Implementacao Alternativa
+            
         }
 
         public void Dispose()
@@ -176,17 +145,5 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Security
             throw new NotImplementedException();
         }
 
-        [DebuggerStepThrough]
-        //Just for debug, call in Imediate Window
-        private string LogEntry(User user, EntityFrameworkContext ctx)
-        {
-            var sb = new StringBuilder(user.ToString());
-
-            sb.Append(" - " + ctx.Entry(user).State);
-
-            foreach (var g in user.Groups)
-                sb.Append("{" + g.Name + " - [" + ctx.Entry(g).State + "]}");
-            return sb.ToString();
-        }
     }
 }

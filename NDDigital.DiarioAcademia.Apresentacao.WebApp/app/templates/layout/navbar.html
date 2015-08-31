@@ -8,11 +8,12 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="index.html">Diário da Academia</a>
+        <a class="navbar-brand" ui-sref="home">Diário da Academia</a>
+        <div ng-include="'app/templates/layout/top-menu.html'" class="visible-xs" style="left: 25%"></div>
     </div>
 
     <!-- Top Menu Items -->
-    <div ng-include="'app/templates/layout/top-menu.html'"></div>
+    <div ng-include="'app/templates/layout/top-menu.html'" class="hidden-xs"></div>
 
 
     <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->

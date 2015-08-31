@@ -1,5 +1,6 @@
 ﻿module.exports = function () {
     return {
-        log: require('./log.js')
+        log: require('./log.js'),
+
     };
 };

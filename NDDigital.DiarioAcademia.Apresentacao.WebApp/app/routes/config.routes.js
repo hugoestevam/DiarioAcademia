@@ -4,8 +4,8 @@
     angular.module('routes.module')
         .config(configRoutes);
 
-    configRoutes.$inject = ['$stateProvider', '$urlRouterProvider', 'routeConfigProvider'];
-    function configRoutes($stateProvider, $urlRouterProvider, routeConfigProvider) {
+    configRoutes.$inject = ['$stateProvider', '$urlRouterProvider', '$locationProvider', 'routeConfigProvider'];
+    function configRoutes($stateProvider, $urlRouterProvider, $locationProvider, routeConfigProvider) {
         var routes = routeConfigProvider.$get();
 
         $urlRouterProvider.otherwise('/home');
@@ -32,6 +32,8 @@
             if (route.abstract)
                 $urlRouterProvider.when(route.url, route.redirect);
         }
+
+       
     }
 
     function verififyPermission(routes, startIndex, route) {

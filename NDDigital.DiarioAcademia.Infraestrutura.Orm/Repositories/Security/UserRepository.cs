@@ -3,30 +3,19 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
+using NDDigital.DiarioAcademia.Dominio.Contracts;
 using NDDigital.DiarioAcademia.Dominio.Entities.Security;
 using NDDigital.DiarioAcademia.Infraestrutura.CepServices;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System;
+using System.Linq.Expressions;
 
 namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Security
 {
-    public interface IUserRepository
-    {
-        IList<User> GetUsersByGroup(Group group);
 
-        IList<Group> GetGroupsByUser(string username);
-
-        IList<User> GetUsers();
-
-        User GetUserById(string id);
-
-        User GetUserByUsername(string username);
-
-        void Delete(string username);
-    }
-
-    public class UserRepository : UserManager<User>, IUserRepository
+    public class UserRepository : UserManager<User>
     {
         private static EntityFrameworkContext _appDbContext;
         public IUserStore<User> _store { get; set; }
@@ -75,7 +64,7 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Security
             return (
                 from c
                 in _appDbContext.Users
-                where c.Groups.Any(g => g.Id == gr.Id)
+                where c.Account.Groups.Any(g => g.Id == gr.Id)
                 select c
                 ).ToList();
         }
@@ -91,7 +80,7 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Security
         public User GetUserById(string id)
         {
             return (from c
-                    in _appDbContext.Users.Include(u => u.Groups)
+                    in _appDbContext.Users.Include(u => u.Account)
                     where c.Id == id
                     select c).FirstOrDefault();
         }
@@ -99,7 +88,7 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Security
         public User GetUserByUsername(string username)
         {
             return (from c
-                    in (_appDbContext.Users).Include(u => u.Groups)
+                    in (_appDbContext.Users).Include(x => x.Account)
                     where c.UserName == username
                     select c
                     ).FirstOrDefault();
@@ -115,13 +104,14 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Security
         {
             var user = GetUserByUsername(username);
 
-            if (user != null)
+            if (user != null && user.Account != null)
 
-                return user.Groups;
+                return user.Account.Groups;
 
             return new List<Group>();
         }
+
+     
     }
 
-    //recurso: não temos uma implementação de IUserStore: http://weblogs.asp.net/imranbaloch/a-simple-implementation-of-microsoft-aspnet-identity
 }

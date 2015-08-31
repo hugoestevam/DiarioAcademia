@@ -29,7 +29,7 @@
 
 		self.getUserByUsername = function (username) {
 			return $http.get(serviceUrl + "username/" + username)
-				 .then(logger.successCallback);
+				 .then(logger.emptyMessageCallback);
 		}
 
 		self.delete = function (user) {

@@ -88,39 +88,34 @@
                 authentication.userName = loginData.userName;
                 userService.getUserByUsername(authentication.userName)
                          .then(function (results) {
-                             authentication.fullName = results.firstName + " " + results.lastName;;
+                             authentication.fullName = results.firstName + " " + results.lastName;
+                             authentication.userId = results.id;
                              //criptografar isto
                              localStorageService.set(storageKeys.authoData, {
                                  token: response.access_token,
                                  userName: loginData.userName,
-                                 fullName: authentication.fullName
+                                 fullName: authentication.fullName,
+                                 userId: authentication.userId
                              });
+                             localStorageService.set(storageKeys.autheData, authorization);
+                             //get groups
                              groupService.getGroupByUsername(authentication.userName)
                                  .then(function (groups) {
                                      authorization.groups = groups;
                                      authorization.permissions = groupService.extractPermissions(groups);
-                                     localStorageService.set(storageKeys.autheData, authorization);
-
-
+                                   
                                  });
-
                          });
 
                 logger.success(res.welcome + " " + (authentication.userName));
                 deferred.resolve(response);
 
             }).error(function (err, status) {
-
-                if (!status) {
+                if (!status)
                     logger.error(res.unavailable_server);
-                } else {
-
-
+                else
                     logger.error(err.error_description);
-
-                }
                 logOut();
-
                 deferred.reject(err);
 
             });
@@ -128,6 +123,7 @@
             return deferred.promise;
 
         };
+
         var logOut = function () {
 
             localStorageService.remove(storageKeys.authoData);
@@ -148,6 +144,7 @@
                 authentication.isAuth = true;
                 authentication.userName = authoData.userName;
                 authentication.fullName = authoData.fullName;
+                authentication.userId = authoData.userId;
             }
             if (autheData) {
                 authorization.groups = autheData.groups;
@@ -184,9 +181,8 @@
             }
 
         };
+
         Object.defineProperty(self, "lastState", lastStateProperty);
-
-
 
     }
 

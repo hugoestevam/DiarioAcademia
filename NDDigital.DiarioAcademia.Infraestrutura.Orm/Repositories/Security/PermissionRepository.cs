@@ -1,5 +1,6 @@
 ﻿using Infrastructure.DAO.ORM.Common.Base;
 using NDDigital.DiarioAcademia.Dominio;
+using NDDigital.DiarioAcademia.Dominio.Contracts;
 using NDDigital.DiarioAcademia.Dominio.Entities.Security;
 using NDDigital.DiarioAcademia.Infraestrutura.Orm.Common;
 using System.Collections.Generic;
@@ -7,14 +8,7 @@ using System.Linq;
 
 namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Security
 {
-    public interface IPermissionRepository : IRepository<Permission>
-    {
-        IList<Permission> GetByGroup(int groupId);
 
-        IList<Permission> GetAllSpecific(string[] permissions);
-
-        Permission GetByPermissionId(string v);
-    }
 
     public class PermissionRepository : RepositoryBaseEF<Permission>, IPermissionRepository
     {

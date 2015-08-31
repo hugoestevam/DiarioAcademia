@@ -2,7 +2,7 @@
 
     'use strict';
     //using
-    sidebarController.$inject = [];
+    sidebarController.$inject = ['authService', '$state'];
 
     //namespace
     angular
@@ -10,13 +10,17 @@
         .controller('sidebarController', sidebarController);
 
     //class
-    function sidebarController() {
+    function sidebarController(authService, $state) {
         var self = this;
 
         //script load
         activate();
         function activate() {
 
+        }
+
+        self.editUser = function () {
+            $state.go('manager.useredit', { userId: authService.authentication.userId });
         }
 
         //public methods

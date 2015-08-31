@@ -29,19 +29,20 @@
 
 		self.save = function (permission) {
 			logger.success(res.saved_successful, permission);
-			return $http.post(serviceUrl, permission);
+			return $http.post(serviceUrl, permission)
+				.then(logger.emptyMessageCallback)
+				 .catch(logger.errorCallback);
 		};
 
 		self.delete = function (permission) {
 			permission = getPermissionsId(permission);
-			logger.danger(res.deleted_successful, permission, "Delete");
 			return $http({
-			    url: serviceUrl,
-			    method: 'DELETE',
-			    data:  permission,
-			    headers: { "Content-Type": "application/json;charset=utf-8" }
+				url: serviceUrl,
+				method: 'DELETE',
+				data:  permission,
+				headers: { "Content-Type": "application/json;charset=utf-8" }
 			})
-				.then(logger.successCallback)
+				.then(logger.emptyMessageCallback)
 				.catch(logger.errorCallback);
 		};
 

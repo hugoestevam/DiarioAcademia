@@ -18,6 +18,16 @@
             displayIcon: "fa-home",
             allowAnnonymous: true,
             $$permissionId: "00"
+        },
+        {
+            state: 'homeapp',
+            url: '/homeapp',
+            controller: 'homeController as vm',
+            templateUrl: '/app/views/layout/home-app.html',
+            displayName: "Inicio",
+            displayIcon: "fa-home",
+            allowAnnonymous: true,
+            $$permissionId: "01"
         });
     }
 

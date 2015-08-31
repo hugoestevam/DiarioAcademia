@@ -11,16 +11,25 @@
 
     //class
     function homeController() {
-        var self = this;
+        var vm = this;
+
+        vm.slides = ['/app/images/slides/slide_one.jpg',
+                     '/app/images/slides/slide_two.jpg',
+                     '/app/images/slides/slide_three.jpg'];
 
         //script load
         activate();
         function activate() {
-
+            $(document).ready(function () {
+                $('.carousel').carousel({
+                    pause: "false"
+                });
+            });
+           
         }
 
         //public methods
-        self.publicMethod = function () {
+        vm.publicMethod = function () {
         };
 
         //private methods

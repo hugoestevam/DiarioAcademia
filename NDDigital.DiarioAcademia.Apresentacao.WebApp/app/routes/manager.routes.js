@@ -24,7 +24,7 @@
             controller: "managerUserListController as vm",
             displayName: "Usuario",
             displayIcon: 'fa-user',
-            $$permissionId: "09"
+            $$permissionId: "10"
         }, {
             state: 'manager.useredit',
             url: '/edit/user/:userId',
@@ -32,7 +32,15 @@
             controller: "managerUserEditController as vm",
             displayName: "Edição de Usuário",
             displayIcon: 'fa-pencil',
-            $$permissionId: "10"
+            $$permissionId: "11"
+        }, {
+            state: 'manager.userGroupEdit',
+            url: '/group/edit/user/:userId',
+            templateUrl: '/app/views/manager/user/manager-user-edit-group.html',
+            controller: "managerUserEditGroupController as vm",
+            displayName: "Edição de Grupos de Usuário",
+            displayIcon: 'fa-pencil',
+            $$permissionId: "12"
         }, {
             state: 'manager.group',
             url: '/group',
@@ -40,7 +48,7 @@
             controller: "managerGroupListController as vm",
             displayName: "Grupo",
             displayIcon: 'fa-users',
-            $$permissionId: "11"
+            $$permissionId: "13"
         }, {
             state: 'manager.group.edit',
             url: '/edit/:groupId',
@@ -48,15 +56,15 @@
             controller: "managerGroupEditController as vm",
             displayName: "Edição de Grupo",
             displayIcon: 'fa-pencil',
-            $$permissionId: "12"
+            $$permissionId: "14"
         }, {
             state: 'manager.groupPermissionsEdit',
-            url: '/edit/permissions/:groupId',
+            url: '/group/edit/permissions/:groupId',
             templateUrl: '/app/views/manager/group/manager-group-permission-edit.html',
             controller: "managerGroupPermissionEditController as vm",
             displayName: "Edição de Permissões de Grupo",
             displayIcon: 'fa-pencil',
-            $$permissionId: "13"
+            $$permissionId: "15"
         }, {
             state: 'manager.permissions',
             url: '/permissions',
@@ -64,7 +72,7 @@
             controller: "managerPermissionController as vm",
             displayName: "Permissões",
             displayIcon: 'fa-key',
-            $$permissionId: "14"
+            $$permissionId: "16"
         })
     }
 
