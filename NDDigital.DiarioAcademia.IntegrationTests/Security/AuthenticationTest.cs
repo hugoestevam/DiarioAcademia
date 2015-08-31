@@ -125,5 +125,9 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.Security
             Assert.AreEqual(2,
                  acc.Groups.First().Id);
         }
+
+
+
+        
     }
 }

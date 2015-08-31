@@ -44,22 +44,7 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.Security
 
         }
 
-        [TestMethod]
-        [TestCategory("Athentication - User")]
-        public void Deveria_Adicionar_Um_Usuario()
-        {
-            var user = ObjectBuilder.CreateUser(full: false);
-
-            user.UserName = user.Account.Username="New username";
-
-            _userRepository.AddUser(user);
-
-            uow.Commit();
-
-            var user2 = _userRepository.GetUserByUsername(user.UserName);
-
-            Assert.AreEqual(user.FirstName, user2.FirstName);
-        }
+       
 
         [TestMethod]
         [TestCategory("Athentication - User")]
@@ -75,7 +60,24 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.Security
             _userRepository.AddUser(user);
 
         }
+[TestMethod]
+        [TestCategory("Athentication - User")]
+        public void Deveria_Adicionar_Um_Usuario()
+        {
+            var user = ObjectBuilder.CreateUser(full: false);
 
+            user.UserName = user.Account.Username="New username";
+
+            _userRepository.AddUser(user);
+
+            uow.Commit();
+
+            var user2 = _userRepository.GetUserByUsername(user.UserName);
+
+            Assert.IsNotNull(user2);
+
+            Assert.AreEqual(user.FirstName, user2.FirstName);
+        }
         [TestMethod]
         [TestCategory("Athentication - User")]
         public void Deveria_Excluir_Um_Usuario()
@@ -111,6 +113,6 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.Security
             Assert.AreEqual(1,users.Count);
 
 
-        }
+        } 
     }
 }

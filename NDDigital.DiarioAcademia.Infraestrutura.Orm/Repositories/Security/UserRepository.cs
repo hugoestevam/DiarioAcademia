@@ -43,7 +43,7 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Security
 
         public static UserRepository Create(IdentityFactoryOptions<UserRepository> options, IOwinContext context)
         {
-            dataContext = context.Get<EntityFrameworkContext>();
+            dataContext = dataContext ?? (_databaseFactory.Get()); // context.Get<EntityFrameworkContext>();
             var userManager = new UserRepository(new UserStore<User>(), _databaseFactory);
 
             // Configure validation logic for usernames
@@ -80,6 +80,7 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Security
             if (dbuser != null)
                 throw new ApplicationException("UsernameJaExisteException");
             dataContext.Users.Add(user);
+            dataContext.SaveChanges();//TODO: rever pq factory static not works
         }
 
         public IList<User> GetUsersByGroup(Group group)
