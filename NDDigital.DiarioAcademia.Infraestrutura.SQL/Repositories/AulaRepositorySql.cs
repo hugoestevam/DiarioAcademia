@@ -9,7 +9,6 @@ using System.Linq.Expressions;
 
 namespace NDDigital.DiarioAcademia.Infraestrutura.SQL.Repositories
 {
-    //TODO: IMPLEMENTAR
     public class AulaRepositorySql : RepositoryBaseADO, IAulaRepository
     {
         #region Querys

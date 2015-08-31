@@ -22,15 +22,15 @@ namespace NDDigital.DiarioAcademia.Apresentacao.WindowsApp.Controls.AulaForms
 
         public AulaDataManager()
         {
-            var _factory = Container.Get<UnitOfWorkFactory>(); //new AdoNetFactory();
+            var _factory = Injection.Get<UnitOfWorkFactory>(); //new AdoNetFactory();
 
-            var unitOfWork = Container.Get<IUnitOfWork>(); //new ADOUnitOfWork(_factory);
+            var unitOfWork = Injection.Get<IUnitOfWork>(); //new ADOUnitOfWork(_factory);
 
-            var aulaRepository = Container.Get<IAulaRepository>();
+            var aulaRepository = Injection.Get<IAulaRepository>();
 
-            var alunoRepository = Container.Get<IAlunoRepository>();
+            var alunoRepository = Injection.Get<IAlunoRepository>();
 
-            var turmaRepository = Container.Get<ITurmaRepository>();
+            var turmaRepository = Injection.Get<ITurmaRepository>();
 
             _aulaService = new AulaService(aulaRepository, alunoRepository, turmaRepository, unitOfWork);
 

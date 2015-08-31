@@ -28,9 +28,9 @@ namespace NDDigital.DiarioAcademia.Apresentacao.WindowsApp.Controls.AulaForms
 
         internal void RefreshGrid()
         {
-            int anoTurma = Principal.Instance.AnoTurmaSelecionado;
+            int id = Principal.Instance.IdTurmaSelecionada;
 
-            var aulas = _aulaService.GetAllByTurma(anoTurma);
+            var aulas = _aulaService.GetAllByTurma(id);//TODO: IMPLEMENTAR
 
             listAulas.Items.Clear();
 

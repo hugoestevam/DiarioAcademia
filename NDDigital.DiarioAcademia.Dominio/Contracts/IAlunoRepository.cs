@@ -5,6 +5,6 @@ namespace NDDigital.DiarioAcademia.Dominio.Contracts
 {
     public interface IAlunoRepository : IRepository<Aluno>
     {
-        IList<Aluno> GetAllByTurmaId(int id);
+        IList<Aluno> GetAllByTurmaId(int turmaId);
     }
 }

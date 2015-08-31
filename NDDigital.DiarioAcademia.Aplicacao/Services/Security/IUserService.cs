@@ -1,12 +1,8 @@
-﻿using NDDigital.DiarioAcademia.Aplicacao.Services;
-using NDDigital.DiarioAcademia.Dominio.Entities.Security;
+﻿using NDDigital.DiarioAcademia.Dominio.Entities.Security;
 using NDDigital.DiarioAcademia.Infraestrutura.Orm.Security;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.AspNet.Identity;
 
 namespace NDDigital.DiarioAcademia.Aplicacao.Services
 {
@@ -15,10 +11,9 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
         List<Group> FindGroupByUsername(string username);
     }
 
-
     public class UserService : IUserService
     {
-        UserRepository _repo;
+        private UserRepository _repo;
 
         public UserService(UserRepository repo)
         {
@@ -47,7 +42,7 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
 
         public User GetById(int id)
         {
-            return _repo.GetUserById(id.ToString());//TODO
+            return _repo.GetUserById(id.ToString());
         }
 
         public User GetById(string id)
@@ -60,8 +55,4 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
             throw new NotImplementedException(); ;
         }
     }
-
-
-
-
 }

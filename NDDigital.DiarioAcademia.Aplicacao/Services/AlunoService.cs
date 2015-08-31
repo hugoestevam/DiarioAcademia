@@ -39,7 +39,7 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
         {
             Turma turma = _turmaRepository.GetById(alunoDto.TurmaId);
 
-            Aluno aluno = new Aluno(alunoDto.Descricao.Split(':')[0], turma ?? new Turma(2007));//TODO: turma vem null
+            Aluno aluno = new Aluno(alunoDto.Descricao.Split(':')[0], turma ?? new Turma(2007));
 
             aluno.Endereco.Bairro = alunoDto.Bairro;
             aluno.Endereco.Cep = alunoDto.Cep;
@@ -91,7 +91,7 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
                 Uf = aluno.Endereco.Uf
             };
 
-            if (aluno.Turma != null)//TODO: extraí turma pois este está vindo null em _alunoRepository.GetById
+            if (aluno.Turma != null)
                 alunoDto.TurmaId = aluno.Turma.Id;
 
             return alunoDto;
@@ -106,8 +106,9 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
 
         public IList<AlunoDTO> GetAllByTurmaId(int id)
         {
-            return _alunoRepository.GetAllByTurmaId(id)
-              .Select(aluno => new AlunoDTO())
+            return _alunoRepository.GetAll()
+              .Select(aluno => new AlunoDTO(aluno))
+              .Where(aluno => aluno.TurmaId == id)
               .ToList();
         }
 

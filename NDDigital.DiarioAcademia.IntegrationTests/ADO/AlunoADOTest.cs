@@ -2,6 +2,7 @@
 using NDDigital.DiarioAcademia.Infraestrutura.SQL.Common;
 using NDDigital.DiarioAcademia.Infraestrutura.SQL.Repositories;
 using NDDigital.DiarioAcademia.IntegrationTests.Base;
+using System.Linq;
 
 namespace NDDigital.DiarioAcademia.IntegrationTests.ADO
 {

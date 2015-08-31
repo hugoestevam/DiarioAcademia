@@ -1,5 +1,4 @@
-﻿using Infrastructure.DAO.ORM.Common;
-using NDDigital.DiarioAcademia.Aplicacao.DTOs;
+﻿using NDDigital.DiarioAcademia.Aplicacao.DTOs;
 using NDDigital.DiarioAcademia.Aplicacao.Services;
 using NDDigital.DiarioAcademia.Apresentacao.WindowsApp.Controls.AlunoForms;
 using NDDigital.DiarioAcademia.Apresentacao.WindowsApp.Controls.AulaForms;
@@ -7,10 +6,8 @@ using NDDigital.DiarioAcademia.Apresentacao.WindowsApp.Controls.Shared;
 using NDDigital.DiarioAcademia.Apresentacao.WindowsApp.Controls.TurmaForms;
 using NDDigital.DiarioAcademia.Apresentacao.WindowsApp.Properties;
 using NDDigital.DiarioAcademia.Dominio.Contracts;
-using NDDigital.DiarioAcademia.Infraestrutura.DAO.Common.Factorys;
 using NDDigital.DiarioAcademia.Infraestrutura.DAO.Common.Uow;
-using NDDigital.DiarioAcademia.Infraestrutura.Orm.Common;
-using NDDigital.DiarioAcademia.Infraestrutura.Orm.Repositories;
+using NDDigital.DiarioAcademia.Infraestrutura.IoC;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -36,13 +33,11 @@ namespace NDDigital.DiarioAcademia.Apresentacao.WindowsApp
 
             _instance = this;
 
-            var factory = new EntityFrameworkFactory();
+            var unitOfWork = Injection.Get<IUnitOfWork>();
 
-            var unitOfWork = new EntityFrameworkUnitOfWork(factory);
+            var alunoRepository = Injection.Get<IAlunoRepository>();
 
-            var alunoRepository = new AlunoRepositoryEF(factory);//Container.Get<IAlunoRepository>();
-
-            var turmaRepository = new TurmaRepositoryEF(factory);//Container.Get<ITurmaRepository>();
+            var turmaRepository = Injection.Get<ITurmaRepository>();
 
             _turmaService = new TurmaService(turmaRepository, unitOfWork);
 
@@ -69,7 +64,7 @@ namespace NDDigital.DiarioAcademia.Apresentacao.WindowsApp
             }
         }
 
-        public int AnoTurmaSelecionado
+        public int IdTurmaSelecionada
         {
             get
             {
@@ -77,7 +72,7 @@ namespace NDDigital.DiarioAcademia.Apresentacao.WindowsApp
 
                 if (turmaSelecionada == null) return 0;
 
-                return turmaSelecionada.Ano;
+                return turmaSelecionada.Id;
             }
         }
 

@@ -20,16 +20,16 @@ namespace NDDigital.DiarioAcademia.UnitTests.Servicos
 
         public TurmaServiceTest()
         {
-            _uow = Container.Get<IUnitOfWork>();
+            _uow = Injection.Get<IUnitOfWork>();
 
-            _repo = Container.Get<ITurmaRepository>();
+            _repo = Injection.Get<ITurmaRepository>();
 
             _turmaService = new TurmaService(_repo, _uow);
         }
 
         [TestMethod]
         public void Test()
-        {
+       {
 
         }
     }

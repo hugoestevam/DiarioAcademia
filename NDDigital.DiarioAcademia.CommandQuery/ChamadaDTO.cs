@@ -12,7 +12,7 @@ namespace NDDigital.DiarioAcademia.Aplicacao.DTOs
 
         public int AnoTurma { get; set; }
 
-        public int TurmaId { get; set; } //TODO: THIAGO SARTOR
+        public int TurmaId { get; set; } 
 
         public DateTime Data { get; set; }
 

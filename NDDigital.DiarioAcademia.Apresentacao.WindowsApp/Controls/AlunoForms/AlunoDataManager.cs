@@ -1,11 +1,9 @@
-﻿using Infrastructure.DAO.ORM.Common;
-using NDDigital.DiarioAcademia.Aplicacao.DTOs;
+﻿using NDDigital.DiarioAcademia.Aplicacao.DTOs;
 using NDDigital.DiarioAcademia.Aplicacao.Services;
 using NDDigital.DiarioAcademia.Apresentacao.WindowsApp.Controls.Shared;
 using NDDigital.DiarioAcademia.Dominio.Contracts;
+using NDDigital.DiarioAcademia.Infraestrutura.DAO.Common.Uow;
 using NDDigital.DiarioAcademia.Infraestrutura.IoC;
-using NDDigital.DiarioAcademia.Infraestrutura.Orm.Common;
-using NDDigital.DiarioAcademia.Infraestrutura.Orm.Repositories;
 using System;
 using System.Windows.Forms;
 
@@ -20,13 +18,11 @@ namespace NDDigital.DiarioAcademia.Apresentacao.WindowsApp.Controls.AlunoForms
 
         public AlunoDataManager() //TODO: IOC
         {
-            var factory = new EntityFrameworkFactory();//Container.Get<UnitOfWorkFactory>();
+            var unitOfWork = Injection.Get<IUnitOfWork>();
 
-            var unitOfWork = new EntityFrameworkUnitOfWork(factory);//Container.Get<IUnitOfWork>();
+            var alunoRepository = Injection.Get<IAlunoRepository>();
 
-            var alunoRepository = new AlunoRepositoryEF(factory); ;//Container.Get<IAlunoRepository>();
-
-            var turmaRepository = Container.Get<ITurmaRepository>();
+            var turmaRepository = Injection.Get<ITurmaRepository>();
 
             _turmaService = new TurmaService(turmaRepository, unitOfWork);
 

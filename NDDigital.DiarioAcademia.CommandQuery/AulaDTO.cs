@@ -23,9 +23,9 @@ namespace NDDigital.DiarioAcademia.Aplicacao.DTOs
 
         public DateTime DataAula { get; set; }
 
-        public int AnoTurma { get; set; } //TODO: REVER ISSO AQUI
+        public int AnoTurma { get; set; } 
 
-        public int TurmaId { get; set; }  //TODO: THIAGO SARTOR 
+        public int TurmaId { get; set; }  
 
         public override string ToString()
         {

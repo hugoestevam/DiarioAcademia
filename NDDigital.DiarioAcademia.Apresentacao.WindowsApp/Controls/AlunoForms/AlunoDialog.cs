@@ -1,6 +1,9 @@
 ﻿using Infrastructure.DAO.ORM.Common;
 using NDDigital.DiarioAcademia.Aplicacao.DTOs;
 using NDDigital.DiarioAcademia.Aplicacao.Services;
+using NDDigital.DiarioAcademia.Dominio.Contracts;
+using NDDigital.DiarioAcademia.Infraestrutura.DAO.Common.Uow;
+using NDDigital.DiarioAcademia.Infraestrutura.IoC;
 using NDDigital.DiarioAcademia.Infraestrutura.Orm.Common;
 using NDDigital.DiarioAcademia.Infraestrutura.Orm.Repositories;
 using System;
@@ -16,13 +19,11 @@ namespace NDDigital.DiarioAcademia.Apresentacao.WindowsApp.Controls.AlunoForms
 
         public AlunoDialog(IEnumerable<TurmaDTO> turmas)//TODO:IOC
         {
-            var factory = new EntityFrameworkFactory();
+            var unitOfWork = Injection.Get<IUnitOfWork>();
 
-            var unitOfWork = new EntityFrameworkUnitOfWork(factory);
+            var alunoRepository = Injection.Get<IAlunoRepository>();
 
-            var alunoRepository = new AlunoRepositoryEF(factory);//Container.Get<IAlunoRepository>();
-
-            var turmaRepository = new TurmaRepositoryEF(factory);//Container.Get<ITurmaRepository>();
+            var turmaRepository = Injection.Get<ITurmaRepository>();
 
             _alunoService = new AlunoService(alunoRepository, turmaRepository, unitOfWork);
 

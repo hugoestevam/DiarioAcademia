@@ -108,14 +108,5 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.EF
 
             Assert.IsTrue(alunosEncontrados.Count == 1);
         }
-
-        [TestMethod]
-        [TestCategory("Teste de Integração Aluno")]
-        public void Deveria_Buscar_Alunos_Por_TurmaId_ORM_Test()
-        {
-            var alunos = _repoAluno.GetAllByTurmaId(1);
-
-            Assert.IsTrue(alunos.Count == 1);
-        }
     }
 }

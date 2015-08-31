@@ -1,7 +1,10 @@
 ﻿using Infrastructure.DAO.ORM.Common;
 using Microsoft.AspNet.Identity;
 using NDDigital.DiarioAcademia.Aplicacao.Services;
+using NDDigital.DiarioAcademia.Dominio.Contracts;
 using NDDigital.DiarioAcademia.Dominio.Entities.Security;
+using NDDigital.DiarioAcademia.Infraestrutura.DAO.Common.Uow;
+using NDDigital.DiarioAcademia.Infraestrutura.IoC;
 using NDDigital.DiarioAcademia.Infraestrutura.Orm.Common;
 using NDDigital.DiarioAcademia.Infraestrutura.Orm.Security;
 using NDDigital.DiarioAcademia.WebApi.Models;
@@ -19,19 +22,17 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers.Authentication
 
         public AccountsController()//TODO: IOC
         {
-            var factory = new EntityFrameworkFactory();
+            var unitOfWork = Injection.Get<IUnitOfWork>();
 
-            var unitOfWork = new EntityFrameworkUnitOfWork(factory);
+            var groupRepository = Injection.Get<IGroupRepository>();
 
-            var groupRepository = new GroupRepository(factory); //Container.Get<IGroupRepository>();
+            var permissionRepository = Injection.Get<IPermissionRepository>();
 
-            var permissionRepository = new PermissionRepository(factory); //Container.Get<IPermissionRepository>();
-
-            var store = new MyUserStore(factory.Get());
+            var store = Injection.Get<IUserStore<User>>();//var store = new MyUserStore(factory.Get());
 
             var userRepository = new UserRepository(store);
 
-            var accountRepository = new AccountRepository(factory);
+            var accountRepository = Injection.Get<IAccountRepository>();//var accountRepository = new AccountRepository(factory);
 
             _authservice = new AuthorizationService(groupRepository, permissionRepository,accountRepository, unitOfWork);
         }

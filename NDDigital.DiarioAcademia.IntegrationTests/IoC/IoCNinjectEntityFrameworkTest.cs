@@ -25,7 +25,7 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.IoC
 
             //Através do IoC Ninject busca um implementação do Repositório
             ITurmaRepository repository
-                = Container.Get<ITurmaRepository>();
+                = Injection.Get<ITurmaRepository>();
 
             Turma turmaAdcionada = repository.Add(t);
 
