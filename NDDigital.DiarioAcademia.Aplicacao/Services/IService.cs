@@ -19,5 +19,4 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
 
         IList<T> GetAll();
     }
-//TODO: Fazer service genérico
 }

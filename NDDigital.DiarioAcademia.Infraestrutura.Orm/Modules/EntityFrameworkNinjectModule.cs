@@ -1,5 +1,7 @@
 ﻿using Infrastructure.DAO.ORM.Common;
+using Microsoft.AspNet.Identity;
 using NDDigital.DiarioAcademia.Dominio.Contracts;
+using NDDigital.DiarioAcademia.Dominio.Entities.Security;
 using NDDigital.DiarioAcademia.Infraestrutura.DAO.Common.Factorys;
 using NDDigital.DiarioAcademia.Infraestrutura.DAO.Common.Uow;
 using NDDigital.DiarioAcademia.Infraestrutura.Orm.Common;
@@ -21,7 +23,8 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Modules
             Bind<IAulaRepository>().To<AulaRepositoryEF>().WithConstructorArgument("factory", factory);
             Bind<IAlunoRepository>().To<AlunoRepositoryEF>().WithConstructorArgument("factory", factory);
             Bind<IPresencaRepository>().To<PresencaRepositoryEF>().WithConstructorArgument("factory", factory);
-            
+
+            Bind<IUserStore<User>>().To<MyUserStore>().WithConstructorArgument("factory", factory);
             Bind<IAccountRepository>().To<AccountRepository>().WithConstructorArgument("factory", factory);
             Bind<IGroupRepository>().To<GroupRepository>().WithConstructorArgument("factory", factory);
             Bind<IPermissionRepository>().To<PermissionRepository>().WithConstructorArgument("factory", factory);

@@ -21,7 +21,7 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.EF
         [TestInitialize]
         public void Initialize()
         {
-            Database.SetInitializer(new BaseTest());
+            Database.SetInitializer(new BaseTestInitializer());
 
             _factory = new EntityFrameworkFactory();
 
@@ -107,15 +107,6 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.EF
             alunosEncontrados = _repoAluno.GetAll();
 
             Assert.IsTrue(alunosEncontrados.Count == 1);
-        }
-
-        [TestMethod]
-        [TestCategory("Teste de Integração Aluno")]
-        public void Deveria_Buscar_Alunos_Por_TurmaId_ORM_Test()
-        {
-            var alunos = _repoAluno.GetAllByTurmaId(1);
-
-            Assert.IsTrue(alunos.Count == 1);
         }
     }
 }

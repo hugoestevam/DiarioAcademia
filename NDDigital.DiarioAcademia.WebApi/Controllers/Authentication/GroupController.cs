@@ -1,7 +1,7 @@
-﻿using Infrastructure.DAO.ORM.Common;
+﻿using Microsoft.AspNet.Identity;
 using NDDigital.DiarioAcademia.Aplicacao.Services;
+using NDDigital.DiarioAcademia.Dominio.Contracts;
 using NDDigital.DiarioAcademia.Dominio.Entities.Security;
-using NDDigital.DiarioAcademia.Infraestrutura.DAO.Common.Factorys;
 using NDDigital.DiarioAcademia.Infraestrutura.DAO.Common.Uow;
 using NDDigital.DiarioAcademia.Infraestrutura.IoC;
 using NDDigital.DiarioAcademia.Infraestrutura.Orm.Common;
@@ -16,25 +16,27 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers.Authentication
         private IGroupService _groupService;
         private IUserService _userService;
 
-        public GroupController() //TODO: IOC
+        public GroupController()
         {
-            var factory = new EntityFrameworkFactory();
+            var unitOfWork = Injection.Get<IUnitOfWork>();
 
-            var unitOfWork = new EntityFrameworkUnitOfWork(factory);
+            var groupRepository = Injection.Get<IGroupRepository>();
 
-            var groupRepository = new GroupRepository(factory); //Container.Get<IGroupRepository>();
+            var permissionRepository = Injection.Get<IPermissionRepository>();
 
-            var permissionRepository = new PermissionRepository(factory); //Container.Get<IPermissionRepository>();
+            var store = Injection.Get<IUserStore<User>>();// var store = new MyUserStore(factory.Get());
+
+            var accountRepository = Injection.Get<IAccountRepository>(); // var accountRepository = new AccountRepository(factory);
 
             _groupService = new GroupService(groupRepository, unitOfWork);
 
-            var context = factory.Get();
+            //var context = factory.Get();
 
-            var store = new MyUserStore(context);
+            //var store = new MyUserStore(context);
 
-            var userRepo = new UserRepository(store);
+            var factory = new EntityFrameworkFactory(); //TODO: Implementar dois contextos
 
-            var userRepository = new UserRepository(store);
+            var userRepository = new UserRepository(store, factory);
 
             _userService = new UserService(userRepository);
         }

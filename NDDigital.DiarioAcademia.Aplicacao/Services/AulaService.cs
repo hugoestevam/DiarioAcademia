@@ -38,8 +38,7 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
 
         public void Add(AulaDTO aulaDto)
         {
-            //Turma turma = _turmaRepository.GetById(aulaDto.AnoTurma) ?? _turmaRepository.GetAll().FirstOrDefault();//TODO:está buscando o ano como id,
-            Turma turma = _turmaRepository.GetById(aulaDto.TurmaId);//TODO: THIAGO SARTOR
+            Turma turma = _turmaRepository.GetById(aulaDto.TurmaId);
 
             Aula aula = new Aula(aulaDto.DataAula, turma);
 
@@ -50,17 +49,12 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
 
         public void RealizaChamada(ChamadaDTO registroPresenca)
         {
-            //var alunos = _alunoRepository.GetAllByTurma(registroPresenca.AnoTurma); //TODO: REGIS
-
-            var alunos = _alunoRepository.GetAllByTurmaId(registroPresenca.TurmaId);//TODO:THIAGO SARTOR
+            var alunos = _alunoRepository.GetAllByTurmaId(registroPresenca.TurmaId);
 
             if (alunos == null || alunos.Any() == false)
                 throw new AlunoNaoEncontrado(String.Format(NENHUM_ALUNO_ENCOTRADO_PARA_TURMA, registroPresenca.AnoTurma));
 
-            //var aula = _aulaRepository.GetByData(registroPresenca.Data.Date)??new Aula(DateTime.Now,new Turma(registroPresenca.AnoTurma));//TODO:arrumar isso aq, pror um filtro melhor, hora é ano hora data
-
-            //tem que separar bem o que esta buscando por ano e o que busca por id, to fazendo tudo por id pq data pode gerar discrepancias
-            var aula = _aulaRepository.GetById(registroPresenca.AulaId);//TODO: THIAGO SARTOR
+            var aula = _aulaRepository.GetById(registroPresenca.AulaId);
 
             if (aula == null)
                 throw new AulaNaoEncontrada(String.Format(NENHUMA_AULA_ENCOTRADA_NESTA_DATA, registroPresenca.Data));
@@ -107,7 +101,7 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
             {
                 Id = aula.Id,
                 DataAula = aula.Data,
-                TurmaId = aula.Turma.Id //TODO: THIAGO SARTOR
+                TurmaId = aula.Turma.Id
             };
         }
 
@@ -144,7 +138,7 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
             return chamada;
         }
 
-        public ChamadaDTO GetChamadaByAula(int id)//TODO: coloquei essa sobrecarga aqui
+        public ChamadaDTO GetChamadaByAula(int id)
         {
             return GetChamadaByAula(GetById(id));
         }

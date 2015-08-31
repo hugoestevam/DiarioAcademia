@@ -6,6 +6,7 @@ using NDDigital.DiarioAcademia.Infraestrutura.SQL.Common;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 using System.Linq.Expressions;
 
 namespace NDDigital.DiarioAcademia.Infraestrutura.SQL.Repositories
@@ -38,20 +39,17 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.SQL.Repositories
                ,[Endereco_Uf] = {0}Endereco_Uf
                ,[Nome] = {0}Nome
                ,[Turma_Id] = {0}Turma_Id
-          WHERE [Id] = {0}Id";
+          WHERE [Id] = {0}id";
 
         public const string SqlDelete =
          "DELETE FROM TBAluno " +
-                       "WHERE Id = {0}Id";
+                       "WHERE Id = {0}id";
 
         public const string SqlSelect =
          "SELECT * FROM TBAluno";
 
-        public const string SqlSelectAllByTurma =
-       "SELECT * FROM TBAluno WHERE Turma_Id = {0}Turma_Id";
-
-        public const string SqlSelectbId =
-        "SELECT * FROM TBAluno WHERE Id = {0}Id";
+        public const string SqlSelectById =
+        "SELECT * FROM TBAluno WHERE Id = {0}id";
 
         #endregion Querys
 
@@ -82,25 +80,11 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.SQL.Repositories
             return GetAll(SqlSelect, Make);
         }
 
-        public IList<Aluno> GetAllByTurma(int ano)
-        {
-            var parms = new object[] { "ano", ano };
-
-            return GetAll(SqlSelectAllByTurma, Make, parms);
-        }
-
-        public IList<Aluno> GetAllByTurmaId(int turmaId)
-        {
-            var parms = new object[] { "Turma_Id", turmaId };
-
-            return GetAll(SqlSelectAllByTurma, Make, parms);
-        }
-
         public Aluno GetById(int id)
         {
-            var parms = new object[] { "Id", id };
+            var parms = new object[] { "id", id };
 
-            return Get(SqlSelectbId, Make, parms);
+            return Get(SqlSelectById, Make, parms);
         }
 
         public void Update(Aluno entity)
@@ -113,7 +97,7 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.SQL.Repositories
             Aluno aluno = new Aluno();
             aluno.Id = Convert.ToInt32(reader["Id"]);
             aluno.Nome = Convert.ToString(reader["Nome"]);
-            aluno.Turma.Id = Convert.ToInt32(reader["Turma_Id"]); //TODO: Tirei o protected da Entity
+            aluno.Turma.Id = Convert.ToInt32(reader["Turma_Id"]);
             aluno.Endereco.Cep = Convert.ToString(reader["Endereco_Cep"]);
             aluno.Endereco.Localidade = Convert.ToString(reader["Endereco_Localidade"]);
             aluno.Endereco.Bairro = Convert.ToString(reader["Endereco_Bairro"]);
@@ -149,6 +133,13 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.SQL.Repositories
         public IList<Aluno> GetAllIncluding(params Expression<Func<Aluno, object>>[] includeProperties)
         {
             throw new NotImplementedException();
+        }
+
+        public IList<Aluno> GetAllByTurmaId(int turmaId)
+        {
+            return GetAll()
+                .Where(a => a.Turma.Id == turmaId)
+                .ToList();
         }
     }
 }

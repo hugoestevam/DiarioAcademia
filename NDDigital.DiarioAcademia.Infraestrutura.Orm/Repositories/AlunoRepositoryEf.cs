@@ -2,9 +2,11 @@
 using NDDigital.DiarioAcademia.Dominio.Contracts;
 using NDDigital.DiarioAcademia.Dominio.Entities;
 using NDDigital.DiarioAcademia.Infraestrutura.Orm.Common;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System;
 
 namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Repositories
 {

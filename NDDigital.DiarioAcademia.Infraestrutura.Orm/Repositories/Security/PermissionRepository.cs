@@ -9,7 +9,6 @@ using System.Linq;
 namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Security
 {
 
-
     public class PermissionRepository : RepositoryBaseEF<Permission>, IPermissionRepository
     {
         public PermissionRepository(EntityFrameworkFactory dbFactory)
@@ -32,13 +31,19 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Security
 
         public IList<Permission> GetByGroup(int groupId)
         {
-            var group = DataContext.Groups.Find(groupId);
-            return group.Permissions;
+            var group = DataContext.Groups
+                .Include("Permissions")
+                .Where(g=>g.Id==groupId)
+                .FirstOrDefault();
+          
+             //return group?.Permissions;  todo: c# 6
+            return group != null ? group.Permissions : new List<Permission>();
         }
 
         public Permission GetByPermissionId(string id)
         {
             return (from p in DataContext.Permissions where p.PermissionId == id select p).FirstOrDefault(); ;
         }
+
     }
 }

@@ -10,7 +10,6 @@ using System.Linq;
 namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Security
 {
 
-
     public class GroupRepository : RepositoryBaseEF<Group>, IGroupRepository
     {
         private IUnitOfWork uow;

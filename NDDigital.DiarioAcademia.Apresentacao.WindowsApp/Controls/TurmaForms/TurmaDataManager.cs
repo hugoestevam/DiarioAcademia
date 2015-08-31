@@ -18,11 +18,11 @@ namespace NDDigital.DiarioAcademia.Apresentacao.WindowsApp.Controls.TurmaForms
 
         public TurmaDataManager()
         {
-            var _factory = Container.Get<UnitOfWorkFactory>();
+            var _factory = Injection.Get<UnitOfWorkFactory>();
 
-            var unitOfWork = Container.Get<IUnitOfWork>();
+            var unitOfWork = Injection.Get<IUnitOfWork>();
 
-            var turmaRepository = Container.Get<ITurmaRepository>();
+            var turmaRepository = Injection.Get<ITurmaRepository>();
 
             _turmaService = new TurmaService(turmaRepository, unitOfWork);
 

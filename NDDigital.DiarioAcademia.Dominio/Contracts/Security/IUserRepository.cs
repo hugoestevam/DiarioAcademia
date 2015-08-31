@@ -14,7 +14,7 @@ namespace NDDigital.DiarioAcademia.Dominio.Contracts
 
         User GetUserById(string id);
 
-        User GetByUserName(string username);
+        User GetUserByUsername(string username);
 
         void Delete(string username);
     }

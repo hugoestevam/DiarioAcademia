@@ -10,8 +10,7 @@ namespace NDDigital.DiarioAcademia.Aplicacao.DTOs
 
         public TurmaDTO(int id)
         {
-            // TODO: Complete member initialization
-            this.Id = id;
+            Id = id;
         }
 
         public TurmaDTO(Turma turma)

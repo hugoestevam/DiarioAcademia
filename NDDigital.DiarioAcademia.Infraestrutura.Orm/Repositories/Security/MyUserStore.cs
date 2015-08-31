@@ -8,16 +8,15 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Data.Entity;
-using System.Diagnostics;
 using System.Data.Entity.Infrastructure;
 
 namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Security
 {
+    //recurso:http://weblogs.asp.net/imranbaloch/a-simple-implementation-of-microsoft-aspnet-identity
     public class MyUserStore : IUserStore<User>, IUserPasswordStore<User>, IUserSecurityStampStore<User>, IQueryableUserStore<User>
     {
         private UserStore<IdentityUser> userStore;
-        private EntityFrameworkContext _context;
+        private static EntityFrameworkContext _context;
 
         public IQueryable<User> Users
         {
@@ -73,7 +72,7 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Security
             _context.SaveChanges();
 
             return _context.SaveChangesAsync();
-            
+           
         }
 
         public void Dispose()
@@ -123,6 +122,7 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Security
 
         private static void SetUser(User user, IdentityUser identityUser)
         {
+
             user.PasswordHash = identityUser.PasswordHash;
             user.SecurityStamp = identityUser.SecurityStamp;
             user.Id = identityUser.Id;
@@ -144,6 +144,5 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Security
         {
             throw new NotImplementedException();
         }
-
     }
 }
