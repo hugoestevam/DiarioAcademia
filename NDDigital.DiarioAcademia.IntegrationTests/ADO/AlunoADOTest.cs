@@ -1,95 +1,75 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using NDDigital.DiarioAcademia.Infraestrutura.SQL.Common;
-using NDDigital.DiarioAcademia.Infraestrutura.SQL.Repositories;
 using NDDigital.DiarioAcademia.IntegrationTests.Base;
-using System.Linq;
 
 namespace NDDigital.DiarioAcademia.IntegrationTests.ADO
 {
     [TestClass]
-    public class AlunoADOTest
+    public class AlunoADOTest: BaseADOTest
     {
-        private AlunoRepositorySql _repoAluno;
-        private TurmaRepositorySql _repoTurma;
-        private ADOUnitOfWork _uow;
-
-        [TestInitialize]
-        public void Initialize()
-        {
-            new BaseTestInitializer();
-
-            var factory = new AdoNetFactory();
-
-            _uow = new ADOUnitOfWork(factory);
-
-            _repoAluno = new AlunoRepositorySql(factory);
-
-            _repoTurma = new TurmaRepositorySql(factory);
-        }
-
+        private const string TestCategory = "Teste de Integração Aluno";
         [TestMethod]
-        [TestCategory("Teste de Integração Aluno")]
+        [TestCategory(TestCategory)]
         public void Deveria_Persistir_Aluno_SQL_Test()
         {
-            _repoTurma.Add(ObjectBuilder.CreateTurma());
+            TurmaRepository.Add(ObjectBuilder.CreateTurma());
 
-            var turmaEncontrada = _repoTurma.GetById(1);
+            var turmaEncontrada = TurmaRepository.GetById(1);
 
             var aluno = ObjectBuilder.CreateAluno(turmaEncontrada);
 
-            _repoAluno.Add(aluno);
+            AlunoRepository.Add(aluno);
 
-            var alunos = _repoAluno.GetAll();
+            var alunos = AlunoRepository.GetAll();
 
-            _uow.Commit();
+            Uow.Commit();
 
             Assert.AreEqual(2, alunos.Count);
         }
 
         [TestMethod]
-        [TestCategory("Teste de Integração Aluno")]
+        [TestCategory(TestCategory)]
         public void Deveria_Buscar_Aluno_SQL_Test()
         {
-            var alunoEncontrado = _repoAluno.GetById(1);
+            var alunoEncontrado = AlunoRepository.GetById(1);
 
             Assert.IsNotNull(alunoEncontrado);
             Assert.AreEqual(1, alunoEncontrado.Id);
         }
 
         [TestMethod]
-        [TestCategory("Teste de Integração Aluno")]
+        [TestCategory(TestCategory)]
         public void Deveria_Editar_Aluno_SQL_Test()
         {
-            var alunoEncontrado = _repoAluno.GetById(1);
+            var alunoEncontrado = AlunoRepository.GetById(1);
             alunoEncontrado.Nome = "Alexandre Regis";
 
-            _repoAluno.Update(alunoEncontrado);
+            AlunoRepository.Update(alunoEncontrado);
 
-            var alunoEditado = _repoAluno.GetById(1);
+            var alunoEditado = AlunoRepository.GetById(1);
 
-            _uow.Commit();
+            Uow.Commit();
 
             Assert.AreEqual("Alexandre Regis", alunoEditado.Nome);
         }
 
         [TestMethod]
-        [TestCategory("Teste de Integração Aluno")]
+        [TestCategory(TestCategory)]
         public void Deveria_Buscar_Todas_Alunos_SQL_Test()
         {
-            var alunosEncontrados = _repoAluno.GetAll();
+            var alunosEncontrados = AlunoRepository.GetAll();
 
             Assert.IsNotNull(alunosEncontrados);
         }
 
         [TestMethod]
-        [TestCategory("Teste de Integração Aluno")]
+        [TestCategory(TestCategory)]
         public void Deveria_Remover_Aluno_SQL_Test()
         {
-            _repoAluno.Delete(1);
+            AlunoRepository.Delete(1);
 
-            var alunosEncontrados = _repoAluno.GetAll();
+            var alunosEncontrados = AlunoRepository.GetAll();
 
-            _uow.Commit();
+            Uow.Commit();
 
             Assert.IsTrue(alunosEncontrados.Count == 0);
         }

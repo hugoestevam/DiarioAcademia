@@ -1,13 +1,5 @@
-﻿using Microsoft.AspNet.Identity;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using NDDigital.DiarioAcademia.Aplicacao.Services;
-using NDDigital.DiarioAcademia.Dominio.Contracts;
-using NDDigital.DiarioAcademia.Dominio.Entities.Security;
-using NDDigital.DiarioAcademia.Infraestrutura.DAO.Common.Uow;
-using NDDigital.DiarioAcademia.Infraestrutura.Orm.Security;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NDDigital.DiarioAcademia.IntegrationTests.Base;
-using NDDigital.DiarioAcademia.IntegrationTests.Common;
-using System.Data.Entity;
 using System.Linq;
 
 namespace NDDigital.DiarioAcademia.IntegrationTests.Security
@@ -15,7 +7,8 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.Security
     [TestClass]
     public class AuthenticationTest : BaseSecurityTest
     {
-        const string TestCategory = "Authentication - Relations";
+        const string TestCategory =
+            "Authorizarion - Relations";
 
         [TestMethod]
         [TestCategory(TestCategory)]

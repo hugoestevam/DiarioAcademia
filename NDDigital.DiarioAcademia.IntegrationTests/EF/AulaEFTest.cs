@@ -1,106 +1,85 @@
-﻿using Infrastructure.DAO.ORM.Common;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using NDDigital.DiarioAcademia.Dominio.Contracts;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NDDigital.DiarioAcademia.Dominio.Entities;
-using NDDigital.DiarioAcademia.Infraestrutura.DAO.Common.Uow;
-using NDDigital.DiarioAcademia.Infraestrutura.Orm.Common;
-using NDDigital.DiarioAcademia.Infraestrutura.Orm.Repositories;
 using System;
-using System.Data.Entity;
 
 namespace NDDigital.DiarioAcademia.IntegrationTests.Base
 {
     [TestClass]
-    public class AulaEFTest
+    public class AulaEFTest: BaseEFTest
     {
-        public IAulaRepository _repoAula;
-        public ITurmaRepository _repoTurma;
-        public IUnitOfWork _uow;
-        public EntityFrameworkFactory _factory;
 
-        [TestInitialize]
-        public void Initialize()
-        {
-            Database.SetInitializer(new BaseTestInitializer());
-
-            _factory = new EntityFrameworkFactory();
-
-            _uow = new EntityFrameworkUnitOfWork(_factory);
-
-            _repoTurma = new TurmaRepositoryEF(_factory);
-
-            _repoAula = new AulaRepositoryEF(_factory);
-        }
+        public const string TestCategory =
+            "Teste de Integração Aula";
 
         [TestMethod]
-        [TestCategory("Teste de Integração Aula")]
+        [TestCategory(TestCategory)]
         public void Deveria_Persistir_Aula_ORM_Test()
         {
-            var turmaEncontrada = _repoTurma.GetById(1);
+            var turmaEncontrada = TurmaRepository.GetById(1);
 
             var aula = ObjectBuilder.CreateAula(turmaEncontrada);
 
-            _repoAula.Add(aula);
+            AulaRepository.Add(aula);
 
-            _uow.Commit();
+            Uow.Commit();
 
-            var aulas = _repoAula.GetAll();
+            var aulas = AulaRepository.GetAll();
 
             Assert.AreEqual(2, aulas.Count);
         }
 
         [TestMethod]
-        [TestCategory("Teste de Integração Aula")]
+        [TestCategory(TestCategory)]
         public void Deveria_Buscar_Aula_ORM_Test()
         {
-            var aulaEncontrada = _repoAula.GetById(1);
+            var aulaEncontrada = AulaRepository.GetById(1);
 
             Assert.IsNotNull(aulaEncontrada);
             Assert.AreEqual(1, aulaEncontrada.Id);
         }
 
         [TestMethod]
-        [TestCategory("Teste de Integração Aula")]
+        [TestCategory(TestCategory)]
         public void Deveria_Editar_Aula_ORM_Test()
         {
-            var aulaEncontrada = _repoAula.GetById(1);
+            var aulaEncontrada = AulaRepository.GetById(1);
             aulaEncontrada.Data = DateTime.Now.AddYears(-15);
 
-            _repoAula.Update(aulaEncontrada);
+            AulaRepository.Update(aulaEncontrada);
 
-            _uow.Commit();
+            Uow.Commit();
 
-            var aulaEditada = _repoAula.GetById(1);
+            var aulaEditada = AulaRepository.GetById(1);
 
             Assert.AreEqual(2000, aulaEditada.Data.Year);
         }
 
         [TestMethod]
-        [TestCategory("Teste de Integração Aula")]
+        [TestCategory(TestCategory)]
         public void Deveria_Buscar_Todas_Aulas_ORM_Test()
         {
-            var aulasEncontradas = _repoAula.GetAll();
+            var aulasEncontradas = AulaRepository.GetAll();
 
             Assert.IsNotNull(aulasEncontradas);
         }
 
         [TestMethod]
-        [TestCategory("Teste de Integração Aula")]
+        [TestCategory(TestCategory)]
         public void Deveria_Remover_Aula_ORM_Test()
         {
-            _repoAula.Add(new Aula());
+            AulaRepository.Add(new Aula());
 
-            _uow.Commit();
+            Uow.Commit();
 
-            var aulasEncontradas = _repoAula.GetAll();
+            var aulasEncontradas = AulaRepository.GetAll();
 
             Assert.IsTrue(aulasEncontradas.Count == 2);
 
-            _repoAula.Delete(1);
+            AulaRepository.Delete(1);
 
-            _uow.Commit();
+            Uow.Commit();
 
-            aulasEncontradas = _repoAula.GetAll();
+            aulasEncontradas = AulaRepository.GetAll();
 
             Assert.IsTrue(aulasEncontradas.Count == 1);
         }

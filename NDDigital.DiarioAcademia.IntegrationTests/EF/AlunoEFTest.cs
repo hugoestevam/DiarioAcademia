@@ -1,110 +1,88 @@
-﻿using Infrastructure.DAO.ORM.Common;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using NDDigital.DiarioAcademia.Dominio.Contracts;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NDDigital.DiarioAcademia.Dominio.Entities;
-using NDDigital.DiarioAcademia.Infraestrutura.DAO.Common.Uow;
-using NDDigital.DiarioAcademia.Infraestrutura.Orm.Common;
-using NDDigital.DiarioAcademia.Infraestrutura.Orm.Repositories;
 using NDDigital.DiarioAcademia.IntegrationTests.Base;
-using System.Data.Entity;
 
 namespace NDDigital.DiarioAcademia.IntegrationTests.EF
 {
     [TestClass]
-    public class AlunoEFTest
+    public class AlunoEFTest : BaseEFTest
     {
-        public IAlunoRepository _repoAluno;
-        public ITurmaRepository _repoTurma;
-        public IUnitOfWork _uow;
-        public EntityFrameworkFactory _factory;
 
-        [TestInitialize]
-        public void Initialize()
-        {
-            Database.SetInitializer(new BaseTestInitializer());
-
-            _factory = new EntityFrameworkFactory();
-
-            _uow = new EntityFrameworkUnitOfWork(_factory);
-
-            _repoTurma = new TurmaRepositoryEF(_factory);
-
-            _repoAluno = new AlunoRepositoryEF(_factory);
-        }
+        private const string TestCategory = "Teste de Integração Aluno";
 
         [TestMethod]
-        [TestCategory("Teste de Integração Aluno")]
+        [TestCategory(TestCategory)]
         public void Deveria_Persistir_Aluno_ORM_Test()
         {
-            _repoTurma.Add(ObjectBuilder.CreateTurma());
+            TurmaRepository.Add(ObjectBuilder.CreateTurma());
 
-            _uow.Commit();
+            Uow.Commit();
 
-            var turmaEncontrada = _repoTurma.GetById(2);
+            var turmaEncontrada = TurmaRepository.GetById(2);
 
             var aluno = ObjectBuilder.CreateAluno(turmaEncontrada);
 
             aluno.Turma = turmaEncontrada;
 
-            _repoAluno.Add(aluno);
+            AlunoRepository.Add(aluno);
 
-            _uow.Commit();
+            Uow.Commit();
 
             Assert.IsNotNull(aluno);
         }
 
         [TestMethod]
-        [TestCategory("Teste de Integração Aluno")]
+        [TestCategory(TestCategory)]
         public void Deveria_Buscar_Aluno_ORM_Test()
         {
-            var alunoEncontrado = _repoAluno.GetById(1);
+            var alunoEncontrado = AlunoRepository.GetById(1);
 
             Assert.IsNotNull(alunoEncontrado);
             Assert.AreEqual(1, alunoEncontrado.Id);
         }
 
         [TestMethod]
-        [TestCategory("Teste de Integração Aluno")]
+        [TestCategory(TestCategory)]
         public void Deveria_Editar_Aluno_ORM_Test()
         {
-            var alunoEncontrado = _repoAluno.GetById(1);
+            var alunoEncontrado = AlunoRepository.GetById(1);
             alunoEncontrado.Nome = "Alexandre Regis";
 
-            _repoAluno.Update(alunoEncontrado);
+            AlunoRepository.Update(alunoEncontrado);
 
-            _uow.Commit();
+            Uow.Commit();
 
-            var alunoEditada = _repoAluno.GetById(1);
+            var alunoEditada = AlunoRepository.GetById(1);
 
             Assert.AreEqual("Alexandre Regis", alunoEditada.Nome);
         }
 
         [TestMethod]
-        [TestCategory("Teste de Integração Aluno")]
+        [TestCategory(TestCategory)]
         public void Deveria_Buscar_Todas_Alunos_ORM_Test()
         {
-            var alunosEncontrados = _repoAluno.GetAll();
+            var alunosEncontrados = AlunoRepository.GetAll();
 
             Assert.IsNotNull(alunosEncontrados);
         }
 
         [TestMethod]
-        [TestCategory("Teste de Integração Aluno")]
+        [TestCategory(TestCategory)]
         public void Deveria_Remover_Aluno_ORM_Test()
         {
-            _repoAluno.Add(new Aluno());
+            AlunoRepository.Add(new Aluno());
 
-            _uow.Commit();
+            Uow.Commit();
 
-            var alunosEncontrados = _repoAluno.GetAll();
+            var alunosEncontrados = AlunoRepository.GetAll();
 
             Assert.IsTrue(alunosEncontrados.Count == 2);
 
-            _repoAluno.Delete(1);
+            AlunoRepository.Delete(1);
 
-            _uow.Commit();
+            Uow.Commit();
 
-            alunosEncontrados = _repoAluno.GetAll();
+            alunosEncontrados = AlunoRepository.GetAll();
 
             Assert.IsTrue(alunosEncontrados.Count == 1);
         }

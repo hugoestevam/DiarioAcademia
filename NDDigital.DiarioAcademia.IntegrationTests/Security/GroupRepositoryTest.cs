@@ -1,25 +1,20 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using NDDigital.DiarioAcademia.Aplicacao.Services;
-using NDDigital.DiarioAcademia.Dominio.Contracts;
-using NDDigital.DiarioAcademia.Infraestrutura.DAO.Common.Uow;
-using NDDigital.DiarioAcademia.Infraestrutura.Orm.Security;
 using NDDigital.DiarioAcademia.IntegrationTests.Base;
-using NDDigital.DiarioAcademia.IntegrationTests.Common;
-using System.Data.Entity;
 
 namespace NDDigital.DiarioAcademia.IntegrationTests.Security
 {
     [TestClass]
     public class GroupRepositoryTest : BaseSecurityTest
     {
-        const string TestCategory = "Athentication - Group";
+        const string TestCategory = 
+            "Athentication - Group";
 
         [TestMethod]
         [TestCategory("Authorization - Group")]
         public void Deveria_Adicionar_Um_Grupo()
         {
             GroupRepository.Add(ObjectBuilder.CreateGroup());
-
+            
             Uow.Commit();
 
             var list = GroupRepository.GetAll();

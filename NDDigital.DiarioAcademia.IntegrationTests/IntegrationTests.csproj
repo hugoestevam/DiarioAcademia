@@ -88,9 +88,13 @@
   <ItemGroup>
     <Compile Include="ADO\AlunoADOTest.cs" />
     <Compile Include="ADO\AulaADOTest.cs" />
+    <Compile Include="ADO\BaseADOTest.cs" />
     <Compile Include="ADO\TurmaADOTest.cs" />
     <Compile Include="Base\BaseTest.cs" />
-    <Compile Include="Base\BaseTestInitializer.cs" />
+    <Compile Include="Base\BaseEntityFrameworkTest.cs" />
+    <Compile Include="EF\BaseEFTest.cs" />
+    <Compile Include="Security\BaseSecurityTest.cs" />
+    <Compile Include="Base\DatabaseTestInitializer.cs" />
     <Compile Include="Base\ObjectBuilder.cs" />
     <Compile Include="Common\DatabaseBootstrapper.cs" />
     <Compile Include="Common\DatabaseFixture.cs" />
@@ -110,6 +114,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="TestDiagram.cd" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

@@ -1,17 +1,13 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using NDDigital.DiarioAcademia.Dominio.Contracts;
-using NDDigital.DiarioAcademia.Infraestrutura.DAO.Common.Uow;
-using NDDigital.DiarioAcademia.Infraestrutura.Orm.Security;
 using NDDigital.DiarioAcademia.IntegrationTests.Base;
-using NDDigital.DiarioAcademia.IntegrationTests.Common;
-using System.Data.Entity;
 
 namespace NDDigital.DiarioAcademia.IntegrationTests.Security
 {
     [TestClass]
     public class PermissionRepositoryTest:BaseSecurityTest
     {
-        const string TestCategory = "Authorization - Permission";
+        const string TestCategory = 
+            "Authorization - Permission";
 
 
 

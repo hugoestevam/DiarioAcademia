@@ -11,14 +11,19 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.IoC
     [TestClass]
     public class IoCNinjectEntityFrameworkTest
     {
+        private const string TestCategory = 
+            "Teste de IoC";
         [TestInitialize]
         public void Initialize()
         {
-            ConfigurationManager.AppSettings["Infrasctructure.DAO"] = "NDDigital.DiarioAcademia.Infraestrutura.Orm.dll";
+            const string key = "Infrasctructure.DAO";
+            const string dll = "NDDigital.DiarioAcademia.Infraestrutura.Orm.dll";
+
+            ConfigurationManager.AppSettings[key] = dll;
         }
 
         [TestMethod]
-        [TestCategory("Teste de IoC")]
+        [TestCategory(TestCategory)]
         public void Save_Turma_IoC_EF_Test()
         {
             Turma t = ObjectBuilder.CreateTurma();

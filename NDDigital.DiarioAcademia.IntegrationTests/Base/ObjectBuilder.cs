@@ -3,8 +3,6 @@ using NDDigital.DiarioAcademia.Dominio.Entities;
 using NDDigital.DiarioAcademia.Dominio.Entities.Security;
 using System;
 using System.Collections.Generic;
-using System.Configuration;
-using System.Data.Common;
 
 namespace NDDigital.DiarioAcademia.IntegrationTests.Base
 {
@@ -14,7 +12,7 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.Base
         static int _index = 0;
         static bool _admin = false;
         static string Index { get { return (++_index).ToString(); } }
-        // public static void Reset() => _index = 0;
+        // public static void Reset() => _index = 0; todo: C# 6
 
 
         public static void Reset() {

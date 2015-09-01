@@ -27,10 +27,6 @@ namespace NDDigital.DiarioAcademia.UnitTests.Servicos
             _turmaService = new TurmaService(_repo, _uow);
         }
 
-        [TestMethod]
-        public void Test()
-       {
-
-        }
+        
     }
 }

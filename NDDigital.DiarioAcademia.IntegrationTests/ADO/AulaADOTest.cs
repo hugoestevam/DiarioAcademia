@@ -1,100 +1,81 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using NDDigital.DiarioAcademia.Dominio.Contracts;
-using NDDigital.DiarioAcademia.Infraestrutura.SQL.Common;
-using NDDigital.DiarioAcademia.Infraestrutura.SQL.Repositories;
 using NDDigital.DiarioAcademia.IntegrationTests.Base;
 using System;
 
 namespace NDDigital.DiarioAcademia.IntegrationTests.ADO
 {
     [TestClass]
-    public class AulaADOTest
+    public class AulaADOTest:BaseADOTest
     {
-        public ITurmaRepository _repoTurma;
-        public IAulaRepository _repoAula;
-        private ADOUnitOfWork _uow;
-
-        [TestInitialize]
-        public void Initialize()
-        {
-            new BaseTestInitializer();
-
-            var factory = new AdoNetFactory();
-
-            _uow = new ADOUnitOfWork(factory);
-
-            _repoTurma = new TurmaRepositorySql(factory);
-
-            _repoAula = new AulaRepositorySql(factory);
-        }
+        private const string TestCategory = "Teste de Integração Aula";
 
         [TestMethod]
-        [TestCategory("Teste de Integração Aula")]
+        [TestCategory(TestCategory)]
         public void Deveria_Persistir_Aula_SQL_Test()
         {
-            _repoTurma.Add(ObjectBuilder.CreateTurma());
+            TurmaRepository.Add(ObjectBuilder.CreateTurma());
 
-            var turmaEncontrada = _repoTurma.GetById(1);
+            var turmaEncontrada = TurmaRepository.GetById(1);
 
             var aula = ObjectBuilder.CreateAula(turmaEncontrada);
 
             aula.Turma = turmaEncontrada;
 
-            _repoAula.Add(aula);
+            AulaRepository.Add(aula);
 
-            var aulas = _repoAula.GetAll();
+            var aulas = AulaRepository.GetAll();
 
-            _uow.Commit();
+            Uow.Commit();
 
             Assert.AreEqual(2, aulas.Count);
         }
 
         [TestMethod]
-        [TestCategory("Teste de Integração Aula")]
+        [TestCategory(TestCategory)]
         public void Deveria_Buscar_Aula_SQL_Test()
         {
-            var aulaEncontrada = _repoAula.GetById(1);
+            var aulaEncontrada = AulaRepository.GetById(1);
 
             Assert.IsNotNull(aulaEncontrada);
             Assert.AreEqual(1, aulaEncontrada.Id);
         }
 
         [TestMethod]
-        [TestCategory("Teste de Integração Aula")]
+        [TestCategory(TestCategory)]
         public void Deveria_Editar_Aula_SQL_Test()
         {
-            var aulaEncontrada = _repoAula.GetById(1);
+            var aulaEncontrada = AulaRepository.GetById(1);
             aulaEncontrada.Data = DateTime.Now.AddYears(-15);
 
-            _repoAula.Update(aulaEncontrada);
+            AulaRepository.Update(aulaEncontrada);
 
-            var aulaEditada = _repoAula.GetById(1);
+            var aulaEditada = AulaRepository.GetById(1);
 
-            _uow.Commit();
+            Uow.Commit();
 
             Assert.AreEqual(2000, aulaEditada.Data.Year);
         }
 
         [TestMethod]
-        [TestCategory("Teste de Integração Aula")]
+        [TestCategory(TestCategory)]
         public void Deveria_Buscar_Todas_Aulas_SQL_Test()
         {
-            var aulasEncontradas = _repoAula.GetAll();
+            var aulasEncontradas = AulaRepository.GetAll();
 
-            _uow.Commit();
+            Uow.Commit();
 
             Assert.AreEqual(1, aulasEncontradas.Count);
         }
 
         [TestMethod]
-        [TestCategory("Teste de Integração Aula")]
+        [TestCategory(TestCategory)]
         public void Deveria_Remover_Aula_SQL_Test()
         {
-            _repoAula.Delete(1);
+            AulaRepository.Delete(1);
 
-            var aulasEncontradas = _repoAula.GetAll();
+            var aulasEncontradas = AulaRepository.GetAll();
 
-            _uow.Commit();
+            Uow.Commit();
 
             Assert.IsTrue(aulasEncontradas.Count == 0);
         }

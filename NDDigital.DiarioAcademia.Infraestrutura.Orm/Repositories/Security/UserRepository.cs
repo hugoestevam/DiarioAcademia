@@ -15,13 +15,13 @@ using System;
 namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Security
 {
 
-    public class UserRepository : UserManager<User>
+    public class UserRepository : UserManager<User>, IUserRepository
     {
         private static EntityFrameworkContext dataContext;
         private static EntityFrameworkFactory _databaseFactory;
         public IUserStore<User> _store { get; set; }
 
-        public UserRepository(IUserStore<User> store, EntityFrameworkFactory databaseFactory)
+        public UserRepository(IUserStore<User> store, EntityFrameworkFactory databaseFactory) 
             : base(store)
         {
             _databaseFactory = databaseFactory;

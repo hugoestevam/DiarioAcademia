@@ -9,8 +9,12 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.IoC
     [TestClass]
     public class IoCNinjectSqlTest
     {
+        private const string TestCategory = 
+            "Teste de IoC";
+
+
         [TestMethod]
-        [TestCategory("Teste de IoC")]
+        [TestCategory(TestCategory)]
         public void Save_Turma_IoC_SQL_Test()
         {
             Turma t = ObjectBuilder.CreateTurma();
