@@ -29,13 +29,13 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers.Authentication
 
             var permissionRepository = Injection.Get<IPermissionRepository>();
 
-            var store = Injection.Get<IUserStore<User>>();//var store = new MyUserStore(factory.Get());
+            var store = Injection.Get<IUserStore<User>>(); //var store = new MyUserStore(factory.Get());
 
             var factory = new EntityFrameworkFactory(); //TODO: Implementar dois contextos
 
             var userRepository = new UserRepository(store, factory);
 
-            var accountRepository = Injection.Get<IAccountRepository>();//var accountRepository = new AccountRepository(factory);
+            var accountRepository = Injection.Get<IAccountRepository>(); //var accountRepository = new AccountRepository(factory);
 
             _authservice = new AuthorizationService(groupRepository, permissionRepository,accountRepository, unitOfWork);
         }

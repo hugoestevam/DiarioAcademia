@@ -32,7 +32,7 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Security
 
         public static UserRepository Create(IdentityFactoryOptions<UserRepository> options, IOwinContext context)
         {
-            dataContext = dataContext ?? (_databaseFactory.Get()); // context.Get<EntityFrameworkContext>();
+            dataContext = dataContext ?? context.Get<EntityFrameworkContext>();
             var userManager = new UserRepository(new UserStore<User>(), _databaseFactory);
 
             // Configure validation logic for usernames
