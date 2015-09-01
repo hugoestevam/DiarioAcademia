@@ -13,7 +13,7 @@ using System.Data.Entity.Infrastructure;
 namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Security
 {
     //recurso:http://weblogs.asp.net/imranbaloch/a-simple-implementation-of-microsoft-aspnet-identity
-    public class MyUserStore : IUserStore<User>, IUserPasswordStore<User>, IUserSecurityStampStore<User>, IQueryableUserStore<User>
+    public class IdentityUserStore : IUserStore<User>, IUserPasswordStore<User>, IUserSecurityStampStore<User>, IQueryableUserStore<User>
     {
         private UserStore<IdentityUser> userStore;
         private static EntityFrameworkContext _context;
@@ -26,7 +26,7 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Security
             }
         }
 
-        public MyUserStore(EntityFrameworkContext context)
+        public IdentityUserStore(EntityFrameworkContext context)
         {
             userStore = new UserStore<IdentityUser>(_context = context);
         }

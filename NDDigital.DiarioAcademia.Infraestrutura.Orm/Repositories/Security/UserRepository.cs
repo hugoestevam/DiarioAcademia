@@ -10,23 +10,10 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System;
+using NDDigital.DiarioAcademia.Dominio.Contracts;
 
 namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Security
 {
-    public interface IUserRepository
-    {
-        IList<User> GetUsersByGroup(Group group);
-
-        IList<Group> GetGroupsByUser(string username);
-
-        IList<User> GetUsers();
-
-        User GetUserById(string id);
-
-        User GetUserByUsername(string username);
-
-        void Delete(string username);
-    }
 
     public class UserRepository : UserManager<User>, IUserRepository
     {
@@ -43,7 +30,7 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Security
 
         public static UserRepository Create(IdentityFactoryOptions<UserRepository> options, IOwinContext context)
         {
-            dataContext = dataContext ?? (_databaseFactory.Get()); // context.Get<EntityFrameworkContext>();
+            dataContext = dataContext ??  context.Get<EntityFrameworkContext>();
             var userManager = new UserRepository(new UserStore<User>(), _databaseFactory);
 
             // Configure validation logic for usernames
@@ -123,6 +110,8 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Security
         {
             var user = GetUserByUsername(username);
             dataContext.Users.Remove(user);
+            dataContext.SaveChanges();
+
         }
 
         public IList<Group> GetGroupsByUser(string username)

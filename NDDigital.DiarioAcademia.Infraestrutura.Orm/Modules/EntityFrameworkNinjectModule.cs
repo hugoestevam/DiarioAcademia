@@ -24,7 +24,7 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Modules
             Bind<IAlunoRepository>().To<AlunoRepositoryEF>().WithConstructorArgument("factory", factory);
             Bind<IPresencaRepository>().To<PresencaRepositoryEF>().WithConstructorArgument("factory", factory);
 
-            Bind<IUserStore<User>>().To<MyUserStore>().WithConstructorArgument("factory", factory);
+            Bind<IUserStore<User>>().To<IdentityUserStore>().WithConstructorArgument("factory", factory);
             Bind<IAccountRepository>().To<AccountRepository>().WithConstructorArgument("factory", factory);
             Bind<IGroupRepository>().To<GroupRepository>().WithConstructorArgument("factory", factory);
             Bind<IPermissionRepository>().To<PermissionRepository>().WithConstructorArgument("factory", factory);

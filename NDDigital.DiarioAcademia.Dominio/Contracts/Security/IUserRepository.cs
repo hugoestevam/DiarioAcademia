@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace NDDigital.DiarioAcademia.Dominio.Contracts
 {
-    public interface IUserRepository : IRepository<User>
+    public interface IUserRepository 
     {
         IList<User> GetUsersByGroup(Group group);
 
@@ -17,5 +17,7 @@ namespace NDDigital.DiarioAcademia.Dominio.Contracts
         User GetUserByUsername(string username);
 
         void Delete(string username);
+
+        void AddUser(User user);
     }
 }

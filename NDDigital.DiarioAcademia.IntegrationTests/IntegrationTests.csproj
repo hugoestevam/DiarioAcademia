@@ -79,7 +79,9 @@
     </When>
     <Otherwise>
       <ItemGroup>
-        <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework" />
+        <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework">
+          <Private>False</Private>
+        </Reference>
       </ItemGroup>
     </Otherwise>
   </Choose>
@@ -87,6 +89,7 @@
     <Compile Include="ADO\AlunoADOTest.cs" />
     <Compile Include="ADO\AulaADOTest.cs" />
     <Compile Include="ADO\TurmaADOTest.cs" />
+    <Compile Include="Base\BaseTest.cs" />
     <Compile Include="Base\BaseTestInitializer.cs" />
     <Compile Include="Base\ObjectBuilder.cs" />
     <Compile Include="Common\DatabaseBootstrapper.cs" />
