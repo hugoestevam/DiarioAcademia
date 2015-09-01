@@ -1,4 +1,5 @@
 ﻿using Ninject;
+using System;
 using System.Configuration;
 using System.IO;
 using System.Reflection;
@@ -24,14 +25,16 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.IoC
             _container = new StandardKernel();
 
             string path
-                   = new FileInfo(
-                                Assembly
-                                .GetExecutingAssembly()
-                                .Location)
-                                .DirectoryName;
+                   = Path.GetDirectoryName(
+                       Assembly.GetExecutingAssembly()
+                       .GetName()
+                       .CodeBase);
+
+            path = path.Substring(6, path.Length - 6);
 
             string fileName
                     = ConfigurationSettings.AppSettings["Infrasctructure.DAO"];
+
 
             string assemblyFile
                     = string.Format("{0}\\{1}", path, fileName);

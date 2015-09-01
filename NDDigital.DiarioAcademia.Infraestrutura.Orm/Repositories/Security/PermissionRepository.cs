@@ -8,7 +8,6 @@ using System.Linq;
 
 namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Security
 {
-    
 
     public class PermissionRepository : RepositoryBaseEF<Permission>, IPermissionRepository
     {
@@ -36,8 +35,9 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Security
                 .Include("Permissions")
                 .Where(g=>g.Id==groupId)
                 .FirstOrDefault();
-           
-             return group?.Permissions;
+          
+             //return group?.Permissions;  todo: c# 6
+            return group != null ? group.Permissions : new List<Permission>();
         }
 
         public Permission GetByPermissionId(string id)

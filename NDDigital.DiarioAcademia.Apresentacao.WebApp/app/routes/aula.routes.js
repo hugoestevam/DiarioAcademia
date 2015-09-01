@@ -23,7 +23,7 @@
             templateUrl: '/app/views/aula/aula-list.html',
             displayName: 'Lista de Aulas',
             displayIcon: "fa-calendar-check-o",
-            $$permissionId: "04"
+            $$permissionId: "05"
         }, {
             state: 'aula.create',
             url: '/create',
@@ -31,7 +31,7 @@
             templateUrl: '/app/views/aula/aula-create.html',
             displayName: 'Criação de Aulas',
             displayIcon: "fa-calendar-plus-o",
-            $$permissionId: "05"
+            $$permissionId: "06"
         }
 );
     }

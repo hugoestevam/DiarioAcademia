@@ -53,8 +53,7 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Security
 
         public Task<User> FindByNameAsync(string userName)
         {
-            return _context.Users.AsNoTracking()
-                .Where(u => u.UserName.ToLower() == userName.ToLower()).FirstOrDefaultAsync();
+            return _context.Users.AsNoTracking().Where(u => u.UserName.ToLower() == userName.ToLower()).FirstOrDefaultAsync();
         }
 
         //TODO: rever implementação (possivel chance de gambi pattern XGH)
@@ -69,11 +68,11 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Security
                 _context.Users.Attach(user);
             }
             dbEntityEntry.State = EntityState.Modified;
-
+            
             _context.SaveChanges();
 
             return _context.SaveChangesAsync();
-
+           
         }
 
         public void Dispose()
@@ -145,7 +144,5 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Security
         {
             throw new NotImplementedException();
         }
-
-       
     }
 }

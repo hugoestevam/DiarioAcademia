@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-
     <link rel="icon" type="image/png" href="/app/images/favicon.ico" />
 
     <title>Diário da Academia</title>
@@ -32,6 +31,7 @@
         <link rel="stylesheet" href="/content/layout/layout.css">
         <link rel="stylesheet" href="/content/layout/login.css">
         <link rel="stylesheet" href="/content/layout/manager.css">
+        <link rel="stylesheet" href="/content/theme/default/home.css">
         <link rel="stylesheet" href="/content/theme/default/layout.css">
         <link rel="stylesheet" href="/content/theme/default/manager.css">
         <link rel="stylesheet" href="/content/theme/default/navbar.css">
@@ -40,127 +40,116 @@
     <!--endbuild -->
 </head>
 
-<body>
+<body style="overflow-x: hidden" >
     <div ng-controller="shellController as shell">
-        <div id="wrapper">
+        <div id="wrapper" ng-class="{'clear-padding-left': !shell.authentication.isAuth}">
             <div class="row" data-ng-include="'/app/templates/layout/navbar.html'"></div>
-            <div ui-view class="fader-animation" id="index"></div>
+            <div ui-view class="fader-animation" id="index" ng-class="{'logged': shell.authentication.isAuth}"></div>
         </div>
     </div>
 
     <!--build:js js/libs.js-->
-         <!-- bower:js -->
-         <script src="/bower_components/jquery/dist/jquery.js"></script>
-         <script src="/bower_components/bootstrap/dist/js/bootstrap.js"></script>
-         <script src="/bower_components/angular/angular.js"></script>
-         <script src="/bower_components/toastr/toastr.js"></script>
-         <script src="/bower_components/angular-local-storage/dist/angular-local-storage.js"></script>
-         <script src="/bower_components/angular-ui-router/release/angular-ui-router.js"></script>
-         <script src="/bower_components/angular-loading-bar/build/loading-bar.js"></script>
-         <script src="/bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
-         <script src="/bower_components/angular-animate/angular-animate.js"></script>
-         <script src="/bower_components/angular-breadcrumb/release/angular-breadcrumb.js"></script>
-         <!-- endbower -->
+    <!-- bower:js -->
+    <script src="/bower_components/jquery/dist/jquery.js"></script>
+    <script src="/bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="/bower_components/angular/angular.js"></script>
+    <script src="/bower_components/toastr/toastr.js"></script>
+    <script src="/bower_components/angular-local-storage/dist/angular-local-storage.js"></script>
+    <script src="/bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="/bower_components/angular-loading-bar/build/loading-bar.js"></script>
+    <script src="/bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <script src="/bower_components/angular-animate/angular-animate.js"></script>
+    <script src="/bower_components/angular-breadcrumb/release/angular-breadcrumb.js"></script>
+    <!-- endbower -->
     <!--endbuild-->
 
     <!--build:js js/app.js-->
-
-        <!--inject:extentions-->
-        <script src="/app/extentions/array.js"></script>
-        <script src="/app/extentions/string.js"></script>
-        <!--endinject-->
-
-        <!--inject:models-->
-        <script src="/app/models/turma.model.js"></script>
-        <!--endinject-->
-  
-        <!--inject:module-->
-        <script src="/app/modules/common.module.js"></script>
-        <script src="/app/modules/core.module.js"></script>
-        <script src="/app/modules/other.module.js"></script>
-        <script src="/app/modules/routes.module.js"></script>
-        <script src="/app/modules/services.module.js"></script>
-        <!--endinject-->
-
-        <!--inject:factories-->
-        <script src="/app/factories/changes.factory.js"></script>
-        <script src="/app/factories/compare-state.factory.js"></script>
-        <script src="/app/factories/ng-automapper.factory.js"></script>
-        <script src="/app/factories/permissions.factory.js"></script>
-        <!--endinject-->
-
-        <!--inject:routes-->
-        <script src="/app/routes/aluno.routes.js"></script>
-        <script src="/app/routes/aula.routes.js"></script>
-        <script src="/app/routes/authentication.routes.js"></script>
-        <script src="/app/routes/chamada.routes.js"></script>
-        <script src="/app/routes/layout.routes.js"></script>
-        <script src="/app/routes/manager.routes.js"></script>
-        <script src="/app/routes/turma.routes.js"></script>
-        <!--endinject-->
-
-        <!--inject:config.routes-->
-        <script src="/app/routes/config.routes.js"></script>
-        <!--endinject-->
-
-        <!--inject:service-->
-        <script src="/app/services/aluno.services.js"></script>
-        <script src="/app/services/alunoAdapter.js"></script>
-        <script src="/app/services/aula.services.js"></script>
-        <script src="/app/services/auth.services.js"></script>
-        <script src="/app/services/authInterceptor.services.js"></script>
-        <script src="/app/services/cep.services.js"></script>
-        <script src="/app/services/chamada.services.js"></script>
-        <script src="/app/services/group.services.js"></script>
-        <script src="/app/services/language.service.js"></script>
-        <script src="/app/services/logger.services.js"></script>
-        <script src="/app/services/permissions.service.js"></script>
-        <script src="/app/services/turma.services.js"></script>
-        <script src="/app/services/user.service.js"></script>
-        <!--endinject-->
-
-        <!--inject:controllers-->
-        <script src="/app/controllers/aluno/alunoCreate.ctrl.js"></script>
-        <script src="/app/controllers/aluno/alunoDetails.ctrl.js"></script>
-        <script src="/app/controllers/aluno/alunosList.ctrl.js"></script>
-        <script src="/app/controllers/aula/aulaCreate.ctrl.js"></script>
-        <script src="/app/controllers/aula/aulasList.ctrl.js"></script>
-        <script src="/app/controllers/authentication/login.ctrl.js"></script>
-        <script src="/app/controllers/authentication/signup.ctrl.js"></script>
-        <script src="/app/controllers/chamada/chamada.ctrl.js"></script>
-        <script src="/app/controllers/chamada/chamadaList.ctrl.js"></script>
-        <script src="/app/controllers/layout/footer.ctrl.js"></script>
-        <script src="/app/controllers/layout/header.ctrl.js"></script>
-        <script src="/app/controllers/layout/home.ctrl.js"></script>
-        <script src="/app/controllers/layout/navbar.ctrl.js"></script>
-        <script src="/app/controllers/layout/shell.ctrl.js"></script>
-        <script src="/app/controllers/layout/sidebar.ctrl.js"></script>
-        <script src="/app/controllers/layout/toolbar.ctrl.js"></script>
-        <script src="/app/controllers/turma/turmaCreate.ctrl.js"></script>
-        <script src="/app/controllers/turma/turmaDetails.ctrl.js"></script>
-        <script src="/app/controllers/turma/turmaList.ctrl.js"></script>
-        <script src="/app/controllers/manager/group/managerGroupEdit.ctrl.js"></script>
-        <script src="/app/controllers/manager/group/managerGroupList.ctrl.js"></script>
-        <script src="/app/controllers/manager/group/managerGroupPermissionEdit.ctrl.js"></script>
-        <script src="/app/controllers/manager/permission/managerPermission.ctrl.js"></script>
-        <script src="/app/controllers/manager/user/managerUserEdit.ctrl.js"></script>
-        <script src="/app/controllers/manager/user/managerUserList.ctrl.js"></script>
-        <!--endinject-->
-
-        <!--inject:directives-->
-        <script src="/app/directives/ndd-confirm-exit/ndd-confirm-exit.directives.js"></script>
-        <script src="/app/directives/ndd-group-checkbox/ndd-group-checkbox.directives.js"></script>
-        <script src="/app/directives/ndd-head/ndd-head.directives.js"></script>
-        <script src="/app/directives/ndd-modal/ndd-modal.directives.js"></script>
-        <script src="/app/directives/ndd-panel/ndd-panel.directives.js"></script>
-        <!--endinject-->    
-     
-        <!--inject:templates-->
-        <script src="/task/temp/templates.js"></script>
-        <!--endinject-->     
+    <!--inject:extentions-->
+    <script src="/app/extentions/array.js"></script>
+    <script src="/app/extentions/string.js"></script>
+    <!--endinject-->
+    <!--inject:models-->
+    <script src="/app/models/turma.model.js"></script>
+    <!--endinject-->
+    <!--inject:module-->
+    <script src="/app/modules/common.module.js"></script>
+    <script src="/app/modules/core.module.js"></script>
+    <script src="/app/modules/other.module.js"></script>
+    <script src="/app/modules/routes.module.js"></script>
+    <script src="/app/modules/services.module.js"></script>
+    <!--endinject-->
+    <!--inject:factories-->
+    <script src="/app/factories/changes.factory.js"></script>
+    <script src="/app/factories/compare-state.factory.js"></script>
+    <script src="/app/factories/ng-automapper.factory.js"></script>
+    <script src="/app/factories/permissions.factory.js"></script>
+    <!--endinject-->
+    <!--inject:routes-->
+    <script src="/app/routes/aluno.routes.js"></script>
+    <script src="/app/routes/aula.routes.js"></script>
+    <script src="/app/routes/authentication.routes.js"></script>
+    <script src="/app/routes/chamada.routes.js"></script>
+    <script src="/app/routes/layout.routes.js"></script>
+    <script src="/app/routes/manager.routes.js"></script>
+    <script src="/app/routes/turma.routes.js"></script>
+    <!--endinject-->
+    <!--inject:config.routes-->
+    <script src="/app/routes/config.routes.js"></script>
+    <!--endinject-->
+    <!--inject:service-->
+    <script src="/app/services/aluno.services.js"></script>
+    <script src="/app/services/alunoAdapter.js"></script>
+    <script src="/app/services/aula.services.js"></script>
+    <script src="/app/services/auth.services.js"></script>
+    <script src="/app/services/authInterceptor.services.js"></script>
+    <script src="/app/services/cep.services.js"></script>
+    <script src="/app/services/chamada.services.js"></script>
+    <script src="/app/services/group.services.js"></script>
+    <script src="/app/services/language.service.js"></script>
+    <script src="/app/services/logger.services.js"></script>
+    <script src="/app/services/permissions.service.js"></script>
+    <script src="/app/services/turma.services.js"></script>
+    <script src="/app/services/user.service.js"></script>
+    <!--endinject-->
+    <!--inject:controllers-->
+    <script src="/app/controllers/aluno/alunoCreate.ctrl.js"></script>
+    <script src="/app/controllers/aluno/alunoDetails.ctrl.js"></script>
+    <script src="/app/controllers/aluno/alunosList.ctrl.js"></script>
+    <script src="/app/controllers/aula/aulaCreate.ctrl.js"></script>
+    <script src="/app/controllers/aula/aulasList.ctrl.js"></script>
+    <script src="/app/controllers/authentication/login.ctrl.js"></script>
+    <script src="/app/controllers/authentication/signup.ctrl.js"></script>
+    <script src="/app/controllers/chamada/chamada.ctrl.js"></script>
+    <script src="/app/controllers/chamada/chamadaList.ctrl.js"></script>
+    <script src="/app/controllers/layout/footer.ctrl.js"></script>
+    <script src="/app/controllers/layout/header.ctrl.js"></script>
+    <script src="/app/controllers/layout/home.ctrl.js"></script>
+    <script src="/app/controllers/layout/navbar.ctrl.js"></script>
+    <script src="/app/controllers/layout/shell.ctrl.js"></script>
+    <script src="/app/controllers/layout/sidebar.ctrl.js"></script>
+    <script src="/app/controllers/layout/toolbar.ctrl.js"></script>
+    <script src="/app/controllers/turma/turmaCreate.ctrl.js"></script>
+    <script src="/app/controllers/turma/turmaDetails.ctrl.js"></script>
+    <script src="/app/controllers/turma/turmaList.ctrl.js"></script>
+    <script src="/app/controllers/manager/group/managerGroupEdit.ctrl.js"></script>
+    <script src="/app/controllers/manager/group/managerGroupList.ctrl.js"></script>
+    <script src="/app/controllers/manager/group/managerGroupPermissionEdit.ctrl.js"></script>
+    <script src="/app/controllers/manager/permission/managerPermission.ctrl.js"></script>
+    <script src="/app/controllers/manager/user/managerUserEdit.ctrl.js"></script>
+    <script src="/app/controllers/manager/user/managerUserEditGroupController.ctrl.js"></script>
+    <script src="/app/controllers/manager/user/managerUserList.ctrl.js"></script>
+    <!--endinject-->
+    <!--inject:directives-->
+    <script src="/app/directives/ndd-confirm-exit/ndd-confirm-exit.directives.js"></script>
+    <script src="/app/directives/ndd-group-checkbox/ndd-group-checkbox.directives.js"></script>
+    <script src="/app/directives/ndd-head/ndd-head.directives.js"></script>
+    <script src="/app/directives/ndd-modal/ndd-modal.directives.js"></script>
+    <script src="/app/directives/ndd-panel/ndd-panel.directives.js"></script>
+    <!--endinject-->
+    <!--inject:templates-->
+    <script src="/task/temp/templates.js"></script>
+    <!--endinject-->
     <!--endbuild-->
-
-
     <!-- Load custom filters-->
     <!-- Load custom directives -->
     <!-- /#page-wrapper -->

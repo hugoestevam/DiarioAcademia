@@ -48,6 +48,11 @@
     function runStateChangeStart($rootScope, $state, authService) {
         $rootScope.$on('$stateChangeStart',
            function (event, toState, toParams, fromState, fromParams) {
+               if (authService.authentication.isAuth && toState.name == 'home') {
+                   event.preventDefault();
+                   return $state.go('homeapp');
+                   
+               }
                if (toState.data.allowAnnonymous) return;
 
                if (authService.authorization.groups)
@@ -59,7 +64,6 @@
 
                if (authService.authentication.isAuth) {
                    var hasPermission = authService.checkAuthorize(toState.name);
-
                    if (hasPermission) return;
                } else {
                    authService.lastState = toState.name;

@@ -3,6 +3,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
+using NDDigital.DiarioAcademia.Dominio.Contracts;
 using NDDigital.DiarioAcademia.Dominio.Entities.Security;
 using NDDigital.DiarioAcademia.Infraestrutura.CepServices;
 using NDDigital.DiarioAcademia.Infraestrutura.Orm.Common;
@@ -10,12 +11,11 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System;
-using NDDigital.DiarioAcademia.Dominio.Contracts;
 
 namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Security
 {
 
-    public class UserRepository : UserManager<User>, IUserRepository
+    public class UserRepository : UserManager<User>
     {
         private static EntityFrameworkContext dataContext;
         private static EntityFrameworkFactory _databaseFactory;
@@ -30,7 +30,7 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Security
 
         public static UserRepository Create(IdentityFactoryOptions<UserRepository> options, IOwinContext context)
         {
-            dataContext = dataContext ??  context.Get<EntityFrameworkContext>();
+            dataContext = dataContext ?? context.Get<EntityFrameworkContext>();
             var userManager = new UserRepository(new UserStore<User>(), _databaseFactory);
 
             // Configure validation logic for usernames
@@ -118,9 +118,18 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Security
         {
             var user = GetUserByUsername(username);
 
-            return user?.Account?.Groups ?? new List<Group>();
+            if (user != null && user.Account != null)
+
+                return user.Account.Groups;
+
+            return new List<Group>();
+
+
+           // return user?.Account?.Groups ?? new List<Group>();  todo: c# 6
+
         }
+
+     
     }
 
-   
 }

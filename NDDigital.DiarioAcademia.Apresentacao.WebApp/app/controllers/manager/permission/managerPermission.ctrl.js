@@ -7,7 +7,7 @@
     function managerPermissionController(permissionService, compareState, permissionsFactory, $state, $rootScope, changesFactory) {
         var vm = this;
 
-        vm.filters = ['aluno', 'turma', 'other', 'manager', 'aula', 'chamada', 'customize'];
+        vm.filters = permissionsFactory.getFilters();
         vm.showRoutes = [];
         vm.hasChange = false;
         vm.changes = [];
@@ -15,7 +15,7 @@
         vm.compareState = compareState;
         vm.onchange = onchange;
         vm.saveChanges = saveChanges;
-
+        vm.selectPermissions = selectPermissions;
 
 
         activate();
@@ -23,8 +23,8 @@
             permissionService.getPermissions().then(function (results) {
                 vm.routes = results;
                 vm.showRoutes = vm.routes.slice();
+                vm.permission = permissionsFactory.filterPermissions(vm.showRoutes);
             });
-            vm.permission = filterPermissions(permissionsFactory.getDefaultPermissions());
         }
 
         //public methods
@@ -50,35 +50,54 @@
 
 
         //private methods
-        function save(item) {
-            permissionService.save(item)
-                .then(function (data, status, headers, config) {
-                    vm.routes.push(item);
+        function save(array) {
+            clearPermissions(array, true);
+            if (array.length == 0)
+                return;
+            permissionService.save(array)
+                .then(function (results) {
+                    vm.routes = vm.routes.concat(results);
+                    vm.permission = permissionsFactory.filterPermissions(vm.showRoutes);
                 });
         }
 
-        function remove(item) {
-            permissionService.delete(item)
+        function remove(array) {
+            clearPermissions(array, false);
+            if (array.length == 0)
+                return;
+            permissionService.delete(array)
                 .then(function (results) {
                     $state.reload();
                 });
         }
 
-        function filterPermissions(permissions) {
-            var filtered = [];
-            for (var i = 0; i < permissions.length; i++) {
-                var permission = permissions[i];
-                var filter = permission.name.split(".");
-                filter = filter.length >= 2 ? filter[0] : 'other';
-                if (!filtered[filter])
-                    filtered[filter] = [];
-                if (!vm.filters.contains(filter))
-                    vm.filters.push(filter);
-                filtered[filter].push(permission); // parse state for permission
+        function clearPermissions(array, isSaved) {
+            var index;
+            for (var i = 0; i < array.length; i++) {
+                index = compareState(vm.routes, array[i]);
+                if (isSaved ? index >= 0 : index < 0) {
+                    array.splice(i, 1);
+                    i--;
+                }    
             }
-            filtered['customize'] = permissionsFactory.getCustomPermissions();
-            return filtered;
         }
+
+        function selectPermissions(isAll, filter) {
+            var isShow, index, array = vm.permission[filter];
+            for (var i = 0; i < array.length; i++) {
+                index = compareState(vm.showRoutes, array[i]);
+                isShow = index >= 0;
+                if (isAll && !isShow) {
+                    vm.showRoutes.push(array[i]);
+                    onchange(array[i], isAll);
+
+                } else if (!isAll && isShow) {
+                    vm.showRoutes.splice(index, 1);
+                    onchange(array[i], isAll);
+                }
+            }
+        }
+
 
     }
 })(window.angular);

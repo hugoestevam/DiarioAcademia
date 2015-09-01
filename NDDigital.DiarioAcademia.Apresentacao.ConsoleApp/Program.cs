@@ -22,18 +22,18 @@ namespace NDDigital.DiarioAcademia.Apresentacao.ConsoleApp
                                
         public static void Main()
         {
-            Person p = null;
-            Console.WriteLine("Person name: " + p?.Name);
+            //Person p = null;
+            //Console.WriteLine("Person name: " + p?.Name);
 
-            p = new Person();
-            Console.WriteLine("Person Name: " + p?.Name);
+            //p = new Person();
+            //Console.WriteLine("Person Name: " + p?.Name);
 
-            p.Name = "Namison";
-            Console.WriteLine($"Person Name: {p.Name} \n Age{{s}}:{p.Age}");
+            //p.Name = "Namison";
+            //Console.WriteLine($"Person Name: {p.Name} \n Age{{s}}:{p.Age}");
 
-            Console.WriteLine(p);
+            //Console.WriteLine(p);
 
-            Console.ReadLine();
+            //Console.ReadLine();
         }
         public class Person
         {
@@ -43,9 +43,9 @@ namespace NDDigital.DiarioAcademia.Apresentacao.ConsoleApp
 
             }
             public string Name { get; set; }
-            public int Age { get; set; } = 14;
+          //  public int Age { get; set; } = 14;
 
-            public override string ToString() => Name;
+            //public override string ToString() => Name;
 
         }
 

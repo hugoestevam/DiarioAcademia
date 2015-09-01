@@ -90,7 +90,10 @@
     //BrowserSync
     config.getBrowsersyncOptionsDefault = function () {
         return {
-            proxy: 'localhost:' + portDefault,
+            //proxy: 'localhost:' + portDefault,   //não mais por proxy
+            server: {
+                baseDir: "./"
+            },
             //watcher for restart
             files: [
                 app + '/**/*.*',

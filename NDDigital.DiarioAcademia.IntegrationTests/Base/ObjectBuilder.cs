@@ -14,8 +14,12 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.Base
         static int _index = 0;
         static bool _admin = false;
         static string Index { get { return (++_index).ToString(); } }
-        public static void Reset() => _index = 0;
+        // public static void Reset() => _index = 0;
 
+
+        public static void Reset() {
+            _index = 0;
+        }
 
         public static Turma CreateTurma()
         {
@@ -52,7 +56,7 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.Base
         {
             var names = new[] { "joao", "jose", "pedro", "mariah", "sabrina" };
 
-            var user = new User { FirstName = names[ _index % 5 ], LastName = "da silva"};
+            var user = new User { FirstName = names[_index % 5], LastName = "da silva" };
 
             user.Account = CreateAccount(full);
 
@@ -70,7 +74,7 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.Base
         }
         public static Group CreateGroup(bool full = true)
         {
-            var group = new Group { Name = "Grupo " + Index, IsAdmin = _admin = ! _admin };
+            var group = new Group { Name = "Grupo " + Index, IsAdmin = _admin = !_admin };
 
             if (full) group.Permissions = CreateListPermissions();
 

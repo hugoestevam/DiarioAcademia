@@ -1,73 +1,19 @@
-﻿<!--<div id="page-wrapper">
-    <div class="row container-user">
-        <div class="col-sm-10">
-            <h1> Diário </h1>
-            <h4><em>Academia do Programador</em></h4>
-            <hr />
-            <div ncy-breadcrumb></div>
+﻿<div class="container-home">
+    <carousel interval="4500" no-wrap="false" class="custom-carousel" >
+        <div class="header-carousel">
+            <h1>Academia do Programador</h1>
             <br />
+            <h3>
+                Curso que forma desenvolvedores para a NDDigital. Anualmente a empresa garimpa talentos
+                tanto para área de desenvolvimento como para outros setores da empresa.
+            </h3>
+            <button class="btn btn-primary btn-header" ui-sref="login">Login</button>
         </div>
-    </div>
-
-    <div class="container-user">
-        <br />
-        <div class="col-lg-offset-2 col-lg-8  col-sm-12">
-            <ndd-panel title="Alunos" icon="fa-users" ui-sref="aluno.list"></ndd-panel>
-            <ndd-panel title="Turmas" icon="fa-university" ui-sref="turma.list"></ndd-panel>
-            <ndd-panel title="Aulas" icon="fa-calendar" ui-sref="aula.list"></ndd-panel>
-            <ndd-panel title="Chamada" icon="fa-check" ui-sref="chamada.create"></ndd-panel>
-        </div>
-
-    </div>
-
-    <br />
-
-        <div class="col-sm-10 container-user">
-            <br /><br />
-            <div class="panel panel-default">
-                <div class="panel-heading"><strong>Objetivo</strong></div>
-                <div class="panel-body">
-                    <div class="alert alert-info">
-                        É um curso que forma desenvolvedores para a empresa NDDigital. Anualmente a empresa garimpa talentos
-                        tanto para área de desenvolvimento como para outros setores da empresa.
-                    </div>
-                </div>
-            </div>
-        </div>
-</div>-->
-
-<div id="page-wrapper">
-    <div class="row container-user">
-        <div class="col-sm-11">
-            <h1> Diário </h1>
-            <h4><em>Academia do Programador</em></h4>
-            <hr />
-            <div ncy-breadcrumb></div>
-            <br />
-        </div>
-
-        <div class="col-sm-11">
-            <br />
-            <div class="col-lg-offset-1 col-lg-10  col-sm-12">
-                <ndd-panel title="Alunos" icon="fa-users" ui-sref="aluno.list"></ndd-panel>
-                <ndd-panel title="Turmas" icon="fa-university" ui-sref="turma.list"></ndd-panel>
-                <ndd-panel title="Aulas" icon="fa-calendar" ui-sref="aula.list"></ndd-panel>
-                <ndd-panel title="Chamada" icon="fa-check" ui-sref="chamada.create"></ndd-panel>
-            </div>
-        </div>
-
-        <div class="col-sm-11">
-            <br /><br />
-            <div class="panel panel-default">
-                <div class="panel-heading"><strong>Objetivo</strong></div>
-                <div class="panel-body">
-                    <div class="alert alert-info">
-                        É um curso que forma desenvolvedores para a empresa NDDigital. Anualmente a empresa garimpa talentos
-                        tanto para área de desenvolvimento como para outros setores da empresa.
-                    </div>
-                </div>
-            </div>
-        </div>
-
-    </div>
+        <slide ng-repeat="slide in vm.slides" class="slide">
+            <img ng-src="{{slide}}">
+        </slide>
+    </carousel>
 </div>
+
+
+

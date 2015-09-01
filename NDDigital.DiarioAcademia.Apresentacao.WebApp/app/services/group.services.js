@@ -16,32 +16,27 @@
 
 		//public methods
 		self.getGroups = function () {
-
-
 			return $http.get(serviceUrl)
 				 .then(logger.successCallback)
 				 .catch(logger.errorCallback);
 		};
 
 		self.getGroupById = function (id) {
-
 			return $http.get(serviceUrl + '/' + id)
 				 .then(logger.successCallback)
 				 .catch(logger.errorCallback);
 		};
 
 		self.getGroupByUsername = function (username) {
-
 			return $http.get(serviceUrl + '?username=' + username)
-				 .then(logger.successCallback)
+				 .then(logger.emptyMessageCallback)
 				 .catch(logger.errorCallback)
 		};
 
 		self.save = function (group) {
 			logger.success(res.saved_successful, group);
-
 			return $http.post(serviceUrl, group)
-							 .then(logger.successCallback)
+							 .then(logger.emptyMessageCallback)
 							 .catch(logger.errorCallback);
 		};
 

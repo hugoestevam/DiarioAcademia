@@ -12,16 +12,9 @@ gulp.task('start', 'Start dev app.--livereload: use livereload', ['inject'], fun
     if (yargs.livereload)
         browserSync(options);
     else {
-        gulp.src(config.index)
-        .pipe(open({
-            uri: "http:\\localhost:" + config.port,
-            app: 'Chrome'
-        }));
+        options.files = [];  // sem livereload
+        browserSync(options);
     }
-    connect.server({
-        root: [config.path], // do not use './'
-        port: config.port,
-    });
 });
 
 gulp.task('start-app', 'Start publish version of app optimized', ['build-optimized'], function () {
