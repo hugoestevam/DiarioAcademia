@@ -150,6 +150,12 @@
     <Content Include="content\theme\default\home.min.css">
       <DependentUpon>home.css</DependentUpon>
     </Content>
+    <Content Include="content\theme\default\homeapp.css">
+      <DependentUpon>homeapp.less</DependentUpon>
+    </Content>
+    <Content Include="content\theme\default\homeapp.min.css">
+      <DependentUpon>homeapp.css</DependentUpon>
+    </Content>
     <Content Include="content\theme\default\layout.css">
       <DependentUpon>layout.less</DependentUpon>
     </Content>
@@ -215,6 +221,11 @@
     <Content Include="content\theme\default\home.css.map">
       <DependentUpon>home.css</DependentUpon>
     </Content>
+    <Content Include="content\theme\default\homeapp.less" />
+    <Content Include="content\theme\default\homeapp.css.map">
+      <DependentUpon>homeapp.css</DependentUpon>
+    </Content>
+    <Content Include="app\factories\permission-groups.factory.js" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

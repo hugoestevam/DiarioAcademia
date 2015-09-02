@@ -1,11 +1,10 @@
 ﻿(function () {
     angular.module('factories.module').factory('permissions.factory', permissionFactory);
 
-    permissionFactory.$inject = ['$state', 'compareState'];
+    permissionFactory.$inject = ['$state', 'compareState', 'permissionGroups'];
 
-    function permissionFactory($state, compareState) {
+    function permissionFactory($state, compareState, permissionGroups) {
 
-        var filters = ['aluno', 'turma', 'other', 'manager', 'aula', 'chamada', 'action', 'action2', 'action3'];
 
         return {
             getPermissions: getPermissions,
@@ -88,14 +87,14 @@
                 filtered[filter].push(permission);  // add in the array of filter
                 if (compareState(permissionDb, permission) >= 0)
                     filtered[filter].countSelected = filtered[filter].countSelected ? filtered[filter].countSelected + 1 : 1;
-                if (!filters.contains(filter))
-                    filters.push(filter);
+                if (!permissionGroups.contains(filter))
+                    permissionGroups.push(filter);
             }
             return filtered;
         }
 
         function getFilters() {
-            return filters;
+            return permissionGroups;
         }
 
 
