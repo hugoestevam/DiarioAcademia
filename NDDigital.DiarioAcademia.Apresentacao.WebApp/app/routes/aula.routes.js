@@ -9,7 +9,7 @@
     configRoutes.$inject = [KEYS.APP_ROUTES];
     function configRoutes(routes) {
         routes.push({
-            state: 'aula',
+            name: 'aula',
             url: '/aula',
             'abstract': true,
             redirect: '/aula/list',
@@ -17,7 +17,7 @@
             displayName: 'Aula',
             displayIcon: "fa-calendar"
         }, {
-            state: 'aula.list',
+            name: 'aula.list',
             url: '/list',
             controller: 'aulaListCtrl as vm',
             templateUrl: '/app/views/aula/aula-list.html',
@@ -25,7 +25,7 @@
             displayIcon: "fa-calendar-check-o",
             $$permissionId: "05"
         }, {
-            state: 'aula.create',
+            name: 'aula.create',
             url: '/create',
             controller: 'aulaCreateCtrl as vm',
             templateUrl: '/app/views/aula/aula-create.html',

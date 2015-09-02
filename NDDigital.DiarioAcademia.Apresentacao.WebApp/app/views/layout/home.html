@@ -3,10 +3,11 @@
         <div class="header-carousel">
             <h1>Academia do Programador</h1>
             <br />
-            <h3>
+            <h3 class="hidden-xs">
                 Curso que forma desenvolvedores para a NDDigital. Anualmente a empresa garimpa talentos
                 tanto para área de desenvolvimento como para outros setores da empresa.
             </h3>
+            <button class="btn btn-info btn-header" ui-sref="signup">Cadastre-se</button>
             <button class="btn btn-primary btn-header" ui-sref="login">Login</button>
         </div>
         <slide ng-repeat="slide in vm.slides" class="slide">

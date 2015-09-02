@@ -36,6 +36,10 @@
         self.isVisible = function (state) {
             return self.authorization.isAuthorized(state);
         };
+
+        self.isLogged = function () {
+            return self.authentication.isAuth && $(document).width() > 768;
+        }
         //private methods
         function reTranslate(language) {
 

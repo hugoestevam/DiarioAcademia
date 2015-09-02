@@ -18,6 +18,7 @@
         vm.onchange = onchange;
         vm.hasChange = false;
         vm.changes = [];
+        vm.redirect = redirect;
 
         activate();
         function activate() {
@@ -62,9 +63,7 @@
         }
 
         function save(permission) {
-            groupService.addPermission(vm.group, permission).then(function (results) {
-                $state.go('manager.group.edit', { groupId: vm.group.id }, { reload: true });
-            });
+            groupService.addPermission(vm.group, permission).then(function (results) {});
         }
 
         function remove(permission) {
@@ -74,6 +73,10 @@
         function modal() {
             vm.titleModalEdit = 'Edição';
             vm.bodyModalEdit = 'Editar ' + vm.group.name + ' ?';
+        }
+
+        function redirect() {
+            $state.go('manager.group.edit', { groupId: vm.group.id });
         }
     }
 })(window.angular);

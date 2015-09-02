@@ -8,7 +8,7 @@
     var config = {
         port: portDefault,
         index: './index.html',
-        fonts: [bower + "/font-awesome/fonts/*.*"],
+        fonts: [bower + "/font-awesome/fonts/*.*", bower + "/bootstrap/fonts/*.*"],
         root: './',
         path: __dirname.replace('task', ''),
 
@@ -99,7 +99,6 @@
                 app + '/**/*.*',
                 './content/**/*.css',
                 './*.html',
-                app + '/images/favicon.ico'
             ],
             ghostMode: {
                 clicks: true,

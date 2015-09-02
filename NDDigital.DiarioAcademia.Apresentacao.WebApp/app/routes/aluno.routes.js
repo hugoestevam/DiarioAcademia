@@ -10,7 +10,7 @@
 
     function configRoutes(routes, roles) {
         routes.push({
-            state: 'aluno',
+            name: 'aluno',
             url: '/aluno',
             'abstract': true,
             redirect: '/aluno/list',
@@ -18,7 +18,7 @@
             displayName: "Aluno",
             displayIcon: "fa-user",
         }, {
-            state: 'aluno.list',
+            name: 'aluno.list',
             url: '/list',
             controller: 'alunoListCtrl as vm',
             templateUrl: '/app/views/aluno/aluno-list.html',
@@ -27,14 +27,14 @@
             displayIcon: "fa-user",
             $$permissionId: "02"
         }, {
-            state: 'aluno.details',
+            name: 'aluno.details',
             url: '/details/:alunoId',
             controller: 'alunoDetailsCtrl as vm',
             templateUrl: '/app/views/aluno/aluno-details.html',
             displayName: "Detalhes do Aluno",
             $$permissionId: "03"
         }, {
-            state: 'aluno.create',
+            name: 'aluno.create',
             url: '/create',
             controller: 'alunoCreateCtrl as vm',
             templateUrl: '/app/views/aluno/aluno-create.html',

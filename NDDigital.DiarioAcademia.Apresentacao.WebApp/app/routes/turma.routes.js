@@ -9,7 +9,7 @@
     configRoutes.$inject = [KEYS.APP_ROUTES];
     function configRoutes(routes) {
         routes.push({
-            state: 'turma',
+            name: 'turma',
             url: '/turma',
             'abstract': true,
             redirect: '/turma/list',
@@ -17,7 +17,7 @@
             displayName: "Turma",
             displayIcon: 'fa-university'
         }, {
-            state: 'turma.list',
+            name: 'turma.list',
             url: '/list',
             controller: 'turmaListCtrl as vm',
             templateUrl: '/app/views/turma/turma-list.html',
@@ -25,7 +25,7 @@
             displayIcon: 'fa-bars',
             $$permissionId: "17"
         }, {
-            state: 'turma.details',
+            name: 'turma.details',
             url: '/details/:turmaId',
             controller: 'turmaDetailsCtrl as vm',
             templateUrl: '/app/views/turma/turma-details.html',
@@ -34,7 +34,7 @@
             $$permissionId: "18"
 
         }, {
-            state: 'turma.create',
+            name: 'turma.create',
             url: '/create',
             controller: 'turmaCreateCtrl as vm',
             templateUrl: '/app/views/turma/turma-create.html',

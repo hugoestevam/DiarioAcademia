@@ -2,10 +2,13 @@
 
     'use strict';
 
-    authService.$inject = ['$http', '$q', 'localStorageService', 'logger', 'BASEURL', 'groupService', 'storageKeys', 'resource', 'userService'];
-
     angular.module('services.module')
-        .service('authService', authService);
+       .service('authService', authService);
+
+    authService.$inject = ['$http', '$q', 'localStorageService', 'logger', 'BASEURL',
+        'groupService', 'storageKeys', 'resource', 'userService'];
+
+   
 
     function authService($http, $q, localStorageService, logger, serviceBase, groupService, storageKeys, res, userService) {
         var self = this;
@@ -79,9 +82,9 @@
 
             var deferred = $q.defer();
 
-            var headers = { 'Content-Type': 'application/x-www-form-urlencoded' };
+            var header = { 'Content-Type': 'application/x-www-form-urlencoded' };
 
-            $http.post(serviceBase + 'oauth/token', data, { headers: headers }).success(function (response) {
+            $http.post(serviceBase + 'oauth/token', data, { headers: header }).success(function (response) {
 
 
                 authentication.isAuth = true;
@@ -103,7 +106,7 @@
                                  .then(function (groups) {
                                      authorization.groups = groups;
                                      authorization.permissions = groupService.extractPermissions(groups);
-                                   
+
                                  });
                          });
 

@@ -5,14 +5,14 @@
 
     function permissionFactory($state, compareState) {
 
-        var filters = ['aluno', 'turma', 'other', 'manager', 'aula', 'chamada', 'customize'];
+        var filters = ['aluno', 'turma', 'other', 'manager', 'aula', 'chamada', 'action', 'action2', 'action3'];
 
         return {
             getPermissions: getPermissions,
             getPermissionById: getPermissionById,
             getCustomPermissions: getCustomPermissions,
             getDefaultPermissions: getDefaultPermissions,
-            getFilters : getFilters, 
+            getFilters: getFilters,
             createPermission: createPermission,
             filterPermissions: filterPermissions
         };
@@ -20,8 +20,8 @@
         //private methods
         function getCustomPermissions() {
             var customPermissions = [
-                { name: "Excluir Aluno", permissionId: '20' },
-                { name: "Adicionar Turma", permissionId: '21' }];
+                { name: "action3.deleteAluno", displayName: "Excluir Aluno", permissionId: '20' },
+                { name: "action2.addTurma", displayName: "Adicionar Turma", permissionId: '21' }];
 
             return customPermissions;
         }
@@ -73,8 +73,8 @@
         }
 
         function filterPermissions(permissionDb) {
-          
-            var permissions = getDefaultPermissions();
+
+            var permissions = getPermissions();
             var filtered = [];
             var countCheck = 0;
             var filter;
@@ -87,11 +87,10 @@
                     filtered[filter] = [];
                 filtered[filter].push(permission);  // add in the array of filter
                 if (compareState(permissionDb, permission) >= 0)
-                    filtered[filter].countSelected = filtered[filter].countSelected ? filtered[filter].countSelected + 1 : 1 ;
+                    filtered[filter].countSelected = filtered[filter].countSelected ? filtered[filter].countSelected + 1 : 1;
                 if (!filters.contains(filter))
                     filters.push(filter);
             }
-            filtered['customize'] = getCustomPermissions();
             return filtered;
         }
 
@@ -99,7 +98,7 @@
             return filters;
         }
 
-      
+
     }
 })(window.angular);
 

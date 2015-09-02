@@ -35,6 +35,8 @@
 		};
 
 		self.delete = function (permission) {
+		    logger.error(res.deleted_successful, permission, "Delete");
+
 			permission = getPermissionsId(permission);
 			return $http({
 				url: serviceUrl,

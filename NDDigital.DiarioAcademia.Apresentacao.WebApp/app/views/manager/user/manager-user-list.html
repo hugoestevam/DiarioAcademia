@@ -32,7 +32,7 @@
             <tbody>
                 <tr ng-repeat="user in vm.users | filter: nameFilter">
                     <td class="text-capitalize">{{user.fullName}}</td>
-                    <td>{{user.userName}}</td>
+                    <td>{{user.username}}</td>
                     <td>{{user.email}}</td>
                     <td class="text-right">
                         <button class="btn btn-info" ng-click="vm.edit(user)">

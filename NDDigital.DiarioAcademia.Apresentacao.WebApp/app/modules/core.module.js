@@ -45,14 +45,16 @@
     };
 
     runStateChangeStart.$inject = ['$rootScope', '$state', 'authService'];
-    function runStateChangeStart($rootScope, $state, authService) {
+    function runStateChangeStart($rootScope, $state, authService, a) {
+
         $rootScope.$on('$stateChangeStart',
            function (event, toState, toParams, fromState, fromParams) {
+
                if (authService.authentication.isAuth && toState.name == 'home') {
                    event.preventDefault();
                    return $state.go('homeapp');
-                   
                }
+
                if (toState.data.allowAnnonymous) return;
 
                if (authService.authorization.groups)
@@ -71,12 +73,12 @@
 
                    $state.go(stateToGo);
                }
+
            });
 
         $rootScope.$on('$viewContentLoading', function (event, viewConfig) {
             console.log('todo');
         });
-
     }
 
     configBreadcrumb.$inject = ["$breadcrumbProvider"];

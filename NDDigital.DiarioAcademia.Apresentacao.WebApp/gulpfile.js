@@ -11,9 +11,9 @@ del = require('del');
 requireDir = require('require-dir');
 util = require('./task/util/util.js')();
 log = util.log;
-connect = require('gulp-connect');
 yargs = require('yargs').argv;
 open = require('gulp-open');
+browserSync = require('browser-sync');
 
 // TASKS
 requireDir('./task/');

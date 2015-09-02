@@ -16,7 +16,7 @@
         vm.onchange = onchange;
         vm.saveChanges = saveChanges;
         vm.selectPermissions = selectPermissions;
-
+        vm.verifyPanelSuccess = verifyPanelSuccess;
 
         activate();
         function activate() {
@@ -33,6 +33,7 @@
             if (compareState(vm.changes, obj) < 0)
                 vm.changes.push(obj);
             obj.action = check;
+            vm.permission = permissionsFactory.filterPermissions(vm.showRoutes);
         }
 
         function saveChanges() {
@@ -51,7 +52,7 @@
 
         //private methods
         function save(array) {
-            clearPermissions(array, true);
+            cleanRepeatedPermissions(array, true);
             if (array.length == 0)
                 return;
             permissionService.save(array)
@@ -62,23 +63,20 @@
         }
 
         function remove(array) {
-            clearPermissions(array, false);
+            cleanRepeatedPermissions(array, false);
             if (array.length == 0)
                 return;
-            permissionService.delete(array)
-                .then(function (results) {
-                    $state.reload();
-                });
+            permissionService.delete(array);
         }
 
-        function clearPermissions(array, isSaved) {
+        function cleanRepeatedPermissions(array, isSaved) {
             var index;
             for (var i = 0; i < array.length; i++) {
                 index = compareState(vm.routes, array[i]);
                 if (isSaved ? index >= 0 : index < 0) {
                     array.splice(i, 1);
                     i--;
-                }    
+                }
             }
         }
 
@@ -96,6 +94,11 @@
                     onchange(array[i], isAll);
                 }
             }
+        }
+
+        function verifyPanelSuccess(filter) {
+            if (vm.permission && vm.permission[filter])
+                return vm.permission[filter].countSelected == vm.permission[filter].length;
         }
 
 

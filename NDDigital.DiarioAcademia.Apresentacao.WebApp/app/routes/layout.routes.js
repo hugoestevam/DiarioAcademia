@@ -10,7 +10,7 @@
     function configRoutes(routes) {
 
         routes.push({
-            state: 'home',
+            name: 'home',
             url: '/home',
             controller: 'homeController as vm',
             templateUrl: '/app/views/layout/home.html',
@@ -20,13 +20,13 @@
             $$permissionId: "00"
         },
         {
-            state: 'homeapp',
+            name: 'homeapp',
             url: '/homeapp',
             controller: 'homeController as vm',
             templateUrl: '/app/views/layout/home-app.html',
-            displayName: "Inicio",
+            displayName: "Inicio App",
             displayIcon: "fa-home",
-            allowAnnonymous: true,
+            allowAnnonymous: false,
             $$permissionId: "01"
         });
     }

@@ -9,7 +9,7 @@
     configRoutes.$inject = [KEYS.APP_ROUTES];
     function configRoutes(routes) {
         routes.push({
-            state: 'chamada',
+            name: 'chamada',
             url: '/chamada',
             'abstract': true,
             redirect: '/chamada/list',
@@ -17,7 +17,7 @@
             displayName: 'Chamada',
             displayIcon: 'fa-check'
         }, {
-            state: 'chamada.create',
+            name: 'chamada.create',
             url: '/create',
             controller: 'chamadaCtrl as vm',
             templateUrl: '/app/views/chamada/chamada.html',

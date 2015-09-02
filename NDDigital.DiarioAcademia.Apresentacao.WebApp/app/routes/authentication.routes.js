@@ -11,7 +11,7 @@
     function configRoutes(routes) {
 
         routes.push({
-            state: 'login',
+            name: 'login',
             url: '/login',
             controller: 'loginController as vm',
             templateUrl: '/app/views/authentication/login.html',
@@ -20,7 +20,7 @@
             displayIcon: 'fa-user',
             $$permissionId: "07"
         }, {
-            state: 'signup',
+            name: 'signup',
             url: '/signup',
             controller: 'signupController as vm',
             templateUrl: '/app/views/authentication/signup.html',

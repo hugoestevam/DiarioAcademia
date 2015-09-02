@@ -44,7 +44,7 @@
     <div ng-controller="shellController as shell">
         <div id="wrapper" ng-class="{'clear-padding-left': !shell.authentication.isAuth}">
             <div class="row" data-ng-include="'/app/templates/layout/navbar.html'"></div>
-            <div ui-view class="fader-animation" id="index" ng-class="{'logged': shell.authentication.isAuth}"></div>
+            <div ui-view class="fader-animation" id="index" ng-class="{'logged': shell.isLogged()}"></div>
         </div>
     </div>
 
@@ -150,9 +150,5 @@
     <script src="/task/temp/templates.js"></script>
     <!--endinject-->
     <!--endbuild-->
-    <!-- Load custom filters-->
-    <!-- Load custom directives -->
-    <!-- /#page-wrapper -->
-    <!-- /#wrapper -->
 </body>
 </html>
