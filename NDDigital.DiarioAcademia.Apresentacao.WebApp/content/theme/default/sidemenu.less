@@ -4,8 +4,8 @@
 }
 
 .profile-ava img {
-    border-radius: 50%;
     -webkit-border-radius: 50%;
+    border-radius: 50%;
     border: 2px solid #333;
     display: inline-block;
     height: 30px;
@@ -23,17 +23,20 @@
 }
 
 .user-back {
-    background-image: url(/app/images/profile-menu.png);
-    background-size: contain;
-    min-height: 150px;
     padding: 0 !important;
+    
 }
 
+a.user-back.text-center{
+    &:hover{
+        background-color: inherit !important;
+    }
+}
 .menu-user {
     background: rgba(0, 0, 0, 0.6);
     padding: 7px 6px;
     color: #fff;
-    margin-top: 34px;
+    margin-top: 15px;
     position: relative;
     cursor: pointer;
     width: 100%;

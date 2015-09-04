@@ -80,7 +80,7 @@
 
             } else
                 error(response.message, null, res.unavailable_server);
-            throw new Error(response);
+           // throw new Error(response);
         }
 
         function emptyMessageCallback(response) {

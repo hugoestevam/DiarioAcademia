@@ -15,8 +15,9 @@
         vm.compareState = compareState;
         vm.onchange = onchange;
         vm.saveChanges = saveChanges;
-        vm.selectPermissions = selectPermissions;
+        vm.modifyGroupPermissions = modifyGroupPermissions;
         vm.verifyPanelSuccess = verifyPanelSuccess;
+        vm.modifyAll = modifyAll;
 
         activate();
         function activate() {
@@ -24,6 +25,8 @@
                 vm.routes = results;
                 vm.showRoutes = vm.routes.slice();
                 vm.permission = permissionsFactory.filterPermissions(vm.showRoutes);
+                vm.allPermissions = permissionsFactory.getPermissions();
+
             });
         }
 
@@ -49,8 +52,23 @@
             vm.changes = [];
         }
 
+        function modifyGroupPermissions(isAll, filter) {
+            var isShow, index, array = vm.permission[filter];
+            for (var i = 0; i < array.length; i++) {
+                index = compareState(vm.showRoutes, array[i]);
+                isShow = index >= 0;
+                if (isAll && !isShow) {
+                    vm.showRoutes.push(array[i]);
+                    onchange(array[i], isAll);
 
-        //private methods
+                } else if (!isAll && isShow) {
+                    vm.showRoutes.splice(index, 1);
+                    onchange(array[i], isAll);
+                }
+            }
+        }
+
+        // private methods
         function save(array) {
             cleanRepeatedPermissions(array, true);
             if (array.length == 0)
@@ -79,28 +97,31 @@
                 }
             }
         }
-
-        function selectPermissions(isAll, filter) {
-            var isShow, index, array = vm.permission[filter];
-            for (var i = 0; i < array.length; i++) {
-                index = compareState(vm.showRoutes, array[i]);
-                isShow = index >= 0;
-                if (isAll && !isShow) {
-                    vm.showRoutes.push(array[i]);
-                    onchange(array[i], isAll);
-
-                } else if (!isAll && isShow) {
-                    vm.showRoutes.splice(index, 1);
-                    onchange(array[i], isAll);
-                }
-            }
-        }
-
+ 
+        //GUI Helpers 
         function verifyPanelSuccess(filter) {
             if (vm.permission && vm.permission[filter])
                 return vm.permission[filter].countSelected == vm.permission[filter].length;
         }
 
+        function modifyAll(action) {
+            if (action && vm.showRoutes.length == vm.allPermissions.length)
+                return;
+            if (!action && vm.showRoutes.length <= 0)
+                return;
+            var permission, index = 0;
+            for (var i = 0; i < vm.allPermissions.length; i++) {
+                permission = vm.allPermissions[i];
+                index = compareState(vm.showRoutes, permission);
+                if (action && index < 0) {
+                    vm.showRoutes.push(permission);
+                    onchange(permission, action);
+                } else if (!action && index >= 0) {
+                    vm.showRoutes.splice(index, 1);
+                    onchange(permission, action);
+                }
+            }
+        }
 
     }
 })(window.angular);

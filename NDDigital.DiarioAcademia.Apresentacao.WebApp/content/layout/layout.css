@@ -14,6 +14,9 @@
 .clear-padding-left {
   padding-left: 0 !important;
 }
+.clear-margin {
+  margin: 0;
+}
 .panel-fixed {
   min-height: 315px;
   margin-bottom: 5%;

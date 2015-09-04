@@ -4,6 +4,10 @@
     height: 100%;
     width: 100%;
     pointer-events: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
 }
 
 .container-home {
@@ -37,7 +41,6 @@
     width: 100%;
     background-color: rgba(0,0,0, 0.7);
     font-family: 'Roboto', sans-serif;
-
     & h1 {
         font-weight: bold;
     }
@@ -64,43 +67,6 @@
     }
 }
 
-
-
-.dashboard-div-wrapper {
-    border-radius: 5px;
-    text-align: center;
-    padding: 15px;
-    color: #fff;
-    margin-bottom: 50px;
-}
-
-.bk-clr-one {
-    background-color: #B9B739;
-}
-.bk-clr-two {
-    background-color: #F94C4C;
-}
-.bk-clr-three {
-    background-color: #119c7e;
-}
-
-.bk-clr-four {
-    background-color: #b739b9;
-}
-
-
-.dashboard-div-icon {
-    height: 75px;
-    width: 75px;
-    border: 2px solid #fff;
-    padding: 20px;
-    -webkit-border-radius: 50%;
-    -moz-border-radius: 50%;
-    border-radius: 50%;
-    font-size: 30px;
-    margin-bottom: 20px;
-    color: #fff;
-}
-.dashboard-div-wrapper .progress {
-    height: 2px;
+.carousel-indicators{
+    pointer-events: all !important;
 }
