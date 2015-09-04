@@ -26,7 +26,9 @@
         self.delete = function (turma) {
             logger.error(res.deleted_successful, turma, "Delete");
 
-            $http.delete(serviceUrl + "/" + turma.id);
+            return $http.delete(serviceUrl + "/" + turma.id)
+                          .then(logger.emptyMessageCallback)
+                          .catch(logger.errorCallback);
 
         };
 

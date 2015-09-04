@@ -1,5 +1,6 @@
 ﻿(function () {
-    angular.module('factories.module').factory('permissions.factory', permissionFactory);
+    angular.module('factories.module')
+        .factory('permissions.factory', permissionFactory);
 
     permissionFactory.$inject = ['$state', 'compareState', 'permissionGroups'];
 

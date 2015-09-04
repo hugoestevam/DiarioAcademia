@@ -1,11 +1,13 @@
-﻿<ul class="nav navbar-right top-nav">
+﻿<ul class="nav navbar-right top-nav" ng-show="shell.authentication.isAuth">
     <li class="dropdown">
-        <a data-toggle="dropdown" class="dropdown-toggle" style="cursor: pointer">
+        <a data-toggle="dropdown" class="dropdown-toggle" style="cursor: pointer; color:white">
             <span class="profile-ava">
-                <img alt="" src="/app/images/avatar_login.png">
+                <i class="fa fa-2x fa-user"></i>
             </span>
-            <span class="username">{{shell.authentication.userName}}</span>
-            <b class="caret"></b>
+            <span style="left:5px; bottom: 5px;position: relative;">
+                <span class="username">{{shell.authentication.username || 'User'}}</span>
+                <b class="caret"></b>
+            </span>
         </a>
         <ul class="dropdown-menu">
             <li ng-hide="shell.authentication.isAuth">

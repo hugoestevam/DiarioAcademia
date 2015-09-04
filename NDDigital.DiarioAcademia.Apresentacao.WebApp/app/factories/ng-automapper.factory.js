@@ -2,13 +2,15 @@
     angular.module("ngAutomapper", []).factory("automapper", automapper);
 
     function automapper() {
-
-        var factory = {};
-
         var mappings = {};
 
+        return {
+            map: map,
+            createMap: createMap
+        };
+        
         //public methods
-        factory.createMap = function (typeFrom, typeTo) {
+        function createMap(typeFrom, typeTo) {
             var key = formatKey(typeFrom, typeTo);
             var mapping = new Mapping(key);
 
@@ -17,10 +19,7 @@
             return mapping;
         };
 
-        //public methods
-        factory.map = function (typeFrom, typeTo,
-                                 fromObj, toObj) {
-
+        function map(typeFrom, typeTo, fromObj, toObj) {
             var key = formatKey(typeFrom, typeTo);
             var mapping = mappings[key];
 
@@ -43,6 +42,7 @@
             }
         };
 
+        //private methods
         function formatKey(typeFrom, typeTo) {
             return typeFrom + ' ' + typeTo;
         }
@@ -69,7 +69,7 @@
             return this;
         }
 
-        return factory;
+
     }
 
 })();
