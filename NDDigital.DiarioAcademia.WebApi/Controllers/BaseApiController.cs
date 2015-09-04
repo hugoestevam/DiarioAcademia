@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
-using NDDigital.DiarioAcademia.Infraestrutura.Orm.Security;
+using NDDigital.DiarioAcademia.Infraestrutura.Security.Repositories;
 using NDDigital.DiarioAcademia.WebApi.Models;
 using System.Net.Http;
 using System.Web;

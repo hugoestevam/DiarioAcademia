@@ -1,7 +1,12 @@
-﻿using NDDigital.DiarioAcademia.Dominio.Entities.Security;
+﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity.ModelConfiguration;
+using NDDigital.DiarioAcademia.Infraestrutura.Security.Entities;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Configurations
+namespace NDDigital.DiarioAcademia.Infraestrutura.Security.Configurations
 {
     internal class AccountConfiguration : EntityTypeConfiguration<Account>
     {

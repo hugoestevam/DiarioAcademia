@@ -20,11 +20,11 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers.Entities
         {
             var factory = new EntityFrameworkFactory();
 
-            var unitOfWork = new EntityFrameworkUnitOfWork(factory);
+            var unitOfWork = Injection.Get<IUnitOfWork>();
 
-            var alunoRepository = new AlunoRepositoryEF(factory); //Container.Get<IAlunoRepository>();
+            var alunoRepository = Injection.Get<IAlunoRepository>();
 
-            var turmaRepository = new TurmaRepositoryEF(factory); //Container.Get<ITurmaRepository>();
+            var turmaRepository = Injection.Get<ITurmaRepository>();
 
             _alunoService = new AlunoService(alunoRepository, turmaRepository, unitOfWork);
         }

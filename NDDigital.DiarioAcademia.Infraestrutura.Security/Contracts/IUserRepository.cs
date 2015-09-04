@@ -1,10 +1,13 @@
-﻿using NDDigital.DiarioAcademia.Dominio.Entities;
-using NDDigital.DiarioAcademia.Dominio.Entities.Security;
+﻿using NDDigital.DiarioAcademia.Infraestrutura.Security.Entities;
+using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace NDDigital.DiarioAcademia.Dominio.Contracts
+namespace NDDigital.DiarioAcademia.Infraestrutura.Security.Contracts
 {
-    public interface IUserRepository 
+    public interface IUserRepository
     {
         IList<User> GetUsersByGroup(Group group);
 

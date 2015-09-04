@@ -3,15 +3,15 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using System.Security.Claims;
+using System.Text;
 using System.Threading.Tasks;
 
-namespace NDDigital.DiarioAcademia.Dominio.Entities.Security
+namespace NDDigital.DiarioAcademia.Infraestrutura.Security.Entities
 {
-    public class User: IdentityUser
+    public class User : IdentityUser
     {
-        //TODO: Mover pra User essas prop
-
         [Required]
         [MaxLength(100)]
         public string FirstName { get; set; }
@@ -35,7 +35,7 @@ namespace NDDigital.DiarioAcademia.Dominio.Entities.Security
         }
         public override string ToString()
         {
-            return String.Format("{0} - {1}",LastName.ToUpper(), UserName);
+            return String.Format("{0} - {1}", LastName.ToUpper(), UserName);
         }
     }
 }

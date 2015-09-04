@@ -1,36 +1,38 @@
-﻿using Infrasctructure.DAO.ORM.Contexts;
-using Microsoft.AspNet.Identity;
+﻿using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
-using NDDigital.DiarioAcademia.Dominio.Contracts;
-using NDDigital.DiarioAcademia.Dominio.Entities.Security;
 using NDDigital.DiarioAcademia.Infraestrutura.CepServices;
-using NDDigital.DiarioAcademia.Infraestrutura.Orm.Common;
+using NDDigital.DiarioAcademia.Infraestrutura.Security.Common;
+using NDDigital.DiarioAcademia.Infraestrutura.Security.Contexts;
+using NDDigital.DiarioAcademia.Infraestrutura.Security.Contracts;
+using NDDigital.DiarioAcademia.Infraestrutura.Security.Entities;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Security
+namespace NDDigital.DiarioAcademia.Infraestrutura.Security.Repositories
 {
-
     public class UserRepository : UserManager<User>, IUserRepository
     {
-        private static EntityFrameworkContext dataContext;
-        private static EntityFrameworkFactory _databaseFactory;
+        private static AuthContext dataContext;
+        private static AuthFactory _databaseFactory;
         public IUserStore<User> _store { get; set; }
 
-        public UserRepository(IUserStore<User> store, EntityFrameworkFactory databaseFactory) 
+        public UserRepository(IUserStore<User> store, AuthFactory databaseFactory)
             : base(store)
         {
-            _databaseFactory = databaseFactory;
-            dataContext = dataContext ?? (databaseFactory.Get());
+            _databaseFactory = databaseFactory ?? new AuthFactory();
+            if(databaseFactory!=null)
+            dataContext = dataContext ?? (databaseFactory.Get() as AuthContext);
         }
 
         public static UserRepository Create(IdentityFactoryOptions<UserRepository> options, IOwinContext context)
         {
-            dataContext = dataContext ?? context.Get<EntityFrameworkContext>();
+            dataContext = dataContext ?? context.Get<AuthContext>();
             var userManager = new UserRepository(new UserStore<User>(), _databaseFactory);
 
             // Configure validation logic for usernames
@@ -100,7 +102,7 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Security
         public User GetUserByUsername(string username)
         {
             return (from c
-                    in (dataContext.Users).Include(x => x.Account).Include(x=>x.Account.Groups)
+                    in (dataContext.Users).Include(x => x.Account).Include(x => x.Account.Groups)
                     where c.UserName == username
                     select c
                     ).FirstOrDefault();
@@ -125,11 +127,11 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Security
             return new List<Group>();
 
 
-           // return user?.Account?.Groups ?? new List<Group>();  todo: c# 6
+            // return user?.Account?.Groups ?? new List<Group>();  todo: c# 6
 
         }
 
-     
+
     }
 
 }

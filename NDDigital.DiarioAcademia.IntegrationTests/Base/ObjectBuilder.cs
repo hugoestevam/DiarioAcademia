@@ -1,6 +1,6 @@
 using FizzWare.NBuilder;
 using NDDigital.DiarioAcademia.Dominio.Entities;
-using NDDigital.DiarioAcademia.Dominio.Entities.Security;
+using NDDigital.DiarioAcademia.Infraestrutura.Security.Entities;
 using System;
 using System.Collections.Generic;
 

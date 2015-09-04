@@ -1,28 +1,29 @@
 ﻿using Infrastructure.DAO.ORM.Common;
 using NDDigital.DiarioAcademia.Infraestrutura.Orm.Common;
+using NDDigital.DiarioAcademia.Infraestrutura.Security.Common;
 using System;
 
 namespace NDDigital.DiarioAcademia.IntegrationTests.Common
 {
-    public class DatabaseFixture : IDisposable
+    public class DatabaseAuthFixture : IDisposable
     {
-        public EntityFrameworkFactory Factory
+        public AuthFactory Factory
         {
             get;
             private set;
         }
 
-        public EntityFrameworkUnitOfWork UnitOfWork
+        public AuthUnitOfWork UnitOfWork
         {
             get;
             private set;
         }
 
-        public DatabaseFixture()
+        public DatabaseAuthFixture()
         {
-            Factory = new EntityFrameworkFactory();
+            Factory = new AuthFactory();
 
-            UnitOfWork = new EntityFrameworkUnitOfWork(Factory);
+            UnitOfWork = new AuthUnitOfWork(Factory);
         }
 
         public void Dispose()

@@ -1,5 +1,5 @@
-﻿using NDDigital.DiarioAcademia.Dominio.Entities.Security;
-using NDDigital.DiarioAcademia.Infraestrutura.Orm.Security;
+﻿using NDDigital.DiarioAcademia.Infraestrutura.Security.Entities;
+using NDDigital.DiarioAcademia.Infraestrutura.Security.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;

@@ -1,6 +1,6 @@
-﻿using NDDigital.DiarioAcademia.Dominio.Contracts;
-using NDDigital.DiarioAcademia.Dominio.Entities.Security;
-using NDDigital.DiarioAcademia.Infraestrutura.DAO.Common.Uow;
+﻿using NDDigital.DiarioAcademia.Infraestrutura.DAO.Common.Uow;
+using NDDigital.DiarioAcademia.Infraestrutura.Security.Contracts;
+using NDDigital.DiarioAcademia.Infraestrutura.Security.Entities;
 using System.Collections.Generic;
 
 namespace NDDigital.DiarioAcademia.Aplicacao.Services

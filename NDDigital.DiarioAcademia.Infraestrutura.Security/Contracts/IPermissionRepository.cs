@@ -1,8 +1,12 @@
-﻿using NDDigital.DiarioAcademia.Dominio.Entities;
-using NDDigital.DiarioAcademia.Dominio.Entities.Security;
+﻿using NDDigital.DiarioAcademia.Dominio;
+using NDDigital.DiarioAcademia.Infraestrutura.Security.Entities;
+using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace NDDigital.DiarioAcademia.Dominio.Contracts
+namespace NDDigital.DiarioAcademia.Infraestrutura.Security.Contracts
 {
     public interface IPermissionRepository : IRepository<Permission>
     {
@@ -11,6 +15,6 @@ namespace NDDigital.DiarioAcademia.Dominio.Contracts
         IList<Permission> GetAllSpecific(string[] permissions);
 
         Permission GetByPermissionId(string v);
-  
+
     }
 }

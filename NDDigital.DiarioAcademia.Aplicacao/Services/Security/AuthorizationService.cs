@@ -1,9 +1,8 @@
 ﻿using Microsoft.AspNet.Identity;
 using NDDigital.DiarioAcademia.Aplicacao.Services.Security;
-using NDDigital.DiarioAcademia.Dominio.Contracts;
-using NDDigital.DiarioAcademia.Dominio.Entities.Security;
 using NDDigital.DiarioAcademia.Infraestrutura.DAO.Common.Uow;
-using NDDigital.DiarioAcademia.Infraestrutura.Orm.Security;
+using NDDigital.DiarioAcademia.Infraestrutura.Security.Contracts;
+using NDDigital.DiarioAcademia.Infraestrutura.Security.Entities;
 using System.Collections.Generic;
 using System.Linq;
 

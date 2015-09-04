@@ -14,7 +14,7 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers.Entities
 
         public AulaController() //TODO: IOC
         {
-            var unitOfWork = Injection.Get<IUnitOfWork>();
+            var unitOfWork = Injection.Get<IEntityFrameworkUnitOfWork>();
 
             var alunoRepository = Injection.Get<IAlunoRepository>();
 

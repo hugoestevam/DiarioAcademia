@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.OAuth;
-using NDDigital.DiarioAcademia.Dominio.Entities.Security;
-using NDDigital.DiarioAcademia.Infraestrutura.Orm.Security;
+using NDDigital.DiarioAcademia.Infraestrutura.Security.Entities;
+using NDDigital.DiarioAcademia.Infraestrutura.Security.Repositories;
 using System.Security.Claims;
 using System.Threading.Tasks;
 

@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNet.Identity.EntityFramework;
 using NDDigital.DiarioAcademia.Dominio.Entities;
-using NDDigital.DiarioAcademia.Dominio.Entities.Security;
 using NDDigital.DiarioAcademia.Infraestrutura.Orm.Configurations;
 using System;
 using System.Collections.Generic;
@@ -11,19 +10,15 @@ using System.Linq;
 
 namespace Infrasctructure.DAO.ORM.Contexts
 {
-    public class EntityFrameworkContext : IdentityDbContext<User>
+    public class EntityFrameworkContext : DbContext
     {
         public EntityFrameworkContext()
-            : base("DiarioAcademiaContext", throwIfV1Schema: false)
+            : base("DiarioAcademiaContext")
         {
             Database.SetInitializer(new DropCreateDatabaseIfModelChanges<EntityFrameworkContext>());
             Configuration.ProxyCreationEnabled = false;
             Configuration.LazyLoadingEnabled = false;
         }
-
-        public DbSet<Group> Groups { get; set; }
-        public DbSet<Permission> Permissions { get; set; }
-        public DbSet<Account> Accounts { get; set; }
 
         public DbSet<Aluno> Alunos { get; set; }
 
@@ -46,11 +41,7 @@ namespace Infrasctructure.DAO.ORM.Contexts
             modelBuilder.Configurations.Add(new EnderecoConfiguration());
             modelBuilder.Configurations.Add(new AulaConfiguration());
             modelBuilder.Configurations.Add(new TurmaConfiguration());
-            modelBuilder.Configurations.Add(new UserConfiguration());
             modelBuilder.Configurations.Add(new PresencaConfiguration());
-            modelBuilder.Configurations.Add(new GroupConfiguration());
-            modelBuilder.Configurations.Add(new PermissionConfiguration());
-            modelBuilder.Configurations.Add(new AccountConfiguration());
         }
 
         public void Detach(object entity)

@@ -1,9 +1,9 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NDDigital.DiarioAcademia.Aplicacao.Services.Security;
-using NDDigital.DiarioAcademia.Infraestrutura.Orm.Security;
 using NDDigital.DiarioAcademia.Infraestrutura.Orm.Common;
 using NDDigital.DiarioAcademia.IntegrationTests.Common;
 using Infrastructure.DAO.ORM.Common;
+using NDDigital.DiarioAcademia.Infraestrutura.Security.Repositories;
 
 namespace NDDigital.DiarioAcademia.IntegrationTests.Base
 {
@@ -13,7 +13,7 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.Base
     public class BaseEntityFrameworkTest:BaseTest
     {
         #region Constructor Utilities
-        protected DatabaseFixture Fixture;
+        protected DatabaseEntityFrameworkFixture Fixture;
         protected EntityFrameworkFactory Factory;
         protected IdentityUserStore IdentityUserStore;
 
@@ -28,13 +28,11 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.Base
         {
             base.Initialize();
 
-            Fixture = new DatabaseFixture();
+            Fixture = new DatabaseEntityFrameworkFixture();
 
             Factory = Fixture.Factory;
 
             var context = Factory.Get();
-
-            IdentityUserStore = new IdentityUserStore(context);
 
             Uow = new EntityFrameworkUnitOfWork(Factory);
 

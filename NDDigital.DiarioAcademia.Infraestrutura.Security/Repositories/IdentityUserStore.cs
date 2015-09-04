@@ -1,32 +1,31 @@
-﻿using Infrasctructure.DAO.ORM.Contexts;
-using Microsoft.AspNet.Identity;
+﻿using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
-using NDDigital.DiarioAcademia.Dominio.Entities.Security;
+using NDDigital.DiarioAcademia.Infraestrutura.Security.Contexts;
+using NDDigital.DiarioAcademia.Infraestrutura.Security.Entities;
 using System;
+using System.Collections.Generic;
 using System.Data.Entity;
-using System.Diagnostics;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Data.Entity.Infrastructure;
 
-namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Security
+namespace NDDigital.DiarioAcademia.Infraestrutura.Security.Repositories
 {
-    //recurso:http://weblogs.asp.net/imranbaloch/a-simple-implementation-of-microsoft-aspnet-identity
     public class IdentityUserStore : IUserStore<User>, IUserPasswordStore<User>, IUserSecurityStampStore<User>, IQueryableUserStore<User>
     {
         private UserStore<IdentityUser> userStore;
-        private static EntityFrameworkContext _context;
+        private static AuthContext _context;
 
         public IQueryable<User> Users
         {
             get
             {
-                return (userStore.Context as EntityFrameworkContext).Users;
+                return (userStore.Context as AuthContext).Users;
             }
         }
 
-        public IdentityUserStore(EntityFrameworkContext context)
+        public IdentityUserStore(AuthContext context)
         {
             userStore = new UserStore<IdentityUser>(_context = context);
         }
@@ -59,7 +58,7 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Security
         //TODO: rever implementação (possivel chance de gambi pattern XGH)
         public Task UpdateAsync(User user)
         {
-            var context = userStore.Context as EntityFrameworkContext;
+            var context = userStore.Context as AuthContext;
 
             DbEntityEntry dbEntityEntry = _context.Entry(user);
 
@@ -68,11 +67,11 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Security
                 _context.Users.Attach(user);
             }
             dbEntityEntry.State = EntityState.Modified;
-            
+
             _context.SaveChanges();
 
             return _context.SaveChangesAsync();
-           
+
         }
 
         public void Dispose()
@@ -145,4 +144,5 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Security
             throw new NotImplementedException();
         }
     }
+
 }

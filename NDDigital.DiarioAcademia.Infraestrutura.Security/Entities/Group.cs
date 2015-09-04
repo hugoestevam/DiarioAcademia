@@ -1,7 +1,11 @@
 ﻿using NDDigital.DiarioAcademia.Dominio.Common;
+using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace NDDigital.DiarioAcademia.Dominio.Entities.Security
+namespace NDDigital.DiarioAcademia.Infraestrutura.Security.Entities
 {
     public class Group : Entity
     {
@@ -16,7 +20,7 @@ namespace NDDigital.DiarioAcademia.Dominio.Entities.Security
 
         public override string ToString()
         {
-            return Name + (IsAdmin?" [Admin]":"");
+            return Name + (IsAdmin ? " [Admin]" : "");
         }
         public override bool Equals(object obj)
         {

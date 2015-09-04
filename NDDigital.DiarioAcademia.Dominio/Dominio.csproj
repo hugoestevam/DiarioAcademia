@@ -59,15 +59,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Contracts\IPresencaRepository.cs" />
-    <Compile Include="Contracts\Security\IUserRepository.cs" />
-    <Compile Include="Contracts\Security\IGroupRepository.cs" />
-    <Compile Include="Contracts\Security\IAccountRepository.cs" />
-    <Compile Include="Contracts\Security\IPermissionRepository.cs" />
     <Compile Include="Entities\Aluno.cs" />
-    <Compile Include="Entities\Security\Account.cs" />
-    <Compile Include="Entities\Security\User.cs" />
-    <Compile Include="Entities\Security\Group.cs" />
-    <Compile Include="Entities\Security\Permission.cs" />
     <Compile Include="Exceptions\AlunoNaoEncontrado.cs" />
     <Compile Include="Entities\Aula.cs" />
     <Compile Include="Exceptions\AulaException.cs" />

@@ -67,7 +67,7 @@
   <ItemGroup>
     <Compile Include="Services\AlunoService.cs" />
     <Compile Include="Services\AulaService.cs" />
-    <Compile Include="Services\AuthorizationService.cs" />
+    <Compile Include="Services\Security\AuthorizationService.cs" />
     <Compile Include="Services\Security\IAccountService.cs" />
     <Compile Include="Services\Security\IAuthorizationService.cs" />
     <Compile Include="Services\Security\IPermissionService.cs" />
@@ -97,6 +97,10 @@
     <ProjectReference Include="..\NDDigital.DiarioAcademia.Infraestrutura.Orm\Infraestrutura.ORM.csproj">
       <Project>{3fd3156c-9f4f-4e10-8b7a-7454c803be89}</Project>
       <Name>Infraestrutura.ORM</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NDDigital.DiarioAcademia.Infraestrutura.Security\Infraestrutura.Security.csproj">
+      <Project>{81e9c407-a1f1-47c5-8dc4-705f7ff5dc17}</Project>
+      <Name>Infraestrutura.Security</Name>
     </ProjectReference>
     <ProjectReference Include="..\NDDigital.DiarioAcademia.Infraestrutura.WebServices\Infraestrutura.CepServices.csproj">
       <Project>{7C91018A-6066-4AB4-BCEA-7F477BB514C4}</Project>

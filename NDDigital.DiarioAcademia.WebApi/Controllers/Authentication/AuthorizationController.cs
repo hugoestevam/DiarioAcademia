@@ -1,15 +1,11 @@
-﻿using Infrastructure.DAO.ORM.Common;
-using Microsoft.AspNet.Identity;
+﻿using Microsoft.AspNet.Identity;
 using NDDigital.DiarioAcademia.Aplicacao.Services;
-using NDDigital.DiarioAcademia.Dominio.Contracts;
-using NDDigital.DiarioAcademia.Dominio.Entities.Security;
 using NDDigital.DiarioAcademia.Aplicacao.Services.Security;
-using NDDigital.DiarioAcademia.Infraestrutura.DAO.Common.Factorys;
 using NDDigital.DiarioAcademia.Infraestrutura.DAO.Common.Uow;
 using NDDigital.DiarioAcademia.Infraestrutura.IoC;
-using NDDigital.DiarioAcademia.Infraestrutura.Orm.Common;
-using NDDigital.DiarioAcademia.Infraestrutura.Orm.Security;
 using System.Web.Http;
+using NDDigital.DiarioAcademia.Infraestrutura.Security.Contracts;
+using NDDigital.DiarioAcademia.Infraestrutura.Security.Entities;
 
 namespace NDDigital.DiarioAcademia.WebApi.Controllers.Authentication
 {

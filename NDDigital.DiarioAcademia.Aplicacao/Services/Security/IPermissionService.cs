@@ -1,7 +1,7 @@
 ﻿using NDDigital.DiarioAcademia.Dominio.Contracts;
-using NDDigital.DiarioAcademia.Dominio.Entities.Security;
 using NDDigital.DiarioAcademia.Infraestrutura.DAO.Common.Uow;
-using NDDigital.DiarioAcademia.Infraestrutura.Orm.Security;
+using NDDigital.DiarioAcademia.Infraestrutura.Security.Contracts;
+using NDDigital.DiarioAcademia.Infraestrutura.Security.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,7 +24,7 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
             _uow = uow;
         }
 
-        public void Add(Dominio.Entities.Security.Permission obj)
+        public void Add(Permission obj)
         {
             _repo.Add(obj);
             _uow.Commit();
@@ -36,18 +36,18 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
             _uow.Commit();
         }
 
-        public void Update(Dominio.Entities.Security.Permission obj)
+        public void Update(Permission obj)
         {
             _repo.Update(obj);
             _uow.Commit();
         }
 
-        IList<Dominio.Entities.Security.Permission> IService<Dominio.Entities.Security.Permission>.GetAll()
+        IList<Permission> IService<Permission>.GetAll()
         {
             return _repo.GetAll(); throw new NotImplementedException();
         }
 
-        Dominio.Entities.Security.Permission IService<Dominio.Entities.Security.Permission>.GetById(int id)
+        Permission IService<Permission>.GetById(int id)
         {
             return _repo.GetById(id); throw new NotImplementedException();
         }
@@ -56,5 +56,6 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
         {
             return (from p in _repo.GetAll() where p.PermissionId==id select p).FirstOrDefault(); 
         }
+
     }
 }

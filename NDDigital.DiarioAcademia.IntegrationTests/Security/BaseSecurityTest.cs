@@ -1,12 +1,14 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NDDigital.DiarioAcademia.Dominio.Contracts;
-using NDDigital.DiarioAcademia.Infraestrutura.Orm.Security;
 using NDDigital.DiarioAcademia.Aplicacao.Services;
 using Infrastructure.DAO.ORM.Common;
+using NDDigital.DiarioAcademia.Infraestrutura.Security.Contracts;
+using NDDigital.DiarioAcademia.Infraestrutura.Security.Repositories;
+using NDDigital.DiarioAcademia.Infraestrutura.Security.Common;
 
 namespace NDDigital.DiarioAcademia.IntegrationTests.Base
 {
-    public class BaseSecurityTest: BaseEntityFrameworkTest
+    public class BaseSecurityTest: BaseAuthTest
     {
 
         protected IPermissionRepository PermissionRepository;
@@ -22,7 +24,7 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.Base
 
             var context = Factory.Get();
 
-            Uow = new EntityFrameworkUnitOfWork(Factory);
+            Uow = new AuthUnitOfWork(Factory);
 
             PermissionRepository = new PermissionRepository(Factory);
             GroupRepository = new GroupRepository(Factory);

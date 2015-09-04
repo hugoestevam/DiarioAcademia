@@ -1,17 +1,17 @@
-﻿using Infrastructure.DAO.ORM.Common.Base;
-using NDDigital.DiarioAcademia.Dominio;
-using NDDigital.DiarioAcademia.Dominio.Contracts;
-using NDDigital.DiarioAcademia.Dominio.Entities.Security;
-using NDDigital.DiarioAcademia.Infraestrutura.Orm.Common;
+﻿using NDDigital.DiarioAcademia.Infraestrutura.Security.Common;
+using NDDigital.DiarioAcademia.Infraestrutura.Security.Contracts;
+using NDDigital.DiarioAcademia.Infraestrutura.Security.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Security
+namespace NDDigital.DiarioAcademia.Infraestrutura.Security.Repositories
 {
-
-    public class PermissionRepository : RepositoryBaseEF<Permission>, IPermissionRepository
+    public class PermissionRepository : RepositoryBaseAuth<Permission>, IPermissionRepository
     {
-        public PermissionRepository(EntityFrameworkFactory dbFactory)
+        public PermissionRepository(AuthFactory dbFactory)
          : base(dbFactory)
         {
         }
@@ -33,10 +33,10 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Security
         {
             var group = DataContext.Groups
                 .Include("Permissions")
-                .Where(g=>g.Id==groupId)
+                .Where(g => g.Id == groupId)
                 .FirstOrDefault();
-          
-             //return group?.Permissions;  todo: c# 6
+
+            //return group?.Permissions;  todo: c# 6
             return group != null ? group.Permissions : new List<Permission>();
         }
 
@@ -46,4 +46,5 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Security
         }
 
     }
+
 }

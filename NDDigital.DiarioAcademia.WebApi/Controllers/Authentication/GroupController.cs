@@ -1,11 +1,12 @@
 ﻿using Microsoft.AspNet.Identity;
 using NDDigital.DiarioAcademia.Aplicacao.Services;
-using NDDigital.DiarioAcademia.Dominio.Contracts;
-using NDDigital.DiarioAcademia.Dominio.Entities.Security;
 using NDDigital.DiarioAcademia.Infraestrutura.DAO.Common.Uow;
 using NDDigital.DiarioAcademia.Infraestrutura.IoC;
 using NDDigital.DiarioAcademia.Infraestrutura.Orm.Common;
-using NDDigital.DiarioAcademia.Infraestrutura.Orm.Security;
+using NDDigital.DiarioAcademia.Infraestrutura.Security.Common;
+using NDDigital.DiarioAcademia.Infraestrutura.Security.Contracts;
+using NDDigital.DiarioAcademia.Infraestrutura.Security.Entities;
+using NDDigital.DiarioAcademia.Infraestrutura.Security.Repositories;
 using System;
 using System.Web.Http;
 
@@ -18,7 +19,7 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers.Authentication
 
         public GroupController()
         {
-            var unitOfWork = Injection.Get<IUnitOfWork>();
+            var unitOfWork = Injection.Get<IAuthUnitOfWork>();
 
             var groupRepository = Injection.Get<IGroupRepository>();
 
@@ -34,7 +35,7 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers.Authentication
 
             //var store = new MyUserStore(context);
 
-            var factory = new EntityFrameworkFactory(); //TODO: Implementar dois contextos
+            var factory = new AuthFactory(); //TODO: Implementar dois contextos
 
             var userRepository = new UserRepository(store, factory);
 
