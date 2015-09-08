@@ -1,4 +1,5 @@
-﻿using NDDigital.DiarioAcademia.Dominio.Contracts;
+﻿using Microsoft.AspNet.Identity;
+using NDDigital.DiarioAcademia.Dominio.Contracts;
 using NDDigital.DiarioAcademia.Infraestrutura.DAO.Common.Factorys;
 using NDDigital.DiarioAcademia.Infraestrutura.DAO.Common.Uow;
 using NDDigital.DiarioAcademia.Infraestrutura.Security.Common;
@@ -25,7 +26,7 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.SQL.Modules
 
             var authFactory = new AuthFactory();
             Bind<IAuthUnitOfWork>().To<AuthUnitOfWork>().WithConstructorArgument("factory", authFactory);
-            //Bind<IUserStore<User>>().To<IdentityUserStore>().WithConstructorArgument("factory", authFactory);
+            Bind<IUserStore<User>>().To<IdentityUserStore>().WithConstructorArgument("factory", authFactory);
             Bind<IAccountRepository>().To<AccountRepository>().WithConstructorArgument("factory", authFactory);
             Bind<IGroupRepository>().To<GroupRepository>().WithConstructorArgument("factory", authFactory);
             Bind<IPermissionRepository>().To<PermissionRepository>().WithConstructorArgument("factory", authFactory);

@@ -20,19 +20,18 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Security.Repositories
     {
         private static AuthContext dataContext;
         private static AuthFactory _databaseFactory;
-        public IUserStore<User> _store { get; set; }
-
-        public UserRepository(IUserStore<User> store, AuthFactory databaseFactory)
+        public UserStore<User> _store { get; set; }
+        public UserRepository(UserStore<User> store, AuthFactory databaseFactory)
             : base(store)
         {
-            _databaseFactory = databaseFactory ?? new AuthFactory();
-            if(databaseFactory!=null)
-            dataContext = dataContext ?? (databaseFactory.Get() as AuthContext);
+            _databaseFactory = _databaseFactory ?? databaseFactory ?? new AuthFactory();
+            if(_databaseFactory!=null)
+            dataContext = dataContext ?? (_databaseFactory.Get() as AuthContext);
         }
 
         public static UserRepository Create(IdentityFactoryOptions<UserRepository> options, IOwinContext context)
         {
-            dataContext = dataContext ?? context.Get<AuthContext>();
+            dataContext = context.Get<AuthContext>();
             var userManager = new UserRepository(new UserStore<User>(), _databaseFactory);
 
             // Configure validation logic for usernames
@@ -64,12 +63,20 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Security.Repositories
 
         public void AddUser(User user)
         {
-            var dbuser = dataContext.Users.Where(u => u.UserName == user.UserName).FirstOrDefault();
-
+            User dbuser=null;
+            try {
+                 dbuser = dataContext.Users.Where(u => u.UserName == user.UserName).FirstOrDefault();
             if (dbuser != null)
                 throw new ApplicationException("UsernameJaExisteException");
+            user.Account = new Account(user.UserName);
             dataContext.Users.Add(user);
             dataContext.SaveChanges();//TODO: rever pq factory static not works
+            }
+            catch (InvalidOperationException exe)
+            {
+                dataContext = new AuthContext();
+                AddUser(user);
+            }
         }
 
         public IList<User> GetUsersByGroup(Group group)

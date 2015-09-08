@@ -24,11 +24,18 @@ namespace NDDigital.DiarioAcademia.WebApi.Providers
 
             var userRepository = context.OwinContext.GetUserManager<UserRepository>();
 
-            User user = await userRepository.FindAsync(context.UserName, context.Password);
+            User user = userRepository.GetUserByUsername(context.UserName);
 
             if (user == null)
             {
-                context.SetError("invalid_grant", "The user name or password is incorrect.");
+                context.SetError("invalid_grant", "The user name is incorrect.");
+                return;
+            }
+
+            var hash = context.Password.GetHashCode().ToString();
+            if (user.PasswordHash != hash)
+            {
+                context.SetError("invalid_grant", "The password is incorrect.");
                 return;
             }
 

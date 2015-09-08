@@ -13,6 +13,7 @@ using NDDigital.DiarioAcademia.Infraestrutura.Security.Contracts;
 using NDDigital.DiarioAcademia.Infraestrutura.Security.Entities;
 using NDDigital.DiarioAcademia.Infraestrutura.Security.Repositories;
 using NDDigital.DiarioAcademia.Infraestrutura.Security.Common;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace NDDigital.DiarioAcademia.WebApi.Controllers.Authentication
 {
@@ -23,15 +24,17 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers.Authentication
 
         public AccountsController()
         {
-            var unitOfWork = Injection.Get<IUnitOfWork>();
+            var unitOfWork = Injection.Get<IAuthUnitOfWork>();
 
             var groupRepository = Injection.Get<IGroupRepository>();
 
             var permissionRepository = Injection.Get<IPermissionRepository>();
 
-            var store = Injection.Get<IUserStore<User>>(); //var store = new MyUserStore(factory.Get());
+            // var store = Injection.Get<IUserStore<User>>();
 
             var factory = new AuthFactory(); //TODO: Implementar dois contextos
+
+            var store = new UserStore<User>(factory.Get());
 
             var userRepository = new UserRepository(store, factory);
 
@@ -44,10 +47,16 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers.Authentication
         [Route("user")]
         public IHttpActionResult GetUsers()
         {
-            //Only SuperAdmin or Admin can delete users (Later when implement roles)
-            var identity = User.Identity as System.Security.Claims.ClaimsIdentity;
 
-            return Ok(this.UserRepository.Users.ToList().Select(u => this.TheModelFactory.Create(u)));
+            var users = UserRepository.GetUsers();
+
+            return Ok(users.Select(u=>TheModelFactory.Create(u)));
+
+
+            //Only SuperAdmin or Admin can delete users (Later when implement roles)
+            //var identity = User.Identity as System.Security.Claims.ClaimsIdentity;
+            //
+            //return Ok(this.UserRepository.Users.ToList().Select(u => this.TheModelFactory.Create(u)));
         }
 
         //[Authorize(Roles = "Admin")]
@@ -82,7 +91,8 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers.Authentication
 
         [AllowAnonymous]
         [Route("create")]
-        public async Task<IHttpActionResult> CreateUser(CreateUserBindingModel createUserModel)
+        //public async Task<IHttpActionResult> CreateUser(CreateUserBindingModel createUserModel)
+        public IHttpActionResult CreateUser(CreateUserBindingModel createUserModel)
         {
             if (!ModelState.IsValid)
             {
@@ -95,14 +105,18 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers.Authentication
                 Email = createUserModel.Email,
                 FirstName = createUserModel.FirstName,
                 LastName = createUserModel.LastName,
+                PasswordHash = createUserModel.Password.GetHashCode().ToString()
+           
             };
 
-            IdentityResult addUserResult = await this.UserRepository.CreateAsync(user, createUserModel.Password);
+           // IdentityResult addUserResult =  this.UserRepository.Create(user, createUserModel.Password);
 
-            if (!addUserResult.Succeeded)
-            {
-                return GetErrorResult(addUserResult);
-            }
+            UserRepository.AddUser(user);
+
+           // if (!addUserResult.Succeeded)
+           // {
+           //     return GetErrorResult(addUserResult);
+           // }
 
             Uri locationHeader = new Uri(Url.Link("GetUserById", new { id = user.Id }));
 
