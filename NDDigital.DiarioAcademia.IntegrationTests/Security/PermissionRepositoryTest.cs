@@ -1,17 +1,19 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NDDigital.DiarioAcademia.IntegrationTests.Base;
+using System.Linq;
 
 namespace NDDigital.DiarioAcademia.IntegrationTests.Security
 {
     [TestClass]
-    public class PermissionRepositoryTest:BaseSecurityTest
+    public class PermissionRepositoryTest : BaseSecurityTest
     {
-        const string TestCategory = 
+        const string TestCategory =
             "Authorization - Permission";
 
 
 
-        [TestMethod] [TestCategory(TestCategory)]
+        [TestMethod]
+        [TestCategory(TestCategory)]
         public void Deveria_Adicionar_Uma_Permissao()
         {
             PermissionRepository.Add(ObjectBuilder.CreatePermission());
@@ -22,7 +24,8 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.Security
             Assert.AreEqual(5, list.Count);
         }
 
-        [TestMethod] [TestCategory(TestCategory)]
+        [TestMethod]
+        [TestCategory(TestCategory)]
         public void Deveria_Excluir_Uma_Permissao()
         {
             var permissao = PermissionRepository.GetById(1);
@@ -36,7 +39,8 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.Security
             Assert.AreEqual(3, list.Count);
         }
 
-        [TestMethod] [TestCategory(TestCategory)]
+        [TestMethod]
+        [TestCategory(TestCategory)]
         public void Deveria_Atualizar_Uma_Permissao()
         {
             var permissao = PermissionRepository.GetById(1);
@@ -52,18 +56,20 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.Security
 
         }
 
-        [TestMethod] [TestCategory(TestCategory)]
+        [TestMethod]
+        [TestCategory(TestCategory)]
         public void Deveria_Buscar_Todas_Permissoes()
         {
             var list = PermissionRepository.GetAll();
 
             Assert.IsNotNull(list);
-            Assert.AreEqual(4,list.Count);
+            Assert.AreEqual(4, list.Count);
         }
 
-        [TestMethod] [TestCategory(TestCategory)]
+        [TestMethod]
+        [TestCategory(TestCategory)]
         public void Deveria_Buscar_Permissoes_Por_Grupo()
-         {
+        {
             var administrador = GroupRepository.GetById(1);
 
             var permissao = ObjectBuilder.CreatePermission();
@@ -79,6 +85,17 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.Security
             var allPermissions = PermissionRepository.GetAll();
 
             Assert.AreEqual(5, allPermissions.Count);
+        }
+        [TestMethod]
+        [TestCategory(TestCategory)]
+        public void Deveria_Buscar_Permissoes_Por_Usuario()
+        {
+            var acc = AccountRepository.GetAll().First();
+
+            var list = PermissionRepository.GetByUser(acc.Username);
+
+            Assert.AreEqual(2, list.Count);
+
         }
     }
 }

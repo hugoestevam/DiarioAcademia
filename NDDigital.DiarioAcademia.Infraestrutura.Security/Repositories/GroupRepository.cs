@@ -19,7 +19,7 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Security.Repositories
         {
         }
 
-        public IList<Group> GetAllSpecific(int[] ids)
+        public IList<Group> GetAllSpecifically(int[] ids)
         {
             var list = new List<Group>();
             foreach (var id in ids)
@@ -28,6 +28,13 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Security.Repositories
             }
             list.RemoveAll(x => x == null);
             return list;
+        }
+
+        public IList<Group> GetByUser(string username)
+        {
+            var acc = (from a in DataContext.Accounts.Include("Groups") select a).FirstOrDefault();
+
+            return acc?.Groups;
         }
     }
 }

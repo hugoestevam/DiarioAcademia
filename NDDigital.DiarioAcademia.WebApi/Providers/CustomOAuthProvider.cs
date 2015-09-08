@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNet.Identity.Owin;
+﻿using Ellevo.Biblioteca.Seguranca;
+using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.OAuth;
 using NDDigital.DiarioAcademia.Infraestrutura.Security.Entities;
@@ -32,8 +33,8 @@ namespace NDDigital.DiarioAcademia.WebApi.Providers
                 return;
             }
 
-            var hash = context.Password.GetHashCode().ToString();
-            if (user.PasswordHash != hash)
+            var hash = Criptografia.Descriptografar(user.PasswordHash);
+            if (context.Password != hash)
             {
                 context.SetError("invalid_grant", "The password is incorrect.");
                 return;
@@ -45,11 +46,16 @@ namespace NDDigital.DiarioAcademia.WebApi.Providers
                 return;
             }
 
-            ClaimsIdentity oAuthIdentity = await user.GenerateUserIdentityAsync(userRepository, "JWT");
 
-            var ticket = new AuthenticationTicket(oAuthIdentity, null);
+            //ClaimsIdentity oAuthIdentity = await user.GenerateUserIdentityAsync(userRepository, "JWT");
 
-            context.Validated(ticket);
+            var identity = new ClaimsIdentity(context.Options.AuthenticationType);
+
+           // var ticket = new AuthenticationTicket(oAuthIdentity, null);
+
+            context.Validated(identity);
+
+           // Task.FromResult<object>(null);
         }
     }
 }

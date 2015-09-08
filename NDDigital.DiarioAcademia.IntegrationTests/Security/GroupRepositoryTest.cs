@@ -1,16 +1,17 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NDDigital.DiarioAcademia.IntegrationTests.Base;
+using System.Linq;
 
 namespace NDDigital.DiarioAcademia.IntegrationTests.Security
 {
     [TestClass]
     public class GroupRepositoryTest : BaseSecurityTest
     {
-        const string TestCategory = 
-            "Athentication - Group";
+        const string TestCategory =
+            "Authorization - Group";
 
         [TestMethod]
-        [TestCategory("Authorization - Group")]
+        [TestCategory(TestCategory)]
         public void Deveria_Adicionar_Um_Grupo()
         {
             GroupRepository.Add(ObjectBuilder.CreateGroup());
@@ -23,7 +24,7 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.Security
         }
 
         [TestMethod]
-        [TestCategory("Authorization - Group")]
+        [TestCategory(TestCategory)]
         public void Deveria_Excluir_Um_Grupo()
         {
             var group = GroupRepository.GetById(1);
@@ -38,10 +39,21 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.Security
         }
 
         [TestMethod]
-        [TestCategory("Authorization - Group")]
+        [TestCategory(TestCategory)]
         public void Deveria_Buscar_Todos_Grupos()
         {
             var list = GroupRepository.GetAll();
+
+            Assert.AreEqual(2, list.Count);
+        }
+
+        [TestMethod]
+        [TestCategory(TestCategory)]
+        public void Deveria_Buscar_Grupos_Por_Usuario()
+        {
+            var acc = AccountRepository.GetAll().First();
+
+            var list = GroupRepository.GetByUser(acc.Username);
 
             Assert.AreEqual(2, list.Count);
         }

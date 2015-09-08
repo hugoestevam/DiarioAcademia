@@ -40,6 +40,7 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers.Authentication
         }
 
         // GET: api/Group
+        [Authorize]
         public IHttpActionResult Get()
         {
             return Ok(_groupService.GetAll());
