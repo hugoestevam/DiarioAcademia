@@ -34,7 +34,9 @@
 
         self.delete = function (aula) {
             logger.error(res.deleted_successful, aula, "Delete");
-            $http.delete(serviceUrl + "/" + aula.id);
+            return $http.delete(serviceUrl + "/" + aula.id)
+                             .then(logger.empyMessageCallback)
+                             .catch(logger.errorCallback);;
         };
 
         self.getTurmaById = function (id) {

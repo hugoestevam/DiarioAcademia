@@ -43,10 +43,15 @@
 
 <body style="overflow-x: hidden" >
     <div ng-controller="shellController as shell">
-        <div id="wrapper" ng-class="{'clear-padding-left': !shell.authentication.isAuth}">
-            <div class="row" data-ng-include="'/app/templates/layout/navbar.html'"></div>
-            <div ui-view class="fader-animation" id="index" ng-class="{'logged': shell.isLogged()}"></div>
+        
+
+        <div class="row container-app">
+            <div id="wrapper" ng-class="{'clear-padding-left': !shell.authentication.isAuth}">
+                <div class="row" data-ng-include="'/app/templates/layout/navbar.html'"></div>
+                <div ui-view class="fader-animation" id="index" ng-class="{'logged': shell.isLogged()}"></div>
+            </div>
         </div>
+        <div class="row clear-margin" data-ng-include="'/app/templates/layout/footer.html'"></div>
     </div>
 
     <!--build:js js/libs.js-->

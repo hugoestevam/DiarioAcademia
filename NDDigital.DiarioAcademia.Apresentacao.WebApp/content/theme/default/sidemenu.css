@@ -1,15 +1,19 @@
 ﻿.sidemenu-custom {
-  top: 63px;
+  top: 50px;
+  height: calc(100% - 68px) !important;
+  overflow: hidden;
 }
 .profile-ava img {
   -webkit-border-radius: 50%;
   border-radius: 50%;
-  border: 2px solid #333;
   display: inline-block;
-  height: 30px;
+  height: 25px;
+}
+.top-nav > li > a:hover {
+  background-color: transparent !important;
 }
 .actived {
-  border-left: green solid 2px;
+  border-right: solid 5px #E25D41 !important;
 }
 .user-avatar {
   border-radius: 50%;
@@ -34,5 +38,23 @@ a.user-back.text-center:hover {
 }
 .user-option {
   padding-left: 8% !important;
+}
+.separator-menu {
+  border-right: solid 5px rgba(204, 204, 204, 0.4);
+}
+.seta-direita {
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+  border-left: 10px solid #E25D41;
+  float: left;
+  margin-top: 18px;
+}
+.align-middle {
+  position: relative;
+  bottom: 3px;
+  left: 8px;
+}
+li > a > .fa {
+  width: 26px;
 }
 /*# sourceMappingURL=sidemenu.css.map */

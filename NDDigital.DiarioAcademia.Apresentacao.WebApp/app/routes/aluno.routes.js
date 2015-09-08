@@ -22,7 +22,7 @@
             url: '/list',
             controller: 'alunoListCtrl as vm',
             templateUrl: '/app/views/aluno/aluno-list.html',
-            allowAnnonymous: true,
+            allowAnnonymous: false,
             displayName: "Lista de Aluno",
             displayIcon: "fa-user",
             $$permissionId: "02"

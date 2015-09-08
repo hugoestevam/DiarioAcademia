@@ -2,12 +2,14 @@
  * Start Bootstrap - SB Admin Bootstrap Admin Template (http://startbootstrap.com)
  * Code licensed under the Apache License v2.0.
  * For details, see http://www.apache.org/licenses/LICENSE-2.0.
+ *
+
+ * NOTE: this template was Customized for DA application
  */
 
-/* Global Styles */
+
 
 body {
-    margin-top: 100px;
     background-color: #fff;
 }
 
@@ -22,8 +24,6 @@ body {
 }
 
 .li {
-  border-bottom: solid 1px #101010;
-  border-top: solid 1px #373737;
   transition: color 0.3s linear;
 }
 
@@ -31,9 +31,6 @@ li:first-child {
   border-top: none;
 }
 
-li:last-child {
-  border-bottom: none;
-}
 
 
 @media(min-width:768px) {
@@ -76,7 +73,7 @@ li:last-child {
     padding: 0 15px;
 }
 
-.top-nav>li {
+.top-nav>ndd-item-sidemenu> li{
     display: inline-block;
     float: left;
 }
@@ -94,7 +91,7 @@ li:last-child {
 .top-nav>.open>a:hover,
 .top-nav>.open>a:focus {
     color: #fff;
-    background-color: #000;
+    background-color: #ccc;
 }
 
 .top-nav>.open>.dropdown-menu {
@@ -149,20 +146,19 @@ ul.alert-dropdown {
         border: none;
         border-radius: 0;
         overflow-y: auto;
-        background-color: #222;
         bottom: 0;
         overflow-x: hidden;
         padding-bottom: 40px;
     }
 
     .side-nav>li>a {
-        width: 225px;
+        width: 210px;
     }
 
     .side-nav li a:hover,
     .side-nav li a:focus {
         outline: none;
-        background-color: #000 !important;
+        background-color: #ccc !important;
     }
 }
 
@@ -174,11 +170,12 @@ ul.alert-dropdown {
     display: block;
     padding: 10px 15px 10px 38px;
     text-decoration: none;
-    color: #999;
+    color: black;
+
 }
 
 .side-nav>li>ul>li>a:hover {
-    color: #fff;
+    color: black;
 }
 
 /* Flot Chart Containers */

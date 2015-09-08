@@ -62,7 +62,7 @@
             bower: require("../bower.json"),
             directory: "./bower_components",
             ignorePath: ['../']
-        }, 
+        },
 
         extentions: app + '/extentions/**/*.js'
 
@@ -118,7 +118,7 @@
     //Resources Injected
     config.getResourcesInjected = function () {
         return {
-            'extentions': config.extentions, 
+            'extentions': config.extentions,
             'module': config.app.js.module,
             'models': config.app.js.models,
             'factories': config.app.js.factories,

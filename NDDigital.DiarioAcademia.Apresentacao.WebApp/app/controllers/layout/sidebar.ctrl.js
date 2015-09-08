@@ -23,6 +23,9 @@
             $state.go('manager.useredit', { userId: authService.authentication.userId });
         }
 
+        self.closeItensOpen = function () {
+            $("ul[aria-expanded=true]").collapse('hide');
+        }
         //public methods
         self.publicMethod = function () {
         };

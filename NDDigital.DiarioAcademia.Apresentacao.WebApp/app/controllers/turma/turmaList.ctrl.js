@@ -27,10 +27,9 @@
 
         //public methods
         vm.delete = function (turma) {
-            turmaService.delete(turma);
-
-            //depois que excluiu precisa atualizar os dados
-            makeRequest();
+            turmaService.delete(turma).then(function () {
+                vm.turmas.remove(turma);
+            });
         };
 
         //private methods

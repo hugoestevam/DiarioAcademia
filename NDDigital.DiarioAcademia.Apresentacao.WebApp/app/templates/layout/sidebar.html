@@ -1,16 +1,14 @@
-﻿<!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
-<div class="collapse navbar-collapse navbar-ex1-collapse" ng-controller="sidebarController as vm">
-    <ul class="nav navbar-nav side-nav sidemenu-custom " ng-show="shell.authentication.isAuth" ng-class="{'slider-enter': shell.authentication.isAuth, 'slider-leave': !shell.authentication.isAuth }">
-        <li class="li">
+﻿<div class="collapse navbar-collapse navbar-ex1-collapse" ng-controller="sidebarController as vm">
+    <ul class="nav navbar-nav side-nav sidemenu-custom" ng-show="shell.authentication.isAuth" ng-class="{'slider-enter': shell.authentication.isAuth, 'slider-leave': !shell.authentication.isAuth }">
+        <li class="li separator-menu">
             <a class="user-back text-center">
                 <img src="/app/images/avatar_login.png" alt="" class="user-avatar" />
                 <div href="javascript:;" data-toggle="collapse" data-target="#log" class="menu-user text-left text-capitalize">
-                    {{shell.authentication.fullName}}
+                    {{shell.authentication.fullName || 'Username'}}
                 </div>
             </a>
         </li>
-
-        <li class="li" style="width: 100%" ng-show="shell.authentication.isAuth">
+        <li class="li " style="width: 100%" ng-show="shell.authentication.isAuth">
             <ul id="log" class="collapse">
                 <li ng-class="{actived: state.contains('useredit')}">
                     <a style="cursor:pointer" ng-click="vm.editUser()" class="user-option"><i class="fa fa-fw fa-user"></i> Perfil</a>
@@ -19,14 +17,20 @@
             </ul>
         </li>
 
-        <li class="li" ng-class="{actived: state.contains('home')}">
-            <a ui-sref="homeapp" data-toggle=" collapse"><i class="fa fa-fw fa-home"></i> Início</a>
+        <li class="li separator-menu" ng-class="{actived: state.contains('home')}">
+            <a ui-sref="homeapp" data-toggle="collapse" ng-click="vm.closeItensOpen()">
+                <i class="fa fa-2x fa-home"></i>
+                <span class="align-middle">Início</span>
+            </a>
         </li>
+        <div class="seta-direita" ng-show="state.contains('home')"></div>
 
-        <li class="li" ng-class="{actived: state.contains('turma')}">
-            <a href="javascript:;" data-toggle="collapse" data-target="#demo">
-                <i class="fa fa-fw fa-university">
-                </i> Turmas <i class="fa fa-fw fa-angle-down"></i>
+
+        <li class="li separator-menu" ng-class="{actived: state.contains('turma')}">
+            <a href="javascript:;" data-toggle="collapse" data-target="#demo" ng-click="vm.closeItensOpen()">
+                <i class="fa fa-2x fa-university"></i>
+                <span class="align-middle">Turmas</span>
+                <i class="fa fa-fw fa-angle-down"></i>
             </a>
             <ul id="demo" class="collapse">
                 <li>
@@ -37,9 +41,14 @@
                 </li>
             </ul>
         </li>
-        <li class="li" ng-class="{actived: state.contains('aluno')}">
-            <a href="javascript:;" data-toggle="collapse" data-target="#demo2">
-                <i class="fa fa-fw fa-users"></i> Alunos <i class="fa fa-fw fa-angle-down"></i>
+        <div class="seta-direita" ng-show="state.contains('turma')"></div>
+
+
+        <li class="li separator-menu" ng-class="{actived: state.contains('aluno')}">
+            <a href=" javascript:;" data-toggle="collapse" data-target="#demo2" ng-click="vm.closeItensOpen()">
+                <i class="fa fa-2x fa-users"></i>
+                <span class="align-middle">Alunos</span>
+                <i class="fa fa-fw fa-angle-down"></i>
             </a>
             <ul id="demo2" class="collapse">
                 <li ng-if="shell.isVisible('aluno.create')">
@@ -50,9 +59,14 @@
                 </li>
             </ul>
         </li>
-        <li class="li" ng-class="{actived: state.contains('aula')}">
-            <a href="javascript:;" data-toggle="collapse" data-target="#demo3">
-                <i class="fa fa-fw fa-calendar"></i> Aulas <i class="fa fa-fw fa-angle-down"></i>
+        <div class="seta-direita" ng-show="state.contains('aluno')"></div>
+
+
+        <li class="li separator-menu" ng-class="{actived: state.contains('aula')}">
+            <a href="javascript:;" data-toggle="collapse" data-target="#demo3" ng-click="vm.closeItensOpen()">
+                <i class="fa fa-2x fa-calendar"></i>
+                <span class="align-middle">Aulas</span>
+                <i class="fa fa-fw fa-angle-down"></i>
             </a>
             <ul id="demo3" class="collapse">
                 <li>
@@ -63,16 +77,30 @@
                 </li>
             </ul>
         </li>
-        <li class="li" ng-class="{actived: state.contains('chamada')}">
-            <a href="javascript:;" data-toggle="collapse" data-target="#demo4"><i class="fa fa-fw fa-check"></i> Realizar Chamada <i class="fa fa-fw fa-angle-down"></i></a>
+        <div class="seta-direita" ng-show="state.contains('aula')"></div>
+
+
+        <li class="li separator-menu" ng-class="{actived:state.contains('chamada')}">
+            <a href="javascript:;" data-toggle="collapse" data-target="#demo4" ng-click="vm.closeItensOpen()">
+                <i class="fa fa-2x fa-check"></i>
+                <span class="align-middle">Realizar Chamada</span>
+                <i class="fa fa-fw fa-angle-down"></i>
+            </a>
             <ul id="demo4" class="collapse">
                 <li>
                     <a ui-sref="chamada.create">Nova Lista</a>
                 </li>
             </ul>
         </li>
-        <li class="li" ng-class="{actived: state.contains('manager')}">
-            <a href="javascript:;" data-toggle="collapse" data-target="#demo5"><i class="fa fa-fw fa-wrench"></i> Gerenciador <i class="fa fa-fw fa-angle-down"></i></a>
+        <div class="seta-direita" ng-show="state.contains('chamada')"></div>
+
+
+        <li class="li separator-menu" ng-class="{actived: state.contains('manager')}">
+            <a href="javascript:;" data-toggle="collapse" data-target="#demo5" ng-click="vm.closeItensOpen()">
+                <i class="fa fa-2x fa-wrench"></i>
+                <span class="align-middle">Gerenciador</span>
+                <i class="fa fa-fw fa-angle-down"></i>
+            </a>
             <ul id="demo5" class="collapse">
                 <li>
                     <a ui-sref="manager.user">Usuarios</a>
@@ -85,8 +113,11 @@
                 </li>
             </ul>
         </li>
-        <li class="li">
-            <a href="#"><i class="fa fa-fw fa-database"></i> Sobre</a>
+        <div class="seta-direita" ng-show="state.contains('manager')"></div>
+
+        <li class="li separator-menu" style="height: calc(100%); pointer-events: none">
+            <a href="javascript:;" style="height: 100%;">
+            </a>
         </li>
     </ul>
 </div>

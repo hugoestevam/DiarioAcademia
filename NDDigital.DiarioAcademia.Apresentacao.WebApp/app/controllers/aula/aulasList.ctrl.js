@@ -25,9 +25,9 @@
 
         //public methods
         vm.delete = function (aula) {
-            aulaService.delete(aula);
-
-            makeRequest();
+            aulaService.delete(aula).then(function () {
+                vm.aulas.remove(aula);
+            });
         }
 
         //private methods
