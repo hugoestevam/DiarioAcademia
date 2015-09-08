@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using NDDigital.DiarioAcademia.WebApi.Filters;
+using System.Web.Mvc;
 
 namespace NDDigital.DiarioAcademia.WebApi
 {
@@ -7,6 +8,7 @@ namespace NDDigital.DiarioAcademia.WebApi
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
         {
             filters.Add(new HandleErrorAttribute());
+            filters.Add(new GrouperAuthorizeAttribute());
         }
     }
 }

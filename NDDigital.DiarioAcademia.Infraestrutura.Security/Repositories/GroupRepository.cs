@@ -36,5 +36,12 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Security.Repositories
 
             return acc?.Groups;
         }
+
+        public bool IsAdmin(string username)
+        {
+            var groups = GetByUser(username);
+
+            return groups.Any(g => g.IsAdmin);
+        }
     }
 }

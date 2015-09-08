@@ -57,5 +57,13 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.Security
 
             Assert.AreEqual(2, list.Count);
         }
+        [TestMethod]
+        [TestCategory(TestCategory)]
+        public void Verifica_se_usuario_é_administrador()
+        {
+            var acc = AccountRepository.GetAll().First();
+            
+            Assert.IsTrue(GroupRepository.IsAdmin(acc.Username));
+        }
     }
 }

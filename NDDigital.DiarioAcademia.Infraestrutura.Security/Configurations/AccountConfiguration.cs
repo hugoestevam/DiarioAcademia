@@ -13,7 +13,9 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Security.Configurations
         public AccountConfiguration()
         {
             ToTable("TBAccount");
-            HasMany(x => x.Groups)
+            Property(a => a.Username)
+                .IsConcurrencyToken();
+            HasMany(a => a.Groups)
             .WithMany()
             .Map(x =>
             {

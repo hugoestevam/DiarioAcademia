@@ -44,7 +44,7 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers.Authentication
             _authservice = new AuthorizationService(groupRepository, permissionRepository,accountRepository, unitOfWork);
         }
 
-        [CustomAuthorize]
+        [GrouperAuthorize]
         [Route("user")]
         public IHttpActionResult GetUsers()
         {

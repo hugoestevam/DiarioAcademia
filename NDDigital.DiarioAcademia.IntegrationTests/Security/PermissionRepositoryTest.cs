@@ -10,8 +10,6 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.Security
         const string TestCategory =
             "Authorization - Permission";
 
-
-
         [TestMethod]
         [TestCategory(TestCategory)]
         public void Deveria_Adicionar_Uma_Permissao()

@@ -13,11 +13,11 @@ using System.Web.Http.Controllers;
 
 namespace NDDigital.DiarioAcademia.WebApi.Filters
 {
-    public class CustomAuthorizeAttribute : AuthorizeAttribute
+    public class GrouperAuthorizeAttribute : AuthorizeAttribute
     {
         private IAuthorizationService _authservice;
 
-        public CustomAuthorizeAttribute()
+        public GrouperAuthorizeAttribute()
         {
             var unitOfWork = Injection.Get<IUnitOfWork>();
 
@@ -35,21 +35,28 @@ namespace NDDigital.DiarioAcademia.WebApi.Filters
 
         protected override bool IsAuthorized(HttpActionContext actionContext)
         {
-            try
+            if (base.IsAuthorized(actionContext))
             {
-                var username = actionContext.Request.RequestUri.Query.Split('=')[1];
+                var queryStringCollection = HttpUtility.ParseQueryString(actionContext.Request.RequestUri.Query);
+                
+                try
+                {
 
-                //_authservice.IsAuthorized(); 
+                    string username = queryStringCollection["username"];
+
+                    string permissionId = queryStringCollection["permissionid"];
+
+                    return _authservice.IsAuthorized(username, permissionId);
+                }
+                catch (Exception ex)
+                {
+                    return false;
+                    throw;
+                }
             }
-            catch (Exception)
-            {
-
-                throw;
-            }
 
 
-
-            return base.IsAuthorized(actionContext);
+            return false;
         }
     }
 }

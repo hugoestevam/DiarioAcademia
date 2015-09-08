@@ -12,5 +12,6 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Security.Contracts
     {
         IList<Group> GetAllSpecifically(int[] groups);
         IList<Group> GetByUser(string username);
+        bool IsAdmin(string username);
     }
 }

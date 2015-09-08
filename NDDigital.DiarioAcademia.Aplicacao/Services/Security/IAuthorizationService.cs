@@ -118,10 +118,17 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
         }
 
         public bool IsAuthorized(string username, string permissionId)
+
         {
+
+            if (_groupRepository.IsAdmin(username)) return true;
+
             var permissions = _permissionRepository.GetByUser(username);
 
-            return permissions.Any(p => p.PermissionId == permissionId);
+            return permissions.Any(p => p.PermissionId == permissionId)
+                
+                ;
+
         }
     }
 }
