@@ -21,6 +21,10 @@ namespace NDDigital.DiarioAcademia.UnitTests.Servicos
 
         private IAulaService aulaService = null;
 
+        private const string TestCategory =
+      "Teste de Serviço - Presenças";
+
+
         public PresencaServiceTests()
         {
             _alunoRepository = new Mock<IAlunoRepository>();
@@ -33,7 +37,7 @@ namespace NDDigital.DiarioAcademia.UnitTests.Servicos
         }
 
         [TestMethod]
-        [TestCategory("Camada de Serviço ORM")]
+        [TestCategory(TestCategory)]
         public void RegistraPresenca_deveria_persistir_as_presencas_dos_alunos()
         {
             //arrange
@@ -68,7 +72,7 @@ namespace NDDigital.DiarioAcademia.UnitTests.Servicos
         }
 
         [TestMethod]
-        [TestCategory("Camada de Serviço ORM")]
+        [TestCategory(TestCategory)]
         [ExpectedException(typeof(AlunoNaoEncontrado))]
         public void RegistraPresenca_deveria_lancar_excecao_AlunoNaoEncontrado()
         {
@@ -86,7 +90,7 @@ namespace NDDigital.DiarioAcademia.UnitTests.Servicos
         }
 
         [TestMethod]
-        [TestCategory("Camada de Serviço ORM")]
+        [TestCategory(TestCategory)]
         [ExpectedException(typeof(AulaNaoEncontrada))]
         public void RegistraPresenca_deveria_lancar_excecao_AulaNaoEncontrado()
         {

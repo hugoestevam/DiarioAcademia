@@ -40,8 +40,22 @@ namespace NDDigital.DiarioAcademia.UnitTests
         internal static Turma CreateTurma()
         {
             return Builder<Turma>.CreateNew()
-        .WithConstructor(() =>
-        new Turma(2014)).Build();
+                .WithConstructor(() =>
+                new Turma(2014)).Build();
+        }
+
+        internal static Aluno CreateAluno()
+        {
+            return Builder<Aluno>.CreateNew()
+                .WithConstructor(() =>
+                new Aluno()).Build();
+        }
+
+        internal static Aula CreateAula()
+        {
+            return Builder<Aula>.CreateNew()
+                 .WithConstructor(() =>
+                 new Aula()).Build();
         }
     }
 }

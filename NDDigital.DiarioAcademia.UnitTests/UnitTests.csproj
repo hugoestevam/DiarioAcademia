@@ -77,6 +77,8 @@
     <Compile Include="Dominio\PresencaTests.cs" />
     <Compile Include="ObjectBuilder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Servicos\AlunoServiceTests.cs" />
+    <Compile Include="Servicos\AulaServiceTests.cs" />
     <Compile Include="Servicos\AuthenticationServiceTest.cs" />
     <Compile Include="Servicos\AuthorizationServiceTest.cs" />
     <Compile Include="Servicos\PresencaServiceTests.cs" />
