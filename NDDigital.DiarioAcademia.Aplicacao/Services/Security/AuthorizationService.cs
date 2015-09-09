@@ -1,108 +1,51 @@
-﻿using Microsoft.AspNet.Identity;
-using NDDigital.DiarioAcademia.Aplicacao.Services.Security;
-using NDDigital.DiarioAcademia.Infraestrutura.DAO.Common.Uow;
+﻿using NDDigital.DiarioAcademia.Infraestrutura.DAO.Common.Uow;
 using NDDigital.DiarioAcademia.Infraestrutura.Security.Contracts;
 using NDDigital.DiarioAcademia.Infraestrutura.Security.Entities;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace NDDigital.DiarioAcademia.Aplicacao.Services
 {
-    
-
-    public class AuthorizationService : IAuthorizationService
+    public interface IAccountService: IService<Account>
     {
-        private IPermissionRepository _permissionRepository;
-        private IGroupRepository _groupRepository;
-        private IAccountRepository _accountRepository;
-        private IUnitOfWork _unitOfWork;
+    }
 
-        public AuthorizationService(
-            IGroupRepository groupRepository,
-            IPermissionRepository permissionRepository,
-            IAccountRepository accountRepository,
-            IUnitOfWork uow)
+    public class AccountService : IAccountService
+    {
+        private IUnitOfWork _uow;
+        private IAccountRepository _repo;
+
+        public AccountService(IAccountRepository repo, IUnitOfWork uow)
         {
-            _permissionRepository = permissionRepository;
-            _groupRepository = groupRepository;
-            _unitOfWork = uow;
-            _accountRepository = accountRepository;
+            _repo = repo;
+            _uow = uow;
         }
 
-        public void AddPermissionsToGroup(int id, string[] permissions)
+        public void Add(Account obj)
         {
-            var groupEncontrado = _groupRepository.GetByIdIncluding(id, x => x.Permissions);
-            var listPermissions = _permissionRepository.GetAllSpecific(permissions);
-
-            if (groupEncontrado != null)
-            {
-                foreach (var item in listPermissions)
-                {
-                    if (!groupEncontrado.Permissions.Contains(item))
-                        groupEncontrado.Permissions.Add(item);
-
-                }
-            }
-            _groupRepository.Update(groupEncontrado);
-
-            _unitOfWork.Commit();
+            _repo.Add(obj);
+            _uow.Commit();
         }
 
-        public void RemovePermissionsFromGroup(int id, string[] permissions)
+        public void Delete(int id)
         {
-            var groupEncontrado = _groupRepository.GetByIdIncluding(id, x => x.Permissions);
-
-            foreach (var permId in permissions)
-            {
-                var perm = groupEncontrado.Permissions.FirstOrDefault(p => p.PermissionId == permId);
-                if (perm != null)
-                {
-                    groupEncontrado.Permissions.Remove(perm);
-                };
-            }
-            _groupRepository.Update(groupEncontrado);
-
-             _unitOfWork.Commit();
+            _repo.Delete(id);
+            _uow.Commit();
         }
 
-        public void AddGroupToUser(string username, int[] groups)
+        public void Update(Account obj)
         {
-            var userEncontrado = _accountRepository.GetByUserName(username);
-
-            var listGroups = _groupRepository.GetAllSpecific(groups);
-
-            SetGroups(userEncontrado, listGroups);
-
-            _accountRepository.Update(userEncontrado);
-
-            _unitOfWork.Commit();
+            _repo.Update(obj);
+            _uow.Commit();
         }
 
-        public void RemoveGroupFromUser(string username, int[] groups)
+        IList<Account> IService<Account>.GetAll()
         {
-
-            var userEncontrado = _accountRepository.GetByUserName(username);
-
-            foreach (var groupId in groups)
-            {
-                var group = userEncontrado.Groups.FirstOrDefault(p => p.Id == groupId);
-                if (group != null)
-                    userEncontrado.Groups.Remove(group);
-                
-            }
-            _accountRepository.Update(userEncontrado);
-            _unitOfWork.Commit();
+            return _repo.GetAllIncluding(g => g.Groups);
         }
 
-        private void SetGroups(Account userEncontrado, IList<Group> listGroups)
+        Account IService<Account>.GetById(int id)
         {
-            if (userEncontrado != null)
-            {
-                userEncontrado.Groups = userEncontrado.Groups ?? new List<Group>();
-                foreach (var item in listGroups)
-                    if (!userEncontrado.Groups.Contains(item))
-                        userEncontrado.Groups.Add(item);
-            }
+            return _repo.GetByIdIncluding(id, g => g.Groups);
         }
     }
 }

@@ -70,7 +70,7 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Security.Repositories
                 throw new ApplicationException("UsernameJaExisteException");
             user.Account = new Account(user.UserName);
             dataContext.Users.Add(user);
-            dataContext.SaveChanges();//TODO: rever pq factory static not works
+            dataContext.SaveChanges();
             }
             catch (InvalidOperationException exe)
             {

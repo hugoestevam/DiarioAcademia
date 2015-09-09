@@ -1,9 +1,9 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using NDDigital.DiarioAcademia.Aplicacao.Services.Security;
 using NDDigital.DiarioAcademia.Infraestrutura.Orm.Common;
 using NDDigital.DiarioAcademia.IntegrationTests.Common;
 using Infrastructure.DAO.ORM.Common;
 using NDDigital.DiarioAcademia.Infraestrutura.Security.Repositories;
+using NDDigital.DiarioAcademia.Aplicacao.Services;
 
 namespace NDDigital.DiarioAcademia.IntegrationTests.Base
 {

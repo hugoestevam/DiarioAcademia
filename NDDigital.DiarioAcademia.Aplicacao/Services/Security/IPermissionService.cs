@@ -11,6 +11,8 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
     public interface IPermissionService : IService<Permission>
     {
         Permission GetByPermissionId(string id);
+        IList<Permission> GetByUser(string username);
+        IList<Permission> GetByGroup(int groupId);
     }
 
     public class PermissionService : IPermissionService
@@ -57,5 +59,15 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
             return (from p in _repo.GetAll() where p.PermissionId==id select p).FirstOrDefault(); 
         }
 
+        public IList<Permission> GetByUser(string username)
+        {
+            return _repo.GetByUser(username);
+        }
+
+        public IList<Permission> GetByGroup(int groupId)
+        {
+            return _repo.GetByGroup(groupId);
+
+        }
     }
 }

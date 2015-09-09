@@ -45,6 +45,23 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Security.Repositories
             return (from p in DataContext.Permissions where p.PermissionId == id select p).FirstOrDefault(); ;
         }
 
+        public IList<Permission> GetByUser(string username)
+        {
+            var acc = (from a in DataContext.Accounts.Include("Groups") select a).FirstOrDefault();
+
+            var list = new List<Permission>();
+
+            foreach (var group in acc.Groups)
+            {
+                var listPermissions = DataContext.Groups.Include("Permissions").First().Permissions;
+
+                list.AddRange(listPermissions);
+
+                list=list.Distinct().ToList();
+            }
+            return list;
+
+        }
     }
 
 }

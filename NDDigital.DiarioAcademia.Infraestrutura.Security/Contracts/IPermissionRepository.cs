@@ -15,6 +15,6 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Security.Contracts
         IList<Permission> GetAllSpecific(string[] permissions);
 
         Permission GetByPermissionId(string v);
-
+        IList<Permission> GetByUser(string username);
     }
 }
