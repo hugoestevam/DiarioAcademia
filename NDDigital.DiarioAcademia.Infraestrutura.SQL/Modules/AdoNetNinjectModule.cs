@@ -18,7 +18,7 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.SQL.Modules
         {
             var factory = new AdoNetFactory();
 
-            Bind<IAdoNetUnitOfWork>().To<ADOUnitOfWork>().WithConstructorArgument("factory", factory);
+            Bind<IUnitOfWork>().To<ADOUnitOfWork>().WithConstructorArgument("factory", factory);
             Bind<ITurmaRepository>().To<TurmaRepositorySql>().WithConstructorArgument("factory", factory);
             Bind<IAulaRepository>().To<AulaRepositorySql>().WithConstructorArgument("factory", factory);
             Bind<IAlunoRepository>().To<AlunoRepositorySql>().WithConstructorArgument("factory", factory);
