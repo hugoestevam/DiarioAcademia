@@ -1,8 +1,12 @@
 ﻿
 .sidemenu-custom {
-    top: 50px;
+    top: 90px;
     height: ~"calc(100% - 68px) !important";
     overflow: hidden;
+}
+
+.side-menu-header {
+    margin-top: 5px;
 }
 
 .profile-ava img {
@@ -12,9 +16,6 @@
     height: 25px;
 }
 
-.top-nav > li > a:hover {
-    background-color: transparent !important;
-}
 
 .actived {
     border-right: solid 5px #E25D41 !important;
@@ -71,4 +72,42 @@ a.user-back.text-center {
 
 li > a > .fa {
     width: 26px;
+}
+
+.li {
+    -moz-transition: none !important;
+    -o-transition: none !important;
+    -webkit-transition: none !important;
+    transition: none !important;
+}
+
+.home-li {
+    pointer-events: none;
+}
+
+@media screen and (max-width: 768px) {
+    .sidemenu-custom {
+        background-color: rgb(15, 117, 179) !important;
+        margin: 0;
+        height: auto !important;
+    }
+
+    .seta-direita {
+        display: none;
+    }
+
+    .navbar-collapse {
+        padding: 0;
+    }
+
+    .navbar-inverse .navbar-nav > li > a {
+        color: white !important;
+        padding-top: 20px;
+
+        &:hover {
+             background-color: rgba(204, 204, 204, 0.5) !important;
+        color: black !important;
+
+        }
+    }
 }

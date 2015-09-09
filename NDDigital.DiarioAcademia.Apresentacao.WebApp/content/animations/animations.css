@@ -4,11 +4,6 @@
   position: absolute;
   width: 100%;
 }
-.logged.ng-enter,
-.logged.ng-leave {
-  position: absolute;
-  width: calc(100% - 225px) !important;
-}
 .fader-animation.ng-enter {
   -moz-transition: all cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.5s 0.5s;
   -o-transition: all cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.5s 0.5s;
@@ -50,4 +45,9 @@
   left: 0;
 }
 /*#endregion*/
+.logged.ng-enter,
+.logged.ng-leave {
+  position: absolute;
+  width: calc(100% - 225px) !important;
+}
 /*# sourceMappingURL=animations.css.map */

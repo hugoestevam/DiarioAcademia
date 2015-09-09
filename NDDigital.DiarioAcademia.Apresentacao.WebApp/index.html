@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="pt-BR" data-ng-app="core.module">
 <head>
     <meta charset="utf-8">
@@ -15,8 +15,8 @@
         <link rel="stylesheet" href="/bower_components/angular-bootstrap/ui-bootstrap-csp.css">                                                      
         <link rel="stylesheet" href="/bower_components/toastr/toastr.css">                                                      
         <link rel="stylesheet" href="/bower_components/angular-loading-bar/build/loading-bar.css">                                                      
-        <link rel="stylesheet" href="/bower_components/angular-loading-bar/src/loading-bar.css">                                                      
         <link rel="stylesheet" href="/bower_components/angular-local-storage/demo/demo-style.css">                                                      
+        <link rel="stylesheet" href="/bower_components/angular-loading-bar/src/loading-bar.css">                                                      
         <link rel="stylesheet" href="/bower_components/font-awesome/css/font-awesome.css">                                                      
         <link rel="stylesheet" href="/bower_components/nz-animate/dist/nzAnimate.css">                                                      
         <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap-theme.css">                                                      
@@ -31,6 +31,8 @@
         <link rel="stylesheet" href="/content/layout/layout.css">
         <link rel="stylesheet" href="/content/layout/login.css">
         <link rel="stylesheet" href="/content/layout/manager.css">
+        <link rel="stylesheet" href="/content/layout/navbar.css">
+        <link rel="stylesheet" href="/content/theme/default/footer.css">
         <link rel="stylesheet" href="/content/theme/default/home.css">
         <link rel="stylesheet" href="/content/theme/default/homeapp.css">
         <link rel="stylesheet" href="/content/theme/default/layout.css">
@@ -41,10 +43,7 @@
     <!--endbuild -->
 </head>
 
-<body style="overflow-x: hidden" >
-    <div ng-controller="shellController as shell">
-        
-
+<body ng-controller="shellController as shell">
         <div class="row container-app">
             <div id="wrapper" ng-class="{'clear-padding-left': !shell.authentication.isAuth}">
                 <div class="row" data-ng-include="'/app/templates/layout/navbar.html'"></div>
@@ -52,7 +51,6 @@
             </div>
         </div>
         <div class="row clear-margin" data-ng-include="'/app/templates/layout/footer.html'"></div>
-    </div>
 
     <!--build:js js/libs.js-->
     <!-- bower:js -->
@@ -68,7 +66,6 @@
     <script src="/bower_components/angular-breadcrumb/release/angular-breadcrumb.js"></script>
     <!-- endbower -->
     <!--endbuild-->
-
     <!--build:js js/app.js-->
     <!--inject:extentions-->
     <script src="/app/extentions/array.js"></script>
@@ -152,6 +149,7 @@
     <script src="/app/directives/ndd-head/ndd-head.directives.js"></script>
     <script src="/app/directives/ndd-modal/ndd-modal.directives.js"></script>
     <script src="/app/directives/ndd-panel/ndd-panel.directives.js"></script>
+    <script src="/app/directives/ndd-sidemenu-option/ndd-sidemenu-option.directives.js"></script>
     <!--endinject-->
     <!--inject:templates-->
     <script src="/task/temp/templates.js"></script>

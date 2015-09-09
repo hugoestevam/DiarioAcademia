@@ -9,9 +9,10 @@
   user-select: none;
 }
 .container-home {
-  height: calc(100% - 64px) !important;
+  height: calc(100% - 30px) !important;
   width: 100%;
   position: fixed;
+  margin-top: -50px;
 }
 .carousel-control.left,
 .carousel-control.right {

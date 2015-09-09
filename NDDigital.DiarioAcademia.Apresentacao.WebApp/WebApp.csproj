@@ -94,6 +94,8 @@
     <Content Include="app\directives\ndd-modal\ndd-modal.html" />
     <Content Include="app\directives\ndd-panel\ndd-panel.directives.js" />
     <Content Include="app\directives\ndd-panel\ndd-panel.html" />
+    <Content Include="app\directives\ndd-sidemenu-option\ndd-sidemenu-option.directives.js" />
+    <Content Include="app\directives\ndd-sidemenu-option\ndd-sidemenu-option.html" />
     <Content Include="app\extentions\array.js" />
     <Content Include="app\extentions\string.js" />
     <Content Include="app\factories\changes.factory.js" />
@@ -143,6 +145,18 @@
     </Content>
     <Content Include="content\layout\manager.min.css">
       <DependentUpon>manager.css</DependentUpon>
+    </Content>
+    <Content Include="content\layout\navbar.css">
+      <DependentUpon>navbar.less</DependentUpon>
+    </Content>
+    <Content Include="content\layout\navbar.min.css">
+      <DependentUpon>navbar.css</DependentUpon>
+    </Content>
+    <Content Include="content\theme\default\footer.css">
+      <DependentUpon>footer.less</DependentUpon>
+    </Content>
+    <Content Include="content\theme\default\footer.min.css">
+      <DependentUpon>footer.css</DependentUpon>
     </Content>
     <Content Include="content\theme\default\home.css">
       <DependentUpon>home.less</DependentUpon>
@@ -226,6 +240,14 @@
       <DependentUpon>homeapp.css</DependentUpon>
     </Content>
     <Content Include="app\factories\permission-groups.factory.js" />
+    <Content Include="content\theme\default\footer.less" />
+    <Content Include="content\theme\default\footer.css.map">
+      <DependentUpon>footer.css</DependentUpon>
+    </Content>
+    <Content Include="content\layout\navbar.less" />
+    <Content Include="content\layout\navbar.css.map">
+      <DependentUpon>navbar.css</DependentUpon>
+    </Content>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -278,7 +300,6 @@
     <Content Include="app\services\turma.services.js" />
     <Content Include="app\templates\components\inner-view.html" />
     <Content Include="app\templates\layout\footer.html" />
-    <Content Include="app\templates\layout\header.html" />
     <Content Include="app\templates\layout\navbar.html" />
     <Content Include="app\templates\layout\sidebar.html" />
     <Content Include="app\templates\layout\toolbar.html" />
