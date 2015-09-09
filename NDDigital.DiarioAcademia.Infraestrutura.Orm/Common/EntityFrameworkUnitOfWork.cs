@@ -9,7 +9,7 @@ using System.Linq;
 
 namespace Infrastructure.DAO.ORM.Common
 {
-    public class EntityFrameworkUnitOfWork : IEntityFrameworkUnitOfWork
+    public class EntityFrameworkUnitOfWork : IUnitOfWork
     {
         private EntityFrameworkContext dbContext = null;
 

@@ -84,5 +84,18 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.Security
             Assert.AreEqual(2,
                  acc.Groups.First().Id);
         }
+
+        [TestMethod]
+        [TestCategory(TestCategory)]
+        public void Usuario_Deve_Ter_Acesso_a_Permissao()
+        {
+            var acc = AccountRepository.GetAllIncluding(x => x.Groups).First();
+
+            var group = GroupRepository.GetByIdIncluding(acc.Groups[0].Id, x => x.Permissions);
+
+            var permissionId = group.Permissions.First().PermissionId;
+
+            Assert.IsTrue(AuthorizationService.IsAuthorized(acc.Username, permissionId));
+        }
     }
 }

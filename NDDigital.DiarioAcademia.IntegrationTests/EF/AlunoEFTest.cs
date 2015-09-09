@@ -8,7 +8,7 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.EF
     public class AlunoEFTest : BaseEFTest
     {
 
-        private const string TestCategory = "Teste de Integração Aluno";
+        private const string TestCategory = "Teste de Integração - Aluno";
 
         [TestMethod]
         [TestCategory(TestCategory)]

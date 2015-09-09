@@ -1,16 +1,10 @@
 ﻿.sidemenu-custom {
-  top: 90px;
+  top: 100px;
   height: calc(100% - 68px) !important;
   overflow: hidden;
 }
 .side-menu-header {
   margin-top: 5px;
-}
-.profile-ava img {
-  -webkit-border-radius: 50%;
-  border-radius: 50%;
-  display: inline-block;
-  height: 25px;
 }
 .actived {
   border-right: solid 5px #E25D41 !important;
@@ -87,4 +81,3 @@ li > a > .fa {
     color: black !important;
   }
 }
-/*# sourceMappingURL=sidemenu.css.map */

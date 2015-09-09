@@ -29,9 +29,9 @@ namespace NDDigital.DiarioAcademia.WebApi.Models
                 UserName = appUser.UserName,
                 FullName = string.Format("{0} {1}", appUser.FirstName, appUser.LastName),
                 Email = appUser.Email,
-                EmailConfirmed = appUser.EmailConfirmed,
-                Roles = _UserRepository.GetRolesAsync(appUser.Id).Result,
-                Claims = _UserRepository.GetClaimsAsync(appUser.Id).Result
+           //     EmailConfirmed = appUser.EmailConfirmed,
+           //     Roles = _UserRepository.GetRolesAsync(appUser.Id).Result,
+           //     Claims = _UserRepository.GetClaimsAsync(appUser.Id).Result
             };
         }
 

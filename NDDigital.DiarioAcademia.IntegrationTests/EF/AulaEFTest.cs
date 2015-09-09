@@ -9,7 +9,7 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.Base
     {
 
         public const string TestCategory =
-            "Teste de Integração Aula";
+            "Teste de Integração - Aula";
 
         [TestMethod]
         [TestCategory(TestCategory)]

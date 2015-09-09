@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNet.Identity;
 using NDDigital.DiarioAcademia.Aplicacao.Services;
-using NDDigital.DiarioAcademia.Aplicacao.Services.Security;
 using NDDigital.DiarioAcademia.Infraestrutura.DAO.Common.Uow;
 using NDDigital.DiarioAcademia.Infraestrutura.IoC;
 using NDDigital.DiarioAcademia.Infraestrutura.Orm.Common;
@@ -13,6 +12,9 @@ using NDDigital.DiarioAcademia.Infraestrutura.Security.Contracts;
 using NDDigital.DiarioAcademia.Infraestrutura.Security.Entities;
 using NDDigital.DiarioAcademia.Infraestrutura.Security.Repositories;
 using NDDigital.DiarioAcademia.Infraestrutura.Security.Common;
+using Microsoft.AspNet.Identity.EntityFramework;
+using Ellevo.Biblioteca.Seguranca;
+using NDDigital.DiarioAcademia.WebApi.Filters;
 
 namespace NDDigital.DiarioAcademia.WebApi.Controllers.Authentication
 {
@@ -23,15 +25,17 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers.Authentication
 
         public AccountsController()
         {
-            var unitOfWork = Injection.Get<IUnitOfWork>();
+            var unitOfWork = Injection.Get<IAuthUnitOfWork>();
 
             var groupRepository = Injection.Get<IGroupRepository>();
 
             var permissionRepository = Injection.Get<IPermissionRepository>();
 
-            var store = Injection.Get<IUserStore<User>>(); //var store = new MyUserStore(factory.Get());
+            // var store = Injection.Get<IUserStore<User>>();
 
             var factory = new AuthFactory(); //TODO: Implementar dois contextos
+
+            var store = new UserStore<User>(factory.Get());
 
             var userRepository = new UserRepository(store, factory);
 
@@ -40,14 +44,20 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers.Authentication
             _authservice = new AuthorizationService(groupRepository, permissionRepository,accountRepository, unitOfWork);
         }
 
-        //[Authorize]
+        [GrouperAuthorize]
         [Route("user")]
         public IHttpActionResult GetUsers()
         {
-            //Only SuperAdmin or Admin can delete users (Later when implement roles)
-            var identity = User.Identity as System.Security.Claims.ClaimsIdentity;
 
-            return Ok(this.UserRepository.Users.ToList().Select(u => this.TheModelFactory.Create(u)));
+            var users = UserRepository.GetUsers();
+
+            return Ok(users.Select(u=>TheModelFactory.Create(u)));
+
+
+            //Only SuperAdmin or Admin can delete users (Later when implement roles)
+            //var identity = User.Identity as System.Security.Claims.ClaimsIdentity;
+            //
+            //return Ok(this.UserRepository.Users.ToList().Select(u => this.TheModelFactory.Create(u)));
         }
 
         //[Authorize(Roles = "Admin")]
@@ -82,7 +92,8 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers.Authentication
 
         [AllowAnonymous]
         [Route("create")]
-        public async Task<IHttpActionResult> CreateUser(CreateUserBindingModel createUserModel)
+        //public async Task<IHttpActionResult> CreateUser(CreateUserBindingModel createUserModel)
+        public IHttpActionResult CreateUser(CreateUserBindingModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -91,18 +102,22 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers.Authentication
 
             var user = new User()
             {
-                UserName = createUserModel.Username,
-                Email = createUserModel.Email,
-                FirstName = createUserModel.FirstName,
-                LastName = createUserModel.LastName,
+                UserName = model.Username,
+                Email = model.Email,
+                FirstName = model.FirstName,
+                LastName = model.LastName,
+                PasswordHash = Criptografia.Criptografar(model.Password, Criptografia.ModoSimples.Padrao)
+           
             };
 
-            IdentityResult addUserResult = await this.UserRepository.CreateAsync(user, createUserModel.Password);
+           // IdentityResult addUserResult =  this.UserRepository.Create(user, createUserModel.Password);
 
-            if (!addUserResult.Succeeded)
-            {
-                return GetErrorResult(addUserResult);
-            }
+            UserRepository.AddUser(user);
+
+           // if (!addUserResult.Succeeded)
+           // {
+           //     return GetErrorResult(addUserResult);
+           // }
 
             Uri locationHeader = new Uri(Url.Link("GetUserById", new { id = user.Id }));
 

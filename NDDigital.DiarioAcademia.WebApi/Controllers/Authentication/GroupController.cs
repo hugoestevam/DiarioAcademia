@@ -37,12 +37,10 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers.Authentication
 
             var factory = new AuthFactory(); //TODO: Implementar dois contextos
 
-            var userRepository = new UserRepository(store, factory);
-
-            _userService = new UserService(userRepository);
         }
 
         // GET: api/Group
+        [Authorize]
         public IHttpActionResult Get()
         {
             return Ok(_groupService.GetAll());

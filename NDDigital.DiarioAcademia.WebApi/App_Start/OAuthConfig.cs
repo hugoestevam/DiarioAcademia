@@ -1,6 +1,7 @@
 ﻿using Infrasctructure.DAO.ORM.Contexts;
 using Microsoft.Owin;
 using Microsoft.Owin.Security.OAuth;
+using NDDigital.DiarioAcademia.Infraestrutura.Security.Contexts;
 using NDDigital.DiarioAcademia.Infraestrutura.Security.Repositories;
 using NDDigital.DiarioAcademia.WebApi.Providers;
 using Owin;
@@ -15,7 +16,7 @@ namespace NDDigital.DiarioAcademia.WebApi.App_Start
         public static void ConfigureOAuth(IAppBuilder app)
         {
             // Configure the db context and user manager to use a single instance per request
-            app.CreatePerOwinContext(EntityFrameworkContext.Create);
+            app.CreatePerOwinContext(AuthContext.Create);
             app.CreatePerOwinContext<UserRepository>(UserRepository.Create);
 
             OAuthServerOptions = new OAuthAuthorizationServerOptions()

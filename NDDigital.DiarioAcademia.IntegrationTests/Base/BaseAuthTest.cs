@@ -1,10 +1,11 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using NDDigital.DiarioAcademia.Aplicacao.Services.Security;
-using NDDigital.DiarioAcademia.Infraestrutura.Orm.Common;
 using NDDigital.DiarioAcademia.IntegrationTests.Common;
 using Infrastructure.DAO.ORM.Common;
 using NDDigital.DiarioAcademia.Infraestrutura.Security.Repositories;
 using NDDigital.DiarioAcademia.Infraestrutura.Security.Common;
+using Microsoft.AspNet.Identity.EntityFramework;
+using NDDigital.DiarioAcademia.Infraestrutura.Security.Entities;
+using NDDigital.DiarioAcademia.Aplicacao.Services;
 
 namespace NDDigital.DiarioAcademia.IntegrationTests.Base
 {
@@ -16,7 +17,9 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.Base
         #region Constructor Utilities
         protected DatabaseAuthFixture Fixture;
         protected AuthFactory Factory;
-        protected IdentityUserStore IdentityUserStore;
+       // protected IdentityUserStore IdentityUserStore;
+        protected UserStore<User> IdentityUserStore;
+        
 
         protected IAuthorizationService AuthorizationService;
 
@@ -35,7 +38,7 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.Base
 
             var context = Factory.Get();
 
-            IdentityUserStore = new IdentityUserStore(context);
+            IdentityUserStore = new UserStore<User>();
 
             Uow = new AuthUnitOfWork(Factory);
 

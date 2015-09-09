@@ -4,10 +4,10 @@ using NDDigital.DiarioAcademia.IntegrationTests.Base;
 namespace NDDigital.DiarioAcademia.IntegrationTests.ADO
 {
     [TestClass]
-    public class TurmaADOTest: BaseADOTest
+    public class TurmaADOTest : BaseADOTest
     {
-        private const string TestCategory = 
-            "Teste de Integração Turma";
+        private const string TestCategory =
+            "Teste de Integração - Turma";
 
         [TestMethod]
         [TestCategory(TestCategory)]

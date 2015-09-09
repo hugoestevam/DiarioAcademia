@@ -54,12 +54,7 @@
 
 
         ///////////////////// callback functions
-
-        //function  successCallback (response) {
-        //    success("Request realizado com sucesso!", response.data, response.status + " - " + response.statusText);
-        //    return response.data.results || response.data;
-        //}
-
+        
         function successCallback(response) {
             success(res.success_request);
             return response.data.results || response.data;
@@ -80,7 +75,6 @@
 
             } else
                 error(response.message, null, res.unavailable_server);
-           // throw new Error(response);
         }
 
         function emptyMessageCallback(response) {

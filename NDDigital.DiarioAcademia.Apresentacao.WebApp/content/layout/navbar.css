@@ -12,4 +12,12 @@
   padding-top: 10px;
   cursor: pointer;
 }
-/*# sourceMappingURL=navbar.css.map */
+.option-nav {
+  line-height: 40px;
+  padding-top: 2px;
+  padding-left: 20px;
+  padding-right: 20px;
+  height: 50px;
+  float: left;
+  text-align: center;
+}

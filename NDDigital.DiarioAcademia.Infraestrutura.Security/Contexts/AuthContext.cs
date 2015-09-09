@@ -24,10 +24,16 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Security.Contexts
         public DbSet<Permission> Permissions { get; set; }
         public DbSet<Account> Accounts { get; set; }
 
+        public static AuthContext Create()
+        {
+            return new AuthContext();
+        }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
+            
 
             modelBuilder.Configurations.Add(new UserConfiguration());
             modelBuilder.Configurations.Add(new GroupConfiguration());

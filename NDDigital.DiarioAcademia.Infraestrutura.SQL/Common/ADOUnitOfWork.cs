@@ -3,7 +3,7 @@ using System;
 
 namespace NDDigital.DiarioAcademia.Infraestrutura.SQL.Common
 {
-    public class ADOUnitOfWork : IAdoNetUnitOfWork
+    public class ADOUnitOfWork : IUnitOfWork
     {
         public AdoNetFactory _factory;
 

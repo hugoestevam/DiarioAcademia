@@ -20,8 +20,8 @@
         //private methods
         function getCustomPermissions() {
             var customPermissions = [
-                { name: "action3.deleteAluno", displayName: "Excluir Aluno", permissionId: '20' },
-                { name: "action2.addTurma", displayName: "Adicionar Turma", permissionId: '21' }];
+                { name: "action3.deleteAluno", displayName: "Excluir Aluno", permissionId: '22' },
+                { name: "action2.addTurma", displayName: "Adicionar Turma", permissionId: '23' }];
 
             return customPermissions;
         }
