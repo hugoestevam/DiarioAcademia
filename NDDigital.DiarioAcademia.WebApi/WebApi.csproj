@@ -194,18 +194,22 @@
   <ItemGroup>
     <Content Include="Assemblies\Ellevo.Biblioteca.dll" />
     <Content Include="Translate\pt-br.txt" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\FormattersConfig.cs" />
     <Compile Include="App_Start\OAuthConfig.cs" />
     <Compile Include="App_Start\RoutesConfig.cs" />
-    <Compile Include="Controllers\Authentication\AccountsController.cs" />
-    <Compile Include="Controllers\Authentication\AuthorizationController.cs" />
-    <Compile Include="Controllers\Authentication\GroupController.cs" />
-    <Compile Include="Controllers\Authentication\PermissionController.cs" />
-    <Compile Include="Controllers\BaseApiController.cs" />
+    <Compile Include="Controllers\Base\BaseSecurityController.cs" />
+    <Compile Include="Controllers\Security\AccountsController.cs" />
+    <Compile Include="Controllers\Security\AuthorizationController.cs" />
+    <Compile Include="Controllers\Security\GroupController.cs" />
+    <Compile Include="Controllers\Security\PermissionController.cs" />
+    <Compile Include="Controllers\Base\BaseApiController.cs" />
+    <Compile Include="Controllers\Base\BaseEntityController.cs" />
     <Compile Include="Controllers\Entities\AlunoController.cs" />
     <Compile Include="Controllers\Entities\AulaController.cs" />
     <Compile Include="Controllers\Entities\CepController.cs" />

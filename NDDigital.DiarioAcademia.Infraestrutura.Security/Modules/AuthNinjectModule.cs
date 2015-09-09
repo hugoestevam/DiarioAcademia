@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using NDDigital.DiarioAcademia.Infraestrutura.DAO.Common.Uow;
 using NDDigital.DiarioAcademia.Infraestrutura.Security.Common;
 using NDDigital.DiarioAcademia.Infraestrutura.Security.Contracts;
@@ -21,11 +22,11 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Security.Modules
             var factory = new AuthFactory();
 
             Bind<IAuthUnitOfWork>().To<AuthUnitOfWork>().WithConstructorArgument("factory", factory);
-            Bind<IUserStore<User>>().To<IdentityUserStore>().WithConstructorArgument("factory", factory);
             Bind<IAccountRepository>().To<AccountRepository>().WithConstructorArgument("factory", factory);
             Bind<IGroupRepository>().To<GroupRepository>().WithConstructorArgument("factory", factory);
             Bind<IPermissionRepository>().To<PermissionRepository>().WithConstructorArgument("factory", factory);
-
+            Bind<IUserStore<User>>().To<UserStore<User>>();
+       
         }
     }
 }
