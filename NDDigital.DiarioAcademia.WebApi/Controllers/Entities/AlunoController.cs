@@ -7,26 +7,19 @@ using NDDigital.DiarioAcademia.Infraestrutura.DAO.Common.Uow;
 using NDDigital.DiarioAcademia.Infraestrutura.IoC;
 using NDDigital.DiarioAcademia.Infraestrutura.Orm.Common;
 using NDDigital.DiarioAcademia.Infraestrutura.Orm.Repositories;
+using NDDigital.DiarioAcademia.WebApi.Controllers.Base;
 using System.Collections.Generic;
 using System.Web.Http;
 
 namespace NDDigital.DiarioAcademia.WebApi.Controllers.Entities
 {
-    public class AlunoController : ApiController
+    public class AlunoController : BaseEntityController
     {
         private AlunoService _alunoService;
 
-        public AlunoController() //TODO: IOC
+        public AlunoController() 
         {
-            var factory = new EntityFrameworkFactory();
-
-            var unitOfWork = Injection.Get<IUnitOfWork>();
-
-            var alunoRepository = Injection.Get<IAlunoRepository>();
-
-            var turmaRepository = Injection.Get<ITurmaRepository>();
-
-            _alunoService = new AlunoService(alunoRepository, turmaRepository, unitOfWork);
+            _alunoService = new AlunoService(AlunoRepository, TurmaRepository, Uow);
         }
 
         // GET: api/Aluno

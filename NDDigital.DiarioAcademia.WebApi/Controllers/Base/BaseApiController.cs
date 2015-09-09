@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
+using NDDigital.DiarioAcademia.Infraestrutura.DAO.Common.Uow;
+using NDDigital.DiarioAcademia.Infraestrutura.IoC;
 using NDDigital.DiarioAcademia.Infraestrutura.Security.Repositories;
 using NDDigital.DiarioAcademia.WebApi.Models;
 using System.Net.Http;
@@ -13,6 +15,15 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers
         private ModelFactory _modelFactory;
         private UserRepository _userRepository = null;
 
+        #region Constructor Requirements
+        protected IUnitOfWork Uow;
+        #endregion
+
+        public BaseApiController()
+        {
+            Uow = Injection.Get<IUnitOfWork>();
+        }
+
         protected UserRepository UserRepository
         {
             get
@@ -21,9 +32,6 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers
             }
         }
 
-        public BaseApiController()
-        {
-        }
 
         protected ModelFactory TheModelFactory
         {

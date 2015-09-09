@@ -50,8 +50,7 @@ namespace NDDigital.DiarioAcademia.WebApi.Filters
                 }
                 catch (Exception ex)
                 {
-                    return false;
-                    throw;
+                    return false;throw;                    
                 }
             }
 

@@ -15,33 +15,18 @@ using NDDigital.DiarioAcademia.Infraestrutura.Security.Common;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Ellevo.Biblioteca.Seguranca;
 using NDDigital.DiarioAcademia.WebApi.Filters;
+using NDDigital.DiarioAcademia.WebApi.Controllers.Base;
 
 namespace NDDigital.DiarioAcademia.WebApi.Controllers.Authentication
 {
     [RoutePrefix("api/accounts")]
-    public class AccountsController : BaseApiController
+    public class AccountsController : BaseSecurityController
     {
         private IAuthorizationService _authservice;
 
         public AccountsController()
         {
-            var unitOfWork = Injection.Get<IAuthUnitOfWork>();
-
-            var groupRepository = Injection.Get<IGroupRepository>();
-
-            var permissionRepository = Injection.Get<IPermissionRepository>();
-
-            // var store = Injection.Get<IUserStore<User>>();
-
-            var factory = new AuthFactory(); //TODO: Implementar dois contextos
-
-            var store = new UserStore<User>(factory.Get());
-
-            var userRepository = new UserRepository(store, factory);
-
-            var accountRepository = Injection.Get<IAccountRepository>(); //var accountRepository = new AccountRepository(factory);
-
-            _authservice = new AuthorizationService(groupRepository, permissionRepository,accountRepository, unitOfWork);
+            _authservice = new AuthorizationService(GroupRepository, PermissionRepository, AccountRepository, Uow);
         }
 
         [GrouperAuthorize]

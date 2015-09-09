@@ -25,3 +25,10 @@ Para executar este projeto em seu potencial é necessário ter um servidor Node 
  * Com o prompt apontado para a pasta raíz do projeto web, insira `> gulp start`
  
 A aplicação já deve estar executando em  [http://localhost:3000](http://localhost:3000)
+
+
+##### Resumo dos comandos
+    > npm install bower -g
+    > npm install
+    > bower install
+    > gulp start
