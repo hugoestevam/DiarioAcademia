@@ -6,10 +6,12 @@ using System.Web.Http;
 using NDDigital.DiarioAcademia.Infraestrutura.Security.Contracts;
 using NDDigital.DiarioAcademia.Infraestrutura.Security.Entities;
 using NDDigital.DiarioAcademia.WebApi.Controllers.Base;
+using NDDigital.DiarioAcademia.WebApi.Filters;
 
 namespace NDDigital.DiarioAcademia.WebApi.Controllers.Authentication
 {
     [RoutePrefix("api/authentication")]
+    [GrouperAuthorize(Claim.Manager)]
     public class AuthorizationController : BaseSecurityController
     {
         private IAuthorizationService _authservice;

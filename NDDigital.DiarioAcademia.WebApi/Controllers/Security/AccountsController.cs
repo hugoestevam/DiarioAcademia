@@ -29,7 +29,6 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers.Authentication
             _authservice = new AuthorizationService(GroupRepository, PermissionRepository, AccountRepository, Uow);
         }
 
-        [GrouperAuthorize]
         [Route("user")]
         public IHttpActionResult GetUsers()
         {
@@ -45,7 +44,7 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers.Authentication
             //return Ok(this.UserRepository.Users.ToList().Select(u => this.TheModelFactory.Create(u)));
         }
 
-        //[Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         [Route("user/{id:guid}", Name = "GetUserById")]
         public async Task<IHttpActionResult> GetUser(string Id)
         {
@@ -129,6 +128,7 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers.Authentication
         }
 
         //[Authorize(Roles = "Admin")]
+    [GrouperAuthorize(Claim.Manager)]
         [Route("user/{id:guid}")]
         public async Task<IHttpActionResult> DeleteUser(string id)
         {
@@ -152,6 +152,7 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers.Authentication
         }
 
         [HttpPut]
+    [GrouperAuthorize(Claim.Manager)]
         [Route("edit")]
         public IHttpActionResult EditUser([FromBody] User user)
         {

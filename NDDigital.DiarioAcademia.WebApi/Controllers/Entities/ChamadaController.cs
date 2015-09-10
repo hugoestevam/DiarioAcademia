@@ -7,10 +7,12 @@ using NDDigital.DiarioAcademia.Infraestrutura.IoC;
 using NDDigital.DiarioAcademia.Infraestrutura.Orm.Common;
 using NDDigital.DiarioAcademia.Infraestrutura.Orm.Repositories;
 using NDDigital.DiarioAcademia.WebApi.Controllers.Base;
+using NDDigital.DiarioAcademia.WebApi.Filters;
 using System.Web.Http;
 
 namespace NDDigital.DiarioAcademia.WebApi.Controllers.Entities
 {
+    [GrouperAuthorize(Claim.Manager)]
     public class ChamadaController : BaseEntityController
     {
         private AulaService _aulaService;

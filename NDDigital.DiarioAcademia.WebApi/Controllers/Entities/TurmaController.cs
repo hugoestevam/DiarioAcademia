@@ -4,11 +4,13 @@ using NDDigital.DiarioAcademia.Aplicacao.Services;
 using NDDigital.DiarioAcademia.Infraestrutura.Orm.Common;
 using NDDigital.DiarioAcademia.Infraestrutura.Orm.Repositories;
 using NDDigital.DiarioAcademia.WebApi.Controllers.Base;
+using NDDigital.DiarioAcademia.WebApi.Filters;
 using System.Collections.Generic;
 using System.Web.Http;
 
 namespace NDDigital.DiarioAcademia.WebApi.Controllers.Entities
 {
+    [GrouperAuthorize(Claim.Manager)]
     public class TurmaController : BaseEntityController
     {
         private TurmaService _turmaService;

@@ -5,11 +5,14 @@ using NDDigital.DiarioAcademia.Infraestrutura.Security.Common;
 using NDDigital.DiarioAcademia.Infraestrutura.Security.Entities;
 using NDDigital.DiarioAcademia.Infraestrutura.Security.Repositories;
 using NDDigital.DiarioAcademia.WebApi.Controllers.Base;
+using NDDigital.DiarioAcademia.WebApi.Filters;
 using System.Web.Http;
 
 namespace NDDigital.DiarioAcademia.WebApi.Controllers.Authentication
 {
+
     [RoutePrefix("api/permission")]
+    [GrouperAuthorize(Claim.Manager_Permission)]
     public class PermissionController : BaseSecurityController
     {
         IPermissionService _permissionService;
