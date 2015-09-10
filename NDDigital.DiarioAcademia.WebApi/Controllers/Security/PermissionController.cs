@@ -9,6 +9,7 @@ using System.Web.Http;
 
 namespace NDDigital.DiarioAcademia.WebApi.Controllers.Authentication
 {
+    [RoutePrefix("api/permission")]
     public class PermissionController : BaseSecurityController
     {
         IPermissionService _permissionService;
@@ -29,6 +30,19 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers.Authentication
         public IHttpActionResult Get(int id)
         {
             return Ok(_permissionService.GetById(id));
+        }
+        // GET: api/Permission/byuser/username
+        [Route("byuser/{username}")]
+        public IHttpActionResult GetByUser(string username)
+        {
+            return Ok(_permissionService.GetByUser(username));
+        }
+
+        [Route("byuser/{groupId:int}")]
+        // GET: api/Permission/bygroup/groupId
+        public IHttpActionResult GetByGroup(int groupId)
+        {
+            return Ok(_permissionService.GetByGroup(groupId));
         }
 
         public IHttpActionResult Post([FromBody]Permission[] values)
