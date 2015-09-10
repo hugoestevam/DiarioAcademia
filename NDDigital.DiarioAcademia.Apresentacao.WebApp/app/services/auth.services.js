@@ -18,7 +18,7 @@
         var _fullname = "";
 
         var authentication = {
-            isAuth: true,
+            isAuth: false,
         };
 
         var userNameProperty = {

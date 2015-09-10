@@ -1,35 +1,42 @@
-﻿<ndd-head title="Permissões"></ndd-head>
+﻿<div class="col-sm-12">
 
-<div class="container-user">
-    <div class="row clear-padding">
-        <button class="btn btn-info" ng-click="vm.modifyAll(true)" 
-                ng-disabled="vm.showRoutes.length == vm.allPermissions.length">Selecionar Todos</button>
+    <ndd-head title="Permissões"></ndd-head>
 
-        <button class="btn btn-danger" ng-click="vm.modifyAll(false)"
-                ng-disabled="vm.showRoutes.length <= 0">Limpar Todos</button>
-        <hr />
-    </div>
-    <br />
-    <div class="row">
-        <div class="col-sm-4 clear-padding col-grid" ng-repeat="filter in vm.filters" ng-show="vm.permission[filter].length">
-            <div class="panel panel-primary text-center panel-fixed" ng-class="{'panel-success': vm.verifyPanelSuccess(filter)}">
-                <div class="panel-heading">
-                    <b class="text-capitalize">{{filter}}</b>
-                    <input type="checkbox" class="pull-left" ng-model="isAll" ng-click="vm.modifyGroupPermissions(isAll, filter)" ng-checked="vm.verifyPanelSuccess(filter)" />
-                </div>
-                <div class="panel-body">
-                    <ndd-group-checkbox array="vm.permission[filter]" compare="vm.showRoutes"
-                                        method="vm.compareState" callback="vm.onchange"></ndd-group-checkbox>
+    <div class="container-user">
+        <div class="row clear-padding">
+            <button class="btn btn-info" ng-click="vm.modifyAll(true)"
+                    ng-disabled="vm.showRoutes.length == vm.allPermissions.length">
+                Selecionar Todos
+            </button>
+
+            <button class="btn btn-danger" ng-click="vm.modifyAll(false)"
+                    ng-disabled="vm.showRoutes.length <= 0">
+                Limpar Todos
+            </button>
+            <hr />
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-sm-4 clear-padding col-grid" ng-repeat="filter in vm.filters" ng-show="vm.permission[filter].length">
+                <div class="panel panel-primary text-center panel-fixed" ng-class="{'panel-success': vm.verifyPanelSuccess(filter)}">
+                    <div class="panel-heading">
+                        <input type="checkbox" class="pull-left" ng-model="isAll" ng-click="vm.modifyGroupPermissions(isAll, filter)" ng-checked="vm.verifyPanelSuccess(filter)" />
+                        <b class="text-capitalize">{{filter}}</b>
+                    </div>
+                    <div class="panel-body">
+                        <ndd-group-checkbox array="vm.permission[filter]" compare="vm.showRoutes"
+                                            method="vm.compareState" callback="vm.onchange"></ndd-group-checkbox>
+                    </div>
                 </div>
             </div>
         </div>
+
     </div>
 
-</div>
+    <div class="col-sm-12 clear-padding text-center">
+        <hr />
+        <button class="btn btn-success" ng-disabled="!vm.hasChange" ng-click="vm.saveChanges()"><i class="fa fa-save"></i> </button>
+    </div>
 
-<div class="col-sm-12 clear-padding text-center">
-    <hr />
-    <button class="btn btn-success" ng-disabled="!vm.hasChange" ng-click="vm.saveChanges()"><i class="fa fa-save"></i> </button>
+    <ndd-confirm-exit controller="vm"><ndd-confirm-exit>
 </div>
-
-<ndd-confirm-exit controller="vm"><ndd-confirm-exit>

@@ -1,0 +1,42 @@
+﻿[
+  {
+    "outputFile": "content/theme/default/home.css",
+    "inputFile": "content/theme/default/home.less"
+  },
+  {
+    "outputFile": "content/layout/layout.css",
+    "inputFile": "content/layout/layout.less"
+  },
+  {
+    "outputFile": "content/theme/default/sidemenu.css",
+    "inputFile": "content/theme/default/sidemenu.less"
+  },
+  {
+    "outputFile": "content/theme/default/navbar.css",
+    "inputFile": "content/theme/default/navbar.less"
+  },
+  {
+    "outputFile": "content/layout/toolbar.css",
+    "inputFile": "content/layout/toolbar.less"
+  },
+  {
+    "outputFile": "content/layout/navbar.css",
+    "inputFile": "content/layout/navbar.less"
+  },
+  {
+    "outputFile": "content/animations/animations.css",
+    "inputFile": "content/animations/animations.less"
+  },
+  {
+    "outputFile": "content/theme/default/loading-bar.css",
+    "inputFile": "content/theme/default/loading-bar.less"
+  },
+  {
+    "outputFile": "content/layout/footer.css",
+    "inputFile": "content/layout/footer.less"
+  },
+  {
+    "outputFile": "content/theme/default/layout.css",
+    "inputFile": "content/theme/default/layout.less"
+  }
+]

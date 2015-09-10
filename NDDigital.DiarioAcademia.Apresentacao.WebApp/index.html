@@ -28,12 +28,17 @@
         <link rel="stylesheet" href="/content/base/morris.css">
         <link rel="stylesheet" href="/content/base/sb-admin.css">
         <link rel="stylesheet" href="/content/base/switcher.css">
+        <link rel="stylesheet" href="/content/layout/footer.css">
         <link rel="stylesheet" href="/content/layout/layout.css">
         <link rel="stylesheet" href="/content/layout/login.css">
         <link rel="stylesheet" href="/content/layout/manager.css">
+        <link rel="stylesheet" href="/content/layout/navbar.css">
+        <link rel="stylesheet" href="/content/layout/toolbar.css">
+        <link rel="stylesheet" href="/content/theme/default/footer.css">
         <link rel="stylesheet" href="/content/theme/default/home.css">
         <link rel="stylesheet" href="/content/theme/default/homeapp.css">
         <link rel="stylesheet" href="/content/theme/default/layout.css">
+        <link rel="stylesheet" href="/content/theme/default/loading-bar.css">
         <link rel="stylesheet" href="/content/theme/default/manager.css">
         <link rel="stylesheet" href="/content/theme/default/navbar.css">
         <link rel="stylesheet" href="/content/theme/default/sidemenu.css">
@@ -41,10 +46,7 @@
     <!--endbuild -->
 </head>
 
-<body style="overflow-x: hidden" >
-    <div ng-controller="shellController as shell">
-        
-
+<body ng-controller="shellController as shell">
         <div class="row container-app">
             <div id="wrapper" ng-class="{'clear-padding-left': !shell.authentication.isAuth}">
                 <div class="row" data-ng-include="'/app/templates/layout/navbar.html'"></div>
@@ -52,7 +54,6 @@
             </div>
         </div>
         <div class="row clear-margin" data-ng-include="'/app/templates/layout/footer.html'"></div>
-    </div>
 
     <!--build:js js/libs.js-->
     <!-- bower:js -->
@@ -68,7 +69,6 @@
     <script src="/bower_components/angular-breadcrumb/release/angular-breadcrumb.js"></script>
     <!-- endbower -->
     <!--endbuild-->
-
     <!--build:js js/app.js-->
     <!--inject:extentions-->
     <script src="/app/extentions/array.js"></script>
@@ -152,6 +152,9 @@
     <script src="/app/directives/ndd-head/ndd-head.directives.js"></script>
     <script src="/app/directives/ndd-modal/ndd-modal.directives.js"></script>
     <script src="/app/directives/ndd-panel/ndd-panel.directives.js"></script>
+    <script src="/app/directives/ndd-sidemenu-option/ndd-sidemenu-option.directives.js"></script>
+    <script src="/app/directives/ndd-toolbar/ndd-toolbar.directives.js"></script>
+    <script src="/app/directives/ndd-toolbar-option/ndd-toolbar-option.directives.js"></script>
     <!--endinject-->
     <!--inject:templates-->
     <script src="/task/temp/templates.js"></script>

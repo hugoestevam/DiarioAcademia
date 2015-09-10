@@ -1,11 +1,12 @@
-﻿<div class="container-user fadeIn enter-fadeIn text-capitalize">
-    <ndd-head title="Grupos de {{vm.user.firstName + ' ' + vm.user.lastName }}"></ndd-head>
+﻿<div class="fadeIn enter-fadeIn text-capitalize">
+    <ndd-head title="Grupos: {{vm.user.firstName + ' ' + vm.user.lastName }}"></ndd-head>
 </div>
 
 <hr style="margin-top: 2%" />
 
 <div class="container-user fadeIn enter-fadeIn">
     <div class="row">
+        <h3 ng-show="vm.groups.length <= 0" class="text-center">Não há grupos cadastrados</h3>
         <div class="col-sm-offset-3 col-sm-6 clear-padding">
             <ndd-group-checkbox array="vm.groups" compare="vm.user.groups" callback="vm.onchange"></ndd-group-checkbox>
         </div>
@@ -14,7 +15,7 @@
     <div class="row">
         <div class="col-xs-12 text-center clear-padding">
             <hr />
-            <button class="btn btn-default pull-left" ui-sref="manager.user" style="margin-left:1%;">
+            <button class="btn btn-default pull-left" ui-sref="manager.useredit({userId: vm.user.id})" style="margin-left:1%;">
                 <i class="fa fa-chevron-circle-left " style="font-size: large"></i>
             </button>
 

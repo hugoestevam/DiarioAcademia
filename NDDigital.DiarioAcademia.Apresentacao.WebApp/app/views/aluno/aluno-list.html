@@ -1,7 +1,7 @@
-﻿<div class="col-lg-8">
+﻿<div class="col-sm-11">
     <ndd-head title="{{vm.title}}"></ndd-head>
 
-    <div class="col-lg-12 clear-padding">
+    <div class="col-sm-12 clear-padding">
         <div class="jumbotron">
             <div>
                 <input class="form-control" type="text" ng-model="vm.criterioDeBusca" placeholder="O que você está procurando?" />
@@ -11,15 +11,12 @@
                         <th>Descrição do aluno</th>
                     </tr>
                     <tr ng-class="" ng-repeat="aluno in vm.alunos | filter: vm.criterioDeBusca">
-                        <td><input type="checkbox" ng-click="vm.alunoSelecionado = aluno" /></td>
+                        <td><input type="radio" ng-click="vm.alunoSelecionado = aluno" name="chkAluno"/></td>
                         <td>{{aluno.nome}}</td>
                     </tr>
                 </table>
-                <a ui-sref="aluno.details( { alunoId : vm.alunoSelecionado.id  }  )">
-                    <button class="btn btn-info">Editar {{vm.alunoSelecionado.nome}}</button>
-                </a>
-                <button class="btn btn-danger" ng-click="vm.delete(vm.alunoSelecionado)" ng-disabled="!true">Excluir</button>
             </div>
         </div>
     </div>
 </div>
+<ndd-toolbar cb-edit="vm.edit" state-new="aluno.create"  cb-remove="vm.remove"></ndd-toolbar>

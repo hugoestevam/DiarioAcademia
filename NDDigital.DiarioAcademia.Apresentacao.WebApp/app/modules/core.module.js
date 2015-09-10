@@ -50,9 +50,16 @@
         $rootScope.$on('$stateChangeStart',
            function (event, toState, toParams, fromState, fromParams) {
 
-               if (authService.authentication.isAuth && toState.name == 'home') {
-                   event.preventDefault();
-                   return $state.go('homeapp');
+               if (authService.authentication.isAuth) {
+                   if (toState.name == 'home') {
+                       event.preventDefault();
+                       return $state.go('homeapp');
+                   }
+
+                   if (toState.name == 'login') {
+                       event.preventDefault();
+                       return $state.go('homeapp');
+                   }
                }
 
                if (toState.data.allowAnnonymous) return;
@@ -70,7 +77,6 @@
                } else {
                    authService.lastState = toState.name;
                    event.preventDefault();
-
                    $state.go(stateToGo);
                }
 

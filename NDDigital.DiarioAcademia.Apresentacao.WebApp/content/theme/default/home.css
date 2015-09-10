@@ -9,9 +9,10 @@
   user-select: none;
 }
 .container-home {
-  height: calc(100% - 64px) !important;
+  height: calc(100% - 10px) !important;
   width: 100%;
   position: fixed;
+  margin-top: -90px;
 }
 .carousel-control.left,
 .carousel-control.right {
@@ -59,4 +60,3 @@
 .carousel-indicators {
   pointer-events: all !important;
 }
-/*# sourceMappingURL=home.css.map */

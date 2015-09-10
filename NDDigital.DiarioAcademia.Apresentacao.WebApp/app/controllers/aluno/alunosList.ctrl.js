@@ -1,7 +1,7 @@
 ﻿(function (angular) {
     'use strict';
     //using
-    alunoListCtrl.$inject = ["alunoService"];
+    alunoListCtrl.$inject = ["alunoService", "$state"];
 
     //namespace
     angular
@@ -9,7 +9,7 @@
         .controller("alunoListCtrl", alunoListCtrl);
 
     //class
-    function alunoListCtrl(alunoService) {
+    function alunoListCtrl(alunoService, $state) {
         var vm = this;
         vm.title = "Lista de Alunos";
         vm.classe = "selecionado";
@@ -23,12 +23,19 @@
             makeRequest();
         }
 
+
         //public methods
-        vm.delete = function (aluno) {
-            alunoService.delete(aluno).then(function () {
-                vm.alunos.remove(aluno);
+        vm.edit = function () {
+            if (vm.alunoSelecionado)
+                $state.go('aluno.details', { alunoId: vm.alunoSelecionado.id });
+        }
+
+        vm.remove = function () {
+            if (!vm.alunoSelecionado)
+                return;
+            alunoService.delete(vm.alunoSelecionado).then(function () {
+                vm.alunos.remove(vm.alunoSelecionado);
             });
-            makeRequest();
         }
 
         //private methods
