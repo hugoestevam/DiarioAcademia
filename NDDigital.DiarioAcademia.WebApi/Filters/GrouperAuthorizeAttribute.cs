@@ -5,8 +5,11 @@ using NDDigital.DiarioAcademia.Infraestrutura.IoC;
 using NDDigital.DiarioAcademia.Infraestrutura.Security.Contracts;
 using NDDigital.DiarioAcademia.Infraestrutura.Security.Entities;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
+using System.Security.Claims;
 using System.Web;
 using System.Web.Http;
 using System.Web.Http.Controllers;
@@ -16,6 +19,9 @@ namespace NDDigital.DiarioAcademia.WebApi.Filters
     public class GrouperAuthorizeAttribute : AuthorizeAttribute
     {
         private IAuthorizationService _authservice;
+
+        public string Permission { get; set; }
+        public string[] Permissions { get; set; }
 
         public GrouperAuthorizeAttribute()
         {
@@ -33,29 +39,60 @@ namespace NDDigital.DiarioAcademia.WebApi.Filters
 
         }
 
+
         protected override bool IsAuthorized(HttpActionContext actionContext)
         {
-            if (base.IsAuthorized(actionContext))
+            var result = base.IsAuthorized(actionContext);
+
+            if (result)
             {
-                var queryStringCollection = HttpUtility.ParseQueryString(actionContext.Request.RequestUri.Query);
+                ClaimsIdentity claimsIdentity;
+                var httpContext = HttpContext.Current;
+                if (!(httpContext.User.Identity is ClaimsIdentity))
+                      return false;
                 
-                try
-                {
 
-                    string username = queryStringCollection["username"];
+                claimsIdentity = httpContext.User.Identity as ClaimsIdentity;
+                var subIdClaims = claimsIdentity.FindFirst("user");
+                var locIdClaims = claimsIdentity.FindAll("claim");
+                if (subIdClaims == null || locIdClaims == null)
+                    // just extra defense, not sure it should happen
+                    return false;
 
-                    string permissionId = queryStringCollection["permissionid"];
+                var userSubId = subIdClaims.Value;
+                var userLocId = locIdClaims.Select(l=>l.Value).ToArray();
 
-                    return _authservice.IsAuthorized(username, permissionId);
-                }
-                catch (Exception ex)
-                {
-                    return false;throw;                    
-                }
+                result = _authservice.IsAuthorized(userSubId, userLocId);
             }
 
 
-            return false;
+            return result;
+
         }
+        /* protected override bool IsAuthorized(HttpActionContext actionContext)
+      {
+          if (base.IsAuthorized(actionContext))
+          {
+              var queryStringCollection = HttpUtility.ParseQueryString(actionContext.Request.RequestUri.Query);
+
+              try
+              {
+
+                  string username = queryStringCollection["username"];
+
+                  string permissionId = queryStringCollection["permissionid"];
+
+                  return _authservice.IsAuthorized(username, permissionId);
+              }
+              catch (Exception ex)
+              {
+                  return false;throw;                    
+              }
+          }
+
+
+          return false;
+      }*/
+
     }
 }
