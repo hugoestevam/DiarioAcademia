@@ -9,7 +9,7 @@
 }
 .navbar-inverse .navbar-nav > li > a {
   text-shadow: none !important;
-  color: #000 !important;
+  color: #4D4D4D !important;
 }
 .navbar-brand {
   color: white !important;
@@ -36,14 +36,14 @@
 .nav-options-custom {
   background-color: #FBFBFB !important;
   border-bottom: solid #F0F0F0 1px;
-  min-height: 50px !important;
+  min-height: 40px !important;
   height: 40px;
   margin-top: 50px;
   padding-left: 10px;
   z-index: 3 !important;
 }
 .option-nav {
-  color: black;
+  color: #4D4D4D !important;
   cursor: pointer;
 }
 .option-nav:hover {

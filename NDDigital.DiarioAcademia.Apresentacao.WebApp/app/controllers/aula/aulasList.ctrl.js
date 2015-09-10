@@ -9,7 +9,7 @@
         .controller("aulaListCtrl", aulaListCtrl);
 
     //class
-    function aulaListCtrl(aulaService) {
+    function aulaListCtrl(aulaService, $state) {
         var vm = this;
         vm.title = "Lista de Aulas";
         vm.classe = "selecionado";
@@ -24,9 +24,11 @@
         }
 
         //public methods
-        vm.delete = function (aula) {
-            aulaService.delete(aula).then(function () {
-                vm.aulas.remove(aula);
+        vm.delete = function () {
+            if (!vm.aulaSelecionada)
+                return;
+            aulaService.delete(vm.aulaSelecionada).then(function () {
+                vm.aulas.remove(vm.aulaSelecionada);
             });
         }
 

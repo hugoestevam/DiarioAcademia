@@ -34,5 +34,9 @@
   {
     "outputFile": "content/layout/footer.css",
     "inputFile": "content/layout/footer.less"
+  },
+  {
+    "outputFile": "content/theme/default/layout.css",
+    "inputFile": "content/theme/default/layout.less"
   }
 ]

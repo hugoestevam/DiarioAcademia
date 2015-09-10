@@ -94,8 +94,12 @@
     <Content Include="app\directives\ndd-modal\ndd-modal.html" />
     <Content Include="app\directives\ndd-panel\ndd-panel.directives.js" />
     <Content Include="app\directives\ndd-panel\ndd-panel.html" />
+    <Content Include="app\directives\ndd-toolbar-option\ndd-toolbar-option.directives.js" />
+    <Content Include="app\directives\ndd-toolbar-option\ndd-toolbar-option.html" />
     <Content Include="app\directives\ndd-sidemenu-option\ndd-sidemenu-option.directives.js" />
     <Content Include="app\directives\ndd-sidemenu-option\ndd-sidemenu-option.html" />
+    <Content Include="app\directives\ndd-toolbar\ndd-toolbar.directives.js" />
+    <Content Include="app\directives\ndd-toolbar\ndd-toolbar.html" />
     <Content Include="app\extentions\array.js" />
     <Content Include="app\extentions\string.js" />
     <Content Include="app\factories\changes.factory.js" />

@@ -1,5 +1,6 @@
 (function(angular){
-	angular.module('directives.module').directive('nddToolbar', nddToolbar);
+	angular.module('directives.module')
+		.directive('nddToolbar', nddToolbar);
 	
 	function nddToolbar(){
 		return{
@@ -8,13 +9,17 @@
 			replace: false,
 			transclude: false,
 			scope:{
-				
+				cbEdit: "=",
+				cbNew: "=",
+				cbRemove: "=",
+				stateNew: "@"
 			},
 			templateUrl: '/app/directives/ndd-toolbar/ndd-toolbar.html'
 		}
 		
 		function link(scope, element, attrs){
-			
 		}
+
+		
 	}
 })(window.angular);

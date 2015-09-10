@@ -1,9 +1,9 @@
 ﻿(function (angular) {
 
     angular.module('directives.module')
-        .directive('nddSidemenuOption', nddSidemenuOption);
+        .directive('nddToolbarOption', nddToolbarOption);
 
-    function nddSidemenuOption() {
+    function nddToolbarOption() {
         controller.$inject = ['$state'];
 
         // Usage:
@@ -15,13 +15,11 @@
             transclude: true,
             replace: true,
             scope: {
-                routeShow: "@",
                 route: "@",
                 name: "@",
-                state: "@",
                 icon: "@"
             },
-            templateUrl: 'app/directives/ndd-sidemenu-option/ndd-sidemenu-option.html'
+            templateUrl: 'app/directives/ndd-toolbar-option/ndd-toolbar-option.html'
         };
 
         function link(scope, element, attrs) {

@@ -27,10 +27,10 @@
 /*#endregion*/
 /*#region Slider Animation*/
 .slider-enter {
-  -moz-transition: 2s;
-  -o-transition: 2s;
-  -webkit-transition: 2s;
-  transition: 2s;
+  -moz-transition: 1s;
+  -o-transition: 1s;
+  -webkit-transition: 1s;
+  transition: 1s;
   -moz-transition-delay: 0.9s;
   -o-transition-delay: 0.9s;
   -webkit-transition-delay: 0.9s;

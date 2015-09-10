@@ -1,59 +1,52 @@
-﻿
-<ndd-head title="Usuarios"></ndd-head>
+﻿<div class="col-sm-11">
+    <ndd-head title="Usuarios"></ndd-head>
 
-<div class="container-user">
-    <div class="row">
-        <div class="col-md-5" style="padding-left: 0">
-            <div class="input-group">
-                <div class="input-group-btn">
-                    <button disabled type="button" class="btn btn-default" style="cursor:default;"><i class="fa fa-search"></i></button>
+    <div class="container-user">
+        <div class="row">
+            <div class="col-md-5" style="padding-left: 0">
+                <div class="input-group">
+                    <div class="input-group-btn">
+                        <button disabled type="button" class="btn btn-default" style="cursor:default;"><i class="fa fa-search"></i></button>
+                    </div>
+                    <input type="text" class="form-control ng-pristine ng-valid ng-touched" ng-model="nameFilter" aria-label="">
                 </div>
-                <input type="text" class="form-control ng-pristine ng-valid ng-touched" ng-model="nameFilter" aria-label="">
-            </div>
 
-            <div class="col-md-7">&nbsp;</div>
-           
+                <div class="col-md-7">&nbsp;</div>
+
+            </div>
+        </div>
+
+        <hr />
+
+        <div class="row">
+            <table class="table table-hover table-responsive table-condensed">
+                <thead>
+                    <tr>
+                        <th>&nbsp;</th>
+                        <th>Nome</th>
+                        <th>Login</th>
+                        <th>Email</th>
+                        <th>&nbsp;</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="user in vm.users | filter: nameFilter">
+                        <td><input type="radio" name="rdUser" ng-click="vm.selectedUser = user" /></td>
+                        <td class="text-capitalize">{{user.fullName}}</td>
+                        <td>{{user.userName}}</td>
+                        <td>{{user.email}}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <pagination ng-model="vm.currentPage"
+                        total-items="vm.countUsers"
+                        max-size="vm.maxSize"
+                        boundary-links="true">
+            </pagination>
         </div>
     </div>
-
-    <br />
-
-    <div class="row">
-        <table class="table table-hover table-responsive table-condensed">
-            <thead>
-                <tr>
-                    <th>Nome</th>
-                    <th>Login</th>
-                    <th>Email</th>
-                    <th>&nbsp;</th>
-                    <th>&nbsp;</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr ng-repeat="user in vm.users | filter: nameFilter">
-                    <td class="text-capitalize">{{user.firstName + " " + user.lastName}}}</td>
-                    <td>{{user.username}}</td>
-                    <td>{{user.email}}</td>
-                    <td class="text-right">
-                        <button class="btn btn-info" ng-click="vm.edit(user)">
-                            <i class="fa fa-pencil-square-o"></i>
-                        </button>
-                    </td>
-                    <td>
-                        <button class="btn btn-danger" ng-click="vm.modal(user)" data-toggle="modal" data-target="#modelRemoveUser">
-                            <i class="fa fa-user-times"></i>
-                        </button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>    
-        <pagination ng-model="vm.currentPage"
-                    total-items="vm.countUsers"
-                    max-size="vm.maxSize"
-                    boundary-links="true">
-        </pagination>
-    </div>
 </div>
+<ndd-toolbar cb-edit="vm.edit" cb-remove="vm.cbRemove"></ndd-toolbar>
 
 <ndd-modal target="modelRemoveUser" label="{{vm.titleModelRemove}}" callback="vm.remove">
     {{vm.bodyModelRemove}}

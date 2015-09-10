@@ -36,8 +36,8 @@
             $state.go('login');
         };
 
-        self.isVisible = function (state) {
-            return self.authorization.isAuthorized(state);
+        self.isAuthorized = function (permission) {
+            return self.authorization.isAuthorized(permission);
         };
 
         self.isLogged = function () {
