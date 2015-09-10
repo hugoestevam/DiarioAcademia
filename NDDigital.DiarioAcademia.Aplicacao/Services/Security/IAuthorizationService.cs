@@ -123,6 +123,8 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
         {
             var permissions = _permissionRepository.GetByUser(username);
 
+            if (_groupRepository.IsAdmin(username)) return true; ;
+
             return permissions.Any(p => p.PermissionId == permissionId);
         }
 
@@ -130,12 +132,12 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
         {
             var permissions = _permissionRepository.GetByUser(username);
 
-            var isAuth = false;
+            var isAuth =  _groupRepository.IsAdmin(username);;
 
             foreach (var item in permissionIds)
             {
-                isAuth = permissions.Any(p => p.PermissionId == item);
                 if (isAuth) break;
+                isAuth = permissions.Any(p => p.PermissionId == item);
             }
             return isAuth;
         }

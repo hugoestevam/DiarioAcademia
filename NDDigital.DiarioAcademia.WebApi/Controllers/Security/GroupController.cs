@@ -8,11 +8,13 @@ using NDDigital.DiarioAcademia.Infraestrutura.Security.Contracts;
 using NDDigital.DiarioAcademia.Infraestrutura.Security.Entities;
 using NDDigital.DiarioAcademia.Infraestrutura.Security.Repositories;
 using NDDigital.DiarioAcademia.WebApi.Controllers.Base;
+using NDDigital.DiarioAcademia.WebApi.Filters;
 using System;
 using System.Web.Http;
 
 namespace NDDigital.DiarioAcademia.WebApi.Controllers.Authentication
 {
+    [GrouperAuthorize(Claim.Manager_Group)]
     public class GroupController : BaseSecurityController
     {
         private IGroupService _groupService;

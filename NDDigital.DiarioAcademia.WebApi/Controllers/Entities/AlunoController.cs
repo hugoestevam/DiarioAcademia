@@ -8,11 +8,13 @@ using NDDigital.DiarioAcademia.Infraestrutura.IoC;
 using NDDigital.DiarioAcademia.Infraestrutura.Orm.Common;
 using NDDigital.DiarioAcademia.Infraestrutura.Orm.Repositories;
 using NDDigital.DiarioAcademia.WebApi.Controllers.Base;
+using NDDigital.DiarioAcademia.WebApi.Filters;
 using System.Collections.Generic;
 using System.Web.Http;
 
 namespace NDDigital.DiarioAcademia.WebApi.Controllers.Entities
 {
+    [GrouperAuthorize(Claim.Aluno)]
     public class AlunoController : BaseEntityController
     {
         private AlunoService _alunoService;
@@ -29,6 +31,7 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers.Entities
             return list;
         }
 
+        [GrouperAuthorize(Claim.Aluno_Details)]
         // GET: api/Aluno/5
         public AlunoDTO Get(int id)
         {

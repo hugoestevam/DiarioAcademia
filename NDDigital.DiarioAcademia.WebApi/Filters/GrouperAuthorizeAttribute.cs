@@ -20,79 +20,65 @@ namespace NDDigital.DiarioAcademia.WebApi.Filters
     {
         private IAuthorizationService _authservice;
 
-        public string Permission { get; set; }
-        public string[] Permissions { get; set; }
+        private List<string> Permissions { get; set; }
 
         public GrouperAuthorizeAttribute()
         {
-            var unitOfWork = Injection.Get<IUnitOfWork>();
-
-            var groupRepository = Injection.Get<IGroupRepository>();
-
-            var permissionRepository = Injection.Get<IPermissionRepository>();
-
-            var store = Injection.Get<IUserStore<User>>();// var store = new MyUserStore(factory.Get());
-
-            var accountRepository = Injection.Get<IAccountRepository>(); // var accountRepository = new AccountRepository(factory);            
-
-            _authservice = new AuthorizationService(groupRepository, permissionRepository, accountRepository, unitOfWork);
+            _authservice = new AuthorizationService(
+                Injection.Get<IGroupRepository>(),
+                Injection.Get<IPermissionRepository>(),
+                Injection.Get<IAccountRepository>(),
+                Injection.Get<IUnitOfWork>()
+                );
 
         }
+        public GrouperAuthorizeAttribute(params string[] permissions):this()
+        {
+            Permissions = new List<string>();
+            
+            foreach (var item in permissions)
+            {
 
+                var split = item.Split('.');
+                Permissions.AddRange(split);
+            }
+
+            Permissions = Permissions.Distinct().ToList();
+            Permissions.RemoveAll(x => x == "");
+        }
+
+        private void ConcatAll(string[] items)
+        {
+            
+
+        }
 
         protected override bool IsAuthorized(HttpActionContext actionContext)
         {
-            var result = base.IsAuthorized(actionContext);
+             var result = base.IsAuthorized(actionContext);
+             
+             if (result)
+             {
+                 ClaimsIdentity claimsIdentity;
+                 var httpContext = HttpContext.Current;
+                 if (!(httpContext.User.Identity is ClaimsIdentity))
+                       return false;
+                 
+                 claimsIdentity = httpContext.User.Identity as ClaimsIdentity;
+             
+                 var subIdClaims = claimsIdentity.FindFirst("user");
 
-            if (result)
-            {
-                ClaimsIdentity claimsIdentity;
-                var httpContext = HttpContext.Current;
-                if (!(httpContext.User.Identity is ClaimsIdentity))
-                      return false;
-                
+                if (subIdClaims == null) return false;
 
-                claimsIdentity = httpContext.User.Identity as ClaimsIdentity;
-                var subIdClaims = claimsIdentity.FindFirst("user");
-                var locIdClaims = claimsIdentity.FindAll("claim");
-                if (subIdClaims == null || locIdClaims == null)
-                    // just extra defense, not sure it should happen
-                    return false;
-
-                var userSubId = subIdClaims.Value;
-                var userLocId = locIdClaims.Select(l=>l.Value).ToArray();
-
-                result = _authservice.IsAuthorized(userSubId, userLocId);
-            }
-
-
-            return result;
+                 var userSubId = subIdClaims.Value;
+             
+                 result = _authservice.IsAuthorized(userSubId, Permissions.ToArray());
+             }
+             
+             
+             return result;
 
         }
-        /* protected override bool IsAuthorized(HttpActionContext actionContext)
-      {
-          if (base.IsAuthorized(actionContext))
-          {
-              var queryStringCollection = HttpUtility.ParseQueryString(actionContext.Request.RequestUri.Query);
-
-              try
-              {
-
-                  string username = queryStringCollection["username"];
-
-                  string permissionId = queryStringCollection["permissionid"];
-
-                  return _authservice.IsAuthorized(username, permissionId);
-              }
-              catch (Exception ex)
-              {
-                  return false;throw;                    
-              }
-          }
-
-
-          return false;
-      }*/
 
     }
 }

@@ -22,25 +22,6 @@ namespace NDDigital.DiarioAcademia.WebApi.Providers
             return Task.FromResult<object>(null);
         }
 
-        private AuthorizationService _authservice;
-        private PermissionService _permissionService;
-
-        public CustomOAuthProvider()
-        {
-            var unitOfWork = Injection.Get<IUnitOfWork>();
-
-            var groupRepository = Injection.Get<IGroupRepository>();
-
-            var permissionRepository = Injection.Get<IPermissionRepository>();
-
-            var store = Injection.Get<IUserStore<User>>();// var store = new MyUserStore(factory.Get());
-
-            var accountRepository = Injection.Get<IAccountRepository>(); // var accountRepository = new AccountRepository(factory);            
-
-            _authservice = new AuthorizationService(groupRepository, permissionRepository, accountRepository, unitOfWork);
-
-            _permissionService = new PermissionService(permissionRepository,unitOfWork);
-        }
 
         public override async Task GrantResourceOwnerCredentials(OAuthGrantResourceOwnerCredentialsContext context)
         {
@@ -58,8 +39,8 @@ namespace NDDigital.DiarioAcademia.WebApi.Providers
                 return;
             }
 
-            var hash = Criptografia.Descriptografar(user.PasswordHash);
-            if (context.Password != hash)
+            var hash = Criptografia.Criptografar(context.Password);
+            if (user.PasswordHash != hash)
             {
                 context.SetError("invalid_grant", "The password is incorrect.");
                 return;
@@ -72,20 +53,11 @@ namespace NDDigital.DiarioAcademia.WebApi.Providers
             }
 
 
-            //ClaimsIdentity oAuthIdentity = await user.GenerateUserIdentityAsync(userRepository, "JWT");
-
-            var permissions = _permissionService.GetByUser(context.UserName);
-
             var identity = new ClaimsIdentity(context.Options.AuthenticationType);
             identity.AddClaim(new Claim("user", context.UserName));
 
-            foreach (var p in permissions)
-                identity.AddClaim(new Claim("claim",p.PermissionId));
-            // var ticket = new AuthenticationTicket(oAuthIdentity, null);
-
             context.Validated(identity);
 
-           // Task.FromResult<object>(null);
         }
     }
 }
