@@ -22,7 +22,6 @@
     Array.prototype.containsObject = function (obj) {
         return this.indexOfObject(obj) >= 0; 
     }
-
     
     Array.prototype.any = function(property,expected) {
         var founded = false;

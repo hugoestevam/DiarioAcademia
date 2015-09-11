@@ -13,14 +13,16 @@
             getDefaultPermissions: getDefaultPermissions,
             getFilters: getFilters,
             createPermission: createPermission,
-            filterPermissions: filterPermissions
+            filterPermissions: filterPermissions,
+            containsPermissionByName: containsPermissionByName,
+            getByName: getByName
         };
 
         //private methods
         function getCustomPermissions() {
             var customPermissions = [
-                { name: "action.deleteAluno", displayName: "Excluir Aluno", permissionId: '22' },
-                { name: "action.addTurma", displayName: "Adicionar Turma", permissionId: '23' }];
+                { name: "action.deleteAluno", displayName: "Excluir Aluno", permissionId: '24' },
+                { name: "action.addTurma", displayName: "Adicionar Turma", permissionId: '25' }];
             return customPermissions;
         }
 
@@ -68,7 +70,8 @@
             return {
                 name: state.name,
                 displayName: state.data.displayName,
-                permissionId: state.data.$$permissionId
+                permissionId: state.data.$$permissionId,
+                parent: state.parent || ""
             };
         }
 
@@ -98,6 +101,19 @@
             return permissionGroups;
         }
 
+        function getByName(permissions, name) {
+            if (!permissions)
+                return undefined;
+            for (var i = 0; i < permissions.length; i++) {
+                if (permissions[i].indexOf(name) >= 0)
+                    return permissions[i];
+            }
+            return undefined;
+        }
+
+        function containsPermissionByName(permissions, name) {           
+            return getByName(permissions, name) != undefined;
+        }
 
     }
 })(window.angular);

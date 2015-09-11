@@ -36,7 +36,7 @@
             logger.success("Turma com id " + id + " encontrada", null, "Busca");
 
             return $http.get(serviceUrl + "/" + id)
-                            .then(logger.successCallback);
+                            .then(logger.emptyMessageCallback);
         };
 
         self.edit = function (turma) {
