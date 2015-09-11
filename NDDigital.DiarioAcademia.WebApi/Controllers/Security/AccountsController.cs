@@ -20,7 +20,7 @@ using NDDigital.DiarioAcademia.WebApi.Controllers.Base;
 namespace NDDigital.DiarioAcademia.WebApi.Controllers.Authentication
 {
     [RoutePrefix("api/accounts")]
-    [GrouperAuthorize(Claim.Manager)]
+   // [GrouperAuthorize(Claim.Manager)]
     public class AccountsController : BaseSecurityController
     {
         private IAuthorizationService _authservice;
@@ -65,8 +65,8 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers.Authentication
             return NotFound();
         }
 
-        [GrouperAuthorize(Basic = true)]
         [Route("user/username/{username}")]
+        [GrouperAuthorize(Basic = true)]
         public IHttpActionResult GetUserByName(string username)
         {
             //Only SuperAdmin or Admin can delete users (Later when implement roles)
