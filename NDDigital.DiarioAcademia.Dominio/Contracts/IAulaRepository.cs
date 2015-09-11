@@ -8,6 +8,6 @@ namespace NDDigital.DiarioAcademia.Dominio.Contracts
     {
         Aula GetByData(DateTime data);
 
-        IList<Aula> GetAllByTurma(int ano);
+        IList<Aula> GetAllByTurmaId(int id);
     }
 }

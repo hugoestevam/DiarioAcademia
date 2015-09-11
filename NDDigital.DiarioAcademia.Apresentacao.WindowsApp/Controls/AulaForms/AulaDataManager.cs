@@ -22,9 +22,7 @@ namespace NDDigital.DiarioAcademia.Apresentacao.WindowsApp.Controls.AulaForms
 
         public AulaDataManager()
         {
-            var _factory = Injection.Get<UnitOfWorkFactory>(); //new AdoNetFactory();
-
-            var unitOfWork = Injection.Get<IUnitOfWork>(); //new ADOUnitOfWork(_factory);
+            var unitOfWork = Injection.Get<IUnitOfWork>(); 
 
             var aulaRepository = Injection.Get<IAulaRepository>();
 

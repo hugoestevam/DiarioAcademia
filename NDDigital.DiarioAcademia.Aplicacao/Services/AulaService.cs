@@ -105,10 +105,10 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
             };
         }
 
-        public IEnumerable<AulaDTO> GetAllByTurma(int ano)
+        public IEnumerable<AulaDTO> GetAllByTurma(int id)
         {
             return _aulaRepository
-                .GetAllByTurma(ano)
+                .GetAllByTurmaId(id)
                 .Select(aula => new AulaDTO(aula))
                 .ToList();
         }

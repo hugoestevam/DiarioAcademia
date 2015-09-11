@@ -91,7 +91,7 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.SQL.Repositories
             }
         }
 
-        public IList<Aula> GetAllByTurma(int ano)
+        public IList<Aula> GetAllByTurmaId(int id)
         {
             throw new NotImplementedException();
         }

@@ -25,11 +25,13 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.SQL.Modules
             Bind<IPresencaRepository>().To<PresencaRepositorySql>().WithConstructorArgument(type, factory);
 
             var authFactory = new AuthFactory();
-            Bind<IAuthUnitOfWork>().To<AuthUnitOfWork>().WithConstructorArgument("factory", authFactory);
-            Bind<IUserStore<User>>().To<IdentityUserStore>().WithConstructorArgument("factory", authFactory);
-            Bind<IAccountRepository>().To<AccountRepository>().WithConstructorArgument("factory", authFactory);
-            Bind<IGroupRepository>().To<GroupRepository>().WithConstructorArgument("factory", authFactory);
-            Bind<IPermissionRepository>().To<PermissionRepository>().WithConstructorArgument("factory", authFactory);
+            var typeAuth = authFactory.GetType();
+
+            Bind<IAuthUnitOfWork>().To<AuthUnitOfWork>().WithConstructorArgument(typeAuth, authFactory);
+            Bind<IUserStore<User>>().To<IdentityUserStore>().WithConstructorArgument(typeAuth, authFactory);
+            Bind<IAccountRepository>().To<AccountRepository>().WithConstructorArgument(typeAuth, authFactory);
+            Bind<IGroupRepository>().To<GroupRepository>().WithConstructorArgument(typeAuth, authFactory);
+            Bind<IPermissionRepository>().To<PermissionRepository>().WithConstructorArgument(typeAuth, authFactory);
         }
     }
 }
