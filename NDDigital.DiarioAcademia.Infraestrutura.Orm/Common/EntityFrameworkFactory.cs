@@ -8,7 +8,7 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Common
 {
     public class EntityFrameworkFactory : UnitOfWorkFactory, IDisposable
     {
-        private EntityFrameworkContext dataContext;       
+        private static EntityFrameworkContext dataContext;       
 
         public EntityFrameworkContext Get()
         {

@@ -37,7 +37,7 @@ namespace NDDigital.DiarioAcademia.UnitTests.Servicos
 
         [TestMethod]
         [TestCategory(TestCategory)]
-        public void Deveria_Persistir_Aluno_SQL_Test()
+        public void Deveria_Chamar_Servico_de_Persistir_Aluno_Test()
         {
             //arrange
             var aluno = ObjectBuilder.CreateAluno();
@@ -60,7 +60,7 @@ namespace NDDigital.DiarioAcademia.UnitTests.Servicos
 
         [TestMethod]
         [TestCategory(TestCategory)]
-        public void Deveria_Buscar_Aluno_SQL_Test()
+        public void Deveria_Chamar_Servico_de_Buscar_Aluno_Test()
         {
             //arrange
             _alunoRepository
@@ -76,7 +76,7 @@ namespace NDDigital.DiarioAcademia.UnitTests.Servicos
 
         [TestMethod]
         [TestCategory(TestCategory)]
-        public void Deveria_Editar_Aluno_SQL_Test()
+        public void Deveria_Chamar_Servico_de_Editar_Aluno_Test()
         {
             //arrange
             var aluno = ObjectBuilder.CreateAluno();
@@ -103,7 +103,7 @@ namespace NDDigital.DiarioAcademia.UnitTests.Servicos
 
         [TestMethod]
         [TestCategory(TestCategory)]
-        public void Deveria_Buscar_Todas_Alunos_SQL_Test()
+        public void Deveria_Chamar_Servico_de_Buscar_Todas_Alunos_Test()
         {
             //arrange
             var alunos = new List<Aluno>() { ObjectBuilder.CreateAluno() };
@@ -121,7 +121,7 @@ namespace NDDigital.DiarioAcademia.UnitTests.Servicos
 
         [TestMethod]
         [TestCategory(TestCategory)]
-        public void Deveria_Remover_Aluno_SQL_Test()
+        public void Deveria_Chamar_Servico_de_Remover_Aluno_Test()
         {
             //arrange
             _alunoRepository

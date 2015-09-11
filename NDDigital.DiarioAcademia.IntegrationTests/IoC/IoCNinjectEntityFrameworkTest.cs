@@ -24,7 +24,7 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.IoC
 
         [TestMethod]
         [TestCategory(TestCategory)]
-        public void Save_Turma_IoC_EF_Test()
+        public void Salva_Turma_IoC_EF_Test()
         {
             Turma t = ObjectBuilder.CreateTurma();
 
@@ -35,6 +35,14 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.IoC
             Turma turmaAdcionada = repository.Add(t);
 
             Assert.IsTrue(turmaAdcionada.Id > 0);
+        }
+
+        [TestMethod]
+        [TestCategory(TestCategory)]
+        public void Contexts_IoC_EF_Test()
+        {
+           
+
         }
     }
 }

@@ -12,7 +12,7 @@ namespace Infrastructure.DAO.ORM.Common.Base
 {
     public abstract class RepositoryBaseEF<T> where T : Entity
     {
-        protected EntityFrameworkContext dataContext;
+        public EntityFrameworkContext dataContext;
         protected readonly IDbSet<T> dbset;
 
         protected RepositoryBaseEF(EntityFrameworkFactory databaseFactory)

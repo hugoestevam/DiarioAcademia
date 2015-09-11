@@ -11,7 +11,7 @@ namespace Infrastructure.DAO.ORM.Common
 {
     public class EntityFrameworkUnitOfWork : IUnitOfWork
     {
-        private EntityFrameworkContext dbContext = null;
+        private EntityFrameworkContext dbContext;
 
         private readonly EntityFrameworkFactory dbFactory;
 

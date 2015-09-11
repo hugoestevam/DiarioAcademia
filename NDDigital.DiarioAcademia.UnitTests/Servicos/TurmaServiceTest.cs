@@ -5,6 +5,7 @@ using NDDigital.DiarioAcademia.Aplicacao.Services;
 using NDDigital.DiarioAcademia.Dominio.Contracts;
 using NDDigital.DiarioAcademia.Dominio.Entities;
 using NDDigital.DiarioAcademia.Infraestrutura.DAO.Common.Uow;
+using NDDigital.DiarioAcademia.Infraestrutura.IoC;
 using System.Collections.Generic;
 
 namespace NDDigital.DiarioAcademia.UnitTests.Servicos
@@ -30,7 +31,22 @@ namespace NDDigital.DiarioAcademia.UnitTests.Servicos
 
         [TestMethod]
         [TestCategory(TestCategory)]
-        public void Deveria_Persistir_Turma_SQL_Test()
+        public void Persistir_Turma_Service_Test()
+        {
+            var repo = Injection.Get<ITurmaRepository>();
+            var uow = Injection.Get<IUnitOfWork>();
+            var service = new TurmaService(repo, uow);
+
+            service.Add(new TurmaDTO(ObjectBuilder.CreateTurma()));
+
+            var turmas = service.GetAll();
+
+            Assert.IsTrue(turmas.Count > 1);
+        }
+
+        [TestMethod]
+        [TestCategory(TestCategory)]
+        public void Deveria_Chamar_Servico_de_Persistir_Turma_Test()
         {
             //arrange
             var turma = ObjectBuilder.CreateTurma();
@@ -51,7 +67,7 @@ namespace NDDigital.DiarioAcademia.UnitTests.Servicos
 
         [TestMethod]
         [TestCategory(TestCategory)]
-        public void Deveria_Buscar_Turma_SQL_Test()
+        public void Deveria_Chamar_Servico_de_Buscar_Turma_Test()
         {
             //arrange
             _turmaRepository
@@ -67,7 +83,7 @@ namespace NDDigital.DiarioAcademia.UnitTests.Servicos
 
         [TestMethod]
         [TestCategory(TestCategory)]
-        public void Deveria_Editar_Turma_SQL_Test()
+        public void Deveria_Chamar_Servico_de_Editar_Turma_Test()
         {
             //arrange
             var turma = ObjectBuilder.CreateTurma();
@@ -94,7 +110,7 @@ namespace NDDigital.DiarioAcademia.UnitTests.Servicos
 
         [TestMethod]
         [TestCategory(TestCategory)]
-        public void Deveria_Buscar_Todas_Turmas_SQL_Test()
+        public void Deveria_Chamar_Servico_de_Buscar_Todas_Turmas_Test()
         {
             //arrange
             var turmas = new List<Turma>() { ObjectBuilder.CreateTurma() };
@@ -112,7 +128,7 @@ namespace NDDigital.DiarioAcademia.UnitTests.Servicos
 
         [TestMethod]
         [TestCategory(TestCategory)]
-        public void Deveria_Remover_Turma_SQL_Test()
+        public void Deveria_Chamar_Servico_de_Remover_Turma_Test()
         {
             //arrange
             _turmaRepository
