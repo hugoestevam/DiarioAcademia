@@ -6,11 +6,11 @@
        .service('authService', authService);
 
     authService.$inject = ['$http', '$q', 'localStorageService', 'logger', 'BASEURL',
-        'groupService', 'storageKeys', 'resource', 'userService'];
+        'groupService', 'storageKeys', 'resource', 'userService', 'permissions.factory'];
 
-   
 
-    function authService($http, $q, localStorageService, logger, serviceBase, groupService, storageKeys, res, userService) {
+
+    function authService($http, $q, localStorageService, logger, serviceBase, groupService, storageKeys, res, userService, permissionFactory) {
         var self = this;
 
         var redirectState = "home";
@@ -55,8 +55,9 @@
             isAuthorized: function (state) {
                 if (!authentication.isAuth)
                     return false;
-                var authorizedGroups = authorization.permissions ? authorization.permissions.indexOf(state) : -1;
-                return authorizedGroups >= 0;
+                if (authorization.isAdmin)
+                    return true;
+                return permissionFactory.containsPermissionByName(authorization.permissions, state);
             },
             role: null
         };
@@ -90,18 +91,18 @@
                 authentication.isAuth = true;
                 authentication.userName = loginData.userName;
                 userService.getUserByUsername(authentication.userName)
-                         .then(function (results) {
-                             authentication.fullName = results.fullName;
-                             authentication.userId = results.id;
-                             authorization.isAdmin = results.isAdmin;
-                             authorization.permissions = results.permissions;
+                         .then(function (result) {
+                             authentication.fullName = result.fullName;
+                             authentication.userId = result.id;
+                             authorization.isAdmin = result.isAdmin;
+                             authorization.permissions = getPermissions(result.permissions);
                              //criptografar isto
                              localStorageService.set(storageKeys.authoData, {
                                  token: response.access_token,
                                  userName: loginData.userName,
                                  fullName: authentication.fullName,
                                  userId: authentication.userId
-                             });                          
+                             });
                              localStorageService.set(storageKeys.autheData, authorization);
                          });
                 logger.success(res.welcome + " " + (authentication.userName));
@@ -121,6 +122,15 @@
 
         };
 
+        function getPermissions(permissions) {
+            var permission, result = [];
+            for (var i = 0; i < permissions.length; i++) {
+                permission = permissionFactory.getPermissionById(permissions[i].permissionId);
+                result.push(permission.name);
+            }
+            return result;
+        }
+
         var logOut = function () {
 
             localStorageService.remove(storageKeys.authoData);
@@ -128,8 +138,9 @@
 
             authentication.isAuth = false;
             authentication.userName = "";
+            authorization.isAdmin = false;
 
-            authorization.groups = authorization.permissions = undefined;
+            authorization.permissions = undefined;
 
         };
 
@@ -144,7 +155,7 @@
                 authentication.userId = authoData.userId;
             }
             if (autheData) {
-                authorization.groups = autheData.groups;
+                authorization.isAdmin = autheData.isAdmin;
                 authorization.permissions = autheData.permissions;
             }
 
@@ -152,9 +163,12 @@
 
         //used for authorize the access to view
         var checkAuthorize = function (toState) {
+            if (authorization.isAdmin)
+                return true;
+            if (toState == "homeapp")
+                return true;
             if (authorization.permissions)
-                return authorization.permissions.contains(toState);
-
+                return permissionFactory.containsPermissionByName(authorization.permissions, toState);
         };
 
 

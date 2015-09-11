@@ -52,7 +52,7 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Security.Repositories
 
             foreach (var group in acc.Groups)
             {
-                var listPermissions = DataContext.Groups.Include("Permissions").First().Permissions;
+                var listPermissions = DataContext.Groups.Include("Permissions").Where(g => g.Id == group.Id).FirstOrDefault().Permissions;
 
                 list.AddRange(listPermissions);
 

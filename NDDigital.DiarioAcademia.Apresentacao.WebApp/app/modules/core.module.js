@@ -74,12 +74,10 @@
                if (authService.authentication.isAuth) {
                    var hasPermission = authService.checkAuthorize(toState.name);
                    if (hasPermission) return;
-               } else {
-                   authService.lastState = toState.name;
-                   event.preventDefault();
-                   $state.go(stateToGo);
                }
-
+               authService.lastState = toState.name;
+               event.preventDefault();
+               $state.go(stateToGo);
            });
 
         $rootScope.$on('$viewContentLoading', function (event, viewConfig) {

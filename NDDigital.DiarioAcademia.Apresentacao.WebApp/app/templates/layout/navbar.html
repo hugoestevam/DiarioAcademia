@@ -24,9 +24,15 @@
 <!-- Navigation Options Bar -->
 <nav class="navbar navbar-fixed-top nav-options-custom" role="navigation" ng-show="shell.authentication.isAuth">
     <div class="option-nav" ui-sref="homeapp" ng-class="{'actived-option': state.contains('home')}">INICIO</div>
-    <div class="option-nav" ui-sref="turma.list" ng-class="{'actived-option': state.contains('turma')}">TURMAS</div>
+
+    <div class="option-nav"  ui-sref="turma" ng-class="{'actived-option': state.contains('turma')}"
+         ng-show="shell.isAuthorized('turma')">TURMAS</div>
+
     <div class="option-nav" ui-sref="aluno.list" ng-class="{'actived-option': state.contains('aluno')}">ALUNOS</div>
+
     <div class="option-nav" ui-sref="aula.list" ng-class="{'actived-option': state.contains('aula')}">AULA</div>
+
     <div class="option-nav" ui-sref="chamada.create" ng-class="{'actived-option': state.contains('chamada')}">CHAMADA</div>
+
     <div class="option-nav" ui-sref="manager" ng-class="{'actived-option': state.contains('manager')}">GERENCIADOR</div>
 </nav>

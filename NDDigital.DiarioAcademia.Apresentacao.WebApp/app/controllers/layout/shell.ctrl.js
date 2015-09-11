@@ -3,15 +3,15 @@
     'use strict';
 
     //using
-    shellController.$inject = ['$rootScope','$state','authService', 'languageService', 'resource'];
+    shellController.$inject = ['$rootScope', '$state', 'authService', 'languageService', 'resource', 'permissions.factory'];
 
     //namespace
     angular
         .module('controllers.module')
         .controller('shellController', shellController);
-    
+
     //class
-    function shellController($rootScope,$state, authService, languageService, res) {
+    function shellController($rootScope, $state, authService, languageService, res, permissionFactory) {
         var self = this;
         self.authentication = {};
 
@@ -39,6 +39,12 @@
         self.isAuthorized = function (permission) {
             return self.authorization.isAuthorized(permission);
         };
+
+        self.goToParentState = function (state) {
+            var toState = permissionFactory.getByName(self.authorization.permissions, state);
+            if (toState)
+                $state.go(toState);
+        }
 
         self.isLogged = function () {
             return self.authentication.isAuth && $(document).width() > 768;
