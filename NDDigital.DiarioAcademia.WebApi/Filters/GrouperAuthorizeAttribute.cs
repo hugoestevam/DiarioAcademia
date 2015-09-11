@@ -21,6 +21,7 @@ namespace NDDigital.DiarioAcademia.WebApi.Filters
         private IAuthorizationService _authservice;
 
         private List<string> Permissions { get; set; }
+        public bool Basic { get; set; }
 
         public GrouperAuthorizeAttribute()
         {
@@ -47,18 +48,14 @@ namespace NDDigital.DiarioAcademia.WebApi.Filters
             Permissions.RemoveAll(x => x == "");
         }
 
-        private void ConcatAll(string[] items)
-        {
-            
-
-        }
-
         protected override bool IsAuthorized(HttpActionContext actionContext)
         {
              var result = base.IsAuthorized(actionContext);
-             
              if (result)
              {
+                if (Basic)
+                    return true;
+
                  ClaimsIdentity claimsIdentity;
                  var httpContext = HttpContext.Current;
                  if (!(httpContext.User.Identity is ClaimsIdentity))

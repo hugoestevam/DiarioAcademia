@@ -64,7 +64,8 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers.Authentication
 
             return NotFound();
         }
-        
+
+        [GrouperAuthorize(Basic = true)]
         [Route("user/username/{username}")]
         public IHttpActionResult GetUserByName(string username)
         {
