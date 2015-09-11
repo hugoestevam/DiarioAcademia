@@ -24,7 +24,6 @@ namespace NDDigital.DiarioAcademia.UnitTests.Servicos
         private const string TestCategory =
       "Teste de Serviço - Presenças";
 
-
         public PresencaServiceTests()
         {
             _alunoRepository = new Mock<IAlunoRepository>();

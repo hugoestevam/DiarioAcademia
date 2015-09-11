@@ -11,8 +11,6 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NDDigital.DiarioAcademia.Infraestrutura.Security.Repositories
 {
@@ -21,6 +19,7 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Security.Repositories
         private static AuthContext dataContext;
         private static AuthFactory _databaseFactory;
         public UserStore<User> _store { get; set; }
+
         public UserRepository(UserStore<User> store, AuthFactory databaseFactory)
             : base(store)
         {
@@ -120,15 +119,12 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Security.Repositories
                 user.Account = dataContext.Accounts.Include(a => a.Groups)?.Where(a => a.Username == username).FirstOrDefault();
 
                 return user;
-
             }
             catch (InvalidOperationException exe)
             {
                 dataContext = new AuthContext();
                 return GetUserByUsername(username);
             }
-
-
         }
 
         public void Delete(string username)
@@ -136,7 +132,6 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Security.Repositories
             var user = GetUserByUsername(username);
             dataContext.Users.Remove(user);
             dataContext.SaveChanges();
-
         }
 
         public IList<Group> GetGroupsByUser(string username)
@@ -149,12 +144,7 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Security.Repositories
 
             return new List<Group>();
 
-
             // return user?.Account?.Groups ?? new List<Group>();  todo: c# 6
-
         }
-
-
     }
-
 }

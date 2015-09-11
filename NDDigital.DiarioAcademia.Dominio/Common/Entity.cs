@@ -49,6 +49,7 @@
         #endregion Public Methods
 
         #region Overrides Methods
+
         /// <summary>
         /// <see cref="M:System.Object.Equals"/>
         /// </summary>

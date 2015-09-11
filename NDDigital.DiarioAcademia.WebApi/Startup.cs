@@ -26,8 +26,6 @@ namespace NDDigital.DiarioAcademia.WebApi
 
             ConfigureOAuthTokenConsumption(app);
 
-           
-
             app.UseCors(CorsOptions.AllowAll);
 
             app.UseWebApi(config);

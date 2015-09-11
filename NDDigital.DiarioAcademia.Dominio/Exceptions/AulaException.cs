@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Runtime.Serialization;
 
 namespace NDDigital.DiarioAcademia.Dominio.Exceptions
 {

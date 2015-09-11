@@ -1,12 +1,5 @@
-﻿using Infrastructure.DAO.ORM.Common;
-using NDDigital.DiarioAcademia.Aplicacao.DTOs;
+﻿using NDDigital.DiarioAcademia.Aplicacao.DTOs;
 using NDDigital.DiarioAcademia.Aplicacao.Services;
-using NDDigital.DiarioAcademia.Dominio.Contracts;
-using NDDigital.DiarioAcademia.Infraestrutura.DAO.Common.Factorys;
-using NDDigital.DiarioAcademia.Infraestrutura.DAO.Common.Uow;
-using NDDigital.DiarioAcademia.Infraestrutura.IoC;
-using NDDigital.DiarioAcademia.Infraestrutura.Orm.Common;
-using NDDigital.DiarioAcademia.Infraestrutura.Orm.Repositories;
 using NDDigital.DiarioAcademia.WebApi.Controllers.Base;
 using NDDigital.DiarioAcademia.WebApi.Filters;
 using System.Collections.Generic;
@@ -19,7 +12,7 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers.Entities
     {
         private AlunoService _alunoService;
 
-        public AlunoController() 
+        public AlunoController()
         {
             _alunoService = new AlunoService(AlunoRepository, TurmaRepository, Uow);
         }

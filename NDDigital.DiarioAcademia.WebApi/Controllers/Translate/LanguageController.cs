@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web;
 using System.Web.Http;
 
@@ -16,21 +14,18 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers.Translate
         {
             var language = ((Language)id).EnumToString();
 
-
             var path = HttpContext.Current.Server.MapPath("~/translate/" + language + ".txt");
 
             var pairs = File.ReadAllLines(path);
 
             foreach (var pair in pairs)
             {
-
                 if (String.IsNullOrWhiteSpace(pair) ||
                     pair.Substring(0, 2).Equals("--"))
                     continue;
 
                 var split = pair.Split('=');
                 yield return new Pair { Key = split[0], Value = split[1] };
-
             }
         }
 
@@ -39,15 +34,17 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers.Translate
             public string Key { get; set; }
             public string Value { get; set; }
         }
+
         public enum Language
         {
             [Description("en-us")]
             English = 1,
+
             [Description("pt-br")]
             Portuguese = 2,
+
             [Description("es-es")]
             Spanish = 3
-
         }
     }
 

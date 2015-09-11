@@ -40,7 +40,7 @@ namespace NDDigital.DiarioAcademia.UnitTests.Servicos
 
             _turmaRepository = new Mock<ITurmaRepository>();
 
-            _aulaService = new AulaService(_aulaRepository.Object,  
+            _aulaService = new AulaService(_aulaRepository.Object,
                 _alunoRepository.Object, _turmaRepository.Object, _unitOfWork.Object);
         }
 

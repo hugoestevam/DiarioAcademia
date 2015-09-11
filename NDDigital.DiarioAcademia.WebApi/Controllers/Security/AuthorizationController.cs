@@ -1,12 +1,7 @@
-﻿using Microsoft.AspNet.Identity;
-using NDDigital.DiarioAcademia.Aplicacao.Services;
-using NDDigital.DiarioAcademia.Infraestrutura.DAO.Common.Uow;
-using NDDigital.DiarioAcademia.Infraestrutura.IoC;
-using System.Web.Http;
-using NDDigital.DiarioAcademia.Infraestrutura.Security.Contracts;
-using NDDigital.DiarioAcademia.Infraestrutura.Security.Entities;
+﻿using NDDigital.DiarioAcademia.Aplicacao.Services;
 using NDDigital.DiarioAcademia.WebApi.Controllers.Base;
 using NDDigital.DiarioAcademia.WebApi.Filters;
+using System.Web.Http;
 
 namespace NDDigital.DiarioAcademia.WebApi.Controllers.Authentication
 {
@@ -54,6 +49,5 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers.Authentication
         {
             return Ok(_authservice.IsAuthorized(username, permissions));
         }
-
     }
 }

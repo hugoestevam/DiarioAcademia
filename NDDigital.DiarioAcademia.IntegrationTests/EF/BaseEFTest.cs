@@ -1,17 +1,15 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Infrastructure.DAO.ORM.Common;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NDDigital.DiarioAcademia.Dominio.Contracts;
-using Infrastructure.DAO.ORM.Common;
 using NDDigital.DiarioAcademia.Infraestrutura.Orm.Repositories;
 
 namespace NDDigital.DiarioAcademia.IntegrationTests.Base
 {
-    public class BaseEFTest: BaseEntityFrameworkTest
+    public class BaseEFTest : BaseEntityFrameworkTest
     {
-
         protected IAlunoRepository AlunoRepository;
         protected ITurmaRepository TurmaRepository;
         protected IAulaRepository AulaRepository;
-
 
         [TestInitialize]
         public override void Initialize()
@@ -25,9 +23,6 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.Base
             AlunoRepository = new AlunoRepositoryEF(Factory);
             TurmaRepository = new TurmaRepositoryEF(Factory);
             AulaRepository = new AulaRepositoryEF(Factory);
-
         }
-
-
     }
 }

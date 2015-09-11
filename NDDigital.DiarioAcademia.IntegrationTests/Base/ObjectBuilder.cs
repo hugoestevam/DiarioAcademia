@@ -8,14 +8,14 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.Base
 {
     public class ObjectBuilder
     {
-
-        static int _index = 0;
-        static bool _admin = false;
-        static string Index { get { return (++_index).ToString(); } }
+        private static int _index = 0;
+        private static bool _admin = false;
+        private static string Index
+        { get { return (++_index).ToString(); } }
         // public static void Reset() => _index = 0; todo: C# 6
 
-
-        public static void Reset() {
+        public static void Reset()
+        {
             _index = 0;
         }
 
@@ -62,6 +62,7 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.Base
 
             return user;
         }
+
         public static Account CreateAccount(bool full = true)
         {
             var username = "username " + Index;
@@ -70,6 +71,7 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.Base
                 ? new Account(username) { Groups = CreateListGroups() }
                 : new Account(username);
         }
+
         public static Group CreateGroup(bool full = true)
         {
             var group = new Group { Name = "Grupo " + Index, IsAdmin = _admin = !_admin };
@@ -78,8 +80,6 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.Base
 
             return group;
         }
-
-
 
         public static List<Group> CreateListGroups(int count = 2)
         {
@@ -90,6 +90,7 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.Base
 
             return list;
         }
+
         public static Permission CreatePermission()
         {
             return new Permission(Index);
@@ -104,6 +105,5 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.Base
 
             return list;
         }
-
     }
 }

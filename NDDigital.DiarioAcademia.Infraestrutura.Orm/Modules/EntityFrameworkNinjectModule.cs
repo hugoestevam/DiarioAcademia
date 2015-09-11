@@ -17,22 +17,21 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Modules
         public override void Load()
         {
             var entityFrameworkFactory = new EntityFrameworkFactory();
+            var type = entityFrameworkFactory.GetType();
 
-            Bind<IUnitOfWork>().To<EntityFrameworkUnitOfWork>().WithConstructorArgument("factory", entityFrameworkFactory);
-            Bind<ITurmaRepository>().To<TurmaRepositoryEF>().WithConstructorArgument("factory", entityFrameworkFactory);
-            Bind<IAulaRepository>().To<AulaRepositoryEF>().WithConstructorArgument("factory", entityFrameworkFactory);
-            Bind<IAlunoRepository>().To<AlunoRepositoryEF>().WithConstructorArgument("factory", entityFrameworkFactory);
-            Bind<IPresencaRepository>().To<PresencaRepositoryEF>().WithConstructorArgument("factory", entityFrameworkFactory);
-
-            //todo: new AuthNinjectModule().Load();
+            Bind<IUnitOfWork>().To<EntityFrameworkUnitOfWork>().WithConstructorArgument(type, entityFrameworkFactory);
+            Bind<ITurmaRepository>().To<TurmaRepositoryEF>().WithConstructorArgument(type, entityFrameworkFactory);
+            Bind<IAulaRepository>().To<AulaRepositoryEF>().WithConstructorArgument(type, entityFrameworkFactory);
+            Bind<IAlunoRepository>().To<AlunoRepositoryEF>().WithConstructorArgument(type, entityFrameworkFactory);
+            Bind<IPresencaRepository>().To<PresencaRepositoryEF>().WithConstructorArgument(type, entityFrameworkFactory);
 
             var authFactory = new AuthFactory();
 
-            Bind<IAuthUnitOfWork>().To<AuthUnitOfWork>().WithConstructorArgument("factory", authFactory);
-            Bind<IUserStore<User>>().To<IdentityUserStore>().WithConstructorArgument("factory", authFactory);
-            Bind<IAccountRepository>().To<AccountRepository>().WithConstructorArgument("factory", authFactory);
-            Bind<IGroupRepository>().To<GroupRepository>().WithConstructorArgument("factory", authFactory);
-            Bind<IPermissionRepository>().To<PermissionRepository>().WithConstructorArgument("factory", authFactory);
+            Bind<IAuthUnitOfWork>().To<AuthUnitOfWork>();
+            Bind<IUserStore<User>>().To<IdentityUserStore>();
+            Bind<IAccountRepository>().To<AccountRepository>();
+            Bind<IGroupRepository>().To<GroupRepository>();
+            Bind<IPermissionRepository>().To<PermissionRepository>();
         }
     }
 }

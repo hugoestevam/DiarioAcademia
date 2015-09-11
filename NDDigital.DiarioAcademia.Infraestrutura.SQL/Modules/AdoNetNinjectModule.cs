@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNet.Identity;
 using NDDigital.DiarioAcademia.Dominio.Contracts;
-using NDDigital.DiarioAcademia.Infraestrutura.DAO.Common.Factorys;
 using NDDigital.DiarioAcademia.Infraestrutura.DAO.Common.Uow;
 using NDDigital.DiarioAcademia.Infraestrutura.Security.Common;
 using NDDigital.DiarioAcademia.Infraestrutura.Security.Contracts;
@@ -17,12 +16,13 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.SQL.Modules
         public override void Load()
         {
             var factory = new AdoNetFactory();
+            var type = factory.GetType();
 
-            Bind<IUnitOfWork>().To<ADOUnitOfWork>().WithConstructorArgument("factory", factory);
-            Bind<ITurmaRepository>().To<TurmaRepositorySql>().WithConstructorArgument("factory", factory);
-            Bind<IAulaRepository>().To<AulaRepositorySql>().WithConstructorArgument("factory", factory);
-            Bind<IAlunoRepository>().To<AlunoRepositorySql>().WithConstructorArgument("factory", factory);
-            Bind<IPresencaRepository>().To<PresencaRepositorySql>().WithConstructorArgument("factory", factory);
+            Bind<IUnitOfWork>().To<ADOUnitOfWork>().WithConstructorArgument(type, factory);
+            Bind<ITurmaRepository>().To<TurmaRepositorySql>().WithConstructorArgument(type, factory);
+            Bind<IAulaRepository>().To<AulaRepositorySql>().WithConstructorArgument(type, factory);
+            Bind<IAlunoRepository>().To<AlunoRepositorySql>().WithConstructorArgument(type, factory);
+            Bind<IPresencaRepository>().To<PresencaRepositorySql>().WithConstructorArgument(type, factory);
 
             var authFactory = new AuthFactory();
             Bind<IAuthUnitOfWork>().To<AuthUnitOfWork>().WithConstructorArgument("factory", authFactory);
@@ -30,7 +30,6 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.SQL.Modules
             Bind<IAccountRepository>().To<AccountRepository>().WithConstructorArgument("factory", authFactory);
             Bind<IGroupRepository>().To<GroupRepository>().WithConstructorArgument("factory", authFactory);
             Bind<IPermissionRepository>().To<PermissionRepository>().WithConstructorArgument("factory", authFactory);
-
         }
     }
 }

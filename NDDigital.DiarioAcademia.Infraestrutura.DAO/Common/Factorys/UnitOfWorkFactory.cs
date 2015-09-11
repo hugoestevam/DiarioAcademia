@@ -2,7 +2,7 @@
 
 namespace NDDigital.DiarioAcademia.Infraestrutura.DAO.Common.Factorys
 {
-    public abstract class UnitOfWorkFactory 
+    public abstract class UnitOfWorkFactory
     {
         public abstract IUnitOfWork Create();
     }

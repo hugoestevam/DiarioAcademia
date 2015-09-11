@@ -1,26 +1,20 @@
-﻿using Infrastructure.DAO.ORM.Common;
-using NDDigital.DiarioAcademia.Aplicacao.Services;
-using NDDigital.DiarioAcademia.Infraestrutura.Orm.Common;
-using NDDigital.DiarioAcademia.Infraestrutura.Security.Common;
+﻿using NDDigital.DiarioAcademia.Aplicacao.Services;
 using NDDigital.DiarioAcademia.Infraestrutura.Security.Entities;
-using NDDigital.DiarioAcademia.Infraestrutura.Security.Repositories;
 using NDDigital.DiarioAcademia.WebApi.Controllers.Base;
 using NDDigital.DiarioAcademia.WebApi.Filters;
 using System.Web.Http;
 
 namespace NDDigital.DiarioAcademia.WebApi.Controllers.Authentication
 {
-
     [RoutePrefix("api/permission")]
     [GrouperAuthorize(Claim.Manager_Permission)]
     public class PermissionController : BaseSecurityController
     {
-        IPermissionService _permissionService;
+        private IPermissionService _permissionService;
 
-        public PermissionController() 
+        public PermissionController()
         {
             _permissionService = new PermissionService(PermissionRepository, Uow);
-
         }
 
         // GET: api/Permission
@@ -34,6 +28,7 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers.Authentication
         {
             return Ok(_permissionService.GetById(id));
         }
+
         // GET: api/Permission/byuser/username
         [Route("byuser/{username}")]
         public IHttpActionResult GetByUser(string username)
@@ -50,25 +45,23 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers.Authentication
 
         public IHttpActionResult Post([FromBody]Permission[] values)
         {
-
             foreach (var item in values)
-            
-               _permissionService.Add(item);
-            
+
+                _permissionService.Add(item);
+
             return Ok(values);
         }
 
         // DELETE: api/Permission/
         public IHttpActionResult Delete([FromBody]string[] ids)
         {
-            if(ids == null)
+            if (ids == null)
                 return BadRequest();
             foreach (var id in ids)
             {
                 var permission = _permissionService.GetByPermissionId(id);
 
                 _permissionService.Delete(permission.Id);
-
             }
             return Ok();
         }

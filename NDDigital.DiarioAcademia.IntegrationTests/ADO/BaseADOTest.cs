@@ -7,13 +7,11 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.Base
 {
     public class BaseADOTest : BaseTest
     {
-
         protected IAlunoRepository AlunoRepository;
         protected ITurmaRepository TurmaRepository;
         protected IAulaRepository AulaRepository;
 
         protected AdoNetFactory Factory;
-
 
         [TestInitialize]
         public override void Initialize()
@@ -27,9 +25,6 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.Base
             AlunoRepository = new AlunoRepositorySql(Factory);
             TurmaRepository = new TurmaRepositorySql(Factory);
             AulaRepository = new AulaRepositorySql(Factory);
-
         }
-
-
     }
 }

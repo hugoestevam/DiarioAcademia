@@ -1,31 +1,28 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using NDDigital.DiarioAcademia.IntegrationTests.Common;
-using Infrastructure.DAO.ORM.Common;
-using NDDigital.DiarioAcademia.Infraestrutura.Security.Repositories;
-using NDDigital.DiarioAcademia.Infraestrutura.Security.Common;
-using Microsoft.AspNet.Identity.EntityFramework;
-using NDDigital.DiarioAcademia.Infraestrutura.Security.Entities;
+﻿using Microsoft.AspNet.Identity.EntityFramework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NDDigital.DiarioAcademia.Aplicacao.Services;
+using NDDigital.DiarioAcademia.Infraestrutura.Security.Common;
+using NDDigital.DiarioAcademia.Infraestrutura.Security.Entities;
+using NDDigital.DiarioAcademia.IntegrationTests.Common;
 
 namespace NDDigital.DiarioAcademia.IntegrationTests.Base
 {
     /// <summary>
     /// Summary description for BaseTest
     /// </summary>
-    public class BaseAuthTest:BaseTest
+    public class BaseAuthTest : BaseTest
     {
         #region Constructor Utilities
+
         protected DatabaseAuthFixture Fixture;
         protected AuthFactory Factory;
-       // protected IdentityUserStore IdentityUserStore;
+
+        // protected IdentityUserStore IdentityUserStore;
         protected UserStore<User> IdentityUserStore;
-        
 
         protected IAuthorizationService AuthorizationService;
 
-        #endregion
-
-
+        #endregion Constructor Utilities
 
         [TestInitialize]
         public override void Initialize()
@@ -41,9 +38,6 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.Base
             IdentityUserStore = new UserStore<User>();
 
             Uow = new AuthUnitOfWork(Factory);
-
         }
-
-
     }
 }

@@ -1,5 +1,4 @@
-﻿using NDDigital.DiarioAcademia.Dominio;
-using NDDigital.DiarioAcademia.Dominio.Entities;
+﻿using NDDigital.DiarioAcademia.Dominio.Entities;
 using System;
 
 namespace NDDigital.DiarioAcademia.Aplicacao.DTOs
@@ -8,7 +7,6 @@ namespace NDDigital.DiarioAcademia.Aplicacao.DTOs
     {
         public AulaDTO()
         {
-            
         }
 
         public AulaDTO(Aula aula)
@@ -23,9 +21,9 @@ namespace NDDigital.DiarioAcademia.Aplicacao.DTOs
 
         public DateTime DataAula { get; set; }
 
-        public int AnoTurma { get; set; } 
+        public int AnoTurma { get; set; }
 
-        public int TurmaId { get; set; }  
+        public int TurmaId { get; set; }
 
         public override string ToString()
         {

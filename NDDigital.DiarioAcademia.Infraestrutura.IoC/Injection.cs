@@ -1,5 +1,4 @@
 ﻿using Ninject;
-using System;
 using System.Configuration;
 using System.IO;
 using System.Reflection;
@@ -34,7 +33,6 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.IoC
 
             string fileName
                     = ConfigurationSettings.AppSettings["Infrasctructure.DAO"];
-
 
             string assemblyFile
                     = string.Format("{0}\\{1}", path, fileName);

@@ -7,7 +7,7 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.Security
     [TestClass]
     public class GroupRepositoryTest : BaseSecurityTest
     {
-        const string TestCategory =
+        private const string TestCategory =
             "Authorization - Group";
 
         [TestMethod]
@@ -15,7 +15,7 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.Security
         public void Deveria_Adicionar_Um_Grupo()
         {
             GroupRepository.Add(ObjectBuilder.CreateGroup());
-            
+
             Uow.Commit();
 
             var list = GroupRepository.GetAll();
@@ -57,12 +57,13 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.Security
 
             Assert.AreEqual(2, list.Count);
         }
+
         [TestMethod]
         [TestCategory(TestCategory)]
         public void Verifica_se_usuario_é_administrador()
         {
             var acc = AccountRepository.GetAll().First();
-            
+
             Assert.IsTrue(GroupRepository.IsAdmin(acc.Username));
         }
     }

@@ -1,5 +1,4 @@
-﻿using NDDigital.DiarioAcademia.Dominio;
-using NDDigital.DiarioAcademia.Dominio.Entities;
+﻿using NDDigital.DiarioAcademia.Dominio.Entities;
 
 namespace NDDigital.DiarioAcademia.Aplicacao.DTOs
 {

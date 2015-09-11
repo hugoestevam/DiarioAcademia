@@ -1,5 +1,4 @@
-﻿using Infrasctructure.DAO.ORM.Contexts;
-using Microsoft.Owin;
+﻿using Microsoft.Owin;
 using Microsoft.Owin.Security.OAuth;
 using NDDigital.DiarioAcademia.Infraestrutura.Security.Contexts;
 using NDDigital.DiarioAcademia.Infraestrutura.Security.Repositories;

@@ -1,10 +1,8 @@
-﻿using Microsoft.AspNet.Identity;
-using NDDigital.DiarioAcademia.Infraestrutura.DAO.Common.Uow;
+﻿using NDDigital.DiarioAcademia.Infraestrutura.DAO.Common.Uow;
 using NDDigital.DiarioAcademia.Infraestrutura.Security.Contracts;
 using NDDigital.DiarioAcademia.Infraestrutura.Security.Entities;
 using System.Collections.Generic;
 using System.Linq;
-using System;
 
 namespace NDDigital.DiarioAcademia.Aplicacao.Services
 {
@@ -21,7 +19,6 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
         bool IsAuthorized(string username, string permissionId);
 
         bool IsAuthorized(string username, string[] permissionId);
-
     }
 
     public class AuthorizationService : IAuthorizationService
@@ -54,7 +51,6 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
                 {
                     if (!groupEncontrado.Permissions.Contains(item))
                         groupEncontrado.Permissions.Add(item);
-
                 }
             }
             _groupRepository.Update(groupEncontrado);
@@ -94,7 +90,6 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
 
         public void RemoveGroupFromUser(string username, int[] groups)
         {
-
             var userEncontrado = _accountRepository.GetByUserName(username);
 
             foreach (var groupId in groups)
@@ -102,7 +97,6 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
                 var group = userEncontrado.Groups.FirstOrDefault(p => p.Id == groupId);
                 if (group != null)
                     userEncontrado.Groups.Remove(group);
-
             }
             _accountRepository.Update(userEncontrado);
             _unitOfWork.Commit();
@@ -132,7 +126,7 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
         {
             var permissions = _permissionRepository.GetByUser(username);
 
-            var isAuth =  _groupRepository.IsAdmin(username);
+            var isAuth = _groupRepository.IsAdmin(username);
 
             foreach (var item in permissionIds)
             {

@@ -1,27 +1,26 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using NDDigital.DiarioAcademia.Infraestrutura.Orm.Common;
-using NDDigital.DiarioAcademia.IntegrationTests.Common;
-using Infrastructure.DAO.ORM.Common;
-using NDDigital.DiarioAcademia.Infraestrutura.Security.Repositories;
+﻿using Infrastructure.DAO.ORM.Common;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NDDigital.DiarioAcademia.Aplicacao.Services;
+using NDDigital.DiarioAcademia.Infraestrutura.Orm.Common;
+using NDDigital.DiarioAcademia.Infraestrutura.Security.Repositories;
+using NDDigital.DiarioAcademia.IntegrationTests.Common;
 
 namespace NDDigital.DiarioAcademia.IntegrationTests.Base
 {
     /// <summary>
     /// Summary description for BaseTest
     /// </summary>
-    public class BaseEntityFrameworkTest:BaseTest
+    public class BaseEntityFrameworkTest : BaseTest
     {
         #region Constructor Utilities
+
         protected DatabaseEntityFrameworkFixture Fixture;
         protected EntityFrameworkFactory Factory;
         protected IdentityUserStore IdentityUserStore;
 
         protected IAuthorizationService AuthorizationService;
 
-        #endregion
-
-
+        #endregion Constructor Utilities
 
         [TestInitialize]
         public override void Initialize()
@@ -35,9 +34,6 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.Base
             var context = Factory.Get();
 
             Uow = new EntityFrameworkUnitOfWork(Factory);
-
         }
-
-
     }
 }

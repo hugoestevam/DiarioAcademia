@@ -67,5 +67,5 @@ namespace NDDigital.DiarioAcademia.Dominio.Entities
         {
             return string.Format("{0}: Presenças: {1}, Faltas: {2}", Nome, ObtemQuantidadePresencas(), ObtemQuantidadeAusencias());
         }
-    }   
+    }
 }

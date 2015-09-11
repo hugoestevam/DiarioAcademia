@@ -27,7 +27,7 @@ namespace NDDigital.DiarioAcademia.Apresentacao.WindowsApp
 
         private IEnumerable<TurmaDTO> turmas;
 
-        public Principal()//TODO: IOC
+        public Principal()
         {
             InitializeComponent();
 
