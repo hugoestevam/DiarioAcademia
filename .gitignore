@@ -172,3 +172,4 @@ NDDigital.DiarioAcademia.WebApi/App_Data/DefaultConnection_log.ldf
 NDDigital.DiarioAcademia.WebApi/App_Data/DefaultConnection_log.ldf
 *.mdf
 NDDigital.DiarioAcademia.WebApi/App_Data/DefaultConnection_log.ldf
+.vs/config/applicationhost.config
