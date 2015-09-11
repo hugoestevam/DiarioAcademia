@@ -18,7 +18,7 @@
         var _fullname = "";
 
         var authentication = {
-            isAuth: true,
+            isAuth: false,
         };
 
         var userNameProperty = {
@@ -91,25 +91,19 @@
                 authentication.userName = loginData.userName;
                 userService.getUserByUsername(authentication.userName)
                          .then(function (results) {
-                             authentication.fullName = results.firstName + " " + results.lastName;
+                             authentication.fullName = results.fullName;
                              authentication.userId = results.id;
+                             authorization.isAdmin = results.isAdmin;
+                             authorization.permissions = results.permissions;
                              //criptografar isto
                              localStorageService.set(storageKeys.authoData, {
                                  token: response.access_token,
                                  userName: loginData.userName,
                                  fullName: authentication.fullName,
                                  userId: authentication.userId
-                             });
+                             });                          
                              localStorageService.set(storageKeys.autheData, authorization);
-                             //get groups
-                             groupService.getGroupByUsername(authentication.userName)
-                                 .then(function (groups) {
-                                     authorization.groups = groups;
-                                     authorization.permissions = groupService.extractPermissions(groups);
-
-                                 });
                          });
-
                 logger.success(res.welcome + " " + (authentication.userName));
                 deferred.resolve(response);
 

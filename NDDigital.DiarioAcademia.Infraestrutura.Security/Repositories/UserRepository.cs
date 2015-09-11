@@ -25,8 +25,8 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Security.Repositories
             : base(store)
         {
             _databaseFactory = _databaseFactory ?? databaseFactory ?? new AuthFactory();
-            if(_databaseFactory!=null)
-            dataContext = dataContext ?? (_databaseFactory.Get() as AuthContext);
+            if (_databaseFactory != null)
+                dataContext = dataContext ?? (_databaseFactory.Get() as AuthContext);
         }
 
         public static UserRepository Create(IdentityFactoryOptions<UserRepository> options, IOwinContext context)
@@ -63,14 +63,15 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Security.Repositories
 
         public void AddUser(User user)
         {
-            User dbuser=null;
-            try {
-                 dbuser = dataContext.Users.Where(u => u.UserName == user.UserName).FirstOrDefault();
-            if (dbuser != null)
-                throw new ApplicationException("UsernameJaExisteException");
-            user.Account = new Account(user.UserName);
-            dataContext.Users.Add(user);
-            dataContext.SaveChanges();
+            User dbuser = null;
+            try
+            {
+                dbuser = dataContext.Users.Where(u => u.UserName == user.UserName).FirstOrDefault();
+                if (dbuser != null)
+                    throw new ApplicationException("UsernameJaExisteException");
+                user.Account = new Account(user.UserName);
+                dataContext.Users.Add(user);
+                dataContext.SaveChanges();
             }
             catch (InvalidOperationException exe)
             {
@@ -108,11 +109,26 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Security.Repositories
 
         public User GetUserByUsername(string username)
         {
-            return (from c
-                    in (dataContext.Users).Include(x => x.Account).Include(x => x.Account.Groups)
-                    where c.UserName == username
-                    select c
-                    ).FirstOrDefault();
+            // TODO: rever implementação
+            try
+            {
+                var user = (from c
+                                      in (dataContext.Users)//.Include(x => x.Account)//.Include(x => x.Account.Groups)
+                            where c.UserName == username
+                            select c
+                                       ).FirstOrDefault();
+                user.Account = dataContext.Accounts.Include(a => a.Groups)?.Where(a => a.Username == username).FirstOrDefault();
+
+                return user;
+
+            }
+            catch (InvalidOperationException exe)
+            {
+                dataContext = new AuthContext();
+                return GetUserByUsername(username);
+            }
+
+
         }
 
         public void Delete(string username)

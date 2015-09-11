@@ -1,16 +1,11 @@
 ﻿.sidemenu-custom {
-  top: 50px;
+  top: 75px;
   height: calc(100% - 68px) !important;
   overflow: hidden;
+  padding-top: 10px;
 }
-.profile-ava img {
-  -webkit-border-radius: 50%;
-  border-radius: 50%;
-  display: inline-block;
-  height: 25px;
-}
-.top-nav > li > a:hover {
-  background-color: transparent !important;
+.side-menu-header {
+  margin-top: 5px;
 }
 .actived {
   border-right: solid 5px #E25D41 !important;
@@ -49,12 +44,36 @@ a.user-back.text-center:hover {
   float: left;
   margin-top: 18px;
 }
-.align-middle {
-  position: relative;
-  bottom: 3px;
-  left: 8px;
-}
 li > a > .fa {
   width: 26px;
 }
-/*# sourceMappingURL=sidemenu.css.map */
+.li {
+  -moz-transition: none !important;
+  -o-transition: none !important;
+  -webkit-transition: none !important;
+  transition: none !important;
+}
+.home-li {
+  pointer-events: none;
+}
+@media screen and (max-width: 768px) {
+  .sidemenu-custom {
+    background-color: #0f75b3 !important;
+    margin: 0;
+    height: auto !important;
+  }
+  .seta-direita {
+    display: none;
+  }
+  .navbar-collapse {
+    padding: 0;
+  }
+  .navbar-inverse .navbar-nav > li > a {
+    color: white !important;
+    padding-top: 20px;
+  }
+  .navbar-inverse .navbar-nav > li > a:hover {
+    background-color: rgba(204, 204, 204, 0.5) !important;
+    color: black !important;
+  }
+}

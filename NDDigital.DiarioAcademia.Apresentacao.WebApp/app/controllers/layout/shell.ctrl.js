@@ -13,6 +13,7 @@
     //class
     function shellController($rootScope,$state, authService, languageService, res) {
         var self = this;
+        self.authentication = {};
 
         //script load
         activate();
@@ -23,6 +24,8 @@
             toastr.options.timeOut = 900;
             self.currentLanguage = languageService.currentLanguage;
             reTranslate('pt-br');
+            var date = new Date();
+            self.year = date.getFullYear();
         }
 
         self.reTranslate = reTranslate;
@@ -33,8 +36,8 @@
             $state.go('login');
         };
 
-        self.isVisible = function (state) {
-            return self.authorization.isAuthorized(state);
+        self.isAuthorized = function (permission) {
+            return self.authorization.isAuthorized(permission);
         };
 
         self.isLogged = function () {

@@ -5,8 +5,11 @@ using NDDigital.DiarioAcademia.Infraestrutura.IoC;
 using NDDigital.DiarioAcademia.Infraestrutura.Security.Contracts;
 using NDDigital.DiarioAcademia.Infraestrutura.Security.Entities;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
+using System.Security.Claims;
 using System.Web;
 using System.Web.Http;
 using System.Web.Http.Controllers;
@@ -17,46 +20,62 @@ namespace NDDigital.DiarioAcademia.WebApi.Filters
     {
         private IAuthorizationService _authservice;
 
+        private List<string> Permissions { get; set; }
+        public bool Basic { get; set; }
+
         public GrouperAuthorizeAttribute()
         {
-            var unitOfWork = Injection.Get<IUnitOfWork>();
+            _authservice = new AuthorizationService(
+                Injection.Get<IGroupRepository>(),
+                Injection.Get<IPermissionRepository>(),
+                Injection.Get<IAccountRepository>(),
+                Injection.Get<IUnitOfWork>()
+                );
 
-            var groupRepository = Injection.Get<IGroupRepository>();
+        }
+        public GrouperAuthorizeAttribute(params string[] permissions):this()
+        {
+            Permissions = new List<string>();
+            
+            foreach (var item in permissions)
+            {
 
-            var permissionRepository = Injection.Get<IPermissionRepository>();
+                var split = item.Split('.');
+                Permissions.AddRange(split);
+            }
 
-            var store = Injection.Get<IUserStore<User>>();// var store = new MyUserStore(factory.Get());
-
-            var accountRepository = Injection.Get<IAccountRepository>(); // var accountRepository = new AccountRepository(factory);            
-
-            _authservice = new AuthorizationService(groupRepository, permissionRepository, accountRepository, unitOfWork);
-
+            Permissions = Permissions.Distinct().ToList();
+            Permissions.RemoveAll(x => x == "");
         }
 
         protected override bool IsAuthorized(HttpActionContext actionContext)
         {
-            if (base.IsAuthorized(actionContext))
-            {
-                var queryStringCollection = HttpUtility.ParseQueryString(actionContext.Request.RequestUri.Query);
-                
-                try
-                {
+             var result = base.IsAuthorized(actionContext);
+             if (result)
+             {
+                if (Basic)
+                    return true;
 
-                    string username = queryStringCollection["username"];
+                 ClaimsIdentity claimsIdentity;
+                 var httpContext = HttpContext.Current;
+                 if (!(httpContext.User.Identity is ClaimsIdentity))
+                       return false;
+                 
+                 claimsIdentity = httpContext.User.Identity as ClaimsIdentity;
+             
+                 var subIdClaims = claimsIdentity.FindFirst("user");
 
-                    string permissionId = queryStringCollection["permissionid"];
+                if (subIdClaims == null) return false;
 
-                    return _authservice.IsAuthorized(username, permissionId);
-                }
-                catch (Exception ex)
-                {
-                    return false;
-                    throw;
-                }
-            }
+                 var userSubId = subIdClaims.Value;
+             
+                 result = _authservice.IsAuthorized(userSubId, Permissions.ToArray());
+             }
+             
+             
+             return result;
 
-
-            return false;
         }
+
     }
 }

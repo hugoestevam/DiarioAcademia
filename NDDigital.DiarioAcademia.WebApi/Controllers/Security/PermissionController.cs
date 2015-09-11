@@ -4,23 +4,22 @@ using NDDigital.DiarioAcademia.Infraestrutura.Orm.Common;
 using NDDigital.DiarioAcademia.Infraestrutura.Security.Common;
 using NDDigital.DiarioAcademia.Infraestrutura.Security.Entities;
 using NDDigital.DiarioAcademia.Infraestrutura.Security.Repositories;
+using NDDigital.DiarioAcademia.WebApi.Controllers.Base;
+using NDDigital.DiarioAcademia.WebApi.Filters;
 using System.Web.Http;
 
 namespace NDDigital.DiarioAcademia.WebApi.Controllers.Authentication
 {
-    public class PermissionController : BaseApiController
+
+    [RoutePrefix("api/permission")]
+    [GrouperAuthorize(Claim.Manager_Permission)]
+    public class PermissionController : BaseSecurityController
     {
         IPermissionService _permissionService;
 
-        public PermissionController() //TODO: IOC
+        public PermissionController() 
         {
-            var factory = new AuthFactory();
-
-            var unitOfWork = new AuthUnitOfWork(factory);
-
-            var permissionRepo = new PermissionRepository(factory); //Container.Get<IPermissionRepository>();
-
-            _permissionService = new PermissionService(permissionRepo, unitOfWork);
+            _permissionService = new PermissionService(PermissionRepository, Uow);
 
         }
 
@@ -31,9 +30,22 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers.Authentication
         }
 
         // GET: api/Permission/group-id
-        public IHttpActionResult Get(int id)//neste caso e o id do grupo
+        public IHttpActionResult Get(int id)
         {
             return Ok(_permissionService.GetById(id));
+        }
+        // GET: api/Permission/byuser/username
+        [Route("byuser/{username}")]
+        public IHttpActionResult GetByUser(string username)
+        {
+            return Ok(_permissionService.GetByUser(username));
+        }
+
+        [Route("byuser/{groupId:int}")]
+        // GET: api/Permission/bygroup/groupId
+        public IHttpActionResult GetByGroup(int groupId)
+        {
+            return Ok(_permissionService.GetByGroup(groupId));
         }
 
         public IHttpActionResult Post([FromBody]Permission[] values)

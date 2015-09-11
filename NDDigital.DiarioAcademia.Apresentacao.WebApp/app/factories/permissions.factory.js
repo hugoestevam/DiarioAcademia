@@ -6,7 +6,6 @@
 
     function permissionFactory($state, compareState, permissionGroups) {
 
-
         return {
             getPermissions: getPermissions,
             getPermissionById: getPermissionById,
@@ -20,13 +19,14 @@
         //private methods
         function getCustomPermissions() {
             var customPermissions = [
-                { name: "action3.deleteAluno", displayName: "Excluir Aluno", permissionId: '20' },
-                { name: "action2.addTurma", displayName: "Adicionar Turma", permissionId: '21' }];
-
+                { name: "action.deleteAluno", displayName: "Excluir Aluno", permissionId: '22' },
+                { name: "action.addTurma", displayName: "Adicionar Turma", permissionId: '23' }];
             return customPermissions;
         }
 
         function getFilter(name) {
+            if (permissionGroups.contains(name))
+                return name;
             var filter = name.split(".");
             filter = filter.length >= 2 ? filter[0] : 'other';
             return filter;
@@ -85,7 +85,7 @@
                 filter = getFilter(permission.name);
                 if (!filtered[filter])
                     filtered[filter] = [];
-                filtered[filter].push(permission);  // add in the array of filter
+                filtered[filter].push(permission);
                 if (compareState(permissionDb, permission) >= 0)
                     filtered[filter].countSelected = filtered[filter].countSelected ? filtered[filter].countSelected + 1 : 1;
                 if (!permissionGroups.contains(filter))

@@ -1,7 +1,8 @@
 ﻿.nav-custom {
     background-color: #0F75B3 !important;
     background-image: none !important;
-    box-shadow: 0 4px 4px #ccc;
+    box-shadow: 0 4px 4px rgba(0, 0, 0,0.3);
+    height: 50px !important;
 }
 
 .navbar-inverse {
@@ -9,7 +10,7 @@
 
     & .navbar-nav > li > a {
         text-shadow: none !important;
-        color: #000 !important;
+        color: #4D4D4D !important;
     }
 }
 
@@ -20,6 +21,46 @@
 
 .navbar {
     margin-bottom: 0;
-    height: 50px !important;
     color: white !important;
+}
+
+.top-nav > li > a {
+    background-color: #0D5F9A !important;
+    float: left;
+    max-height: 50px;
+}
+
+.profile-ava {
+    position: relative;
+    bottom: 4px;
+}
+
+.menu-log {
+    left: 5px;
+    bottom: 9px;
+    position: relative;
+}
+
+.nav-options-custom {
+    background-color: #FBFBFB !important;
+    border-bottom: solid #F0F0F0 1px;
+    min-height: 30px !important;
+    height: 30px;
+    margin-top: 50px;
+    padding-left: 10px;
+    z-index: 3 !important;
+}
+
+.option-nav {
+    color: #4D4D4D !important;
+    cursor: pointer;
+
+    &:hover {
+        background-color: rgba(204, 204, 204, 0.5);
+    }
+}
+
+.actived-option {
+    background-color: #E25D41 !important;
+    color: white;
 }

@@ -5,30 +5,22 @@ using NDDigital.DiarioAcademia.Infraestrutura.IoC;
 using System.Web.Http;
 using NDDigital.DiarioAcademia.Infraestrutura.Security.Contracts;
 using NDDigital.DiarioAcademia.Infraestrutura.Security.Entities;
+using NDDigital.DiarioAcademia.WebApi.Controllers.Base;
+using NDDigital.DiarioAcademia.WebApi.Filters;
 
 namespace NDDigital.DiarioAcademia.WebApi.Controllers.Authentication
 {
     [RoutePrefix("api/authentication")]
-    public class AuthorizationController : BaseApiController
+    [GrouperAuthorize(Claim.Manager)]
+    public class AuthorizationController : BaseSecurityController
     {
         private IAuthorizationService _authservice;
 
-        public AuthorizationController()//TODO: IOC
+        public AuthorizationController()
         {
-            var unitOfWork = Injection.Get<IUnitOfWork>();
-
-            var groupRepository = Injection.Get<IGroupRepository>();
-
-            var permissionRepository = Injection.Get<IPermissionRepository>();
-
-            var store = Injection.Get<IUserStore<User>>();// var store = new MyUserStore(factory.Get());
-
-            var accountRepository = Injection.Get<IAccountRepository>(); // var accountRepository = new AccountRepository(factory);            
-
-            _authservice = new AuthorizationService(groupRepository, permissionRepository, accountRepository, unitOfWork);
+            _authservice = new AuthorizationService(GroupRepository, PermissionRepository, AccountRepository, Uow);
         }
 
-        //[Authorize]
         [Route("addpermission/{groupId:int}")]
         public IHttpActionResult AddPermissionsToGroup(int groupId, [FromBody]string[] permissions)
         {
@@ -36,7 +28,6 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers.Authentication
             return Ok();
         }
 
-        //[Authorize]
         [Route("removepermission/{groupId:int}")]
         public IHttpActionResult RemovePermissionsToGroup(int groupId, [FromBody]string[] permissions)
         {
@@ -44,7 +35,6 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers.Authentication
             return Ok();
         }
 
-        //[Authorize]
         [Route("addgroup/{username}")]
         public IHttpActionResult AddGroupToUser(string username, [FromBody]int[] groups)
         {
@@ -52,12 +42,18 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers.Authentication
             return Ok();
         }
 
-        //[Authorize]
         [Route("removegroup/{username}")]
         public IHttpActionResult removeGroupToUser(string username, [FromBody]int[] groups)
         {
             _authservice.RemoveGroupFromUser(username, groups);
             return Ok();
         }
+
+        [Route("isAuthorized/{username}")]
+        public IHttpActionResult isAuthorized(string username, [FromBody]string[] permissions)
+        {
+            return Ok(_authservice.IsAuthorized(username, permissions));
+        }
+
     }
 }

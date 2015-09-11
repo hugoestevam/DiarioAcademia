@@ -20,6 +20,8 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
 
         bool IsAuthorized(string username, string permissionId);
 
+        bool IsAuthorized(string username, string[] permissionId);
+
     }
 
     public class AuthorizationService : IAuthorizationService
@@ -121,7 +123,23 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
         {
             var permissions = _permissionRepository.GetByUser(username);
 
+            if (_groupRepository.IsAdmin(username)) return true; ;
+
             return permissions.Any(p => p.PermissionId == permissionId);
+        }
+
+        public bool IsAuthorized(string username, string[] permissionIds)
+        {
+            var permissions = _permissionRepository.GetByUser(username);
+
+            var isAuth =  _groupRepository.IsAdmin(username);
+
+            foreach (var item in permissionIds)
+            {
+                if (isAuth) break;
+                isAuth = permissions.Any(p => p.PermissionId == item);
+            }
+            return isAuth;
         }
     }
 }

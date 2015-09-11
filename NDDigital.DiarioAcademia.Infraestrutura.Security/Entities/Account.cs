@@ -19,7 +19,7 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Security.Entities
         [MaxLength(100)]
         public string Username { get; set; }
 
-        public List<Group> Groups { get; set; }
+        public virtual List<Group> Groups { get; set; }
 
         public Account(string username)
         {

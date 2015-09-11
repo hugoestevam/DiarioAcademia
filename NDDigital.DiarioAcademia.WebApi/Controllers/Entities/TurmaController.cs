@@ -3,24 +3,21 @@ using NDDigital.DiarioAcademia.Aplicacao.DTOs;
 using NDDigital.DiarioAcademia.Aplicacao.Services;
 using NDDigital.DiarioAcademia.Infraestrutura.Orm.Common;
 using NDDigital.DiarioAcademia.Infraestrutura.Orm.Repositories;
+using NDDigital.DiarioAcademia.WebApi.Controllers.Base;
+using NDDigital.DiarioAcademia.WebApi.Filters;
 using System.Collections.Generic;
 using System.Web.Http;
 
 namespace NDDigital.DiarioAcademia.WebApi.Controllers.Entities
 {
-    public class TurmaController : ApiController
+    [GrouperAuthorize(Claim.Manager)]
+    public class TurmaController : BaseEntityController
     {
         private TurmaService _turmaService;
 
-        public TurmaController() //TODO: IOC
+        public TurmaController() 
         {
-            var factory = new EntityFrameworkFactory();
-
-            var unitOfWork = new EntityFrameworkUnitOfWork(factory);
-
-            var turmaRepository = new TurmaRepositoryEF(factory); //Container.Get<ITurmaRepository>();
-
-            _turmaService = new TurmaService(turmaRepository, unitOfWork);
+            _turmaService = new TurmaService(TurmaRepository, Uow);
         }
 
         // GET: api/Turma

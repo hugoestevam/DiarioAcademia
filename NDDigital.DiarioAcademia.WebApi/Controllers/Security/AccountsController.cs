@@ -15,43 +15,34 @@ using NDDigital.DiarioAcademia.Infraestrutura.Security.Common;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Ellevo.Biblioteca.Seguranca;
 using NDDigital.DiarioAcademia.WebApi.Filters;
+using NDDigital.DiarioAcademia.WebApi.Controllers.Base;
 
 namespace NDDigital.DiarioAcademia.WebApi.Controllers.Authentication
 {
     [RoutePrefix("api/accounts")]
-    public class AccountsController : BaseApiController
+   // [GrouperAuthorize(Claim.Manager)]
+    public class AccountsController : BaseSecurityController
     {
         private IAuthorizationService _authservice;
+        private IPermissionService _permissionService;
+        private IGroupService _groupService;
+
 
         public AccountsController()
         {
-            var unitOfWork = Injection.Get<IAuthUnitOfWork>();
+            _authservice = new AuthorizationService(GroupRepository, PermissionRepository, AccountRepository, Uow);
+            _permissionService = new PermissionService(PermissionRepository, Uow);
+            _groupService = new GroupService(GroupRepository, Uow);
 
-            var groupRepository = Injection.Get<IGroupRepository>();
-
-            var permissionRepository = Injection.Get<IPermissionRepository>();
-
-            // var store = Injection.Get<IUserStore<User>>();
-
-            var factory = new AuthFactory(); //TODO: Implementar dois contextos
-
-            var store = new UserStore<User>(factory.Get());
-
-            var userRepository = new UserRepository(store, factory);
-
-            var accountRepository = Injection.Get<IAccountRepository>(); //var accountRepository = new AccountRepository(factory);
-
-            _authservice = new AuthorizationService(groupRepository, permissionRepository,accountRepository, unitOfWork);
         }
 
-        [GrouperAuthorize]
         [Route("user")]
         public IHttpActionResult GetUsers()
         {
 
             var users = UserRepository.GetUsers();
 
-            return Ok(users.Select(u=>TheModelFactory.Create(u)));
+            return Ok(users.Select(u => TheModelFactory.Create(u)));
 
 
             //Only SuperAdmin or Admin can delete users (Later when implement roles)
@@ -60,7 +51,6 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers.Authentication
             //return Ok(this.UserRepository.Users.ToList().Select(u => this.TheModelFactory.Create(u)));
         }
 
-        //[Authorize(Roles = "Admin")]
         [Route("user/{id:guid}", Name = "GetUserById")]
         public async Task<IHttpActionResult> GetUser(string Id)
         {
@@ -75,18 +65,18 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers.Authentication
             return NotFound();
         }
 
-        //[Authorize(Roles = "Admin")]
         [Route("user/username/{username}")]
-        public async Task<IHttpActionResult> GetUserByName(string username)
+        public IHttpActionResult GetUserByName(string username)
         {
             //Only SuperAdmin or Admin can delete users (Later when implement roles)
             var user = this.UserRepository.GetUserByUsername(username);
-
             if (user != null)
             {
-                return Ok(user);
+                var model = TheModelFactory.Create(user);
+                model.IsAdmin = _groupService.isAdmin(username);
+                model.Permissions = _permissionService.GetByUser(username);
+                return Ok(model);
             }
-
             return NotFound();
         }
 
@@ -107,17 +97,17 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers.Authentication
                 FirstName = model.FirstName,
                 LastName = model.LastName,
                 PasswordHash = Criptografia.Criptografar(model.Password, Criptografia.ModoSimples.Padrao)
-           
+
             };
 
-           // IdentityResult addUserResult =  this.UserRepository.Create(user, createUserModel.Password);
+            // IdentityResult addUserResult =  this.UserRepository.Create(user, createUserModel.Password);
 
             UserRepository.AddUser(user);
 
-           // if (!addUserResult.Succeeded)
-           // {
-           //     return GetErrorResult(addUserResult);
-           // }
+            // if (!addUserResult.Succeeded)
+            // {
+            //     return GetErrorResult(addUserResult);
+            // }
 
             Uri locationHeader = new Uri(Url.Link("GetUserById", new { id = user.Id }));
 
