@@ -20,13 +20,20 @@ using NDDigital.DiarioAcademia.WebApi.Controllers.Base;
 namespace NDDigital.DiarioAcademia.WebApi.Controllers.Authentication
 {
     [RoutePrefix("api/accounts")]
+    [GrouperAuthorize(Claim.Manager)]
     public class AccountsController : BaseSecurityController
     {
         private IAuthorizationService _authservice;
+        private IPermissionService _permissionService;
+        private IGroupService _groupService;
+
 
         public AccountsController()
         {
             _authservice = new AuthorizationService(GroupRepository, PermissionRepository, AccountRepository, Uow);
+            _permissionService = new PermissionService(PermissionRepository, Uow);
+            _groupService = new GroupService(GroupRepository, Uow);
+
         }
 
         [Route("user")]
@@ -35,7 +42,7 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers.Authentication
 
             var users = UserRepository.GetUsers();
 
-            return Ok(users.Select(u=>TheModelFactory.Create(u)));
+            return Ok(users.Select(u => TheModelFactory.Create(u)));
 
 
             //Only SuperAdmin or Admin can delete users (Later when implement roles)
@@ -44,7 +51,6 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers.Authentication
             //return Ok(this.UserRepository.Users.ToList().Select(u => this.TheModelFactory.Create(u)));
         }
 
-        [Authorize(Roles = "Admin")]
         [Route("user/{id:guid}", Name = "GetUserById")]
         public async Task<IHttpActionResult> GetUser(string Id)
         {
@@ -58,19 +64,19 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers.Authentication
 
             return NotFound();
         }
-
-        //[Authorize(Roles = "Admin")]
+        
         [Route("user/username/{username}")]
-        public async Task<IHttpActionResult> GetUserByName(string username)
+        public IHttpActionResult GetUserByName(string username)
         {
             //Only SuperAdmin or Admin can delete users (Later when implement roles)
             var user = this.UserRepository.GetUserByUsername(username);
-
             if (user != null)
             {
-                return Ok(user);
+                var model = TheModelFactory.Create(user);
+                model.IsAdmin = _groupService.isAdmin(username);
+                model.Permissions = _permissionService.GetByUser(username);
+                return Ok(model);
             }
-
             return NotFound();
         }
 
@@ -91,17 +97,17 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers.Authentication
                 FirstName = model.FirstName,
                 LastName = model.LastName,
                 PasswordHash = Criptografia.Criptografar(model.Password, Criptografia.ModoSimples.Padrao)
-           
+
             };
 
-           // IdentityResult addUserResult =  this.UserRepository.Create(user, createUserModel.Password);
+            // IdentityResult addUserResult =  this.UserRepository.Create(user, createUserModel.Password);
 
             UserRepository.AddUser(user);
 
-           // if (!addUserResult.Succeeded)
-           // {
-           //     return GetErrorResult(addUserResult);
-           // }
+            // if (!addUserResult.Succeeded)
+            // {
+            //     return GetErrorResult(addUserResult);
+            // }
 
             Uri locationHeader = new Uri(Url.Link("GetUserById", new { id = user.Id }));
 
@@ -128,7 +134,6 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers.Authentication
         }
 
         //[Authorize(Roles = "Admin")]
-    [GrouperAuthorize(Claim.Manager)]
         [Route("user/{id:guid}")]
         public async Task<IHttpActionResult> DeleteUser(string id)
         {
@@ -152,7 +157,6 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers.Authentication
         }
 
         [HttpPut]
-    [GrouperAuthorize(Claim.Manager)]
         [Route("edit")]
         public IHttpActionResult EditUser([FromBody] User user)
         {

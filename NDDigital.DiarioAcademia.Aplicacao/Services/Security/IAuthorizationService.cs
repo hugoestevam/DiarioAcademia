@@ -132,7 +132,7 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
         {
             var permissions = _permissionRepository.GetByUser(username);
 
-            var isAuth =  _groupRepository.IsAdmin(username);;
+            var isAuth =  _groupRepository.IsAdmin(username);
 
             foreach (var item in permissionIds)
             {

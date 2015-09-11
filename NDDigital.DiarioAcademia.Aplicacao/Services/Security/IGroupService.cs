@@ -9,6 +9,7 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
     public interface IGroupService : IService<Group>
     {
         IList<Group> GetByUser(string username);
+        bool isAdmin(string username);
     }
 
     public class GroupService : IGroupService
@@ -53,6 +54,11 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
         public IList<Group> GetByUser(string username)
         {
             return _repo.GetByUser(username);
+        }
+
+        public bool isAdmin(string username)
+        {
+            return _repo.IsAdmin(username);
         }
     }
 }

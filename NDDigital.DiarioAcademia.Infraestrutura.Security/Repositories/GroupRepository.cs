@@ -32,7 +32,9 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Security.Repositories
 
         public IList<Group> GetByUser(string username)
         {
-            var acc = (from a in DataContext.Accounts.Include("Groups") select a).FirstOrDefault();
+            var acc = (from a in DataContext.Accounts.Include("Groups")
+                       where a.Username == username
+                       select a).FirstOrDefault();
 
             return acc?.Groups;
         }

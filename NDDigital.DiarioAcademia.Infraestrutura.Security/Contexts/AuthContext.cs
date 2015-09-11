@@ -15,7 +15,7 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Security.Contexts
         public AuthContext()
              : base("DiarioAcademiaContext", throwIfV1Schema: false)
         {
-            Database.SetInitializer(new DropCreateDatabaseIfModelChanges<AuthContext>());
+            Database.SetInitializer(new AuthenticationInitializer());
             Configuration.ProxyCreationEnabled = false;
             Configuration.LazyLoadingEnabled = false;
         }

@@ -45,6 +45,8 @@ build/
 *.pidb
 *.log
 *.scc
+*.ldf
+*.mdf
 
 # Visual C++ cache files
 ipch/
@@ -166,9 +168,3 @@ NDDigital.DiarioAcademia.Apresentacao.WebApp/task/temp/templates.js
 packages/FluentAssertions.3.2.1/lib/sl5/Microsoft.VisualStudio.QualityTools.UnitTesting.Silverlight.xml
 packages/FluentAssertions.3.2.1/lib/sl5/Microsoft.VisualStudio.QualityTools.UnitTesting.Silverlight.xml
 .vs/config/applicationhost.config
-NDDigital.DiarioAcademia.WebApi/App_Data/DefaultConnection_log.ldf
-*.ldf
-*.ldf
-NDDigital.DiarioAcademia.WebApi/App_Data/DefaultConnection_log.ldf
-*.mdf
-NDDigital.DiarioAcademia.WebApi/App_Data/DefaultConnection_log.ldf
