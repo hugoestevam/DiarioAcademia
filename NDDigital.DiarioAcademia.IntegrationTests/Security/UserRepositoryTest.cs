@@ -6,9 +6,9 @@ using System.Linq;
 namespace NDDigital.DiarioAcademia.IntegrationTests.Security
 {
     [TestClass]
-    public class UserTest:BaseSecurityTest
+    public class UserTest : BaseSecurityTest
     {
-        const string TestCategory = 
+        private const string TestCategory =
             "Authentication - User";
 
         [TestMethod]
@@ -23,15 +23,15 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.Security
             user.UserName = dbuser.UserName;
 
             UserRepository.AddUser(user);
-
         }
+
         [TestMethod]
         [TestCategory(TestCategory)]
         public void Deveria_Adicionar_Um_Usuario()
         {
             var user = ObjectBuilder.CreateUser(full: false);
 
-            user.UserName = user.Account.Username="New username";
+            user.UserName = user.Account.Username = "New username";
 
             UserRepository.AddUser(user);
 
@@ -43,6 +43,7 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.Security
 
             Assert.AreEqual(user.FirstName, user2.FirstName);
         }
+
         [TestMethod]
         [TestCategory(TestCategory)]
         public void Deveria_Excluir_Um_Usuario()
@@ -60,7 +61,6 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.Security
         [TestCategory(TestCategory)]
         public void Deveria_Buscar_Todos_Usuarios()
         {
-
             var count = UserRepository.GetUsers().Count;
 
             Assert.IsTrue(count > 0);
@@ -74,10 +74,7 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.Security
 
             var users = UserRepository.GetUsersByGroup(grupo);
 
-
-            Assert.AreEqual(1,users.Count);
-
-
-        } 
+            Assert.AreEqual(1, users.Count);
+        }
     }
 }

@@ -4,9 +4,10 @@ using NDDigital.DiarioAcademia.IntegrationTests.Base;
 namespace NDDigital.DiarioAcademia.IntegrationTests.ADO
 {
     [TestClass]
-    public class AlunoADOTest: BaseADOTest
+    public class AlunoADOTest : BaseADOTest
     {
         private const string TestCategory = "Teste de Integração Aluno";
+
         [TestMethod]
         [TestCategory(TestCategory)]
         public void Deveria_Persistir_Aluno_SQL_Test()

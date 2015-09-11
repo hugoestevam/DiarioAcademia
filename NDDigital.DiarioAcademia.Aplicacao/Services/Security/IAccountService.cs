@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace NDDigital.DiarioAcademia.Aplicacao.Services
 {
-    public interface IAccountService: IService<Account>
+    public interface IAccountService : IService<Account>
     {
     }
 

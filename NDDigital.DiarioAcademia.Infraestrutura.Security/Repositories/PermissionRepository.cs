@@ -1,11 +1,8 @@
 ﻿using NDDigital.DiarioAcademia.Infraestrutura.Security.Common;
 using NDDigital.DiarioAcademia.Infraestrutura.Security.Contracts;
 using NDDigital.DiarioAcademia.Infraestrutura.Security.Entities;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NDDigital.DiarioAcademia.Infraestrutura.Security.Repositories
 {
@@ -48,7 +45,7 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Security.Repositories
         public IList<Permission> GetByUser(string username)
         {
             var acc = (from a in DataContext.Accounts.Include("Groups")
-                       where a.Username==username
+                       where a.Username == username
                        select a).FirstOrDefault();
 
             var list = new List<Permission>();
@@ -59,11 +56,9 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Security.Repositories
 
                 list.AddRange(listPermissions);
 
-                list=list.Distinct().ToList();
+                list = list.Distinct().ToList();
             }
             return list;
-
         }
     }
-
 }

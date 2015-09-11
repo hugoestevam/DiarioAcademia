@@ -9,9 +9,8 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.IoC
     [TestClass]
     public class IoCNinjectSqlTest
     {
-        private const string TestCategory = 
+        private const string TestCategory =
             "Teste de IoC";
-
 
         [TestMethod]
         [TestCategory(TestCategory)]

@@ -5,36 +5,31 @@ using NDDigital.DiarioAcademia.Dominio.Entities;
 using NDDigital.DiarioAcademia.Infraestrutura.Security.Contexts;
 using NDDigital.DiarioAcademia.Infraestrutura.Security.Entities;
 using NDDigital.DiarioAcademia.Infraestrutura.Security.Repositories;
-using System;
 using System.Data.Entity;
 
 namespace NDDigital.DiarioAcademia.IntegrationTests.Base
 {
-	public class DatabaseTestInitializer : DropCreateDatabaseAlways<EntityFrameworkContext>
-	{
-		public EntityFrameworkContext _entityContext;
-		public AuthContext _authContext;
-		private readonly Mock<UserRepository> _userRepository = null;
-		public IUserStore<User> _store;
+    public class DatabaseTestInitializer : DropCreateDatabaseAlways<EntityFrameworkContext>
+    {
+        public EntityFrameworkContext _entityContext;
+        public AuthContext _authContext;
+        private readonly Mock<UserRepository> _userRepository = null;
+        public IUserStore<User> _store;
 
-		
-		public DatabaseTestInitializer()
-		{
-            var entityTables = new[] { "TBPresenca" , "TBAula", "TBAluno","TBTurma" };
-             var authTables = new[] { "TBGroup", "TBAccount", "TBAccount", "TBPermission" };
+        public DatabaseTestInitializer()
+        {
+            var entityTables = new[] { "TBPresenca", "TBAula", "TBAluno", "TBTurma" };
+            var authTables = new[] { "TBGroup", "TBAccount", "TBAccount", "TBPermission" };
             var authNoReseed = new[] { "TBAccountGroups", "TBGroupPermission", "TBUser" };
-
 
             _userRepository = new Mock<UserRepository>();
 
-			_entityContext = new EntityFrameworkContext();
+            _entityContext = new EntityFrameworkContext();
             _authContext = new AuthContext();
 
-
-            TruncateTables(_authContext, authNoReseed, reseed:false);
+            TruncateTables(_authContext, authNoReseed, reseed: false);
             TruncateTables(_authContext, authTables);
             TruncateTables(_entityContext, entityTables);
-
 
             _entityContext.SaveChanges();
 
@@ -69,7 +64,6 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.Base
         {
             context.Set<User>().Add(ObjectBuilder.CreateUser());
             context.SaveChanges();
-
         }
 
         private void TruncateTables(DbContext context, string[] tables, bool reseed = true)
@@ -84,5 +78,5 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.Base
 
             context.Database.ExecuteSqlCommand(query);
         }
-	}
+    }
 }

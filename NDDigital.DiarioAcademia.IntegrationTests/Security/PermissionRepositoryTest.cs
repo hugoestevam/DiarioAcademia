@@ -7,7 +7,7 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.Security
     [TestClass]
     public class PermissionRepositoryTest : BaseSecurityTest
     {
-        const string TestCategory =
+        private const string TestCategory =
             "Authorization - Permission";
 
         [TestMethod]
@@ -51,7 +51,6 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.Security
             var permissaoEditada = PermissionRepository.GetById(1);
 
             Assert.AreEqual("02", permissaoEditada.PermissionId);
-
         }
 
         [TestMethod]
@@ -84,6 +83,7 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.Security
 
             Assert.AreEqual(5, allPermissions.Count);
         }
+
         [TestMethod]
         [TestCategory(TestCategory)]
         public void Deveria_Buscar_Permissoes_Por_Usuario()
@@ -93,7 +93,6 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.Security
             var list = PermissionRepository.GetByUser(acc.Username);
 
             Assert.AreEqual(2, list.Count);
-
         }
     }
 }

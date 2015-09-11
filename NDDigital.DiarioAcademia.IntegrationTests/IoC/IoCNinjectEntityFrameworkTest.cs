@@ -11,8 +11,9 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.IoC
     [TestClass]
     public class IoCNinjectEntityFrameworkTest
     {
-        private const string TestCategory = 
+        private const string TestCategory =
             "Teste de IoC";
+
         [TestInitialize]
         public void Initialize()
         {
@@ -41,8 +42,6 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.IoC
         [TestCategory(TestCategory)]
         public void Contexts_IoC_EF_Test()
         {
-           
-
         }
     }
 }

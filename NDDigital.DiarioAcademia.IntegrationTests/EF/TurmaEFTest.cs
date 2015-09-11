@@ -4,7 +4,7 @@ using NDDigital.DiarioAcademia.IntegrationTests.Base;
 namespace Test
 {
     [TestClass]
-    public class TurmaEFTest:BaseEFTest
+    public class TurmaEFTest : BaseEFTest
     {
         private const string TestCategory =
             "Teste de Integração Turma";

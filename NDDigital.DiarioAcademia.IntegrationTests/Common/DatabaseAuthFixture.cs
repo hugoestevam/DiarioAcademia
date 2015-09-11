@@ -1,6 +1,4 @@
-﻿using Infrastructure.DAO.ORM.Common;
-using NDDigital.DiarioAcademia.Infraestrutura.Orm.Common;
-using NDDigital.DiarioAcademia.Infraestrutura.Security.Common;
+﻿using NDDigital.DiarioAcademia.Infraestrutura.Security.Common;
 using System;
 
 namespace NDDigital.DiarioAcademia.IntegrationTests.Common

@@ -11,7 +11,7 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Configurations
 
             HasKey(t => t.Id);
 
-            Property(t => t.Ano);           
+            Property(t => t.Ano);
         }
     }
 }

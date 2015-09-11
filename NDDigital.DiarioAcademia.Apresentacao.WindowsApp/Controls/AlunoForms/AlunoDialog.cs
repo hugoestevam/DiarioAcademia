@@ -17,7 +17,7 @@ namespace NDDigital.DiarioAcademia.Apresentacao.WindowsApp.Controls.AlunoForms
         private AlunoDTO _aluno;
         private IAlunoService _alunoService;
 
-        public AlunoDialog(IEnumerable<TurmaDTO> turmas)//TODO:IOC
+        public AlunoDialog(IEnumerable<TurmaDTO> turmas)
         {
             var unitOfWork = Injection.Get<IUnitOfWork>();
 

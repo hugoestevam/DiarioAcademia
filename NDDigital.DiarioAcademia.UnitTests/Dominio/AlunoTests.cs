@@ -1,7 +1,7 @@
-﻿using System;
+﻿using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NDDigital.DiarioAcademia.Dominio.Entities;
-using FluentAssertions;
+using System;
 
 namespace NDDigital.DiarioAcademia.UnitTests.Dominio
 {
@@ -23,7 +23,6 @@ namespace NDDigital.DiarioAcademia.UnitTests.Dominio
         {
             aluno.ObtemQuantidadePresencas().Should().Be(0);
         }
-
 
         [TestMethod]
         [TestCategory("Camada de Domínio")]

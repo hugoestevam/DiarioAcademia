@@ -1,10 +1,6 @@
 ﻿using NDDigital.DiarioAcademia.Dominio.Common;
-using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NDDigital.DiarioAcademia.Infraestrutura.Security.Entities
 {
@@ -12,7 +8,6 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Security.Entities
     {
         public Account()
         {
-
         }
 
         [Required]
@@ -25,6 +20,5 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Security.Entities
         {
             Username = username;
         }
-
     }
 }

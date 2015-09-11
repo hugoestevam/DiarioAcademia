@@ -19,8 +19,13 @@ namespace Infrastructure.DAO.ORM.Common
         {
             get
             {
-                return dbContext ?? dbFactory.Get();
+                return dbContext = dbContext ?? dbFactory.Get();
             }
+        }
+
+        public DbContext Test()
+        {
+            return dbContext;
         }
 
         public EntityFrameworkUnitOfWork(EntityFrameworkFactory dbFactory)

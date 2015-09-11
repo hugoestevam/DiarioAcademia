@@ -1,13 +1,10 @@
 ﻿using Ellevo.Biblioteca.Seguranca;
 using NDDigital.DiarioAcademia.Infraestrutura.Security.Entities;
-using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Validation;
 using System.Diagnostics;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NDDigital.DiarioAcademia.Infraestrutura.Security.Contexts
 {
@@ -30,7 +27,6 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Security.Contexts
                         Account = new Account("superadmin"),
                         FirstName = "admin",
                         LastName = "admin"
-
                     };
                     user.Account.Groups = new List<Group>();
                     user.Account.Groups.Add(group);
@@ -53,7 +49,6 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Security.Contexts
                     }
                 }
             }
-
         }
     }
 }

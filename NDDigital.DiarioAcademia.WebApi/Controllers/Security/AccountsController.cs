@@ -1,21 +1,14 @@
-﻿using Microsoft.AspNet.Identity;
+﻿using Ellevo.Biblioteca.Seguranca;
+using Microsoft.AspNet.Identity;
 using NDDigital.DiarioAcademia.Aplicacao.Services;
-using NDDigital.DiarioAcademia.Infraestrutura.DAO.Common.Uow;
-using NDDigital.DiarioAcademia.Infraestrutura.IoC;
-using NDDigital.DiarioAcademia.Infraestrutura.Orm.Common;
+using NDDigital.DiarioAcademia.Infraestrutura.Security.Entities;
+using NDDigital.DiarioAcademia.Infraestrutura.Security.Repositories;
+using NDDigital.DiarioAcademia.WebApi.Controllers.Base;
 using NDDigital.DiarioAcademia.WebApi.Models;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Http;
-using NDDigital.DiarioAcademia.Infraestrutura.Security.Contracts;
-using NDDigital.DiarioAcademia.Infraestrutura.Security.Entities;
-using NDDigital.DiarioAcademia.Infraestrutura.Security.Repositories;
-using NDDigital.DiarioAcademia.Infraestrutura.Security.Common;
-using Microsoft.AspNet.Identity.EntityFramework;
-using Ellevo.Biblioteca.Seguranca;
-using NDDigital.DiarioAcademia.WebApi.Filters;
-using NDDigital.DiarioAcademia.WebApi.Controllers.Base;
 
 namespace NDDigital.DiarioAcademia.WebApi.Controllers.Authentication
 {
@@ -27,13 +20,11 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers.Authentication
         private IPermissionService _permissionService;
         private IGroupService _groupService;
 
-
         public AccountsController()
         {
             _authservice = new AuthorizationService(GroupRepository, PermissionRepository, AccountRepository, Uow);
             _permissionService = new PermissionService(PermissionRepository, Uow);
             _groupService = new GroupService(GroupRepository, Uow);
-
         }
 
         [Route("user")]
@@ -84,7 +75,6 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers.Authentication
                 FirstName = model.FirstName,
                 LastName = model.LastName,
                 PasswordHash = Criptografia.Criptografar(model.Password, Criptografia.ModoSimples.Padrao)
-
             };
 
             // IdentityResult addUserResult =  this.UserRepository.Create(user, createUserModel.Password);

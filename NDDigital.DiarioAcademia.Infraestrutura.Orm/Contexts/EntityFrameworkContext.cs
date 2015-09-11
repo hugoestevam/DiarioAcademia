@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNet.Identity.EntityFramework;
-using NDDigital.DiarioAcademia.Dominio.Entities;
+﻿using NDDigital.DiarioAcademia.Dominio.Entities;
 using NDDigital.DiarioAcademia.Infraestrutura.Orm.Configurations;
 using System;
 using System.Collections.Generic;

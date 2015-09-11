@@ -1,6 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Data.Entity;
 using NDDigital.DiarioAcademia.Infraestrutura.DAO.Common.Uow;
+using System.Data.Entity;
 
 namespace NDDigital.DiarioAcademia.IntegrationTests.Base
 {
@@ -10,10 +10,10 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.Base
     public class BaseTest
     {
         #region Protected Properties
+
         protected IUnitOfWork Uow;
-        #endregion
 
-
+        #endregion Protected Properties
 
         [TestInitialize]
         public virtual void Initialize()
@@ -21,9 +21,6 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.Base
             Database.SetInitializer(new DatabaseTestInitializer());
 
             ObjectBuilder.Reset();
-           
         }
-
-
     }
 }

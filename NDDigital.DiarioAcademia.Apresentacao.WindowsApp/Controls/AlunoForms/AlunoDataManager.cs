@@ -16,7 +16,7 @@ namespace NDDigital.DiarioAcademia.Apresentacao.WindowsApp.Controls.AlunoForms
 
         private AlunoControl _control;
 
-        public AlunoDataManager() //TODO: IOC
+        public AlunoDataManager() 
         {
             var unitOfWork = Injection.Get<IUnitOfWork>();
 

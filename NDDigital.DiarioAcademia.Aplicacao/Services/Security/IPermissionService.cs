@@ -1,5 +1,4 @@
-﻿using NDDigital.DiarioAcademia.Dominio.Contracts;
-using NDDigital.DiarioAcademia.Infraestrutura.DAO.Common.Uow;
+﻿using NDDigital.DiarioAcademia.Infraestrutura.DAO.Common.Uow;
 using NDDigital.DiarioAcademia.Infraestrutura.Security.Contracts;
 using NDDigital.DiarioAcademia.Infraestrutura.Security.Entities;
 using System;
@@ -11,7 +10,9 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
     public interface IPermissionService : IService<Permission>
     {
         Permission GetByPermissionId(string id);
+
         IList<Permission> GetByUser(string username);
+
         IList<Permission> GetByGroup(int groupId);
     }
 
@@ -56,7 +57,7 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
 
         public Permission GetByPermissionId(string id)
         {
-            return (from p in _repo.GetAll() where p.PermissionId==id select p).FirstOrDefault(); 
+            return (from p in _repo.GetAll() where p.PermissionId == id select p).FirstOrDefault();
         }
 
         public IList<Permission> GetByUser(string username)
@@ -67,7 +68,6 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
         public IList<Permission> GetByGroup(int groupId)
         {
             return _repo.GetByGroup(groupId);
-
         }
     }
 }

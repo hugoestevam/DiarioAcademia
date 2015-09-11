@@ -9,7 +9,6 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.CepServices
 {
     internal class MailInfo
     {
-
         internal string Mails_Host_Server;
         internal string Sender_Mail;
         internal string Sender_Mail_Name;
@@ -17,13 +16,12 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.CepServices
         internal string Login_Pass;
         internal string DefaultReceiver;
         internal int SmtpServerPor;
-
-
-
     }
+
     public class EmailService : IIdentityMessageService
     {
         private MailInfo MailInfo;
+
         public EmailService()
         {
             MailInfo = new MailInfo
@@ -38,7 +36,6 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.CepServices
                 DefaultReceiver = "wesley.lemos@nddigital.com.br"
             };
         }
-
 
         public async Task<bool> Send(string to, string subject, string body, MemoryStream anexo = null)
         {
@@ -62,7 +59,6 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.CepServices
                             if (anexo != null)
                             {
                                 mail.Attachments.Add(new Attachment(anexo, subject + ".pdf"));
-
                             }
 
                             SmtpServer.Port = MailInfo.SmtpServerPor;
@@ -97,7 +93,6 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.CepServices
 
             return ret;
         }
-
 
         public Task SendAsync(IdentityMessage message)
         {

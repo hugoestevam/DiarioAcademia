@@ -3,11 +3,9 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using NDDigital.DiarioAcademia.Infraestrutura.Security.Contexts;
 using NDDigital.DiarioAcademia.Infraestrutura.Security.Entities;
 using System;
-using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace NDDigital.DiarioAcademia.Infraestrutura.Security.Repositories
@@ -71,7 +69,6 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Security.Repositories
             _context.SaveChanges();
 
             return _context.SaveChangesAsync();
-
         }
 
         public void Dispose()
@@ -121,7 +118,6 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Security.Repositories
 
         private static void SetUser(User user, IdentityUser identityUser)
         {
-
             user.PasswordHash = identityUser.PasswordHash;
             user.SecurityStamp = identityUser.SecurityStamp;
             user.Id = identityUser.Id;
@@ -144,5 +140,4 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Security.Repositories
             throw new NotImplementedException();
         }
     }
-
 }

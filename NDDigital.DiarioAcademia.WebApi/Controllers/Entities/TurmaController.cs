@@ -1,8 +1,5 @@
-﻿using Infrastructure.DAO.ORM.Common;
-using NDDigital.DiarioAcademia.Aplicacao.DTOs;
+﻿using NDDigital.DiarioAcademia.Aplicacao.DTOs;
 using NDDigital.DiarioAcademia.Aplicacao.Services;
-using NDDigital.DiarioAcademia.Infraestrutura.Orm.Common;
-using NDDigital.DiarioAcademia.Infraestrutura.Orm.Repositories;
 using NDDigital.DiarioAcademia.WebApi.Controllers.Base;
 using NDDigital.DiarioAcademia.WebApi.Filters;
 using System.Collections.Generic;
@@ -15,7 +12,7 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers.Entities
     {
         private TurmaService _turmaService;
 
-        public TurmaController() 
+        public TurmaController()
         {
             _turmaService = new TurmaService(TurmaRepository, Uow);
         }

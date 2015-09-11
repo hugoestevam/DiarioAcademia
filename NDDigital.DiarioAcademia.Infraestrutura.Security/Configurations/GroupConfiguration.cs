@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using NDDigital.DiarioAcademia.Infraestrutura.Security.Entities;
 using System.Data.Entity.ModelConfiguration;
-using NDDigital.DiarioAcademia.Infraestrutura.Security.Entities;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NDDigital.DiarioAcademia.Infraestrutura.Security.Configurations
 {

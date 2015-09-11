@@ -30,7 +30,15 @@ namespace Infrastructure.DAO.ORM.Common.Base
 
         protected EntityFrameworkContext DataContext
         {
-            get { return dataContext ?? (DatabaseFactory.Get()); }
+            get
+            {
+                return dataContext = dataContext ?? (DatabaseFactory.Get());
+            }
+        }
+
+        public DbContext Test()
+        {
+            return dataContext;
         }
 
         public virtual T Add(T entity)
@@ -101,7 +109,7 @@ namespace Infrastructure.DAO.ORM.Common.Base
                 query = query.Include(includeProperty);
             }
 
-            return query.Where(g=> g.Id == id).FirstOrDefault();
+            return query.Where(g => g.Id == id).FirstOrDefault();
         }
 
         public virtual IList<T> GetAll()

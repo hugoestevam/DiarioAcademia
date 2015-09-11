@@ -1,5 +1,4 @@
-﻿using NDDigital.DiarioAcademia.Infraestrutura.DAO.Common.Factorys;
-using NDDigital.DiarioAcademia.Infraestrutura.SQL.Common;
+﻿using NDDigital.DiarioAcademia.Infraestrutura.SQL.Common;
 using System;
 using System.Collections.Generic;
 using System.Data;

@@ -5,9 +5,8 @@ using System;
 namespace NDDigital.DiarioAcademia.IntegrationTests.Base
 {
     [TestClass]
-    public class AulaEFTest: BaseEFTest
+    public class AulaEFTest : BaseEFTest
     {
-
         public const string TestCategory =
             "Teste de Integração - Aula";
 

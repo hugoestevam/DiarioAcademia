@@ -2,13 +2,13 @@
 using NDDigital.DiarioAcademia.Infraestrutura.Security.Contracts;
 using NDDigital.DiarioAcademia.Infraestrutura.Security.Entities;
 using System.Collections.Generic;
-using System;
 
 namespace NDDigital.DiarioAcademia.Aplicacao.Services
 {
     public interface IGroupService : IService<Group>
     {
         IList<Group> GetByUser(string username);
+
         bool isAdmin(string username);
     }
 
@@ -46,7 +46,7 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
             return _repo.GetAllIncluding(g => g.Permissions);
         }
 
-       Group IService<Group>.GetById(int id)
+        Group IService<Group>.GetById(int id)
         {
             return _repo.GetByIdIncluding(id, g => g.Permissions);
         }

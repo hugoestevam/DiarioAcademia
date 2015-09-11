@@ -7,7 +7,7 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.Security
     [TestClass]
     public class AuthenticationTest : BaseSecurityTest
     {
-        const string TestCategory =
+        private const string TestCategory =
             "Authorizarion - Relations";
 
         [TestMethod]

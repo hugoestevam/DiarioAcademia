@@ -16,8 +16,10 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers
         private UserRepository _userRepository = null;
 
         #region Constructor Requirements
+
         protected IUnitOfWork Uow;
-        #endregion
+
+        #endregion Constructor Requirements
 
         public BaseApiController()
         {
@@ -31,7 +33,6 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers
                 return _userRepository ?? Request.GetOwinContext().GetUserManager<UserRepository>();
             }
         }
-
 
         protected ModelFactory TheModelFactory
         {

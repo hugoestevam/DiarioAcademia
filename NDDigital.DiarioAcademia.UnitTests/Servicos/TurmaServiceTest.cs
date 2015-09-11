@@ -42,6 +42,7 @@ namespace NDDigital.DiarioAcademia.UnitTests.Servicos
             var turmas = service.GetAll();
 
             Assert.IsTrue(turmas.Count > 1);
+            Assert.IsTrue((uow as Infrastructure.DAO.ORM.Common.EntityFrameworkUnitOfWork).Test() == (repo as NDDigital.DiarioAcademia.Infraestrutura.Orm.Repositories.TurmaRepositoryEF).Test());
         }
 
         [TestMethod]

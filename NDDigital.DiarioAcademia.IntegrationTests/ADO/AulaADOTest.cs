@@ -5,7 +5,7 @@ using System;
 namespace NDDigital.DiarioAcademia.IntegrationTests.ADO
 {
     [TestClass]
-    public class AulaADOTest:BaseADOTest
+    public class AulaADOTest : BaseADOTest
     {
         private const string TestCategory = "Teste de Integração Aula";
 
