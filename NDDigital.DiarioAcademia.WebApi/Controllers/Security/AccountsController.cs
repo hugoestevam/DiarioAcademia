@@ -66,7 +66,6 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers.Authentication
         }
 
         [Route("user/username/{username}")]
-        [GrouperAuthorize(Basic = true)]
         public IHttpActionResult GetUserByName(string username)
         {
             //Only SuperAdmin or Admin can delete users (Later when implement roles)
