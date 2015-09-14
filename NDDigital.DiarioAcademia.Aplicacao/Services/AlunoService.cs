@@ -123,6 +123,8 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
         {
             try
             {
+                var list = GetAllByTurmaId(id);
+
                 FileStream fs = new FileStream(path,
                            FileMode.Create, FileAccess.Write, FileShare.None);
 
@@ -135,9 +137,9 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
                 doc.Add(new Paragraph("Relatório de presenças - Academia do prgramador " + id + ":\n\n"));
                 doc.Add(new Paragraph("Alunos/Presenças/Faltas:\n\n"));
 
-                foreach (var listaAluno in GetAllByTurmaId(id))
+                foreach (var item in list)
                 {
-                    doc.Add(new Paragraph(listaAluno.Descricao));
+                    doc.Add(new Paragraph(item.Descricao));
                 }
 
                 doc.Close();

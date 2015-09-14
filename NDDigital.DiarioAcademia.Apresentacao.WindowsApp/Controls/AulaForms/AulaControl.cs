@@ -30,7 +30,7 @@ namespace NDDigital.DiarioAcademia.Apresentacao.WindowsApp.Controls.AulaForms
         {
             int id = Principal.Instance.IdTurmaSelecionada;
 
-            var aulas = _aulaService.GetAllByTurma(id);//TODO: IMPLEMENTAR
+            var aulas = _aulaService.GetAllByTurma(id);
 
             listAulas.Items.Clear();
 

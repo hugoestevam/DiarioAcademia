@@ -109,7 +109,7 @@ namespace NDDigital.DiarioAcademia.UnitTests.Servicos
             var comando = new ChamadaDTO { AnoTurma = 2000 };
 
             //act
-            //Exception ex = Record.Exception(new Assert.ThrowsDelegate(() => aulaService.RealizaChamada(comando))); TODO: Implementar
+            
             aulaService.RealizaChamada(comando);
             // assert is [ExpectedException]
         }
