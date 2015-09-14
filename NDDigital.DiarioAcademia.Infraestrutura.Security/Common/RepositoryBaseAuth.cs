@@ -18,7 +18,7 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Security.Common
         {
             DatabaseFactory = databaseFactory;
             dbset = DataContext.Set<T>();
-            dataContext = dataContext ?? (DatabaseFactory.Get() as AuthContext);
+            dataContext = dataContext ?? (DatabaseFactory.Get());
         }
 
         protected AuthFactory DatabaseFactory

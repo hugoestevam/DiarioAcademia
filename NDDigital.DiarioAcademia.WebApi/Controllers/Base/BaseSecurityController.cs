@@ -1,4 +1,5 @@
-﻿using NDDigital.DiarioAcademia.Infraestrutura.IoC;
+﻿using NDDigital.DiarioAcademia.Infraestrutura.DAO.Common.Uow;
+using NDDigital.DiarioAcademia.Infraestrutura.IoC;
 using NDDigital.DiarioAcademia.Infraestrutura.Security.Contracts;
 
 namespace NDDigital.DiarioAcademia.WebApi.Controllers.Base
@@ -14,6 +15,9 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers.Base
             PermissionRepository = Injection.Get<IPermissionRepository>();
             GroupRepository = Injection.Get<IGroupRepository>();
             AccountRepository = Injection.Get<IAccountRepository>();
+
+
+            Uow = Injection.Get<IAuthUnitOfWork>();
         }
     }
 }

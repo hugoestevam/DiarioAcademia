@@ -1,5 +1,6 @@
 ﻿using Infrastructure.DAO.ORM.Common;
 using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using NDDigital.DiarioAcademia.Dominio.Contracts;
 using NDDigital.DiarioAcademia.Infraestrutura.DAO.Common.Uow;
 using NDDigital.DiarioAcademia.Infraestrutura.Orm.Common;
@@ -30,7 +31,7 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Modules
 
 
             Bind<IAuthUnitOfWork>().To<AuthUnitOfWork>().WithConstructorArgument(typeAuth, authFactory);
-            Bind<IUserStore<User>>().To<IdentityUserStore>().WithConstructorArgument(typeAuth, authFactory);
+            Bind<IUserStore<User>>().To<UserStore<User>>();//.WithConstructorArgument(typeAuth, authFactory);
             Bind<IAccountRepository>().To<AccountRepository>().WithConstructorArgument(typeAuth, authFactory);
             Bind<IGroupRepository>().To<GroupRepository>().WithConstructorArgument(typeAuth, authFactory);
             Bind<IPermissionRepository>().To<PermissionRepository>().WithConstructorArgument(typeAuth, authFactory);

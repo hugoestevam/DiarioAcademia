@@ -44,8 +44,8 @@
                });
     };
 
-    runStateChangeStart.$inject = ['$rootScope', '$state', 'authService'];
-    function runStateChangeStart($rootScope, $state, authService, a) {
+    runStateChangeStart.$inject = ['$rootScope', '$state', 'authService','logger'];
+    function runStateChangeStart($rootScope, $state, authService, logger) {
 
         $rootScope.$on('$stateChangeStart',
            function (event, toState, toParams, fromState, fromParams) {
@@ -75,6 +75,9 @@
                    var hasPermission = authService.checkAuthorize(toState.name);
                    if (hasPermission) return;
                }
+
+               logger.warning("Você não tem permissão para acessar \"" + toState.data.displayName + "\"");
+
                authService.lastState = toState.name;
                event.preventDefault();
                $state.go(stateToGo);
