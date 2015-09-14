@@ -26,13 +26,11 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.SQL.Repositories
         public const string SqlDelete = @"DELETE FROM TBAula
             WHERE Id = {0}Id";
 
-        public const string SqlSelect = @"SELECT * FROM TBAula";
+        public const string SqlSelect = 
+            @"SELECT * FROM TBAula";
 
-        public const string SqlSelectbId = @"SELECT * FROM TBAula
-            WHERE Id = {0}Id";
-
-        public const string SqlSelectTexto = @"SELECT * FROM TBAula
-            WHERE Data = {0}Data";
+        public const string SqlSelectById =
+            @"SELECT * FROM TBAula WHERE Id = {0}Id_Aula";
 
         #endregion Querys
 
@@ -91,9 +89,16 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.SQL.Repositories
             }
         }
 
-        public IList<Aula> GetAllByTurmaId(int id)
+        public IList<Aula> GetAllByTurmaId()
         {
-            throw new NotImplementedException();
+            try
+            {
+                return GetAll();
+            }
+            catch (Exception te)
+            {
+                throw new Exception("Erro ao tentar listar todas as Aulas por determinada turma!" + te.Message);
+            }
         }
 
         public IList<Aula> GetAllIncluding(params Expression<Func<Aula, object>>[] includeProperties)
@@ -110,13 +115,13 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.SQL.Repositories
         {
             try
             {
-                var parms = new object[] { "Id", id };
+                var parms = new object[] { "Id_Aula", id };
 
-                return Get(SqlSelectbId, Make, parms);
+                return Get(SqlSelectById, Make, parms);
             }
-            catch (Exception)
+            catch (Exception te)
             {
-                return null;
+                throw new Exception(te.Message);
             }
         }
 

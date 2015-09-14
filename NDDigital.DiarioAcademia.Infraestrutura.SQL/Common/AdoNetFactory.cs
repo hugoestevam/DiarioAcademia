@@ -3,6 +3,7 @@ using NDDigital.DiarioAcademia.Infraestrutura.DAO.Common.Uow;
 using System.Configuration;
 using System.Data;
 using System.Data.Common;
+using System;
 
 namespace NDDigital.DiarioAcademia.Infraestrutura.SQL.Common
 {
@@ -39,8 +40,12 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.SQL.Common
             Command.Connection = Connection;
 
             Connection.Open();
+        }
 
-            Command.Transaction = Connection.BeginTransaction();
+        public void BeginTransaction()
+        {
+            if (Command.Transaction == null)
+                Command.Transaction = Connection.BeginTransaction();
         }
 
         public override IUnitOfWork Create()

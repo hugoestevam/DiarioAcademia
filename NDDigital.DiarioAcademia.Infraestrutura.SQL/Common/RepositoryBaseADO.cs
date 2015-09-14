@@ -19,6 +19,8 @@ namespace Infrasctructure.DAO.SQL.Common
 
         public int Insert(string sql, object[] parms = null)
         {
+            _factory.BeginTransaction();
+
             sql = string.Format(sql, "@");
             sql += ";SELECT SCOPE_IDENTITY()";
 
@@ -33,6 +35,8 @@ namespace Infrasctructure.DAO.SQL.Common
 
         public void Update(string sql, object[] parms = null)
         {
+            _factory.BeginTransaction();
+
             sql = string.Format(sql, "@");
 
             _factory.Command.CommandText = sql;

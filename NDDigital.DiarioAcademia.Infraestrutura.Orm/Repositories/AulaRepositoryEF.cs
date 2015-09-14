@@ -21,12 +21,9 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Repositories
             return GetQueryable().FirstOrDefault(x => x.Data.Equals(data));
         }
 
-        public IList<Aula> GetAllByTurmaId(int id)
+        public IList<Aula> GetAllByTurmaId()
         {
-            return GetQueryable()
-               .Include(x => x.Turma)
-               .Where(x => x.Turma.Id == id)
-               .ToList();
+            return GetAll();
         }
 
         public override Aula GetById(int id)
