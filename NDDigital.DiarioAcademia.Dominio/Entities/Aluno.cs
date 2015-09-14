@@ -58,8 +58,6 @@ namespace NDDigital.DiarioAcademia.Dominio.Entities
         {
             presenca = Presencas.Find(x => x.Aula == aula);
 
-            //presenca = Presencas.FirstOrDefault(x => x.Aula.Equals(aula)); //TODO: THIAGO SARTOR
-
             return presenca != null;
         }
 

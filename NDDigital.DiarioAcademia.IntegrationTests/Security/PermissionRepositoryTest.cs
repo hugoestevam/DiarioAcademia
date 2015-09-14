@@ -92,7 +92,7 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.Security
 
             var list = PermissionRepository.GetByUser(acc.Username);
 
-            Assert.AreEqual(2, list.Count);
+            Assert.AreEqual(4, list.Count);
         }
     }
 }

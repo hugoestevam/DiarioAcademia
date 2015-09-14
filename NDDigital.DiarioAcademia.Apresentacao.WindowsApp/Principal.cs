@@ -247,7 +247,7 @@ namespace NDDigital.DiarioAcademia.Apresentacao.WindowsApp
                 saveFileDialog.FileName = "Relatório Academia do Programador " + ano;
                 saveFileDialog.ShowDialog();
 
-                _alunoService.GerarRelatorioAlunosPdf(turmaSelecionada.Ano, saveFileDialog.FileName);
+                _alunoService.GerarRelatorioAlunosPdf(turmaSelecionada.Id, saveFileDialog.FileName);
 
                 Process.Start(saveFileDialog.FileName);
             }

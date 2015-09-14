@@ -120,6 +120,10 @@ namespace NDDigital.DiarioAcademia.Apresentacao.WindowsApp.Controls.AulaForms
 
             dialog.Chamada = chamada;
 
+            dialog.Chamada.AulaId = aulaSelecionada.Id;
+
+            dialog.Chamada.TurmaId = aulaSelecionada.TurmaId;
+
             if (dialog.ShowDialog() == DialogResult.OK)
             {
                 _aulaService.RealizaChamada(chamada);

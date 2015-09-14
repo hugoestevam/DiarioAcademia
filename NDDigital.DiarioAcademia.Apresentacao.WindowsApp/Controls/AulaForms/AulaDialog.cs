@@ -1,12 +1,6 @@
 ﻿using NDDigital.DiarioAcademia.Aplicacao.DTOs;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace NDDigital.DiarioAcademia.Apresentacao.WindowsApp.Controls.AulaForms
@@ -27,13 +21,13 @@ namespace NDDigital.DiarioAcademia.Apresentacao.WindowsApp.Controls.AulaForms
             }
         }
 
-        public Aplicacao.DTOs.AulaDTO Aula 
-        { 
+        public Aplicacao.DTOs.AulaDTO Aula
+        {
             get
             {
                 return _aula;
             }
-            set 
+            set
             {
                 _aula = value;
 
@@ -41,7 +35,14 @@ namespace NDDigital.DiarioAcademia.Apresentacao.WindowsApp.Controls.AulaForms
 
                 cmbTurmas.SelectedItem = new TurmaDTO(_aula.TurmaId);
 
-                cmbData.Value = _aula.DataAula;
+                if (_aula.DataAula.Year == 0001)
+                {
+                    cmbData.Value = DateTime.Now;
+                }
+                else
+                {
+                    cmbData.Value = _aula.DataAula;
+                }               
             }
         }
 
@@ -53,7 +54,9 @@ namespace NDDigital.DiarioAcademia.Apresentacao.WindowsApp.Controls.AulaForms
 
                 _aula.DataAula = cmbData.Value;
 
-                _aula.AnoTurma = ((TurmaDTO)cmbTurmas.SelectedItem).Id;
+                _aula.AnoTurma = ((TurmaDTO)cmbTurmas.SelectedItem).Ano;
+
+                _aula.TurmaId = ((TurmaDTO)cmbTurmas.SelectedItem).Id;
             }
             catch (Exception exc)
             {
@@ -62,7 +65,5 @@ namespace NDDigital.DiarioAcademia.Apresentacao.WindowsApp.Controls.AulaForms
                 DialogResult = DialogResult.None;
             }
         }
-
-
     }
 }
