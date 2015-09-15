@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
 
-namespace Infrasctructure.DAO.SQL.Common
+namespace Infraestrutura.DAO.SQL.Common
 {
     public delegate T ConverterDelegate<T>(IDataReader reader);
 
