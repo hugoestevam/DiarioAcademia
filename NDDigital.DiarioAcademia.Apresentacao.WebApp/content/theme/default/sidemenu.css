@@ -1,57 +1,20 @@
-﻿.sidemenu-custom {
-  top: 75px;
-  height: calc(100% - 68px) !important;
-  overflow: hidden;
-  padding-top: 10px;
-}
-.side-menu-header {
-  margin-top: 5px;
-}
-.actived {
+﻿.actived {
   border-right: solid 5px #E25D41 !important;
-}
-.user-avatar {
-  border-radius: 50%;
-  height: 60px;
-  margin: 5% 0 5% 5%;
-  position: relative;
-}
-.user-back {
-  padding: 0 !important;
+  background-color: rgba(204, 204, 204, 0.4);
 }
 a.user-back.text-center:hover {
   background-color: inherit !important;
 }
 .menu-user {
   background: rgba(0, 0, 0, 0.6);
-  padding: 7px 6px;
   color: #fff;
-  margin-top: 15px;
-  position: relative;
   cursor: pointer;
-  width: 100%;
-}
-.user-option {
-  padding-left: 8% !important;
 }
 .separator-menu {
   border-right: solid 5px rgba(204, 204, 204, 0.4);
 }
 .seta-direita {
-  border-top: 10px solid transparent;
-  border-bottom: 10px solid transparent;
   border-left: 10px solid #E25D41;
-  float: left;
-  margin-top: 18px;
-}
-li > a > .fa {
-  width: 26px;
-}
-.li {
-  -moz-transition: none !important;
-  -o-transition: none !important;
-  -webkit-transition: none !important;
-  transition: none !important;
 }
 .home-li {
   pointer-events: none;
@@ -59,35 +22,15 @@ li > a > .fa {
 @media screen and (max-width: 768px) {
   .sidemenu-custom {
     background-color: #0f75b3 !important;
-    margin: 0;
-    height: auto !important;
-  }
-  .seta-direita {
-    display: none;
-  }
-  .navbar-collapse {
-    padding: 0;
   }
   .navbar-inverse .navbar-nav > li > a {
     color: white !important;
-    padding-top: 20px;
   }
   .navbar-inverse .navbar-nav > li > a:hover {
     background-color: rgba(204, 204, 204, 0.5) !important;
     color: black !important;
   }
 }
-.side-option {
-  width: 215px;
-  float: left;
-  position: relative;
-  display: block;
-}
 .side-option a {
-  display: block;
-  height: 60px;
-  padding: 15px;
-  line-height: 20px;
   color: #4D4D4D !important;
-  text-decoration: none;
 }

@@ -38,5 +38,17 @@
   {
     "outputFile": "content/theme/default/layout.css",
     "inputFile": "content/theme/default/layout.less"
+  },
+  {
+    "outputFile": "content/layout/sidemenu.css",
+    "inputFile": "content/layout/sidemenu.less"
+  },
+  {
+    "outputFile": "content/theme/default/toolbar.css",
+    "inputFile": "content/theme/default/toolbar.less"
+  },
+  {
+    "outputFile": "content/layout/home.css",
+    "inputFile": "content/layout/home.less"
   }
 ]
