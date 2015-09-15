@@ -21,10 +21,7 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers
 
         #endregion Constructor Requirements
 
-        public BaseApiController()
-        {
-            Uow = Injection.Get<IUnitOfWork>();
-        }
+       
 
         protected UserRepository UserRepository
         {
