@@ -1,4 +1,5 @@
 ﻿using NDDigital.DiarioAcademia.Dominio.Contracts;
+using NDDigital.DiarioAcademia.Infraestrutura.DAO.Common.Uow;
 using NDDigital.DiarioAcademia.Infraestrutura.IoC;
 
 namespace NDDigital.DiarioAcademia.WebApi.Controllers.Base
@@ -14,6 +15,8 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers.Base
             AulaRepository = Injection.Get<IAulaRepository>();
             AlunoRepository = Injection.Get<IAlunoRepository>();
             TurmaRepository = Injection.Get<ITurmaRepository>();
+
+            Uow = Injection.Get<IUnitOfWork>();
         }
     }
 }

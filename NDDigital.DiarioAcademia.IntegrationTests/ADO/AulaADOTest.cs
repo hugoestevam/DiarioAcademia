@@ -62,8 +62,6 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.ADO
         {
             var aulasEncontradas = AulaRepository.GetAll();
 
-            Uow.Commit();
-
             Assert.AreEqual(1, aulasEncontradas.Count);
         }
 

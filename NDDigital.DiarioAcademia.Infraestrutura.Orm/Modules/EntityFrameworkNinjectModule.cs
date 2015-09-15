@@ -24,7 +24,6 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Modules
             Bind<ITurmaRepository>().To<TurmaRepositoryEF>().WithConstructorArgument(type, entityFrameworkFactory);
             Bind<IAulaRepository>().To<AulaRepositoryEF>().WithConstructorArgument(type, entityFrameworkFactory);
             Bind<IAlunoRepository>().To<AlunoRepositoryEF>().WithConstructorArgument(type, entityFrameworkFactory);
-            Bind<IPresencaRepository>().To<PresencaRepositoryEF>().WithConstructorArgument(type, entityFrameworkFactory);
 
             var authFactory = new AuthFactory();
             var typeAuth = authFactory.GetType();

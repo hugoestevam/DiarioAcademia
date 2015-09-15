@@ -14,6 +14,7 @@ Para executar este projeto em seu potencial é necessário ter um servidor Node 
     > npm install bower -g
     > npm install gulp -g
         -reinicie o prompt
+        -aponte para a pasta do projeto web
     > npm install
     > bower install
     > gulp start
