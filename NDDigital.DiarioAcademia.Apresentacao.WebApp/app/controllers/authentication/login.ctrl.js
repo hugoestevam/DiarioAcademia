@@ -24,6 +24,7 @@
                 password: ""
             };
             vm.message = "";
+
         }
 
         //public methods

@@ -16,7 +16,7 @@
             redirect: '/manager/user',
             displayName: "Gerenciador",
             displayIcon: 'fa-wrench',
-            $$permissionId: "11"
+            $$permissionId: "12"
         }, {
             name: 'manager.user',
             url: '/user',
@@ -24,7 +24,7 @@
             controller: "managerUserListController as vm",
             displayName: "Usuario",
             displayIcon: 'fa-user',
-            $$permissionId: "12"
+            $$permissionId: "13"
         }, {
             name: 'manager.useredit',
             url: '/edit/user/:userId',
@@ -32,7 +32,7 @@
             controller: "managerUserEditController as vm",
             displayName: "Edição de Usuário",
             displayIcon: 'fa-pencil',
-            $$permissionId: "13"
+            $$permissionId: "14"
         }, {
             name: 'manager.userGroupEdit',
             url: '/group/edit/user/:userId',
@@ -40,7 +40,7 @@
             controller: "managerUserEditGroupController as vm",
             displayName: "Edição de Grupos de Usuário",
             displayIcon: 'fa-pencil',
-            $$permissionId: "14"
+            $$permissionId: "15"
         }, {
             name: 'manager.group',
             url: '/group',
@@ -48,7 +48,7 @@
             controller: "managerGroupListController as vm",
             displayName: "Grupo",
             displayIcon: 'fa-users',
-            $$permissionId: "15"
+            $$permissionId: "16"
         }, {
             name: 'manager.group.edit',
             url: '/edit/:groupId',
@@ -56,7 +56,7 @@
             controller: "managerGroupEditController as vm",
             displayName: "Edição de Grupo",
             displayIcon: 'fa-pencil',
-            $$permissionId: "16"
+            $$permissionId: "17"
         }, {
             name: 'manager.groupPermissionsEdit',
             url: '/group/edit/permissions/:groupId',
@@ -64,7 +64,7 @@
             controller: "managerGroupPermissionEditController as vm",
             displayName: "Edição de Permissões de Grupo",
             displayIcon: 'fa-pencil',
-            $$permissionId: "17"
+            $$permissionId: "18"
         }, {
             name: 'manager.permissions',
             url: '/permissions',
@@ -72,7 +72,7 @@
             controller: "managerPermissionController as vm",
             displayName: "Permissões",
             displayIcon: 'fa-key',
-            $$permissionId: "18"
+            $$permissionId: "19"
         })
     }
 

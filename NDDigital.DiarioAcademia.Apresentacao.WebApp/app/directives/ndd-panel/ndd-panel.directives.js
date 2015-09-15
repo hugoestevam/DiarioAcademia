@@ -18,9 +18,7 @@
             templateUrl: 'app/directives/ndd-panel/ndd-panel.html'
         };
 
-        function link(scope, element, attrs) {
-
-        }
+        function link(scope, element, attrs) {}
 
     }
 

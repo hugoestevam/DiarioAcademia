@@ -11,11 +11,11 @@
         routes.push({
             name: 'aula',
             url: '/aula',
-            'abstract': true,
             redirect: '/aula/list',
             templateUrl: '/app/templates/components/inner-view.html',
             displayName: 'Aula',
-            displayIcon: "fa-calendar"
+            displayIcon: "fa-calendar",
+            $$permissionId: "06"
         }, {
             name: 'aula.list',
             url: '/list',
@@ -23,7 +23,7 @@
             templateUrl: '/app/views/aula/aula-list.html',
             displayName: 'Lista de Aulas',
             displayIcon: "fa-calendar-check-o",
-            $$permissionId: "05"
+            $$permissionId: "07"
         }, {
             name: 'aula.create',
             url: '/create',
@@ -31,7 +31,7 @@
             templateUrl: '/app/views/aula/aula-create.html',
             displayName: 'Criação de Aulas',
             displayIcon: "fa-calendar-plus-o",
-            $$permissionId: "06"
+            $$permissionId: "08"
         }
 );
     }

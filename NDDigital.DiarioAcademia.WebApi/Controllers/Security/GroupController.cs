@@ -48,10 +48,14 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers.Authentication
         // PUT: api/Group/5
         public IHttpActionResult Put(int id, [FromBody]Group value)
         {
-            Group group;
+            // TODO: rever implementação
+            Group group =  _groupService.GetById(id);
+            group.Name = value.Name;
+            group.IsAdmin = value.IsAdmin;
+            group.Permissions = value.Permissions;
             try
             {
-                _groupService.Update(value);
+                _groupService.Update(group);
             }
             catch (Exception ex)
             {

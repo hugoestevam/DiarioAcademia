@@ -3,7 +3,7 @@
     angular.module('controllers.module')
         .controller('managerUserEditGroupController', managerUserEditGroupController);
 
-    managerUserEditGroupController.$inject = ['userService','groupService', "$stateParams"];
+    managerUserEditGroupController.$inject = ['userService', 'groupService', "$stateParams"];
 
 
     function managerUserEditGroupController(userService, groupService, $stateParams) {
@@ -18,8 +18,7 @@
         activate();
         function activate() {
             userService.getUserById($stateParams.userId).then(function (results) {
-                vm.user = results;
-                vm.user.groups = vm.user.groups ? vm.user.groups : [];
+                vm.user = results;              
                 originalUser = $.extend(true, {}, vm.user);
                 vm.name = vm.user.firstName;
                 vm.bodyModelEdit += vm.name;
@@ -28,6 +27,11 @@
                     vm.groups = results;
                     if (results)
                         originalGroups = results.slice();
+
+
+                    groupService.getGroupByUsername(vm.user.userName).then(function (result) {
+                        vm.user.groups = result ? result : [];
+                    });
                 });
             });
         }

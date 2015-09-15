@@ -46,7 +46,7 @@
         </div>
     </div>
 </div>
-<ndd-toolbar cb-edit="vm.edit" cb-remove="vm.cbRemove"></ndd-toolbar>
+<ndd-toolbar cb-properties="vm.edit" security-properties="manager.useredit" cb-remove="vm.cbRemove"></ndd-toolbar>
 
 <ndd-modal target="modelRemoveUser" label="{{vm.titleModelRemove}}" callback="vm.remove">
     {{vm.bodyModelRemove}}

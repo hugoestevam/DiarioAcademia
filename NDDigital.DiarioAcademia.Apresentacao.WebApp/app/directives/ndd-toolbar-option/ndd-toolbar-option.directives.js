@@ -7,17 +7,18 @@
         controller.$inject = ['$state'];
 
         // Usage:
-        //  <ndd-sidemenu-option >
+        //  <ndd-sidemenu-option></ndd-sidemenu-option >
         return {
             restrict: 'E',
             link: link,
             controller: controller,
             transclude: true,
-            replace: true,
+            replace: false,
             scope: {
                 route: "@",
                 name: "@",
-                icon: "@"
+                icon: "@",
+                security:"@"
             },
             templateUrl: 'app/directives/ndd-toolbar-option/ndd-toolbar-option.html'
         };
