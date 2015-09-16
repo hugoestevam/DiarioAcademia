@@ -4,8 +4,14 @@ ndd-toolbar {
     top: 75px;
     width: 10%;
     height: 100%;
-    border-left: solid 1px #E8E8E8;
-    background-color: #FDFDFD;
+}
+
+ndd-toolbar-option {
+    & a {
+        display: block;
+        padding: 15px;
+        line-height: 20px;
+    }
 }
 
 .toolbar {
@@ -14,9 +20,11 @@ ndd-toolbar {
 
     & .li {
         width: 100%;
+    }
+}
 
-        & a {
-            color: #4D4D4D !important;
-        }
+@media screen and (max-width: 768px) {
+    .navbar-nav {
+        margin: 0 !important;
     }
 }

@@ -25,7 +25,7 @@
                     data: {
                         displayName: route.displayName,
                         allowAnnonymous: route.allowAnnonymous,
-                        $$permissionId: verififyPermission(routes, i, route)
+                        $$permissionId: verifyPermission(routes, i, route)
                     },
                     ncyBreadcrumb: {
                         label: route.displayName,
@@ -39,7 +39,7 @@
        
     }
 
-    function verififyPermission(routes, startIndex, route) {
+    function verifyPermission(routes, startIndex, route) {
         var exclude = ['home', 'homeapp'];
         var errorpermissionIdUndefined = " can't have the attribute $$permissionId to be undefined",
             errorpermissionIdAlreadyExists = " can't have the attribute $$permissionId because already exists";

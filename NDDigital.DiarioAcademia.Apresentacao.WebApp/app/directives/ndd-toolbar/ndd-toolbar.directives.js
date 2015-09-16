@@ -9,10 +9,12 @@
 			replace: false,
 			transclude: false,
 			scope:{
-				cbEdit: "=",
-				cbNew: "=",
-				cbRemove: "=",
-				stateNew: "@"
+			    cbProperties: "=",
+			    cbRemove: "=",
+			    cbNew: "=",
+				stateNew: "@",
+				securityProperties: "@",
+				securityRemove: "@"
 			},
 			templateUrl: '/app/directives/ndd-toolbar/ndd-toolbar.html'
 		}

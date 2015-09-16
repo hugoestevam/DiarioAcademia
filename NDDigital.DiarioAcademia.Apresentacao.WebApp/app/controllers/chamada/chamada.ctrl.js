@@ -20,43 +20,42 @@
         activate();
 
         function activate() {
-            turmaService.getTurmas()
-                .then(function (data) {
-                        vm.turmas = data;                
-                });
+            turmaService.getTurmas().then(function (data) {
+                vm.turmas = data;
+                aulaService.getAulas().then(function (data) {
+                        vm.allAulas = data;
+                    });
+            });
 
-            aulaService.getAulas()
-                .then(function (data) {
-                    vm.allAulas = data;
-                });          
+
         }
 
-       vm.save = function () {
-           vm.chamada = convertToChamadaDto(vm.chamada);
-           convertStatusPresencas(vm.chamada);
-           chamadaService.
-               realizarChamada(vm.chamada);
-           clearFields();
-       };
+        vm.save = function () {
+            vm.chamada = convertToChamadaDto(vm.chamada);
+            convertStatusPresencas(vm.chamada);
+            chamadaService.
+                realizarChamada(vm.chamada);
+            clearFields();
+        };
 
-       
-       function clearFields() {
-           vm.chamada = {};
-           vm.alunos = [];
-           vm.turmaSelected = false;
-           vm.aulaSelected = false;
-       }
 
-       function convertStatusPresencas(chamada) {
-           for (var i = 0; i < chamada.alunos.length; i++) {
-               vm.chamada.alunos[i].status =
-                   chamada.alunos[i].status == false ? "F" : "C";
-           }
-       }
+        function clearFields() {
+            vm.chamada = {};
+            vm.alunos = [];
+            vm.turmaSelected = false;
+            vm.aulaSelected = false;
+        }
 
-       vm.populateAulas = function (turma) {
-           if (turma) {
-               vm.getAulaByTurma(turma);
+        function convertStatusPresencas(chamada) {
+            for (var i = 0; i < chamada.alunos.length; i++) {
+                vm.chamada.alunos[i].status =
+                    chamada.alunos[i].status == false ? "F" : "C";
+            }
+        }
+
+        vm.populateAulas = function (turma) {
+            if (turma) {
+                vm.getAulaByTurma(turma);
                 vm.turmaSelected = true;
             }
         }
@@ -88,7 +87,7 @@
 
         function convertStatus() {
             for (var i = 0; i < vm.allAlunos.length; i++) {
-                vm.allAlunos[i].status =  vm.allAlunos[i].status == "F" ? false : true;
+                vm.allAlunos[i].status = vm.allAlunos[i].status == "F" ? false : true;
             }
         }
 
@@ -119,9 +118,9 @@
 
         function convertDtoTo(chamada) {
             return {
-                id : chamada.id,
-                turma : turmaService.getTurmaById(chamada.turmaId),
-                data : chamada.data,
+                id: chamada.id,
+                turma: turmaService.getTurmaById(chamada.turmaId),
+                data: chamada.data,
                 aula: aulaService.getAulaById(chamada.aulaId),
                 alunos: chamada.alunos
             };

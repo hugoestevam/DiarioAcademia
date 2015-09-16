@@ -4,14 +4,18 @@
 
     <div class="container-user">
         <div class="row clear-padding">
-            <button class="btn btn-info" ng-click="vm.modifyAll(true)"
-                    ng-disabled="vm.showRoutes.length == vm.allPermissions.length">
-                Selecionar Todos
+            <button class="btn btn-success" ng-disabled="!vm.hasChange" ng-click="vm.saveChanges()">
+                <i class="fa fa-save"></i>
+                <span>Salvar</span>
+            </button>
+            <button class="btn btn-danger pull-right space-left" ng-click="vm.modifyAll(false)" ng-disabled="vm.showRoutes.length <= 0">
+                <i class="fa fa-minus-square-o"></i>
+                <span>Limpar Todos</span>
             </button>
 
-            <button class="btn btn-danger" ng-click="vm.modifyAll(false)"
-                    ng-disabled="vm.showRoutes.length <= 0">
-                Limpar Todos
+            <button class="btn btn-info pull-right " ng-click="vm.modifyAll(true)" ng-disabled="vm.showRoutes.length == vm.allPermissions.length">
+                <i class="fa fa-check-square-o"></i>
+                <span>Selecionar Todos</span>
             </button>
             <hr />
         </div>
@@ -24,19 +28,11 @@
                         <b class="text-capitalize">{{filter}}</b>
                     </div>
                     <div class="panel-body">
-                        <ndd-group-checkbox array="vm.permission[filter]" compare="vm.showRoutes"
-                                            method="vm.compareState" callback="vm.onchange"></ndd-group-checkbox>
+                        <ndd-group-checkbox array="vm.permission[filter]" compare="vm.showRoutes" method="vm.compareState" callback="vm.onchange"></ndd-group-checkbox>
                     </div>
                 </div>
             </div>
         </div>
-
     </div>
-
-    <div class="col-sm-12 clear-padding text-center">
-        <hr />
-        <button class="btn btn-success" ng-disabled="!vm.hasChange" ng-click="vm.saveChanges()"><i class="fa fa-save"></i> </button>
-    </div>
-
     <ndd-confirm-exit controller="vm"><ndd-confirm-exit>
 </div>

@@ -6,11 +6,11 @@
        .service('authService', authService);
 
     authService.$inject = ['$http', '$q', 'localStorageService', 'logger', 'BASEURL',
-        'groupService', 'storageKeys', 'resource', 'userService', 'permissions.factory'];
+        'groupService', 'storageKeys', 'resource', 'userService', 'permissions.factory', "$rootScope"];
 
 
 
-    function authService($http, $q, localStorageService, logger, serviceBase, groupService, storageKeys, res, userService, permissionFactory) {
+    function authService($http, $q, localStorageService, logger, serviceBase, groupService, storageKeys, res, userService, permissionFactory, $rootScope) {
         var self = this;
 
         var redirectState = "home";
@@ -56,6 +56,8 @@
                 if (!authentication.isAuth)
                     return false;
                 if (authorization.isAdmin)
+                    return true;
+                if (state == "homeapp")
                     return true;
                 return permissionFactory.containsPermissionByName(authorization.permissions, state);
             },
@@ -104,6 +106,8 @@
                                  userId: authentication.userId
                              });
                              localStorageService.set(storageKeys.autheData, authorization);
+
+                             $rootScope.$broadcast('login');
                          });
                 logger.success(res.welcome + " " + (authentication.userName));
                 deferred.resolve(response);

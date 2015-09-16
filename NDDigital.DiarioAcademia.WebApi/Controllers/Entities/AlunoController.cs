@@ -23,8 +23,7 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers.Entities
             var list = _alunoService.GetAll();
             return list;
         }
-
-        [GrouperAuthorize(Claim.Aluno_Details)]
+        
         // GET: api/Aluno/5
         public AlunoDTO Get(int id)
         {

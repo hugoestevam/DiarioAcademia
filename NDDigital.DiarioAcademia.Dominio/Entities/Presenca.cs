@@ -10,8 +10,10 @@ namespace NDDigital.DiarioAcademia.Dominio.Entities
 
         public string StatusPresenca { get; set; }
 
-        private Presenca()
+        public Presenca()
         {
+            Aluno = new Aluno();
+            Aula = new Aula();
         }
 
         public Presenca(Aula aula, Aluno aluno, string statusPresenca)

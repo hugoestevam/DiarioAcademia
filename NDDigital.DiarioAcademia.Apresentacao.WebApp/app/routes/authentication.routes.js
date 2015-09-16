@@ -18,7 +18,7 @@
             allowAnnonymous: true,
             displayName: 'Login',
             displayIcon: 'fa-user',
-            $$permissionId: "07"
+            $$permissionId: "09"
         }, {
             name: 'signup',
             url: '/signup',
@@ -27,7 +27,7 @@
             allowAnnonymous: true,
             displayName: "Registre-se",
             displayIcon: "fa-sign-in",
-            $$permissionId: "08"
+            $$permissionId: "10"
         });
 
     }

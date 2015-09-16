@@ -6,7 +6,6 @@
 		.value('permissionGroups', [
 				'aluno',
 				'turma',
-				'other',
 				'manager',
 				'aula',
 				'chamada',

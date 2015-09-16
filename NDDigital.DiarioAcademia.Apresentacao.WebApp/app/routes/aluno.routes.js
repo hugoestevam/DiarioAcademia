@@ -12,11 +12,11 @@
         routes.push({
             name: 'aluno',
             url: '/aluno',
-            'abstract': true,
             redirect: '/aluno/list',
             templateUrl: '/app/templates/components/inner-view.html',
             displayName: "Aluno",
             displayIcon: "fa-user",
+            $$permissionId: "02"
         }, {
             name: 'aluno.list',
             url: '/list',
@@ -25,14 +25,14 @@
             allowAnnonymous: false,
             displayName: "Lista de Aluno",
             displayIcon: "fa-user",
-            $$permissionId: "02"
+            $$permissionId: "03"
         }, {
             name: 'aluno.details',
             url: '/details/:alunoId',
             controller: 'alunoDetailsCtrl as vm',
             templateUrl: '/app/views/aluno/aluno-details.html',
             displayName: "Detalhes do Aluno",
-            $$permissionId: "03"
+            $$permissionId: "04"
         }, {
             name: 'aluno.create',
             url: '/create',
@@ -40,7 +40,7 @@
             templateUrl: '/app/views/aluno/aluno-create.html',
             displayName: "Criação de Aluno",
             displayIcon: "fa-user-plus",
-            $$permissionId: "04"
+            $$permissionId: "05"
         });
     }
 })();

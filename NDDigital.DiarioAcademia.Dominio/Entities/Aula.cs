@@ -18,7 +18,7 @@ namespace NDDigital.DiarioAcademia.Dominio.Entities
 
         public virtual Turma Turma { get; set; }
 
-        public virtual List<Presenca> Presencas { get; set; }
+        public virtual IList<Presenca> Presencas { get; set; }
 
         public Aula(DateTime dateTime, Turma turma)
             : this()

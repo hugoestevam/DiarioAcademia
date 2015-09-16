@@ -1,1 +1,1 @@
-﻿ndd-toolbar{position:fixed;right:0;top:75px;width:10%;height:100%;border-left:solid 1px #e8e8e8;background-color:#fdfdfd}.toolbar{width:100%;margin-top:8px}.toolbar .li{width:100%}.toolbar .li a{color:#4d4d4d !important}
+﻿ndd-toolbar{position:fixed;right:0;top:75px;width:10%;height:100%}ndd-toolbar-option a{display:block;padding:15px;line-height:20px}.toolbar{width:100%;margin-top:8px}.toolbar .li{width:100%}@media screen and (max-width:768px){.navbar-nav{margin:0 !important}}

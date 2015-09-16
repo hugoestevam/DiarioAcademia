@@ -3,7 +3,7 @@ using NDDigital.DiarioAcademia.Infraestrutura.Security.Contracts;
 using NDDigital.DiarioAcademia.Infraestrutura.Security.Entities;
 using System.Collections.Generic;
 using System.Linq;
-
+using System;
 namespace NDDigital.DiarioAcademia.Infraestrutura.Security.Repositories
 {
     public class PermissionRepository : RepositoryBaseAuth<Permission>, IPermissionRepository
@@ -44,9 +44,16 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Security.Repositories
 
         public IList<Permission> GetByUser(string username)
         {
-            var acc = (from a in DataContext.Accounts.Include("Groups")
-                       where a.Username == username
-                       select a).FirstOrDefault();
+
+            Account acc;
+            //TODO: rever implementação
+            try {
+                acc = dataContext.Accounts.Include("Groups").Where(a => a.Username == username).FirstOrDefault();
+            }
+            catch (Exception ex) {
+                dataContext = new Contexts.AuthContext();
+                return GetByUser(username);
+            }
 
             var list = new List<Permission>();
 

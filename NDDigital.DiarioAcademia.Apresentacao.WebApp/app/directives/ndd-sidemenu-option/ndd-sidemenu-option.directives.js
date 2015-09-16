@@ -13,7 +13,7 @@
             link: link,
             controller: controller,
             transclude: true,
-            replace: true,
+            replace: false,
             scope: {
                 routeShow: "@",
                 route: "@",

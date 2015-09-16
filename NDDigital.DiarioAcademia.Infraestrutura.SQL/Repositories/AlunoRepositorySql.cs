@@ -1,4 +1,4 @@
-﻿using Infrasctructure.DAO.SQL.Common;
+﻿using Infraestrutura.DAO.SQL.Common;
 using NDDigital.DiarioAcademia.Dominio.Contracts;
 using NDDigital.DiarioAcademia.Dominio.Entities;
 using NDDigital.DiarioAcademia.Infraestrutura.SQL.Common;
