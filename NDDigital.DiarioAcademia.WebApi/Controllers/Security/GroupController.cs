@@ -31,6 +31,7 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers.Authentication
         }
 
         // GET: api/Group?username=username
+        [GrouperAuthorize(Basic =true)]
         public IHttpActionResult Get(string username)
         {
             var list = _groupService.GetByUser(username);

@@ -13,7 +13,7 @@
 		var self = this;
 
 		var serviceUrl = baseUrl + "api/accounts/user/";
-		var serviceAuthenticationUrl = baseUrl + "api/authentication";
+		var serviceAuthenticationUrl = baseUrl + "api/authentication/";
 
 		//public methods
 		self.getUsers = function () {
@@ -34,7 +34,7 @@
 
 		self.delete = function (user) {
 			logger.danger(res.deleted_successful, user, "Delete");
-			return $http.delete(serviceUrl + "/" + user.id)
+			return $http.delete(serviceUrl + user.id)
 		            .then(logger.emptyMessageCallback);
 		};
 
@@ -49,13 +49,13 @@
 		//users
 
 		self.addUserGroup = function (user, groups) {
-			return $http.post(serviceAuthenticationUrl + "/addgroup/" + user.userName, groups)
+			return $http.post(serviceAuthenticationUrl + "addgroup/" + user.userName, groups)
 			 .then(logger.successCallback)
 			 .catch(logger.errorCallback);
 		};
 
 		self.removeUserGroup = function (user, groups) {
-			return $http.post(serviceAuthenticationUrl + "/removegroup/" + user.userName, groups)
+			return $http.post(serviceAuthenticationUrl + "removegroup/" + user.userName, groups)
 			 .then(logger.successCallback)
 			 .catch(logger.errorCallback);
 		};

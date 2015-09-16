@@ -15,7 +15,7 @@
         var self = this;
 
 
-        var url = baseUrl + 'api/language';
+        var url = baseUrl + 'api/language/';
 
         self.get = get;
         self.updateLanguage = updateLanguage;
@@ -26,7 +26,7 @@
             var id = 2;// languageId[language || 'en-us'];
             self.currentLanguage.value = resource.$currentLanguage = language;
             if (!id) throw new Error("Language not Found");
-            return $http.get(url + "/" + id);
+            return $http.get(url + id);
         }
         function updateLanguage(language) {
             get(language)

@@ -11,7 +11,7 @@
     //class
     function alunoService($http, logger, baseUrl, adapter,res) {
         var self = this;
-        var serviceUrl = baseUrl + "api/aluno";
+        var serviceUrl = baseUrl + "api/aluno/";
 
         //public methods
         self.getAlunos = function () {
@@ -22,7 +22,7 @@
         };
 
         self.getAlunoById = function (id) {
-            return $http.get(serviceUrl + '/' + id)
+            return $http.get(serviceUrl + id)
                  .then(logger.successCallback)
                  .catch(logger.errorCallback)
                  .then(convertToObj);
@@ -35,12 +35,12 @@
 
         self.delete = function (aluno) {
             logger.error(res.deleted_successful, aluno, "Delete");
-            return $http.delete(serviceUrl + "/" + aluno.id);
+            return $http.delete(serviceUrl + aluno.id);
         };
 
         self.getTurmaById = function (id) {
             logger.success(res.student_founded(id), null, "GetById");
-            return $http.get(serviceUrl + "/" + id)
+            return $http.get(serviceUrl + id)
                 .then(function (response) {
                     return response.data;
                 });
@@ -48,7 +48,7 @@
 
         self.edit = function (aluno) {
             logger.success(res.student_edited(aluno.descricao.split(':')[0]) + " editado", null, "Edição");
-            return $http.put(serviceUrl + "/" + aluno.id, aluno);
+            return $http.put(serviceUrl + aluno.id, aluno);
         };
 
         function convertToObj(data) {

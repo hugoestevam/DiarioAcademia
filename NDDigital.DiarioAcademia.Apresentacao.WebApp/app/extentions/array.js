@@ -1,4 +1,4 @@
-﻿(function (angular) {
+﻿(function () {
     Array.prototype.indexOfObject = function (obj) {
         for (var i in this) {
             if (this[i].id == obj.id)
@@ -33,4 +33,4 @@
         return founded;
     };
 
-})(window.angular);
+})();

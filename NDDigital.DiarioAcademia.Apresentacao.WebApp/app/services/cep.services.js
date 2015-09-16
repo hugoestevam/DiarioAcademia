@@ -11,11 +11,11 @@
     //class
     function cepService($http, logger, baseUrl) {
         var self = this;
-        var serviceUrl = baseUrl + "api/cep";
+        var serviceUrl = baseUrl + "api/cep/";
 
         //public methods
         self.getEndereco = function (cep) {
-            return $http.get(serviceUrl + '/' + cep)
+            return $http.get(serviceUrl + cep)
               .then(logger.successCallback)
               .catch(logger.errorCallback);
         }

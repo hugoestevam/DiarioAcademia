@@ -11,7 +11,7 @@
     //class
     function chamadaService($http, logger, baseUrl, res) {
         var self = this;
-        var serviceUrl = baseUrl + "api/chamada";
+        var serviceUrl = baseUrl + "api/chamada/";
 
         //public methods
         self.realizarChamada = function (chamada) {
@@ -29,7 +29,7 @@
 
         //public methods
         self.getChamadaByAula = function (id) {
-            return $http.get(serviceUrl + '/' + id)
+            return $http.get(serviceUrl + id)
                 .then(logger.successCallback)
                 .catch(logger.errorCallback);
         };

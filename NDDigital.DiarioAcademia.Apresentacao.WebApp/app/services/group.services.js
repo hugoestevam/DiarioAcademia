@@ -11,7 +11,7 @@
 	//class
 	function groupService($http, logger, baseUrl, res, $state) {
 		var self = this;
-		var serviceUrl = baseUrl + "api/group";
+		var serviceUrl = baseUrl + "api/group/";
 		var serviceAuthenticationUrl = baseUrl + "api/authentication";
 
 		//public methods
@@ -22,7 +22,7 @@
 		};
 
 		self.getGroupById = function (id) {
-			return $http.get(serviceUrl + '/' + id)
+			return $http.get(serviceUrl + id)
 				 .then(logger.successCallback)
 				 .catch(logger.errorCallback);
 		};
@@ -41,14 +41,14 @@
 		};
 
 		self.edit = function (group) {
-			return $http.put(serviceUrl + "/" + group.id, group)
+			return $http.put(serviceUrl + group.id, group)
 			 .then(logger.successCallback)
 			 .catch(logger.errorCallback);;
 		};
 
 		self.delete = function (group) {
 			logger.danger(res.deleted_successful, group, "Delete");
-			return $http.delete(serviceUrl + "/" + group.id)
+			return $http.delete(serviceUrl + group.id)
 			   .then(logger.emptyMessageCallback)
 			   .catch(logger.errorCallback);
 		};
@@ -56,14 +56,14 @@
 		//permissions
 		self.addPermission = function (group, permissions) {
 			var permissionsIds = getPermissionId(permissions);
-			return $http.post(serviceAuthenticationUrl + "/addPermission/" + group.id, permissionsIds)
+			return $http.post(serviceAuthenticationUrl + "addPermission/" + group.id, permissionsIds)
 			 .then(logger.successCallback)
 			 .catch(logger.errorCallback);;
 		};
 
 		self.removePermission = function (group, permissions) {
 		    var permissionsIds = getPermissionId(permissions);
-		    return $http.post(serviceAuthenticationUrl + "/removePermission/" + group.id, permissionsIds)
+		    return $http.post(serviceAuthenticationUrl + "removePermission/" + group.id, permissionsIds)
 			 .then(logger.successCallback)
 			 .catch(logger.errorCallback);;
 		};
