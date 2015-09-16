@@ -30,7 +30,7 @@
             if (permissionGroups.contains(name))
                 return name;
             var filter = name.split(".");
-            filter = filter.length >= 2 ? filter[0] : 'other';
+            filter = filter.length >= 2 ? filter[0] : undefined;
             return filter;
         }
 
@@ -86,6 +86,8 @@
             for (var i = 0; i < permissions.length; i++) {
                 permission = permissions[i];
                 filter = getFilter(permission.name);
+                if (!filter)
+                    continue;
                 if (!filtered[filter])
                     filtered[filter] = [];
                 filtered[filter].push(permission);

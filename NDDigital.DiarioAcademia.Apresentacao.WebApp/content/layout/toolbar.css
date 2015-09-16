@@ -17,3 +17,8 @@ ndd-toolbar-option a {
 .toolbar .li {
   width: 100%;
 }
+@media screen and (max-width: 768px) {
+  .navbar-nav {
+    margin: 0 !important;
+  }
+}

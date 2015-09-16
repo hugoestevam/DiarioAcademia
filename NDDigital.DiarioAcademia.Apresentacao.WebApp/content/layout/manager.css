@@ -42,7 +42,7 @@
   }
 }
 .input-group-edit {
-  width: calc(100% - 60px);
+  width: calc(100% - 100px);
   margin-right: 3%;
   float: left;
   padding-left: 2%;
@@ -63,4 +63,3 @@
 .separator {
   border-right: solid 2px rgba(204, 204, 204, 0.4);
 }
-/*# sourceMappingURL=manager.css.map */

@@ -34,3 +34,11 @@ a.user-back.text-center:hover {
 .side-option a {
   color: #4D4D4D !important;
 }
+@media screen and (max-width: 768px) {
+  .side-option a {
+    color: white !important;
+  }
+  .side-option a:hover {
+    background-color: rgba(204, 204, 204, 0.6);
+  }
+}

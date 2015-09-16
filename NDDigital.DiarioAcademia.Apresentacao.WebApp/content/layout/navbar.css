@@ -21,3 +21,8 @@
   float: left;
   text-align: center;
 }
+@media screen and (max-width: 768px) {
+  .option-nav {
+    display: none;
+  }
+}

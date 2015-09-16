@@ -50,5 +50,13 @@
   {
     "outputFile": "content/layout/home.css",
     "inputFile": "content/layout/home.less"
+  },
+  {
+    "outputFile": "content/layout/manager.css",
+    "inputFile": "content/layout/manager.less"
+  },
+  {
+    "outputFile": "content/theme/default/manager.css",
+    "inputFile": "content/theme/default/manager.less"
   }
 ]

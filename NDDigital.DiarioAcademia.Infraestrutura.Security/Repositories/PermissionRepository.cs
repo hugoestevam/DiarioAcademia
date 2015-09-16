@@ -46,11 +46,11 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Security.Repositories
         {
 
             Account acc;
-
+            //TODO: rever implementação
             try {
                 acc = dataContext.Accounts.Include("Groups").Where(a => a.Username == username).FirstOrDefault();
             }
-            catch (ObjectDisposedException ex) {
+            catch (Exception ex) {
                 dataContext = new Contexts.AuthContext();
                 return GetByUser(username);
             }
