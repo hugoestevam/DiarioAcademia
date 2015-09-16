@@ -19,6 +19,8 @@ namespace Infraestrutura.DAO.SQL.Common
 
         public int Insert(string sql, object[] parms = null)
         {
+            VerificaConexao();
+
             _factory.BeginTransaction();
 
             sql = string.Format(sql, "@");
@@ -33,8 +35,18 @@ namespace Infraestrutura.DAO.SQL.Common
             return id;
         }
 
+        private void VerificaConexao()
+        {
+            if (_factory.Connection == null)            
+            {
+               _factory.AbreConexao();
+            }
+        }
+
         public void Update(string sql, object[] parms = null)
         {
+            VerificaConexao();
+
             _factory.BeginTransaction();
 
             sql = string.Format(sql, "@");
@@ -51,6 +63,8 @@ namespace Infraestrutura.DAO.SQL.Common
 
         public List<T> GetAll<T>(string sql, ConverterDelegate<T> convert, object[] parms = null)
         {
+            VerificaConexao();
+
             sql = string.Format(sql, "@");
 
             _factory.Command.CommandText = sql;
@@ -71,6 +85,8 @@ namespace Infraestrutura.DAO.SQL.Common
 
         public T Get<T>(string sql, ConverterDelegate<T> convert, object[] parms = null)
         {
+            VerificaConexao();
+
             sql = string.Format(sql, "@");
 
             _factory.Command.CommandText = sql;

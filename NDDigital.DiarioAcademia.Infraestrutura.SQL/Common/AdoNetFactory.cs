@@ -4,6 +4,7 @@ using System.Configuration;
 using System.Data;
 using System.Data.Common;
 using System;
+using System.Data.SqlClient;
 
 namespace NDDigital.DiarioAcademia.Infraestrutura.SQL.Common
 {
@@ -24,12 +25,16 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.SQL.Common
             DbProviderFactories.GetFactory(providerName);
 
         private DbConnection _connection;
-        private DbTransaction _transaction;
         private DbCommand _command;
 
         #endregion Attributos
 
         public AdoNetFactory()
+        {
+            AbreConexao();
+        }
+
+        public void AbreConexao()
         {
             Connection = factory.CreateConnection();
 
@@ -63,13 +68,6 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.SQL.Common
             get { return _connection; }
 
             set { _connection = value; }
-        }
-
-        public DbTransaction Transaction
-        {
-            get { return _transaction; }
-
-            set { _transaction = value; }
         }
 
         public DbCommand Command
