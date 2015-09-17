@@ -3,6 +3,7 @@ using NDDigital.DiarioAcademia.Infraestrutura.Security.Contexts;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Core.EntityClient;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Linq.Expressions;
@@ -100,6 +101,14 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Security.Common
                 query = query.Include(includeProperty);
             }
 
+            var conn =
+                    ((EntityConnection)
+                        ((IObjectContextAdapter)dataContext).ObjectContext.Connection)
+                            .StoreConnection;
+
+            if (conn.State == System.Data.ConnectionState.Open)
+                conn.Close();
+
             return query.Where(g => g.Id == id).FirstOrDefault();
         }
 
@@ -121,6 +130,8 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Security.Common
             {
                 query = query.Include(includeProperty);
             }
+
+
 
             return query.ToList();
         }

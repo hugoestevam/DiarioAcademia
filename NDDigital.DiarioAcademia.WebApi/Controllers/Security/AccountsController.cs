@@ -64,7 +64,7 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers.Authentication
         //public async Task<IHttpActionResult> CreateUser(CreateUserBindingModel createUserModel)
         public IHttpActionResult CreateUser(CreateUserBindingModel model)
         {
-            if (!ModelState.IsValid)
+            if (!ModelState.IsValid || model== null)
             {
                 return BadRequest(ModelState);
             }
@@ -115,27 +115,17 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers.Authentication
         {
             //Only SuperAdmin or Admin can delete users (Later when implement roles)
 
-            var appUser = await this.UserRepository.FindByIdAsync(id);
+                UserRepository.Delete(id);
 
-            if (appUser != null)
-            {
-                IdentityResult result = await this.UserRepository.DeleteAsync(appUser);
 
-                if (!result.Succeeded)
-                {
-                    return GetErrorResult(result);
-                }
-
-                return Ok();
-            }
-
-            return NotFound();
+            return Ok();
         }
 
-        [HttpPut]
         [Route("edit")]
         public IHttpActionResult EditUser([FromBody] User user)
         {
+            if (user == null) return BadRequest();
+
             var u = UserRepository.GetUserByUsername(user.UserName);
 
             u.FirstName = user.FirstName;

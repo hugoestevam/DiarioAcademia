@@ -92,6 +92,7 @@
 
                 authentication.isAuth = true;
                 authentication.userName = loginData.userName;
+                localStorageService.set(storageKeys.authoData, { token: response.access_token});
                 userService.getUserByUsername(authentication.userName)
                          .then(function (result) {
                              authentication.fullName = result.fullName;

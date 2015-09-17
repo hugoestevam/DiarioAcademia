@@ -57,13 +57,12 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers.Authentication
         {
             if (ids == null)
                 return BadRequest();
-            foreach (var id in ids)
-            {
-                var permission = _permissionService.GetByPermissionId(id);
 
-                _permissionService.Delete(permission.Id);
-            }
-            return Ok();
+
+            _permissionService.DeleteAll(ids);
+            
+                
+                return Ok();
         }
     }
 }

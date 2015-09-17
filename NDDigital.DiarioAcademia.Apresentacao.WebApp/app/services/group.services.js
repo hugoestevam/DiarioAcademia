@@ -12,7 +12,7 @@
 	function groupService($http, logger, baseUrl, res, $state) {
 		var self = this;
 		var serviceUrl = baseUrl + "api/group/";
-		var serviceAuthenticationUrl = baseUrl + "api/authentication";
+		var serviceAuthenticationUrl = baseUrl + "api/authentication/";
 
 		//public methods
 		self.getGroups = function () {

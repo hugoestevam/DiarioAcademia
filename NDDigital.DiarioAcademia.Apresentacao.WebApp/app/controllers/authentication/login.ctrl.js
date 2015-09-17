@@ -20,8 +20,8 @@
         activate();
         function activate() {
             vm.loginData = {
-                userName: "",
-                password: ""
+                userName: "superadmin",
+                password: "174963"
             };
             vm.message = "";
 
