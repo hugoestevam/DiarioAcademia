@@ -47,25 +47,31 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Security.Repositories
 
             Account acc;
             //TODO: rever implementação
-            try {
+            try
+            {
                 acc = dataContext.Accounts.Include("Groups").Where(a => a.Username == username).FirstOrDefault();
+
+                var list = new List<Permission>();
+
+
+
+                foreach (var group in acc.Groups)
+                {
+                    var listPermissions = DataContext.Groups.Include("Permissions").Where(g => g.Id == group.Id).FirstOrDefault().Permissions;
+
+                    list.AddRange(listPermissions);
+
+                    list = list.Distinct().ToList();
+                }
+
+                    return list;
+
             }
-            catch (Exception ex) {
+            catch (Exception ex)
+            {
                 dataContext = new Contexts.AuthContext();
                 return GetByUser(username);
             }
-
-            var list = new List<Permission>();
-
-            foreach (var group in acc.Groups)
-            {
-                var listPermissions = DataContext.Groups.Include("Permissions").Where(g => g.Id == group.Id).FirstOrDefault().Permissions;
-
-                list.AddRange(listPermissions);
-
-                list = list.Distinct().ToList();
-            }
-            return list;
         }
     }
 }

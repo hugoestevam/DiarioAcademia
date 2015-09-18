@@ -101,6 +101,12 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Security.Common
                 query = query.Include(includeProperty);
             }
 
+            CloseConnection();
+            return query.Where(g => g.Id == id).FirstOrDefault();
+        }
+
+        protected void CloseConnection()
+        {
             var conn =
                     ((EntityConnection)
                         ((IObjectContextAdapter)dataContext).ObjectContext.Connection)
@@ -109,7 +115,6 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Security.Common
             if (conn.State == System.Data.ConnectionState.Open)
                 conn.Close();
 
-            return query.Where(g => g.Id == id).FirstOrDefault();
         }
 
         public virtual IList<T> GetAll()

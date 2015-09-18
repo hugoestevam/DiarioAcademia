@@ -32,6 +32,7 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.Base
             TruncateTables(_entityContext, entityTables);
 
             _entityContext.SaveChanges();
+            _authContext.SaveChanges();
 
             SeedContext(_entityContext);
             SeedContext(_authContext);

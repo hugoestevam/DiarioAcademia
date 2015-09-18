@@ -34,7 +34,7 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers.Entities
         public IHttpActionResult Post([FromBody]AlunoDTO value)
         {
             _alunoService.Add(value);
-            return Ok();
+            return Ok(value);
         }
 
         // PUT: api/Aluno/5

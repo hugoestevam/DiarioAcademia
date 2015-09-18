@@ -12,10 +12,13 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Security.Configurations
                 .IsConcurrencyToken();
             HasMany(a => a.Groups)
             .WithMany()
+            
             .Map(x =>
             {
                 x.ToTable("TBAccountGroups");
             });
+
+
         }
     }
 }

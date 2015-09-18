@@ -10,6 +10,7 @@ using NDDigital.DiarioAcademia.Infraestrutura.Security.Entities;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 
 namespace NDDigital.DiarioAcademia.Infraestrutura.Security.Repositories
@@ -131,9 +132,26 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Security.Repositories
         {
             var user = GetUserByUsername(username);
             if (user == null) return;
-            dataContext.Accounts.Remove(user.Account);
+            //dataContext.Accounts.Remove(user.Account);
+            //dataContext.SaveChanges();
             dataContext.Users.Remove(user);
-            dataContext.SaveChanges();
+            // dataContext.SaveChanges();
+
+            var acc = dataContext.Accounts.Where(a => a.Username == username).FirstOrDefault();
+
+            dataContext.Accounts.Remove(acc);
+            try
+            {
+                dataContext.SaveChanges();
+
+            }
+            catch (DbUpdateException)
+            {
+                dataContext = new AuthContext();
+                Delete(username);
+            }
+
+
         }
 
         public IList<Group> GetGroupsByUser(string username)

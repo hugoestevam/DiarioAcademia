@@ -18,9 +18,10 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.Base
         [TestInitialize]
         public virtual void Initialize()
         {
+            ObjectBuilder.Reset();
             Database.SetInitializer(new DatabaseTestInitializer());
 
-            ObjectBuilder.Reset();
         }
+       
     }
 }
