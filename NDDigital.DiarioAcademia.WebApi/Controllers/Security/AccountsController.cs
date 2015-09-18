@@ -4,6 +4,7 @@ using NDDigital.DiarioAcademia.Aplicacao.Services;
 using NDDigital.DiarioAcademia.Infraestrutura.Security.Entities;
 using NDDigital.DiarioAcademia.Infraestrutura.Security.Repositories;
 using NDDigital.DiarioAcademia.WebApi.Controllers.Base;
+using NDDigital.DiarioAcademia.WebApi.Filters;
 using NDDigital.DiarioAcademia.WebApi.Models;
 using System;
 using System.Linq;
@@ -13,7 +14,7 @@ using System.Web.Http;
 namespace NDDigital.DiarioAcademia.WebApi.Controllers.Authentication
 {
     [RoutePrefix("api/accounts")]
-    //[GrouperAuthorize(Claim.Manager)]
+    [GrouperAuthorize(Claim.Manager)]
     public class AccountsController : BaseSecurityController
     {
         private IAuthorizationService _authservice;
@@ -45,7 +46,7 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers.Authentication
         }
 
         [Route("user/username/{username}")]
-        //[GrouperAuthorize(Basic = true)]
+        [GrouperAuthorize(Basic = true)]
         public IHttpActionResult GetUserByName(string username)
         {
             //Only SuperAdmin or Admin can delete users (Later when implement roles)
@@ -63,7 +64,7 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers.Authentication
         //public async Task<IHttpActionResult> CreateUser(CreateUserBindingModel createUserModel)
         public IHttpActionResult CreateUser(CreateUserBindingModel model)
         {
-            if (!ModelState.IsValid)
+            if (!ModelState.IsValid || model== null)
             {
                 return BadRequest(ModelState);
             }
@@ -114,27 +115,17 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers.Authentication
         {
             //Only SuperAdmin or Admin can delete users (Later when implement roles)
 
-            var appUser = await this.UserRepository.FindByIdAsync(id);
+                UserRepository.Delete(id);
 
-            if (appUser != null)
-            {
-                IdentityResult result = await this.UserRepository.DeleteAsync(appUser);
 
-                if (!result.Succeeded)
-                {
-                    return GetErrorResult(result);
-                }
-
-                return Ok();
-            }
-
-            return NotFound();
+            return Ok();
         }
 
-        [HttpPut]
         [Route("edit")]
         public IHttpActionResult EditUser([FromBody] User user)
         {
+            if (user == null) return BadRequest();
+
             var u = UserRepository.GetUserByUsername(user.UserName);
 
             u.FirstName = user.FirstName;

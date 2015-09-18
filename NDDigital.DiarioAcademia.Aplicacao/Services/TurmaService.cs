@@ -2,6 +2,7 @@
 using NDDigital.DiarioAcademia.Dominio.Contracts;
 using NDDigital.DiarioAcademia.Dominio.Entities;
 using NDDigital.DiarioAcademia.Infraestrutura.DAO.Common.Uow;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -22,29 +23,54 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
 
         public void Add(TurmaDTO turmaDto)
         {
-            Turma turma = new Turma(turmaDto.Ano);
+            try
+            {
+                Turma turma = new Turma(turmaDto.Ano);
 
-            _turmaRepository.Add(turma);
+                _turmaRepository.Add(turma);
 
-            _unitOfWork.Commit();
+                _unitOfWork.Commit();
+            }
+            catch (Exception te)
+            {
+                _unitOfWork.Rollback();
+                throw new Exception(te.Message);
+            }
         }
 
         public void Update(TurmaDTO turmaDto)
         {
-            Turma turma = _turmaRepository.GetById(turmaDto.Id);
+            try
+            {
+                Turma turma = _turmaRepository.GetById(turmaDto.Id);
 
-            turma.Ano = turmaDto.Ano;
+                turma.Ano = turmaDto.Ano;
 
-            _turmaRepository.Update(turma);
+                _turmaRepository.Update(turma);
 
-            _unitOfWork.Commit();
+                _unitOfWork.Commit();
+            }
+            catch (Exception te)
+            {
+                _unitOfWork.Rollback();
+                throw new Exception(te.Message);
+            }
         }
 
         public void Delete(int id)
         {
-            _turmaRepository.Delete(id);
+            try
+            {
+                _turmaRepository.Delete(id);
 
-            _unitOfWork.Commit();
+                _unitOfWork.Commit();
+            }
+            catch (Exception te)
+            {
+                _unitOfWork.Rollback();
+                throw new Exception(te.Message);
+            }
+
         }
 
         public TurmaDTO GetById(int id)

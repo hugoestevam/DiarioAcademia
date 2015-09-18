@@ -67,7 +67,7 @@
                if (authService.authorization.groups)
                    var userIsAdmin = authService.authorization.groups.any('isAdmin', true);
 
-               if (userIsAdmin) return;
+               if (authService.authorization.isAdmin) return;
 
                var stateToGo = 'login';
 

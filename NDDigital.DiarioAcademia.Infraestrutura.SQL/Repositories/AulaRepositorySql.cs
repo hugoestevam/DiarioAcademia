@@ -48,9 +48,11 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.SQL.Repositories
               WHERE A.Id = {0}Id";
 
         public const string SqlSelectPresencasByAula =
-            @"SELECT P.Id, P.StatusPresenca, A.Nome as NomeAluno, P.Aula_Id, P.Aluno_Id
+            @"SELECT P.Id, P.StatusPresenca, A.Nome as NomeAluno,
+                     P.Aula_Id, P.Aluno_Id, AL.Data
                 FROM TBPresenca AS P
-                INNER JOIN TBAluno AS A ON A.Id = P.Aluno_Id
+	                INNER JOIN TBAula AS AL ON AL.Id = P.Aula_Id
+                    INNER JOIN TBAluno AS A ON A.Id = P.Aluno_Id
               WHERE P.Aula_Id = {0}Id_Aula";
 
         #endregion Querys

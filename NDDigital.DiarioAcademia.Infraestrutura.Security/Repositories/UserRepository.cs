@@ -130,6 +130,8 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Security.Repositories
         public void Delete(string username)
         {
             var user = GetUserByUsername(username);
+            if (user == null) return;
+            dataContext.Accounts.Remove(user.Account);
             dataContext.Users.Remove(user);
             dataContext.SaveChanges();
         }

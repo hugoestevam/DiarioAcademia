@@ -116,6 +116,7 @@
     <Compile Include="ADO\AulaADOTest.cs" />
     <Compile Include="ADO\BaseADOTest.cs" />
     <Compile Include="ADO\TurmaADOTest.cs" />
+    <Compile Include="ADO\RepositoryBaseADOTests.cs" />
     <Compile Include="Base\BaseAuthTest.cs" />
     <Compile Include="Base\BaseTest.cs" />
     <Compile Include="Base\BaseEntityFrameworkTest.cs" />

@@ -54,7 +54,7 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.Security
 
             var count = UserRepository.GetUsers().ToList().Count;
 
-            Assert.IsTrue(count == 0);
+            Assert.AreEqual(0,count,"Quantidadde de usuários");
         }
 
         [TestMethod]

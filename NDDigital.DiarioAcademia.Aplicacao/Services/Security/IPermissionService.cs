@@ -14,6 +14,7 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
         IList<Permission> GetByUser(string username);
 
         IList<Permission> GetByGroup(int groupId);
+        void DeleteAll(string[] ids);
     }
 
     public class PermissionService : IPermissionService
@@ -47,12 +48,12 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
 
         IList<Permission> IService<Permission>.GetAll()
         {
-            return _repo.GetAll(); throw new NotImplementedException();
+            return _repo.GetAll();
         }
 
         Permission IService<Permission>.GetById(int id)
         {
-            return _repo.GetById(id); throw new NotImplementedException();
+            return _repo.GetById(id);
         }
 
         public Permission GetByPermissionId(string id)
@@ -68,6 +69,19 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
         public IList<Permission> GetByGroup(int groupId)
         {
             return _repo.GetByGroup(groupId);
+        }
+
+        public void DeleteAll(string[] ids)
+        {
+            foreach (var id in ids)
+            {
+                var permission = GetByPermissionId(id);
+
+                Delete(permission.Id);
+
+            }
+
+            _uow.Commit();
         }
     }
 }

@@ -11,7 +11,7 @@
     //class
     function turmaService($http, logger, baseUrl,res) {
         var self = this;
-        var serviceUrl = baseUrl + "api/turma";
+        var serviceUrl = baseUrl + "api/turma/";
 
         self.getTurmas = function () {
             return $http.get(serviceUrl)
@@ -26,7 +26,7 @@
         self.delete = function (turma) {
             logger.error(res.deleted_successful, turma, "Delete");
 
-            return $http.delete(serviceUrl + "/" + turma.id)
+            return $http.delete(serviceUrl + turma.id)
                           .then(logger.emptyMessageCallback)
                           .catch(logger.errorCallback);
 
@@ -35,14 +35,14 @@
         self.getTurmaById = function (id) {
             logger.success("Turma com id " + id + " encontrada", null, "Busca");
 
-            return $http.get(serviceUrl + "/" + id)
+            return $http.get(serviceUrl + id)
                             .then(logger.emptyMessageCallback);
         };
 
         self.edit = function (turma) {
             logger.success("Turma " + turma.descricao + " editada", null, "Edição");
 
-            $http.put(serviceUrl + "/" +  turma.id, turma);
+            $http.put(serviceUrl +  turma.id, turma);
         };
     }
 })(window.angular);

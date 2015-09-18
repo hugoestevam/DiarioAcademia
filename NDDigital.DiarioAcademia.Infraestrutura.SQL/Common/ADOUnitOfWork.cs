@@ -21,6 +21,11 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.SQL.Common
 
             _factory.Command.Transaction.Commit();
             _factory.Command.Transaction = null;
+
+            if (_factory.Connection != null)
+                _factory.Connection.Close();
+            _factory.Connection = null;
+
         }
 
         public void Dispose()
