@@ -1,5 +1,4 @@
-﻿
-(function (angular) {
+﻿(function (angular) {
 
 	angular
 		.module('factories.module')
@@ -13,6 +12,4 @@
 				'action2',
 				'action3'
 		]);
-
-
 })(window.angular);

@@ -1,5 +1,5 @@
 ﻿<div class="fadeIn enter-fadeIn text-capitalize">
-    <ndd-head title="Grupos: {{vm.user.firstName + ' ' + vm.user.lastName }}"></ndd-head>
+    <ndd-head title="Grupos: {{vm.user.firstName + ' ' + vm.user.lastName }}" back-route="manger.user.list"></ndd-head>
 </div>
 
 <hr style="margin-top: 2%" />
@@ -15,7 +15,7 @@
     <div class="row">
         <div class="col-xs-12 text-center clear-padding">
             <hr />
-            <button class="btn btn-info pull-left" ui-sref="manager.useredit({userId: vm.user.id})" style="margin-left: 2%;">
+            <button class="btn btn-info pull-left" ui-sref="manager.user.edit({userId: vm.user.id})" style="margin-left: 2%;">
                 <i class="fa fa-chevron-circle-left" style="font-size: large"></i>
                 <span>Voltar</span>
             </button>

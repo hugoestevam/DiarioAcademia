@@ -43,13 +43,13 @@
 
         <!--Manager -->
 
-        <ndd-sidemenu-option route-show="manager" name="Usuários"
-                             route="manager.user" state="{{state}}" icon="fa-user"></ndd-sidemenu-option>
+        <ndd-sidemenu-option route-show="manager" name="Usuários" route-actived="manager.user"
+                             route="manager.user.list" state="{{state}}" icon="fa-user"></ndd-sidemenu-option>
         <div class="seta-direita" ng-show="state.contains('manager.user')"></div>
 
 
-        <ndd-sidemenu-option route-show="manager" name="Grupos"
-                             route="manager.group" state="{{state}}" icon="fa-users"></ndd-sidemenu-option>
+        <ndd-sidemenu-option route-show="manager" name="Grupos"  route-actived="manager.group"
+                             route="manager.group.list" state="{{state}}" icon="fa-users"></ndd-sidemenu-option>
         <div class="seta-direita" ng-show="state.contains('manager.group')"></div>
 
 

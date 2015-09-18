@@ -44,36 +44,38 @@
 
         #region User
 
-        public const string Manager_User =
-            Manager_User_List
+        public const string Manager_User = ".13"
+            + Manager_User_List
             + Manager_User_Edit
             + Manager_User_Group_Edit;
 
-        public const string Manager_User_List = ".13";
-        public const string Manager_User_Edit = ".14";
-        public const string Manager_User_Group_Edit = ".15";
+        public const string Manager_User_List = ".14";
+        public const string Manager_User_Edit = ".15";
+        public const string Manager_User_Group_Edit = ".16";
 
         #endregion User
 
         #region Group
 
-        public const string Manager_Group =
-            Manager_Group_List
+        public const string Manager_Group = ".17"
+            + Manager_Group_List
+            + Manager_Group_Create
             + Manager_Group_Edit
             + Manager_Group_Permission_Edit;
 
-        public const string Manager_Group_List = ".16";
-        public const string Manager_Group_Edit = ".17";
-        public const string Manager_Group_Permission_Edit = ".18";
+        public const string Manager_Group_List = ".18";
+        public const string Manager_Group_Create = ".19";
+        public const string Manager_Group_Edit = ".20";
+        public const string Manager_Group_Permission_Edit = ".21";
 
         #endregion Group
 
-        #region Group
+        #region Permissions
 
         public const string Manager_Permission =
             Manager_Permission_List;
 
-        public const string Manager_Permission_List = ".19";
+        public const string Manager_Permission_List = ".22";
 
         #endregion Group
 
@@ -81,14 +83,14 @@
 
         #region Turma
 
-        public const string Turma = ".20"
+        public const string Turma = ".23"
             + Turma_List
             + Turma_Details
             + Turma_Create;
 
-        public const string Turma_List = ".21";
-        public const string Turma_Details = ".22";
-        public const string Turma_Create = ".23";
+        public const string Turma_List = ".24";
+        public const string Turma_Details = ".25";
+        public const string Turma_Create = ".26";
 
         #endregion Turma
 
@@ -98,8 +100,8 @@
               Custon_Excluir_Aluno
             + Custon_Delete_Turma;
 
-        public const string Custon_Excluir_Aluno = ".24";
-        public const string Custon_Delete_Turma = ".25";
+        public const string Custon_Excluir_Aluno = ".27";
+        public const string Custon_Delete_Turma = ".28";
 
         #endregion Custom
     }

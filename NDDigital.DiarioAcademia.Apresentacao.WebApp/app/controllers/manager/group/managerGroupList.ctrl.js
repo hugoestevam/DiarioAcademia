@@ -11,12 +11,13 @@
 
         vm.new = save;
         vm.showGroup = showGroup;
+        vm.edit = edit;
+        vm.onClick = onClick;
+        vm.onRemove = onRemove;
 
         vm.newGroup = {};
         vm.creating = false;
         vm.selectedGroup = undefined;
-
-        var params = getParams();
 
         //angular pagination
         vm.currentPage = 1;
@@ -32,12 +33,6 @@
                     pagination();
                 });
             });
-
-            if (params != "") {
-                groupService.getGroupById(parseInt(params)).then(function (results) {
-                    vm.selectedGroup = results;
-                });
-            }
         }
 
         // public methods
@@ -58,13 +53,25 @@
             });
         }
 
-        // helpers
-
-        function getParams() {
-            var path = $location.path().replace('/manager/group', "")
-            return path.slice(path.lastIndexOf('/') + 1, path.length);
+        function edit() {
+            if (!vm.selectedGroup)
+                return;
+            $state.go('manager.group.edit', { groupId: vm.selectedGroup.id })
         }
 
+        function onClick(value) {
+            if(value)
+                vm.selectedGroup = value;
+        }
+
+        function onRemove() {
+            groupService.delete(vm.selectedGroup).then(function (results) {
+                vm.groups.remove(vm.selectedGroup);
+                vm.selectedGroup = {};
+            });
+        }
+
+        // helpers
         function pagination() {
             vm.countTotalGroups = groups.length;
             vm.countGroups = (groups.length / vm.numPerPage) * 10;

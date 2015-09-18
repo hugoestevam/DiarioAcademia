@@ -5,9 +5,9 @@
 
     function nddSidemenuOption() {
         controller.$inject = ['$state'];
-
         // Usage:
-        //  <ndd-sidemenu-option >
+        //  <ndd-sidemenu-option routeShow="route.toShow" route-actived="route.actived" route: "route.toRedirect" 
+        //                       name="myName" state="route.actualState" icon="fa-icon"> </ndd-sidemenu-option>
         return {
             restrict: 'E',
             link: link,
@@ -16,6 +16,7 @@
             replace: false,
             scope: {
                 routeShow: "@",
+                routeActived: "@",
                 route: "@",
                 name: "@",
                 state: "@",

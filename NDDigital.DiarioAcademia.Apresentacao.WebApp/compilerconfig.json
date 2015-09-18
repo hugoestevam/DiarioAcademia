@@ -58,5 +58,9 @@
   {
     "outputFile": "content/theme/default/manager.css",
     "inputFile": "content/theme/default/manager.less"
+  },
+  {
+    "outputFile": "content/layout/head.css",
+    "inputFile": "content/layout/head.less"
   }
 ]

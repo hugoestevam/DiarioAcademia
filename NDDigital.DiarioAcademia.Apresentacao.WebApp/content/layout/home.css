@@ -3,7 +3,7 @@
   width: 100%;
 }
 .container-home {
-  height: calc(100% - 10px) !important;
+  height: calc(100% - 5px) !important;
   width: 100%;
   position: fixed;
   margin-top: -90px;

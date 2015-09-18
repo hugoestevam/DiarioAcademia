@@ -1,22 +1,14 @@
-﻿<div class="col-sm-11">
-    <ndd-head title="{{vm.title}}"></ndd-head>
-
+﻿<div class="col-sm-11 clear-padding">
+    <ndd-head title="{{vm.title}}" back-route="aluno"></ndd-head>
     <div class="col-sm-12 clear-padding">
-        <div class="jumbotron">
-            <div>
-                <input class="form-control" type="text" ng-model="vm.criterioDeBusca" placeholder="O que você está procurando?" />
-                <table class="table">
-                    <tr>
-                        <th></th>
-                        <th>Descrição do aluno</th>
-                    </tr>
-                    <tr ng-class="" ng-repeat="aluno in vm.alunos | filter: vm.criterioDeBusca">
-                        <td><input type="radio" ng-click="vm.alunoSelecionado = aluno" name="chkAluno"/></td>
-                        <td>{{aluno.nome}}</td>
-                    </tr>
-                </table>
-            </div>
+        <div class="submit-line">
+            <input type="text" class="form-control" placeholder="Pesquisar" ng-model="nameFilter" />
+            <button class="submit-lente" type="submit">
+                <i class="fa fa-search"></i>
+            </button>
+            <br />
         </div>
     </div>
+    <ndd-table columns="['ALUNOS', 'PRESENÇAS', 'FALTAS']" attrs="['nome', 'presencas', 'faltas']" data="vm.alunos" cb-click="vm.onClick" ng-model="nameFilter"></ndd-table>
 </div>
-<ndd-toolbar cb-properties="vm.edit" security-properties="aluno.details" cb-remove="vm.remove" security-remove="action.deleteAluno" ></ndd-toolbar>
+<ndd-toolbar cb-properties="vm.edit" security-properties="aluno.details" cb-remove="vm.remove" security-remove="action.deleteAluno"></ndd-toolbar>

@@ -95,7 +95,7 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Security.Repositories
             return (from c
                     in dataContext.Users
                     select c
-                    ).ToList();
+                     ).ToList();
         }
 
         public User GetUserById(string id)

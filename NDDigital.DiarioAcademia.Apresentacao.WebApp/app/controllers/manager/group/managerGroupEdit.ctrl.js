@@ -40,14 +40,14 @@
         function save() {
             return groupService.edit(vm.group).then(function () {
                 vm.hasChange = false;
-                $state.go('manager.group', {}, {reload: true});
+                $state.go('manager.group.list', {}, {reload: true});
             });
         }
 
         function remove() {
             groupService.delete(vm.group).then(function (results) {
                 vm.hasChange = false;
-                $state.go('manager.group', {}, { reload: true });
+                $state.go('manager.group.list', {}, { reload: true });
             });
         }
 
@@ -60,7 +60,7 @@
         }
 
         function editPermission() {
-            $state.go('manager.groupPermissionsEdit', { groupId: vm.group.id });
+            $state.go('manager.group.permissionsEdit', { groupId: vm.group.id });
         }
     }
 })(window.angular);

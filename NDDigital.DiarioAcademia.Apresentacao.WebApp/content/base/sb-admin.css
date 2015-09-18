@@ -35,12 +35,14 @@ li:first-child {
 #wrapper {
     padding-left: 0;
     margin-bottom: 1%;
-    margin-top: 75px;
+    margin-top: 60px;
 }
 
 #page-wrapper {
     width: 100%;
-    padding: 0;
+    padding-left: 20px;
+    padding-top: 10px;
+    padding-right: 20px;
     background-color: #fff;
 }
 
@@ -51,12 +53,8 @@ li:first-child {
 
 @media(min-width:768px) {
     #wrapper {
-        padding-left: 225px;
+        padding-left: 215px;
         transition: 1s;
-    }
-
-    #page-wrapper {
-        padding: 10px;
     }
 }
 

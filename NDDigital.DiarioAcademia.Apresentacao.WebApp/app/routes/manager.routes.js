@@ -17,62 +17,100 @@
             displayName: "Gerenciador",
             displayIcon: 'fa-wrench',
             $$permissionId: "12"
-        }, {
+        },
+
+        /* Users */
+        {
             name: 'manager.user',
             url: '/user',
-            templateUrl: '/app/views/manager/user/manager-user-list.html',
-            controller: "managerUserListController as vm",
+            templateUrl: '/app/templates/components/inner-view.html',
+            controller: "shellController as vm",
             displayName: "Usuario",
             displayIcon: 'fa-user',
             $$permissionId: "13"
-        }, {
-            name: 'manager.useredit',
+        },
+         {
+             name: 'manager.user.list',
+             url: '/user',
+             templateUrl: '/app/views/manager/user/manager-user-list.html',
+             controller: "managerUserListController as vm",
+             displayName: "Lista de Usuario",
+             displayIcon: 'fa-user',
+             $$permissionId: "14"
+         },
+        {
+            name: 'manager.user.edit',
             url: '/edit/user/:userId',
             templateUrl: '/app/views/manager/user/manager-user-edit.html',
             controller: "managerUserEditController as vm",
             displayName: "Edição de Usuário",
             displayIcon: 'fa-pencil',
-            $$permissionId: "14"
+            $$permissionId: "15"
         }, {
-            name: 'manager.userGroupEdit',
+            name: 'manager.user.groupEdit',
             url: '/group/edit/user/:userId',
             templateUrl: '/app/views/manager/user/manager-user-edit-group.html',
             controller: "managerUserEditGroupController as vm",
             displayName: "Edição de Grupos de Usuário",
             displayIcon: 'fa-pencil',
-            $$permissionId: "15"
-        }, {
+            $$permissionId: "16"
+        },
+
+        /* Groups */
+        {
             name: 'manager.group',
             url: '/group',
-            templateUrl: '/app/views/manager/group/manager-group-list.html',
-            controller: "managerGroupListController as vm",
+            templateUrl: '/app/templates/components/inner-view.html',
+            controller: "shellController as vm",
             displayName: "Grupo",
             displayIcon: 'fa-users',
-            $$permissionId: "16"
-        }, {
+            $$permissionId: "17"
+        },
+        {
+            name: 'manager.group.list',
+            url: '/list',
+            templateUrl: '/app/views/manager/group/manager-group-list.html',
+            controller: "managerGroupListController as vm",
+            displayName: "Lista de Grupo",
+            displayIcon: 'fa-users',
+            $$permissionId: "18"
+        },
+        {
+            name: 'manager.group.create',
+            url: '/create/:groupId',
+            templateUrl: '/app/views/manager/group/manager-group-create.html',
+            controller: "managerGroupCreateController as vm",
+            displayName: "Criação de Grupo",
+            displayIcon: 'fa-pencil',
+            $$permissionId: "19"
+        },
+        {
             name: 'manager.group.edit',
             url: '/edit/:groupId',
             templateUrl: '/app/views/manager/group/manager-group-edit.html',
             controller: "managerGroupEditController as vm",
             displayName: "Edição de Grupo",
             displayIcon: 'fa-pencil',
-            $$permissionId: "17"
+            $$permissionId: "20"
         }, {
-            name: 'manager.groupPermissionsEdit',
+            name: 'manager.group.permissionsEdit',
             url: '/group/edit/permissions/:groupId',
             templateUrl: '/app/views/manager/group/manager-group-permission-edit.html',
             controller: "managerGroupPermissionEditController as vm",
             displayName: "Edição de Permissões de Grupo",
             displayIcon: 'fa-pencil',
-            $$permissionId: "18"
-        }, {
+            $$permissionId: "21"
+        },
+
+        /* Permissions */
+        {
             name: 'manager.permissions',
             url: '/permissions',
             templateUrl: '/app/views/manager/permission/manager-permission.html',
             controller: "managerPermissionController as vm",
             displayName: "Permissões",
             displayIcon: 'fa-key',
-            $$permissionId: "19"
+            $$permissionId: "22"
         })
     }
 

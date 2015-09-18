@@ -10,12 +10,12 @@ gulp.task('start', 'Start dev app.--livereload: use livereload', ['inject'], fun
     var options = config.getBrowsersyncOptionsDefault();
     if (!yargs.livereload)
         options.files = [];  // break livereload - no watched files
-    browserSync(options);
+    browserSync.init(options);
 });
 
 gulp.task('start-app', 'Start publish version of app optimized', ['build-optimized'], function () {
     //start application
-    browserSync({
+    browserSync.init({
         server: {
             baseDir: "./dist/"   //publish version
         }

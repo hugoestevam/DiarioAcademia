@@ -38,7 +38,7 @@
 		}
 
 		function editGroups() {
-			$state.go('manager.userGroupEdit', { userId: vm.user.id });
+			$state.go('manager.user.groupEdit', { userId: vm.user.id });
 		}
 
 		function saveChanges() {

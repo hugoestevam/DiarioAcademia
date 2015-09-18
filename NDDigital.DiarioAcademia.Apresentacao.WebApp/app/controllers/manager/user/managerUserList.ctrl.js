@@ -16,6 +16,7 @@
         vm.remove = remove;
         vm.modal = modal;
         vm.cbRemove = cbRemove;
+        vm.onClick = onClick;
 
         //angular pagination
         vm.currentPage = 1;
@@ -39,7 +40,7 @@
 
         function edit() {
             if (vm.selectedUser)
-                $state.go('manager.useredit', { userId: vm.selectedUser.id });
+                $state.go('manager.user.edit', { userId: vm.selectedUser.id });
         }
 
        
@@ -50,7 +51,9 @@
             $("#modelRemoveUser").modal();
         }
 
-
+        function onClick(value) {
+            vm.selectedUser = value;
+        }
 
         function remove() {
             managerService.delete(vm.user).then(function (results) {

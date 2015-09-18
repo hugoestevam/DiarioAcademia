@@ -15,7 +15,7 @@
             templateUrl: '/app/templates/components/inner-view.html',
             displayName: "Turma",
             displayIcon: 'fa-university',
-            $$permissionId: "20"
+            $$permissionId: "23"
         }, {
             name: 'turma.list',
             url: '/list',
@@ -23,7 +23,7 @@
             templateUrl: '/app/views/turma/turma-list.html',
             displayName: "Lista de Turmas",
             displayIcon: 'fa-bars',
-            $$permissionId: "21"
+            $$permissionId: "24"
         }, {
             name: 'turma.details',
             url: '/details/:turmaId',
@@ -32,7 +32,7 @@
             displayName: "Detalhes da Turma",
             displayIcon: 'fa-pencil',
             parents: ["turma.list"],
-            $$permissionId: "22"
+            $$permissionId: "25"
 
         }, {
             name: 'turma.create',
@@ -41,7 +41,7 @@
             templateUrl: '/app/views/turma/turma-create.html',
             displayName: "Criação da Turma",
             displayIcon: 'fa-plus',
-            $$permissionId: "23"
+            $$permissionId: "26"
         }
 );
     }

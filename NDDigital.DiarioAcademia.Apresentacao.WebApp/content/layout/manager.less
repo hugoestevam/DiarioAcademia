@@ -24,7 +24,7 @@
 
 
 .clear-padding {
-    padding: 0 1% 0 0;
+    padding: 0 0 0 0;
 }
 
 .input-search {
@@ -64,16 +64,77 @@
 
 .container-scroll {
     height: 45vh;
-    overflow:auto;
+    overflow: auto;
 }
 
-.msgAllPermission{
+.msgAllPermission {
     margin-left: 2%;
-    & i{
+
+    & i {
         color: #f0ad4e;
     }
 }
 
-.separator{
+.separator {
     border-right: solid 2px rgba(204, 204, 204, 0.4);
+}
+
+.container-header {
+    padding-left: 0;
+    padding-bottom: 22px;
+}
+
+.text-indicator {
+    color: #CECECE;
+    font-size: 15px;
+    font-weight: 300;
+    font-family: "Roboto", sans-serif;
+
+    & span {
+        margin-right: 10px;
+        position: relative;
+        top: 6px;
+        cursor: pointer;
+
+        &:hover {
+            color: #EB8A76 - 40;
+        }
+    }
+}
+
+
+.text-indicator-actived {
+    color: #EB8A76;
+}
+
+.input-search-user {
+    border-right: none !important;
+}
+
+.submit-lente {
+    position: absolute;
+    top: 0;
+    right: 0;
+    line-height: 26px;
+    z-index: 10;
+    border: none;
+    background: transparent;
+    outline: none;
+    color: #808080;
+}
+
+.submit-line {
+    position: relative;
+    width: 400px;
+     & input {
+        height: 30px;
+    }
+}
+
+.submit-line input {
+    width: 100%;
+}
+
+.col-grid{
+    padding-right: 10px !important;
 }

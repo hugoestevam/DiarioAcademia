@@ -23,8 +23,17 @@
             makeRequest();
         }
 
-        //public methods
-        vm.delete = function () {
+        //public method
+        vm.delete = remove;
+        vm.onClick = onClick;
+        
+
+        function onClick(value) {
+            if (value)
+                vm.aulaSelecionada = value;
+        }
+
+        function remove() {
             if (!vm.aulaSelecionada)
                 return;
             aulaService.delete(vm.aulaSelecionada).then(function () {

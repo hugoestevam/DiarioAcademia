@@ -26,12 +26,21 @@
         }
 
         //public methods 
-        vm.edit = function () {
+        vm.onClick = onClick;
+        vm.edit = edit;
+        vm.remove = remove;
+
+        function onClick(value) {
+            if (value)
+                vm.turmaSelecionada = value;
+        }
+
+        function edit() {
             if (vm.turmaSelecionada)
                 $state.go('turma.details', { turmaId: vm.turmaSelecionada.id });
         }
 
-        vm.remove = function () {
+        function remove() {
             if (!vm.turmaSelecionada)
                 return;
             turmaService.delete(vm.turmaSelecionada).then(function () {

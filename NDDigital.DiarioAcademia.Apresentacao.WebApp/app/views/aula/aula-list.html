@@ -1,21 +1,15 @@
-﻿<div class="col-sm-11">
-    <ndd-head title="Aulas"></ndd-head>
-    <div class="col-lg-12">
-        <div class="jumbotron">
-            <div>
-                <input class="form-control" type="text" ng-model="vm.criterioDeBusca" placeholder="O que você está procurando?" />
-                <table class="table">
-                    <tr>
-                        <th></th>
-                        <th>Data da aula</th>
-                    </tr>
-                    <tr ng-class="" ng-repeat="aula in vm.aulas | filter: vm.criterioDeBusca">
-                        <td><input type="radio" name="rdAula" ng-click="vm.aulaSelecionada = aula" /></td>
-                        <td>{{aula.dataAula | date: 'dd/MM/yyyy'}}</td>
-                    </tr>
-                </table>
-            </div>
+﻿<div class="col-sm-11 clear-padding">
+    <ndd-head title="Aulas" back-route="aula"></ndd-head>
+
+    <div class="col-sm-12 clear-padding">
+        <div class="submit-line">
+            <input type="text" class="form-control" placeholder="Pesquisar" ng-model="nameFilter" />
+            <button class="submit-lente" type="submit">
+                <i class="fa fa-search"></i>
+            </button>
+            <br />
         </div>
     </div>
+    <ndd-table columns="['DATA DA AULA']" attrs="['dataAula']" data="vm.aulas" cb-click="vm.onClick" ng-model="nameFilter"></ndd-table>
 </div>
 <ndd-toolbar state-new="aula.create" cb-remove="vm.delete"></ndd-toolbar>

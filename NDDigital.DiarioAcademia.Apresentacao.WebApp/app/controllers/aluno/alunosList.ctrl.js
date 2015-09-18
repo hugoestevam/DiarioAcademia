@@ -25,12 +25,22 @@
 
 
         //public methods
-        vm.edit = function () {
+        vm.onClick = onClick;
+        vm.edit = edit;
+        vm.remove = remove;
+
+
+        function onClick(value) {
+            if (value)
+                vm.alunoSelecionado = value;
+        }
+
+        function edit() {
             if (vm.alunoSelecionado)
                 $state.go('aluno.details', { alunoId: vm.alunoSelecionado.id });
         }
 
-        vm.remove = function () {
+       function remove() {
             if (!vm.alunoSelecionado)
                 return;
             alunoService.delete(vm.alunoSelecionado).then(function () {

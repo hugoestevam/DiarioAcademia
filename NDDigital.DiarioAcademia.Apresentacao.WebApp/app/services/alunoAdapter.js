@@ -18,7 +18,7 @@
         function init() {
             automapper.createMap("aluno", "alunoDto")
                         .forMember("id", function () { return this.id })
-                        .forMember("descricao", function () { return this.nome; })
+                        .forMember("descricao", function () { return "Aluno " + this.nome + ": " + "Presencas: " + this.presencas + ", Faltas: " + this.faltas })
                         .forMember("turmaId", function () { return this.turma.id; })
                         .forMember("cep", function () { return this.endereco.cep; })
                         .forMember("bairro", function () { return this.endereco.bairro; })
@@ -30,7 +30,9 @@
 
             automapper.createMap("alunoDto", "aluno")
                .forMember("id", function () { return this.id })
-               .forMember("nome", function () { return this.descricao; })
+               .forMember("nome", function () { return this.descricao.replace('Aluno', '').split(":")[0]; })
+               .forMember("presencas", function () { return this.descricao.replace('Aluno ', '').replace(',', ':').split(":")[2]; })
+               .forMember("faltas", function () { return this.descricao.replace('Aluno', '').replace(',', ':').split(":")[4]; })
                .forMember("turma", function () { return { id: this.turmaId }; })
                .forMember("endereco", function () {
                    return {
