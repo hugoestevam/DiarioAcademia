@@ -25,6 +25,7 @@
 
         function verify(scope, element) {
             var auth = controller.isAuthorized(scope.nddSecurity);
+            element = $(element);
             return auth ? element.show() : element.hide();
         }
 

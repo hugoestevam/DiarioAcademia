@@ -21,7 +21,7 @@
         {
             name: 'homeapp',
             url: '/homeapp',
-            controller: 'homeController as vm',
+            controller: 'homeAppController as vm',
             templateUrl: '/app/views/layout/home-app.html',
             displayName: "Inicio App",
             displayIcon: "fa-home",

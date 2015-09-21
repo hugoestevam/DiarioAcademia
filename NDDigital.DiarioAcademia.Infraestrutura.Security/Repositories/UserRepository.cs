@@ -93,10 +93,17 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Security.Repositories
 
         public IList<User> GetUsers()
         {
-            return (from c
-                    in dataContext.Users
-                    select c
-                     ).ToList();
+            try
+            {
+                return (from c
+                        in dataContext.Users
+                        select c
+                         ).ToList();
+            }
+            catch (InvalidOperationException ex) {
+                dataContext = new AuthContext();
+                return GetUsers();
+            }
         }
 
         public User GetUserById(string id)
