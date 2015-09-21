@@ -21,7 +21,7 @@
 
         function link(scope, element, attrs) {
             attrs.$observe('data', function (newValue, oldValue) {
-                chartAlunos(newValue * 10, scope.color, scope.target);
+                chartAlunos(newValue, scope.color, scope.target);
             });
         }
 
