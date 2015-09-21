@@ -2,6 +2,7 @@
 using NDDigital.DiarioAcademia.Infraestrutura.Security.Common;
 using NDDigital.DiarioAcademia.Infraestrutura.Security.Contracts;
 using NDDigital.DiarioAcademia.Infraestrutura.Security.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -43,7 +44,7 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Security.Repositories
                 return GetByUser(username);
             }
 
-            if(acc != null)
+            if (acc != null)
 
             return acc.Groups;
 

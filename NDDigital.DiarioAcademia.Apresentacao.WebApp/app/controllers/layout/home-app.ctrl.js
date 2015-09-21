@@ -2,7 +2,7 @@
 
     'use strict';
     //using
-    homeAppController.$inject = ['alunoService', 'turmaService', 'aulaService'];
+    homeAppController.$inject = ['alunoService', 'turmaService', 'aulaService', 'authService'];
 
     //namespace
     angular
@@ -10,13 +10,14 @@
         .controller('homeAppController', homeAppController);
 
     //class
-    function homeAppController(alunoService, turmaService, aulaService) {
+    function homeAppController(alunoService, turmaService, aulaService, authService) {
         var vm = this;
 
         //script load
         activate();
 
         function activate() {
+            
             alunoService.getAlunos().then(function (alunos) {
                 vm.alunos = alunos.length;
 

@@ -10,7 +10,8 @@
 
 
 
-    function authService($http, $q, localStorageService, logger, serviceBase, groupService, storageKeys, res, userService, permissionFactory, $rootScope) {
+    function authService($http, $q, localStorageService, logger, serviceBase, groupService,
+                            storageKeys, res, userService, permissionFactory, $rootScope) {
         var self = this;
 
         var redirectState = "home";
@@ -88,11 +89,9 @@
             var header = { 'Content-Type': 'application/x-www-form-urlencoded' };
 
             $http.post(serviceBase + 'oauth/token', data, { headers: header }).success(function (response) {
-
-
                 authentication.isAuth = true;
                 authentication.userName = loginData.userName;
-                localStorageService.set(storageKeys.authoData, { token: response.access_token});
+                localStorageService.set(storageKeys.authoData, { token: response.access_token });
                 userService.getUserByUsername(authentication.userName)
                          .then(function (result) {
                              authentication.fullName = result.fullName;
@@ -106,9 +105,9 @@
                                  fullName: authentication.fullName,
                                  userId: authentication.userId
                              });
-                             localStorageService.set(storageKeys.autheData, authorization);
-
                              $rootScope.$broadcast('login');
+
+                             localStorageService.set(storageKeys.autheData, authorization);
                          });
                 logger.success(res.welcome + " " + (authentication.userName));
                 deferred.resolve(response);

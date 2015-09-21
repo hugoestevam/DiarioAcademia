@@ -24,8 +24,12 @@ namespace NDDigital.DiarioAcademia.WebApi.Filters
                 Injection.Get<IGroupRepository>(),
                 Injection.Get<IPermissionRepository>(),
                 Injection.Get<IAccountRepository>(),
-                Injection.Get<IUnitOfWork>()
+                Injection.Get<IAuthUnitOfWork>()
                 );
+        }
+        public GrouperAuthorizeAttribute(bool basic): this()
+        {
+            this.Basic = basic;
         }
 
         public GrouperAuthorizeAttribute(params string[] permissions) : this()
