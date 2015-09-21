@@ -8,7 +8,6 @@
         , 'LocalStorageModule'
         , 'angular-loading-bar'
         , 'ngAutomapper'
-        , 'ncy-angular-breadcrumb'
         //app modules
         , 'common.module'
         , 'factories.module'
@@ -20,7 +19,6 @@
     ])
 
     .config(configInterceptors)
-    .config(configBreadcrumb)
     .run(runStateChangeSuccess)
     .run(runStateChangeStart);
 
@@ -87,14 +85,4 @@
             console.log('todo');
         });
     }
-
-    configBreadcrumb.$inject = ["$breadcrumbProvider"];
-    function configBreadcrumb($breadcrumbProvider) {
-        $breadcrumbProvider.setOptions({
-            prefixStateName: 'home',
-            includeAbstract: true,
-            template: 'bootstrap3', // if templateUrl is undefined
-            templateUrl: 'app/templates/layout/breadcrumb.html'
-        });
-    };
 })(window.angular);

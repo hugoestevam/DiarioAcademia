@@ -77,7 +77,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="app\controllers\manager\group\managerGroupCreate.ctrl.js" />
+    <Content Include="app\controllers\layout\home-app.ctrl.js" />
     <Content Include="app\controllers\manager\group\managerGroupPermissionEdit.ctrl.js" />
     <Content Include="app\controllers\manager\group\managerGroupEdit.ctrl.js" />
     <Content Include="app\controllers\manager\group\managerGroupList.ctrl.js" />
@@ -85,6 +85,8 @@
     <Content Include="app\controllers\manager\user\managerUserEdit.ctrl.js" />
     <Content Include="app\controllers\manager\user\managerUserEditGroupController.ctrl.js" />
     <Content Include="app\controllers\manager\user\managerUserList.ctrl.js" />
+    <Content Include="app\directives\ndd-chart-knob\ndd-chart-knob.directives.js" />
+    <Content Include="app\directives\ndd-chart-knob\ndd-chart-knob.html" />
     <Content Include="app\directives\ndd-confirm-exit\ndd-confirm-exit.directives.js" />
     <Content Include="app\directives\ndd-confirm-exit\ndd-confirm-exit.html" />
     <Content Include="app\directives\ndd-group-checkbox\ndd-group-checkbox.directives.js" />
@@ -95,8 +97,6 @@
     <Content Include="app\directives\ndd-modal\ndd-modal.html" />
     <Content Include="app\directives\ndd-panel\ndd-panel.directives.js" />
     <Content Include="app\directives\ndd-panel\ndd-panel.html" />
-    <Content Include="app\directives\ndd-popover\ndd-popover.directives.js" />
-    <Content Include="app\directives\ndd-popover\ndd-popover.html" />
     <Content Include="app\directives\ndd-security\ndd-security.directives.js" />
     <Content Include="app\directives\ndd-table\ndd-table.directives.js" />
     <Content Include="app\directives\ndd-table\ndd-table.html" />
@@ -113,7 +113,7 @@
     <Content Include="app\images\avatar_login.png" />
     <Content Include="app\images\avatar_plus.gif" />
     <Content Include="app\images\favicon.ico" />
-    <Content Include="app\images\icons\Icon_back.png" />
+    <Content Include="app\images\profile-menu.png" />
     <Content Include="app\images\slides\slide_one.jpg" />
     <Content Include="app\images\slides\slide_three.jpg" />
     <Content Include="app\images\slides\slide_two.jpg" />
@@ -125,7 +125,6 @@
     <Content Include="app\templates\layout\top-menu.html" />
     <Content Include="app\factories\permissions.factory.js" />
     <Content Include="app\views\layout\home-app.html" />
-    <Content Include="app\views\manager\group\manager-group-create.html" />
     <Content Include="app\views\manager\group\manager-group-permission-edit.html" />
     <Content Include="app\views\manager\group\manager-group-edit.html" />
     <Content Include="app\views\manager\group\manager-group-list.html" />
@@ -144,12 +143,6 @@
     </Content>
     <Content Include="content\layout\footer.min.css">
       <DependentUpon>footer.css</DependentUpon>
-    </Content>
-    <Content Include="content\layout\head.css">
-      <DependentUpon>head.less</DependentUpon>
-    </Content>
-    <Content Include="content\layout\head.min.css">
-      <DependentUpon>head.css</DependentUpon>
     </Content>
     <Content Include="content\layout\home.css">
       <DependentUpon>home.less</DependentUpon>
@@ -188,7 +181,6 @@
     <Content Include="content\layout\sidemenu.less" />
     <Content Include="content\layout\home.less" />
     <Content Include="content\component\homeapp.less" />
-    <Content Include="content\layout\head.less" />
     <None Include="content\layout\toolbar.less" />
     <Content Include="content\layout\sidemenu.min.css">
       <DependentUpon>sidemenu.css</DependentUpon>

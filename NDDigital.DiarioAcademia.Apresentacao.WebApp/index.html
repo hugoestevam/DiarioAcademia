@@ -62,16 +62,16 @@
 
     <!--build:js js/libs.js-->
     <!-- bower:js -->
-    <script src="/bower_components/jquery/dist/jquery.js"></script>
-    <script src="/bower_components/bootstrap/dist/js/bootstrap.js"></script>
     <script src="/bower_components/angular/angular.js"></script>
-    <script src="/bower_components/toastr/toastr.js"></script>
+    <script src="/bower_components/angular-animate/angular-animate.js"></script>
+    <script src="/bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <script src="/bower_components/angular-loading-bar/build/loading-bar.js"></script>
     <script src="/bower_components/angular-local-storage/dist/angular-local-storage.js"></script>
     <script src="/bower_components/angular-ui-router/release/angular-ui-router.js"></script>
-    <script src="/bower_components/angular-loading-bar/build/loading-bar.js"></script>
-    <script src="/bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
-    <script src="/bower_components/angular-animate/angular-animate.js"></script>
-    <script src="/bower_components/angular-breadcrumb/release/angular-breadcrumb.js"></script>
+    <script src="/bower_components/jquery/dist/jquery.js"></script>
+    <script src="/bower_components/aterrien/jQuery-Knob/js/jquery.knob.js"></script>
+    <script src="/bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="/bower_components/toastr/toastr.js"></script>
     <!-- endbower -->
     <!--endbuild-->
     <!--build:js js/app.js-->
@@ -135,6 +135,7 @@
     <script src="/app/controllers/chamada/chamadaList.ctrl.js"></script>
     <script src="/app/controllers/layout/footer.ctrl.js"></script>
     <script src="/app/controllers/layout/header.ctrl.js"></script>
+    <script src="/app/controllers/layout/home-app.ctrl.js"></script>
     <script src="/app/controllers/layout/home.ctrl.js"></script>
     <script src="/app/controllers/layout/navbar.ctrl.js"></script>
     <script src="/app/controllers/layout/shell.ctrl.js"></script>
@@ -153,6 +154,7 @@
     <script src="/app/controllers/manager/user/managerUserList.ctrl.js"></script>
     <!--endinject-->
     <!--inject:directives-->
+    <script src="/app/directives/ndd-chart-knob/ndd-chart-knob.directives.js"></script>
     <script src="/app/directives/ndd-confirm-exit/ndd-confirm-exit.directives.js"></script>
     <script src="/app/directives/ndd-group-checkbox/ndd-group-checkbox.directives.js"></script>
     <script src="/app/directives/ndd-head/ndd-head.directives.js"></script>
