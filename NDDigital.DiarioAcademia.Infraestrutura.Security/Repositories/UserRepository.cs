@@ -117,7 +117,7 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Security.Repositories
                             where c.UserName == username
                             select c
                                        ).FirstOrDefault();
-                user.Account = dataContext.Accounts.Include(a => a.Groups)?.Where(a => a.Username == username).FirstOrDefault();
+                user.Account = dataContext.Accounts.Include(a => a.Groups).Where(a => a.Username == username).FirstOrDefault();
 
                 return user;
             }

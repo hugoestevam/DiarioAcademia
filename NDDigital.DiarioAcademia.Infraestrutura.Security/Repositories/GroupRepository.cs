@@ -43,9 +43,11 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Security.Repositories
                 return GetByUser(username);
             }
 
-            
+            if(acc != null)
 
-            return acc?.Groups;
+            return acc.Groups;
+
+            return null;
         }
 
         public bool IsAdmin(string username)
