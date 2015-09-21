@@ -2,7 +2,9 @@
 using NDDigital.DiarioAcademia.Infraestrutura.Security.Common;
 using NDDigital.DiarioAcademia.Infraestrutura.Security.Contracts;
 using NDDigital.DiarioAcademia.Infraestrutura.Security.Entities;
+using System;
 using System.Collections.Generic;
+using System.Data.Entity.Core;
 using System.Linq;
 
 namespace NDDigital.DiarioAcademia.Infraestrutura.Security.Repositories
@@ -33,17 +35,26 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Security.Repositories
 
             try
             {
+
                 acc = (from a in DataContext.Accounts.Include("Groups")
                        where a.Username == username
                        select a).FirstOrDefault();
 
             }
-            catch (System.InvalidOperationException)
+            catch (InvalidOperationException)
+            {
+                return GetByUser(username);
+            }
+            catch (EntityCommandExecutionException)
+            {
+                return GetByUser(username);
+            }
+            catch (EntityException)
             {
                 return GetByUser(username);
             }
 
-            if(acc != null)
+            if (acc != null)
 
             return acc.Groups;
 

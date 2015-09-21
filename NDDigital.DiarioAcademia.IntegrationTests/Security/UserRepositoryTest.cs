@@ -47,10 +47,10 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.Security
         [TestMethod]
         [TestCategory(TestCategory)]
         public void Deveria_Excluir_Um_Usuario()
-        {
+       {
             var user = UserRepository.GetUsers().First();
 
-            UserRepository.Delete(user.UserName);
+            UserRepository.Delete(user.Id);
 
             var count = UserRepository.GetUsers().ToList().Count;
 

@@ -82,29 +82,55 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Security.Repositories
 
         public IList<User> GetUsersByGroup(Group group)
         {
-            var gr = group; //key "group" is reserved
-            return (
-                from c
-                in dataContext.Users
-                where c.Account.Groups.Any(g => g.Id == gr.Id)
-                select c
-                ).ToList();
+           
+            try
+            {
+                var gr = group; //key "group" is reserved
+                return (
+                    from c
+                    in dataContext.Users
+                    where c.Account.Groups.Any(g => g.Id == gr.Id)
+                    select c
+                    ).ToList();
+            }
+            catch (InvalidOperationException exe)
+            {
+                dataContext = new AuthContext();
+                return GetUsersByGroup(group);
+            }
         }
 
         public IList<User> GetUsers()
         {
-            return (from c
+            try
+            {
+                return (from c
                     in dataContext.Users
                     select c
                      ).ToList();
+            }
+            catch (InvalidOperationException exe)
+            {
+                dataContext = new AuthContext();
+                return GetUsers();
+            }
         }
 
         public User GetUserById(string id)
         {
-            return (from c
-                    in dataContext.Users.Include(u => u.Account)
-                    where c.Id == id
-                    select c).FirstOrDefault();
+            try
+            {
+                return (from c
+                      in dataContext.Users.Include(u => u.Account)
+                        where c.Id == id
+                        select c).FirstOrDefault();
+            }
+            catch (InvalidOperationException exe)
+            {
+                dataContext = new AuthContext();
+                return GetUserById(id);
+            }
+           
         }
 
         public User GetUserByUsername(string username)
@@ -117,6 +143,8 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Security.Repositories
                             where c.UserName == username
                             select c
                                        ).FirstOrDefault();
+
+                if (user == null) return GetUserByUsername(username);
                 user.Account = dataContext.Accounts.Include(a => a.Groups).Where(a => a.Username == username).FirstOrDefault();
 
                 return user;
@@ -128,16 +156,13 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Security.Repositories
             }
         }
 
-        public void Delete(string username)
+        public void Delete(string id)
         {
-            var user = GetUserByUsername(username);
+            var user = GetUserById(id);
             if (user == null) return;
-            //dataContext.Accounts.Remove(user.Account);
-            //dataContext.SaveChanges();
-            dataContext.Users.Remove(user);
-            // dataContext.SaveChanges();
 
-            var acc = dataContext.Accounts.Where(a => a.Username == username).FirstOrDefault();
+            var acc = dataContext.Accounts.Where(a => a.Username == user.UserName).FirstOrDefault();
+            dataContext.Users.Remove(user);
 
             dataContext.Accounts.Remove(acc);
             try
@@ -148,7 +173,7 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Security.Repositories
             catch (DbUpdateException)
             {
                 dataContext = new AuthContext();
-                Delete(username);
+                Delete(id);
             }
 
 
@@ -165,6 +190,11 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Security.Repositories
             return new List<Group>();
 
             // return user?.Account?.Groups ?? new List<Group>();  todo: c# 6
+        }
+
+        public void Update(User user)
+        {
+            dataContext.SaveChanges();
         }
     }
 }

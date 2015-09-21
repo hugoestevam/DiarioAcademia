@@ -40,6 +40,10 @@ namespace NDDigital.DiarioAcademia.WebApi.Models
     public class ChangePasswordBindingModel
     {
         [Required]
+        [Display(Name = "Username")]
+        public string Username { get; set; }
+
+        [Required]
         [DataType(DataType.Password)]
         [Display(Name = "Current password")]
         public string OldPassword { get; set; }

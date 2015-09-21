@@ -18,5 +18,8 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Security.Contracts
         void Delete(string username);
 
         void AddUser(User user);
+
+        new void Update(User user);
+
     }
 }

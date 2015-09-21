@@ -9,6 +9,7 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
     public interface IUserService : IService<User>
     {
         List<Group> FindGroupByUsername(string username);
+        new void Update(User user);
     }
 
     public class UserService : IUserService

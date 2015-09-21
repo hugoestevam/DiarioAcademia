@@ -34,7 +34,7 @@
 
 		self.delete = function (user) {
 			
-			return $http.delete(serviceUrl + user.id)
+			return $http.delete(serviceUrl +"user/"+ user.id)
 		            .then(logger.emptyMessageCallback)
 		            .then(function (response) {
 		                logger.success(res.deleted_successful, user, "Delete");
@@ -45,7 +45,7 @@
 		self.edit = function (user) {
 			
 
-			return $http.put(serviceUrl +"edit/"+ user.id, user)
+			return $http.post(serviceUrl +"edit/", user)
 							.then(logger.successCallback)
                             .then(function (response) {
                                 logger.success("User " + user.firstName + " editado", null, "Edição");

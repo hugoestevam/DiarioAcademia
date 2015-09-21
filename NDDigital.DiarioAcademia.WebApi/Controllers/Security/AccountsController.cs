@@ -100,12 +100,11 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers.Authentication
                 return BadRequest(ModelState);
             }
 
-            IdentityResult result = await this.UserRepository.ChangePasswordAsync(User.Identity.GetUserId(), model.OldPassword, model.NewPassword);
+            var user = UserRepository.GetUserByUsername( model.Username);
 
-            if (!result.Succeeded)
-            {
-                return GetErrorResult(result);
-            }
+            user.PasswordHash = Criptografia.Criptografar(model.NewPassword);
+
+            UserRepository.Update(user);
 
             return Ok();
         }
@@ -130,10 +129,11 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers.Authentication
 
             u.FirstName = user.FirstName;
             u.LastName = user.LastName;
+            u.Email = user.Email;
 
             UserRepository.Update(u);
 
-            return Ok(u);
+            return Ok(user);
         }
     }
 }
