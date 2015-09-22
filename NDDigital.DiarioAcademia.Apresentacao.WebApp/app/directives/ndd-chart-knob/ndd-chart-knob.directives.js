@@ -13,27 +13,31 @@
                 name: "@",
                 data: '@',
                 color: '@',
-                target: "@",
                 security: "@"
             },
             templateUrl: 'app/directives/ndd-chart-knob/ndd-chart-knob.html'
         };
 
         function link(scope, element, attrs) {
+            chartAlunos(0, scope.color, element); // initialize
+
             attrs.$observe('data', function (newValue, oldValue) {
-                chartAlunos(newValue, scope.color, scope.target);
+                if (newValue == "" || !newValue)
+                    return;
+                chartAlunos(newValue, scope.color, element);
             });
         }
 
-        function chartAlunos(count, color, target) {
-            if (!count)
+        function chartAlunos(count, color, element) {
+            if (count != 0 && !count)
                 return;
             $(document).ready(function () {
-                $("#" + target).each(function () {
+                var input = element.find('input');
+
+                $(input).each(function () {
                     var elm = $(this);
                     elm.knob({
                         'min': 0,
-                        'max': count,
                         "skin": "tron",
                         "readOnly": true,
                         "thickness": .02,
@@ -53,7 +57,11 @@
                         }
                     });
 
-                    $('ndd-chart-knob[target =' + target + '] strong').attr({ 'style': 'color: ' + color });
+                    $(input).trigger('configure', {
+                        max: count
+                    });
+
+                    element.find('strong').attr({ 'style': 'color: ' + color });
                 });
 
             });
