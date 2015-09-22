@@ -2,7 +2,7 @@
 
     'use strict';
     //using
-    homeAppController.$inject = ['alunoService', 'turmaService', 'aulaService', 'authService'];
+    homeAppController.$inject = ['alunoService', 'turmaService', 'aulaService', 'authService', '$scope'];
 
     //namespace
     angular
@@ -10,7 +10,7 @@
         .controller('homeAppController', homeAppController);
 
     //class
-    function homeAppController(alunoService, turmaService, aulaService, authService) {
+    function homeAppController(alunoService, turmaService, aulaService, authService, $scope) {
         var vm = this;
 
         //script load
@@ -18,6 +18,9 @@
 
         function activate() {
             getAlunos();
+            $scope.$on('login', function () {
+                getAlunos();
+            });
         }
 
         //private methods
