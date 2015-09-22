@@ -17,27 +17,36 @@
         activate();
 
         function activate() {
-            
-            alunoService.getAlunos().then(function (alunos) {
-                vm.alunos = alunos.length;
-
-                turmaService.getTurmas().then(function (turmas) {
-                    vm.turmas = turmas.length;
-
-                    aulaService.getAulas().then(function (aulas) {
-                        vm.aulas = aulas.length;
-                    });
-                });
-            });
+            getAlunos();
         }
 
-
-        //public methods
-        vm.publicMethod = function () {
+        //private methods
+        function getAlunos() {
+            if (!authService.authorization.isAuthorized('aluno.list')) {
+                return getTurmas();
+            }
+            alunoService.getAlunos().then(function (alunos) {
+                vm.alunos = alunos.length;
+                getTurmas();
+            });
         };
 
-        //private methods
-        function privateMethod() {
+        function getTurmas() {
+            if (!authService.authorization.isAuthorized('turmas.list')) {
+                return getAulas();
+            }
+            turmaService.getTurmas().then(function (turmas) {
+                vm.turmas = turmas.length;
+                getAulas();
+            });
+        };
+
+        function getAulas() {
+            if (!authService.authorization.isAuthorized('aulas.list'))
+                return
+            aulaService.getAulas().then(function (aulas) {
+                vm.aulas = aulas.length;
+            });
         };
     }
 
