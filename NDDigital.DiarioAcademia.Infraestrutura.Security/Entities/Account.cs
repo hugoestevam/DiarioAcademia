@@ -20,5 +20,9 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Security.Entities
         {
             Username = username;
         }
+        public override string ToString()
+        {
+            return Username;
+        }
     }
 }

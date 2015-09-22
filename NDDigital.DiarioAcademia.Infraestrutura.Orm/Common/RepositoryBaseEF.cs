@@ -7,6 +7,7 @@ using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Threading;
 
 namespace Infrastructure.DAO.ORM.Common.Base
 {
@@ -114,7 +115,7 @@ namespace Infrastructure.DAO.ORM.Common.Base
 
         public virtual IList<T> GetAll()
         {
-           
+            Thread.Sleep(1);
             return dbset.ToList();
         }
 

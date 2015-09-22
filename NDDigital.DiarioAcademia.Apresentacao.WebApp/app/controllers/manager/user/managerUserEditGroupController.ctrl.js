@@ -58,10 +58,25 @@
                 else
                     exclude.push(vm.changes[i].id);
             }
-            if (include.length > 0)
-                userService.addUserGroup(vm.user, include);
-            if (exclude.length > 0)
+
+
+            var needInclude = include.length > 0;
+            var needExclude = exclude.length > 0;
+
+            if (needInclude) {
+
+                userService.addUserGroup(vm.user, include).then(function () {
+
+                    if (needExclude) {
+                        userService.removeUserGroup(vm.user, exclude);
+                    }
+                })
+
+            } else if (needExclude) {
                 userService.removeUserGroup(vm.user, exclude);
+            }
+
+
         }
 
     }

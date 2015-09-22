@@ -18,7 +18,7 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Security.Repositories
             var list = new List<Permission>();
             foreach (var id in ids)
             {
-                var permission = DataContext.Permissions.Where(p => p.PermissionId == id).FirstOrDefault();
+                var permission = GetByPermissionId(id);
 
                 list.Add(permission ?? new Permission(id));
             }

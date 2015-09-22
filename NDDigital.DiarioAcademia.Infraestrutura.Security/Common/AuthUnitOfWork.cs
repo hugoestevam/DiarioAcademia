@@ -1,5 +1,6 @@
 ﻿using NDDigital.DiarioAcademia.Infraestrutura.DAO.Common.Uow;
 using NDDigital.DiarioAcademia.Infraestrutura.Security.Contexts;
+using System;
 
 namespace NDDigital.DiarioAcademia.Infraestrutura.Security.Common
 {
@@ -24,7 +25,16 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Security.Common
 
         public void Commit()
         {
-            DbContext.SaveChanges();
+            try
+            {
+                 DbContext.SaveChanges();
+            }
+            catch (InvalidOperationException exe)
+            {
+
+                throw exe;
+            }
+           
         }
 
         public void Dispose()

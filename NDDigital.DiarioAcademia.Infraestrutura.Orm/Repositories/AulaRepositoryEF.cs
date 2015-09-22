@@ -58,10 +58,20 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Repositories
 
         public IList<Aula> GetAll()
         {
-            return GetQueryable()
+            try
+            {
+           return GetQueryable()
                 .Include(x => x.Turma)
                 .Include(x => x.Presencas)
                 .ToList();
+            }
+            catch (InvalidOperationException)
+            {
+
+                return GetAll();
+            }
+
+           
         }
     }
 }

@@ -16,11 +16,14 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.CepServices
 
             var endereco = new Endereco();
 
-            endereco.Cep = xml.Element("cep").Value;
-            endereco.Bairro = xml.Element("bairro").Value;
-            endereco.Localidade = xml.Element("localidade").Value;
-            endereco.Uf = xml.Element("uf").Value;
+            if (xml.Element("erro") == null)
+            {
 
+                endereco.Cep = xml.Element("cep").Value;
+                endereco.Bairro = xml.Element("bairro").Value;
+                endereco.Localidade = xml.Element("localidade").Value;
+                endereco.Uf = xml.Element("uf").Value;
+            }
             return endereco;
         }
     }

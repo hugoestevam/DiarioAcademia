@@ -3,6 +3,7 @@ using NDDigital.DiarioAcademia.Infraestrutura.Security.Contexts;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Core;
 using System.Data.Entity.Core.EntityClient;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
@@ -41,6 +42,9 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Security.Common
 
         public virtual void Update(T entity)
         {
+            if (entity == null) return;
+
+
             DbEntityEntry dbEntityEntry = DataContext.Entry(entity);
 
             if (dbEntityEntry.State == EntityState.Detached)
@@ -101,8 +105,19 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Security.Common
                 query = query.Include(includeProperty);
             }
 
-            CloseConnection();
-            return query.Where(g => g.Id == id).FirstOrDefault();
+            //CloseConnection();
+            try
+            {
+ var result = query.Where(g => g.Id == id).FirstOrDefault();
+            
+            return result;
+            }
+            catch (EntityException)
+            {
+
+                return GetByIdIncluding(id, includeProperties); // :c
+            }
+           
         }
 
         protected void CloseConnection()

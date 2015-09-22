@@ -35,11 +35,11 @@
 		self.delete = function (user) {
 			
 			return $http.delete(serviceUrl +"user/"+ user.id)
-		            .then(logger.emptyMessageCallback)
-		            .then(function (response) {
-		                logger.success(res.deleted_successful, user, "Delete");
-		                return response;
-		            });
+					.then(logger.emptyMessageCallback)
+					.then(function (response) {
+						logger.success(res.deleted_successful, user, "Delete");
+						return response;
+					});
 		};
 
 		self.edit = function (user) {
@@ -47,10 +47,10 @@
 
 			return $http.post(serviceUrl +"edit/", user)
 							.then(logger.successCallback)
-                            .then(function (response) {
-                                logger.success("User " + user.firstName + " editado", null, "Edição");
-                                return response;
-                            })
+							.then(function (response) {
+								logger.success("User " + user.firstName + " editado", null, "Edição");
+								return response;
+							})
 							.catch(logger.errorCallback);
 		};
 

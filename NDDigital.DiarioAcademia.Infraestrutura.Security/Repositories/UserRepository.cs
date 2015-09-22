@@ -144,7 +144,7 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Security.Repositories
                             select c
                                        ).FirstOrDefault();
 
-                if (user == null) return GetUserByUsername(username);
+                if (user != null) 
                 user.Account = dataContext.Accounts.Include(a => a.Groups).Where(a => a.Username == username).FirstOrDefault();
 
                 return user;

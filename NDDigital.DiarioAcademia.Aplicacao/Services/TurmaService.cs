@@ -4,6 +4,7 @@ using NDDigital.DiarioAcademia.Dominio.Entities;
 using NDDigital.DiarioAcademia.Infraestrutura.DAO.Common.Uow;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 
 namespace NDDigital.DiarioAcademia.Aplicacao.Services
@@ -65,10 +66,10 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
 
                 _unitOfWork.Commit();
             }
-            catch (Exception te)
+            catch (DbUpdateException te)
             {
                 _unitOfWork.Rollback();
-                throw new Exception(te.Message);
+                throw new ApplicationException("Ocorreu um erro, verifique se esta turma tem alunos relacionados");
             }
 
         }

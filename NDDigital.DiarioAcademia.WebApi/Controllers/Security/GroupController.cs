@@ -21,13 +21,17 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers.Authentication
         [Authorize]
         public IHttpActionResult Get()
         {
-            return Ok(_groupService.GetAll());
+            var list = _groupService.GetAll();
+
+            return Ok(list);
         }
 
         // GET: api/Group/1
         public IHttpActionResult Get(int id)
         {
-            return Ok(_groupService.GetById(id));
+            var group = _groupService.GetById(id);
+
+            return Ok(group);
         }
 
         // GET: api/Group?username=username
@@ -53,7 +57,7 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers.Authentication
             Group group =  _groupService.GetById(id);
             group.Name = value.Name;
             group.IsAdmin = value.IsAdmin;
-            group.Permissions = value.Permissions;
+            //group.Permissions = value.Permissions;
             try
             {
                 _groupService.Update(group);

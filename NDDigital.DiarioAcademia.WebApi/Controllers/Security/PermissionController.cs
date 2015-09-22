@@ -2,6 +2,8 @@
 using NDDigital.DiarioAcademia.Infraestrutura.Security.Entities;
 using NDDigital.DiarioAcademia.WebApi.Controllers.Base;
 using NDDigital.DiarioAcademia.WebApi.Filters;
+using System.Collections.Generic;
+using System.Linq;
 using System.Web.Http;
 
 namespace NDDigital.DiarioAcademia.WebApi.Controllers.Authentication
@@ -20,7 +22,8 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers.Authentication
         // GET: api/Permission
         public IHttpActionResult Get()
         {
-            return Ok(_permissionService.GetAll());
+            var list = _permissionService.GetAll();
+            return Ok(list);
         }
 
         // GET: api/Permission/group-id
@@ -43,11 +46,9 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers.Authentication
             return Ok(_permissionService.GetByGroup(groupId));
         }
 
-        public IHttpActionResult Post([FromBody]Permission[] values)
+        public IHttpActionResult Post([FromBody]List<Permission> values)
         {
-            foreach (var item in values)
-
-                _permissionService.Add(item);
+            _permissionService.Add(values.Select(p=>p.PermissionId).ToArray());
 
             return Ok(values);
         }
@@ -59,7 +60,7 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers.Authentication
                 return BadRequest();
 
 
-            _permissionService.DeleteAll(ids);
+            _permissionService.Delete(ids);
             
                 
                 return Ok();
