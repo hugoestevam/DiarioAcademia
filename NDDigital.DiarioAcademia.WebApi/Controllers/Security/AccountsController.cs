@@ -14,7 +14,6 @@ using System.Web.Http;
 namespace NDDigital.DiarioAcademia.WebApi.Controllers.Authentication
 {
     [RoutePrefix("api/accounts")]
-    [GrouperAuthorize(Claim.Manager)]
     public class AccountsController : BaseSecurityController
     {
         private IAuthorizationService _authservice;
@@ -29,12 +28,14 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers.Authentication
         }
 
         [Route("user")]
+        [GrouperAuthorize(Claim.Manager_User_List)]
         public IHttpActionResult GetUsers()
         {
             var users = UserRepository.GetUsers();
             return Ok(users.Select(u => TheModelFactory.Create(u)));
         }
 
+        [GrouperAuthorize(Claim.Manager_User_Edit)]
         [Route("user/{id:guid}", Name = "GetUserById")]
         public async Task<IHttpActionResult> GetUser(string Id)
         {
@@ -45,8 +46,8 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers.Authentication
             return Ok(user);
         }
 
-        [Route("user/username/{username}")]
         [GrouperAuthorize(Basic = true)]
+        [Route("user/username/{username}")]
         public IHttpActionResult GetUserByName(string username)
         {
             //Only SuperAdmin or Admin can delete users (Later when implement roles)
@@ -61,10 +62,9 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers.Authentication
 
         [AllowAnonymous]
         [Route("create")]
-        //public async Task<IHttpActionResult> CreateUser(CreateUserBindingModel createUserModel)
         public IHttpActionResult CreateUser(CreateUserBindingModel model)
         {
-            if (!ModelState.IsValid || model== null)
+            if (!ModelState.IsValid || model == null)
             {
                 return BadRequest(ModelState);
             }
@@ -93,6 +93,7 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers.Authentication
         }
 
         [Route("ChangePassword")]
+        [GrouperAuthorize(Basic = true)]
         public async Task<IHttpActionResult> ChangePassword(ChangePasswordBindingModel model)
         {
             if (!ModelState.IsValid)
@@ -110,17 +111,18 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers.Authentication
         }
 
         [Route("user/{id:guid}")]
+        [GrouperAuthorize(Claim.Manager_User_List)]
         public async Task<IHttpActionResult> DeleteUser(string id)
         {
             //Only SuperAdmin or Admin can delete users (Later when implement roles)
 
-                UserRepository.Delete(id);
+            UserRepository.Delete(id);
 
 
             return Ok();
         }
 
-        [Route("edit")]
+        [GrouperAuthorize(Claim.Manager_User_Edit)]
         public IHttpActionResult EditUser([FromBody] User user)
         {
             if (user == null) return BadRequest();

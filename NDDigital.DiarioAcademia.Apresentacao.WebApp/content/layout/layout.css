@@ -19,6 +19,9 @@ body {
 .clear-padding-left {
   padding-left: 0 !important;
 }
+.margin-noAuth {
+  margin-top: 20px !important;
+}
 .clear-margin {
   margin: 0;
 }

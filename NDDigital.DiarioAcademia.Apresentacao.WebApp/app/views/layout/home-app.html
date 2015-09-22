@@ -3,34 +3,39 @@
     <h1 style="margin-top: 5px"> Diário </h1>
     <h4><em>Academia do Programador</em></h4>
     <hr />
+    <br />
 </div>
 
-<div class="col-xs-12">
-    <div class="col-sm-4">
-        <ndd-chart-knob name="ALUNOS" data="{{vm.alunos}}" color="#15A7FF" target="chartAlunos" security="alunos.list"></ndd-chart-knob>
-    </div>
-    <div class="col-sm-4">
-        <ndd-chart-knob name="TURMAS" data="{{vm.turmas}}" color="#CCC925" target="chartTurmas" security="turmas.list"></ndd-chart-knob>
-
-    </div>
-    <div class="col-sm-4">
-        <ndd-chart-knob name="AULAS" data="{{vm.aulas}}" color="#FF2F32" target="chartAulas" security="aulas.list"></ndd-chart-knob>
-    </div>
-</div>
-<div class="col-xs-12">
-    <hr />
-</div>
 <div class="col-xs-offset-3 col-xs-6">
     <div class="panel panel-default">
         <div class="panel-heading"><strong>Objetivo</strong></div>
         <div class="panel-body">
-            <div class="alert alert-info">
+            <div class="alert alert-primary">
                 É um curso que forma desenvolvedores para a empresa NDDigital. Anualmente a empresa garimpa talentos
                 tanto para área de desenvolvimento como para outros setores da empresa.
             </div>
         </div>
     </div>
 </div>
+<div class="col-xs-12">
+    <br />
+    <i class="fa fa-2x fa-line-chart pull-left"></i>
+    <h3 class="clear-margin">Academia em números</h3>
+    <hr />
+</div>
+<br />
+<div class="col-xs-12">
+    <div class="col-sm-4">
+        <ndd-chart-knob name="TURMAS" data="{{vm.turmas}}" color="#FF9D15" target="chartTurmas" security="turmas.list"></ndd-chart-knob>
+    </div>
+    <div class="col-sm-4">
+        <ndd-chart-knob name="ALUNOS" data="{{vm.alunos}}" color="#15A7FF" target="chartAlunos" security="alunos.list"></ndd-chart-knob>
+    </div>
+    <div class="col-sm-4">
+        <ndd-chart-knob name="AULAS" data="{{vm.aulas}}" color="#FF2F32" target="chartAulas" security="aulas.list"></ndd-chart-knob>
+    </div>
+</div>
+
 
 
 
