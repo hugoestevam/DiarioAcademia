@@ -114,6 +114,7 @@ namespace Infrastructure.DAO.ORM.Common.Base
 
         public virtual IList<T> GetAll()
         {
+           
             return dbset.ToList();
         }
 

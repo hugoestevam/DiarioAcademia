@@ -63,7 +63,7 @@
         function convertDto(aluno) {
             return {
                 id: aluno.id,
-                turmaId: aluno.turma.id,
+                turmaId: aluno.turmaId,
                 descricao: aluno.nome + ": Presenças: 0, Faltas: 0 ",
                 cep: aluno.endereco.cep,
                 bairro: aluno.endereco.bairro,

@@ -47,7 +47,7 @@
         };
 
         self.edit = function (aluno) {
-            logger.success(res.student_edited(aluno.descricao.split(':')[0]) + " editado", null, "Edição");
+            logger.success(res.student_edited+aluno.descricao);
             return $http.put(serviceUrl + aluno.id, aluno);
         };
 
