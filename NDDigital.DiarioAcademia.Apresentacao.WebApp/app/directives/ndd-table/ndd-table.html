@@ -10,7 +10,10 @@
             ng-class="{'actived-row':selectedEntity == entity}">
             <td><input type="radio" name="rdGroup" ng-click="selectedEntity == entity" ng-checked="selectedEntity == entity" /></td>
             <td ng-repeat="attribute in attrs">
-                <span ng-hide="isBool(entity[attribute])">{{entity[attribute]  | date: 'dd/MM/yyyy' }}</span>
+                <div ng-hide="isBool(entity[attribute])" >
+                    <span ng-hide="isNumber(entity[attribute])">{{entity[attribute]  | date: 'dd/MM/yyyy' }}</span>
+                    <span ng-show="isNumber(entity[attribute])">{{entity[attribute]}}</span>
+                </div>
                 <span class="glyphicon glyphicon-star" ng-show="isBool(entity[attribute]) && entity[attribute]"></span>
                 <span class="glyphicon glyphicon-minus" ng-show="isBool(entity[attribute]) && !entity[attribute]"></span>
             </td>

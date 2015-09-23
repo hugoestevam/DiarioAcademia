@@ -25,6 +25,9 @@
 			scope.isBool = function (value) {
 				return typeof (value) == 'boolean';
 			}
+			scope.isNumber = function (value) {
+			    return $.isNumeric(value);;
+			}
 			scope.onClick = function (value) {
 				scope.selectedEntity = value;
 			};

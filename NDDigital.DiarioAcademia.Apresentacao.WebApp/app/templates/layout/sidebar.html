@@ -1,8 +1,10 @@
 ﻿<div class="collapse navbar-collapse navbar-ex1-collapse" ng-controller="sidebarController as vm">
     <ul class="nav navbar-nav side-nav sidemenu-custom" ng-show="shell.authentication.isAuth" ng-class="{'slider-enter': shell.authentication.isAuth, 'slider-leave': !shell.authentication.isAuth }">
-      
-        <!--Home -->
+        <li class="li separator-menu" style="height:5px; pointer-events: none">
+            <a href="#"></a>
+        </li>
 
+        <!--Home -->
         <ndd-sidemenu-option route-show="home" name="Inicio" icon="fa-home" class="home-li"
                              route="homeapp" state="{{state}}"></ndd-sidemenu-option>
         <div class="seta-direita" ng-show="state.contains('home')"></div>
@@ -48,7 +50,7 @@
         <div class="seta-direita" ng-show="state.contains('manager.user')"></div>
 
 
-        <ndd-sidemenu-option route-show="manager" name="Grupos"  route-actived="manager.group"
+        <ndd-sidemenu-option route-show="manager" name="Grupos" route-actived="manager.group"
                              route="manager.group.list" state="{{state}}" icon="fa-users"></ndd-sidemenu-option>
         <div class="seta-direita" ng-show="state.contains('manager.group')"></div>
 

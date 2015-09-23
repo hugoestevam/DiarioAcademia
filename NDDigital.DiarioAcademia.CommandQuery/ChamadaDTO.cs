@@ -44,5 +44,13 @@ namespace NDDigital.DiarioAcademia.Aplicacao.DTOs
         {
             return string.Format("{0}: {1}", Nome, Status == "F" ? "Faltou" : "Presente");
         }
+
+        public override bool Equals(object obj)
+        {
+            ChamadaAlunoDTO chamada = obj as ChamadaAlunoDTO;
+            if (chamada != null && chamada.AlunoId == this.AlunoId)
+                return true;
+            return base.Equals(obj);
+        }
     }
 }

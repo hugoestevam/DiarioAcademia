@@ -10,6 +10,6 @@
             <br />
         </div>
     </div>
-    <ndd-table columns="['DATA DA AULA']" attrs="['dataAula']" data="vm.aulas" cb-click="vm.onClick" ng-model="nameFilter"></ndd-table>
+    <ndd-table columns="['DATA DA AULA', 'TURMA']" attrs="['dataAula', 'anoTurma']" data="vm.aulas" cb-click="vm.onClick" ng-model="nameFilter"></ndd-table>
 </div>
 <ndd-toolbar state-new="aula.create" cb-remove="vm.delete"></ndd-toolbar>

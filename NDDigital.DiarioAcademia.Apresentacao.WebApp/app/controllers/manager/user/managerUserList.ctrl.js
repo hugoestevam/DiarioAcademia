@@ -25,7 +25,11 @@
         vm.countUsers = 0;
 
         activate();
-        function activate() {   
+        function activate() {
+            makeRequest();     
+        }
+
+        function makeRequest() {
             managerService.getUsers().then(function (results) {
                 users = results;
                 vm.countUsers = users.length;
@@ -37,6 +41,7 @@
                 });
             });
         }
+
 
         function edit() {
             if (vm.selectedUser)
@@ -57,8 +62,7 @@
 
         function remove() {
             managerService.delete(vm.user).then(function (results) {
-                users.remove(vm.user);
-                vm.users.remove(vm.user);
+                makeRequest();
                 vm.user = undefined;
             });
         }
