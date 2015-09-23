@@ -140,5 +140,6 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.SQL.Repositories
                 .Where(a => a.Turma.Id == turmaId)
                 .ToList();
         }
+
     }
 }

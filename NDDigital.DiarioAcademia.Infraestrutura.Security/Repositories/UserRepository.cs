@@ -135,6 +135,7 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Security.Repositories
 
         public User GetUserByUsername(string username)
         {
+
             // TODO: rever implementação
             try
             {

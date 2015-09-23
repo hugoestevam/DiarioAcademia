@@ -23,5 +23,7 @@ namespace NDDigital.DiarioAcademia.Dominio
         IList<T> GetMany(Expression<Func<T, bool>> where);
 
         IList<T> GetAllIncluding(params Expression<Func<T, object>>[] includeProperties);
+
+
     }
 }

@@ -58,8 +58,8 @@ namespace Infrastructure.DAO.ORM.Common.Base
             }
             dbEntityEntry.State = EntityState.Modified;
 
-            dbset.Attach(entity);
-            DataContext.Entry(entity).State = EntityState.Modified;
+          //  dbset.Attach(entity);
+          //  DataContext.Entry(entity).State = EntityState.Modified;
         }
 
         public virtual void Delete(T entity)
@@ -135,6 +135,7 @@ namespace Infrastructure.DAO.ORM.Common.Base
 
             return query.ToList();
         }
+
 
         protected IQueryable<T> GetQueryable()
         {
