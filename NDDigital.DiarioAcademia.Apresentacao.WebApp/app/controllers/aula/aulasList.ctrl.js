@@ -26,7 +26,7 @@
         //public method
         vm.delete = remove;
         vm.onClick = onClick;
-        
+
 
         function onClick(value) {
             if (value)
@@ -37,16 +37,15 @@
             if (!vm.aulaSelecionada)
                 return;
             aulaService.delete(vm.aulaSelecionada).then(function () {
-                vm.aulas.remove(vm.aulaSelecionada);
+                makeRequest();
             });
         }
 
         //private methods
         function makeRequest() {
-            aulaService.getAulas().
-                then(function (data) {
-                    vm.aulas = data;
-                });
+            aulaService.getAulas().then(function (data) {
+                vm.aulas = data;
+            });
         };
     }
 }(window.angular));

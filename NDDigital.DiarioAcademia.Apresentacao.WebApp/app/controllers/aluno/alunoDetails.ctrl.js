@@ -27,23 +27,10 @@
                     alunoService.getAlunoById(params.alunoId)
                         .then(function (resultsAluno) {
 
-
-                        vm.turmas = dataTurmas;
-                        vm.aluno = convertDtoToAluno(resultsAluno);
-
-
-                  
-
-               });
-
-
-
-
-                                   });
-
-
-
-
+                            vm.turmas = dataTurmas;
+                            vm.aluno = convertDtoToAluno(resultsAluno);
+                        });
+                });
         }
 
         //public methods
@@ -70,7 +57,7 @@
                     vm.aluno.endereco.bairro = result.bairro;
                     vm.aluno.endereco.localidade = result.localidade;
                     vm.aluno.endereco.uf = result.uf;
-                })
+                });
             }
         });
 

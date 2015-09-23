@@ -44,7 +44,7 @@
             if (!vm.alunoSelecionado)
                 return;
             alunoService.delete(vm.alunoSelecionado).then(function () {
-                vm.alunos.remove(vm.alunoSelecionado);
+                makeRequest();
             });
         }
 

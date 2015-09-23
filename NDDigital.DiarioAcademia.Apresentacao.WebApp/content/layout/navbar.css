@@ -1,16 +1,29 @@
 ﻿.dropdown-menu {
   left: 25%;
-  margin-top: 50px !important;
+  margin-top: 40px !important;
 }
 .top-nav {
-  margin-right: 15px;
-  margin-left: 15px;
+  margin: 0 !important;
   padding: 0 !important;
-  height: 50px;
+  height: 40px;
 }
 .top-nav .help {
-  padding-top: 10px;
+  padding-top: 6px;
   cursor: pointer;
+}
+.nav-option a:hover {
+  background-color: #3a8cc7 !important;
+  cursor: pointer;
+}
+.nav-option span:hover {
+  background-color: #3a8cc7 !important;
+  cursor: pointer;
+}
+.container-help {
+  height: 40px;
+  width: 60px;
+  text-align: center;
+  display: block;
 }
 .option-nav {
   line-height: 25px;

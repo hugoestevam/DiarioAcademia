@@ -8,6 +8,7 @@ using System.Web.Http;
 namespace NDDigital.DiarioAcademia.WebApi.Controllers.Entities
 {
     [GrouperAuthorize(Claim.Aluno)]
+    [RoutePrefix("api/aluno")]
     public class AlunoController : BaseEntityController
     {
         private AlunoService _alunoService;
@@ -28,6 +29,13 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers.Entities
         public AlunoDTO Get(int id)
         {
             return _alunoService.GetById(id);
+        }
+
+        // GET: api/Aluno/5
+        [Route("getbyturma/{turmaid}")]
+        public IList<AlunoDTO> GetByTurma(int turmaid)
+        {
+            return _alunoService.GetAllByTurmaId(turmaid);
         }
 
         // POST: api/Aluno

@@ -10,52 +10,43 @@
     //class
     function chamadaCtrl(chamadaService, alunoService, aulaService, turmaService) {
         var vm = this;
+
         vm.title = "Realizar chamada";
+
         vm.alunos = [];
         vm.turmas = [];
         vm.aulas = [];
         vm.turmaSelected = false;
         vm.aulaSelected = false;
 
+
         activate();
 
         function activate() {
             turmaService.getTurmas().then(function (data) {
                 vm.turmas = data;
+
                 aulaService.getAulas().then(function (data) {
-                        vm.allAulas = data;
-                    });
+                    vm.allAulas = data;
+                });
             });
-
-
         }
+
+
+        //public methods
 
         vm.save = function () {
             vm.chamada = convertToChamadaDto(vm.chamada);
-            convertStatusPresencas(vm.chamada);
-            chamadaService.
-                realizarChamada(vm.chamada);
+            chamadaService.realizarChamada(vm.chamada);
             clearFields();
         };
-
-
-        function clearFields() {
-            vm.chamada = {};
-            vm.alunos = [];
-            vm.turmaSelected = false;
-            vm.aulaSelected = false;
-        }
-
-        function convertStatusPresencas(chamada) {
-            for (var i = 0; i < chamada.alunos.length; i++) {
-                vm.chamada.alunos[i].status =
-                    chamada.alunos[i].status == false ? "F" : "C";
-            }
-        }
 
         vm.populateAulas = function (turma) {
             if (turma) {
                 vm.getAulaByTurma(turma);
+                alunoService.getAlunoByTurmaId(turma.id).then(function (results) {
+                    vm.talunos = convertToDto(results);
+                });
                 vm.turmaSelected = true;
             }
         }
@@ -74,56 +65,65 @@
         vm.getChamada = function () {
             vm.alunos = [];
             if (vm.chamada.aula) {
-                chamadaService.getChamadaByAula(vm.chamada.aula.id)
-                    .then(function (data) {
-                        vm.chamadaDto = data;
-                        vm.allAlunos = vm.chamadaDto.alunos;
-                        convertStatus();
-                        vm.alunos = vm.allAlunos;
-                    });
+                chamadaService.getChamadaByAula(vm.chamada.aula.id).then(function (data) {
+                    vm.chamadaDto = data;
+                    checkStatus(vm.chamadaDto.alunos);
+                    vm.alunos = vm.talunos;
+                });
             }
             vm.aulaSelected = true;
         }
 
-        function convertStatus() {
-            for (var i = 0; i < vm.allAlunos.length; i++) {
-                vm.allAlunos[i].status = vm.allAlunos[i].status == "F" ? false : true;
+
+        //private methods
+
+        function checkStatus(alunos) {
+            for (var i = 0; i < vm.talunos.length; i++) {
+                if (alunos.length == 0) {
+                    vm.talunos[i].status = false;
+                    continue;
+                }  
+                for (var j = 0; j < alunos.length; j++) {
+                    if (vm.talunos[i].alunoId == alunos[j].alunoId)
+                        vm.talunos[i].status = alunos[j] ? alunos[j].status != "F" : false;
+                }
             }
         }
 
-        function convertAlunosList() {
-            for (var i = 0; i < vm.allAlunos.length; i++) {
-                vm.allAlunos[i] = convertDto(vm.allAlunos[i]);
+        function convertToDto(alunos) {
+            var alunosDTO = [];
+            for (var i = 0; i < alunos.length; i++) {
+                alunosDTO[i] = {
+                    alunoId: alunos[i].id,
+                    nome: alunos[i].nome,
+                    status: false,
+                    turma: alunos[i].turma.id
+                };
             }
-        }
-
-        function convertDto(aluno) {
-            return {
-                alunoId: aluno.id,
-                nome: aluno.descricao.split(':')[0],
-                status: false,
-                turma: aluno.turmaId
-            };
+            return alunosDTO;
         }
 
         function convertToChamadaDto(chamada) {
-            return {
+            var chamadaDto = {
                 id: chamada.id,
                 turmaId: chamada.turma.id,
                 data: chamada.aula.data,
                 aulaId: chamada.aula.id,
                 alunos: vm.alunos
             };
+            for (var i = 0; i < vm.alunos.length; i++) {
+                chamadaDto.alunos[i].status = !vm.alunos[i].status ? "F" : "C";
+            }
+            return chamadaDto;
         }
 
-        function convertDtoTo(chamada) {
-            return {
-                id: chamada.id,
-                turma: turmaService.getTurmaById(chamada.turmaId),
-                data: chamada.data,
-                aula: aulaService.getAulaById(chamada.aulaId),
-                alunos: chamada.alunos
-            };
+        function clearFields() {
+            vm.chamada = {};
+            vm.alunos = [];
+            vm.aulas = [];
+            vm.turmaSelected = false;
+            vm.aulaSelected = false;
         }
+
     }
 }(window.angular));

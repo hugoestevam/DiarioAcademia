@@ -9,7 +9,6 @@
         var groups = [];
         vm.groups = [];
 
-        vm.new = save;
         vm.showGroup = showGroup;
         vm.edit = edit;
         vm.onClick = onClick;
@@ -27,6 +26,10 @@
 
         activate();
         function activate() {
+            makeRequest();
+        }
+
+        function makeRequest() {
             groupService.getGroups().then(function (results) {
                 groups = results;
                 $scope.$watch("vm.currentPage + vm.numPerPage", function () {
@@ -41,17 +44,7 @@
             vm.selectedGroup = group;
         }
 
-        //actions
-        function save() {
-            if (!vm.newGroup.name)
-                return;
-            groupService.save(vm.newGroup).then(function (results) {
-                vm.creating = false;
-                groups.push(results);
-                pagination();
-                vm.newGroup = {};
-            });
-        }
+        //private methods
 
         function edit() {
             if (!vm.selectedGroup)
@@ -66,7 +59,7 @@
 
         function onRemove() {
             groupService.delete(vm.selectedGroup).then(function (results) {
-                vm.groups.remove(vm.selectedGroup);
+                makeRequest();
                 vm.selectedGroup = {};
             });
         }

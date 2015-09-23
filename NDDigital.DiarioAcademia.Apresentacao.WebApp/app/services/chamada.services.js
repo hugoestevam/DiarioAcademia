@@ -21,13 +21,12 @@
         };
 
         //public methods
-        self.getChamadass = function () {
+        self.getChamadas = function () {
             return $http.get(serviceUrl)
                  .then(logger.successCallback)
                  .catch(logger.errorCallback);
         };
 
-        //public methods
         self.getChamadaByAula = function (id) {
             return $http.get(serviceUrl + id)
                 .then(logger.successCallback)
