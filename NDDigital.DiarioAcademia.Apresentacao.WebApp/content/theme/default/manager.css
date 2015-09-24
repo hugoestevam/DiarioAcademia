@@ -2,11 +2,15 @@
   border: solid 1px green;
 }
 .form-control {
-  cursor: default !important;
+  cursor: default;
 }
 input[type="checkbox"] {
   cursor: pointer !important;
 }
 table .glyphicon-star {
   color: #f0ad4e;
+}
+.input-group:hover * {
+  border-color: #0F75B3;
+  font-weight: 600;
 }
