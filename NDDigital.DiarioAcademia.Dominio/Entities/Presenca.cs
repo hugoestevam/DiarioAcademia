@@ -4,9 +4,9 @@ namespace NDDigital.DiarioAcademia.Dominio.Entities
 {
     public class Presenca : Entity
     {
-        public virtual Aula Aula { get; private set; }
+        public virtual Aula Aula { get; set; }
 
-        public virtual Aluno Aluno { get; private set; }
+        public virtual Aluno Aluno { get; set; }
 
         public string StatusPresenca { get; set; }
 

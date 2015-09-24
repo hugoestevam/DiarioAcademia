@@ -66,6 +66,8 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
                 aluno.RegistraPresenca(aula, item.Status);
 
                 _alunoRepository.Update(aluno);
+
+                _unitOfWork.Commit();
             }
 
             aula.ChamadaRealizada = true;
