@@ -152,9 +152,9 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.SQL.Repositories
 
                 aula = Get(SqlSelectById, Make, parms);
 
-                var parms = new object[] { "Id_Aula", id };
+                var parmsPresenca = new object[] { "Id_Aula", id };
 
-                aula.Presencas = GetAll(SqlSelectPresencasByAula, MakePresenca, parms);
+                aula.Presencas = GetAll(SqlSelectPresencasByAula, MakePresenca, parmsPresenca);
             }
             catch (Exception te)
             {
