@@ -14,7 +14,6 @@
         var factory = {};
 
         init();
-
         function init() {
             automapper.createMap("aluno", "alunoDto")
                         .forMember("id", function () { return this.id })
@@ -49,15 +48,7 @@
             return { ano: turma.ano };        
         };
 
-        factory.convert = function (obj) {
-            //return {
-            //    turmaId: obj.turma.id,
-            //    descricao: obj.nome,
-            //    cep: obj.endereco.cep,
-            //    bairro: obj.endereco.bairro,
-            //    localidade: obj.endereco.localidade,
-            //    uf: obj.endereco.uf
-            //    };
+        factory.toAlunoDto = function (obj) {
             var result = {};
 
             automapper.map("aluno", "alunoDto", obj, result);
@@ -66,26 +57,12 @@
         };
 
         factory.convertBack = function (obj) {
-            //return {
-            //    id: objDto.turmaId,
-            //    nome: objDto.descricao.split(":"),
-            //    endereco: { 
-            //        cep: objDto.cep,
-            //        bairro: objDto.bairro,
-            //        localidade: objDto.localidade,
-            //        uf: objDto.uf
-            //    }
-            //};
-
             var result = {};
-
             automapper.map("alunoDto", "aluno", obj, result);
-
             return result;
         };
 
         return factory;
-
     }
 
 })();

@@ -125,7 +125,8 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
 
             Aula aula = _aulaRepository.GetById(aulaDTO.Id);
 
-
+            chamada.ChamadaRealizada = aula.ChamadaRealizada;
+          
             chamada.Alunos = aula.ChamadaRealizada ? 
                 aula.Presencas.Select(x => new ChamadaAlunoDTO(x.Aluno.Id, x.Aluno.Nome, x.StatusPresenca)).ToList() 
                 : new List<ChamadaAlunoDTO>();

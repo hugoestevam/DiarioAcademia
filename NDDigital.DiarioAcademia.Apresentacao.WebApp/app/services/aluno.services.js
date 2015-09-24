@@ -62,7 +62,7 @@
         };
 
         function convertToDto(data) {
-            return adapter.convert(data);
+            return adapter.toAlunoDto(data);
         };
     }
 })();

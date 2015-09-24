@@ -1,6 +1,6 @@
 ﻿@media (max-width: 768px) {
   #page-wrapper {
-    padding: 50px;
+    padding: 20px;
   }
 }
 body {
@@ -10,6 +10,10 @@ body {
   margin: 0;
   width: 100%;
   position: absolute;
+}
+.inner-view {
+  padding: 0 !important;
+  margin-left: 10px;
 }
 .disabled {
   z-index: 1000;
@@ -69,4 +73,8 @@ tbody td {
 }
 .align-center {
   margin: 0 auto;
+}
+.jumbotron {
+  padding-right: 60px;
+  padding-left: 60px;
 }

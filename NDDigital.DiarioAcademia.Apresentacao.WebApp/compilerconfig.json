@@ -62,5 +62,9 @@
   {
     "outputFile": "content/layout/head.css",
     "inputFile": "content/layout/head.less"
+  },
+  {
+    "outputFile": "content/layout/chamada.css",
+    "inputFile": "content/layout/chamada.less"
   }
 ]

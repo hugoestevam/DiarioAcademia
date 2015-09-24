@@ -53,6 +53,7 @@
   margin-top: 40px;
   padding-left: 10px;
   z-index: 3 !important;
+  min-width: 626px;
 }
 .option-nav {
   color: #4D4D4D !important;

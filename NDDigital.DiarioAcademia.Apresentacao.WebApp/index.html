@@ -27,6 +27,7 @@
     <link rel="stylesheet" href="/content/base/morris.css">
     <link rel="stylesheet" href="/content/base/sb-admin.css">
     <link rel="stylesheet" href="/content/base/switcher.css">
+    <link rel="stylesheet" href="/content/layout/chamada.css">
     <link rel="stylesheet" href="/content/layout/footer.css">
     <link rel="stylesheet" href="/content/layout/head.css">
     <link rel="stylesheet" href="/content/layout/home.css">
@@ -89,6 +90,10 @@
     <script src="/app/modules/routes.module.js"></script>
     <script src="/app/modules/services.module.js"></script>
     <!--endinject-->
+    <!--inject:adapters-->
+    <script src="/app/adapters/aluno.adapter.js"></script>
+    <script src="/app/adapters/chamada.adapter.js"></script>
+    <!--endinject-->
     <!--inject:factories-->
     <script src="/app/factories/changes.factory.js"></script>
     <script src="/app/factories/compare-state.factory.js"></script>
@@ -110,7 +115,6 @@
     <!--endinject-->
     <!--inject:service-->
     <script src="/app/services/aluno.services.js"></script>
-    <script src="/app/services/alunoAdapter.js"></script>
     <script src="/app/services/aula.services.js"></script>
     <script src="/app/services/auth.services.js"></script>
     <script src="/app/services/authInterceptor.services.js"></script>
@@ -132,6 +136,7 @@
     <script src="/app/controllers/authentication/login.ctrl.js"></script>
     <script src="/app/controllers/authentication/signup.ctrl.js"></script>
     <script src="/app/controllers/chamada/chamada.ctrl.js"></script>
+    <script src="/app/controllers/chamada/chamadaList.ctrl.js"></script>
     <script src="/app/controllers/layout/footer.ctrl.js"></script>
     <script src="/app/controllers/layout/header.ctrl.js"></script>
     <script src="/app/controllers/layout/home-app.ctrl.js"></script>

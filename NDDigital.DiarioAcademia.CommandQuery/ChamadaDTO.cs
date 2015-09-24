@@ -19,6 +19,8 @@ namespace NDDigital.DiarioAcademia.Aplicacao.DTOs
         public List<ChamadaAlunoDTO> Alunos { get; set; }
 
         public int AulaId { get; set; }
+
+        public bool ChamadaRealizada { get; set; }
     }
 
     public class ChamadaAlunoDTO

@@ -118,6 +118,7 @@
     <Content Include="app\images\slides\slide_three.jpg" />
     <Content Include="app\images\slides\slide_two.jpg" />
     <Content Include="app\routes\manager.routes.js" />
+    <Content Include="app\adapters\chamada.adapter.js" />
     <Content Include="app\services\group.services.js" />
     <Content Include="app\services\language.service.js" />
     <Content Include="app\services\permissions.service.js" />
@@ -139,11 +140,20 @@
     <Content Include="content\animations\animations.min.css">
       <DependentUpon>animations.css</DependentUpon>
     </Content>
+    <Content Include="content\layout\chamada.css">
+      <DependentUpon>chamada.less</DependentUpon>
+    </Content>
+    <Content Include="content\layout\chamada.min.css">
+      <DependentUpon>chamada.css</DependentUpon>
+    </Content>
     <Content Include="content\layout\footer.css">
       <DependentUpon>footer.less</DependentUpon>
     </Content>
     <Content Include="content\layout\footer.min.css">
       <DependentUpon>footer.css</DependentUpon>
+    </Content>
+    <Content Include="content\layout\head.css">
+      <DependentUpon>head.less</DependentUpon>
     </Content>
     <Content Include="content\layout\home.css">
       <DependentUpon>home.less</DependentUpon>
@@ -183,6 +193,7 @@
     <Content Include="content\layout\home.less" />
     <Content Include="content\component\homeapp.less" />
     <Content Include="content\layout\head.less" />
+    <Content Include="content\layout\chamada.less" />
     <None Include="content\layout\toolbar.less" />
     <Content Include="content\layout\sidemenu.min.css">
       <DependentUpon>sidemenu.css</DependentUpon>
@@ -348,7 +359,7 @@
     <Content Include="app\routes\layout.routes.js" />
     <Content Include="app\routes\turma.routes.js" />
     <Content Include="app\services\aluno.services.js" />
-    <Content Include="app\services\alunoAdapter.js" />
+    <Content Include="app\adapters\aluno.adapter.js" />
     <Content Include="app\services\aula.services.js" />
     <Content Include="app\services\auth.services.js" />
     <Content Include="app\services\authInterceptor.services.js" />

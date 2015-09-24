@@ -26,6 +26,7 @@
         app: {
             js: {
                 models: app + "/models/*.model.js",
+                adapters: app + "/adapters/*.adapter.js",
                 factories: app + "/factories/**/*.js",
                 module: app + "/modules/*.module.js",
                 routes: [app + "/routes/**/*.routes.js", "!" + routesConfig],
@@ -121,6 +122,7 @@
             'extentions': config.extentions,
             'module': config.app.js.module,
             'models': config.app.js.models,
+            'adapters': config.app.js.adapters,
             'factories': config.app.js.factories,
             'routes': config.app.js.routes,
             'config.routes': config.app.js.routeConfig,
