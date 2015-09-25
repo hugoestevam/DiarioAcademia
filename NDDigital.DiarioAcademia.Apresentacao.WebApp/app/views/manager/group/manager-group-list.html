@@ -1,4 +1,5 @@
-﻿<div class="col-sm-11 clear-padding">
+﻿<div class="container-view">
+
     <div class="col-xs-12 clear-padding text-indicator container-header">
         <span ui-sref="manager.user.list">USUÁRIOS</span>
         <span class="text-indicator-actived">GRUPOS</span>
@@ -9,9 +10,9 @@
                 <i class="fa fa-search"></i>
             </button>
         </div>
-        <hr class="separator-head" />
     </div>
     <ndd-table columns="['NOME', 'ADMINISTRADOR']" attrs="['name', 'isAdmin']" data="vm.groups" cb-click="vm.onClick" ng-model="nameFilter"></ndd-table>
+
 </div>
 <ndd-toolbar cb-properties="vm.edit" security-properties="manager.group.edit" state-new="manager.group.create" cb-remove="vm.onRemove"></ndd-toolbar>
 <ndd-modal target="modelRemoveUser" label="{{vm.titleModelRemove}}" callback="vm.remove">{{vm.bodyModelRemove}}</ndd-modal>

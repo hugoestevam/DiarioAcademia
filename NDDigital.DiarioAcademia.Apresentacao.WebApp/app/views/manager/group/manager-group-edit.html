@@ -1,8 +1,5 @@
-﻿
-<ndd-head title="{{vm.name}}" back-route="manager.group.list"></ndd-head>
-<div class="col-sm-11 clear-padding">
-    <br />
-
+﻿<ndd-head title="{{vm.name}}" back-route="manager.group.list"></ndd-head>
+<div class="container-view padding-left">
     <form>
         <label>Grupo</label>
         <input type="text" class="form-control" ng-model="vm.group.name" ng-change="vm.hasChange = true" />
@@ -33,9 +30,8 @@
             <i class="fa fa-times"></i>
         </button>
     </div>
-
-    <br />
 </div>
+<br />
 <ndd-modal target="modalGroup" label="{{vm.titleModal}}" callback="vm.callback">
     {{vm.bodyModal}}
 </ndd-modal>

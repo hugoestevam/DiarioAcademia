@@ -2,21 +2,24 @@ ndd-toolbar {
     position: fixed;
     right: 0;
     top: 75px;
-    width: 10%;
+    width: 150px;
     height: 100%;
 }
 
 ndd-toolbar-option {
     & a {
         display: block;
-        padding: 15px;
+        padding: 10px;
         line-height: 20px;
     }
 }
 
 .toolbar {
     width: 100%;
-    margin-top: 8px;
+
+    & li :first-child {
+        margin-top: 3px;
+    }
 
     & .li {
         width: 100%;
@@ -33,5 +36,11 @@ ndd-toolbar-option {
 @media screen and (max-width: 768px) {
     .navbar-nav {
         margin: 0 !important;
+    }
+}
+
+@media screen and (max-width: 1199px) {
+    .toolbar .li a {
+        text-align: center;
     }
 }

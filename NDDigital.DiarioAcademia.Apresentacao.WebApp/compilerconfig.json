@@ -1,70 +1,30 @@
 ﻿[
   {
-    "outputFile": "content/theme/default/home.css",
-    "inputFile": "content/theme/default/home.less"
+    "outputFile": "content/component/dashboard.css",
+    "inputFile": "content/component/dashboard.less"
   },
   {
-    "outputFile": "content/layout/layout.css",
-    "inputFile": "content/layout/layout.less"
+    "outputFile": "content/component/jumbotron.css",
+    "inputFile": "content/component/jumbotron.less"
   },
   {
-    "outputFile": "content/theme/default/sidemenu.css",
-    "inputFile": "content/theme/default/sidemenu.less"
+    "outputFile": "content/component/panel.css",
+    "inputFile": "content/component/panel.less"
   },
   {
-    "outputFile": "content/theme/default/navbar.css",
-    "inputFile": "content/theme/default/navbar.less"
+    "outputFile": "content/component/table.css",
+    "inputFile": "content/component/table.less"
   },
   {
     "outputFile": "content/layout/toolbar.css",
     "inputFile": "content/layout/toolbar.less"
   },
   {
-    "outputFile": "content/layout/navbar.css",
-    "inputFile": "content/layout/navbar.less"
-  },
-  {
-    "outputFile": "content/animations/animations.css",
-    "inputFile": "content/animations/animations.less"
-  },
-  {
-    "outputFile": "content/theme/default/loading-bar.css",
-    "inputFile": "content/theme/default/loading-bar.less"
-  },
-  {
-    "outputFile": "content/layout/footer.css",
-    "inputFile": "content/layout/footer.less"
-  },
-  {
-    "outputFile": "content/theme/default/layout.css",
-    "inputFile": "content/theme/default/layout.less"
-  },
-  {
-    "outputFile": "content/layout/sidemenu.css",
-    "inputFile": "content/layout/sidemenu.less"
-  },
-  {
-    "outputFile": "content/theme/default/toolbar.css",
-    "inputFile": "content/theme/default/toolbar.less"
-  },
-  {
-    "outputFile": "content/layout/home.css",
-    "inputFile": "content/layout/home.less"
-  },
-  {
-    "outputFile": "content/layout/manager.css",
-    "inputFile": "content/layout/manager.less"
-  },
-  {
     "outputFile": "content/theme/default/manager.css",
     "inputFile": "content/theme/default/manager.less"
   },
   {
-    "outputFile": "content/layout/head.css",
-    "inputFile": "content/layout/head.less"
-  },
-  {
-    "outputFile": "content/layout/chamada.css",
-    "inputFile": "content/layout/chamada.less"
+    "outputFile": "content/layout/manager.css",
+    "inputFile": "content/layout/manager.less"
   }
 ]

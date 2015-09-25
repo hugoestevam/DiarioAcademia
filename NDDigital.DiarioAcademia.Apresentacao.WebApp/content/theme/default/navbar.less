@@ -11,6 +11,8 @@
     min-height: 40px !important;
 }
 
+
+
 .navbar-toggle {
     margin-top: 3px;
     margin-bottom: 3px;
@@ -67,6 +69,17 @@
     min-width: 626px;
 }
 
+@media screen and (max-width: 768px) {
+
+    .nav-options-custom {
+        
+        max-height: 100px;
+        height:auto;
+        min-width: 100%;
+
+    }
+}
+
 .option-nav {
     color: #4D4D4D !important;
     cursor: pointer;
@@ -79,4 +92,16 @@
 .actived-option {
     background-color: #E25D41 !important;
     color: white !important;
+}
+
+
+.nav-option{
+     & a:hover {
+        background-color: #0D5F9A + 45 !important;
+        cursor: pointer;
+    }
+      & span:hover {
+        background-color: #0D5F9A + 45 !important;
+        cursor: pointer;
+    }
 }

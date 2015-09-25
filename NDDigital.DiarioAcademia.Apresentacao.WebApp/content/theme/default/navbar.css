@@ -55,6 +55,13 @@
   z-index: 3 !important;
   min-width: 626px;
 }
+@media screen and (max-width: 768px) {
+  .nav-options-custom {
+    max-height: 100px;
+    height: auto;
+    min-width: 100%;
+  }
+}
 .option-nav {
   color: #4D4D4D !important;
   cursor: pointer;

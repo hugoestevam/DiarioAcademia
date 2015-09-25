@@ -1,15 +1,13 @@
-﻿<div class="col-sm-11 clear-padding">
+﻿<div class="container-view">
     <div class="col-sm-12 clear-padding text-indicator container-header">
-        <span class="text-indicator-actived" >USUÁRIOS</span>
+        <span class="text-indicator-actived">USUÁRIOS</span>
         <span ui-sref="manager.group.list">GRUPOS</span>
-
         <div class="submit-line pull-right">
             <input type="text" class="form-control" placeholder="Pesquisar" ng-model="nameFilter" />
             <button class="submit-lente" type="submit">
                 <i class="fa fa-search"></i>
             </button>
         </div>
-        <hr  class="separator-head"/>
     </div>
 
     <ndd-table columns="['NOME', 'LOGON', 'E-MAIL']" attrs="['fullName', 'userName', 'email']" data="vm.users" cb-click="vm.onClick" ng-model="nameFilter"></ndd-table>

@@ -127,6 +127,7 @@
     <Content Include="app\templates\layout\top-menu.html" />
     <Content Include="app\factories\permissions.factory.js" />
     <Content Include="app\views\layout\home-app.html" />
+    <Content Include="app\views\manager\group\manager-group-create.html" />
     <Content Include="app\views\manager\group\manager-group-permission-edit.html" />
     <Content Include="app\views\manager\group\manager-group-edit.html" />
     <Content Include="app\views\manager\group\manager-group-list.html" />
@@ -140,10 +141,34 @@
     <Content Include="content\animations\animations.min.css">
       <DependentUpon>animations.css</DependentUpon>
     </Content>
-    <Content Include="content\layout\chamada.css">
+    <Content Include="content\component\dashboard.css">
+      <DependentUpon>dashboard.less</DependentUpon>
+    </Content>
+    <Content Include="content\component\dashboard.min.css">
+      <DependentUpon>dashboard.css</DependentUpon>
+    </Content>
+    <Content Include="content\component\jumbotron.css">
+      <DependentUpon>jumbotron.less</DependentUpon>
+    </Content>
+    <Content Include="content\component\jumbotron.min.css">
+      <DependentUpon>jumbotron.css</DependentUpon>
+    </Content>
+    <Content Include="content\component\panel.css">
+      <DependentUpon>panel.less</DependentUpon>
+    </Content>
+    <Content Include="content\component\panel.min.css">
+      <DependentUpon>panel.css</DependentUpon>
+    </Content>
+    <Content Include="content\component\table.css">
+      <DependentUpon>table.less</DependentUpon>
+    </Content>
+    <Content Include="content\component\table.min.css">
+      <DependentUpon>table.css</DependentUpon>
+    </Content>
+    <Content Include="content\theme\default\chamada.css">
       <DependentUpon>chamada.less</DependentUpon>
     </Content>
-    <Content Include="content\layout\chamada.min.css">
+    <Content Include="content\theme\default\chamada.min.css">
       <DependentUpon>chamada.css</DependentUpon>
     </Content>
     <Content Include="content\layout\footer.css">
@@ -152,8 +177,11 @@
     <Content Include="content\layout\footer.min.css">
       <DependentUpon>footer.css</DependentUpon>
     </Content>
-    <Content Include="content\layout\head.css">
+    <Content Include="content\theme\default\head.css">
       <DependentUpon>head.less</DependentUpon>
+    </Content>
+    <Content Include="content\theme\default\head.min.css">
+      <DependentUpon>head.css</DependentUpon>
     </Content>
     <Content Include="content\layout\home.css">
       <DependentUpon>home.less</DependentUpon>
@@ -167,10 +195,10 @@
     <Content Include="content\layout\layout.min.css">
       <DependentUpon>layout.css</DependentUpon>
     </Content>
-    <Content Include="content\layout\login.css">
+    <Content Include="content\component\login.css">
       <DependentUpon>login.less</DependentUpon>
     </Content>
-    <Content Include="content\layout\login.min.css">
+    <Content Include="content\component\login.min.css">
       <DependentUpon>login.css</DependentUpon>
     </Content>
     <Content Include="content\layout\manager.css">
@@ -191,9 +219,12 @@
     </Content>
     <Content Include="content\layout\sidemenu.less" />
     <Content Include="content\layout\home.less" />
-    <Content Include="content\component\homeapp.less" />
-    <Content Include="content\layout\head.less" />
-    <Content Include="content\layout\chamada.less" />
+    <Content Include="content\component\dashboard.less" />
+    <Content Include="content\theme\default\head.less" />
+    <Content Include="content\theme\default\chamada.less" />
+    <Content Include="content\component\table.less" />
+    <Content Include="content\component\panel.less" />
+    <Content Include="content\component\jumbotron.less" />
     <None Include="content\layout\toolbar.less" />
     <Content Include="content\layout\sidemenu.min.css">
       <DependentUpon>sidemenu.css</DependentUpon>
@@ -291,8 +322,8 @@
     <Content Include="content\theme\default\layout.css.map">
       <DependentUpon>layout.css</DependentUpon>
     </Content>
-    <Content Include="content\layout\login.less" />
-    <Content Include="content\layout\login.css.map">
+    <Content Include="content\component\login.less" />
+    <Content Include="content\component\login.css.map">
       <DependentUpon>login.css</DependentUpon>
     </Content>
     <Content Include="content\theme\default\home.less" />

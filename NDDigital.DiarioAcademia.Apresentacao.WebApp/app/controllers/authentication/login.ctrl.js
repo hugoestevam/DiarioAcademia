@@ -33,7 +33,7 @@
                 $state.go(auth.lastState == "login" || auth.lastState == 'home' ? 'homeapp' : auth.lastState);
             },
             function (err) {
-                vm.message = "Erro ao logar";
+                vm.message = "Erro ao logar: " + err.error_description;
             });
         };
     }

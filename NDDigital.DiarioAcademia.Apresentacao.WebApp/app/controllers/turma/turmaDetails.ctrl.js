@@ -11,7 +11,7 @@
     //class
     function turmaDetailsCtrl(turmaService, params, $state) {
         var vm = this;
-        vm.title = "Atualizando de Turma";
+        vm.title = "Atualização de Turma";
         vm.turma = {};
 
         //script load

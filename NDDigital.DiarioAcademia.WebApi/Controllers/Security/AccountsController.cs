@@ -127,11 +127,12 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers.Authentication
         {
             if (user == null) return BadRequest();
 
-            var u = UserRepository.GetUserByUsername(user.UserName);
+            var u = UserRepository.GetUserById(user.Id);
 
             u.FirstName = user.FirstName;
             u.LastName = user.LastName;
             u.Email = user.Email;
+            u.UserName = user.UserName;
 
             UserRepository.Update(u);
 
