@@ -10,6 +10,7 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.Base
         protected IAlunoRepository AlunoRepository;
         protected ITurmaRepository TurmaRepository;
         protected IAulaRepository AulaRepository;
+        protected IPresencaRepository PresencaRepository;
 
         protected AdoNetFactory Factory;
 
@@ -25,6 +26,7 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.Base
             AlunoRepository = new AlunoRepositorySql(Factory);
             TurmaRepository = new TurmaRepositorySql(Factory);
             AulaRepository = new AulaRepositorySql(Factory);
+            PresencaRepository = new PresencaRepositorySql(Factory);
         }
     }
 }

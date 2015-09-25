@@ -88,6 +88,7 @@
     <Compile Include="Repositories\AlunoRepositorySql.cs" />
     <Compile Include="Repositories\AulaRepositorySql.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\PresencaRepositorySql.cs" />
     <Compile Include="Repositories\TurmaRepositorySql.cs" />
   </ItemGroup>
   <ItemGroup>

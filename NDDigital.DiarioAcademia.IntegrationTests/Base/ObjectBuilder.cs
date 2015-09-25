@@ -26,6 +26,13 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.Base
             new Turma(2014)).Build();
         }
 
+        public static Presenca CreatePresenca()
+        {
+            return Builder<Presenca>.CreateNew()
+          .WithConstructor(() =>
+          new Presenca()).Build();
+        }
+
         public static Aluno CreateAluno(Turma turma)
         {
             return Builder<Aluno>.CreateNew()
@@ -48,6 +55,18 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.Base
             return Builder<Aula>.CreateNew()
             .WithConstructor(() =>
             new Aula(DateTime.Now, turma)).Build();
+        }
+
+        public static List<Presenca> CreateListPresenca()
+        {
+            var list = new List<Presenca>();
+
+            for (int i = 0; i < 3; i++)
+            {
+                list = new List<Presenca>() { new Presenca { StatusPresenca = "C"} };
+            }                              
+
+            return list;
         }
 
         public static User CreateUser(bool full = true)

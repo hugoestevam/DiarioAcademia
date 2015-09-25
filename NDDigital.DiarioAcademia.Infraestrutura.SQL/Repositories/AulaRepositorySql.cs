@@ -64,9 +64,12 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.SQL.Repositories
 
         #endregion Querys
 
+        public PresencaRepositorySql repoPresenca;
+
         public AulaRepositorySql(AdoNetFactory factory)
             : base(factory)
         {
+            repoPresenca = new PresencaRepositorySql(factory);
         }
 
         public Aula Add(Aula entity)
