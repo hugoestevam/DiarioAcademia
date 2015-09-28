@@ -1,12 +1,7 @@
-﻿
-<div class="col-sm-12 clear-padding">
-    <div class="container-user">
-        <h1>Entrar</h1>
-        <hr />
-    </div>
+﻿<div class="container-user">
+    <ndd-head title="Entrar"></ndd-head>
 </div>
-
-<div class="col-sm-offset-4 col-sm-4 col-xs-offset-2 col-xs-8 login">
+<div class="col-xs-offset-4 col-xs-4 login">
 
     <div class="card card-container">
         <img id="profile-img" class="profile-img-card" src="/app/images/avatar_login.png" />
@@ -20,9 +15,10 @@
 
             <input type="password" name="inputPassword"
                    class="form-control" placeholder="Password" required ng-model="vm.loginData.password">
-
+           
             <span class="pull-right" style="font-size:small;">
                 <a href="" ui-sref="signup">Não tem um conta ? Registre -se </a>
+                
             </span>
             <br />
             <button class="btn btn-lg btn-info btn-block btn-signin" type="submit"

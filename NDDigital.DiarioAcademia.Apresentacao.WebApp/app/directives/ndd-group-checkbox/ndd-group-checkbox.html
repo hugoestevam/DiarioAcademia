@@ -1,18 +1,8 @@
-﻿<div class="input-group space-bottom" ng-repeat="obj in elements">
-
+﻿<div class="input-group" ng-repeat="obj in elements" style="padding-bottom: 2%" > 
     <span class="input-group-addon" ng-class="{'border-success': check(obj, compare, method)}">
-        <input type="checkbox" ng-checked="check(obj, compare, method)" ng-click="onclick(obj, compare, callback, method)">
+        <input type="checkbox" ng-checked="check(obj, compare, method)"
+               ng-click="onclick(obj, compare, chkGroup, callback, method)" ng-model="chkGroup">
     </span>
-
-    <input type="text" class="cursor-pointer form-control " value="{{obj.displayName || obj.name}}" readonly
-           ng-click="onclick(obj, compare, callback, method);"
-           ng-class="{'border-success': check(obj, compare, method), 'clear-border': !!obj.permissionId}">
-
-    <span class="cursor-pointer input-group-addon show-permissionId" ng-show="obj.permissionId"
-          ng-click="onclick(obj, compare, callback, method);"
-          ng-class="{'border-success': check(obj, compare, method)}">
-        <small>{{obj.permissionId}}</small>
-    </span>
-
+    <input type="text" class="form-control" value="{{obj.displayName || obj.name}}" disabled ng-class="{'border-success': check(obj, compare, method)}">
 </div>
 <pager total-items="countElements" ng-model="currentPage" ng-hide="array.length == 0 || array.length <= numPerPage"></pager>

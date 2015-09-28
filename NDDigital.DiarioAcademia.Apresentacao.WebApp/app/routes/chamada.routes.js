@@ -23,7 +23,7 @@
             templateUrl: '/app/views/chamada/chamada.html',
             displayName: 'Realizar Chamada',
             displayIcon: 'fa-plus',
-            $$permissionId: "11"
+            $$permissionId: "09"
         }
 );
     }

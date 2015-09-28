@@ -52,33 +52,18 @@
 
         function saveChanges() {
             vm.hasChange = false;
-
             if (vm.changes.length != 0) {
                 var include = changesFactory.getInclude(vm.changes);
                 var exclude = changesFactory.getExclude(vm.changes);
-
-                var needInclude = include.length > 0;
-                var needExclude = exclude.length > 0;
-
-                if (needInclude) {
-
-                    save(include).then(function () {
-
-                        if (needExclude) {
-                            remove(exclude);
-                        }
-                    })
-
-                } else if (needExclude) {
+                if (include.length > 0)
+                    save(include);
+                if (exclude.length > 0)
                     remove(exclude);
-                }
-
-
             }
         }
 
         function save(permission) {
-            groupService.addPermission(vm.group, permission).then(function (results) { });
+            groupService.addPermission(vm.group, permission).then(function (results) {});
         }
 
         function remove(permission) {

@@ -1,43 +1,64 @@
 ﻿
-<ndd-head title="Edição de Usuário" back-route="manager.user.list"></ndd-head>
-   
+<ndd-head title="Edição de Usuário"></ndd-head>
 
-<div class="col-sm-offset-2 col-sm-8">
-    <div style="padding-right: 2%;">
-        <div ng-include="'/app/templates/components/user-profile.html'"></div>
+<div class="row container-user">
+    <br />
+    <div class="col-sm-6 clear-padding" style="padding-right: 3%;">
+        <div class="col-xs-12 clear-padding">
+            <h3 style="margin-top: 0;">Perfil</h3>
+            <hr style="margin-top: 2%" />
+        </div>
+        <form name="vm.formUser">
+            <div class="col-xs-12 clear-padding" style="padding-bottom: 2%">
+                <div class="col-xs-6 clear-padding">
+                    <label for="name">Nome</label>
+                    <input type="text" ng-model="vm.user.firstName" class="form-control" id="name" />
+                </div>
+                <div class="col-xs-6 clear-padding">
+                    <label for="lastname">Sobrenome</label>
+                    <input type="text" ng-model="vm.user.lastName" class="form-control" id="lastname" />
+                </div>
+
+            </div>
+            <div class="col-xs-12 clear-padding">
+                <div class="col-xs-12 clear-padding">
+                    <label for="username">Username</label>
+                    <input type="text" ng-model="vm.user.username" class="form-control" id="username" />
+                </div>
+            </div>
+        </form>
+
     </div>
 
-    <div class="col-sm-12 clear-padding">
-        <br />
+    <div class="col-sm-6" style="padding-left: 3%;">
         <div class="col-xs-12 clear-padding">
             <h3 style="margin-top: 0;">Configurações</h3>
             <hr style="margin-top: 2%" />
-            <br />
-        </div>    
-        <label for="groups">Grupos:</label>
-        <button class="btn btn-info" ng-click="vm.editGroups()">
-            <i class="fa fa-users"></i>
-            <span>Editar Grupos</span>
-        </button>
+        </div>
+        <div class="jumbotron" style="margin-top: 10%">
+            <p> Em breve configurações</p>
+            <button class="btn btn-success" ng-click="vm.editGroups()">Editar Grupos</button>
+        </div>
     </div>
 </div>
 
-<div class="col-sm-12 clear-padding text-center">
-    <div class="footer">
-        <br /><br />
-        <hr />
-        <button class="btn btn-success" data-toggle="modal" data-target="#modelEditUser" ng-disabled="vm.formUser.$pristine">
-            <i class="fa fa-check-square-o"></i>
-            <span>Salvar Alterações</span>
+<div class="row">
+    <div class="col-sm-12 clear-padding text-center">
+        <div class="footer">
+            <hr />
+            <button class="btn btn-default pull-left" ui-sref="manager.user" style="margin-left: 2%;">
+                <i class="fa fa-chevron-circle-left " style="font-size: large"></i>
+            </button>
 
-        </button>
-        <button class="btn btn-info" ng-click="vm.clear()">
-            <i class="fa fa-history"></i>
-            <span>Desfazer Alterações</span>
-        </button>
+            <button class="btn btn-success" data-toggle="modal" data-target="#modelEditUser" ng-disabled="vm.formUser.$pristine">
+                <i class="fa fa-check-square-o"></i>
+            </button>
+            <button class="btn btn-info" ng-click="vm.clear()">
+                <i class="fa fa-history"></i>
+            </button>
+        </div>
     </div>
 </div>
-
 
 <ndd-modal target="modelEditUser" label="{{vm.titleModelEdit}}" callback="vm.editUser">
     {{vm.bodyModelEdit}}

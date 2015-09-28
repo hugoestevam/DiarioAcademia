@@ -44,9 +44,7 @@
 
         }
 
-        function onclick(obj, compare, callback, method) {
-
-            var chkGroups = !check(obj, compare, method);
+        function onclick(obj, compare, chkGroups, callback, method) {
             if (!compare) {
                 console.warn("Compare is null");
                 return;

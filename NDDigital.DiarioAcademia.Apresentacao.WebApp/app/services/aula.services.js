@@ -11,7 +11,7 @@
     //class
     function aulaService($http, logger, baseUrl,res) {
         var self = this;
-        var serviceUrl = baseUrl + "api/aula/";
+        var serviceUrl = baseUrl + "api/aula";
 
         //public methods
         self.getAulas = function () {
@@ -21,7 +21,7 @@
         };
 
         self.getAulaById = function (id) {
-            return $http.get(serviceUrl + id)
+            return $http.get(serviceUrl + '/' + id)
                  .then(logger.successCallback)
                  .catch(logger.errorCallback);
         };
@@ -34,14 +34,12 @@
 
         self.delete = function (aula) {
             logger.error(res.deleted_successful, aula, "Delete");
-            return $http.delete(serviceUrl + aula.id)
-                             .then(logger.empyMessageCallback)
-                             .catch(logger.errorCallback);;
+            $http.delete(serviceUrl + "/" + aula.id);
         };
 
         self.getTurmaById = function (id) {
             logger.success("Aula com id " + id + " encontrada", null, "GetById");
-            return $http.get(serviceUrl + id)
+            return $http.get(serviceUrl + "/" + id)
                 .then(function (response) {
                     return response.data;
                 });
@@ -49,7 +47,7 @@
 
         self.getTurmaByAno = function (ano) {
             logger.success("Aula com ano " + ano + " encontrada", null, "GetByAno");
-            return $http.get(serviceUrl + ano)
+            return $http.get(serviceUrl + "/" + ano)
                 .then(function (response) {
                     return response.data;
                 });

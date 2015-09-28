@@ -4,6 +4,11 @@
   position: absolute;
   width: 100%;
 }
+.logged.ng-enter,
+.logged.ng-leave {
+  position: absolute;
+  width: calc(100% - 225px) !important;
+}
 .fader-animation.ng-enter {
   -moz-transition: all cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.5s 0.5s;
   -o-transition: all cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.5s 0.5s;
@@ -31,10 +36,10 @@
   -o-transition: 1s;
   -webkit-transition: 1s;
   transition: 1s;
-  -moz-transition-delay: 0.9s;
-  -o-transition-delay: 0.9s;
-  -webkit-transition-delay: 0.9s;
-  transition-delay: 0.9s;
+  -moz-transition-delay: 0.8s;
+  -o-transition-delay: 0.8s;
+  -webkit-transition-delay: 0.8s;
+  transition-delay: 0.8s;
   left: 225px !important;
 }
 .slider-leave {
@@ -45,8 +50,4 @@
   left: 0;
 }
 /*#endregion*/
-.logged.ng-enter,
-.logged.ng-leave {
-  position: absolute;
-  width: calc(100% - 225px) !important;
-}
+/*# sourceMappingURL=animations.css.map */

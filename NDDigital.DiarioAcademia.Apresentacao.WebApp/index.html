@@ -10,75 +10,60 @@
 
     <title>Diário da Academia</title>
     <!--build:css css/default.css-->
-    <!--inject:css-->
-    <link rel="stylesheet" href="/bower_components/angular/angular-csp.css">
-    <link rel="stylesheet" href="/bower_components/angular-bootstrap/ui-bootstrap-csp.css">
-    <link rel="stylesheet" href="/bower_components/toastr/toastr.css">
-    <link rel="stylesheet" href="/bower_components/angular-loading-bar/build/loading-bar.css">
-    <link rel="stylesheet" href="/bower_components/angular-loading-bar/src/loading-bar.css">
-    <link rel="stylesheet" href="/bower_components/angular-local-storage/demo/demo-style.css">
-    <link rel="stylesheet" href="/bower_components/font-awesome/css/font-awesome.css">
-    <link rel="stylesheet" href="/bower_components/nz-animate/dist/nzAnimate.css">
-    <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap-theme.css">
-    <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.css">
-    <!--endinject -->
-    <!--inject:appcss-->
-    <link rel="stylesheet" href="/content/animations/animations.css">
-    <link rel="stylesheet" href="/content/base/morris.css">
-    <link rel="stylesheet" href="/content/base/sb-admin.css">
-    <link rel="stylesheet" href="/content/base/switcher.css">
-    <link rel="stylesheet" href="/content/component/dashboard.css">
-    <link rel="stylesheet" href="/content/component/jumbotron.css">
-    <link rel="stylesheet" href="/content/component/login.css">
-    <link rel="stylesheet" href="/content/component/panel.css">
-    <link rel="stylesheet" href="/content/component/table.css">
-    <link rel="stylesheet" href="/content/layout/footer.css">
-    <link rel="stylesheet" href="/content/layout/home.css">
-    <link rel="stylesheet" href="/content/layout/layout.css">
-    <link rel="stylesheet" href="/content/layout/manager.css">
-    <link rel="stylesheet" href="/content/layout/navbar.css">
-    <link rel="stylesheet" href="/content/layout/sidemenu.css">
-    <link rel="stylesheet" href="/content/layout/toolbar.css">
-    <link rel="stylesheet" href="/content/theme/default/chamada.css">
-    <link rel="stylesheet" href="/content/theme/default/footer.css">
-    <link rel="stylesheet" href="/content/theme/default/head.css">
-    <link rel="stylesheet" href="/content/theme/default/home.css">
-    <link rel="stylesheet" href="/content/theme/default/homeapp.css">
-    <link rel="stylesheet" href="/content/theme/default/layout.css">
-    <link rel="stylesheet" href="/content/theme/default/loading-bar.css">
-    <link rel="stylesheet" href="/content/theme/default/manager.css">
-    <link rel="stylesheet" href="/content/theme/default/navbar.css">
-    <link rel="stylesheet" href="/content/theme/default/sidemenu.css">
-    <link rel="stylesheet" href="/content/theme/default/toolbar.css">
-    <!--endinject -->
+        <!--inject:css-->                                                      
+        <link rel="stylesheet" href="/bower_components/angular/angular-csp.css">                                                      
+        <link rel="stylesheet" href="/bower_components/angular-bootstrap/ui-bootstrap-csp.css">                                                      
+        <link rel="stylesheet" href="/bower_components/toastr/toastr.css">                                                      
+        <link rel="stylesheet" href="/bower_components/angular-loading-bar/build/loading-bar.css">                                                      
+        <link rel="stylesheet" href="/bower_components/angular-loading-bar/src/loading-bar.css">                                                      
+        <link rel="stylesheet" href="/bower_components/angular-local-storage/demo/demo-style.css">                                                      
+        <link rel="stylesheet" href="/bower_components/font-awesome/css/font-awesome.css">                                                      
+        <link rel="stylesheet" href="/bower_components/nz-animate/dist/nzAnimate.css">                                                      
+        <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap-theme.css">                                                      
+        <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.css">                                                      
+        <!--endinject -->
+
+        <!--inject:appcss-->
+        <link rel="stylesheet" href="/content/animations/animations.css">
+        <link rel="stylesheet" href="/content/base/morris.css">
+        <link rel="stylesheet" href="/content/base/sb-admin.css">
+        <link rel="stylesheet" href="/content/base/switcher.css">
+        <link rel="stylesheet" href="/content/layout/layout.css">
+        <link rel="stylesheet" href="/content/layout/login.css">
+        <link rel="stylesheet" href="/content/layout/manager.css">
+        <link rel="stylesheet" href="/content/theme/default/home.css">
+        <link rel="stylesheet" href="/content/theme/default/homeapp.css">
+        <link rel="stylesheet" href="/content/theme/default/layout.css">
+        <link rel="stylesheet" href="/content/theme/default/manager.css">
+        <link rel="stylesheet" href="/content/theme/default/navbar.css">
+        <link rel="stylesheet" href="/content/theme/default/sidemenu.css">
+        <!--endinject -->
     <!--endbuild -->
 </head>
 
-<body ng-controller="shellController as shell">
-    <div class="row container-app">
-        <div class="row" data-ng-include="'/app/templates/layout/navbar.html'"></div>
-        <div id="page-wrapper">
-            <div id="wrapper" ng-class="{'clear-padding-left': !shell.authentication.isAuth}">
-                <div ui-view class="fader-animation" id="index" ng-class="{'logged': shell.isLogged()}"></div>
-            </div>
+<body style="overflow-x: hidden" >
+    <div ng-controller="shellController as shell">
+        <div id="wrapper" ng-class="{'clear-padding-left': !shell.authentication.isAuth}">
+            <div class="row" data-ng-include="'/app/templates/layout/navbar.html'"></div>
+            <div ui-view class="fader-animation" id="index" ng-class="{'logged': shell.isLogged()}"></div>
         </div>
     </div>
-    <div class="row clear-margin" data-ng-include="'/app/templates/layout/footer.html'"></div>
 
     <!--build:js js/libs.js-->
     <!-- bower:js -->
     <script src="/bower_components/angular/angular.js"></script>
     <script src="/bower_components/angular-animate/angular-animate.js"></script>
     <script src="/bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <script src="/bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="/bower_components/angular-breadcrumb/release/angular-breadcrumb.js"></script>
     <script src="/bower_components/angular-loading-bar/build/loading-bar.js"></script>
     <script src="/bower_components/angular-local-storage/dist/angular-local-storage.js"></script>
-    <script src="/bower_components/angular-ui-router/release/angular-ui-router.js"></script>
     <script src="/bower_components/jquery/dist/jquery.js"></script>
-    <script src="/bower_components/aterrien/jQuery-Knob/js/jquery.knob.js"></script>
     <script src="/bower_components/bootstrap/dist/js/bootstrap.js"></script>
     <script src="/bower_components/toastr/toastr.js"></script>
     <!-- endbower -->
     <!--endbuild-->
+
     <!--build:js js/app.js-->
     <!--inject:extentions-->
     <script src="/app/extentions/array.js"></script>
@@ -93,10 +78,6 @@
     <script src="/app/modules/other.module.js"></script>
     <script src="/app/modules/routes.module.js"></script>
     <script src="/app/modules/services.module.js"></script>
-    <!--endinject-->
-    <!--inject:adapters-->
-    <script src="/app/adapters/aluno.adapter.js"></script>
-    <script src="/app/adapters/chamada.adapter.js"></script>
     <!--endinject-->
     <!--inject:factories-->
     <script src="/app/factories/changes.factory.js"></script>
@@ -119,6 +100,7 @@
     <!--endinject-->
     <!--inject:service-->
     <script src="/app/services/aluno.services.js"></script>
+    <script src="/app/services/alunoAdapter.js"></script>
     <script src="/app/services/aula.services.js"></script>
     <script src="/app/services/auth.services.js"></script>
     <script src="/app/services/authInterceptor.services.js"></script>
@@ -143,7 +125,6 @@
     <script src="/app/controllers/chamada/chamadaList.ctrl.js"></script>
     <script src="/app/controllers/layout/footer.ctrl.js"></script>
     <script src="/app/controllers/layout/header.ctrl.js"></script>
-    <script src="/app/controllers/layout/home-app.ctrl.js"></script>
     <script src="/app/controllers/layout/home.ctrl.js"></script>
     <script src="/app/controllers/layout/navbar.ctrl.js"></script>
     <script src="/app/controllers/layout/shell.ctrl.js"></script>
@@ -152,7 +133,6 @@
     <script src="/app/controllers/turma/turmaCreate.ctrl.js"></script>
     <script src="/app/controllers/turma/turmaDetails.ctrl.js"></script>
     <script src="/app/controllers/turma/turmaList.ctrl.js"></script>
-    <script src="/app/controllers/manager/group/managerGroupCreate.ctrl.js"></script>
     <script src="/app/controllers/manager/group/managerGroupEdit.ctrl.js"></script>
     <script src="/app/controllers/manager/group/managerGroupList.ctrl.js"></script>
     <script src="/app/controllers/manager/group/managerGroupPermissionEdit.ctrl.js"></script>
@@ -162,18 +142,11 @@
     <script src="/app/controllers/manager/user/managerUserList.ctrl.js"></script>
     <!--endinject-->
     <!--inject:directives-->
-    <script src="/app/directives/ndd-chart-knob/ndd-chart-knob.directives.js"></script>
     <script src="/app/directives/ndd-confirm-exit/ndd-confirm-exit.directives.js"></script>
     <script src="/app/directives/ndd-group-checkbox/ndd-group-checkbox.directives.js"></script>
     <script src="/app/directives/ndd-head/ndd-head.directives.js"></script>
     <script src="/app/directives/ndd-modal/ndd-modal.directives.js"></script>
     <script src="/app/directives/ndd-panel/ndd-panel.directives.js"></script>
-    <script src="/app/directives/ndd-popover/ndd-popover.directives.js"></script>
-    <script src="/app/directives/ndd-security/ndd-security.directives.js"></script>
-    <script src="/app/directives/ndd-sidemenu-option/ndd-sidemenu-option.directives.js"></script>
-    <script src="/app/directives/ndd-table/ndd-table.directives.js"></script>
-    <script src="/app/directives/ndd-toolbar/ndd-toolbar.directives.js"></script>
-    <script src="/app/directives/ndd-toolbar-option/ndd-toolbar-option.directives.js"></script>
     <!--endinject-->
     <!--inject:templates-->
     <script src="/task/temp/templates.js"></script>

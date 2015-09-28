@@ -19,11 +19,15 @@
 
         //script load
         activate();
-
         function activate() {
+            $(document).ready(function () {
+                $('.carousel').carousel({
+                    pause: "false"
+                });
+            });
+           
         }
 
-        
         //public methods
         vm.publicMethod = function () {
         };

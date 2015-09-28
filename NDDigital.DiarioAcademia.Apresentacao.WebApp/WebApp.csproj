@@ -77,7 +77,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="app\controllers\layout\home-app.ctrl.js" />
     <Content Include="app\controllers\manager\group\managerGroupPermissionEdit.ctrl.js" />
     <Content Include="app\controllers\manager\group\managerGroupEdit.ctrl.js" />
     <Content Include="app\controllers\manager\group\managerGroupList.ctrl.js" />
@@ -85,8 +84,6 @@
     <Content Include="app\controllers\manager\user\managerUserEdit.ctrl.js" />
     <Content Include="app\controllers\manager\user\managerUserEditGroupController.ctrl.js" />
     <Content Include="app\controllers\manager\user\managerUserList.ctrl.js" />
-    <Content Include="app\directives\ndd-chart-knob\ndd-chart-knob.directives.js" />
-    <Content Include="app\directives\ndd-chart-knob\ndd-chart-knob.html" />
     <Content Include="app\directives\ndd-confirm-exit\ndd-confirm-exit.directives.js" />
     <Content Include="app\directives\ndd-confirm-exit\ndd-confirm-exit.html" />
     <Content Include="app\directives\ndd-group-checkbox\ndd-group-checkbox.directives.js" />
@@ -97,15 +94,6 @@
     <Content Include="app\directives\ndd-modal\ndd-modal.html" />
     <Content Include="app\directives\ndd-panel\ndd-panel.directives.js" />
     <Content Include="app\directives\ndd-panel\ndd-panel.html" />
-    <Content Include="app\directives\ndd-security\ndd-security.directives.js" />
-    <Content Include="app\directives\ndd-table\ndd-table.directives.js" />
-    <Content Include="app\directives\ndd-table\ndd-table.html" />
-    <Content Include="app\directives\ndd-toolbar-option\ndd-toolbar-option.directives.js" />
-    <Content Include="app\directives\ndd-toolbar-option\ndd-toolbar-option.html" />
-    <Content Include="app\directives\ndd-sidemenu-option\ndd-sidemenu-option.directives.js" />
-    <Content Include="app\directives\ndd-sidemenu-option\ndd-sidemenu-option.html" />
-    <Content Include="app\directives\ndd-toolbar\ndd-toolbar.directives.js" />
-    <Content Include="app\directives\ndd-toolbar\ndd-toolbar.html" />
     <Content Include="app\extentions\array.js" />
     <Content Include="app\extentions\string.js" />
     <Content Include="app\factories\changes.factory.js" />
@@ -118,16 +106,13 @@
     <Content Include="app\images\slides\slide_three.jpg" />
     <Content Include="app\images\slides\slide_two.jpg" />
     <Content Include="app\routes\manager.routes.js" />
-    <Content Include="app\adapters\chamada.adapter.js" />
     <Content Include="app\services\group.services.js" />
     <Content Include="app\services\language.service.js" />
     <Content Include="app\services\permissions.service.js" />
     <Content Include="app\services\user.service.js" />
-    <Content Include="app\templates\components\user-profile.html" />
     <Content Include="app\templates\layout\top-menu.html" />
     <Content Include="app\factories\permissions.factory.js" />
     <Content Include="app\views\layout\home-app.html" />
-    <Content Include="app\views\manager\group\manager-group-create.html" />
     <Content Include="app\views\manager\group\manager-group-permission-edit.html" />
     <Content Include="app\views\manager\group\manager-group-edit.html" />
     <Content Include="app\views\manager\group\manager-group-list.html" />
@@ -141,64 +126,16 @@
     <Content Include="content\animations\animations.min.css">
       <DependentUpon>animations.css</DependentUpon>
     </Content>
-    <Content Include="content\component\dashboard.css">
-      <DependentUpon>dashboard.less</DependentUpon>
-    </Content>
-    <Content Include="content\component\dashboard.min.css">
-      <DependentUpon>dashboard.css</DependentUpon>
-    </Content>
-    <Content Include="content\component\jumbotron.css">
-      <DependentUpon>jumbotron.less</DependentUpon>
-    </Content>
-    <Content Include="content\component\jumbotron.min.css">
-      <DependentUpon>jumbotron.css</DependentUpon>
-    </Content>
-    <Content Include="content\component\panel.css">
-      <DependentUpon>panel.less</DependentUpon>
-    </Content>
-    <Content Include="content\component\panel.min.css">
-      <DependentUpon>panel.css</DependentUpon>
-    </Content>
-    <Content Include="content\component\table.css">
-      <DependentUpon>table.less</DependentUpon>
-    </Content>
-    <Content Include="content\component\table.min.css">
-      <DependentUpon>table.css</DependentUpon>
-    </Content>
-    <Content Include="content\theme\default\chamada.css">
-      <DependentUpon>chamada.less</DependentUpon>
-    </Content>
-    <Content Include="content\theme\default\chamada.min.css">
-      <DependentUpon>chamada.css</DependentUpon>
-    </Content>
-    <Content Include="content\layout\footer.css">
-      <DependentUpon>footer.less</DependentUpon>
-    </Content>
-    <Content Include="content\layout\footer.min.css">
-      <DependentUpon>footer.css</DependentUpon>
-    </Content>
-    <Content Include="content\theme\default\head.css">
-      <DependentUpon>head.less</DependentUpon>
-    </Content>
-    <Content Include="content\theme\default\head.min.css">
-      <DependentUpon>head.css</DependentUpon>
-    </Content>
-    <Content Include="content\layout\home.css">
-      <DependentUpon>home.less</DependentUpon>
-    </Content>
-    <Content Include="content\layout\home.min.css">
-      <DependentUpon>home.css</DependentUpon>
-    </Content>
     <Content Include="content\layout\layout.css">
       <DependentUpon>layout.less</DependentUpon>
     </Content>
     <Content Include="content\layout\layout.min.css">
       <DependentUpon>layout.css</DependentUpon>
     </Content>
-    <Content Include="content\component\login.css">
+    <Content Include="content\layout\login.css">
       <DependentUpon>login.less</DependentUpon>
     </Content>
-    <Content Include="content\component\login.min.css">
+    <Content Include="content\layout\login.min.css">
       <DependentUpon>login.css</DependentUpon>
     </Content>
     <Content Include="content\layout\manager.css">
@@ -206,40 +143,6 @@
     </Content>
     <Content Include="content\layout\manager.min.css">
       <DependentUpon>manager.css</DependentUpon>
-    </Content>
-    <Content Include="content\layout\navbar.css">
-      <DependentUpon>navbar.less</DependentUpon>
-    </Content>
-    <Content Include="content\layout\navbar.min.css">
-      <DependentUpon>navbar.css</DependentUpon>
-    </Content>
-    <Content Include="content\layout\footer.less" />
-    <Content Include="content\layout\sidemenu.css">
-      <DependentUpon>sidemenu.less</DependentUpon>
-    </Content>
-    <Content Include="content\layout\sidemenu.less" />
-    <Content Include="content\layout\home.less" />
-    <Content Include="content\component\dashboard.less" />
-    <Content Include="content\theme\default\head.less" />
-    <Content Include="content\theme\default\chamada.less" />
-    <Content Include="content\component\table.less" />
-    <Content Include="content\component\panel.less" />
-    <Content Include="content\component\jumbotron.less" />
-    <None Include="content\layout\toolbar.less" />
-    <Content Include="content\layout\sidemenu.min.css">
-      <DependentUpon>sidemenu.css</DependentUpon>
-    </Content>
-    <Content Include="content\layout\toolbar.css">
-      <DependentUpon>toolbar.less</DependentUpon>
-    </Content>
-    <Content Include="content\layout\toolbar.min.css">
-      <DependentUpon>toolbar.css</DependentUpon>
-    </Content>
-    <Content Include="content\theme\default\footer.css">
-      <DependentUpon>footer.less</DependentUpon>
-    </Content>
-    <Content Include="content\theme\default\footer.min.css">
-      <DependentUpon>footer.css</DependentUpon>
     </Content>
     <Content Include="content\theme\default\home.css">
       <DependentUpon>home.less</DependentUpon>
@@ -259,12 +162,6 @@
     <Content Include="content\theme\default\layout.min.css">
       <DependentUpon>layout.css</DependentUpon>
     </Content>
-    <Content Include="content\theme\default\loading-bar.css">
-      <DependentUpon>loading-bar.less</DependentUpon>
-    </Content>
-    <Content Include="content\theme\default\loading-bar.min.css">
-      <DependentUpon>loading-bar.css</DependentUpon>
-    </Content>
     <Content Include="content\theme\default\manager.css">
       <DependentUpon>manager.less</DependentUpon>
     </Content>
@@ -282,12 +179,6 @@
     </Content>
     <Content Include="content\theme\default\sidemenu.min.css">
       <DependentUpon>sidemenu.css</DependentUpon>
-    </Content>
-    <Content Include="content\theme\default\toolbar.css">
-      <DependentUpon>toolbar.less</DependentUpon>
-    </Content>
-    <Content Include="content\theme\default\toolbar.min.css">
-      <DependentUpon>toolbar.css</DependentUpon>
     </Content>
     <Content Include="gulpfile.js" />
     <Content Include="index.html" />
@@ -322,8 +213,8 @@
     <Content Include="content\theme\default\layout.css.map">
       <DependentUpon>layout.css</DependentUpon>
     </Content>
-    <Content Include="content\component\login.less" />
-    <Content Include="content\component\login.css.map">
+    <Content Include="content\layout\login.less" />
+    <Content Include="content\layout\login.css.map">
       <DependentUpon>login.css</DependentUpon>
     </Content>
     <Content Include="content\theme\default\home.less" />
@@ -335,20 +226,6 @@
       <DependentUpon>homeapp.css</DependentUpon>
     </Content>
     <Content Include="app\factories\permission-groups.factory.js" />
-    <Content Include="content\theme\default\footer.less" />
-    <Content Include="content\theme\default\footer.css.map">
-      <DependentUpon>footer.css</DependentUpon>
-    </Content>
-    <Content Include="content\layout\navbar.less" />
-    <Content Include="content\layout\navbar.css.map">
-      <DependentUpon>navbar.css</DependentUpon>
-    </Content>
-    <None Include="compilerconfig.json" />
-    <Content Include="compilerconfig.json.defaults">
-      <DependentUpon>compilerconfig.json</DependentUpon>
-    </Content>
-    <Content Include="content\theme\default\loading-bar.less" />
-    <Content Include="content\theme\default\toolbar.less" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -365,6 +242,7 @@
     <Content Include="app\controllers\authentication\login.ctrl.js" />
     <Content Include="app\controllers\authentication\signup.ctrl.js" />
     <Content Include="app\controllers\chamada\chamada.ctrl.js" />
+    <Content Include="app\controllers\chamada\chamadaList.ctrl.js" />
     <Content Include="app\controllers\layout\footer.ctrl.js" />
     <Content Include="app\controllers\layout\header.ctrl.js" />
     <Content Include="app\controllers\layout\home.ctrl.js" />
@@ -390,7 +268,7 @@
     <Content Include="app\routes\layout.routes.js" />
     <Content Include="app\routes\turma.routes.js" />
     <Content Include="app\services\aluno.services.js" />
-    <Content Include="app\adapters\aluno.adapter.js" />
+    <Content Include="app\services\alunoAdapter.js" />
     <Content Include="app\services\aula.services.js" />
     <Content Include="app\services\auth.services.js" />
     <Content Include="app\services\authInterceptor.services.js" />
@@ -400,6 +278,7 @@
     <Content Include="app\services\turma.services.js" />
     <Content Include="app\templates\components\inner-view.html" />
     <Content Include="app\templates\layout\footer.html" />
+    <Content Include="app\templates\layout\header.html" />
     <Content Include="app\templates\layout\navbar.html" />
     <Content Include="app\templates\layout\sidebar.html" />
     <Content Include="app\templates\layout\toolbar.html" />

@@ -2,7 +2,7 @@
 
     "use strict";
     //using
-    alunoDetailsCtrl.$inject = ["alunoService", "turmaService", "$stateParams", "$state", "$scope", "cepService"];
+    alunoDetailsCtrl.$inject = ["alunoService", "turmaService", "$stateParams", "$state","$scope", "cepService"];
 
     //namespace
     angular
@@ -15,22 +15,20 @@
         vm.title = "Atualização de Alunos";
         vm.aluno = { endereco: { cep: "" } }; //Graças ao DTO tive que inicializar com um CEP para o serviço funcionar
         vm.turmas = [];
-
+        
         //script load
         activate();
 
         function activate() {
+            alunoService.getAlunoById(params.alunoId)
+                .then(function (results) {
+                    vm.aluno = convertDtoToAluno(results);
+                });
 
             turmaService.getTurmas()
-                .then(function (dataTurmas) {
-
-                    alunoService.getAlunoById(params.alunoId)
-                        .then(function (resultsAluno) {
-
-                            vm.turmas = dataTurmas;
-                            vm.aluno = convertDtoToAluno(resultsAluno);
-                        });
-                });
+               .then(function (data) {
+                   vm.turmas = data;
+               });
         }
 
         //public methods
@@ -57,7 +55,7 @@
                     vm.aluno.endereco.bairro = result.bairro;
                     vm.aluno.endereco.localidade = result.localidade;
                     vm.aluno.endereco.uf = result.uf;
-                });
+                })
             }
         });
 

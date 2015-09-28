@@ -11,11 +11,11 @@
         routes.push({
             name: 'turma',
             url: '/turma',
+            'abstract': true,
             redirect: '/turma/list',
             templateUrl: '/app/templates/components/inner-view.html',
             displayName: "Turma",
-            displayIcon: 'fa-university',
-            $$permissionId: "23"
+            displayIcon: 'fa-university'
         }, {
             name: 'turma.list',
             url: '/list',
@@ -23,7 +23,7 @@
             templateUrl: '/app/views/turma/turma-list.html',
             displayName: "Lista de Turmas",
             displayIcon: 'fa-bars',
-            $$permissionId: "24"
+            $$permissionId: "17"
         }, {
             name: 'turma.details',
             url: '/details/:turmaId',
@@ -31,8 +31,7 @@
             templateUrl: '/app/views/turma/turma-details.html',
             displayName: "Detalhes da Turma",
             displayIcon: 'fa-pencil',
-            parents: ["turma.list"],
-            $$permissionId: "25"
+            $$permissionId: "18"
 
         }, {
             name: 'turma.create',
@@ -41,7 +40,7 @@
             templateUrl: '/app/views/turma/turma-create.html',
             displayName: "Criação da Turma",
             displayIcon: 'fa-plus',
-            $$permissionId: "26"
+            $$permissionId: "19"
         }
 );
     }

@@ -3,7 +3,7 @@
     angular.module('controllers.module')
         .controller('managerUserEditGroupController', managerUserEditGroupController);
 
-    managerUserEditGroupController.$inject = ['userService', 'groupService', "$stateParams"];
+    managerUserEditGroupController.$inject = ['userService','groupService', "$stateParams"];
 
 
     function managerUserEditGroupController(userService, groupService, $stateParams) {
@@ -18,7 +18,8 @@
         activate();
         function activate() {
             userService.getUserById($stateParams.userId).then(function (results) {
-                vm.user = results;              
+                vm.user = results;
+                vm.user.groups = vm.user.groups ? vm.user.groups : [];
                 originalUser = $.extend(true, {}, vm.user);
                 vm.name = vm.user.firstName;
                 vm.bodyModelEdit += vm.name;
@@ -27,11 +28,6 @@
                     vm.groups = results;
                     if (results)
                         originalGroups = results.slice();
-
-
-                    groupService.getGroupByUsername(vm.user.userName).then(function (result) {
-                        vm.user.groups = result ? result : [];
-                    });
                 });
             });
         }
@@ -58,25 +54,10 @@
                 else
                     exclude.push(vm.changes[i].id);
             }
-
-
-            var needInclude = include.length > 0;
-            var needExclude = exclude.length > 0;
-
-            if (needInclude) {
-
-                userService.addUserGroup(vm.user, include).then(function () {
-
-                    if (needExclude) {
-                        userService.removeUserGroup(vm.user, exclude);
-                    }
-                })
-
-            } else if (needExclude) {
+            if (include.length > 0)
+                userService.addUserGroup(vm.user, include);
+            if (exclude.length > 0)
                 userService.removeUserGroup(vm.user, exclude);
-            }
-
-
         }
 
     }

@@ -20,11 +20,10 @@
         activate();
         function activate() {
             vm.loginData = {
-                userName: "superadmin",
-                password: "174963"
+                userName: "",
+                password: ""
             };
             vm.message = "";
-
         }
 
         //public methods
@@ -33,7 +32,7 @@
                 $state.go(auth.lastState == "login" || auth.lastState == 'home' ? 'homeapp' : auth.lastState);
             },
             function (err) {
-                vm.message = "Erro ao logar: " + err.error_description;
+                vm.message = "Erro ao logar";
             });
         };
     }

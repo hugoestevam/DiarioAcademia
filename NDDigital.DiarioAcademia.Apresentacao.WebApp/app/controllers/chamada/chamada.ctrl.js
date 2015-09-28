@@ -2,66 +2,64 @@
 
     'use strict';
     //using
-    chamadaCtrl.$inject = ["chamadaService", "aulaService", "turmaService"];
+    chamadaCtrl.$inject = ["chamadaService", "alunoService", "aulaService", "turmaService"];
 
     //namespace
     angular.module("controllers.module").controller("chamadaCtrl", chamadaCtrl);
 
     //class
-    function chamadaCtrl(chamadaService, aulaService, turmaService, $scope) {
+    function chamadaCtrl(chamadaService, alunoService, aulaService, turmaService) {
         var vm = this;
-
         vm.title = "Realizar chamada";
-
         vm.alunos = [];
         vm.turmas = [];
         vm.aulas = [];
         vm.turmaSelected = false;
         vm.aulaSelected = false;
 
-
         activate();
+
         function activate() {
-            turmaService.getTurmas().then(function (data) {
-                vm.turmas = data;
+            turmaService.getTurmas()
+                .then(function (data) {
+                        vm.turmas = data;                
+                });
 
-                aulaService.getAulas().then(function (data) {
+            aulaService.getAulas()
+                .then(function (data) {
                     vm.allAulas = data;
-                });
-            });
+                });          
         }
 
-        //public methods
-        vm.save = function () {
-            vm.chamada.alunos = vm.alunos;
-            chamadaService.realizarChamada(vm.chamada);
-            clearFields();
-        };
+       vm.save = function () {
+           vm.chamada = convertToChamadaDto(vm.chamada);
+           convertStatusPresencas(vm.chamada);
+           chamadaService.
+               realizarChamada(vm.chamada);
+           clearFields();
+       };
 
-        vm.populateAulas = function (turma) {
-            if (turma) {
-                vm.getAulaByTurma(turma);
-                chamadaService.getAlunosChamadaByTurma(turma.id).then(function (results) {
-                    vm.talunos = results;
-                    vm.aulaSelected = false;
-                });
+       
+       function clearFields() {
+           vm.chamada = {};
+           vm.alunos = [];
+           vm.turmaSelected = false;
+           vm.aulaSelected = false;
+       }
+
+       function convertStatusPresencas(chamada) {
+           for (var i = 0; i < chamada.alunos.length; i++) {
+               vm.chamada.alunos[i].status =
+                   chamada.alunos[i].status == false ? "F" : "C";
+           }
+       }
+
+       vm.populateAulas = function (turma) {
+           if (turma) {
+               vm.getAulaByTurma(turma);
                 vm.turmaSelected = true;
-                vm.aulaSelected = false;
             }
         }
-
-        vm.getChamada = function () {
-            vm.alunos = [];
-            if (vm.chamada.aula) {
-                chamadaService.getChamadaByAula(vm.chamada.aula.id).then(function (data) {
-                    vm.chamadaDto = data;
-                    checkStatus(vm.chamadaDto.alunos);
-                    vm.alunos = vm.talunos;
-                });
-            }
-            vm.aulaSelected = true;
-        }
-
 
         vm.getAulaByTurma = function (turma) {
             vm.aulas = [];
@@ -74,31 +72,59 @@
             }
         }
 
-        //private methods
-        function checkStatus(alunos) {
-            var index;
-            for (var j = 0; j < vm.talunos.length; j++) {
-                index = containsAluno(alunos, vm.talunos[j]);
-                vm.talunos[j].status = index >= 0 ? alunos[index].status != "F" : false;
-            }
-        }
-
-        function containsAluno(alunos, aluno) {
-            if (!alunos || alunos.length == 0)
-                return -1;
-            for (var i = 0; i < alunos.length; i++) {
-                if (alunos[i].alunoId == aluno.alunoId)
-                    return i;
-            }
-            return -1;
-        }
-
-        function clearFields() {
-            vm.chamada = {};
+        vm.getChamada = function () {
             vm.alunos = [];
-            vm.aulas = [];
-            vm.turmaSelected = false;
-            vm.aulaSelected = false;
+            if (vm.chamada.aula) {
+                chamadaService.getChamadaByAula(vm.chamada.aula.id)
+                    .then(function (data) {
+                        vm.chamadaDto = data;
+                        vm.allAlunos = vm.chamadaDto.alunos;
+                        convertStatus();
+                        vm.alunos = vm.allAlunos;
+                    });
+            }
+            vm.aulaSelected = true;
+        }
+
+        function convertStatus() {
+            for (var i = 0; i < vm.allAlunos.length; i++) {
+                vm.allAlunos[i].status =  vm.allAlunos[i].status == "F" ? false : true;
+            }
+        }
+
+        function convertAlunosList() {
+            for (var i = 0; i < vm.allAlunos.length; i++) {
+                vm.allAlunos[i] = convertDto(vm.allAlunos[i]);
+            }
+        }
+
+        function convertDto(aluno) {
+            return {
+                alunoId: aluno.id,
+                nome: aluno.descricao.split(':')[0],
+                status: false,
+                turma: aluno.turmaId
+            };
+        }
+
+        function convertToChamadaDto(chamada) {
+            return {
+                id: chamada.id,
+                turmaId: chamada.turma.id,
+                data: chamada.aula.data,
+                aulaId: chamada.aula.id,
+                alunos: vm.alunos
+            };
+        }
+
+        function convertDtoTo(chamada) {
+            return {
+                id : chamada.id,
+                turma : turmaService.getTurmaById(chamada.turmaId),
+                data : chamada.data,
+                aula: aulaService.getAulaById(chamada.aulaId),
+                alunos: chamada.alunos
+            };
         }
     }
 }(window.angular));

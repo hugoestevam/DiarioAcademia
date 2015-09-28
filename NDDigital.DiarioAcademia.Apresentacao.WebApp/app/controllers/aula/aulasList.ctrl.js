@@ -9,7 +9,7 @@
         .controller("aulaListCtrl", aulaListCtrl);
 
     //class
-    function aulaListCtrl(aulaService, $state) {
+    function aulaListCtrl(aulaService) {
         var vm = this;
         vm.title = "Lista de Aulas";
         vm.classe = "selecionado";
@@ -23,29 +23,19 @@
             makeRequest();
         }
 
-        //public method
-        vm.delete = remove;
-        vm.onClick = onClick;
+        //public methods
+        vm.delete = function (aula) {
+            aulaService.delete(aula);
 
-
-        function onClick(value) {
-            if (value)
-                vm.aulaSelecionada = value;
-        }
-
-        function remove() {
-            if (!vm.aulaSelecionada)
-                return;
-            aulaService.delete(vm.aulaSelecionada).then(function () {
-                makeRequest();
-            });
+            makeRequest();
         }
 
         //private methods
         function makeRequest() {
-            aulaService.getAulas().then(function (data) {
-                vm.aulas = data;
-            });
+            aulaService.getAulas().
+                then(function (data) {
+                    vm.aulas = data;
+                });
         };
     }
 }(window.angular));

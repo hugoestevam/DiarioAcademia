@@ -17,15 +17,17 @@
             displayName: "Inicio",
             displayIcon: "fa-home",
             allowAnnonymous: true,
+            $$permissionId: "00"
         },
         {
             name: 'homeapp',
             url: '/homeapp',
-            controller: 'homeAppController as vm',
+            controller: 'homeController as vm',
             templateUrl: '/app/views/layout/home-app.html',
             displayName: "Inicio App",
             displayIcon: "fa-home",
-            allowAnnonymous: false
+            allowAnnonymous: false,
+            $$permissionId: "01"
         });
     }
 

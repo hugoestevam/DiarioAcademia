@@ -1,17 +1,18 @@
-﻿<ndd-head title="{{vm.title}}" back-route="turma.list"></ndd-head>
+﻿<div class="col-lg-8">
+    <ndd-head title="{{vm.title}}"></ndd-head>
+    <div class="col-lg-12">
+        <form name="vm.turmaForm" class="jumbotron">
+            <input class="form-control" type="text" value="Academia do Programador" name="descricao" ng-required="true" ng-disabled="true" /><br>
+            <input class="form-control" type="number" value="2000" ng-model="vm.turma.ano" name="ano" ng-required="true" ng-disabled="false" /><br>
+            <div ng-show="vm.turmaForm.ano.$error.required && vm.turmaForm.ano.$dirty" class="alert alert-danger">
+                Por favor, preencha o campo ano!
+            </div>
+            <div ng-show="vm.turmaForm.ano.minlength && vm.alunoForm.ano.$error.$dirty" class="alert alert-danger">
+                O campo ano deve ter 4 digitos!
+            </div>
 
-<div class="col-sm-offset-1 col-sm-10">
-    <form name="vm.turmaForm" class="jumbotron">
-        <input class="form-control" type="text" value="Academia do Programador" name="descricao" ng-required="true" ng-disabled="true" /><br>
-        <input class="form-control" type="number" value="2000" ng-model="vm.turma.ano" name="ano" ng-required="true" ng-disabled="false" /><br>
-        <div ng-show="vm.turmaForm.ano.$error.required && vm.turmaForm.ano.$dirty" class="alert alert-danger">
-            Por favor, preencha o campo ano!
-        </div>
-        <div ng-show="vm.turmaForm.ano.minlength && vm.alunoForm.ano.$error.$dirty" class="alert alert-danger">
-            O campo ano deve ter 4 digitos!
-        </div>
-
-        <button class="btn btn-primary" ng-click="vm.save()" ng-disabled="vm.turmaForm.$invalid">Salvar</button>
-        <button class="btn btn-success" ng-click="vm.clearFields()">Limpar</button>
-    </form>
+            <button class="btn btn-primary" ng-click="vm.save()" ng-disabled="vm.turmaForm.$invalid">Salvar</button>
+            <button class="btn btn-success" ng-click="vm.clearFields()">Limpar</button>
+        </form>
+    </div>
 </div>

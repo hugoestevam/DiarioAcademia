@@ -1,4 +1,4 @@
-﻿(function () {
+﻿(function (angular) {
     Array.prototype.indexOfObject = function (obj) {
         for (var i in this) {
             if (this[i].id == obj.id)
@@ -22,6 +22,7 @@
     Array.prototype.containsObject = function (obj) {
         return this.indexOfObject(obj) >= 0; 
     }
+
     
     Array.prototype.any = function(property,expected) {
         var founded = false;
@@ -33,4 +34,4 @@
         return founded;
     };
 
-})();
+})(window.angular);

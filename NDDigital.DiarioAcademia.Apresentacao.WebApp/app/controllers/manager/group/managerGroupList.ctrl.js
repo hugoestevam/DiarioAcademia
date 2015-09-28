@@ -9,14 +9,14 @@
         var groups = [];
         vm.groups = [];
 
+        vm.new = save;
         vm.showGroup = showGroup;
-        vm.edit = edit;
-        vm.onClick = onClick;
-        vm.onRemove = onRemove;
 
         vm.newGroup = {};
         vm.creating = false;
         vm.selectedGroup = undefined;
+
+        var params = getParams();
 
         //angular pagination
         vm.currentPage = 1;
@@ -26,16 +26,18 @@
 
         activate();
         function activate() {
-            makeRequest();
-        }
-
-        function makeRequest() {
             groupService.getGroups().then(function (results) {
                 groups = results;
                 $scope.$watch("vm.currentPage + vm.numPerPage", function () {
                     pagination();
                 });
             });
+
+            if (params != "") {
+                groupService.getGroupById(parseInt(params)).then(function (results) {
+                    vm.selectedGroup = results;
+                });
+            }
         }
 
         // public methods
@@ -44,27 +46,25 @@
             vm.selectedGroup = group;
         }
 
-        //private methods
-
-        function edit() {
-            if (!vm.selectedGroup)
+        //actions
+        function save() {
+            if (!vm.newGroup.name)
                 return;
-            $state.go('manager.group.edit', { groupId: vm.selectedGroup.id })
-        }
-
-        function onClick(value) {
-            if(value)
-                vm.selectedGroup = value;
-        }
-
-        function onRemove() {
-            groupService.delete(vm.selectedGroup).then(function (results) {
-                makeRequest();
-                vm.selectedGroup = {};
+            groupService.save(vm.newGroup).then(function (results) {
+                vm.creating = false;
+                groups.push(results);
+                pagination();
+                vm.newGroup = {};
             });
         }
 
         // helpers
+
+        function getParams() {
+            var path = $location.path().replace('/manager/group', "")
+            return path.slice(path.lastIndexOf('/') + 1, path.length);
+        }
+
         function pagination() {
             vm.countTotalGroups = groups.length;
             vm.countGroups = (groups.length / vm.numPerPage) * 10;

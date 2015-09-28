@@ -3,7 +3,7 @@
     "use strict";
     //using
 
-    turmaListCtrl.$inject = ["turmaService", "$state"];
+    turmaListCtrl.$inject = ["turmaService"];
 
     //namespace
     angular
@@ -11,7 +11,7 @@
         .controller("turmaListCtrl", turmaListCtrl);
 
     //class
-    function turmaListCtrl(turmaService, $state) {
+    function turmaListCtrl(turmaService) {
         var vm = this;
         vm.title = "Lista das Turmas";
         vm.classe = "selecionado";
@@ -25,29 +25,13 @@
             makeRequest();
         }
 
-        //public methods 
-        vm.onClick = onClick;
-        vm.edit = edit;
-        vm.remove = remove;
+        //public methods
+        vm.delete = function (turma) {
+            turmaService.delete(turma);
 
-        function onClick(value) {
-            if (value)
-                vm.turmaSelecionada = value;
-        }
-
-        function edit() {
-            if (vm.turmaSelecionada)
-                $state.go('turma.details', { turmaId: vm.turmaSelecionada.id });
-        }
-
-        function remove() {
-            if (!vm.turmaSelecionada)
-                return;
-            turmaService.delete(vm.turmaSelecionada).then(function () {
-                vm.turmas.remove(vm.turmaSelecionada);
-                vm.turmaSelecionada = {};
-            });
-        }
+            //depois que excluiu precisa atualizar os dados
+            makeRequest();
+        };
 
         //private methods
         function makeRequest() {

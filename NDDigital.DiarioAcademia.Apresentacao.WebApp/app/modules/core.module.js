@@ -8,6 +8,7 @@
         , 'LocalStorageModule'
         , 'angular-loading-bar'
         , 'ngAutomapper'
+        , 'ncy-angular-breadcrumb'
         //app modules
         , 'common.module'
         , 'factories.module'
@@ -19,6 +20,7 @@
     ])
 
     .config(configInterceptors)
+    .config(configBreadcrumb)
     .run(runStateChangeSuccess)
     .run(runStateChangeStart);
 
@@ -42,22 +44,15 @@
                });
     };
 
-    runStateChangeStart.$inject = ['$rootScope', '$state', 'authService','logger'];
-    function runStateChangeStart($rootScope, $state, authService, logger) {
+    runStateChangeStart.$inject = ['$rootScope', '$state', 'authService'];
+    function runStateChangeStart($rootScope, $state, authService, a) {
 
         $rootScope.$on('$stateChangeStart',
            function (event, toState, toParams, fromState, fromParams) {
 
-               if (authService.authentication.isAuth) {
-                   if (toState.name == 'home') {
-                       event.preventDefault();
-                       return $state.go('homeapp');
-                   }
-
-                   if (toState.name == 'login') {
-                       event.preventDefault();
-                       return $state.go('homeapp');
-                   }
+               if (authService.authentication.isAuth && toState.name == 'home') {
+                   event.preventDefault();
+                   return $state.go('homeapp');
                }
 
                if (toState.data.allowAnnonymous) return;
@@ -65,24 +60,34 @@
                if (authService.authorization.groups)
                    var userIsAdmin = authService.authorization.groups.any('isAdmin', true);
 
-               if (authService.authorization.isAdmin) return;
+               if (userIsAdmin) return;
 
                var stateToGo = 'login';
 
                if (authService.authentication.isAuth) {
                    var hasPermission = authService.checkAuthorize(toState.name);
                    if (hasPermission) return;
+               } else {
+                   authService.lastState = toState.name;
+                   event.preventDefault();
+
+                   $state.go(stateToGo);
                }
 
-               logger.warning("Você não tem permissão para acessar \"" + toState.data.displayName + "\"");
-
-               authService.lastState = toState.name;
-               event.preventDefault();
-               $state.go(stateToGo);
            });
 
         $rootScope.$on('$viewContentLoading', function (event, viewConfig) {
             console.log('todo');
         });
     }
+
+    configBreadcrumb.$inject = ["$breadcrumbProvider"];
+    function configBreadcrumb($breadcrumbProvider) {
+        $breadcrumbProvider.setOptions({
+            prefixStateName: 'home',
+            includeAbstract: true,
+            template: 'bootstrap3', // if templateUrl is undefined
+            templateUrl: 'app/templates/layout/breadcrumb.html'
+        });
+    };
 })(window.angular);

@@ -54,7 +54,12 @@
 
 
         ///////////////////// callback functions
-        
+
+        //function  successCallback (response) {
+        //    success("Request realizado com sucesso!", response.data, response.status + " - " + response.statusText);
+        //    return response.data.results || response.data;
+        //}
+
         function successCallback(response) {
             success(res.success_request);
             return response.data.results || response.data;
@@ -64,10 +69,8 @@
         function errorCallback(response) {
             if (response.status) {
 
-               
-
                 var infolog = {
-                    message: formatMessageLog(response.data),
+                    message: response.data.message || response.data.errors[0].errorMessage,
                     content: response.data,
                     title: response.status + " - " + response.statusText,
                     type: "error"
@@ -77,23 +80,11 @@
 
             } else
                 error(response.message, null, res.unavailable_server);
+           // throw new Error(response);
         }
+
         function emptyMessageCallback(response) {
             return response.data.results || response.data;
         }
-
-        function formatMessageLog(data) {
-
-
-            var message = (typeof data === 'string') ? "" :
-            data.message || data.errors[0].errorMessage;
-
-            if (data.errors && data.errors.length> 1)
-            message += " +(" + data.errors.length - 1 + ")";
-
-            return message;
-
-        }
-
     }
 }(window.angular));

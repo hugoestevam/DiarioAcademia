@@ -18,8 +18,22 @@
             templateUrl: 'app/directives/ndd-panel/ndd-panel.html'
         };
 
-        function link(scope, element, attrs) {}
+        function link(scope, element, attrs) {
+            scope.class = getClassPanel(scope.title.toLowerCase());
+        }
 
+        function getClassPanel(name) {
+            switch (name) {
+                case 'alunos':
+                    return 'bk-clr-one';
+                case 'turmas':
+                    return 'bk-clr-two ';
+                case 'chamada':
+                    return 'bk-clr-four';
+                default:
+                    return 'bk-clr-three';
+            }
+        }
     }
 
 

@@ -12,7 +12,7 @@
 	//class
 	function permissionsService($http, logger, baseUrl, $state, res) {
 		var self = this;
-		var serviceUrl = baseUrl + "api/permission/";
+		var serviceUrl = baseUrl + "api/permission";
 
 		//public methods
 		self.getPermissions = function () {
@@ -22,7 +22,7 @@
 		};
 
 		self.getPermissionById = function (id) {
-			return $http.get(serviceUrl + id)
+			return $http.get(serviceUrl + '/' + id)
 				 .then(logger.successCallback)
 				 .catch(logger.errorCallback)
 		};

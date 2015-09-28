@@ -2,16 +2,16 @@
     'use strict';
 
     //using
-    alunoService.$inject = ['$http', 'logger', 'BASEURL', "alunoAdapter", 'resource'];
+    alunoService.$inject = ['$http', 'logger', 'BASEURL', "alunoAdapter",'resource'];
 
     //namespace
     angular.module('services.module')
        .service('alunoService', alunoService);
 
     //class
-    function alunoService($http, logger, baseUrl, adapter, res) {
+    function alunoService($http, logger, baseUrl, adapter,res) {
         var self = this;
-        var serviceUrl = baseUrl + "api/aluno/";
+        var serviceUrl = baseUrl + "api/aluno";
 
         //public methods
         self.getAlunos = function () {
@@ -22,14 +22,7 @@
         };
 
         self.getAlunoById = function (id) {
-            return $http.get(serviceUrl + id)
-                 .then(logger.successCallback)
-                 .catch(logger.errorCallback)
-                 .then(convertToObj);
-        };
-
-        self.getAlunoByTurmaId = function (id) {
-            return $http.get(serviceUrl + "getbyturma/" + id)
+            return $http.get(serviceUrl + '/' + id)
                  .then(logger.successCallback)
                  .catch(logger.errorCallback)
                  .then(convertToObj);
@@ -42,13 +35,20 @@
 
         self.delete = function (aluno) {
             logger.error(res.deleted_successful, aluno, "Delete");
-            return $http.delete(serviceUrl + aluno.id);
+            return $http.delete(serviceUrl + "/" + aluno.id);
+        };
+
+        self.getTurmaById = function (id) {
+            logger.success(res.student_founded(id), null, "GetById");
+            return $http.get(serviceUrl + "/" + id)
+                .then(function (response) {
+                    return response.data;
+                });
         };
 
         self.edit = function (aluno) {
-            return $http.put(serviceUrl + aluno.id, aluno).then(function (results) {
-                logger.success(res.student_edited + aluno.descricao);
-            });
+            logger.success(res.student_edited(aluno.descricao.split(':')[0]) + " editado", null, "Edição");
+            return $http.put(serviceUrl + "/" + aluno.id, aluno);
         };
 
         function convertToObj(data) {
@@ -62,7 +62,7 @@
         };
 
         function convertToDto(data) {
-            return adapter.toAlunoDto(data);
+            return adapter.convert(data);
         };
     }
 })();

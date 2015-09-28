@@ -14,10 +14,11 @@
         var factory = {};
 
         init();
+
         function init() {
             automapper.createMap("aluno", "alunoDto")
                         .forMember("id", function () { return this.id })
-                        .forMember("descricao", function () { return "Aluno " + this.nome + ": " + "Presencas: " + this.presencas + ", Faltas: " + this.faltas })
+                        .forMember("descricao", function () { return this.nome; })
                         .forMember("turmaId", function () { return this.turma.id; })
                         .forMember("cep", function () { return this.endereco.cep; })
                         .forMember("bairro", function () { return this.endereco.bairro; })
@@ -29,9 +30,7 @@
 
             automapper.createMap("alunoDto", "aluno")
                .forMember("id", function () { return this.id })
-               .forMember("nome", function () { return this.descricao.replace('Aluno', '').split(":")[0]; })
-               .forMember("presencas", function () { return this.descricao.replace('Aluno ', '').replace(',', ':').split(":")[2]; })
-               .forMember("faltas", function () { return this.descricao.replace('Aluno', '').replace(',', ':').split(":")[4]; })
+               .forMember("nome", function () { return this.descricao; })
                .forMember("turma", function () { return { id: this.turmaId }; })
                .forMember("endereco", function () {
                    return {
@@ -48,7 +47,15 @@
             return { ano: turma.ano };        
         };
 
-        factory.toAlunoDto = function (obj) {
+        factory.convert = function (obj) {
+            //return {
+            //    turmaId: obj.turma.id,
+            //    descricao: obj.nome,
+            //    cep: obj.endereco.cep,
+            //    bairro: obj.endereco.bairro,
+            //    localidade: obj.endereco.localidade,
+            //    uf: obj.endereco.uf
+            //    };
             var result = {};
 
             automapper.map("aluno", "alunoDto", obj, result);
@@ -57,12 +64,26 @@
         };
 
         factory.convertBack = function (obj) {
+            //return {
+            //    id: objDto.turmaId,
+            //    nome: objDto.descricao.split(":"),
+            //    endereco: { 
+            //        cep: objDto.cep,
+            //        bairro: objDto.bairro,
+            //        localidade: objDto.localidade,
+            //        uf: objDto.uf
+            //    }
+            //};
+
             var result = {};
+
             automapper.map("alunoDto", "aluno", obj, result);
+
             return result;
         };
 
         return factory;
+
     }
 
 })();

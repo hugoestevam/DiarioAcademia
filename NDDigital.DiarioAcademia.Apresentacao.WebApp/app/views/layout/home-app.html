@@ -1,46 +1,33 @@
-﻿
-<div class="col-xs-12">
-    <h1 style="margin-top: 5px"> Diário </h1>
-    <h4><em>Academia do Programador</em></h4>
-    <hr />
-    <br />
-</div>
+﻿<div class="row container-user">
+    <div class="col-sm-12">
+        <h1> Diário </h1>
+        <h4><em>Academia do Programador</em></h4>
+        <hr />
+        <div ncy-breadcrumb></div>
+        <br />
+    </div>
 
-<div class="col-sm-offset-3 col-sm-6 col-xs-offset-1 col-xs-10">
-    <div class="panel panel-default">
-        <div class="panel-heading"><strong>Objetivo</strong></div>
-        <div class="panel-body">
-            <span>
-                Capacitar colaboradores para a NDDigital.
-            </span>
+    <div ng-class="{'col-xs-offset-1 col-xs-10': !shell.authentication.isAuth}">
+        <div class="col-sm-11">
+            <br />
+            <div class="col-sm-12">
+                <ndd-panel title="Alunos" icon="fa-users" ui-sref="aluno.list"></ndd-panel>
+                <ndd-panel title="Turmas" icon="fa-university" ui-sref="turma.list"></ndd-panel>
+                <ndd-panel title="Aulas" icon="fa-calendar" ui-sref="aula.list"></ndd-panel>
+                <ndd-panel title="Chamada" icon="fa-check" ui-sref="chamada.create"></ndd-panel>
+            </div>
+        </div>
+        <div class="col-sm-11">
             <br /><br />
-            <span>
-                Anualmente a empresa garimpa talentos
-                tanto para área de desenvolvimento como para outros setores da empresa.
-            </span>
+            <div class="panel panel-default">
+                <div class="panel-heading"><strong>Objetivo</strong></div>
+                <div class="panel-body">
+                    <div class="alert alert-info">
+                        É um curso que forma desenvolvedores para a empresa NDDigital. Anualmente a empresa garimpa talentos
+                        tanto para área de desenvolvimento como para outros setores da empresa.
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
-<div class="col-xs-12">
-    <br />
-    <i class="fa fa-2x fa-line-chart pull-left"></i>
-    <h3 class="clear-margin">Academia em números</h3>
-    <hr />
-</div>
-<br />
-<div class="col-xs-12">
-    <div class="col-sm-4 col-xs-12">
-        <ndd-chart-knob name="TURMAS" data="{{vm.turmas}}" color="#FF9D15" security="turmas.list"></ndd-chart-knob>
-    </div>
-    <div class="col-sm-4 col-xs-12">
-        <ndd-chart-knob name="ALUNOS" data="{{vm.alunos}}" color="#15A7FF" security="alunos.list"></ndd-chart-knob>
-    </div>
-    <div class="col-sm-4 col-xs-12">
-        <ndd-chart-knob name="AULAS" data="{{vm.aulas}}" color="#FF2F32" security="aulas.list"></ndd-chart-knob>
-    </div>
-</div>
-<div class="col-xs-12"><br /><br /></div>
-
-
-
-

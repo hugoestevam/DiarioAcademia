@@ -73,7 +73,8 @@
             cleanRepeatedPermissions(array, true);
             if (array.length == 0)
                 return;
-            permissionService.save(array).then(function (results) {
+            permissionService.save(array)
+                .then(function (results) {
                     vm.routes = vm.routes.concat(results);
                     vm.permission = permissionsFactory.filterPermissions(vm.showRoutes);
                 });

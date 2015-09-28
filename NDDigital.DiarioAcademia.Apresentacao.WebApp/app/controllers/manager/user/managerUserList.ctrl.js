@@ -10,26 +10,20 @@
         var vm = this;
         var users = [];
 
-      
-        //public methods
-        vm.edit = edit;
-        vm.remove = remove;
-        vm.modal = modal;
-        vm.cbRemove = cbRemove;
-        vm.onClick = onClick;
-
         //angular pagination
         vm.currentPage = 1;
         vm.numPerPage = 10;
         vm.maxSize = 4;
         vm.countUsers = 0;
 
+        //public methods
+        vm.edit = edit;
+        vm.remove = remove;
+        vm.modal = modal;
+
+
         activate();
         function activate() {
-            makeRequest();     
-        }
-
-        function makeRequest() {
             managerService.getUsers().then(function (results) {
                 users = results;
                 vm.countUsers = users.length;
@@ -42,27 +36,14 @@
             });
         }
 
-
-        function edit() {
-            if (vm.selectedUser)
-                $state.go('manager.user.edit', { userId: vm.selectedUser.id });
-        }
-
-       
-        function cbRemove() {
-            if (!vm.selectedUser)
-                return;
-            vm.modal(vm.selectedUser);
-            $("#modelRemoveUser").modal();
-        }
-
-        function onClick(value) {
-            vm.selectedUser = value;
+        function edit(user) {
+            $state.go('manager.useredit', { userId: user.id });
         }
 
         function remove() {
             managerService.delete(vm.user).then(function (results) {
-                makeRequest();
+                users.remove(vm.user);
+                vm.users.remove(vm.user);
                 vm.user = undefined;
             });
         }
@@ -72,6 +53,6 @@
             vm.titleModelRemove = 'Exclusão';
             vm.bodyModelRemove = 'Remover ' + user.fullName + ' (' + user.userName + ') ?'
         }
-
+        
     }
 })(window.angular);

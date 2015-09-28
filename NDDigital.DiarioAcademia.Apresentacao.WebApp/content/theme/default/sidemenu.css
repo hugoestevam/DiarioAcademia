@@ -1,45 +1,38 @@
-﻿.actived {
-  border-right: solid 5px #E25D41 !important;
-  background-color: rgba(204, 204, 204, 0.4);
-  font-weight: bolder;
+﻿.sidemenu-custom {
+  top: 63px;
+}
+.profile-ava img {
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
+  border: 2px solid #333;
+  display: inline-block;
+  height: 30px;
+}
+.actived {
+  border-left: green solid 2px;
+}
+.user-avatar {
+  border-radius: 50%;
+  height: 60px;
+  margin: 5% 0 5% 5%;
+  position: relative;
+}
+.user-back {
+  padding: 0 !important;
 }
 a.user-back.text-center:hover {
   background-color: inherit !important;
 }
 .menu-user {
   background: rgba(0, 0, 0, 0.6);
+  padding: 7px 6px;
   color: #fff;
+  margin-top: 15px;
+  position: relative;
   cursor: pointer;
+  width: 100%;
 }
-.separator-menu {
-  border-right: solid 5px rgba(204, 204, 204, 0.4);
+.user-option {
+  padding-left: 8% !important;
 }
-.seta-direita {
-  border-left: 10px solid #E25D41;
-}
-.home-li {
-  pointer-events: none;
-}
-@media screen and (max-width: 768px) {
-  .sidemenu-custom {
-    background-color: #0f75b3 !important;
-  }
-  .navbar-inverse .navbar-nav > li > a {
-    color: white !important;
-  }
-  .navbar-inverse .navbar-nav > li > a:hover {
-    background-color: rgba(204, 204, 204, 0.5) !important;
-    color: black !important;
-  }
-}
-.side-option a {
-  color: #4D4D4D !important;
-}
-@media screen and (max-width: 768px) {
-  .side-option a {
-    color: white !important;
-  }
-  .side-option a:hover {
-    background-color: rgba(204, 204, 204, 0.6);
-  }
-}
+/*# sourceMappingURL=sidemenu.css.map */

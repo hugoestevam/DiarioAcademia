@@ -3,17 +3,16 @@
     'use strict';
 
     //using
-    shellController.$inject = ['$rootScope', '$state', 'authService', 'languageService', 'resource', 'permissions.factory'];
+    shellController.$inject = ['$rootScope','$state','authService', 'languageService', 'resource'];
 
     //namespace
     angular
         .module('controllers.module')
         .controller('shellController', shellController);
-
+    
     //class
-    function shellController($rootScope, $state, authService, languageService, res, permissionFactory) {
+    function shellController($rootScope,$state, authService, languageService, res) {
         var self = this;
-        self.authentication = {};
 
         //script load
         activate();
@@ -24,8 +23,6 @@
             toastr.options.timeOut = 900;
             self.currentLanguage = languageService.currentLanguage;
             reTranslate('pt-br');
-            var date = new Date();
-            self.year = date.getFullYear();
         }
 
         self.reTranslate = reTranslate;
@@ -36,15 +33,9 @@
             $state.go('login');
         };
 
-        self.isAuthorized = function (permission) {
-            return self.authorization.isAuthorized(permission);
+        self.isVisible = function (state) {
+            return self.authorization.isAuthorized(state);
         };
-
-        self.goToParentState = function (state) {
-            var toState = permissionFactory.getByName(self.authorization.permissions, state);
-            if (toState)
-                $state.go(toState);
-        }
 
         self.isLogged = function () {
             return self.authentication.isAuth && $(document).width() > 768;

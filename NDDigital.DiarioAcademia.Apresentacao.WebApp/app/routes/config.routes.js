@@ -25,7 +25,7 @@
                     data: {
                         displayName: route.displayName,
                         allowAnnonymous: route.allowAnnonymous,
-                        $$permissionId: verifyPermission(routes, i, route)
+                        $$permissionId: verififyPermission(routes, i, route)
                     },
                     ncyBreadcrumb: {
                         label: route.displayName,
@@ -39,20 +39,19 @@
        
     }
 
-    function verifyPermission(routes, startIndex, route) {
-        var exclude = ['home', 'homeapp'];
-        var errorpermissionIdUndefined = " can't have the attribute $$permissionId to be undefined",
-            errorpermissionIdAlreadyExists = " can't have the attribute $$permissionId because already exists";
+    function verififyPermission(routes, startIndex, route) {
+        var error$$permissionIdUndefined = " can't have the attribute $$permissionId to be undefined",
+            error$$permissionIdAlreadyExists = " can't have the attribute $$permissionId because already exists";
         if (route.abstract)
             return;
         for (var i = startIndex + 1; i < routes.length; i++) {
             var other = routes[i];
-            if (other.abstract || exclude.contains(other.name))
+            if (other.abstract)
                 continue;
             if (!other.$$permissionId)
-                throwRouteError(routes[i].name, errorpermissionIdUndefined);
+                throwRouteError(routes[i].state, error$$permissionIdUndefined);
             if (other.$$permissionId == route.$$permissionId)
-                throwRouteError(routes[i].name, errorpermissionIdAlreadyExists);
+                throwRouteError(routes[i].state, error$$permissionIdAlreadyExists);
         }
         return route.$$permissionId;
     }
