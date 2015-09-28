@@ -59,6 +59,12 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.Base
             //Adiciona uma aula
             context.Set<Aula>().Add(ObjectBuilder.CreateAula(turmEncontrada));
             context.SaveChanges();
+
+            //Busca aluno do id = 1
+            var aulaEncontrada = context.Set<Aula>().Find(1);
+
+            context.Set<Presenca>().Add(ObjectBuilder.CreatePresenca(alunoEncontrado,aulaEncontrada, "C"));
+            context.SaveChanges();
         }
 
         protected void SeedContext(AuthContext context)

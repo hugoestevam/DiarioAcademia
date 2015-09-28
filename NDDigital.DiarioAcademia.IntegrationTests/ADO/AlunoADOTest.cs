@@ -55,11 +55,20 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.ADO
 
         [TestMethod]
         [TestCategory(TestCategory)]
-        public void Deveria_Buscar_Todas_Alunos_SQL_Test()
+        public void Deveria_Buscar_Todos_Alunos_SQL_Test()
         {
             var alunosEncontrados = AlunoRepository.GetAll();
 
             Assert.IsNotNull(alunosEncontrados);
+        }
+
+        [TestMethod]
+        [TestCategory(TestCategory)]
+        public void Deveria_Buscar_Aluno_Com_Presencas_SQL_Test()
+        {
+            var alunoEncontrado = AlunoRepository.GetById(1);
+
+            Assert.IsNotNull(alunoEncontrado.Presencas);
         }
 
         [TestMethod]

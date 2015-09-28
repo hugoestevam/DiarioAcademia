@@ -60,20 +60,20 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.SQL.Repositories
               INNER JOIN TBTurma AS T ON T.Id = A.Turma_Id
               WHERE A.Id = {0}id";
 
-        public const string SqlInsertPresenca =
-            @"INSERT INTO TBPresenca (StatusPresenca, Aula_Id, Aluno_Id)
-              VALUES ({0}StatusPresenca, {0}Aula_Id, {0}Aluno_Id)";
+        //public const string SqlInsertPresenca =
+        //    @"INSERT INTO TBPresenca (StatusPresenca, Aula_Id, Aluno_Id)
+        //      VALUES ({0}StatusPresenca, {0}Aula_Id, {0}Aluno_Id)";
 
-        public const string SqlSelectPresenca =
-            @"SELECT P.Id,P.StatusPresenca,P.Aula_Id,P.Aluno_Id,
-	                 AL.Data, AL.ChamadaRealizada, AL.Turma_Id,
-	                 A.Nome, A.Endereco_Cep, A.Endereco_Bairro, A.Endereco_Localidade, A.Endereco_Uf,
-	                 T.Ano
-              FROM TBPresenca AS P
-                  INNER JOIN TBAula AS AL ON AL.Id = P.Aula_Id
-                  INNER JOIN TBAluno AS A ON A.Id = P.Aluno_Id
-                  INNER JOIN TBTurma AS T ON T.Id = AL.Turma_Id
-              WHERE Aluno_Id = {0}Id_Aluno and Aula_Id = {0}Id_Aula";
+        //public const string SqlSelectPresenca =
+        //    @"SELECT P.Id,P.StatusPresenca,P.Aula_Id,P.Aluno_Id,
+        //          AL.Data, AL.ChamadaRealizada, AL.Turma_Id,
+        //          A.Nome, A.Endereco_Cep, A.Endereco_Bairro, A.Endereco_Localidade, A.Endereco_Uf,
+        //          T.Ano
+        //      FROM TBPresenca AS P
+        //          INNER JOIN TBAula AS AL ON AL.Id = P.Aula_Id
+        //          INNER JOIN TBAluno AS A ON A.Id = P.Aluno_Id
+        //          INNER JOIN TBTurma AS T ON T.Id = AL.Turma_Id
+        //      WHERE Aluno_Id = {0}Id_Aluno and Aula_Id = {0}Id_Aula";
 
         public const string SqlUpdatePresenca =
             @"UPDATE TBPresenca SET StatusPresenca = {0}StatusPresenca,
@@ -92,11 +92,14 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.SQL.Repositories
                   INNER JOIN TBTurma AS T ON T.Id = AL.Turma_Id
               WHERE P.Aluno_Id = {0}Id_Aluno";
 
+        private PresencaRepositorySql _repoPresenca;
+
         #endregion Querys
 
         public AlunoRepositorySql(AdoNetFactory factory)
             : base(factory)
         {
+            _repoPresenca = new PresencaRepositorySql(factory);
         }
 
         public Aluno Add(Aluno entity)
@@ -120,17 +123,12 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.SQL.Repositories
         public IList<Aluno> GetAll()
         {
             IList<Aluno> listaAlunos = null;
-            List<Presenca> listaPresencasAlunos = null;
 
             listaAlunos = GetAll(SqlSelect, Make);
 
             foreach (var aluno in listaAlunos)
             {
-                var parms = new object[] { "Id_Aluno", aluno.Id };
-
-                listaPresencasAlunos = GetAll(SqlSelectPresencasByAluno, MakePresenca, parms);
-
-                aluno.Presencas = listaPresencasAlunos;
+                aluno.Presencas = _repoPresenca.GetAllByAluno(aluno.Id);
             }
 
             return listaAlunos;
@@ -154,24 +152,7 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.SQL.Repositories
         public void Update(Aluno entity)
         {
             try
-            {
-                var idAula = entity.Presencas[0].Aula.Id;
-
-                var parms = new object[] { "Id_Aluno", entity.Id, "Id_Aula", idAula };
-
-                var idPresenca = Get(SqlSelectPresenca, MakePresenca, parms).Id;
-
-                var presenca = entity.Presencas[idPresenca];
-
-                if (presenca.Aula.ChamadaRealizada)
-                {
-                    Update(SqlUpdatePresenca, TakePresenca(presenca));
-                }
-                else
-                {
-                    Insert(SqlInsertPresenca, TakePresenca(presenca));
-                }
-
+            {               
                 Update(SqlUpdate, Take(entity));
             }
             catch (Exception te)
@@ -286,6 +267,5 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.SQL.Repositories
                 .Where(a => a.Turma.Id == turmaId)
                 .ToList();
         }
-
     }
 }

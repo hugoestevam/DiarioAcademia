@@ -26,11 +26,11 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.Base
             new Turma(2014)).Build();
         }
 
-        public static Presenca CreatePresenca()
+        public static Presenca CreatePresenca(Aluno aluno, Aula aula, string status)
         {
             return Builder<Presenca>.CreateNew()
           .WithConstructor(() =>
-          new Presenca()).Build();
+          new Presenca(aula, aluno, status)).Build();
         }
 
         public static Aluno CreateAluno(Turma turma)

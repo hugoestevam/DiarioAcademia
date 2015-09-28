@@ -62,7 +62,16 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.ADO
         {
             var aulasEncontradas = AulaRepository.GetAll();
 
-            Assert.AreEqual(1, aulasEncontradas.Count);
+            Assert.IsNotNull(aulasEncontradas);
+        }
+
+        [TestMethod]
+        [TestCategory(TestCategory)]
+        public void Deveria_Buscar_Aula_Com_Presencas_SQL_Test()
+        {
+            var aulaEncontrada = AulaRepository.GetById(1);
+
+            Assert.IsNotNull(aulaEncontrada.Presencas);
         }
 
         [TestMethod]

@@ -51,25 +51,25 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.SQL.Repositories
 //                                    Aluno_Id = {0}Aluno_Id
 //              WHERE Id = {0}Id";
 
-        public const string SqlSelectPresencasByAula =
-            @"SELECT P.Id,P.StatusPresenca,P.Aula_Id,P.Aluno_Id,
-	                 AL.Data, AL.ChamadaRealizada, AL.Turma_Id,
-	                 A.Nome, A.Endereco_Cep, A.Endereco_Bairro, A.Endereco_Localidade, A.Endereco_Uf,
-	                 T.Ano
-              FROM TBPresenca AS P
-                  INNER JOIN TBAula AS AL ON AL.Id = P.Aula_Id
-                  INNER JOIN TBAluno AS A ON A.Id = P.Aluno_Id
-                  INNER JOIN TBTurma AS T ON T.Id = AL.Turma_Id
-              WHERE P.Aula_Id = {0}Id_Aula";
+        //public const string SqlSelectPresencasByAula =
+        //    @"SELECT P.Id,P.StatusPresenca,P.Aula_Id,P.Aluno_Id,
+	       //          AL.Data, AL.ChamadaRealizada, AL.Turma_Id,
+	       //          A.Nome, A.Endereco_Cep, A.Endereco_Bairro, A.Endereco_Localidade, A.Endereco_Uf,
+	       //          T.Ano
+        //      FROM TBPresenca AS P
+        //          INNER JOIN TBAula AS AL ON AL.Id = P.Aula_Id
+        //          INNER JOIN TBAluno AS A ON A.Id = P.Aluno_Id
+        //          INNER JOIN TBTurma AS T ON T.Id = AL.Turma_Id
+        //      WHERE P.Aula_Id = {0}Id_Aula";
 
         #endregion Querys
 
-        public PresencaRepositorySql repoPresenca;
+        public PresencaRepositorySql _repoPresenca;
 
         public AulaRepositorySql(AdoNetFactory factory)
             : base(factory)
         {
-            repoPresenca = new PresencaRepositorySql(factory);
+            _repoPresenca = new PresencaRepositorySql(factory);
         }
 
         public Aula Add(Aula entity)
@@ -123,7 +123,7 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.SQL.Repositories
                 {
                     var parms = new object[] { "Id_Aula", aula.Id };
 
-                    aula.Presencas = GetAll(SqlSelectPresencasByAula, MakePresenca, parms);
+                    aula.Presencas = _repoPresenca.GetAllByAula(aula.Id);
                 }
             }
             catch (Exception te)
@@ -157,7 +157,7 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.SQL.Repositories
 
                 var parmsPresenca = new object[] { "Id_Aula", id };
 
-                aula.Presencas = GetAll(SqlSelectPresencasByAula, MakePresenca, parmsPresenca);
+                aula.Presencas = _repoPresenca.GetAllByAula(id);
             }
             catch (Exception te)
             {
