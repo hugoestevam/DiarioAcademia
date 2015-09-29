@@ -6,6 +6,8 @@ Para executar este projeto em seu potencial é necessário ter um servidor Node 
 * Obtenha o NodeJS pelo:
  * [Site oficial](https://nodejs.org/), ou use
  * [Chocolatey](https://chocolatey.org/)
+* Obtenha o Phyton pelo:
+ * [Phython 2.7.3](https://www.python.org/ftp/python/2.7.3/python-2.7.3.msi)
  
 
 #### Preparando o ambiente
@@ -16,11 +18,10 @@ Para executar este projeto em seu potencial é necessário ter um servidor Node 
         -reinicie o prompt
         -aponte para a pasta do projeto web
     > npm install
-        -Em caso de aparecer avisos na instalação, como o de phyton pode ignorar*.
+        -Em caso de aparecer avisos na instalação pode ignorar.
     > bower install
     > gulp start
 
-*Caso deseje solucionar, instale o  [Phython 2.7.3](https://www.python.org/ftp/python/2.7.3/python-2.7.3.msi)
 
 ##### Detalhes
 * Inicie o prompt com permissões de administrador e apontando para a [pasta do projeto web](https://github.com/AlexandreRech/DiarioAcademia/tree/master/NDDigital.DiarioAcademia.Apresentacao.WebApp) (onde está o `gulpfile.js`)
