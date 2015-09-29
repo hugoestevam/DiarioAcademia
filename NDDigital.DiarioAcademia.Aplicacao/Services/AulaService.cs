@@ -66,8 +66,6 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
                 aluno.RegistraPresenca(aula, item.Status);
 
                 _alunoRepository.Update(aluno);
-
-                _unitOfWork.Commit();
             }
 
             aula.ChamadaRealizada = true;
@@ -126,14 +124,21 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
             Aula aula = _aulaRepository.GetById(aulaDTO.Id);
 
             chamada.ChamadaRealizada = aula.ChamadaRealizada;
-         
+
+
             if (aula.ChamadaRealizada)
             {
-                chamada.Alunos = aula.Presencas.Select(x => new ChamadaAlunoDTO(x.Aluno.Id, x.Aluno.Nome, x.StatusPresenca)).ToList();
+                chamada.Alunos = aula.Presencas
+                    .Select(x => new ChamadaAlunoDTO
+                        (x.Aluno.Id, x.Aluno.Nome, x.StatusPresenca)).ToList();
             }
-            else {
+            else
+            {
                 var alunos = _alunoRepository.GetAllByTurmaId(aulaDTO.TurmaId);
-                chamada.Alunos = alunos.Select(x => new ChamadaAlunoDTO(x.Id, x.Nome, "C")).ToList();
+
+                chamada.Alunos = alunos
+                    .Select(x => new ChamadaAlunoDTO
+                        (x.Id, x.Nome, "C")).ToList();
             }
 
             return chamada;

@@ -121,8 +121,6 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.SQL.Repositories
 
                 foreach (var aula in listAulas)
                 {
-                    var parms = new object[] { "Id_Aula", aula.Id };
-
                     aula.Presencas = _repoPresenca.GetAllByAula(aula.Id);
                 }
             }
@@ -235,7 +233,6 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.SQL.Repositories
         private static Presenca MakePresenca(IDataReader reader)
         {
             Presenca presenca = new Presenca();
-
             presenca.Id = Convert.ToInt32(reader["Id"]);
             presenca.Aluno = new Aluno
             {
@@ -266,7 +263,6 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.SQL.Repositories
                 },
             };
             presenca.StatusPresenca = Convert.ToString(reader["StatusPresenca"]);
-
             return presenca;
         }
 
