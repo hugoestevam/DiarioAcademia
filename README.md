@@ -30,7 +30,7 @@ Para executar este projeto em seu potencial é necessário ter um servidor Node 
  * O Node vai ler e baixar cada uma das dependencia listadas em `package.json`
 * Instale todas as dependencias do client com `> bower install`
  * O Node vai ler e baixar cada uma das dependencia listadas em `bower.json`
-* Insira simplemente `> gulp`. 
+* Insira simplesmente `> gulp`. 
  * Se tudo estiver ok, o prompt irá listar todas as tasks do gulp
 
 #### Executando
