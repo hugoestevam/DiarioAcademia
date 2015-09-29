@@ -32,12 +32,6 @@
                 .catch(logger.errorCallback);
         };
 
-        self.getAlunosChamadaByTurma = function (id) {
-            return alunoService.getAlunoByTurmaId(id)
-                .then(convertToAlunoChamadaDto);
-        };
-
-
         //private methods
         function convertToChamadaDto(data) {
             return chamadaAdapter.toChamadaDto(data);

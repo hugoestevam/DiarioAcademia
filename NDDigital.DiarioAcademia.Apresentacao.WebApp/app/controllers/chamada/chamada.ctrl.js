@@ -41,10 +41,6 @@
         vm.populateAulas = function (turma) {
             if (turma) {
                 vm.getAulaByTurma(turma);
-                chamadaService.getAlunosChamadaByTurma(turma.id).then(function (results) {
-                    vm.talunos = results;
-                    vm.aulaSelected = false;
-                });
                 vm.turmaSelected = true;
                 vm.aulaSelected = false;
             }
@@ -55,8 +51,7 @@
             if (vm.chamada.aula) {
                 chamadaService.getChamadaByAula(vm.chamada.aula.id).then(function (data) {
                     vm.chamadaDto = data;
-                    checkStatus(vm.chamadaDto.alunos);
-                    vm.alunos = vm.talunos;
+                    vm.alunos = checkStatus(vm.chamadaDto, vm.chamadaDto.alunos);
                 });
             }
             vm.aulaSelected = true;
@@ -75,23 +70,14 @@
         }
 
         //private methods
-        function checkStatus(alunos) {
+        function checkStatus(chamadaDto, alunos) {
             var index;
-            for (var j = 0; j < vm.talunos.length; j++) {
-                index = containsAluno(alunos, vm.talunos[j]);
-                vm.talunos[j].status = index >= 0 ? alunos[index].status != "F" : false;
+            for (var j = 0; j < alunos.length; j++) {
+                alunos[j].status = chamadaDto.chamadaRealizada && alunos[j].status != "F";
             }
+            return alunos;
         }
 
-        function containsAluno(alunos, aluno) {
-            if (!alunos || alunos.length == 0)
-                return -1;
-            for (var i = 0; i < alunos.length; i++) {
-                if (alunos[i].alunoId == aluno.alunoId)
-                    return i;
-            }
-            return -1;
-        }
 
         function clearFields() {
             vm.chamada = {};
