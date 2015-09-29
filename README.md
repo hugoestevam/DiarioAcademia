@@ -18,7 +18,7 @@ Para executar este projeto em seu potencial é necessário ter um servidor Node 
         -reinicie o prompt
         -aponte para a pasta do projeto web
     > npm install
-        -Em caso de aparecer avisos na instalação pode ignorar.
+        -Em caso de aparecer avisos em relação ao phyton na instalação pode ignorar.
     > bower install
     > gulp start
 
