@@ -16,7 +16,7 @@ Para executar este projeto em seu potencial é necessário ter um servidor Node 
         -reinicie o prompt
         -aponte para a pasta do projeto web
     > npm install
-        -Em caso de aparecer erros: espere a instalação terminar e execute o comando "npm install" novamente.
+        -Em caso de aparecer erros na instalação, como o de phyton, pode ignorar ou instalar [Phython 2.7.3](https://www.python.org/ftp/python/2.7.3/python-2.7.3.msi)
     > bower install
     > gulp start
 
