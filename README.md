@@ -10,12 +10,21 @@ Para executar este projeto em seu potencial é necessário ter um servidor Node 
  * [Python 2.7.3](https://www.python.org/ftp/python/2.7.3/python-2.7.3.msi)
 * Certifique-se de possuir o Visual Studio instalado.
  
- 
+#### Baixando o Projeto
+
+O download do projeto pode ser através do [download do zip](https://github.com/AlexandreRech/DiarioAcademia/archive/master.zip) ou pelo `git` seguindo os passos:
+
+     > choco install git 
+        -reinicie o prompt
+        -aponte para a pasta da solução
+     > git clone https://github.com/AlexandreRech/DiarioAcademia.git
+
 #### Preparando o ambiente
 
 ##### Resumo dos comandos
-    > npm install bower -g
-    > npm install gulp -g
+    > npm install npm -g
+        -reinicie o prompt
+    > npm install gulp bower -g
         -reinicie o prompt
         -aponte para a pasta do projeto web
     > npm install
@@ -26,11 +35,11 @@ Para executar este projeto em seu potencial é necessário ter um servidor Node 
 
 ##### Detalhes
 * Inicie o prompt com permissões de administrador e apontando para a [pasta do projeto web](https://github.com/AlexandreRech/DiarioAcademia/tree/master/NDDigital.DiarioAcademia.Apresentacao.WebApp) (onde está o `gulpfile.js`)
-* Instale o bower globalmente inserindo no prompt `> npm install bower -g`
+* Instale a versão mais atual do npm  `> npm install npm -g`
+* Instale gulp e bower globalmente inserindo no prompt `> npm install gulp bower -g`
  * Será instalado na pasta de sistema `AppData` no caso do Windows
-* Instale o gulp globalmente inserindo no prompt `> npm install gulp -g`
-* Instale todas as dependencias de desenvolvedor com `> npm install`
- * O Node vai ler e baixar cada uma das dependencia listadas em `package.json`
+* Execute o comando `npm install`
+ * O Node vai ler e baixar cada uma das dependencias listadas em `package.json`
 * Instale todas as dependencias do client com `> bower install`
  * O Node vai ler e baixar cada uma das dependencia listadas em `bower.json`
 * Insira simplesmente `> gulp`. 
