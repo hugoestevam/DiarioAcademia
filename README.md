@@ -12,7 +12,7 @@ Para executar este projeto em seu potencial é necessário ter um servidor Node 
  
 #### Baixando o Projeto
 
-O download do projeto pode ser através do [download do zip](https://github.com/AlexandreRech/DiarioAcademia/archive/master.zip) ou pelo `git` seguindo os passos:
+O download do projeto pode ser feito através do [download do zip](https://github.com/AlexandreRech/DiarioAcademia/archive/master.zip) ou pelo `git` seguindo os passos:
 
      > choco install git 
         -reinicie o prompt
@@ -28,7 +28,7 @@ O download do projeto pode ser através do [download do zip](https://github.com/
         -reinicie o prompt
         -aponte para a pasta do projeto web
     > npm install
-        -Em caso de aparecer avisos em relação ao phyton na instalação pode ignorar.
+        -Avisos em relação ao phyton na instalação podem ser ignorados.
     > bower install
     > gulp start
 
