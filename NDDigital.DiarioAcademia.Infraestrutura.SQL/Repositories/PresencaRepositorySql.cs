@@ -96,6 +96,7 @@ public class PresencaRepositorySql : RepositoryBaseADO, IPresencaRepository
         try
         {
             var presencaRemovida = GetById(id);
+
             Delete(SqlDelete, Take(presencaRemovida));
         }
         catch (Exception te)
@@ -109,7 +110,10 @@ public class PresencaRepositorySql : RepositoryBaseADO, IPresencaRepository
         try
         {
             var presencaRemovida = GetById(entity.Id);
+
             Delete(SqlDelete, Take(presencaRemovida));
+
+            _uow.Commit();
         }
         catch (Exception te)
         {
@@ -214,8 +218,6 @@ public class PresencaRepositorySql : RepositoryBaseADO, IPresencaRepository
             var parms = new object[] { "Id_Aluno", idAluno };
 
             listPresenca = GetAll(SqlSelectByAluno, Make, parms);
-
-            //_uow.Commit();
         }
         catch (Exception te)
         {
