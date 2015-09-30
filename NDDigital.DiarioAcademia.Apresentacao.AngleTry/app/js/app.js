@@ -105,17 +105,17 @@
     'use strict';
 
     angular
-        .module('app.translate', []);
-})();
-(function() {
-    'use strict';
-
-    angular
         .module('app.utils', [
           'app.colors'
           ]);
 })();
 
+(function() {
+    'use strict';
+
+    angular
+        .module('app.translate', []);
+})();
 (function() {
     'use strict';
 
@@ -315,8 +315,7 @@
         })
         ;
 
-})();
-
+})();                       
 (function() {
     'use strict';
 
@@ -568,79 +567,78 @@
  * Provides helper functions for routes definition
  =========================================================*/
 
-(function () {
+(function() {
     'use strict';
 
     angular
         .module('app.routes')
         .provider('RouteHelpers', RouteHelpersProvider)
-    ;
+        ;
 
     RouteHelpersProvider.$inject = ['APP_REQUIRES'];
     function RouteHelpersProvider(APP_REQUIRES) {
 
-        /* jshint validthis:true */
-        return {
-            // provider access level
+      /* jshint validthis:true */
+      return {
+        // provider access level
+        basepath: basepath,
+        resolveFor: resolveFor,
+        // controller access level
+        $get: function() {
+          return {
             basepath: basepath,
-            resolveFor: resolveFor,
-            // controller access level
-            $get: function () {
-                return {
-                    basepath: basepath,
-                    resolveFor: resolveFor
-                };
-            }
-        };
-
-        // Set here the base of the relative path
-        // for all app views
-        function basepath(uri) {
-            return 'app/views/' + uri;
+            resolveFor: resolveFor
+          };
         }
+      };
 
-        // Generates a resolve object by passing script names
-        // previously configured in constant.APP_REQUIRES
-        function resolveFor() {
-            var _args = arguments;
-            return {
-                deps: ['$ocLazyLoad', '$q', function ($ocLL, $q) {
-                    // Creates a promise chain for each argument
-                    var promise = $q.when(1); // empty promise
-                    for (var i = 0, len = _args.length; i < len; i++) {
-                        promise = andThen(_args[i]);
-                    }
-                    return promise;
+      // Set here the base of the relative path
+      // for all app views
+      function basepath(uri) {
+        return 'app/views/' + uri;
+      }
 
-                    // creates promise to chain dynamically
-                    function andThen(_arg) {
-                        // also support a function that returns a promise
-                        if (typeof _arg === 'function')
-                            return promise.then(_arg);
-                        else
-                            return promise.then(function () {
-                                // if is a module, pass the name. If not, pass the array
-                                var whatToLoad = getRequired(_arg);
-                                // simple error check
-                                if (!whatToLoad) return $.error('Route resolve: Bad resource name [' + _arg + ']');
-                                // finally, return a promise
-                                return $ocLL.load(whatToLoad);
-                            });
-                    }
-                    // check and returns required data
-                    // analyze module items with the form [name: '', files: []]
-                    // and also simple array of script files (for not angular js)
-                    function getRequired(name) {
-                        if (APP_REQUIRES.modules)
-                            for (var m in APP_REQUIRES.modules)
-                                if (APP_REQUIRES.modules[m].name && APP_REQUIRES.modules[m].name === name)
-                                    return APP_REQUIRES.modules[m];
-                        return APP_REQUIRES.scripts && APP_REQUIRES.scripts[name];
-                    }
+      // Generates a resolve object by passing script names
+      // previously configured in constant.APP_REQUIRES
+      function resolveFor() {
+        var _args = arguments;
+        return {
+          deps: ['$ocLazyLoad','$q', function ($ocLL, $q) {
+            // Creates a promise chain for each argument
+            var promise = $q.when(1); // empty promise
+            for(var i=0, len=_args.length; i < len; i ++){
+              promise = andThen(_args[i]);
+            }
+            return promise;
 
-                }]
-            };
-        } // resolveFor
+            // creates promise to chain dynamically
+            function andThen(_arg) {
+              // also support a function that returns a promise
+              if(typeof _arg === 'function')
+                  return promise.then(_arg);
+              else
+                  return promise.then(function() {
+                    // if is a module, pass the name. If not, pass the array
+                    var whatToLoad = getRequired(_arg);
+                    // simple error check
+                    if(!whatToLoad) return $.error('Route resolve: Bad resource name [' + _arg + ']');
+                    // finally, return a promise
+                    return $ocLL.load( whatToLoad );
+                  });
+            }
+            // check and returns required data
+            // analyze module items with the form [name: '', files: []]
+            // and also simple array of script files (for not angular js)
+            function getRequired(name) {
+              if (APP_REQUIRES.modules)
+                  for(var m in APP_REQUIRES.modules)
+                      if(APP_REQUIRES.modules[m].name && APP_REQUIRES.modules[m].name === name)
+                          return APP_REQUIRES.modules[m];
+              return APP_REQUIRES.scripts && APP_REQUIRES.scripts[name];
+            }
+
+          }]};
+      } // resolveFor
 
     }
 
@@ -691,7 +689,6 @@
               title: 'Submenu',
               templateUrl: helper.basepath('submenu.html')
           })
-
           // 
           // CUSTOM RESOLVES
           //   Add your own resolves properties
@@ -730,14 +727,13 @@
       // ----------------------------------- 
       $rootScope.app = {
         name: 'Angle',
-        description: 'DA Style',
-//        description: 'Angular Bootstrap Admin Template',
+        description: 'Angular Bootstrap Admin Template',
         year: ((new Date()).getFullYear()),
         layout: {
           isFixed: true,
           isCollapsed: false,
           isBoxed: false,
-          isRTL: true,
+          isRTL: false,
           horizontal: false,
           isFloat: false,
           asideHover: false,
@@ -1126,68 +1122,6 @@
     }
 })();
 
-(function() {
-    'use strict';
-
-    angular
-        .module('app.translate')
-        .config(translateConfig)
-        ;
-    translateConfig.$inject = ['$translateProvider'];
-    function translateConfig($translateProvider){
-  
-      $translateProvider.useStaticFilesLoader({
-          prefix : 'app/i18n/',
-          suffix : '.json'
-      });
-      $translateProvider.preferredLanguage('en');
-      $translateProvider.useLocalStorage();
-      $translateProvider.usePostCompiling(true);
-
-    }
-})();
-(function() {
-    'use strict';
-
-    angular
-        .module('app.translate')
-        .run(translateRun)
-        ;
-    translateRun.$inject = ['$rootScope', '$translate'];
-    
-    function translateRun($rootScope, $translate){
-
-      // Internationalization
-      // ----------------------
-
-      $rootScope.language = {
-        // Handles language dropdown
-        listIsOpen: false,
-        // list of available languages
-        available: {
-          'en':       'English',
-          'es_AR':    'Español'
-        },
-        // display always the current ui language
-        init: function () {
-          var proposedLanguage = $translate.proposedLanguage() || $translate.use();
-          var preferredLanguage = $translate.preferredLanguage(); // we know we have set a preferred one in app.config
-          $rootScope.language.selected = $rootScope.language.available[ (proposedLanguage || preferredLanguage) ];
-        },
-        set: function (localeId) {
-          // Set the new idiom
-          $translate.use(localeId);
-          // save a reference for the current language
-          $rootScope.language.selected = $rootScope.language.available[localeId];
-          // finally toggle dropdown
-          $rootScope.language.listIsOpen = ! $rootScope.language.listIsOpen;
-        }
-      };
-
-      $rootScope.language.init();
-
-    }
-})();
 /**=========================================================
  * Module: animate-enabled.js
  * Enable or disables ngAnimate for element with directive
@@ -1613,6 +1547,68 @@
     }
 })();
 
+(function() {
+    'use strict';
+
+    angular
+        .module('app.translate')
+        .config(translateConfig)
+        ;
+    translateConfig.$inject = ['$translateProvider'];
+    function translateConfig($translateProvider){
+  
+      $translateProvider.useStaticFilesLoader({
+          prefix : 'app/i18n/',
+          suffix : '.json'
+      });
+      $translateProvider.preferredLanguage('en');
+      $translateProvider.useLocalStorage();
+      $translateProvider.usePostCompiling(true);
+
+    }
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.translate')
+        .run(translateRun)
+        ;
+    translateRun.$inject = ['$rootScope', '$translate'];
+    
+    function translateRun($rootScope, $translate){
+
+      // Internationalization
+      // ----------------------
+
+      $rootScope.language = {
+        // Handles language dropdown
+        listIsOpen: false,
+        // list of available languages
+        available: {
+          'en':       'English',
+          'es_AR':    'Español'
+        },
+        // display always the current ui language
+        init: function () {
+          var proposedLanguage = $translate.proposedLanguage() || $translate.use();
+          var preferredLanguage = $translate.preferredLanguage(); // we know we have set a preferred one in app.config
+          $rootScope.language.selected = $rootScope.language.available[ (proposedLanguage || preferredLanguage) ];
+        },
+        set: function (localeId) {
+          // Set the new idiom
+          $translate.use(localeId);
+          // save a reference for the current language
+          $rootScope.language.selected = $rootScope.language.available[localeId];
+          // finally toggle dropdown
+          $rootScope.language.listIsOpen = ! $rootScope.language.listIsOpen;
+        }
+      };
+
+      $rootScope.language.init();
+
+    }
+})();
 (function() {
     'use strict';
 

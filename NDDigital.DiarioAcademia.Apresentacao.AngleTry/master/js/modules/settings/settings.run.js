@@ -13,14 +13,14 @@
       // ----------------------------------- 
       $rootScope.app = {
         name: 'Angle',
-        description: 'DA Style',
+        description: 'Anisan Style',
 //        description: 'Angular Bootstrap Admin Template',
         year: ((new Date()).getFullYear()),
         layout: {
           isFixed: true,
           isCollapsed: false,
           isBoxed: false,
-          isRTL: true,
+          isRTL: false,
           horizontal: false,
           isFloat: false,
           asideHover: false,

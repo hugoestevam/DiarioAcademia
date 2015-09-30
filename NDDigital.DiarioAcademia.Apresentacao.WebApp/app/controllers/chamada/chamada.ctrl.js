@@ -73,7 +73,7 @@
         function checkStatus(chamadaDto, alunos) {
             var index;
             for (var j = 0; j < alunos.length; j++) {
-                alunos[j].status = alunos[j].status != "F";
+                alunos[j].status = chamadaDto.chamadaRealizada && alunos[j].status != "F";
             }
             return alunos;
         }
