@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq.Expressions;
+using System.Linq;
 
 namespace NDDigital.DiarioAcademia.Infraestrutura.SQL.Repositories
 {
@@ -40,27 +41,6 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.SQL.Repositories
               FROM TBAula AS A
               INNER JOIN TBTurma AS T ON A.Turma_Id = T.Id
               WHERE A.Id = {0}Id";
-
-//        public const string SqlInsertPresenca =
-//            @"INSERT INTO TBPresenca (StatusPresenca, Aula_Id, Aluno_Id)
-//              VALUES ({0}StatusPresenca, {0}Aula_Id, {0}Aluno_Id)";
-
-//        public const string SqlUpdatePresenca =
-//            @"UPDATE TBPresenca SET StatusPresenca = {0}StatusPresenca,
-//                                    Aula_Id = {0}Aula_Id,
-//                                    Aluno_Id = {0}Aluno_Id
-//              WHERE Id = {0}Id";
-
-        //public const string SqlSelectPresencasByAula =
-        //    @"SELECT P.Id,P.StatusPresenca,P.Aula_Id,P.Aluno_Id,
-	       //          AL.Data, AL.ChamadaRealizada, AL.Turma_Id,
-	       //          A.Nome, A.Endereco_Cep, A.Endereco_Bairro, A.Endereco_Localidade, A.Endereco_Uf,
-	       //          T.Ano
-        //      FROM TBPresenca AS P
-        //          INNER JOIN TBAula AS AL ON AL.Id = P.Aula_Id
-        //          INNER JOIN TBAluno AS A ON A.Id = P.Aluno_Id
-        //          INNER JOIN TBTurma AS T ON T.Id = AL.Turma_Id
-        //      WHERE P.Aula_Id = {0}Id_Aula";
 
         #endregion Querys
 
@@ -153,8 +133,6 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.SQL.Repositories
 
                 aula = Get(SqlSelectById, Make, parms);
 
-                var parmsPresenca = new object[] { "Id_Aula", id };
-
                 aula.Presencas = _repoPresenca.GetAllByAula(id);
             }
             catch (Exception te)
@@ -171,18 +149,6 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.SQL.Repositories
 
             try
             {
-                //foreach (var presenca in entity.Presencas)
-                //{
-                //    if (entity.ChamadaRealizada)
-                //    {
-                //        Update(SqlUpdatePresenca, TakePresenca(presenca));
-                //    }
-                //    else
-                //    {
-                //        Insert(SqlInsertPresenca, TakePresenca(presenca));
-                //    }
-                //}
-
                 Update(SqlUpdate, Take(entity));
             }
             catch (Exception te)

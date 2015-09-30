@@ -60,37 +60,11 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.SQL.Repositories
               INNER JOIN TBTurma AS T ON T.Id = A.Turma_Id
               WHERE A.Id = {0}id";
 
-        //public const string SqlInsertPresenca =
-        //    @"INSERT INTO TBPresenca (StatusPresenca, Aula_Id, Aluno_Id)
-        //      VALUES ({0}StatusPresenca, {0}Aula_Id, {0}Aluno_Id)";
-
-        //public const string SqlSelectPresenca =
-        //    @"SELECT P.Id,P.StatusPresenca,P.Aula_Id,P.Aluno_Id,
-        //          AL.Data, AL.ChamadaRealizada, AL.Turma_Id,
-        //          A.Nome, A.Endereco_Cep, A.Endereco_Bairro, A.Endereco_Localidade, A.Endereco_Uf,
-        //          T.Ano
-        //      FROM TBPresenca AS P
-        //          INNER JOIN TBAula AS AL ON AL.Id = P.Aula_Id
-        //          INNER JOIN TBAluno AS A ON A.Id = P.Aluno_Id
-        //          INNER JOIN TBTurma AS T ON T.Id = AL.Turma_Id
-        //      WHERE Aluno_Id = {0}Id_Aluno and Aula_Id = {0}Id_Aula";
-
         public const string SqlUpdatePresenca =
             @"UPDATE TBPresenca SET StatusPresenca = {0}StatusPresenca,
                                     Aula_Id = {0}Aula_Id,
                                     Aluno_Id = {0}Aluno_Id
               WHERE Id = {0}Id";
-
-        public const string SqlSelectPresencasByAluno =
-            @"SELECT P.Id,P.StatusPresenca,P.Aula_Id,P.Aluno_Id,
-	                 AL.Data, AL.ChamadaRealizada, AL.Turma_Id,
-	                 A.Nome, A.Endereco_Cep, A.Endereco_Bairro, A.Endereco_Localidade, A.Endereco_Uf,
-	                 T.Ano
-              FROM TBPresenca AS P
-                  INNER JOIN TBAula AS AL ON AL.Id = P.Aula_Id
-                  INNER JOIN TBAluno AS A ON A.Id = P.Aluno_Id
-                  INNER JOIN TBTurma AS T ON T.Id = AL.Turma_Id
-              WHERE P.Aluno_Id = {0}Id_Aluno";
 
         private PresencaRepositorySql _repoPresenca;
 
@@ -142,9 +116,7 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.SQL.Repositories
 
             aluno = Get(SqlSelectById, Make, parms);
 
-            var parms_ = new object[] { "Id_Aluno", aluno.Id };
-
-            aluno.Presencas = GetAll(SqlSelectPresencasByAluno, MakePresenca, parms_);
+            aluno.Presencas = _repoPresenca.GetAllByAluno(id);
 
             return aluno;
         }
@@ -152,7 +124,19 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.SQL.Repositories
         public void Update(Aluno entity)
         {
             try
-            {               
+            {
+                foreach (var presenca in entity.Presencas)
+                {
+                    if (presenca.Aula.ChamadaRealizada)
+                    {
+                        _repoPresenca.Update(presenca);
+                    }
+                    else
+                    {
+                        _repoPresenca.Add(presenca);
+                    }
+                }
+
                 Update(SqlUpdate, Take(entity));
             }
             catch (Exception te)
@@ -182,44 +166,6 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.SQL.Repositories
             return aluno;
         }
 
-        private static Presenca MakePresenca(IDataReader reader)
-        {
-            Presenca presenca = new Presenca();
-
-            presenca.Id = Convert.ToInt32(reader["Id"]);
-            presenca.Aluno = new Aluno
-            {
-                Id = Convert.ToInt32(reader["Aluno_Id"]),
-                Nome = Convert.ToString(reader["Nome"]),
-                Turma = new Turma
-                {
-                    Id = Convert.ToInt32(reader["Turma_Id"]),
-                    Ano = Convert.ToInt32(reader["Ano"]),
-                },
-                Endereco = new Endereco
-                {
-                    Cep = Convert.ToString(reader["Endereco_Cep"]),
-                    Localidade = Convert.ToString(reader["Endereco_Localidade"]),
-                    Bairro = Convert.ToString(reader["Endereco_Bairro"]),
-                    Uf = Convert.ToString(reader["Endereco_Uf"])
-                }
-            };
-            presenca.Aula = new Aula
-            {
-                Id = Convert.ToInt32(reader["Aula_Id"]),
-                Data = Convert.ToDateTime(reader["Data"]),
-                ChamadaRealizada = Convert.ToBoolean(reader["ChamadaRealizada"]),
-                Turma = new Turma
-                {
-                    Id = Convert.ToInt32(reader["Turma_Id"]),
-                    Ano = Convert.ToInt32(reader["Ano"]),
-                },
-            };
-            presenca.StatusPresenca = Convert.ToString(reader["StatusPresenca"]);
-
-            return presenca;
-        }
-
         private static object[] Take(Aluno aluno)
         {
             return new object[]
@@ -231,18 +177,6 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.SQL.Repositories
                 "Endereco_Localidade", aluno.Endereco.Localidade,
                 "Endereco_Bairro", aluno.Endereco.Bairro,
                 "Endereco_Uf", aluno.Endereco.Uf
-            };
-        }
-
-        private static object[] TakePresenca(Presenca presenca)
-        {
-            return new object[]
-            {
-                "Id", presenca.Id,
-                "Aluno_Id", presenca.Aluno.Id,
-                "Nome", presenca.Aluno.Nome,
-                "Aula_Id", presenca.Aula.Id,
-                "StatusPresenca", presenca.StatusPresenca,
             };
         }
 

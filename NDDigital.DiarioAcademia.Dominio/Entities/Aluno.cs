@@ -56,7 +56,8 @@ namespace NDDigital.DiarioAcademia.Dominio.Entities
 
         private bool TemPresencaRegistrada(Aula aula, out Presenca presenca)
         {
-            presenca = Presencas.Find(x => x.Aula == aula);
+            presenca = Presencas.
+                Find(x => x.Aula.Id == aula.Id);
 
             return presenca != null;
         }

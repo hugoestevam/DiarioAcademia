@@ -38,9 +38,11 @@ namespace NDDigital.DiarioAcademia.UnitTests.Dominio
             aluno.Nome = "Rech";
 
             Aula aula1 = new Aula(DateTime.Now.AddDays(-1), turma);
+            aula1.Id = 1;
             aluno.RegistraPresenca(aula1, "C");
 
             Aula aula2 = new Aula(DateTime.Now, turma);
+            aula2.Id = 2; 
             aluno.RegistraPresenca(aula2, "F");
 
             aluno.ToString().Should().Be("Rech: Presenças: 1, Faltas: 1");

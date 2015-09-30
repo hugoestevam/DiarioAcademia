@@ -21,8 +21,6 @@ namespace Infraestrutura.DAO.SQL.Common
         {
             VerificaConexao();
 
-            _factory.BeginTransaction();
-
             sql = string.Format(sql, "@");
             sql += ";SELECT SCOPE_IDENTITY()";
 
@@ -37,17 +35,15 @@ namespace Infraestrutura.DAO.SQL.Common
 
         private void VerificaConexao()
         {
-            if (_factory.Connection == null)            
+            if (_factory.Connection == null)
             {
-               _factory.AbreConexao();
+                _factory.AbreConexao();
             }
         }
 
         public void Update(string sql, object[] parms = null)
         {
             VerificaConexao();
-
-            _factory.BeginTransaction();
 
             sql = string.Format(sql, "@");
 

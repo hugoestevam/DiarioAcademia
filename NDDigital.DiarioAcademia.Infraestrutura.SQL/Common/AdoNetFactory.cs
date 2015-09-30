@@ -45,6 +45,8 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.SQL.Common
             Command.Connection = Connection;
 
             Connection.Open();
+
+            BeginTransaction();
         }
 
         public void BeginTransaction()

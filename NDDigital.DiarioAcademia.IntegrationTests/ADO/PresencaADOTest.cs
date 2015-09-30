@@ -25,7 +25,7 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.ADO
 
             var presencas = PresencaRepository.GetAll();
 
-            Assert.AreEqual(2, presencas.Count);     
+            Assert.AreEqual(2, presencas.Count);
         }
 
         [TestMethod]

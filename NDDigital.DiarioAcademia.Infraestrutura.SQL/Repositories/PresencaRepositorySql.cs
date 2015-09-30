@@ -45,8 +45,8 @@ public class PresencaRepositorySql : RepositoryBaseADO, IPresencaRepository
                   INNER JOIN TBTurma AS T ON T.Id = AL.Turma_Id
               WHERE P.Id = {0}Id_Presenca";
 
-        public const string SqlSelectByAluno =
-         @"SELECT P.Id,P.StatusPresenca,P.Aula_Id,P.Aluno_Id,
+    public const string SqlSelectByAluno =
+     @"SELECT P.Id,P.StatusPresenca,P.Aula_Id,P.Aluno_Id,
 	                 AL.Data, AL.ChamadaRealizada, AL.Turma_Id,
 	                 A.Nome, A.Endereco_Cep, A.Endereco_Bairro, A.Endereco_Localidade, A.Endereco_Uf,
 	                 T.Ano
@@ -55,7 +55,6 @@ public class PresencaRepositorySql : RepositoryBaseADO, IPresencaRepository
                   INNER JOIN TBAluno AS A ON A.Id = P.Aluno_Id
                   INNER JOIN TBTurma AS T ON T.Id = AL.Turma_Id
               WHERE P.Aluno_Id = {0}Id_Aluno";
-
 
     public const string SqlSelectByAula =
      @"SELECT P.Id,P.StatusPresenca,P.Aula_Id,P.Aluno_Id,
@@ -68,10 +67,14 @@ public class PresencaRepositorySql : RepositoryBaseADO, IPresencaRepository
                   INNER JOIN TBTurma AS T ON T.Id = AL.Turma_Id
               WHERE P.Aula_Id = {0}Id_Aula";
 
+    private ADOUnitOfWork _uow;
+
     #endregion Querys
 
-    public PresencaRepositorySql(AdoNetFactory factory) : base(factory)
+    public PresencaRepositorySql(AdoNetFactory factory)
+        : base(factory)
     {
+        _uow = new ADOUnitOfWork(factory);
     }
 
     public Presenca Add(Presenca presenca)
@@ -211,6 +214,8 @@ public class PresencaRepositorySql : RepositoryBaseADO, IPresencaRepository
             var parms = new object[] { "Id_Aluno", idAluno };
 
             listPresenca = GetAll(SqlSelectByAluno, Make, parms);
+
+            //_uow.Commit();
         }
         catch (Exception te)
         {
