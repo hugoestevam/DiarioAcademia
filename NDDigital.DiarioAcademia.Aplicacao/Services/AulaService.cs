@@ -97,12 +97,7 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
         {
             var aula = _aulaRepository.GetById(id);
 
-            return new AulaDTO
-            {
-                Id = aula.Id,
-                DataAula = aula.Data,
-                TurmaId = aula.Turma.Id
-            };
+            return new AulaDTO(aula);
         }
 
         public IEnumerable<AulaDTO> GetAllByTurma(int id)

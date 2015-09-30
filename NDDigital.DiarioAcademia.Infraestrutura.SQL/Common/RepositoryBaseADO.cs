@@ -39,6 +39,8 @@ namespace Infraestrutura.DAO.SQL.Common
             {
                 _factory.AbreConexao();
             }
+            if (_factory.Command.Transaction == null)
+                _factory.Command.Transaction = _factory.Connection.BeginTransaction();
         }
 
         public void Update(string sql, object[] parms = null)
@@ -96,7 +98,7 @@ namespace Infraestrutura.DAO.SQL.Common
                 t = convert(reader);
 
             reader.Close();
-
+            _factory.Command.Transaction.Commit();
             return t;
         }
     }

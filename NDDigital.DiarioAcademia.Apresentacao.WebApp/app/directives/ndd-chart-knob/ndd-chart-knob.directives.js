@@ -49,7 +49,7 @@
                         angleOffset: "-125"
                     });
 
-                    $({ value: 0 }).delay(600).animate({ value: count }, {
+                    $({ value: 0 }).delay(1600).animate({ value: count }, {
                         duration: 1000,
                         easing: 'swing',
                         progress: function () {

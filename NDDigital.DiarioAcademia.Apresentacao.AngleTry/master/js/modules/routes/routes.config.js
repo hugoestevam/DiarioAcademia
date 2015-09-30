@@ -41,6 +41,7 @@
               title: 'Submenu',
               templateUrl: helper.basepath('submenu.html')
           })
+
           // 
           // CUSTOM RESOLVES
           //   Add your own resolves properties
