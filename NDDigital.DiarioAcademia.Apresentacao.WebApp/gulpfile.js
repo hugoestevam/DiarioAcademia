@@ -12,7 +12,6 @@ requireDir = require('require-dir');
 util = require('./task/util/util.js')();
 log = util.log;
 yargs = require('yargs').argv;
-open = require('gulp-open');
 browserSync = require('browser-sync').create();
 modRewrite = require('connect-modrewrite');
 
