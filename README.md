@@ -6,8 +6,8 @@ Para executar este projeto em seu potencial é necessário ter um servidor Node 
 * Obtenha o NodeJS pelo:
  * [Site oficial](https://nodejs.org/), ou use
  * [Chocolatey](https://chocolatey.org/)
-* Obtenha o Phyton por:
- * [Phython 2.7.3](https://www.python.org/ftp/python/2.7.3/python-2.7.3.msi)
+* Obtenha o Python por:
+ * [Python 2.7.3](https://www.python.org/ftp/python/2.7.3/python-2.7.3.msi)
 * Certifique-se de possuir o Visual Studio instalado.
  
  
