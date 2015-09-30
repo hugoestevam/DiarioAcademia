@@ -127,9 +127,18 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.SQL.Repositories
             {
                 var aluno = GetById(entity.Id);
 
+                var diff = entity.Presencas.Where(x => 
+                {
+                    var existing = aluno.Presencas.FirstOrDefault(a => x.Id == a.Id && x.StatusPresenca == a.StatusPresenca);
+                    if (existing != null)
+                        return false;
+                    else
+                        return true;
+                });
+
                 if (entity.Nome == aluno.Nome)
                 {
-                    foreach (var presenca in entity.Presencas)
+                    foreach (var presenca in diff)
                     {
                         if (presenca.Aula.ChamadaRealizada)
                         {

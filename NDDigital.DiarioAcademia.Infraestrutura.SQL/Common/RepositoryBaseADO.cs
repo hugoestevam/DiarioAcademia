@@ -41,6 +41,10 @@ namespace Infraestrutura.DAO.SQL.Common
             {
                 _factory.AbreConexao();
             }
+            else
+            {
+                _factory.CriaCommand(true);
+            }
         }
 
         public void Update(string sql, object[] parms = null)
