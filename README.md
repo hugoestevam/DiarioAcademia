@@ -6,8 +6,11 @@ Para executar este projeto em seu potencial é necessário ter um servidor Node 
 * Obtenha o NodeJS pelo:
  * [Site oficial](https://nodejs.org/), ou use
  * [Chocolatey](https://chocolatey.org/)
+* Obtenha o Python por:
+ * [Python 2.7.3](https://www.python.org/ftp/python/2.7.3/python-2.7.3.msi)
+* Certifique-se de possuir o Visual Studio instalado.
  
-
+ 
 #### Preparando o ambiente
 
 ##### Resumo dos comandos
@@ -16,6 +19,7 @@ Para executar este projeto em seu potencial é necessário ter um servidor Node 
         -reinicie o prompt
         -aponte para a pasta do projeto web
     > npm install
+        -Em caso de aparecer avisos em relação ao phyton na instalação pode ignorar.
     > bower install
     > gulp start
 
@@ -29,7 +33,7 @@ Para executar este projeto em seu potencial é necessário ter um servidor Node 
  * O Node vai ler e baixar cada uma das dependencia listadas em `package.json`
 * Instale todas as dependencias do client com `> bower install`
  * O Node vai ler e baixar cada uma das dependencia listadas em `bower.json`
-* Insira simplemente `> gulp`. 
+* Insira simplesmente `> gulp`. 
  * Se tudo estiver ok, o prompt irá listar todas as tasks do gulp
 
 #### Executando
