@@ -12,7 +12,16 @@ Para executar este projeto em seu potencial é necessário ter um servidor Node 
  
 #### Baixando o Projeto
 
-O download do projeto pode ser feito através do [download do zip](https://github.com/AlexandreRech/DiarioAcademia/archive/master.zip) ou pelo `git` seguindo os passos:
+O download do projeto pode ser feito de 3 formas:
+
+1) Através do [download do zip](https://github.com/AlexandreRech/DiarioAcademia/archive/master.zip)
+
+2) Através do github para desktop:
+
+ - Baixe do [GitHub for desktop](https://desktop.github.com/)
+ - Após instalar, clique em [Clone in Desktop](github-windows://openRepo/https://github.com/AlexandreRech/DiarioAcademia)
+
+3) Através do `git` seguindo os passos:
 
      > choco install git 
         -reinicie o prompt

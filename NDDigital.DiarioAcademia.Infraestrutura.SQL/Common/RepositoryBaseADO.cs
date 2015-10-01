@@ -21,6 +21,8 @@ namespace Infraestrutura.DAO.SQL.Common
         {
             VerificaConexao();
 
+            _factory.BeginTransaction();
+
             sql = string.Format(sql, "@");
             sql += ";SELECT SCOPE_IDENTITY()";
 
@@ -39,11 +41,17 @@ namespace Infraestrutura.DAO.SQL.Common
             {
                 _factory.AbreConexao();
             }
+            else
+            {
+                _factory.CriaCommand(true);
+            }
         }
 
         public void Update(string sql, object[] parms = null)
         {
             VerificaConexao();
+
+            _factory.BeginTransaction();
 
             sql = string.Format(sql, "@");
 
@@ -82,7 +90,7 @@ namespace Infraestrutura.DAO.SQL.Common
         public T Get<T>(string sql, ConverterDelegate<T> convert, object[] parms = null)
         {
             VerificaConexao();
-
+            
             sql = string.Format(sql, "@");
 
             _factory.Command.CommandText = sql;
@@ -96,7 +104,7 @@ namespace Infraestrutura.DAO.SQL.Common
                 t = convert(reader);
 
             reader.Close();
-
+            
             return t;
         }
     }

@@ -40,13 +40,9 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.SQL.Common
 
             Connection.ConnectionString = connectionString;
 
-            Command = factory.CreateCommand();
-
-            Command.Connection = Connection;
+            CriaCommand();
 
             Connection.Open();
-
-            BeginTransaction();
         }
 
         public void BeginTransaction()
@@ -77,6 +73,26 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.SQL.Common
             get { return _command; }
 
             set { _command = value; }
+        }
+
+        internal void CriaCommand()
+        {
+            CriaCommand(false);
+        }
+
+        internal void CriaCommand(bool existingTransaction)
+        {
+            if (existingTransaction)
+            {
+                var trans = Command.Transaction;
+                Command = Connection.CreateCommand();
+                Command.Transaction = trans;
+            }
+            else
+            {
+                Command = factory.CreateCommand();
+                Command.Connection = Connection;
+            }
         }
     }
 }
