@@ -6,7 +6,6 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq.Expressions;
-using System.Linq;
 
 namespace NDDigital.DiarioAcademia.Infraestrutura.SQL.Repositories
 {
@@ -14,15 +13,17 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.SQL.Repositories
     {
         #region Querys
 
-        public const string SqlInsertAula = @"INSERT INTO TBAula
-            (Data, ChamadaRealizada, Turma_Id) VALUES
-            ({0}Data, {0}ChamadaRealizada, {0}Turma_Id)";
+        public const string SqlInsertAula =
+             @"INSERT INTO TBAula
+                (Data, ChamadaRealizada, Turma_Id) VALUES
+                ({0}Data, {0}ChamadaRealizada, {0}Turma_Id)";
 
-        public const string SqlUpdate = @"UPDATE TBAula SET
-            Data = {0}Data,
-            ChamadaRealizada = {0}ChamadaRealizada,
-            Turma_Id = {0}Turma_Id
-            WHERE Id = {0}Id";
+        public const string SqlUpdate =
+             @"UPDATE TBAula SET
+                Data = {0}Data,
+                ChamadaRealizada = {0}ChamadaRealizada,
+                Turma_Id = {0}Turma_Id
+             WHERE Id = {0}Id";
 
         public const string SqlDelete =
             @"DELETE FROM TBAula WHERE Id = {0}Id";
@@ -158,6 +159,23 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.SQL.Repositories
             }
         }
 
+        public IList<Aula> GetAllIncluding(params Expression<Func<Aula, object>>[] includeProperties)
+        {
+            return GetAll();
+        }
+
+        public Aula GetByIdIncluding(int id, params Expression<Func<Aula, object>>[] includeProperties)
+        {
+            return GetById(id);
+        }
+
+        public IList<Aula> GetMany(Expression<Func<Aula, bool>> where)
+        {
+            return GetAll();
+        }
+
+        #region Métodos privados
+
         private Aula Make(IDataReader reader)
         {
             Aula aula = new Aula();
@@ -185,76 +203,6 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.SQL.Repositories
             };
         }
 
-        //private static object[] TakePresenca(Presenca presenca)
-        //{
-        //    return new object[]
-        //    {
-        //        "Id", presenca.Id,
-        //        "Aluno_Id", presenca.Aluno.Id,
-        //        "Nome", presenca.Aluno.Nome,
-        //        "Aula_Id", presenca.Aula.Id,
-        //        "StatusPresenca", presenca.StatusPresenca,
-        //    };
-        //}
-
-        private static Presenca MakePresenca(IDataReader reader)
-        {
-            Presenca presenca = new Presenca();
-            presenca.Id = Convert.ToInt32(reader["Id"]);
-            presenca.Aluno = new Aluno
-            {
-                Id = Convert.ToInt32(reader["Aluno_Id"]),
-                Nome = Convert.ToString(reader["Nome"]),
-                Turma = new Turma
-                {
-                    Id = Convert.ToInt32(reader["Turma_Id"]),
-                    Ano = Convert.ToInt32(reader["Ano"]),
-                },
-                Endereco = new Endereco
-                {
-                    Cep = Convert.ToString(reader["Endereco_Cep"]),
-                    Localidade = Convert.ToString(reader["Endereco_Localidade"]),
-                    Bairro = Convert.ToString(reader["Endereco_Bairro"]),
-                    Uf = Convert.ToString(reader["Endereco_Uf"])
-                }
-            };
-            presenca.Aula = new Aula
-            {
-                Id = Convert.ToInt32(reader["Aula_Id"]),
-                Data = Convert.ToDateTime(reader["Data"]),
-                ChamadaRealizada = Convert.ToBoolean(reader["ChamadaRealizada"]),
-                Turma = new Turma
-                {
-                    Id = Convert.ToInt32(reader["Turma_Id"]),
-                    Ano = Convert.ToInt32(reader["Ano"]),
-                },
-            };
-            presenca.StatusPresenca = Convert.ToString(reader["StatusPresenca"]);
-            return presenca;
-        }
-
-        #region Métodos Não utilizados
-
-        public IList<Aula> GetAllIncluding(params Expression<Func<Aula, object>>[] includeProperties)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Aula GetByData(DateTime data)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Aula GetByIdIncluding(int id, params Expression<Func<Aula, object>>[] includeProperties)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IList<Aula> GetMany(Expression<Func<Aula, bool>> where)
-        {
-            throw new NotImplementedException();
-        }
-
-        #endregion Métodos Não utilizados
+        #endregion Métodos privados
     }
 }

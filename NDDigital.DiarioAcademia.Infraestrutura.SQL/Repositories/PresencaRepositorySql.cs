@@ -43,29 +43,29 @@ public class PresencaRepositorySql : RepositoryBaseADO, IPresencaRepository
                   INNER JOIN TBAula AS AL ON AL.Id = P.Aula_Id
                   INNER JOIN TBAluno AS A ON A.Id = P.Aluno_Id
                   INNER JOIN TBTurma AS T ON T.Id = AL.Turma_Id
-              WHERE P.Id = {0}Id_Presenca";
+              WHERE P.Id = {0}Id";
 
     public const string SqlSelectByAluno =
-     @"SELECT P.Id,P.StatusPresenca,P.Aula_Id,P.Aluno_Id,
-	                 AL.Data, AL.ChamadaRealizada, AL.Turma_Id,
-	                 A.Nome, A.Endereco_Cep, A.Endereco_Bairro, A.Endereco_Localidade, A.Endereco_Uf,
-	                 T.Ano
-              FROM TBPresenca AS P
-                  INNER JOIN TBAula AS AL ON AL.Id = P.Aula_Id
-                  INNER JOIN TBAluno AS A ON A.Id = P.Aluno_Id
-                  INNER JOIN TBTurma AS T ON T.Id = AL.Turma_Id
-              WHERE P.Aluno_Id = {0}Id_Aluno";
+         @"SELECT P.Id,P.StatusPresenca,P.Aula_Id,P.Aluno_Id,
+	                     AL.Data, AL.ChamadaRealizada, AL.Turma_Id,
+	                     A.Nome, A.Endereco_Cep, A.Endereco_Bairro, A.Endereco_Localidade, A.Endereco_Uf,
+	                     T.Ano
+                  FROM TBPresenca AS P
+                      INNER JOIN TBAula AS AL ON AL.Id = P.Aula_Id
+                      INNER JOIN TBAluno AS A ON A.Id = P.Aluno_Id
+                      INNER JOIN TBTurma AS T ON T.Id = AL.Turma_Id
+                  WHERE P.Aluno_Id = {0}Id_Aluno";
 
     public const string SqlSelectByAula =
-     @"SELECT P.Id,P.StatusPresenca,P.Aula_Id,P.Aluno_Id,
-	                 AL.Data, AL.ChamadaRealizada, AL.Turma_Id,
-	                 A.Nome, A.Endereco_Cep, A.Endereco_Bairro, A.Endereco_Localidade, A.Endereco_Uf,
-	                 T.Ano
-              FROM TBPresenca AS P
-                  INNER JOIN TBAula AS AL ON AL.Id = P.Aula_Id
-                  INNER JOIN TBAluno AS A ON A.Id = P.Aluno_Id
-                  INNER JOIN TBTurma AS T ON T.Id = AL.Turma_Id
-              WHERE P.Aula_Id = {0}Id_Aula";
+         @"SELECT P.Id,P.StatusPresenca,P.Aula_Id,P.Aluno_Id,
+	                     AL.Data, AL.ChamadaRealizada, AL.Turma_Id,
+	                     A.Nome, A.Endereco_Cep, A.Endereco_Bairro, A.Endereco_Localidade, A.Endereco_Uf,
+	                     T.Ano
+                  FROM TBPresenca AS P
+                      INNER JOIN TBAula AS AL ON AL.Id = P.Aula_Id
+                      INNER JOIN TBAluno AS A ON A.Id = P.Aluno_Id
+                      INNER JOIN TBTurma AS T ON T.Id = AL.Turma_Id
+                  WHERE P.Aula_Id = {0}Id_Aula";
 
     private ADOUnitOfWork _uow;
 
@@ -74,7 +74,6 @@ public class PresencaRepositorySql : RepositoryBaseADO, IPresencaRepository
     public PresencaRepositorySql(AdoNetFactory factory)
         : base(factory)
     {
-        _uow = new ADOUnitOfWork(factory);
     }
 
     public Presenca Add(Presenca presenca)
@@ -137,7 +136,7 @@ public class PresencaRepositorySql : RepositoryBaseADO, IPresencaRepository
     {
         try
         {
-            var parms = new object[] { "Id_Presenca", id };
+            var parms = new object[] { "Id", id };
 
             return Get(SqlSelectbId, Make, parms);
         }
@@ -159,6 +158,57 @@ public class PresencaRepositorySql : RepositoryBaseADO, IPresencaRepository
             throw new Exception("Erro ao tentar editar uma Presenca!" + te.Message);
         }
     }
+
+    public List<Presenca> GetAllByAluno(int idAluno)
+    {
+        List<Presenca> listPresenca = null;
+        try
+        {
+            var parms = new object[] { "Id_Aluno", idAluno };
+
+            listPresenca = GetAll(SqlSelectByAluno, Make, parms);
+        }
+        catch (Exception te)
+        {
+            throw new Exception("Erro ao tentar encontrar a presenca!" + te.Message);
+        }
+
+        return listPresenca;
+    }
+
+    public List<Presenca> GetAllByAula(int idAula)
+    {
+        List<Presenca> listPresenca = null;
+        try
+        {
+            var parms = new object[] { "Id_Aula", idAula };
+
+            listPresenca = GetAll(SqlSelectByAula, Make, parms);
+        }
+        catch (Exception te)
+        {
+            throw new Exception("Erro ao tentar encontrar a presenca!" + te.Message);
+        }
+
+        return listPresenca;
+    }
+
+    public IList<Presenca> GetAllIncluding(params Expression<Func<Presenca, object>>[] includeProperties)
+    {
+        return GetAll();
+    }
+
+    public Presenca GetByIdIncluding(int id, params Expression<Func<Presenca, object>>[] includeProperties)
+    {
+        return GetById(id);
+    }
+
+    public IList<Presenca> GetMany(Expression<Func<Presenca, bool>> where)
+    {
+        return GetAll();
+    }
+
+    #region Métodos privados
 
     private static object[] Take(Presenca presenca)
     {
@@ -210,52 +260,5 @@ public class PresencaRepositorySql : RepositoryBaseADO, IPresencaRepository
         return presenca;
     }
 
-    public List<Presenca> GetAllByAluno(int idAluno)
-    {
-        List<Presenca> listPresenca = null;
-        try
-        {
-            var parms = new object[] { "Id_Aluno", idAluno };
-
-            listPresenca = GetAll(SqlSelectByAluno, Make, parms);
-        }
-        catch (Exception te)
-        {
-            throw new Exception("Erro ao tentar encontrar a presenca!" + te.Message);
-        }
-
-        return listPresenca;
-    }
-
-    public List<Presenca> GetAllByAula(int idAula)
-    {
-        List<Presenca> listPresenca = null;
-        try
-        {
-            var parms = new object[] { "Id_Aula", idAula };
-
-            listPresenca = GetAll(SqlSelectByAula, Make, parms);
-        }
-        catch (Exception te)
-        {
-            throw new Exception("Erro ao tentar encontrar a presenca!" + te.Message);
-        }
-
-        return listPresenca;
-    }
-
-    public IList<Presenca> GetAllIncluding(params Expression<Func<Presenca, object>>[] includeProperties)
-    {
-        throw new NotImplementedException();
-    }
-
-    public Presenca GetByIdIncluding(int id, params Expression<Func<Presenca, object>>[] includeProperties)
-    {
-        throw new NotImplementedException();
-    }
-
-    public IList<Presenca> GetMany(Expression<Func<Presenca, bool>> where)
-    {
-        throw new NotImplementedException();
-    }
+    #endregion Métodos privados
 }

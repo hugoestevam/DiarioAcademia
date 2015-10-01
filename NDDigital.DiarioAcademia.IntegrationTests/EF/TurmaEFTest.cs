@@ -11,28 +11,6 @@ namespace Test
 
         [TestMethod]
         [TestCategory(TestCategory)]
-        public void Deveria_Remover_Turma_ORM_Test()
-        {
-            var turma = ObjectBuilder.CreateTurma();
-
-            TurmaRepository.Add(turma);
-            Uow.Commit();
-
-            var turmasEncontradas = TurmaRepository.GetAll();
-
-            Assert.AreEqual(2, turmasEncontradas.Count);
-
-            TurmaRepository.Delete(2);
-
-            Uow.Commit();
-
-            turmasEncontradas = TurmaRepository.GetAll();
-
-            Assert.AreEqual(1, turmasEncontradas.Count);
-        }
-
-        [TestMethod]
-        [TestCategory(TestCategory)]
         public void Deveria_Persistir_Turma_ORM_Test()
         {
             var turma = ObjectBuilder.CreateTurma();
@@ -76,6 +54,28 @@ namespace Test
         public void Deveria_Buscar_Todas_Turmas_ORM_Test()
         {
             var turmasEncontradas = TurmaRepository.GetAll();
+
+            Assert.AreEqual(1, turmasEncontradas.Count);
+        }
+
+        [TestMethod]
+        [TestCategory(TestCategory)]
+        public void Deveria_Remover_Turma_ORM_Test()
+        {
+            var turma = ObjectBuilder.CreateTurma();
+
+            TurmaRepository.Add(turma);
+            Uow.Commit();
+
+            var turmasEncontradas = TurmaRepository.GetAll();
+
+            Assert.AreEqual(2, turmasEncontradas.Count);
+
+            TurmaRepository.Delete(2);
+
+            Uow.Commit();
+
+            turmasEncontradas = TurmaRepository.GetAll();
 
             Assert.AreEqual(1, turmasEncontradas.Count);
         }

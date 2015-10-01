@@ -103,13 +103,13 @@ namespace NDDigital.DiarioAcademia.UnitTests.Servicos
                 .Returns(alunos);
 
             _aulaRepository
-                .Setup(x => x.GetByData(It.IsAny<DateTime>()))
+                .Setup(x => x.GetById(It.IsAny<int>()))
                 .Returns(null as Aula);
 
             var comando = new ChamadaDTO { AnoTurma = 2000 };
 
             //act
-            
+
             aulaService.RealizaChamada(comando);
             // assert is [ExpectedException]
         }

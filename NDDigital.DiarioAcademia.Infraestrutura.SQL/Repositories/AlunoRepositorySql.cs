@@ -38,7 +38,7 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.SQL.Repositories
                    ,Endereco_Uf = {0}Endereco_Uf
                    ,Nome = {0}Nome
                    ,Turma_Id = {0}Turma_Id
-              WHERE Id = {0}id";
+              WHERE Id = {0}Id";
 
         public const string SqlDelete =
             @"DELETE FROM TBAluno WHERE Id = {0}id";
@@ -58,7 +58,7 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.SQL.Repositories
                   ,T.Ano
               FROM TBAluno AS A
               INNER JOIN TBTurma AS T ON T.Id = A.Turma_Id
-              WHERE A.Id = {0}id";
+              WHERE A.Id = {0}Id";
 
         public const string SqlUpdatePresenca =
             @"UPDATE TBPresenca SET StatusPresenca = {0}StatusPresenca,
@@ -78,31 +78,60 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.SQL.Repositories
 
         public Aluno Add(Aluno entity)
         {
-            Insert(SqlInsert, Take(entity));
+            try
+            {
+                Insert(SqlInsert, Take(entity));
+            }
+            catch (Exception te)
+            {
+                throw new Exception("Erro ao tentar adicionar um aluno!" + te.Message);
+            }
 
             return entity;
         }
 
         public void Delete(int id)
         {
-            var alunoRemovido = GetById(id);
-            Delete(SqlDelete, Take(alunoRemovido));
+            try
+            {
+                var alunoRemovido = GetById(id);
+
+                Delete(SqlDelete, Take(alunoRemovido));
+            }
+            catch (Exception te)
+            {
+                throw new Exception("Erro ao tentar deletar um aluno!" + te.Message);
+            }
         }
 
         public void Delete(Aluno entity)
         {
-            Delete(SqlDelete, Take(entity));
+            try
+            {
+                Delete(SqlDelete, Take(entity));
+            }
+            catch (Exception te)
+            {
+                throw new Exception("Erro ao tentar deletar um aluno!" + te.Message);
+            }
         }
 
         public IList<Aluno> GetAll()
         {
             IList<Aluno> listaAlunos = null;
 
-            listaAlunos = GetAll(SqlSelect, Make);
-
-            foreach (var aluno in listaAlunos)
+            try
             {
-                aluno.Presencas = _repoPresenca.GetAllByAluno(aluno.Id);
+                listaAlunos = GetAll(SqlSelect, Make);
+
+                foreach (var aluno in listaAlunos)
+                {
+                    aluno.Presencas = _repoPresenca.GetAllByAluno(aluno.Id);
+                }
+            }
+            catch (Exception te)
+            {
+                throw new Exception("Erro ao tentar buscar todos os aluno!" + te.Message);
             }
 
             return listaAlunos;
@@ -112,11 +141,18 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.SQL.Repositories
         {
             Aluno aluno = null;
 
-            var parms = new object[] { "id", id };
+            try
+            {
+                var parms = new object[] { "Id", id };
 
-            aluno = Get(SqlSelectById, Make, parms);
+                aluno = Get(SqlSelectById, Make, parms);
 
-            aluno.Presencas = _repoPresenca.GetAllByAluno(id);
+                aluno.Presencas = _repoPresenca.GetAllByAluno(id);
+            }
+            catch (Exception te)
+            {
+                throw new Exception("Erro ao tentar buscar todos os aluno!" + te.Message);
+            }
 
             return aluno;
         }
@@ -127,28 +163,11 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.SQL.Repositories
             {
                 var aluno = GetById(entity.Id);
 
-                var diff = entity.Presencas.Where(x => 
-                {
-                    var existing = aluno.Presencas.FirstOrDefault(a => x.Id == a.Id && x.StatusPresenca == a.StatusPresenca);
-                    if (existing != null)
-                        return false;
-                    else
-                        return true;
-                });
+                var presencas = ComparaPresencas(entity, aluno);
 
-                if (entity.Nome == aluno.Nome)
+                if (presencas != null)
                 {
-                    foreach (var presenca in diff)
-                    {
-                        if (presenca.Aula.ChamadaRealizada)
-                        {
-                            _repoPresenca.Update(presenca);
-                        }
-                        else
-                        {
-                            _repoPresenca.Add(presenca);
-                        }
-                    }
+                    RealizaChamada(presencas);
                 }
 
                 Update(SqlUpdate, Take(entity));
@@ -157,6 +176,62 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.SQL.Repositories
             {
                 throw new Exception("Erro ao tentar editar uma Aula!" + te.Message);
             }
+        }
+
+        public Aluno GetByIdIncluding(int id, params Expression<Func<Aluno, object>>[] includeProperties)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IList<Aluno> GetMany(Expression<Func<Aluno, bool>> where)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IList<Aluno> GetAllIncluding(params Expression<Func<Aluno, object>>[] includeProperties)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IList<Aluno> GetAllByTurmaId(int turmaId)
+        {
+            return GetAll()
+                .Where(a => a.Turma.Id == turmaId)
+                .ToList();
+        }
+
+        #region Métodos privados
+
+        private void RealizaChamada(IEnumerable<Presenca> presencas)
+        {
+            foreach (var presenca in presencas)
+            {
+                if (presenca.Aula.ChamadaRealizada)
+                {
+                    _repoPresenca.Update(presenca);
+                }
+                else
+                {
+                    _repoPresenca.Add(presenca);
+                }
+            }
+        }
+
+        private static IEnumerable<Presenca> ComparaPresencas(Aluno entity, Aluno aluno)
+        {
+            var presencas = entity.Presencas.Where(x =>
+            {
+                var existing = aluno.Presencas
+                    .FirstOrDefault(a => x.Id == a.Id
+                        &&
+                        x.StatusPresenca == a.StatusPresenca);
+
+                if (existing != null)
+                    return false;
+                else
+                    return true;
+            });
+            return presencas;
         }
 
         private static Aluno Make(IDataReader reader)
@@ -194,26 +269,6 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.SQL.Repositories
             };
         }
 
-        public Aluno GetByIdIncluding(int id, params Expression<Func<Aluno, object>>[] includeProperties)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IList<Aluno> GetMany(Expression<Func<Aluno, bool>> where)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IList<Aluno> GetAllIncluding(params Expression<Func<Aluno, object>>[] includeProperties)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IList<Aluno> GetAllByTurmaId(int turmaId)
-        {
-            return GetAll()
-                .Where(a => a.Turma.Id == turmaId)
-                .ToList();
-        }
+        #endregion Métodos privados
     }
 }

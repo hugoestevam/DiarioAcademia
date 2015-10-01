@@ -20,8 +20,6 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.Base
         {
             ObjectBuilder.Reset();
             Database.SetInitializer(new DatabaseTestInitializer());
-
         }
-       
     }
 }
