@@ -1,10 +1,4 @@
-﻿using Ellevo.Biblioteca.Seguranca;
-using NDDigital.DiarioAcademia.Infraestrutura.Security.Entities;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Data.Entity.Validation;
-using System.Diagnostics;
-using System.Linq;
+﻿using System.Data.Entity;
 
 namespace NDDigital.DiarioAcademia.Infraestrutura.Security.Contexts
 {

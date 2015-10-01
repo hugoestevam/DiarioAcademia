@@ -1,6 +1,5 @@
-﻿using Ellevo.Biblioteca.Seguranca;
-using Microsoft.AspNet.Identity;
-using NDDigital.DiarioAcademia.Aplicacao.Services;
+﻿using NDDigital.DiarioAcademia.Aplicacao.Services;
+using NDDigital.DiarioAcademia.Infraestrutura.Security.Common;
 using NDDigital.DiarioAcademia.Infraestrutura.Security.Entities;
 using NDDigital.DiarioAcademia.Infraestrutura.Security.Repositories;
 using NDDigital.DiarioAcademia.WebApi.Controllers.Base;
