@@ -195,7 +195,19 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Security.Repositories
 
         public void Update(User user)
         {
+          
             dataContext.SaveChanges();
+        }
+
+        public void UpdateWithUsername(User user, string newUsername)
+        {
+            Account acc;
+            if (user.Account == null)
+                acc = dataContext.Accounts.Where(a => a.Username == user.UserName).First();
+            else
+                acc = user.Account;
+            acc.Username = user.UserName=newUsername;
+            Update(user);
         }
     }
 }

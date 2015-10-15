@@ -20,6 +20,6 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Security.Contracts
         void AddUser(User user);
 
         new void Update(User user);
-
+        void UpdateWithUsername(User dbuser, string newUsername);
     }
 }

@@ -121,7 +121,7 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers.Authentication
             return Ok();
         }
 
-        [GrouperAuthorize(Claim.Manager_User_Edit)]
+        //[GrouperAuthorize(Claim.Manager_User_Edit)]
         public IHttpActionResult EditUser([FromBody] User user)
         {
             if (user == null) return BadRequest();
@@ -131,7 +131,7 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers.Authentication
             u.FirstName = user.FirstName;
             u.LastName = user.LastName;
             u.Email = user.Email;
-            u.UserName = user.UserName;
+            u.UserName = u.Account.Username=user.UserName;
 
             UserRepository.Update(u);
 
