@@ -65,15 +65,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Services\AlunoService.cs" />
-    <Compile Include="Services\AulaService.cs" />
+    <Compile Include="Services\Entities\AlunoService.cs" />
+    <Compile Include="Services\Entities\AulaService.cs" />
+    <Compile Include="Services\Overview\OverviewService.cs" />
     <Compile Include="Services\Security\IAuthorizationService.cs" />
     <Compile Include="Services\Security\IAccountService.cs" />
     <Compile Include="Services\Security\IPermissionService.cs" />
     <Compile Include="Services\Security\IUserService.cs" />
     <Compile Include="Services\Security\IGroupService.cs" />
-    <Compile Include="Services\IService.cs" />
-    <Compile Include="Services\TurmaService.cs" />
+    <Compile Include="Services\Entities\IService.cs" />
+    <Compile Include="Services\Entities\TurmaService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -24,6 +24,6 @@ namespace NDDigital.DiarioAcademia.Dominio
 
         IList<T> GetAllIncluding(params Expression<Func<T, object>>[] includeProperties);
 
-
+        int GetCount();
     }
 }

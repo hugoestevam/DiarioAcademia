@@ -66,6 +66,8 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.SQL.Repositories
                                     Aluno_Id = {0}Aluno_Id
               WHERE Id = {0}Id";
 
+        public const string SqlCount = @"SELECT COUNT(*) AS count FROM TBAluno";
+
         private PresencaRepositorySql _repoPresenca;
 
         #endregion Querys
@@ -267,6 +269,11 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.SQL.Repositories
                 "Endereco_Bairro", aluno.Endereco.Bairro,
                 "Endereco_Uf", aluno.Endereco.Uf
             };
+        }
+
+        public int GetCount()
+        {
+            return Get(SqlCount, (IDataReader reader) => { return Convert.ToInt32(reader["count"]); });
         }
 
         #endregion Métodos privados

@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity.Core;
 using System.Linq;
+using NDDigital.DiarioAcademia.Dominio;
 
 namespace NDDigital.DiarioAcademia.Infraestrutura.Security.Repositories
 {
@@ -69,5 +70,7 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Security.Repositories
 
             return groups.Any(g => g.IsAdmin);
         }
+
+        
     }
 }

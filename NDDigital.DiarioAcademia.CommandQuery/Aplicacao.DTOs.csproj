@@ -43,11 +43,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AlunoDTO.cs" />
-    <Compile Include="AulaDTO.cs" />
+    <Compile Include="Entities\AlunoDTO.cs" />
+    <Compile Include="Entities\AulaDTO.cs" />
+    <Compile Include="Overview\CountersDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ChamadaDTO.cs" />
-    <Compile Include="TurmaDTO.cs" />
+    <Compile Include="Entities\ChamadaDTO.cs" />
+    <Compile Include="Entities\TurmaDTO.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\NDDigital.DiarioAcademia.Dominio\Dominio.csproj">
@@ -62,6 +63,7 @@
   <ItemGroup>
     <None Include="app.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
