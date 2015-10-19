@@ -41,8 +41,8 @@
 
     function verifyPermission(routes, startIndex, route) {
         var exclude = ['home', 'homeapp'];
-        var errorpermissionIdUndefined = " can't have the attribute $$permissionId to be undefined",
-            errorpermissionIdAlreadyExists = " can't have the attribute $$permissionId because already exists";
+        var errorIdUndefined = " can't have the attribute $$permissionId to be undefined",
+            errorIdAlreadyExists = " can't have the attribute $$permissionId because already exists";
         if (route.abstract)
             return;
         for (var i = startIndex + 1; i < routes.length; i++) {
@@ -50,9 +50,9 @@
             if (other.abstract || exclude.contains(other.name))
                 continue;
             if (!other.$$permissionId)
-                throwRouteError(routes[i].name, errorpermissionIdUndefined);
+                throwRouteError(routes[i].name, errorIdUndefined);
             if (other.$$permissionId == route.$$permissionId)
-                throwRouteError(routes[i].name, errorpermissionIdAlreadyExists);
+                throwRouteError(routes[i].name, errorIdAlreadyExists);
         }
         return route.$$permissionId;
     }

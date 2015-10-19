@@ -1,0 +1,48 @@
+﻿
+<div class="abs-center wd-xl">
+    <!-- START panel-->
+    <div class="p">
+        <img ng-src="{{user.picture}}" alt="Avatar" width="60" height="60" class="img-thumbnail img-circle center-block" />
+    </div>
+    <div class="panel widget b0">
+        <div class="panel-body">
+            <p class="text-center">Please login to get started.</p>
+            <form role="form" name="lockForm">
+                <div class="form-group has-feedback">
+                    <input type="text" name="inputEmail"
+                           class="form-control" placeholder="Username" required autofocus ng-model="vm.loginData.userName">
+                    <span ng-show="lockForm.lock_password.$dirty &amp;&amp; lockForm.lock_password.$error.required" class="text-danger">This field is required</span>
+                </div>
+                <div class="form-group has-feedback">
+                    <input id="exampleInputPassword1" type="password" placeholder="Password" name="inputPassword" required
+                           ng-model="vm.loginData.password" class="form-control" />
+                    <span class="fa fa-lock form-control-feedback text-muted"></span>
+                    <span ng-show="lockForm.lock_password.$dirty &amp;&amp; lockForm.lock_password.$error.required" class="text-danger">This field is required</span>
+                </div>
+                <div class="clearfix">
+                    <div class="pull-left mt-sm">
+                        <a ui-sref="signup" class="text-muted">
+                            <small>Not Registred ? Join now</small>
+                        </a>
+                    </div>
+                    <div class="pull-right">
+                        <!-- Change this button type to submit to send the form data-->
+                        <button type="button" ng-click="vm.login()" class="btn btn-sm btn-primary">Login</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div ng-hide="vm.message == ''" class="alert alert-danger">
+        {{vm.message}}
+    </div>
+    <!-- END panel-->
+    <div class="p-lg text-center">
+        <span>&copy;</span>
+        <span ng-bind="app.year"></span>
+        <span>-</span>
+        <span ng-bind="app.name"></span>
+        <br />
+        <span ng-bind="app.description"></span>
+    </div>
+</div>

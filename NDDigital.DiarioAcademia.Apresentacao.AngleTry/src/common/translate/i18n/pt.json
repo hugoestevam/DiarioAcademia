@@ -1,0 +1,89 @@
+﻿{
+    "dashboard": {
+        "APP_NAME": "Academia do Programador",
+        "WELCOME": "Bem vindo ao {{appName}}"
+    },
+    "header": {
+        "LIST_CLASS": "Lista de Turma",
+        "EDIT_CLASS": "Edição de Turma",
+        "CREATE_CLASS": "Cadastro de Turma",
+
+        "LIST_STUDENT": "Lista de Aluno",
+        "CREATE_STUDENT": "Cadastro de Aluno",
+        "EDIT_STUDENT": "Edit Student",
+
+        "LIST_LESSON": "Lista de Aula",
+        "CREATE_LESSON": "Cadastro de Aula",
+
+        "CLASS_REGISTER": "Chamada",
+
+        "LIST_USERS": "Lista de Usuário",
+        "CREATE_USERS": "Cadastro de Usuário",
+        "EDIT_USERS": "Edição de Usuário",
+
+        "LIST_GROUPS": "Lista de Grupos",
+        "CREATE_GROUPS": "Cadastro de Grupo",
+        "EDIT_GROUPS": "Edição de grupo",
+
+        "LIST_PERMISSIONS": "List of Permissions",
+
+        "SETTINGS": "Configurações",
+        "USER_OPTIONS": "Minha Conta",
+        "LANGUAGE": "Idioma",
+        "THEMES": "Temas"
+
+    },
+    "topbar": {
+        "search": {
+            "PLACEHOLDER": "Digite e aperte enter ..."
+        }
+    },
+    "sidebar": {
+        "WELCOME": "Bem Vindo",
+        "heading": {
+            "HEADER": "Navegação Principal"
+        },
+        "nav": {
+            "HOME": "Página Principal",
+            "menu": {
+                "MENU": "Menu",
+                "SUBMENU": "Sub Menu"
+            }
+        }
+    },
+    "entities": {
+        "CLASS": "Turma",
+        "STUDENT": "Aluno",
+        "LESSON": "Aula",
+        "CLASS_REGISTER": "Chamada",
+        "MANAGER": "Gerenciador",
+        "USER": "Usuário",
+        "GROUP": "Grupo",
+        "PERMISSIONS": "Permissiões"
+    },
+    "action": {
+        "CREATE": "Criar",
+        "LIST": "Listar",
+        "EDIT": "Editar",
+        "SAVE": "Salvar",
+        "DELETE": "Excluir",
+        "CLEAN": "Limpar",
+        "CLEAN_ALL": "Limpar Todos",
+        "SELECT_ALL": "Selecionar Todos",
+        "CANCEL": "Cancelar",
+        "OK": "Ok",
+        "CREATE_CLASS_REGISTER": "Realizar Chamada !"
+    },
+    "status": {
+        "CLASS_REGISTER_NOT_CREATE": "Chamada não cadastrada !",
+        "CLASS_REGISTER_CREATE": "Chamada cadastrada !",
+        "IS_ADMIN": "É admistrador",
+        "IS_NOT_ADMIN": "Não é administrador"
+    },
+    "home": {
+        "MESSAGE_START": "Este projeto é um esqueleto de aplicação. Você pode usá-lo para se basear projetos webapp angulares e ambiente dev para esses projetos.",
+        "MESSAGE_DESCRIPTION": "O aplicativo semente não faz muito e tem a maior parte do recurso removido para que você possa adicionar tema como por suas necessidades apenas seguindo os exemplos de aplicativos de demonstração."
+
+    }
+
+}

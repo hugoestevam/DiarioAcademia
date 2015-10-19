@@ -80,9 +80,5 @@
                event.preventDefault();
                $state.go(stateToGo);
            });
-
-        $rootScope.$on('$viewContentLoading', function (event, viewConfig) {
-            console.log('todo');
-        });
     }
 })(window.angular);

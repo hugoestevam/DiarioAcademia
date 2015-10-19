@@ -1,0 +1,80 @@
+﻿{
+    "dashboard": {
+        "APP_NAME": "Academia del programador",
+        "WELCOME": "Bienvenido a {{appName}}"
+    },
+    "header": {
+        "LIST_CLASS": "Lista de Clase",
+        "EDIT_CLASS": "Clase Editar",
+        "CREATE_CLASS": "Crear clase",
+        "LIST_STUDENT": "Lista de Estudiante",
+        "CREATE_STUDENT": "Crear Estudiante",
+        "EDIT_STUDENT": "Editar Estudiante",
+        "LIST_LESSON": "Lista de la lección",
+        "CREATE_LESSON": "Crear la lección",
+        "CLASS_REGISTER": "Clase Registro",
+        "LIST_USERS": "Lista de Usuarios",
+        "CREATE_USERS": "Crear usuario",
+        "EDIT_USERS": "Editar Usuarios",
+        "List_groups": "Lista de grupos",
+        "CREATE_GROUPS": "Crear grupo",
+        "EDIT_GROUPS": "Edición de grupo",
+        "LIST_PERMISSIONS": "Lista de permisos",
+        "SETTINGS": "Configuración",
+        "USER_OPTIONS": "Mi Cuenta",
+        "LANGUAGE": "Idioma",
+        "THEMES": "Temas"
+    },
+    "topbar": {
+        "search": {
+            "PLACEHOLDER": "Tipo y pulsa enter .."
+        }
+    },
+    "sidebar": {
+        "BIENVENIDOS": "Bienvenidos",
+        "heading": {
+            "HEADER": "Navegación Principal"
+        },
+        "nav": {
+            "HOME": "Home",
+            "MENU": {
+                "MENU": "Menú",
+                "Submenú": "Sub Menu"
+            }
+        }
+    },
+    "entities": {
+        "CLASS": "Clase",
+        "STUDENT": "Estudiante",
+        "LESSON": "Lección",
+        "CLASS_REGISTER": "Clase Registro",
+        "MANAGER": "Gerente",
+        "USER": "Usuario",
+        "GROUP": "Grupo",
+        "PERMISSIONS": "Permisos"
+    },
+    "action": {
+        "CREATE": "Crear",
+        "LIST": "Lista",
+        "EDIT": "Editar",
+        "SAVE": "Guardar",
+        "DELETE": "Borrar",
+        "CLEAN": "Limpio",
+        "CLEAN_ALL": "Limpio Todos",
+        "SELECT_ALL": "Seleccionar todo",
+        "CANCEL": "Cancelar",
+        "OK": "Ok",
+        "CREATE_CLASS_REGISTER": "Crear clase registro!"
+    },
+    "status": {
+        "CLASS_REGISTER_NOT_CREATE": "Clase Registro no crea!",
+        "CLASS_REGISTER_CREATE": "Clase Registro salvado!",
+        "IS_ADMIN": "Yo soy el administrador",
+        "IS_NOT_ADMIN": "No es un administrador"
+    },
+    "home": {
+        "MESSAGE_START": "Este proyecto es un esqueleto de la aplicación. Se puede utilizar para arrancar rápidamente turísticos proyectos webapp angulares y entorno de desarrollo para estos proyectos.",
+    "MESSAGE_DESCRIPTION":  "La aplicación semilla no hacer mucho y tiene la mayor parte de la función de quitar para que pueda agregar el tema según sus necesidades simplemente siguiendo los ejemplos de aplicaciones de demostración."
+
+    }
+}

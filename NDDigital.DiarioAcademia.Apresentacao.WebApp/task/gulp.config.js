@@ -32,14 +32,13 @@
                 routes: [app + "/routes/**/*.routes.js", "!" + routesConfig],
                 routeConfig: routesConfig,
                 service: app + "/services/**/*.js",
-                controllers: app + "/controllers/**/*.ctrl.js",
+                controllers: app + "/controllers/**/*.controller.js",
                 directives: app + "/directives/**/*.directives.js"
             },
 
             html: app + "/**/**/*.html",
 
-            css: ["./content/**/**/*.css",
-                  "!./content/**/**/*.min.css"],
+            css: ["./content/**/**/*.css","!./content/**/**/*.min.css"],
 
             images: [app + '/**/**/*.png', app + '/**/**/*.gif', app + '/**/**/*.jpg']
         },
@@ -91,7 +90,7 @@
     //BrowserSync
     config.getBrowsersyncOptionsDefault = function () {
         return {
-            //proxy: 'localhost:' + portDefault,   //não mais por proxy
+            //proxy: 'localhost:' + portDefault,   // use this for proxy
             server: {
                 baseDir: "./"
             },

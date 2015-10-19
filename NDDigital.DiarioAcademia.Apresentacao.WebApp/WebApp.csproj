@@ -77,14 +77,17 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="app\controllers\layout\home-app.ctrl.js" />
-    <Content Include="app\controllers\manager\group\managerGroupPermissionEdit.ctrl.js" />
-    <Content Include="app\controllers\manager\group\managerGroupEdit.ctrl.js" />
-    <Content Include="app\controllers\manager\group\managerGroupList.ctrl.js" />
-    <Content Include="app\controllers\manager\permission\managerPermission.ctrl.js" />
-    <Content Include="app\controllers\manager\user\managerUserEdit.ctrl.js" />
-    <Content Include="app\controllers\manager\user\managerUserEditGroupController.ctrl.js" />
-    <Content Include="app\controllers\manager\user\managerUserList.ctrl.js" />
+    <Content Include="app\controllers\layout\header.controller.js" />
+    <Content Include="app\controllers\layout\home-app.controller.js" />
+    <Content Include="app\controllers\layout\navbar.controller.js" />
+    <Content Include="app\controllers\manager\group\manager-group-permission-edit.controller.js" />
+    <Content Include="app\controllers\manager\group\manager-group-edit.controller.js" />
+    <Content Include="app\controllers\manager\group\manager-group-list.controller.js" />
+    <Content Include="app\controllers\manager\group\manager-group-create.controller.js" />
+    <Content Include="app\controllers\manager\permission\manager-permission.controller.js" />
+    <Content Include="app\controllers\manager\user\manager-user-edit.controller.js" />
+    <Content Include="app\controllers\manager\user\manager-user-edit-group.controller.js" />
+    <Content Include="app\controllers\manager\user\manager-user-list.controller.js" />
     <Content Include="app\directives\ndd-chart-knob\ndd-chart-knob.directives.js" />
     <Content Include="app\directives\ndd-chart-knob\ndd-chart-knob.html" />
     <Content Include="app\directives\ndd-confirm-exit\ndd-confirm-exit.directives.js" />
@@ -357,24 +360,22 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="app\controllers\aluno\alunoCreate.ctrl.js" />
-    <Content Include="app\controllers\aluno\alunoDetails.ctrl.js" />
-    <Content Include="app\controllers\aluno\alunosList.ctrl.js" />
-    <Content Include="app\controllers\aula\aulaCreate.ctrl.js" />
-    <Content Include="app\controllers\aula\aulasList.ctrl.js" />
-    <Content Include="app\controllers\authentication\login.ctrl.js" />
-    <Content Include="app\controllers\authentication\signup.ctrl.js" />
-    <Content Include="app\controllers\chamada\chamada.ctrl.js" />
-    <Content Include="app\controllers\layout\footer.ctrl.js" />
-    <Content Include="app\controllers\layout\header.ctrl.js" />
-    <Content Include="app\controllers\layout\home.ctrl.js" />
-    <Content Include="app\controllers\layout\navbar.ctrl.js" />
-    <Content Include="app\controllers\layout\shell.ctrl.js" />
-    <Content Include="app\controllers\layout\sidebar.ctrl.js" />
-    <Content Include="app\controllers\layout\toolbar.ctrl.js" />
-    <Content Include="app\controllers\turma\turmaCreate.ctrl.js" />
-    <Content Include="app\controllers\turma\turmaDetails.ctrl.js" />
-    <Content Include="app\controllers\turma\turmaList.ctrl.js" />
+    <Content Include="app\controllers\aluno\aluno-create.controller.js" />
+    <Content Include="app\controllers\aluno\aluno-details.controller.js" />
+    <Content Include="app\controllers\aluno\aluno-list.controller.js" />
+    <Content Include="app\controllers\aula\aula-create.controller.js" />
+    <Content Include="app\controllers\aula\aula-list.controller.js" />
+    <Content Include="app\controllers\authentication\login.controller.js" />
+    <Content Include="app\controllers\authentication\signup.controller.js" />
+    <Content Include="app\controllers\chamada\chamada.controller.js" />
+    <Content Include="app\controllers\layout\footer.controller.js" />
+    <Content Include="app\controllers\layout\home.controller.js" />
+    <Content Include="app\controllers\layout\shell.controller.js" />
+    <Content Include="app\controllers\layout\sidebar.controller.js" />
+    <Content Include="app\controllers\layout\toolbar.controller.js" />
+    <Content Include="app\controllers\turma\turma-create.controller.js" />
+    <Content Include="app\controllers\turma\turma-details.controller.js" />
+    <Content Include="app\controllers\turma\turma-list.controller.js" />
     <Content Include="app\factories\ng-automapper.factory.js" />
     <Content Include="app\models\turma.model.js" />
     <Content Include="app\modules\common.module.js" />

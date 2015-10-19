@@ -43,5 +43,9 @@
     "wiredep": "^3.0.0-beta",
     "yargs": "^3.15.0"
   },
-  "dependencies": {}
+  "dependencies": {
+    "browser-sync": "^2.9.8",
+    "gulp-help": "^1.6.1",
+    "require-dir": "^0.3.0"
+  }
 }

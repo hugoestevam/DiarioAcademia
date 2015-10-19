@@ -1,0 +1,89 @@
+{
+    "dashboard": {
+        "APP_NAME": "Programmer's Academy",
+        "WELCOME": "Welcome to {{appName}}"
+    },
+    "header": {
+        "LIST_CLASS": "List of Class",
+        "EDIT_CLASS": "Edit Class",
+        "CREATE_CLASS": "Create Class",
+
+        "LIST_STUDENT": "List of Student",
+        "CREATE_STUDENT": "Create Student",
+        "EDIT_STUDENT": "Edit Student",
+
+        "LIST_LESSON": "List of Lesson",
+        "CREATE_LESSON": "Create Lesson",
+
+        "CLASS_REGISTER": "Class Register",
+
+        "LIST_USERS": "List of Users",
+        "CREATE_USERS": "Create Users",
+        "EDIT_USERS": "Edit Users",
+
+        "LIST_GROUPS": "List of Groups",
+        "CREATE_GROUPS": "Create Group",
+        "EDIT_GROUPS": "Edit Group",
+
+        "LIST_PERMISSIONS": "List of Permissions",
+
+        "SETTINGS": "Settings",
+        "USER_OPTIONS": "My Account",
+        "LANGUAGE": "Language",
+        "THEMES": "Themes"
+
+    },
+    "topbar": {
+        "search": {
+            "PLACEHOLDER": "Type and hit enter.."
+        }
+    },
+    "sidebar": {
+        "WELCOME": "Welcome",
+        "heading": {
+            "HEADER": "Main Navigation"
+        },
+        "nav": {
+            "HOME": "Home",
+            "menu": {
+                "MENU": "Menu",
+                "SUBMENU": "Sub Menu"
+            }
+        }
+    },
+    "entities": {
+        "CLASS": "Class",
+        "STUDENT": "Student",
+        "LESSON": "Lesson",
+        "CLASS_REGISTER": "Class Register",
+        "MANAGER": "Manager",
+        "USER": "User",
+        "GROUP": "Group",
+        "PERMISSIONS": "Permissions"
+    },
+    "action": {
+        "CREATE": "Create",
+        "LIST": "List",
+        "EDIT": "Edit",
+        "SAVE": "Save",
+        "DELETE": "Exclude",
+        "CLEAN": "Clean",
+        "CLEAN_ALL": "Clean All",
+        "SELECT_ALL": "Select All",
+        "CANCEL": "Cancel",
+        "OK": "Ok",
+        "CREATE_CLASS_REGISTER": "Create Class Register !"
+    },
+    "status": {
+        "CLASS_REGISTER_NOT_CREATE": "Class Register not create !",
+        "CLASS_REGISTER_CREATE": "Class Register saved !",
+        "IS_ADMIN": "It is administrator",
+        "IS_NOT_ADMIN": "It is not an administrator"
+
+    },
+    "home": {
+        "MESSAGE_START": "This project is an application skeleton. You can use it to quickly bootstrap your angular webapp projects and dev environment for these projects.",
+    "MESSAGE_DESCRIPTION":  " The seed app doesn't do much and has most of the feature removed so you can add theme as per your needs just following the demo app examples."
+    }
+
+}

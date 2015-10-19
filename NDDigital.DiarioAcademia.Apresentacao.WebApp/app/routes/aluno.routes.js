@@ -6,9 +6,9 @@
         .module('routes.module')
         .config(configRoutes);
 
-    configRoutes.$inject = [KEYS.APP_ROUTES, KEYS.USER_ROLES];
+    configRoutes.$inject = [KEYS.APP_ROUTES];
 
-    function configRoutes(routes, roles) {
+    function configRoutes(routes) {
         routes.push({
             name: 'aluno',
             url: '/aluno',

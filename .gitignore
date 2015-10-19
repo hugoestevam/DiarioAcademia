@@ -166,9 +166,9 @@ NDDigital.DiarioAcademia.Apresentacao.WebApp/dist/*
 NDDigital.DiarioAcademia.Apresentacao.WebApp/index.html
 NDDigital.DiarioAcademia.Apresentacao.WebApp/task/temp/templates.js
 NDDigital.DiarioAcademia.Apresentacao.AngleTry/bower_components/*
+NDDigital.DiarioAcademia.Apresentacao.AngleTry/src/node_modules/*
+NDDigital.DiarioAcademia.Apresentacao.AngleTry/bower_components/*
 NDDigital.DiarioAcademia.Apresentacao.AngleTry/node_modules/*
-NDDigital.DiarioAcademia.Apresentacao.AngleTry/master/bower_components/*
-NDDigital.DiarioAcademia.Apresentacao.AngleTry/master/node_modules/*
 packages/FluentAssertions.3.2.1/lib/sl5/Microsoft.VisualStudio.QualityTools.UnitTesting.Silverlight.xml
 packages/FluentAssertions.3.2.1/lib/sl5/Microsoft.VisualStudio.QualityTools.UnitTesting.Silverlight.xml
 .vs/config/applicationhost.config

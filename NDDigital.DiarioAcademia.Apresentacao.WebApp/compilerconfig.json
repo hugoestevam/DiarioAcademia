@@ -26,5 +26,9 @@
   {
     "outputFile": "content/layout/manager.css",
     "inputFile": "content/layout/manager.less"
+  },
+  {
+    "outputFile": "content/theme/default/home.css",
+    "inputFile": "content/theme/default/home.less"
   }
 ]
