@@ -201,6 +201,7 @@
     <Compile Include="App_Start\OAuthConfig.cs" />
     <Compile Include="App_Start\RoutesConfig.cs" />
     <Compile Include="Controllers\Base\BaseSecurityController.cs" />
+    <Compile Include="Controllers\Entities\OverviewController.cs" />
     <Compile Include="Controllers\Security\AccountsController.cs" />
     <Compile Include="Controllers\Security\AuthorizationController.cs" />
     <Compile Include="Controllers\Security\GroupController.cs" />

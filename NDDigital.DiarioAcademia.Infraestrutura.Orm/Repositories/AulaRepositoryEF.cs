@@ -73,5 +73,7 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Repositories
 
            
         }
+
+        
     }
 }

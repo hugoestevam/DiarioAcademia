@@ -260,5 +260,10 @@ public class PresencaRepositorySql : RepositoryBaseADO, IPresencaRepository
         return presenca;
     }
 
+    public int GetCount()
+    {
+        throw new NotImplementedException();
+    }
+
     #endregion Métodos privados
 }

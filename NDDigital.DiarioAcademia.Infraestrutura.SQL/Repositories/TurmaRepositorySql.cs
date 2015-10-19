@@ -28,6 +28,7 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.SQL.Repositories
 
         public const string SqlSelectbId =
             @"SELECT * FROM TBTurma WHERE Id = {0}Id";
+        public const string SqlCount = @"SELECT COUNT(*) AS count FROM TBAula";
 
         #endregion Querys
 
@@ -152,6 +153,11 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.SQL.Repositories
                 "Id", turma.Id,
                 "Ano", turma.Ano
             };
+        }
+
+        public int GetCount()
+        {
+            return Get(SqlCount, (IDataReader reader) => { return Convert.ToInt32(reader["count"]); });
         }
 
         #endregion

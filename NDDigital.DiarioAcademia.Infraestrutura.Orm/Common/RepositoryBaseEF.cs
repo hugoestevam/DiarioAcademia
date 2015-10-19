@@ -141,5 +141,9 @@ namespace Infrastructure.DAO.ORM.Common.Base
         {
             return dbset.AsQueryable();
         }
+        public int GetCount()
+        {
+            return dbset.Count();
+        }
     }
 }

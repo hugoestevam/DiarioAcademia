@@ -42,6 +42,7 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.SQL.Repositories
               FROM TBAula AS A
               INNER JOIN TBTurma AS T ON A.Turma_Id = T.Id
               WHERE A.Id = {0}Id";
+        public const string SqlCount = @"SELECT COUNT(*) AS count FROM TBAula";
 
         #endregion Querys
 
@@ -201,6 +202,11 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.SQL.Repositories
                 "Turma_Id", aula.Turma.Id,
                 "Ano", aula.Turma.Ano
             };
+        }
+
+        public int GetCount()
+        {
+            return Get(SqlCount, (IDataReader reader) => { return Convert.ToInt32(reader["count"]); });
         }
 
         #endregion Métodos privados

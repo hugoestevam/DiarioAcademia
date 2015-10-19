@@ -76,5 +76,18 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.Security
 
             Assert.AreEqual(1, users.Count);
         }
+        [TestMethod]
+        [TestCategory(TestCategory)]
+        public void Deveria_Editar_Um_Usuario_E_Tambem_Seu_Account()
+        {
+            var dbuser = UserRepository.GetUsers().First();
+
+            var newUsername = "New Username";
+
+            UserRepository.UpdateWithUsername(dbuser,newUsername);
+
+            Assert.AreEqual(newUsername, dbuser.Account.Username);            
+
+        }
     }
 }

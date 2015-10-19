@@ -160,5 +160,10 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Security.Common
         {
             return dbset.AsQueryable();
         }
+
+        public int GetCount()
+        {
+            return dbset.Count();
+        }
     }
 }
