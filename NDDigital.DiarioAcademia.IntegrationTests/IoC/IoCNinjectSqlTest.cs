@@ -3,6 +3,7 @@ using NDDigital.DiarioAcademia.Dominio.Contracts;
 using NDDigital.DiarioAcademia.Dominio.Entities;
 using NDDigital.DiarioAcademia.Infraestrutura.IoC;
 using NDDigital.DiarioAcademia.IntegrationTests.Base;
+using System.Configuration;
 
 namespace NDDigital.DiarioAcademia.IntegrationTests.IoC
 {
@@ -12,19 +13,25 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.IoC
         private const string TestCategory =
             "Teste de IoC";
 
+        [TestInitialize]
+        public void Initialize()
+        {
+            const string key = "Infrasctructure.DAO";
+            const string dll = "NDDigital.DiarioAcademia.Infraestrutura.SQL.dll";
+
+            ConfigurationManager.AppSettings[key] = dll;
+        }
+
+
         [TestMethod]
         [TestCategory(TestCategory)]
-        public void Save_Turma_IoC_SQL_Test()
+        public void IoC_Repository_SQL_Test()
         {
-            Turma t = ObjectBuilder.CreateTurma();
-
-            //Através do IoC Ninject busca um implementação do Repositório
+            //Através do IoC Ninject busca um implementação do Repositório ADO.NET
             ITurmaRepository repository
                 = Injection.Get<ITurmaRepository>();
 
-            Turma turmaAdcionada = repository.Add(t);
-
-            Assert.IsTrue(turmaAdcionada.Id > 0);
+            Assert.IsInstanceOfType(repository, typeof(TurmaRepositorySql));
         }
     }
 }
