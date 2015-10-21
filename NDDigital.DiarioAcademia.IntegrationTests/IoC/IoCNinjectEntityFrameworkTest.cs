@@ -2,8 +2,8 @@
 using NDDigital.DiarioAcademia.Dominio.Contracts;
 using NDDigital.DiarioAcademia.Dominio.Entities;
 using NDDigital.DiarioAcademia.Infraestrutura.IoC;
+using NDDigital.DiarioAcademia.Infraestrutura.Orm.Repositories;
 using NDDigital.DiarioAcademia.IntegrationTests.Base;
-
 using System.Configuration;
 
 namespace NDDigital.DiarioAcademia.IntegrationTests.IoC
@@ -25,23 +25,13 @@ namespace NDDigital.DiarioAcademia.IntegrationTests.IoC
 
         [TestMethod]
         [TestCategory(TestCategory)]
-        public void Salva_Turma_IoC_EF_Test()
+        public void IoC_Repository_EF_Test()
         {
-            Turma t = ObjectBuilder.CreateTurma();
-
             //Através do IoC Ninject busca um implementação do Repositório
             ITurmaRepository repository
                 = Injection.Get<ITurmaRepository>();
 
-            Turma turmaAdcionada = repository.Add(t);
-
-            Assert.IsTrue(turmaAdcionada.Id > 0);
-        }
-
-        [TestMethod]
-        [TestCategory(TestCategory)]
-        public void Contexts_IoC_EF_Test()
-        {
-        }
+            Assert.IsInstanceOfType(repository, typeof(TurmaRepositoryEF));
+        }        
     }
 }
