@@ -2,13 +2,24 @@
 
 Para executar este projeto em seu potencial é necessário ter um servidor Node rodando na máquina.
 
-#### Instalando NodeJS
+#### Dependencias
+Todas as dependencias podem ser opcionalmente instaladas através do [Chocolatey](https://chocolatey.org/).
+
+#####NodeJS
 * Obtenha o NodeJS pelo:
  * [Site oficial](https://nodejs.org/), ou use
- * [Chocolatey](https://chocolatey.org/)
-* Obtenha o Python por:
- * [Python 2.7.3](https://www.python.org/ftp/python/2.7.3/python-2.7.3.msi)
-* Certifique-se de possuir o Visual Studio instalado.
+ * `choco install nodejs`
+ 
+#####Python
+* Instale o Python por:
+ * [Instalador](https://www.python.org/ftp/python/2.7.3/python-2.7.3.msi), ou use
+ * `choco install python`
+
+
+#####git
+* Obtenha o git pelo:
+ * [Site oficial](https://git-for-windows.github.io/), ou use
+ * `choco install git`
  
 #### Baixando o Projeto
 
@@ -23,8 +34,6 @@ O download do projeto pode ser feito de 3 formas:
 
 3) Através do `git` seguindo os passos:
 
-     > choco install git 
-        -reinicie o prompt
         -aponte para a pasta da solução
      > git clone https://github.com/AlexandreRech/DiarioAcademia.git
 
@@ -62,3 +71,11 @@ O download do projeto pode ser feito de 3 formas:
  
 A aplicação já deve estar executando em  [http://localhost:3000](http://localhost:3000). Lembrando que para tudo funcionar corretamente, o projeto [Webapi](https://github.com/AlexandreRech/DiarioAcademia/tree/master/NDDigital.DiarioAcademia.WebApi) deve estar executando no IIS.
 
+##### Troubleshooting
+Caso dê algum problema relacionado ao `CLI`, certifique-se de ter o Visual Studio instalado e execute o comando:
+
+    npm config set msvs_version yyyy --global
+
+Substituindo `yyyy`pela versão do VS (exemplo: `2013`)
+
+Para demais erros de variavel de ambiente, um simples reiniciar de prompt deve resolver.
