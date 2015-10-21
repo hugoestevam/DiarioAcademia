@@ -20,7 +20,7 @@ gulp.task('inject', 'Inject the files in the index.html', ['inject-css', 'templa
 });
 
 
-gulp.task('inject-css', 'Inject only css app in the index.html', gulpsync.sync(['compile-less', 'inject-lib']), function (callback) {
+gulp.task('inject-css', 'Inject only css app in the index.html', gulpsync.sync(['compile-sass', 'inject-lib']), function (callback) {
     gulp.src(config.index)
          .pipe(loader.inject(gulp.src(config.app.css.static), {
              starttag: "<!--inject:appcss-->"
@@ -40,12 +40,12 @@ gulp.task('inject-lib', 'Inject only libs in the index.html', function (callback
 
 
 // Compile Tasks
-gulp.task('compile-less', 'Compile less', function () {
-    return gulp.src(config.app.less.app)
+gulp.task('compile-sass', 'Compile sass', function () {
+    return gulp.src(config.app.sass.app)
               .pipe(changed(config.dist.css, { extension: '.css' })) // Keep in the pipeline only changed files
-              .pipe(addsrc(config.app.less.bootstrap))
-              .pipe(addsrc(config.app.less.angle))
-              .pipe(compileLess())
+              .pipe(addsrc(config.app.sass.bootstrap))
+              .pipe(addsrc(config.app.sass.angle))
+              .pipe(compileSass().on('error', compileSass.logError))
               .pipe(gulp.dest(config.dist.css))
               .pipe(loader.if(args.livereload, browserSync.stream()));
 });
