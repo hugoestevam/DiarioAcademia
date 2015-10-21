@@ -1,4 +1,5 @@
 ﻿using NDDigital.DiarioAcademia.Aplicacao.DTOs;
+using NDDigital.DiarioAcademia.Dominio;
 using NDDigital.DiarioAcademia.Dominio.Contracts;
 using NDDigital.DiarioAcademia.Dominio.Entities;
 using NDDigital.DiarioAcademia.Infraestrutura.DAO.Common.Uow;
@@ -69,7 +70,7 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
             catch (DbUpdateException te)
             {
                 _unitOfWork.Rollback();
-                throw new ApplicationException("Ocorreu um erro, verifique se esta turma tem alunos relacionados");
+                throw new ApplicationException(Resource.EXCEPTION_TURMA_COM_ALUNOS_RELACIONADOS);
             }
 
         }

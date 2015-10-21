@@ -42,7 +42,7 @@
             'app.checkbox',
             'app.ndd-confirm-exit',
             'app.ndd-security',
-            //entities
+            //features
             'app.layout',
             'app.auth',
             'app.turma',

@@ -28,7 +28,7 @@ module.exports = function () {
                     services: paths.app + '**/**/*.service.js',
                     controllers: [paths.app + 'common/layout/shell.controller.js',
                                   paths.app + 'common/sidebar/sidebar.controller.js',
-                                  paths.app + 'common/sidebar/sidebar.userblock.controller.js' ],
+                                  paths.app + 'common/sidebar/sidebar.userblock.controller.js'],
                     route: paths.app + '**/**/*.routes.js',
                     routeConfig: paths.app + 'common/routes/routes.config.js',
                     directive: paths.app + "**/**/*.directive.js",
@@ -68,19 +68,18 @@ module.exports = function () {
                     }
                 }
             },
-
-            less: {
-                all: paths.app + "content/**/**/**/*.less",
-                app: [paths.app + "content/**/**/*.less", "!./src/content/libs/**/*.less"],
-                bootstrap: paths.app + "content/libs/bootstrap/bootstrap.less",
-                angle: paths.app + "content/libs/app/app.less"
+            sass: {
+                all: paths.app + "content/**/**/**/*.scss",
+                app: [paths.app + "content/**/**/*.scss", "!./src/content/libs/**/*.scss"],
+                bootstrap: paths.app + "content/libs/bootstrap/bootstrap.scss",
+                angle: paths.app + "content/libs/app/app.scss"
             },
 
             json: [paths.app + '**/**/*.json'],
 
             fonts: {
                 all: [paths.app + "**/**/fonts/*.*", "!" + paths.app + "content/fonts/*.*"],
-                bootstrap:  [paths.app + "content/fonts/*.*"]
+                bootstrap: [paths.app + "content/fonts/*.*"]
             },
 
             images: [paths.app + "images/**/**/*.*"]
