@@ -3,7 +3,7 @@ module.exports = function () {
     // MAIN PATHS
     var paths = {
         app: './src/',
-        scripts: 'js/'
+        dist: "./dist/"
     };
     var bower = "./bower_components/";
 
@@ -13,55 +13,77 @@ module.exports = function () {
 
         index: "./index.html",
 
-        // production mode (see build task)
-        isProduction: false,
-
-        // Angular template cache
-        // Example:
-        //    gulp --usecache
-        useCache: args.usecache,
-
         app: {
             html: [paths.app + "**/**/*.html"],
 
             js: {
-                modules: [paths.app + '**/**/*.module.js'],
-                extentions: [paths.app + 'common/extentions/*.js'],
-                configs: [paths.app + "**/**/*.config.js", '!' + paths.app + "common/routes/routes.config.js"],
-                constant: [paths.app + "**/**/*.constants.js"],
-                provider: [paths.app + "**/**/*.provider.js"],
-                adapters: [paths.app + "**/**/*.adapter.js"],
-                factory: [paths.app + "**/**/*.factory.js"],
-                services: [paths.app + '**/**/*.service.js'],
-                controllers: [  // if you have more static controllers: use .json with require() here
-                    paths.app + 'common/layout/shell.controller.js',
-                    paths.app + 'common/sidebar/sidebar.controller.js',
-                    paths.app + 'common/sidebar/sidebar.userblock.controller.js'
+                'static': {
+                    modules: paths.app + '**/**/*.module.js',
+                    extentions: paths.app + 'common/extentions/*.js',
+                    configs: [paths.app + "**/**/*.config.js", '!' + paths.app + "common/routes/routes.config.js"],
+                    constant: paths.app + "**/**/*.constants.js",
+                    provider: paths.app + "**/**/*.provider.js",
+                    adapters: paths.app + "**/**/*.adapter.js",
+                    factory: paths.app + "**/**/*.factory.js",
+                    services: paths.app + '**/**/*.service.js',
+                    controllers: [paths.app + 'common/layout/shell.controller.js',
+                                  paths.app + 'common/sidebar/sidebar.controller.js',
+                                  paths.app + 'common/sidebar/sidebar.userblock.controller.js' ],
+                    route: paths.app + '**/**/*.routes.js',
+                    routeConfig: paths.app + 'common/routes/routes.config.js',
+                    directive: paths.app + "**/**/*.directive.js",
+                    run: paths.app + "**/**/*.run.js",
+                },
+
+                lazy: {
+                    controller: {
+                        src: [paths.app + '**/**/**/*.controller.js',
+                              "!" + paths.app + 'common/layout/shell.controller.js',
+                              "!" + paths.app + 'common/sidebar/sidebar.controller.js',
+                              "!" + paths.app + 'common/sidebar/sidebar.userblock.controller.js'],
+                        dist: paths.dist + "src/"
+                    },
+                    vendor: {
+                        src: [paths.app + "vendor/**/**/*.js"],
+                        dist: paths.dist + "src/vendor/"
+                    }
+                }
+            },
+
+            css: {
+                'static': [paths.app + "content/**/**/*.css",
+                   paths.app + "content/css/**/app.css",
+                   "!" + paths.app + "content/theme/theme*.css",
+                   "!" + paths.app + "content/**/**/bootstrap*.css"
                 ],
-                route: [paths.app + '**/**/*.routes.js'],
-                routeConfig: [paths.app + 'common/routes/routes.config.js'],
-                directive: [paths.app + "**/**/*.directive.js"],
-                run: [paths.app + "**/**/*.run.js"]
+
+                lazy: {
+                    theme: {
+                        src: [paths.app + "content/theme/theme*.css"],
+                        dist: paths.dist + "src/content/theme/"
+                    },
+                    vendor: {
+                        src: [paths.app + "vendor/**/**/*.css"],
+                        dist: paths.dist + "src/vendor/"
+                    }
+                }
             },
 
             less: {
-                all: "./src/content/**/**/**/*.less",
-                app: ["./src/content/**/**/*.less", "!./src/content/libs/**/*.less"],
-                bootstrap: "./src/vendor/bootstrap/bootstrap.less",
-                angle: "./src/content/libs/app/app.less"
+                all: paths.app + "content/**/**/**/*.less",
+                app: [paths.app + "content/**/**/*.less", "!./src/content/libs/**/*.less"],
+                bootstrap: paths.app + "content/libs/bootstrap/bootstrap.less",
+                angle: paths.app + "content/libs/app/app.less"
             },
 
+            json: [paths.app + '**/**/*.json'],
 
-            distCss: "./src/content/css/",
+            fonts: {
+                all: [paths.app + "**/**/fonts/*.*", "!" + paths.app + "content/fonts/*.*"],
+                bootstrap:  [paths.app + "content/fonts/*.*"]
+            },
 
-            css: ["./src/content/**/**/*.css",
-                "!./src/content/theme/theme*.css",
-                "!./src/content/**/**/bootstrap*.css"
-            ],
-
-
-            appcss: "./src/content/css/**/app.css"
-
+            images: [paths.app + "images/**/**/*.*"]
         },
 
         libs: {
@@ -81,12 +103,22 @@ module.exports = function () {
         },
 
         dist: {
-            root: "./dist"
+            root: paths.dist,
+            src: {
+                root: paths.dist + "src/",
+                images: paths.dist + "src/images/",
+                fonts: paths.dist + "/fonts/"
+            },
+            css: paths.app + "content/css/",
+            images: paths.dist + "images/"
         },
 
         clean: {
-            distCss: "./src/content/css/**/**/*.css",
-            dist: "./dist/**/**/*.*",
+            dist: {
+                all: "./dist",
+                css: paths.app + "content/css/**/**/*.css",
+            }
+
         },
 
         templatecache: {
@@ -103,20 +135,20 @@ module.exports = function () {
     // Resources
     config.getResourcesInjected = function () {
         return {
-            'modules': config.app.js.modules,
-            'extentions': config.app.js.extentions,
-            'provider': config.app.js.provider,
-            'config': config.app.js.configs,
-            'constant': config.app.js.constant,
-            'adapters': config.app.js.adapters,
-            'factory': config.app.js.factory,
-            'service': config.app.js.services,
-            'controller.static': config.app.js.controllers,
-            'routes': config.app.js.route,
-            'config.routes': config.app.js.routeConfig,
-            'directive': config.app.js.directive,
+            'modules': config.app.js.static.modules,
+            'extentions': config.app.js.static.extentions,
+            'provider': config.app.js.static.provider,
+            'config': config.app.js.static.configs,
+            'constant': config.app.js.static.constant,
+            'adapters': config.app.js.static.adapters,
+            'factory': config.app.js.static.factory,
+            'service': config.app.js.static.services,
+            'controller': config.app.js.static.controllers,
+            'routes': config.app.js.static.route,
+            'config.routes': config.app.js.static.routeConfig,
+            'directive': config.app.js.static.directive,
             'templates': config.templatecache.path + config.templatecache.file,
-            'run': config.app.js.run,
+            'run': config.app.js.static.run,
         }
     }
 
@@ -164,5 +196,9 @@ module.exports = function () {
         };
     }
 
+
+
     return config;
+
+
 }

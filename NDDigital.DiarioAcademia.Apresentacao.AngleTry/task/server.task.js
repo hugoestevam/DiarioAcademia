@@ -6,7 +6,7 @@
  *
  */
 
-gulp.task('start', 'starts the  app. --livereload: enable livereload', ['inject'], function () {
+gulp.task('start', 'Starts the  app. --livereload: enable livereload', ['inject'], function () {
     var options = config.getBrowsersyncOptions();
     if (!args.livereload)
         options.files = []; // no files watched
@@ -15,7 +15,7 @@ gulp.task('start', 'starts the  app. --livereload: enable livereload', ['inject'
 });
 
 
-gulp.task('start-app', 'Start publish version of app optimized', ['build-optimized'], function () {
+gulp.task('start-publish', 'Start publish version of app optimized', ['build'], function () {
     //start application
     browserSync.init({
         server: {
