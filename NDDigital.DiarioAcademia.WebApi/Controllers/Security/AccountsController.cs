@@ -74,7 +74,7 @@ namespace NDDigital.DiarioAcademia.WebApi.Controllers.Authentication
                 Email = model.Email,
                 FirstName = model.FirstName,
                 LastName = model.LastName,
-                PasswordHash = Criptografia.Criptografar(model.Password, Criptografia.ModoSimples.Padrao)
+                PasswordHash = Criptografia.Criptografar(model.Password)
             };
 
             // IdentityResult addUserResult =  this.UserRepository.Create(user, createUserModel.Password);
