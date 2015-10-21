@@ -14,7 +14,7 @@
             url: '/create',
             resolve: helper.resolveFor('chamadaCtrl'),
             controller: 'chamadaCtrl as vm',
-            templateUrl: '/src/entities/chamada/chamada.html',
+            templateUrl: '/src/features/chamada/chamada.html',
             displayName: 'Realizar Chamada',
             $$permissionId: "11"
         }

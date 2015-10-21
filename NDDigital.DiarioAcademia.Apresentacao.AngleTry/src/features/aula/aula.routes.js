@@ -20,7 +20,7 @@
             name: 'app.aula.list',
             url: '/list',
             controller: 'aulaListCtrl as vm',
-            templateUrl: '/src/entities/aula/views/aula-list.html',
+            templateUrl: '/src/features/aula/views/aula-list.html',
             resolve: helper.resolveFor('aulaListCtrl'),
             displayName: 'Lista de Aulas',
             $$permissionId: "07"
@@ -28,7 +28,7 @@
             name: 'app.aula.create',
             url: '/create',
             controller: 'aulaCreateCtrl as vm',
-            templateUrl: '/src/entities/aula/views/aula-create.html',
+            templateUrl: '/src/features/aula/views/aula-create.html',
             resolve: helper.resolveFor('aulaCreateCtrl'),
             displayName: 'Criação de Aulas',
             $$permissionId: "08"
