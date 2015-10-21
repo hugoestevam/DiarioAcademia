@@ -42,43 +42,49 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Security.Contexts
             modelBuilder.Configurations.Add(new AccountConfiguration());
         }
 
-        private void Seed()
+        private void TrySave()
         {
-            Group group;
-            if (Groups.Count() == 0)
+            try
             {
-                group = new Group { Name = "Administration", IsAdmin = true };
-                Groups.Add(group);
-                if (Accounts.Count() == 0)
+                SaveChanges();
+            }
+            catch (DbEntityValidationException dbEx)
+            {
+                foreach (var validationErrors in dbEx.EntityValidationErrors)
                 {
-                    var user = new User
+                    foreach (var validationError in validationErrors.ValidationErrors)
                     {
-                        UserName = "superadmin",
-                        PasswordHash = Criptografia.Criptografar("174963"),
-                        Account = new Account("superadmin"),
-                        FirstName = "admin",
-                        LastName = "admin"
-                    };
-                    user.Account.Groups = new List<Group>();
-                    user.Account.Groups.Add(group);
-                    Users.Add(user);
-                    try
-                    {
-                        SaveChanges();
-                    }
-                    catch (DbEntityValidationException dbEx)
-                    {
-                        foreach (var validationErrors in dbEx.EntityValidationErrors)
-                        {
-                            foreach (var validationError in validationErrors.ValidationErrors)
-                            {
-                                Trace.TraceInformation("Property: {0} Error: {1}",
-                                                        validationError.PropertyName,
-                                                        validationError.ErrorMessage);
-                            }
-                        }
+                        Trace.TraceInformation("Property: {0} Error: {1}",
+                                                validationError.PropertyName,
+                                                validationError.ErrorMessage);
                     }
                 }
+            }
+        }
+
+        private void Seed()
+        {
+            Group group = new Group { Name = "Administration", IsAdmin = true };
+            if (Groups.Count() == 0)
+            {
+                Groups.Add(group);
+                TrySave();
+            }
+
+            if (Accounts.Count() == 0)
+            {
+                var user = new User
+                {
+                    UserName = "superadmin",
+                    PasswordHash = Criptografia.Criptografar("174963"),
+                    Account = new Account("superadmin"),
+                    FirstName = "admin",
+                    LastName = "admin"
+                };
+                user.Account.Groups = new List<Group>();
+                user.Account.Groups.Add(group);
+                Users.Add(user);
+                TrySave();
             }
         }
     }
