@@ -277,5 +277,11 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.SQL.Repositories
         }
 
         #endregion Métodos privados
+
+
+        public IQueryable<Aluno> GetAlunos()
+        {
+            return GetAll().AsQueryable();
+        }
     }
 }

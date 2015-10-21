@@ -20,6 +20,8 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
         Endereco BuscaEnderecoPorCep(string cep);
 
         void GerarRelatorioAlunosPdf(int ano, string path);
+
+        IQueryable<Aluno> GetAlunos();
     }
 
 
@@ -151,6 +153,11 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
             {
                 throw new Exception(ex.Message);
             }
+        }
+
+        public IQueryable<Aluno> GetAlunos()
+        {
+            return _alunoRepository.GetAlunos();                 
         }
     }
 }

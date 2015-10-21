@@ -50,5 +50,11 @@ namespace NDDigital.DiarioAcademia.Infraestrutura.Orm.Repositories
                     .Where(x => x.Turma.Id == id)
                     .ToList();
         }
+
+
+        public IQueryable<Aluno> GetAlunos()
+        {
+            return GetQueryable();
+        }
     }
 }
