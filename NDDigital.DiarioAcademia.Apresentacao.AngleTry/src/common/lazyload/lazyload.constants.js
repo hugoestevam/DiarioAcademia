@@ -15,32 +15,32 @@
 
             // Angular based script (use the right module name)
             modules: [
-               { name: 'loginController', files: [root + 'entities/authentication/controllers/login.controller.js'] },
-               { name: 'signupController', files: [root + 'entities/authentication/controllers/signup.controller.js'] },
+               { name: 'loginController', files: [root + 'features/authentication/controllers/login.controller.js'] },
+               { name: 'signupController', files: [root + 'features/authentication/controllers/signup.controller.js'] },
                //Class
-               { name: 'turmaListCtrl', files: [root + 'entities/turma/controllers/turma-list.controller.js'] },
-               { name: 'turmaDetailsCtrl', files: [root + 'entities/turma/controllers/turma-details.controller.js'] },
-               { name: 'turmaCreateCtrl', files: [root + 'entities/turma/controllers/turma-create.controller.js'] },
+               { name: 'turmaListCtrl', files: [root + 'features/turma/controllers/turma-list.controller.js'] },
+               { name: 'turmaDetailsCtrl', files: [root + 'features/turma/controllers/turma-details.controller.js'] },
+               { name: 'turmaCreateCtrl', files: [root + 'features/turma/controllers/turma-create.controller.js'] },
                //Student
-               { name: 'alunoListCtrl', files: [root + 'entities/aluno/controllers/aluno-list.controller.js'] },
-               { name: 'alunoDetailsCtrl', files: [root + 'entities/aluno/controllers/aluno-details.controller.js'] },
-               { name: 'alunoCreateCtrl', files: [root + 'entities/aluno/controllers/aluno-create.controller.js'] },
+               { name: 'alunoListCtrl', files: [root + 'features/aluno/controllers/aluno-list.controller.js'] },
+               { name: 'alunoDetailsCtrl', files: [root + 'features/aluno/controllers/aluno-details.controller.js'] },
+               { name: 'alunoCreateCtrl', files: [root + 'features/aluno/controllers/aluno-create.controller.js'] },
                //Lesson
-               { name: 'aulaListCtrl', files: [root + 'entities/aula/controllers/aula-list.controller.js'] },
-               { name: 'aulaCreateCtrl', files: [root + 'entities/aula/controllers/aula-create.controller.js'] },
+               { name: 'aulaListCtrl', files: [root + 'features/aula/controllers/aula-list.controller.js'] },
+               { name: 'aulaCreateCtrl', files: [root + 'features/aula/controllers/aula-create.controller.js'] },
                //Class Register
-               { name: 'chamadaCtrl', files: [root + 'entities/chamada/chamada.controller.js'] },
+               { name: 'chamadaCtrl', files: [root + 'features/chamada/chamada.controller.js'] },
                //User
-               { name: 'managerUserListController', files: [root + 'entities/user/controllers/manager-user-list.controller.js'] },
-               { name: 'managerUserEditController', files: [root + 'entities/user/controllers/manager-user-edit.controller.js'] },
-               { name: 'managerUserEditGroupController', files: [root + 'entities/user/controllers/manager-user-edit-group.controller.js'] },
+               { name: 'managerUserListController', files: [root + 'features/user/controllers/manager-user-list.controller.js'] },
+               { name: 'managerUserEditController', files: [root + 'features/user/controllers/manager-user-edit.controller.js'] },
+               { name: 'managerUserEditGroupController', files: [root + 'features/user/controllers/manager-user-edit-group.controller.js'] },
                //Permissions
-               { name: 'managerPermissionController', files: [root + 'entities/permission/manager-permission.controller.js'] },
+               { name: 'managerPermissionController', files: [root + 'features/permission/manager-permission.controller.js'] },
                // Group
-               { name: 'managerGroupListController', files: [root + 'entities/group/controllers/manager-group-list.controller.js'] },
-               { name: 'managerGroupCreateController', files: [root + 'entities/group/controllers/manager-group-create.controller.js'] },
-               { name: 'managerGroupEditController', files: [root + 'entities/group/controllers/manager-group-edit.controller.js'] },
-               { name: 'managerGroupPermissionEditController', files: [root + 'entities/group/controllers/manager-group-permission-edit.controller.js'] }
+               { name: 'managerGroupListController', files: [root + 'features/group/controllers/manager-group-list.controller.js'] },
+               { name: 'managerGroupCreateController', files: [root + 'features/group/controllers/manager-group-create.controller.js'] },
+               { name: 'managerGroupEditController', files: [root + 'features/group/controllers/manager-group-edit.controller.js'] },
+               { name: 'managerGroupPermissionEditController', files: [root + 'features/group/controllers/manager-group-permission-edit.controller.js'] }
             ]
         });
 

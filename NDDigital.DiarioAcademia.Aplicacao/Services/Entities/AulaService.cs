@@ -1,4 +1,5 @@
 ﻿using NDDigital.DiarioAcademia.Aplicacao.DTOs;
+using NDDigital.DiarioAcademia.Dominio;
 using NDDigital.DiarioAcademia.Dominio.Contracts;
 using NDDigital.DiarioAcademia.Dominio.Entities;
 using NDDigital.DiarioAcademia.Dominio.Exceptions;
@@ -25,8 +26,8 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
         private IAlunoRepository _alunoRepository;
         private ITurmaRepository _turmaRepository;
 
-        private const string NENHUM_ALUNO_ENCOTRADO_PARA_TURMA = "Nenhum aluno encontrado para a turma de {0}";
-        private const string NENHUMA_AULA_ENCOTRADA_NESTA_DATA = "Nenhuma aula encontrada para esta data {0}";
+        private readonly string NENHUM_ALUNO_ENCOTRADO_PARA_TURMA = Resource.EXCEPTION_NENHUM_ALUNO_ENCOTRADO_PARA_TURMA;
+        private readonly string NENHUMA_AULA_ENCOTRADA_NESTA_DATA = Resource.EXCEPTION_NENHUMA_AULA_ENCOTRADA_NESTA_DATA;
 
         public AulaService(IAulaRepository repoAula, IAlunoRepository repoAluno, ITurmaRepository repoTurma, IUnitOfWork unitOfWork)
         {

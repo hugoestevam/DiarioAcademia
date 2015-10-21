@@ -11,7 +11,7 @@ gulp.task('start', 'Starts the  app. --livereload: enable livereload', ['inject'
     if (!args.livereload)
         options.files = []; // no files watched
     browserSync.init(options);
-    gulp.watch([config.app.less.all], ['compile-less']);
+    gulp.watch([config.app.sass.all], ['compile-sass']);
 });
 
 

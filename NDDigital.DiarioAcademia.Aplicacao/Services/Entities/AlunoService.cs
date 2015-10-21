@@ -1,6 +1,7 @@
 ﻿using iTextSharp.text;
 using iTextSharp.text.pdf;
 using NDDigital.DiarioAcademia.Aplicacao.DTOs;
+using NDDigital.DiarioAcademia.Dominio;
 using NDDigital.DiarioAcademia.Dominio.Contracts;
 using NDDigital.DiarioAcademia.Dominio.Entities;
 using NDDigital.DiarioAcademia.Infraestrutura.CepServices;
@@ -20,6 +21,8 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
 
         void GerarRelatorioAlunosPdf(int ano, string path);
     }
+
+
 
     public class AlunoService : IAlunoService
     {
@@ -134,8 +137,8 @@ namespace NDDigital.DiarioAcademia.Aplicacao.Services
 
                 doc.Open();
 
-                doc.Add(new Paragraph("Relatório de presenças - Academia do prgramador " + id + ":\n\n"));
-                doc.Add(new Paragraph("Alunos/Presenças/Faltas:\n\n"));
+                doc.Add(new Paragraph(Resource.RELATORIO_TITULO + id + ":\n\n"));
+                doc.Add(new Paragraph(Resource.RELATORIO_DESCRICAO +":\n\n"));
 
                 foreach (var item in list)
                 {
