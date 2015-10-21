@@ -72,7 +72,7 @@ O download do projeto pode ser feito de 3 formas:
 A aplicação já deve estar executando em  [http://localhost:3000](http://localhost:3000). Lembrando que para tudo funcionar corretamente, o projeto [Webapi](https://github.com/AlexandreRech/DiarioAcademia/tree/master/NDDigital.DiarioAcademia.WebApi) deve estar executando no IIS.
 
 ##### Troubleshooting
-Caso dê algum problema relacionado ao `CLI`, certifique-se de ter o Visual Studio instalado e execute o comando:
+Caso dê algum problema relacionado ao `CL.exe`, certifique-se de ter o Visual Studio instalado e execute o comando:
 
     npm config set msvs_version yyyy --global
 
