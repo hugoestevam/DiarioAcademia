@@ -2,6 +2,7 @@
 using NDDigital.DiarioAcademia.Dominio.Contracts;
 using NDDigital.DiarioAcademia.Dominio.Entities;
 using NDDigital.DiarioAcademia.Infraestrutura.IoC;
+using NDDigital.DiarioAcademia.Infraestrutura.SQL.Repositories;
 using NDDigital.DiarioAcademia.IntegrationTests.Base;
 using System.Configuration;
 
