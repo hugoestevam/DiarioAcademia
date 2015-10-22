@@ -70,9 +70,8 @@ module.exports = function () {
             },
             sass: {
                 all: paths.app + "content/**/**/**/*.scss",
-                app: [paths.app + "content/**/**/*.scss", "!./src/content/libs/**/*.scss"],
                 bootstrap: paths.app + "content/libs/bootstrap/bootstrap.scss",
-                angle: paths.app + "content/libs/app/app.scss"
+                angle: paths.app + "content/app.scss"
             },
 
             json: [paths.app + '**/**/*.json'],
@@ -82,17 +81,13 @@ module.exports = function () {
                 bootstrap: [paths.app + "content/fonts/*.*"]
             },
 
-            images: [paths.app + "images/**/**/*.*"]
+            images: [paths.app + "images/**/**/*.*"],
+
+            vendor: paths.app + "vendor/"
         },
 
         libs: {
-            css: [bower + "/**/**/**/*.css",
-                 "./src/content/css/bootstrap.css",
-                 "!" + bower + "**/**/**/*.min.css",
-                 "!" + bower + "**/**/**/bootstrap*.css",
-                 "!" + bower + "/modernizr/**/*.css",
-                 "!" + bower + "/ng-table/docs/**/*.css"]
-
+            css: getLibsCss()
         },
 
         bower: {
@@ -165,7 +160,7 @@ module.exports = function () {
                     }
                 }
             },
-            exclude: require("../src/vendor/vendor.json")
+            exclude: require("../src/vendor.json")
         };
     }
 
@@ -195,7 +190,23 @@ module.exports = function () {
         };
     }
 
+    //Helpers
+    function getLibsCss() {
+        var resources = [bower + "/**/**/**/*.css",
+                         paths.app + "content/css/**/bootstrap.css",
+                         "!" + bower + "**/**/**/*.min.css",
+                         "!" + bower + "**/**/**/font-awesome*.css",
+                         "!" + bower + "**/**/**/bootstrap*.css",
+                         "!" + bower + "**/examples/**/*.css",
+                         "!" + bower + "modernizr/**/**/*.css",
+                         "!" + bower + "/ng-table/docs/**/*.css"];
 
+        var vendors = require("../src/vendor.json");
+        vendors.map(function (vendor) {
+            resources.push("!" + vendor);
+        });
+        return resources;
+    }
 
     return config;
 
