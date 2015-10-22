@@ -10,7 +10,7 @@ gulp.task('start', 'Starts the  app. --livereload: enable livereload', ['inject'
     var options = config.getBrowsersyncOptions();
     if (!args.livereload)
         options.files = []; // no files watched
-    browserSync.init(options);
+     browserSync.init(options);
     gulp.watch([config.app.sass.all], ['compile-sass']);
 });
 

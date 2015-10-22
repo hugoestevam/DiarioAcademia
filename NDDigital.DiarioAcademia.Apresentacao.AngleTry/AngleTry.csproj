@@ -116,12 +116,6 @@
     <Content Include="src\content\base\morris.css" />
     <Content Include="src\content\base\sb-admin.css" />
     <Content Include="src\content\base\switcher.css" />
-    <Content Include="src\content\component\language-button.css">
-      <DependentUpon>language-button.scss</DependentUpon>
-    </Content>
-    <Content Include="src\content\component\language-button.min.css">
-      <DependentUpon>language-button.css</DependentUpon>
-    </Content>
     <Content Include="src\content\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="src\content\theme\theme-a.css" />
     <Content Include="src\content\theme\theme-b.css" />
@@ -230,14 +224,13 @@
     <Content Include="src\vendor\vendor.json" />
     <Content Include="src\common\translate\i18n\en.json" />
     <Content Include="src\common\translate\i18n\es.json" />
+    <Content Include="package .old.json" />
     <None Include="src\content\component\dashboard.scss" />
     <Content Include="src\content\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="src\content\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="src\content\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="src\content\fonts\glyphicons-halflings-regular.woff2" />
-    <Content Include="src\content\component\language-button.css.map">
-      <DependentUpon>language-button.css</DependentUpon>
-    </Content>
+    <Content Include="src\content\component\jumbotron.scss" />
     <None Include="src\content\component\table.scss" />
     <None Include="src\content\component\panel.scss" />
     <None Include="src\content\component\language-button.scss" />
