@@ -224,7 +224,6 @@
     <Content Include="src\vendor\vendor.json" />
     <Content Include="src\common\translate\i18n\en.json" />
     <Content Include="src\common\translate\i18n\es.json" />
-    <Content Include="package .old.json" />
     <None Include="src\content\component\dashboard.scss" />
     <Content Include="src\content\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="src\content\fonts\glyphicons-halflings-regular.ttf" />
